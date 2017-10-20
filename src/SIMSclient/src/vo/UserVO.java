@@ -1,10 +1,27 @@
 package SIMSclient.src.vo;
 
+import SIMSclient.src.UserRole;
+
 public class UserVO {
 
-	  String admin;
+	  String name;
 	  String password;
-	  String id;//身份
-	
-	
+	  int id;//身份
+      UserRole role;
+
+      public UserVO(int i,String n,String p,UserRole r){
+    	  id = i;
+    	  name = n;
+    	  password = p;
+    	  role = r;
+      }
+
+      public String getName(){
+    	  return name;
+      }
+
+      public int getID(){
+    	  return id;
+      }
+
 }
