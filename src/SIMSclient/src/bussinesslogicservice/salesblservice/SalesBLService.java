@@ -2,9 +2,9 @@ package SIMSclient.src.bussinesslogicservice.salesblservice;
 
 import java.util.*;
 
-import SIMSclient.src.vo.MemberVO;
 import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.Commodity.CommodityVO;
+import SIMSclient.src.vo.commodity.CommodityVO;
+import SIMSclient.src.vo.member.MemberVO;
 
 public interface SalesBLService {
 
