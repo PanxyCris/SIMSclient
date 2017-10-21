@@ -1,5 +1,9 @@
 package SIMSserver.src.dataservice.commoditydataservice;
 
+import java.rmi.RemoteException;
+
+import SIMSclient.src.po.CommodityPO;
+
 public interface CommodityDataService {
 	public void setID(int id);
 	public int getID();
@@ -30,4 +34,11 @@ public interface CommodityDataService {
 
 	public void setWarmingValue(int warmingValue);
 	public int getWarmingValue();
+
+	public void insert(CommodityPO po) throws RemoteException;
+	public void delelte(CommodityPO po) throws RemoteException;
+	public void update(CommodityPO po) throws RemoteException;
+	public void find(CommodityPO po) throws RemoteException;
+	public void init() throws RemoteException;
+	public void finish() throws RemoteException;
 }

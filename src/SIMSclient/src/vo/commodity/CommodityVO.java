@@ -92,6 +92,8 @@ public class CommodityVO {
 		public int getWarmingValue(){
 			return warmingValue;
 		}
+		
+		
 
 
 }
