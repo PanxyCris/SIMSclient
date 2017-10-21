@@ -2,7 +2,7 @@ package SIMSserver.src.data_stub;
 
 import java.rmi.RemoteException;
 
-import SIMSclient.src.po.CommodityPO;
+import SIMSserver.src.po.CommodityPO;
 
 public class CommodityDataService_Stub {
 	public void insert(CommodityPO po) throws RemoteException{
