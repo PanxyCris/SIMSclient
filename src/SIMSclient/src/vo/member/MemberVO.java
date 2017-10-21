@@ -3,17 +3,18 @@ package SIMSclient.src.vo.member;
 import SIMSclient.src.vo.ObjectVO;
 
 public class MemberVO extends ObjectVO {
-	public MemberCategory category;   //客户分类：进货商和销售商
-	public MemberLevel level;   //客户级别：五级，一级普通用户，五级VIP客户
-	public String name;  //客户名字
-	public String cellNumber;  //电话号码
-	public String address;  
-	public String post;   //邮编
+	public MemberCategory category; // 客户分类：进货商和销售商
+	public MemberLevel level; // 客户级别：五级，一级普通用户，五级VIP客户
+	public String name; // 客户名字
+	public String cellNumber; // 电话号码
+	public String address;
+	public String post; // 邮编
 	public String email;
-	public double receivableLimit;  //应收额度
-	public double receivable;  //应收
-	public double payable;  //应付
-	public String saleMan;  //默认业务员
+	public double receivableLimit; // 应收额度
+	public double receivable; // 应收
+	public double payable; // 应付
+	public String saleMan; // 默认业务员
+
 	/**
 	 * @param category
 	 * @param level
@@ -27,8 +28,9 @@ public class MemberVO extends ObjectVO {
 	 * @param payable
 	 * @param saleMan
 	 */
-	public MemberVO(String ID, MemberCategory category, MemberLevel level, String name, String cellNumber, String address,
-			String post, String email, double receivableLimit, double receivable, double payable, String saleMan) {
+	public MemberVO(String ID, MemberCategory category, MemberLevel level, String name, String cellNumber,
+			String address, String post, String email, double receivableLimit, double receivable, double payable,
+			String saleMan) {
 		super();
 		this.ID = ID;
 		this.category = category;
@@ -43,7 +45,5 @@ public class MemberVO extends ObjectVO {
 		this.payable = payable;
 		this.saleMan = saleMan;
 	}
-	
-	
 
 }
