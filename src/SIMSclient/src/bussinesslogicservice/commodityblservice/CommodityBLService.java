@@ -1,5 +1,9 @@
 package SIMSclient.src.bussinesslogicservice.commodityblservice;
 
+import java.rmi.RemoteException;
+
+import SIMSclient.src.po.CommodityPO;
+
 public interface CommodityBLService {
 	public void setID(int id);
 	public int getID();
@@ -30,4 +34,12 @@ public interface CommodityBLService {
 
 	public void setWarmingValue(int warmingValue);
 	public int getWarmingValue();
+
+	public void insert(CommodityPO po);
+	public void delelte(CommodityPO po);
+	public void update(CommodityPO po);
+	public void find(CommodityPO po);
+	public void check();   //ø‚¥Ê≤Èø¥
+	public void stock();   //ø‚¥Ê≈Ãµ„
+
 }
