@@ -7,6 +7,6 @@ public class ObjectVO {
 	
 	@Override
 	public String toString() {
-		return "[ID=" + ID + ", Name= " + name + "]";
+		return "[ID=" + ID + ", Date= " + date + "]";
 	}
 }

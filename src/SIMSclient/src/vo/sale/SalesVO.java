@@ -3,9 +3,12 @@ package SIMSclient.src.vo.sale;
 import java.util.ArrayList;
 
 import SIMSclient.src.vo.ObjectVO;
+import SIMSclient.src.vo.bill.BillState;
+import SIMSclient.src.vo.bill.BillType;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 
 public class SalesVO extends ObjectVO{
+	public String clientID;
 	public String clientName;  //客户姓名
 	public String user; // 操作员
 	public String saleMan; // 业务员
@@ -18,13 +21,13 @@ public class SalesVO extends ObjectVO{
 	public BillState state; // 单据状态
 	public ArrayList<CommodityItemVO> commodities; // 商品清单
 
-	public SalesVO(String ID, String clientName, String cellNumber, String user, String saleMan,
+	public SalesVO(String ID, String clientID, String clientName, String cellNumber, String user, String saleMan,
 			double beforePrice, double allowance, double voucher, double afterPrice, String remark, BillType billType,
 			BillState state, ArrayList<CommodityItemVO> commodities) {
 		super();
 		this.ID = ID;
+		this.clientID = clientID;
 		this.clientName = clientName;
-		this.cellNumber = cellNumber;
 		this.user = user;
 		this.saleMan = saleMan;
 		this.beforePrice = beforePrice;
