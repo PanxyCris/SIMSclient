@@ -1,5 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.commodityblservice;
 
+import SIMSclient.src.vo.bill.BillVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public interface CommodityBLService {
@@ -37,7 +38,13 @@ public interface CommodityBLService {
 	public void delelte(CommodityVO vo);
 	public void update(CommodityVO vo);
 	public void find(CommodityVO vo);
+	public void giftInventoryReceiptsMaking(BillVO vo);  //制定库存赠送单
+	public void lossAndRevenueInventoryReceiptsMaking(BillVO vo);//制定库存报损报溢单
+	public void warningInventoryReceiptsMaking(BillVO vo);//制定库存警戒单
 	public void check();   //库存查看
 	public void stock();   //库存盘点
+
+
+
 
 }
