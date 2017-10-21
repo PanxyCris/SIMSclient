@@ -14,5 +14,19 @@ public class PromotionVO {
 	public double afterPrice; // ÕÛÈÃºó½ð¶î
 	public String remark; // ±¸×¢
 	 
+	public PromotionVO(String BillID, String clientID, String clientName, String cellNumber, String user, String saleMan,
+			double beforePrice, double allowance, double voucher, double afterPrice, String remark) {
+		super();
+		this.BillID = BillID;
+		this.clientID = clientID;
+		this.clientName = clientName;
+		this.user = user;
+		this.saleMan = saleMan;
+		this.beforePrice = beforePrice;
+		this.allowance = allowance;
+		this.voucher = voucher;
+		this.afterPrice = afterPrice;
+		this.remark = remark;
+	}
 
 }

@@ -12,4 +12,20 @@ public class PromotionPO {
 	public double voucher; // 代金券金额
 	public double afterPrice; // 折让后金额
 	public String remark; // 备注
+
+	public PromotionPO(String BillID, String clientID, String clientName, String cellNumber, String user, String saleMan,
+			double beforePrice, double allowance, double voucher, double afterPrice, String remark) {
+		super();
+		this.BillID = BillID;
+		this.clientID = clientID;
+		this.clientName = clientName;
+		this.user = user;
+		this.saleMan = saleMan;
+		this.beforePrice = beforePrice;
+		this.allowance = allowance;
+		this.voucher = voucher;
+		this.afterPrice = afterPrice;
+		this.remark = remark;
+	}
+
 }
