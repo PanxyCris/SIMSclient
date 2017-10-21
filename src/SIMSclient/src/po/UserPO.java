@@ -2,8 +2,14 @@ package SIMSclient.src.po;
 
 import java.io.*;
 
+import SIMSclient.src.UserRole;
+
 public class UserPO implements Serializable {
-     int id;
+     /**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	int id;
      String name;
      String password;
      UserRole role;
