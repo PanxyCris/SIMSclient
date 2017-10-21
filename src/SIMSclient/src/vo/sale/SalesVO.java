@@ -6,7 +6,11 @@ import SIMSclient.src.vo.ObjectVO;
 import SIMSclient.src.vo.bill.BillState;
 import SIMSclient.src.vo.bill.BillType;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
-
+/**
+ * 
+ * @author 
+ *
+ */
 public class SalesVO extends ObjectVO{
 	public String clientID;
 	public String clientName;  //¿Í»§ÐÕÃû
