@@ -2,6 +2,7 @@ package SIMSclient.src.dataservice.commoditydataservice;
 
 import java.rmi.RemoteException;
 
+import SIMSclient.src.po.BillPO;
 import SIMSclient.src.po.CommodityPO;
 
 public interface CommodityDataService {
@@ -39,6 +40,9 @@ public interface CommodityDataService {
 	public void delelte(CommodityPO po) throws RemoteException;
 	public void update(CommodityPO po) throws RemoteException;
 	public void find(CommodityPO po) throws RemoteException;
+	public void giftInventoryReceiptsMaking(BillPO po) throws RemoteException;  //制定库存赠送单
+	public void lossAndRevenueInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存报损报溢单
+	public void warningInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存警戒单
 	public void init() throws RemoteException;
 	public void finish() throws RemoteException;
 }

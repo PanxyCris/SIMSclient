@@ -1,5 +1,6 @@
 package SIMSclient.src.bussiness_stub;
 
+import SIMSclient.src.vo.bill.BillVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public class CommodityBLService_Stub {
@@ -21,5 +22,14 @@ public class CommodityBLService_Stub {
 	}
 	public void stock(){
 		System.out.println("Stock Success.");
+	}
+	public void giftInventoryReceiptsMaking(BillVO vo){
+		System.out.println("Making Success.");
+	}
+	public void lossAndRevenueInventoryReceiptsMaking(BillVO vo){
+		System.out.println("Making Success.");
+	}
+	public void warningInventoryReceiptsMaking(BillVO vo){
+		System.out.println("Making Success.");
 	}
 }
