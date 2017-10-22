@@ -1,5 +1,5 @@
 package SIMSclient.src;
 
-public class ResultMessage {
-
+public enum ResultMessage {
+     SUCCESS,FAIL
 }
