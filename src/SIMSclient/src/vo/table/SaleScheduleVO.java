@@ -1,22 +1,13 @@
-package SIMSclient.src.po.table;
+package SIMSclient.src.vo.table;
 
-
-public class BusinessHistorySchedulePO {
+public class SaleScheduleVO {
 	//筛选条件
-	String date;//时间
-	String billType;
+	String date;//时间,精确到天
+	String tradeName;//商品名
 	String customer;//客户
 	String clerkID;//业务员
 	String repertory;//仓库
 	
-	public BusinessHistorySchedulePO(String d,String b,String cu,String cl,String r){
-		date=d;
-		billType=b;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
-	}
-
 	public String getDate() {
 		return date;
 	}
@@ -25,12 +16,12 @@ public class BusinessHistorySchedulePO {
 		this.date = date;
 	}
 
-	public String getBillType() {
-		return billType;
+	public String getTradeName() {
+		return tradeName;
 	}
 
-	public void setBillType(String billType) {
-		this.billType = billType;
+	public void setTradeName(String tradeName) {
+		this.tradeName = tradeName;
 	}
 
 	public String getCustomer() {
@@ -55,6 +46,14 @@ public class BusinessHistorySchedulePO {
 
 	public void setRepertory(String repertory) {
 		this.repertory = repertory;
+	}
+
+	public SaleScheduleVO(String d,String t,String cu,String cl,String r){
+		date=d;
+		tradeName=t;
+		customer=cu;
+		clerkID=cl;
+		repertory=r;
 	}
 	
 }

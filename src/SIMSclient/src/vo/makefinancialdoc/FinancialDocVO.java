@@ -2,6 +2,7 @@ package SIMSclient.src.vo.makefinancialdoc;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class FinancialDocVO implements Serializable {
 	String docID;//单据编号
 	String userID;//当前登录用户的ID

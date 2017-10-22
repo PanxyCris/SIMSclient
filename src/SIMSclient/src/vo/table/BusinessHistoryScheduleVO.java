@@ -1,7 +1,7 @@
-package SIMSclient.src.po.table;
+package SIMSclient.src.vo.table;
 
 
-public class BusinessHistorySchedulePO {
+public class BusinessHistoryScheduleVO {
 	//筛选条件
 	String date;//时间
 	String billType;
@@ -9,7 +9,7 @@ public class BusinessHistorySchedulePO {
 	String clerkID;//业务员
 	String repertory;//仓库
 	
-	public BusinessHistorySchedulePO(String d,String b,String cu,String cl,String r){
+	public BusinessHistoryScheduleVO(String d,String b,String cu,String cl,String r){
 		date=d;
 		billType=b;
 		customer=cu;

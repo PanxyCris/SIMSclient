@@ -1,10 +1,10 @@
-package SIMSclient.src.po.table;
+package SIMSclient.src.vo.table;
 
-public class StatementOfOperationPO {
+public class StatementOfOperationVO {
 	//É¸Ñ¡Ìõ¼þ
 	String date;
 	
-	public StatementOfOperationPO(String d) {
+	public StatementOfOperationVO(String d) {
 		date=d;
 	}
 

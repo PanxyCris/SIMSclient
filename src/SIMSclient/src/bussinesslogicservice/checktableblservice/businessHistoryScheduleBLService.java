@@ -1,17 +1,16 @@
 package SIMSclient.src.bussinesslogicservice.checktableblservice;
 
 import SIMSclient.src.po.BillPO;
-import SIMSclient.src.po.table.BusinessHistorySchedulePO;
-import SIMSclient.src.vo.bill.BillType;
+import SIMSclient.src.vo.table.BusinessHistoryScheduleVO;
 
 public interface businessHistoryScheduleBLService {
 	
-	public BusinessHistorySchedulePO viewReport();
+	public void viewReport(BusinessHistoryScheduleVO businessHistoryScheduleVO);
 	
 	public void exportReport();
 	
 	public void writeOff();//ºì³å
 	
-	public BillPO writeOffAndCopy(BillPO billPO);//ºì³å²¢¸´ÖÆ
+	public void writeOffAndCopy(BillPO billPO);//ºì³å²¢¸´ÖÆ
 	
 }

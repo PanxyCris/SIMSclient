@@ -1,10 +1,10 @@
 package SIMSclient.src.bussinesslogicservice.checktableblservice;
 
-import SIMSclient.src.po.table.SaleSchedulePO;
+import SIMSclient.src.vo.table.SaleScheduleVO;
 
 public interface saleScheduleBLService {
 	
-	public SaleSchedulePO viewReport();
+	public void viewReport(SaleScheduleVO saleScheduleVO);
 	
 	public void exportReport();
 	

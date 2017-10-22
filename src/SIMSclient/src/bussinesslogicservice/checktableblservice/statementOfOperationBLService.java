@@ -1,5 +1,11 @@
 package SIMSclient.src.bussinesslogicservice.checktableblservice;
 
-public interface statementOfOperationBLService {
+import SIMSclient.src.vo.table.StatementOfOperationVO;
 
+public interface statementOfOperationBLService {
+	
+	public void viewRport(StatementOfOperationVO statementOfOperationVO);
+
+	public void exportReport();
+	
 }
