@@ -1,5 +1,10 @@
 package SIMSserver.src.dataservice.setupaccountdataservice;
 
-public interface SetUpAccountDataService {
+import SIMSclient.src.vo.AccountBookVO;
 
+public interface SetUpAccountDataService {
+	
+	public void newBuild(AccountBookVO accountBookVO);//ÐÂ½¨
+	
+	public void delete(AccountBookVO accountBookVO);//É¾³ý
 }

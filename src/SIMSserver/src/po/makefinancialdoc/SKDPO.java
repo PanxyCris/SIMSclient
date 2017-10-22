@@ -3,7 +3,7 @@ package SIMSserver.src.po.makefinancialdoc;
 @SuppressWarnings("serial")
 public class SKDPO extends FinancialDocPO {
 	String docID;//单据编号
-	String userID;//当前登录用户的ID
+	int userID;//当前登录用户的ID
 	String note;//备注
 	
 	String customer;//客户(包含供应商和销售商)
@@ -22,11 +22,11 @@ public class SKDPO extends FinancialDocPO {
 		this.docID = docID;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
@@ -38,7 +38,7 @@ public class SKDPO extends FinancialDocPO {
 		this.note = note;
 	}
 
-	public SKDPO (String d,String u,String n,String c,String a,int tran,int tot){
+	public SKDPO (String d,int u,String n,String c,String a,int tran,int tot){
 		super(d,u,n);
 		docID=d;
 		userID=u;

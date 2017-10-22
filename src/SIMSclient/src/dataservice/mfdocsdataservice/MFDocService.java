@@ -1,19 +1,25 @@
 package SIMSclient.src.dataservice.mfdocsdataservice;
 
-<<<<<<< HEAD
-import SIMSclient.src.vo.MFDoc.SKDVO;
-import SIMSclient.src.vo.MFDoc.XJFYDVO;
-=======
-import SIMSclient.src.vo.MFDocVO.SKDVO;
-import SIMSclient.src.vo.MFDocVO.XJFYDVO;
->>>>>>> branch '鐜嬬伩鐏?' of http://101.37.19.32:10080/plsw_SEAC/plswERPnju.git
+import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
+import SIMSclient.src.po.makefinancialdoc.SKDPO;
+import SIMSclient.src.po.makefinancialdoc.XJFYDPO;
 
 public interface MFDocService {
 	
-	public SKDVO newBuildSKD();
+	public SKDPO newBuildSKD();//新建
 	
-	public XJFYDVO newBuildXJFYD();
+	public XJFYDPO newBuildXJFYD();
 	
+	public boolean delete(FinancialDocPO financialDocPO);//删除
+	
+	public SKDPO modifySKD();//修改
+	
+	public XJFYDPO modifyXJFYD();
+	
+	public SKDPO recordSKD(BillPO billPO);//入账
+	
+	public XJFYDPO recordXJFYD(BillPO billPO);
 	
 	
 }

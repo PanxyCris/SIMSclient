@@ -1,5 +1,11 @@
 package SIMSclient.src.dataservice.checktabledataservice;
 
-public interface statementOfOperationBLService {
+import SIMSclient.src.po.table.StatementOfOperationPO;
 
-}
+public interface statementOfOperationBLService {
+	
+	public void viewRport(StatementOfOperationPO statementOfOperationPO);
+
+	public void exportReport();
+	
+}	

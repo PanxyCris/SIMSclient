@@ -6,10 +6,10 @@ public class BusinessHistoryScheduleVO {
 	String date;//时间
 	String billType;
 	String customer;//客户
-	String clerkID;//业务员
+	int clerkID;//业务员
 	String repertory;//仓库
 	
-	public BusinessHistoryScheduleVO(String d,String b,String cu,String cl,String r){
+	public BusinessHistoryScheduleVO(String d,String b,String cu,int cl,String r){
 		date=d;
 		billType=b;
 		customer=cu;
@@ -41,11 +41,11 @@ public class BusinessHistoryScheduleVO {
 		this.customer = customer;
 	}
 
-	public String getClerkID() {
+	public int getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(String clerkID) {
+	public void setClerkID(int clerkID) {
 		this.clerkID = clerkID;
 	}
 

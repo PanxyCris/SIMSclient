@@ -5,7 +5,7 @@ public class SaleScheduleVO {
 	String date;//时间,精确到天
 	String tradeName;//商品名
 	String customer;//客户
-	String clerkID;//业务员
+	int clerkID;//业务员
 	String repertory;//仓库
 	
 	public String getDate() {
@@ -32,11 +32,11 @@ public class SaleScheduleVO {
 		this.customer = customer;
 	}
 
-	public String getClerkID() {
+	public int getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(String clerkID) {
+	public void setClerkID(int clerkID) {
 		this.clerkID = clerkID;
 	}
 
@@ -48,7 +48,7 @@ public class SaleScheduleVO {
 		this.repertory = repertory;
 	}
 
-	public SaleScheduleVO(String d,String t,String cu,String cl,String r){
+	public SaleScheduleVO(String d,String t,String cu,int cl,String r){
 		date=d;
 		tradeName=t;
 		customer=cu;

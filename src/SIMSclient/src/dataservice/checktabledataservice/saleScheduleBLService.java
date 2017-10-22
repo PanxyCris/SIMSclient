@@ -1,5 +1,10 @@
 package SIMSclient.src.dataservice.checktabledataservice;
 
-public interface saleScheduleBLService {
+import SIMSclient.src.po.table.SaleSchedulePO;
 
+public interface saleScheduleBLService {
+	
+	public void viewReport(SaleSchedulePO saleSchedulePO);
+	
+	public void exportReport();
 }

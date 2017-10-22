@@ -3,11 +3,12 @@ package SIMSclient.src.po;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class AccountPO implements Serializable {
 	private String name;
-	private int money;
+	private double money;
 	
-	public AccountPO(String n,int m){
+	public AccountPO(String n,double m){
 		name=n;
 		money=m;
 	}
@@ -20,7 +21,7 @@ public class AccountPO implements Serializable {
 		this.name = name;
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return money;
 	}	
 	

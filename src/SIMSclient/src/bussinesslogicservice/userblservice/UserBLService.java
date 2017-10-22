@@ -17,4 +17,5 @@ public interface UserBLService {
 	public void delelte(UserVO vo);
 	public void update(UserVO vo);
 	public void find(UserVO vo);
+	
 }

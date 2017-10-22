@@ -2,9 +2,9 @@ package SIMSclient.src.po;
 
 public class AccountBookPO {
 	String date;
-	String clerkID;
+	int clerkID;
 
-	public AccountBookPO(String d, String c) {
+	public AccountBookPO(String d, int c) {
 		date = d;
 		clerkID = c;
 	}
@@ -17,11 +17,11 @@ public class AccountBookPO {
 		this.date = date;
 	}
 
-	public String getClerkID() {
+	public int getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(String clerkID) {
+	public void setClerkID(int clerkID) {
 		this.clerkID = clerkID;
 	}
 }
