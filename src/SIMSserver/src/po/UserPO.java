@@ -2,7 +2,7 @@ package SIMSserver.src.po;
 
 import java.io.*;
 
-import SIMSclient.src.UserRole;
+import SIMSclient.src.enumeration.UserRole;
 
 public class UserPO implements Serializable {
      /**

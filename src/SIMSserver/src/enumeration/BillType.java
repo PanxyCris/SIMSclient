@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.bill;
+package SIMSserver.src.enumeration;
 
 public enum BillType {
 	INVENTORY_GIFT("¿â´æÔùËÍ"), INVENTORY_BENEFIT("¿â´æ±¨Òç"), INVENTORY_LOSS("¿â´æ±¨Ëð"), INVENTORY_WARN("¿â´æ¾¯½ä"),

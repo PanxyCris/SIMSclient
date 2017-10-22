@@ -2,7 +2,7 @@ package SIMSclient.src.dataservice.userdataservice;
 
 import java.rmi.RemoteException;
 
-import SIMSclient.src.UserRole;
+import SIMSclient.src.enumeration.UserRole;
 import SIMSclient.src.po.UserPO;
 
 public interface UserDataService {

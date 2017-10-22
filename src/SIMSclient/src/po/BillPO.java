@@ -1,7 +1,7 @@
 package SIMSclient.src.po;
 
-import SIMSclient.src.vo.bill.BillState;
-import SIMSclient.src.vo.bill.BillType;
+import SIMSclient.src.enumeration.BillState;
+import SIMSclient.src.enumeration.BillType;
 
 public class BillPO {
 	BillType type;

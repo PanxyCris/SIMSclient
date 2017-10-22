@@ -1,7 +1,7 @@
 package SIMSserver.src.dataservice.billdataservice;
 
-import SIMSclient.src.vo.bill.BillState;
-import SIMSclient.src.vo.bill.BillType;
+import SIMSserver.src.enumeration.BillState;
+import SIMSserver.src.enumeration.BillType;
 
 public interface BillDataService {
 
