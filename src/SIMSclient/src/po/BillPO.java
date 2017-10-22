@@ -7,16 +7,16 @@ public class BillPO {
 	BillType type;
 	BillState state;
 
-	public BillPO(BillType t, BillState s){
+	public BillPO(BillType t, BillState s) {
 		type = t;
 		state = s;
 	}
 
-	public BillType getType(){
+	public BillType getType() {
 		return type;
 	}
 
-	public BillState getState(){
+	public BillState getState() {
 		return state;
 	}
 }

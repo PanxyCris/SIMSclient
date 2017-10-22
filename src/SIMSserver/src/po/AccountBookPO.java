@@ -1,5 +1,5 @@
 package SIMSserver.src.po;
 
-public class AccountPO {
-	
+public class AccountBookPO {
+
 }
