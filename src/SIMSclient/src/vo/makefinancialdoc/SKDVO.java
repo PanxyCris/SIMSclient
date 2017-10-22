@@ -3,7 +3,7 @@ package SIMSclient.src.vo.makefinancialdoc;
 @SuppressWarnings("serial")
 public class SKDVO extends FinancialDocVO {
 	String docID;//单据编号
-	String userID;//当前登录用户的ID
+	int userID;//当前登录用户的ID
 	String note;//备注
 	
 	String customer;//客户(包含供应商和销售商)
@@ -22,11 +22,11 @@ public class SKDVO extends FinancialDocVO {
 		this.docID = docID;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
@@ -38,7 +38,7 @@ public class SKDVO extends FinancialDocVO {
 		this.note = note;
 	}
 
-	public SKDVO (String d,String u,String n,String c,String a,int tran,int tot){
+	public SKDVO (String d,int u,String n,String c,String a,int tran,int tot){
 		super(d,u,n);
 		docID=d;
 		userID=u;

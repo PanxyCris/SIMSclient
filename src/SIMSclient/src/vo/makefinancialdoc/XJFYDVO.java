@@ -3,7 +3,7 @@ package SIMSclient.src.vo.makefinancialdoc;
 @SuppressWarnings("serial")
 public class XJFYDVO extends FinancialDocVO {
 	String docID;// 单据编号
-	String userID;// 操作员(当前登录用户)
+	int userID;// 操作员(当前登录用户)
 	String accountID;// 银行账户ID
 
 	// 条目清单
@@ -13,7 +13,7 @@ public class XJFYDVO extends FinancialDocVO {
 
 	int total;// 总额
 
-	public XJFYDVO(String d, String u, String a, String e, int trans, String n, int to) {
+	public XJFYDVO(String d, int u, String a, String e, int trans, String n, int to) {
 		super(d, u, n);
 		docID = d;
 		userID = u;
@@ -32,11 +32,11 @@ public class XJFYDVO extends FinancialDocVO {
 		this.docID = docID;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 

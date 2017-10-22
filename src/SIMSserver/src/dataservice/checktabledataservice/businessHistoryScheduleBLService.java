@@ -1,5 +1,16 @@
 package SIMSserver.src.dataservice.checktabledataservice;
 
-public interface businessHistoryScheduleBLService {
+import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
+import SIMSclient.src.po.table.BusinessHistorySchedulePO;
 
+public interface businessHistoryScheduleBLService {
+	
+	public FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO);
+	
+	public void exportReport();
+	
+	public void writeOff();//ºì³å
+	
+	public void writeOffAndCopy(BillPO billPO);//ºì³å²¢¸´ÖÆ
 }
