@@ -1,7 +1,12 @@
 package SIMSclient.src.po.makefinancialdoc;
 
+/**
+ * 付款单
+ * @author xxx
+ *
+ */
 @SuppressWarnings("serial")
-public class XJFYDPO extends FinancialDocPO {
+public class PaymentBillPO extends FinancialDocPO {
 	String docID;// 单据编号
 	String userID;// 操作员(当前登录用户)
 	String accountID;// 银行账户ID
@@ -13,15 +18,28 @@ public class XJFYDPO extends FinancialDocPO {
 
 	int total;// 总额
 
-	public XJFYDPO(String d, String u, String a, String e, int trans, String n, int to) {
+	/**
+	 * @param d
+	 * @param u
+	 * @param n
+	 * @param docID
+	 * @param userID
+	 * @param accountID
+	 * @param entryName
+	 * @param transferAmount
+	 * @param note
+	 * @param total
+	 */
+	public PaymentBillPO(String d, String u, String n, String docID, String userID, String accountID, String entryName,
+			int transferAmount, String note, int total) {
 		super(d, u, n);
-		docID = d;
-		userID = u;
-		accountID = a;
-		entryName = e;
-		transferAmount = trans;
-		note = n;
-		total = to;
+		this.docID = docID;
+		this.userID = userID;
+		this.accountID = accountID;
+		this.entryName = entryName;
+		this.transferAmount = transferAmount;
+		this.note = note;
+		this.total = total;
 	}
 
 	public String getDocID() {
@@ -79,4 +97,5 @@ public class XJFYDPO extends FinancialDocPO {
 	public void setTotal(int total) {
 		this.total = total;
 	}
+
 }
