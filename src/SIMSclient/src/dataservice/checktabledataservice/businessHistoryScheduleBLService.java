@@ -13,4 +13,8 @@ public interface businessHistoryScheduleBLService {
 	public void writeOff();//ºì³å
 	
 	public void writeOffAndCopy(BillPO billPO);//ºì³å²¢¸´ÖÆ
+	
+	public void insert(BusinessHistorySchedulePO businessHistorySchedulePO);
+	
+	public void delete(BusinessHistorySchedulePO businessHistorySchedulePO);
 }
