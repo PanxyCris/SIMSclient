@@ -5,9 +5,7 @@ import java.io.*;
 import SIMSclient.src.enumeration.UserRole;
 
 public class UserPO implements Serializable {
-     /**
-	 *
-	 */
+   
 	private static final long serialVersionUID = 1L;
 	int id;
      String name;
