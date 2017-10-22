@@ -16,7 +16,7 @@ public interface SalesBLService {
 	 * @return ID
 	 */
 	public String getSaleID();
-	public String getBackID();
+	public String getBackSaleID();
 	
 	/**
 	 * 通过ID获取商品信息 

@@ -1,5 +1,7 @@
 package SIMSclient.src.po.makefinancialdoc;
 
+import java.util.Date;
+
 /**
  * ¸¶¿îµ¥
  * @author xxx
@@ -30,9 +32,9 @@ public class PaymentBillPO extends FinancialDocPO {
 	 * @param note
 	 * @param total
 	 */
-	public PaymentBillPO(String d, String u, String n, String docID, String userID, String accountID, String entryName,
+	public PaymentBillPO(String d, int u, String n, Date date, String docID, String userID, String accountID, String entryName,
 			int transferAmount, String note, int total) {
-		super(d, u, n);
+		super(d, u, n, date);
 		this.docID = docID;
 		this.userID = userID;
 		this.accountID = accountID;

@@ -1,13 +1,13 @@
 package SIMSclient.src.po.table;
 
 public class SaleSchedulePO {
-	//筛选条件
-	String date;//时间,精确到天
-	String tradeName;//商品名
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
-	
+	// 筛选条件
+	String date;// 时间,精确到天
+	String tradeName;// 商品名
+	String customer;// 客户
+	int clerkID;// 业务员
+	String repertory;// 仓库
+
 	public String getDate() {
 		return date;
 	}
@@ -48,12 +48,12 @@ public class SaleSchedulePO {
 		this.repertory = repertory;
 	}
 
-	public SaleSchedulePO(String d,String t,String cu,int cl,String r){
-		date=d;
-		tradeName=t;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
+	public SaleSchedulePO(String d, String t, String cu, int cl, String r) {
+		date = d;
+		tradeName = t;
+		customer = cu;
+		clerkID = cl;
+		repertory = r;
 	}
-	
+
 }
