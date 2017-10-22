@@ -3,8 +3,8 @@ package SIMSserver.src.po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import SIMSclient.src.vo.bill.BillState;
-import SIMSclient.src.vo.bill.BillType;
+import SIMSclient.src.enumeration.BillState;
+import SIMSclient.src.enumeration.BillType;
 import SIMSclient.src.vo.bill.Warehouse;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 

@@ -1,6 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.userblservice;
 
-import SIMSclient.src.UserRole;
+import SIMSclient.src.enumeration.UserRole;
 import SIMSclient.src.vo.UserVO;
 
 public interface UserBLService {

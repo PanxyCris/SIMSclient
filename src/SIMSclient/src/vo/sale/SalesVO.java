@@ -2,9 +2,9 @@ package SIMSclient.src.vo.sale;
 
 import java.util.ArrayList;
 
+import SIMSclient.src.enumeration.BillState;
+import SIMSclient.src.enumeration.BillType;
 import SIMSclient.src.vo.ObjectVO;
-import SIMSclient.src.vo.bill.BillState;
-import SIMSclient.src.vo.bill.BillType;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 /**
  * 

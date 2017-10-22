@@ -1,5 +1,8 @@
 package SIMSclient.src.vo.bill;
 
+import SIMSclient.src.enumeration.BillState;
+import SIMSclient.src.enumeration.BillType;
+
 public class BillVO {
 
 	BillType type;

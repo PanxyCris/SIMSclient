@@ -2,7 +2,7 @@ package SIMSclient.src.vo;
 
 import java.io.*;
 
-import SIMSclient.src.UserRole;
+import SIMSclient.src.enumeration.UserRole;
 
 public class UserVO implements Serializable {
      /**
