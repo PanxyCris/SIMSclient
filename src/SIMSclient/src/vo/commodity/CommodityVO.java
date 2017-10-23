@@ -5,7 +5,7 @@ public class CommodityVO {
 		private int id;   //商品编号
 		private String name;
 		private String model; //商品型号
-		private String classification;
+		private ClassificationVO classification;
 		private int number; //商品数量
 		private double purPrice; //进价
 		private double retailedPrice; //零售价
@@ -37,11 +37,11 @@ public class CommodityVO {
 			return model;
 		}
 
-		public void setClassification(String classification){
+		public void setClassification(ClassificationVO classification){
 			this.classification = classification;
 		}
 
-		public String getClassification(){
+		public ClassificationVO getClassification(){
 			return classification;
 		}
 
@@ -92,8 +92,8 @@ public class CommodityVO {
 		public int getWarmingValue(){
 			return warmingValue;
 		}
-		
-		
+
+
 
 
 }

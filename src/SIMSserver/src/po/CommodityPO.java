@@ -1,97 +1,111 @@
 package SIMSserver.src.po;
 
+import SIMSserver.src.po.ClassificationPO;
+
 public class CommodityPO {
 
 
-		private int id;   //商品编号
-		private String name;
-		private String model; //商品型号
-		private String classification;
-		private int number; //商品数量
-		private double purPrice; //进价
-		private double retailedPrice; //零售价
-		private double recentPurPrice; //最新进价
-		private double recentRetailedPrice; //最新零售价
-		private int warmingValue; //警戒值
+	private int id;   //商品编号
+	private String name;
+	private String model; //商品型号
+	private ClassificationPO classification;
+	private int number; //商品数量
+	private double purPrice; //进价
+	private double retailedPrice; //零售价
+	private double recentPurPrice; //最新进价
+	private double recentRetailedPrice; //最新零售价
+	private int warmingValue; //警戒值
 
-		public void setID(int id){
-			this.id = id;
-		}
+	public CommodityPO(int id,String name,String model,ClassificationPO classification,int number,double purPrice,
+			double retailedPrice,int warmingValue){
+		this.id = id;
+		this.name = name;
+		this.model = model;
+		this.classification = classification;
+		this.number = number;
+		this.purPrice = recentPurPrice = purPrice;
+		this.retailedPrice = recentRetailedPrice = retailedPrice;
 
-		public int getID(){
-			return id;
-		}
+	}
 
-		public void setName(String name){
-			this.name = name;
-		}
+	public void setID(int id){
+		this.id = id;
+	}
 
-		public String getName(){
-			return name;
-		}
+	public int getID(){
+		return id;
+	}
 
-	    public void setModel(String model){
-	    	this.model = model;
-	    }
+	public void setName(String name){
+		this.name = name;
+	}
 
-		public String getModel(){
-			return model;
-		}
+	public String getName(){
+		return name;
+	}
 
-		public void setClassification(String classification){
-			this.classification = classification;
-		}
+    public void setModel(String model){
+    	this.model = model;
+    }
 
-		public String getClassification(){
-			return classification;
-		}
+	public String getModel(){
+		return model;
+	}
 
-		public void setNumber(int number){
-			this.number = number;
-		}
+	public void setClassification(ClassificationPO classification){
+		this.classification = classification;
+	}
 
-		public int getNumber(){
-			return number;
-		}
+	public ClassificationPO getClassification(){
+		return classification;
+	}
 
-	    public void setPurPrice(double purPrice){
-	    	this.purPrice = purPrice;
-	    }
+	public void setNumber(int number){
+		this.number = number;
+	}
 
-		public double getPurPrice(){
-			return purPrice;
-		}
+	public int getNumber(){
+		return number;
+	}
 
-		public void setRetailedPrice(double retailedPrice){
-			this.retailedPrice = retailedPrice;
-		}
+    public void setPurPrice(double purPrice){
+    	this.purPrice = purPrice;
+    }
 
-		public double getRetailedPrice(){
-			return retailedPrice;
-		}
+	public double getPurPrice(){
+		return purPrice;
+	}
 
-		public void setRecentPurPrice(double recentPurPrice){
-			this.recentPurPrice = recentPurPrice;
-		}
+	public void setRetailedPrice(double retailedPrice){
+		this.retailedPrice = retailedPrice;
+	}
 
-		public double getRecentPurPrice(){
-			 return recentPurPrice;
-		}
+	public double getRetailedPrice(){
+		return retailedPrice;
+	}
 
-		public void setRecentRetailedPrice(double recentRetailedPrice){
-			this.recentRetailedPrice = recentRetailedPrice;
-		}
+	public void setRecentPurPrice(double recentPurPrice){
+		this.recentPurPrice = recentPurPrice;
+	}
 
-		public double getRecentRetailedPrice(){
-			return recentRetailedPrice;
-		}
+	public double getRecentPurPrice(){
+		 return recentPurPrice;
+	}
 
-		public void setWarmingValue(int warmingValue){
-			this.warmingValue = warmingValue;
-		}
+	public void setRecentRetailedPrice(double recentRetailedPrice){
+		this.recentRetailedPrice = recentRetailedPrice;
+	}
 
-		public int getWarmingValue(){
-			return warmingValue;
-		}
+	public double getRecentRetailedPrice(){
+		return recentRetailedPrice;
+	}
 
+	public void setWarmingValue(int warmingValue){
+		this.warmingValue = warmingValue;
+	}
+
+	public int getWarmingValue(){
+		return warmingValue;
+	}
 }
+

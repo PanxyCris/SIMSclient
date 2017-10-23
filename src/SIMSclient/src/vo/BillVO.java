@@ -1,8 +1,11 @@
-package SIMSserver.src.po;
+package SIMSclient.src.vo;
 
 import java.util.Date;
 
-public class BillPO {
+
+public class BillVO {
+
+
 
 	public enum BillType {
 		INVENTORY_GIFT("¿â´æÔùËÍ"), INVENTORY_BENEFIT("¿â´æ±¨Òç"), INVENTORY_LOSS("¿â´æ±¨Ëð"), INVENTORY_WARN("¿â´æ¾¯½ä"),
@@ -28,13 +31,13 @@ public class BillPO {
 		}
 	}
 
-	int id;
-	Date date;
+	public int id;
+	public Date date;
 	BillType type;
 	BillState state;
 	String description;
 
-	public BillPO(int i,Date d,BillType t, BillState s,String des){
+	public BillVO(int i,Date d,BillType t, BillState s,String des){
 		id = i;
 		date = d;
 		type = t;
@@ -61,4 +64,5 @@ public class BillPO {
 	public String getDescription(){
 		return description;
 	}
+
 }

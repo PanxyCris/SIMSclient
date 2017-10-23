@@ -41,7 +41,8 @@ public interface CommodityDataService {
 	public void update(CommodityPO po) throws RemoteException;
 	public void find(CommodityPO po) throws RemoteException;
 	public void giftInventoryReceiptsMaking(BillPO po) throws RemoteException;  //制定库存赠送单
-	public void lossAndRevenueInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存报损报溢单
+	public void lossInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存报损单
+	public void revenueInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存报溢单
 	public void warningInventoryReceiptsMaking(BillPO po) throws RemoteException;//制定库存警戒单
 	public void init() throws RemoteException;
 	public void finish() throws RemoteException;

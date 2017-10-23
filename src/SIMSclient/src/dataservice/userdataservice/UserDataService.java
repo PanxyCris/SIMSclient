@@ -2,7 +2,8 @@ package SIMSclient.src.dataservice.userdataservice;
 
 import java.rmi.RemoteException;
 
-import SIMSclient.src.enumeration.UserRole;
+import SIMSclient.src.po.UserPO.Authority;
+import SIMSclient.src.po.UserPO.UserRole;
 import SIMSclient.src.po.UserPO;
 
 public interface UserDataService {
@@ -14,6 +15,8 @@ public interface UserDataService {
     public String getPassword();
 
     public UserRole getRole();
+
+    public Authority getAuthority();
 
     public void insert(UserPO po) throws RemoteException;
 	public void delelte(UserPO po) throws RemoteException;

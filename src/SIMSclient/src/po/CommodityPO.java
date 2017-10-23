@@ -6,13 +6,25 @@ public class CommodityPO {
 	private int id;   //商品编号
 	private String name;
 	private String model; //商品型号
-	private String classification;
+	private ClassificationPO classification;
 	private int number; //商品数量
 	private double purPrice; //进价
 	private double retailedPrice; //零售价
 	private double recentPurPrice; //最新进价
 	private double recentRetailedPrice; //最新零售价
 	private int warmingValue; //警戒值
+
+	public CommodityPO(int id,String name,String model,ClassificationPO classification,int number,double purPrice,
+			double retailedPrice,int warmingValue){
+		this.id = id;
+		this.name = name;
+		this.model = model;
+		this.classification = classification;
+		this.number = number;
+		this.purPrice = recentPurPrice = purPrice;
+		this.retailedPrice = recentRetailedPrice = retailedPrice;
+
+	}
 
 	public void setID(int id){
 		this.id = id;
@@ -38,11 +50,11 @@ public class CommodityPO {
 		return model;
 	}
 
-	public void setClassification(String classification){
+	public void setClassification(ClassificationPO classification){
 		this.classification = classification;
 	}
 
-	public String getClassification(){
+	public ClassificationPO getClassification(){
 		return classification;
 	}
 

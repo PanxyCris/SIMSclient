@@ -1,12 +1,13 @@
 package SIMSserver.src.po;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
-import SIMSclient.src.enumeration.BillState;
-import SIMSclient.src.enumeration.BillType;
-import SIMSclient.src.vo.bill.Warehouse;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
+import SIMSserver.src.po.BillPO.BillState;
+import SIMSserver.src.po.BillPO.BillType;
+import SIMSserver.src.po.WareHouse;
+import SIMSserver.src.po.CommodityPO;
 
 public class SalesPO implements Serializable {
 
@@ -15,7 +16,7 @@ public class SalesPO implements Serializable {
 	private String clientName; // 客户姓名
 	private String user; // 操作员
 	private String saleMan; // 业务员
-	private Warehouse warehouse; // 仓库
+	private WareHouse warehouse; // 仓库
 	private double beforePrice; // 折让前价格
 	private double allowance; // 折让金额
 	private double voucher; // 代金券金额
@@ -23,7 +24,7 @@ public class SalesPO implements Serializable {
 	private String remark; // 备注
 	private BillType billType; // 单据类型
 	private BillState state; // 单据状态
-	private ArrayList<CommodityItemVO> commodities; // 商品清单
+	private ArrayList<CommodityPO> commodities; // 商品清单
 
 	/**
 	 * @param iD
@@ -41,9 +42,9 @@ public class SalesPO implements Serializable {
 	 * @param state
 	 * @param commodities
 	 */
-	public SalesPO(String iD, String clientID, String clientName, String user, String saleMan, Warehouse warehouse,
+	public SalesPO(String iD, String clientID, String clientName, String user, String saleMan, WareHouse warehouse,
 			double beforePrice, double allowance, double voucher, double afterPrice, String remark, BillType billType,
-			BillState state, ArrayList<CommodityItemVO> commodities) {
+			BillState state, ArrayList<CommodityPO> commodities) {
 		super();
 		ID = iD;
 		this.clientID = clientID;
@@ -101,11 +102,11 @@ public class SalesPO implements Serializable {
 		this.saleMan = saleMan;
 	}
 
-	public Warehouse getWarehouse() {
+	public WareHouse getWarehouse() {
 		return warehouse;
 	}
 
-	public void setWarehouse(Warehouse warehouse) {
+	public void setWarehouse(WareHouse warehouse) {
 		this.warehouse = warehouse;
 	}
 
@@ -165,11 +166,11 @@ public class SalesPO implements Serializable {
 		this.state = state;
 	}
 
-	public ArrayList<CommodityItemVO> getCommodities() {
+	public ArrayList<CommodityPO> getCommodities() {
 		return commodities;
 	}
 
-	public void setCommodities(ArrayList<CommodityItemVO> commodities) {
+	public void setCommodities(ArrayList<CommodityPO> commodities) {
 		this.commodities = commodities;
 	}
 

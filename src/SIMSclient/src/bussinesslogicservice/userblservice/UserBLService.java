@@ -1,6 +1,8 @@
 package SIMSclient.src.bussinesslogicservice.userblservice;
 
-import SIMSclient.src.enumeration.UserRole;
+import SIMSclient.src.vo.UserVO.UserRole;
+import SIMSclient.src.vo.UserVO.Authority;
+
 import SIMSclient.src.vo.UserVO;
 
 public interface UserBLService {
@@ -12,10 +14,11 @@ public interface UserBLService {
     public String getPassword();
 
     public UserRole getRole();
+    public Authority getAuthority();
 
     public void insert(UserVO vo);
 	public void delelte(UserVO vo);
 	public void update(UserVO vo);
 	public void find(UserVO vo);
-	
+
 }
