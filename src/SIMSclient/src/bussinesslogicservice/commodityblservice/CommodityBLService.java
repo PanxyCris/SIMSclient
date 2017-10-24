@@ -1,6 +1,7 @@
 package SIMSclient.src.bussinesslogicservice.commodityblservice;
 
-import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.BillVO;
+
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public interface CommodityBLService {
