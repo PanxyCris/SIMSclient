@@ -42,7 +42,6 @@ public class SalesVO extends BillVO{
 		this.commodities = commodities;
 	}
 
-	@Override
 	public String toString() {
 		return "[单据ID=" + id + "单据类型=" + billType.value + ", 客户ID=" + clientID + ", 客户姓名=" + clientName
 				+ ", 业务员=" + saleMan + ", 操作员=" + user + ", 商品列表=" + commodities + ",\r\n折让前总额 =" + beforePrice
