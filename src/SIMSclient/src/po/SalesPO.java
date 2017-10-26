@@ -1,11 +1,7 @@
 package SIMSclient.src.po;
 
 import java.io.Serializable;
-
 import java.util.ArrayList;
-
-import SIMSclient.src.po.BillPO.BillState;
-import SIMSclient.src.po.BillPO.BillType;
 import SIMSclient.src.po.WareHouse;
 import SIMSclient.src.po.CommodityPO;
 
@@ -22,8 +18,6 @@ public class SalesPO implements Serializable {
 	private double voucher; // 代金券金额
 	private double afterPrice; // 折让后金额
 	private String remark; // 备注
-	private BillType billType; // 单据类型
-	private BillState state; // 单据状态
 	private ArrayList<CommodityPO> commodities; // 商品清单
 
 	/**
@@ -43,8 +37,8 @@ public class SalesPO implements Serializable {
 	 * @param commodities
 	 */
 	public SalesPO(String iD, String clientID, String clientName, String user, String saleMan, WareHouse warehouse,
-			double beforePrice, double allowance, double voucher, double afterPrice, String remark, BillType billType,
-			BillState state, ArrayList<CommodityPO> commodities) {
+			double beforePrice, double allowance, double voucher, double afterPrice, String remark,
+			 ArrayList<CommodityPO> commodities) {
 		super();
 		ID = iD;
 		this.clientID = clientID;
@@ -57,8 +51,6 @@ public class SalesPO implements Serializable {
 		this.voucher = voucher;
 		this.afterPrice = afterPrice;
 		this.remark = remark;
-		this.billType = billType;
-		this.state = state;
 		this.commodities = commodities;
 	}
 
@@ -150,21 +142,6 @@ public class SalesPO implements Serializable {
 		this.remark = remark;
 	}
 
-	public BillType getBillType() {
-		return billType;
-	}
-
-	public void setBillType(BillType billType) {
-		this.billType = billType;
-	}
-
-	public BillState getState() {
-		return state;
-	}
-
-	public void setState(BillState state) {
-		this.state = state;
-	}
 
 	public ArrayList<CommodityPO> getCommodities() {
 		return commodities;

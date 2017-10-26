@@ -2,9 +2,6 @@ package SIMSclient.src.vo.commodity;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.po.ClassificationPO;
-import SIMSclient.src.po.CommodityPO;
-
 public class ClassificationVO {
 
 	String name;
