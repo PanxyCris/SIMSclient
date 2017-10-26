@@ -10,7 +10,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class ReceiptBillPO extends FinancialDocPO {
 	String docID;// 单据编号
-	String userID;// 当前登录用户的ID
+	int userID;// 当前登录用户的ID
 	String note;// 备注
 
 	String customer;// 客户(包含供应商和销售商)
@@ -35,7 +35,7 @@ public class ReceiptBillPO extends FinancialDocPO {
 	 * @param transferAmount
 	 * @param total
 	 */
-	public ReceiptBillPO(String d, int u, String n, Date date, String docID, String userID, String note, String customer,
+	public ReceiptBillPO(String d, int u, String n, Date date, String docID, int userID, String note, String customer,
 			String accountID, int transferAmount, int total) {
 		super(d, u, n, date);
 		this.docID = docID;
@@ -61,13 +61,13 @@ public class ReceiptBillPO extends FinancialDocPO {
 
 
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
 
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 

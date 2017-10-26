@@ -10,7 +10,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class PaymentBillPO extends FinancialDocPO {
 	String docID;// 单据编号
-	String userID;// 操作员(当前登录用户)
+	int userID;// 操作员(当前登录用户)
 	String accountID;// 银行账户ID
 
 	// 条目清单
@@ -32,7 +32,7 @@ public class PaymentBillPO extends FinancialDocPO {
 	 * @param note
 	 * @param total
 	 */
-	public PaymentBillPO(String d, int u, String n, Date date, String docID, String userID, String accountID, String entryName,
+	public PaymentBillPO(String d, int u, String n, Date date, String docID, int userID, String accountID, String entryName,
 			int transferAmount, String note, int total) {
 		super(d, u, n, date);
 		this.docID = docID;
@@ -52,11 +52,11 @@ public class PaymentBillPO extends FinancialDocPO {
 		this.docID = docID;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 

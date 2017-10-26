@@ -1,8 +1,9 @@
 package SIMSclient.src.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class BillPO {
+public class BillPO implements Serializable{
 
 
 	private Date date;
