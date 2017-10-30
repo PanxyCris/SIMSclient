@@ -13,6 +13,7 @@
 
 | **修改人员** | **日期**     | **变更原因** | **版本号** |
 | -------- | ---------- | -------- | ------- |
+| 王灿灿 | 2017-10-30 | 添加accountbl模块 | v1.1 |
 
 
 ## 1.引言 
@@ -70,8 +71,8 @@
 
 <img src="../img/软件详细设计图/account_add顺序图.png">  
   
-<img src="../img/软件详细设图/account_delete顺序图.png">
+<img src="../img/软件详细设计图/account_delete顺序图.png">
 
-<img src="../img/软件详细设图/account_modify顺序图.png">
+<img src="../img/软件详细设计图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
