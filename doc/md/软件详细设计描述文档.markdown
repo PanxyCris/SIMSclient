@@ -16,8 +16,8 @@
 | 王灿灿 | 2017-10-30 | 添加accountbl模块 | v1.1 |
 
 
-## 1.引言 
-<br/> 
+## 1.引言
+<br/>
 　　**1.1　编制目的**
 
 　　本报告详细完成对企业进销存系统的详细设计，达到指导后续软件构造的目的，同时实现和测试人员及用户的沟通。
@@ -42,22 +42,22 @@
 
 ## 4.结构视角
 <br/>
-　　**4.1　业务逻辑层的分解**  
+　　**4.1　业务逻辑层的分解**
 
 　　业务逻辑层的开发包图参见软件体系结构文档图。
 
 　　　　4.1.1　accountbl模块
 
-　　　　(1)模块概述  
+　　　　(1)模块概述
 
-　　　　accountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。  
-　　　　Accountbl模块的职责及接口参见软件体系结构描述文档表。  
+　　　　accountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Accountbl模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountblservice.AccountBLService接口。业务逻辑层和数据层之间添加dataservice.accountdataservice.AccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了AccountController，这样AccountController将会对账户管理的业务逻辑处理委托给Account对象。AccountPO是作为账户记录的持久化对象被添加到设计模型中去的。  
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountblservice.AccountBLService接口。业务逻辑层和数据层之间添加dataservice.accountdataservice.AccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了AccountController，这样AccountController将会对账户管理的业务逻辑处理委托给Account对象。AccountPO是作为账户记录的持久化对象被添加到设计模型中去的。
 
-　　　　accountbl模块的设计如图所示。  
+　　　　accountbl模块的设计如图所示。
 
 <img src="../img/软件详细设计图/accountbl模块设计图.png">
 
@@ -65,14 +65,179 @@
 
 　　　　(3)模块内部类的接口规范
 
-　　　　(4)业务逻辑层的动态模型  
+　　　　(4)业务逻辑层的动态模型
 
 　　　　以下四个图分别表明了企业进销存系统中，对银行账户进行增删改查的逻辑处理的相关对象之间的协作
 
-<img src="../img/软件详细设计图/account_add顺序图.png">  
-  
+<img src="../img/软件详细设计图/account_add顺序图.png">
+
 <img src="../img/软件详细设计图/account_delete顺序图.png">
 
 <img src="../img/软件详细设计图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
+
+4.1.2 commoditybl 模块<br>
+（1）模块概述<br>
+commoditybl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
+ （2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityController，这样CommodityController会将对商品的业务逻辑处理委托给Commodity对象。CommodityPO是作为商品记录的持久化对象呗添加到设计模型中去的。而CommodityList和CommodityItem的添加时Billinfo的容器类。CommodityItem保有具体商品的数据，及相应的计算小计的职责。而Classification是作为商品的分类而聚合在其中。CommodityList封装了关于Commodity的数据集合的数据结构的秘密和计算总数的职责。Salesinfo和Billinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
+<img src="../img/软件详细设计图/commoditybl模块各个类的设计"><br>
+<center>**commodity模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>LoginController</th>
+<th>负责实现对应于登录界面所需要的服务</th>
+</tr>
+<tr>
+<th>CommodityController</th>
+<th>负责实现商品界面所需要的服务</th>
+</tr>
+<th>User</th>
+<th>系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题</th>
+</tr>
+<tr>
+<th>Commodity</th>
+<th>商品的领域模型对象，拥有一个商品所持有的数量、售价等信息，可以帮助完成商品界面所需要的服务</th>
+</tr>
+</table>
+（3）模块内部类的接口规范
+<center>**CommodityController的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">CommodityController.addBill</th>
+<th>语法</th>
+<th>public ResultMessage addBill(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Commodity领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Commodity领域对象的addBill方法</th>
+</tr>
+<tr>
+<th rowspan="3">CommodityController.addSales</th>
+<th>语法</th>
+<th>public ResultMessage addSales(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Commodity领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Commodity领域对象的addSales方法</th>
+</tr>
+<tr>
+<th rowspan="3">CommodityController.getTotal</th>
+<th>语法</th>
+<th>public ResultMessage getTotal(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Commodity领域对象，已添加商品和数量，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Commodity领域对象的getTotal方法</th>
+</tr>
+</table>
+
+<center>**Commodity的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.addBill</th>
+<th>语法</th>
+<th>public ResultMessage addBill(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个商品增减回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个商品增加回合中，生成一个单据</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.addSales</th>
+<th>语法</th>
+<th>public ResultMessage addSales(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个商品增减回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个商品增加回合中，生成一次销售记录</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.getTotal</th>
+<th>语法</th>
+<th>public ResultMessage getTotal(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已进行一次商品的增减</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回商品数量的总数</th>
+</tr>
+</table>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>CommodityDataService.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.insert(CommodityPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.delete(CommodityPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.update(CommodityPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getCommodityDatabase</th>
+<th>得到Commodity数据库的服务的引用</th>
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型
+该图表明了SIMS系统中，当用户点击输入新增添的商品之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/添加商品的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入删除的商品之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/删除商品的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入修改的商品之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/修改商品的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入查询商品之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/查询商品的顺序图.png"><br>
