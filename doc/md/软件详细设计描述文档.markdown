@@ -83,7 +83,7 @@ commoditybl模块承担的需求参见需求规格说明文档功能需求及相
 commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
  （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityController，这样CommodityController会将对商品的业务逻辑处理委托给Commodity对象。CommodityPO是作为商品记录的持久化对象呗添加到设计模型中去的。而CommodityList和CommodityItem的添加时Billinfo的容器类。CommodityItem保有具体商品的数据，及相应的计算小计的职责。而Classification是作为商品的分类而聚合在其中。CommodityList封装了关于Commodity的数据集合的数据结构的秘密和计算总数的职责。Salesinfo和Billinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
-<img src="../img/软件详细设计图/commodity模块各个类的设计"><br>
+<img src="../img/软件详细设计图/commodity模块各个类的设计.png"><br>
 <center>**commodity模块各个类的设计**</center>
 <table><tbody>
 <tr>
