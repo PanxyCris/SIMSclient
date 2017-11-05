@@ -25,6 +25,7 @@
 | 王灿灿 | 2017-10-30 | 添加accountbl模块 | v1.1 |
 | 潘星宇 | 2017-11-01 | 添加commoditybl模块 | v1.1 |
 | 李杰 | 2017-11-02 | 添加salebl模块 | v1.1 |
+| 潘星宇 | 2017-11-05 | 添加userbl模块 | v1.1 |
 
 
 ## 1.引言
@@ -252,6 +253,101 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/修改商品的顺序图.png"><br>
 该图表明了SIMS系统中，当用户点击输入查询商品之后，商品业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询商品的顺序图.png"><br>
+
+4.1.3 userbl 模块<br>
+（1）模块概述<br>
+userbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+userbl模块的职责及接口参见软件系统结构描述文档表<br>
+ （2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。业务逻辑层和数据层之间添加dataservice.userdataservice.UserDataService接口。UserPO是作为商品记录的持久化对象呗添加到设计模型中去的。<br>
+<img src="../img/userbl模块各个类的设计"><br>
+<center>**user模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>LoginController</th>
+<th>负责实现对应于登录界面所需要的服务</th>
+</tr>
+<th>User</th>
+<th>系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题</th>
+</tr>
+</table>
+（3）模块内部类的接口规范
+<center>**User的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">user.getAuthority</th>
+<th>语法</th>
+<th>public ResultMessage getAuthority()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个user领域对象，并且其权限已被赋值</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用User领域对象的getAuthority方法</th>
+</tr>
+<tr>
+<th rowspan="3">user.getRole</th>
+<th>语法</th>
+<th>public ResultMessage getRole()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个user领域对象，并且其角色已被确认</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用User领域对象的getRole方法</th>
+</tr>
+</table>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>UserDataService.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>UserDataService.insert(UserPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>UserDataService.delete(UserPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>UserDataService.update(UserPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getUserDatabase</th>
+<th>得到User数据库的服务的引用</th>
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型
+该图表明了SIMS系统中，当用户点击输入新增添的用户之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/添加用户的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入删除的用户之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/删除用户的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入修改的用户之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/修改用户的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入查询用户之后，商品业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/查询用户的顺序图.png"><br>
 
 ##5.依赖视角
 下面两图是客户端和服务器各自的包之间的依赖关系<br>
