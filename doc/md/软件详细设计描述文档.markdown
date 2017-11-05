@@ -260,7 +260,7 @@ userbl模块承担的需求参见需求规格说明文档功能需求及相关�
 userbl模块的职责及接口参见软件系统结构描述文档表<br>
  （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。业务逻辑层和数据层之间添加dataservice.userdataservice.UserDataService接口。UserPO是作为商品记录的持久化对象呗添加到设计模型中去的。<br>
-<img src="../img/userbl模块各个类的设计"><br>
+<img src="../img/软件详细设计图/userbl模块各个类的设计.png"><br>
 <center>**user模块各个类的设计**</center>
 <table><tbody>
 <tr>
