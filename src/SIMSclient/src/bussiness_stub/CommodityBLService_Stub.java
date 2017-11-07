@@ -1,6 +1,6 @@
 package SIMSclient.src.bussiness_stub;
 
-import SIMSclient.src.vo.bill.BillVO;
+
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public class CommodityBLService_Stub {
