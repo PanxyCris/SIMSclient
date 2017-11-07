@@ -1,13 +1,12 @@
 package SIMSclient.src.bussinesslogicservice.billblservice;
 
 import java.util.Date;
-import SIMSclient.src.vo.BillVO.BillState;
 
 
 public interface BillBLService {
 
 	public int getID();
 	public Date getDate();
-	public BillState getState();
+	public SIMSclient.src.vo.bill.BillVO.BillState getState();
 	public String getDescription();
 }
