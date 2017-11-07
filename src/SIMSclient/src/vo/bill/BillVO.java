@@ -1,4 +1,4 @@
-package SIMSclient.src.vo;
+package SIMSclient.src.vo.bill;
 
 import java.util.Date;
 
