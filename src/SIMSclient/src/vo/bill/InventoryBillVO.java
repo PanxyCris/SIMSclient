@@ -1,8 +1,6 @@
-package SIMSclient.src.vo.inventory;
+package SIMSclient.src.vo.bill;
 
 import java.util.Date;
-
-import SIMSclient.src.vo.BillVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public class InventoryBillVO extends BillVO{
