@@ -267,7 +267,7 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 userbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 userbl模块的职责及接口参见软件系统结构描述文档表<br>
 （2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。业务逻辑层和数据层之间添加dataservice.userdataservice.UserDataService接口。UserPO是作为商品记录的持久化对象呗添加到设计模型中去的。<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。业务逻辑层和数据层之间添加dataservice.userdataservice.UserDataService接口。UserPO是作为商品记录的持久化对象添加到设计模型中去的。<br>
 <img src="../img/软件详细设计图/userbl模块各个类的设计.png"><br>
 <center>**user模块各个类的设计**</center>
 <table><tbody>
@@ -366,8 +366,245 @@ salesbl模块的职责及接口参见软件系统结构描述文档表<br>
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleBLService接口。业务逻辑层和数据层之间添加dataservice. SaleDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SaleController，这样SaleController会将对销售的逻辑业务处理委托给Sale对象。SalePO是作为销售单的持久化对象被添加到设计模型中去的。
 Salebl模块的设计如图所示
+<img src="../img/软件详细设计图/Saales模块.png"><br>
+
+salesbl模块各个类的职责
+| 模块 | 职责 |
+| SalesController | 负责实现销售管理界面所需要的服务 |
+| Sales | 制定销售单的领域模型对象，拥有销售单的信息 |
+| SalesList | 负责每一个销售单的数据 |
+| SalesListItem | 销售单数据里的条目 |
 
 （3）模块内部类的接口规范<br>
+<center>**SalesController的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.getSalesID</th>
+<th>语法</th>
+<th>public String getSalesID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale的方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.getSaleBackID</th>
+<th>语法</th>
+<th>public String getSaleBackID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sales领域对象的方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.addCommodities</th>
+<th>语法</th>
+<th>public void addCommodities(CommodityItem item)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，添加商品和数量，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的addCommodities方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.deteleCommodities</th>
+<th>语法</th>
+<th>public void deleteCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，删除商品，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的deleteCommodities方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.findCommodities</th>
+<th>语法</th>
+<th>public void findCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，查找商品与其数量，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的findCommodities方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.updateCommodities</th>
+<th>语法</th>
+<th>public void updateCommodities(CommodityItem item)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，修改商品和数量，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的updateCommodities方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.save</th>
+<th>语法</th>
+<th>public SlaesVO save()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的方法</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.submit</th>
+<th>语法</th>
+<th>public Sales submit()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的方法</th>
+</tr>
+</table>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>Sales.getSalesID</th>
+<th>获取进货单的ID</th>
+</tr>
+<tr>
+<th>Sales.getSaleBackID</th>
+<th>获取进货退货单的ID</th>
+</tr>
+<tr>
+<th>salesDataService.addCommodities(CommodityPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>SalesDataService.deleteCommodities(CommodityPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>SalesDataService.updateCommodities(CommodityPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<tr>
+<th>Sales.save</th>
+<th>保存草稿</th>
+</tr>
+<th>Sales.submit</th>
+<th>提交单据</th>
+</tr>
+</table>
+
+
+<center>**Sales的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.addBill</th>
+<th>语法</th>
+<th>public ResultMessage addBill(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个商品增减回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个商品增加回合中，生成一个单据</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.addSales</th>
+<th>语法</th>
+<th>public ResultMessage addSales(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个商品增减回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个商品增加回合中，生成一次销售记录</th>
+</tr>
+<tr>
+<th rowspan="3">Commodity.getTotal</th>
+<th>语法</th>
+<th>public ResultMessage getTotal(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已进行一次商品的增减</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回商品数量的总数</th>
+</tr>
+</table>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>CommodityDataService.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.insert(CommodityPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.delete(CommodityPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.update(CommodityPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getCommodityDatabase</th>
+<th>得到Commodity数据库的服务的引用</th>
+</tr>
+</table>
 
 （4）业务逻辑层的动态模型<br>
 该图展示了进货销售人员想在销售单／销售退货单中添加一个商品的时候，销售业务逻辑处理的相关对象之间的协作<br>
@@ -483,9 +720,11 @@ Memberbl各个类的职责如图
 </table>
 
 （4）业务逻辑层的动态模型<br>
-该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
-该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
-该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
+该图展示了当进货销售人员想要添加一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/addMember.png">
+
+该图展示了当进货销售人员想要删除一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/deleteMember.png">
 
 4.1.6 purchasebl 模块<br>
 （1）模块概述<br>
