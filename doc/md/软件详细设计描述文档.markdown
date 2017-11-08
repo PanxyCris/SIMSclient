@@ -424,7 +424,7 @@ Memberbl各个类的职责如图
 <th>成功添加客户，持久化更新客户的数据</th>
 </tr>
 <tr>
-<th rowspan="3">Memner.updateMember</th>
+<th rowspan="3">Member.updateMember</th>
 <th>语法</th>
 <th>public ResultMessage upddteMember(MemberPO po)</th>
 </tr>
@@ -437,7 +437,7 @@ Memberbl各个类的职责如图
 <th>客户属性被成功修改，持久化更新客户的数据</th>
 </tr>
 <tr>
-<th rowspan="3">Memner.deleteMember</th>
+<th rowspan="3">Member.deleteMember</th>
 <th>语法</th>
 <th>public ResultMessage deleteMember(String name)</th>
 </tr>
@@ -451,7 +451,15 @@ Memberbl各个类的职责如图
 </tr>
 </table>
 <table><tbody>
-<tr>
+
+| **需要的服务（需接口）** |
+| MemberDataService.findMember | 根据ID进行查找单一持久化对象 |
+| MemberDataService.addMember | 插入单一持久化对象 |
+| MemberDataService.updateMember | 更新单一持久化对象 |
+| MemberDataService.deleteMember | 删除单一持久化对象 |
+| MemberDataService.getMemberDate | 得到Member数据的服务引用 |
+
+
 （4）业务逻辑层的动态模型<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
 该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
