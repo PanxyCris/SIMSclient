@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<TextField layoutX="159.0" layoutY="216.0" prefHeight="37.0" prefWidth="282.0" />
+		<PasswordField layoutX="159.0" layoutY="253.0" prefHeight="37.0" prefWidth="282.0" />
+		<Button layoutX="159.0" layoutY="338.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="282.0" text="安  全  登  录" textOverrun="CLIP">
+			<font>
+				<Font size="16.0" />
+			</font>
+			<graphic>
+				<ImageView fitHeight="27.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@img/安全登录.jpg" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+		<ImageView fitHeight="125.0" fitWidth="133.0" layoutX="7.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@img/用户.jpg" />
+			</image>
+		</ImageView>
+		<ImageView fitHeight="221.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@img/登录界面.jpg" />
+			</image>
+		</ImageView>
+		<Hyperlink layoutX="456.0" layoutY="216.0" prefHeight="37.0" prefWidth="81.0" text="   注册账号" textAlignment="CENTER">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Hyperlink>
+		<Hyperlink layoutX="456.0" layoutY="253.0" prefHeight="37.0" prefWidth="81.0" text="   找回密码" textAlignment="CENTER">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Hyperlink>
+		<CheckBox layoutX="159.0" layoutY="296.0" mnemonicParsing="false" text="记住密码">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</CheckBox>
+		<CheckBox layoutX="365.0" layoutY="296.0" mnemonicParsing="false" text="自动登录">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</CheckBox>
+		<ChoiceBox layoutX="409.0" layoutY="216.0" prefHeight="37.0" prefWidth="2.0" />
+		<Button layoutX="409.0" layoutY="253.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="26.0">
+			<graphic>
+				<ImageView fitHeight="18.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@img/键盘.jpg" />
+					</image>
+				</ImageView>
+			</graphic>
+		</Button>
+	</children>
+</AnchorPane>
