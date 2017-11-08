@@ -791,7 +791,7 @@ promotionbl模块的职责及接口参见软件系统结构描述文档表<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PromotionBLService接口。业务逻辑层和数据层之间添加dataservice. PromotionDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PromotionController，这样PromotionController会将对客户的逻辑业务处理委托给Promotion对象。PromotionPO是作为客户的持久化对象被添加到设计模型中去的。
 Promotionbl模块的设计如图
 
-<img src="../img/软件详细设计图/制定销售策略 设计类图(1).png">
+<img src="../img/软件详细设计图/制定销售策略设计类图.png">
 Promotionbl各个类的职责如图
 | **模块** | **职责** |
 | PromotionController | 负责实现制定销售策略界面所需要的服务 |
@@ -867,7 +867,7 @@ Promotionbl各个类的职责如图
 
 （4）业务逻辑层的动态模型<br>
 该图展示了当总经理想要制定销售策略的时候，制定销售策略业务逻辑处理的相关对象之间的协作<br>
-<img src="../img/软件详细设计图/制定销售策略 顺序图(1).png">
+<img src="../img/软件详细设计图/制定销售策略顺序图.png">
 =======
 4.1.7 billbl模块<br>
 （1）模块概述<br>
