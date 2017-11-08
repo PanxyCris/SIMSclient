@@ -7,7 +7,7 @@ public class InventoryBillVO extends BillVO{
 
 	CommodityVO vo;
 
-	public InventoryBillVO(int i, Date d, BillState s, String des,CommodityVO v) {
+	public InventoryBillVO(String i, Date d, BillState s, String des,CommodityVO v) {
 		super(i, d, s, des);
 		vo = v;
 	}
