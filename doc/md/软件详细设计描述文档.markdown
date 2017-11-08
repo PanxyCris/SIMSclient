@@ -34,6 +34,7 @@
 | 李杰 | 2017-11-02 | 添加salesbl模块、memberbl模块 | v1.1 |
 | 潘星宇 | 2017-11-05 | 添加userbl模块 | v1.1 |
 | 李杰 | 2017-11-07 | 添加purchase模块 | v1.1 |
+| 孙嘉杰 | 2017-11-08 | 添加promotionbl模块 | v1.1 |
 
 
 ## 1.引言
@@ -742,6 +743,91 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
 图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
 
+4.1.7 promotionbl 模块<br>
+（1）模块概述<br>
+promotionbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+promotionbl模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PromotionBLService接口。业务逻辑层和数据层之间添加dataservice. PromotionDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PromotionController，这样PromotionController会将对客户的逻辑业务处理委托给Promotion对象。PromotionPO是作为客户的持久化对象被添加到设计模型中去的。
+Promotionbl模块的设计如图
+
+<img src="../img/软件详细设计图/制定销售策略 设计类图（1）.png">
+Promotionbl各个类的职责如图
+| **模块** | **职责** |
+| PromotionController | 负责实现制定销售策略界面所需要的服务 |
+| Promotion | 制定销售策略的领域模型对象 |
+（3）模块内部类的接口规范<br>
+<center>**Promotion的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getPromotion</th>
+<th>语法</th>
+<th>public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>关键字符合输入条件，id符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>查询到目标销售策略</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getID</th>
+<th>语法</th>
+<th>public String getBillID</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>类型、名字、级别、电话、地址、邮编等符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得账单ID</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getclientID()</th>
+<th>语法</th>
+<th>public String getclientID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>属性符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得客户ID</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getclientName</th>
+<th>语法</th>
+<th>public String getclientName()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>输入的客户ID符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得客户姓名</th>
+</tr>
+</table>
+<table><tbody>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型<br>
+该图展示了当总经理想要制定销售策略的时候，制定销售策略业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/制定销售策略 顺序图（1）.png">
 
 ##5.依赖视角
 下面两图是客户端和服务器各自的包之间的依赖关系<br>
