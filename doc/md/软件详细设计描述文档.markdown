@@ -37,6 +37,7 @@
 | 孙嘉杰 | 2017-11-08 | 添加promotionbl模块 | v1.1 |
 | 潘星宇 | 2017-11-08 | 添加billbl模块 | v1.1 |
 | 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.2 |
+| 潘星宇 | 2017-11-08 | 添加mainui模块 | v1.1 |
 >>>>>>> refs/remotes/origin/master
 
 
@@ -1059,6 +1060,69 @@ billbl模块的职责及接口参见软件系统结构描述文档表<br>
 该图表明了SIMS系统中，当用户点击输入查询单据之后，单据业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询单据的顺序图.png"><br>
 
+4.2.1 mainui模块<br>
+（1）模块概述<br>
+mainui模块承担的需求为登录主界面需求<br>
+mainui模块的职责及接口为登录user的使用概况<br>
+（2）整体结构<br>
+为提供给业务逻辑层，我们直接使用bussinesslogicservice.userblservice.UserBLService接口来调用关于用户的信息。
+<center>**mainui模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>mainui</th>
+<th>负责实现对应于登录界面所需要的服务</th>
+</tr>
+</table>
+（3）模块内部类的接口规范
+<center>**mainui的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">MainUI.sendinfo</th>
+<th>语法</th>
+<th>public ResultMessage login(String info)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已输入用户名和密码，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用mainui领域对象的login方法</th>
+</tr>
+<tr>
+<th rowspan="3">MainUI.register</th>
+<th>语法</th>
+<th>public ResultMessage register(String info)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已输入新用户名和密码，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用mainui领域对象的register方法</th>
+</tr>
+</table>
+
+<table><tbody>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>UserDataService.isExist(String info)</th>
+<th>根据ID和密码判断是否存在该用户</th>
+</tr>
+</table>
 >>>>>>> refs/remotes/origin/master
 
 ##5.依赖视角
