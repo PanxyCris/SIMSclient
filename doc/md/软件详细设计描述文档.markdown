@@ -34,6 +34,10 @@
 | 李杰 | 2017-11-02 | 添加salesbl模块、memberbl模块 | v1.1 |
 | 潘星宇 | 2017-11-05 | 添加userbl模块 | v1.1 |
 | 李杰 | 2017-11-07 | 添加purchase模块 | v1.1 |
+| 孙嘉杰 | 2017-11-08 | 添加promotionbl模块 | v1.1 |
+| 潘星宇 | 2017-11-08 | 添加billbl模块 | v1.1 |
+| 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.2 |
+>>>>>>> refs/remotes/origin/master
 
 
 ## 1.引言
@@ -124,6 +128,18 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th>Commodity</th>
 <th>商品的领域模型对象，拥有一个商品所持有的数量、售价等信息，可以帮助完成商品界面所需要的服务</th>
+</tr>
+<tr>
+<th>CommodityList</th>
+<th>商品清单的领域模型对象，拥有一系列商品所持有的数量、售价等信息，可以帮助完成商品界面所需要的服务</th>
+</tr>
+<tr>
+<th>CommodityItem</th>
+<th>商品项目的领域模型对象，拥有具体商品所持有的批次、售价等信息，可以帮助完成商品界面所需要的服务</th>
+</tr>
+<tr>
+<th>Classification</th>
+<th>商品分类的领域模型对象，拥有一个商品分类所持有的下属商品等信息，可以帮助完成商品界面所需要的服务</th>
 </tr>
 </table>
 （3）模块内部类的接口规范
@@ -250,6 +266,22 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <th>DataFactory.getCommodityDatabase</th>
 <th>得到Commodity数据库的服务的引用</th>
 </tr>
+<tr>
+<th>CommodityDataService.insertClass(ClassificationPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.deleteClass(ClassificationPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.updateClass(ClassificationPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getClassDatabase</th>
+<th>得到Class数据库的服务的引用</th>
+</tr>
 </table>
 
 （4）业务逻辑层的动态模型
@@ -261,6 +293,14 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/修改商品的顺序图.png"><br>
 该图表明了SIMS系统中，当用户点击输入查询商品之后，商品业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询商品的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入新增添的分类之后，商品分类业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/添加分类的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入删除的分类之后，商品分类业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/删除分类的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入修改的分类之后，商品分类业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/修改分类的顺序图.png"><br>
+
+
 
 4.1.3 userbl 模块<br>
 （1）模块概述<br>
@@ -784,6 +824,238 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
 该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
 
+<<<<<<< HEAD
+4.1.7 promotionbl 模块<br>
+（1）模块概述<br>
+promotionbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+promotionbl模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PromotionBLService接口。业务逻辑层和数据层之间添加dataservice. PromotionDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PromotionController，这样PromotionController会将对客户的逻辑业务处理委托给Promotion对象。PromotionPO是作为客户的持久化对象被添加到设计模型中去的。
+Promotionbl模块的设计如图
+
+<img src="../img/软件详细设计图/制定销售策略设计类图.png">
+Promotionbl各个类的职责如图
+| **模块** | **职责** |
+| PromotionController | 负责实现制定销售策略界面所需要的服务 |
+| Promotion | 制定销售策略的领域模型对象 |
+（3）模块内部类的接口规范<br>
+<center>**Promotion的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getPromotion</th>
+<th>语法</th>
+<th>public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>关键字符合输入条件，id符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>查询到目标销售策略</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getID</th>
+<th>语法</th>
+<th>public String getBillID</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>类型、名字、级别、电话、地址、邮编等符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得账单ID</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getclientID()</th>
+<th>语法</th>
+<th>public String getclientID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>属性符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得客户ID</th>
+</tr>
+<tr>
+<th rowspan="3">Promotion.getclientName</th>
+<th>语法</th>
+<th>public String getclientName()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>输入的客户ID符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功获得客户姓名</th>
+</tr>
+</table>
+<table><tbody>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型<br>
+该图展示了当总经理想要制定销售策略的时候，制定销售策略业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/制定销售策略顺序图.png">
+=======
+4.1.7 billbl模块<br>
+（1）模块概述<br>
+billbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+billbl模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.billblservice.billBLService接口。业务逻辑层和数据层之间添加dataservice.billdataservice.BillDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了BillController，这样BillController会将对商品的业务逻辑处理委托给Bill对象。BillPO是作为单据记录的持久化对象添加到设计模型中去的。BillList封装了关于Bill的数据集合的数据结构的秘密和计算总数的职责。InventoryBill、PurchaseAndSalesBill和Financial继承了Bill总类。Commodityinfo、Salesinfo和Accountinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
+<img src="../img/软件详细设计图/bill模块各个类的设计.png"><br>
+<center>**bill模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>LoginController</th>
+<th>负责实现对应于登录界面所需要的服务</th>
+</tr>
+<tr>
+<th>BillController</th>
+<th>负责实现单据界面所需要的服务</th>
+<tr>
+<th>Bill</th>
+<th>单据的领域模型对象，拥有一个单据所持有的编号、时间等信息，可以帮助完成单据界面所需要的服务</th>
+</tr>
+<tr>
+<th>BillList</th>
+<th>单据清单的领域模型对象，拥有一系列单据所持有的编号、时间、状态等信息，可以帮助完成单据界面所需要的服务</th>
+</tr>
+<tr>
+<th>InventoryBill</th>
+<th>库存单据类的领域模型对象，拥有库存单据所持有的商品、进出数量等信息</th>
+</tr>
+<tr>
+<th>PurchaseAndSalesBill</th>
+<th>销售和进退货类的领域模型对象，拥有销售进出货所持有的商品、进出数量等信息</th>
+</tr>
+<tr>
+<th>FinancialBill</th>
+<th>收付款类的领域模型对象，拥有收付款项等信息</th>
+</tr>
+</table>
+
+（3）模块内部类的接口规范
+<center>**BillController的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">BillController.check(BillList list)</th>
+<th>语法</th>
+<th>public ResultMessage check(BillList list)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个BillList领域对象，已有单据进入待审批状态，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Bill领域对象的check方法</th>
+</tr>
+<tr>
+<th rowspan="3">BillController.sendMessage()</th>
+<th>语法</th>
+<th>public ResultMessage sendMessage</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>总经理已执行了单据审批操作，返回单据审批结果信息</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Bill领域对象的sendMessage方法</th>
+</tr>
+</table>
+
+<center>**Bill的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Bill.check(BillList list)</th>
+<th>语法</th>
+<th>public ResultMessage check(BillList list)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已进行一次单据的集合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回单据清单对象</th>
+</tr>
+<tr>
+<th rowspan="3">Bill.sendMessage()</th>
+<th>语法</th>
+<th>public ResultMessage sendMessage()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>单据已经进入待审批状态</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回单据审批结果</th>
+</tr>
+</table>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>BillDataService.find(String id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>BillDataService.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>BillDataService.insert(BillPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>BillDataService.update(BillPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getBillDatabase</th>
+<th>得到Bill数据库的服务的引用</th>
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型
+该图表明了SIMS系统中，当用户点击输入新增添的单据之后，单据业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/添加单据的顺序图.png"><br>
+该图表明了SIMS系统中，当用户点击输入查询单据之后，单据业务逻辑处理相关对象之间的协作<br>
+<img src="../img/软件详细设计图/查询单据的顺序图.png"><br>
+
+>>>>>>> refs/remotes/origin/master
 
 ##5.依赖视角
 下面两图是客户端和服务器各自的包之间的依赖关系<br>
