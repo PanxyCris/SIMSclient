@@ -452,13 +452,35 @@ Memberbl各个类的职责如图
 </table>
 <table><tbody>
 
-| **需要的服务（需接口）** | ---------- |
-| MemberDataService.findMember | 根据ID进行查找单一持久化对象 |
-| MemberDataService.addMember | 插入单一持久化对象 |
-| MemberDataService.updateMember | 更新单一持久化对象 |
-| MemberDataService.deleteMember | 删除单一持久化对象 |
-| MemberDataService.getMemberDate | 得到Member数据的服务引用 |
-
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>MemberDataService.findMember(String id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>MemberDataService.addMember(MemberPO po)</th>
+<th>添加单一持久化对象</th>
+</tr>
+<tr>
+<th>MemberDataService.deleteMember(MemberPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>MemberDataService.updateMember(MemberPO po)</th>
+<th>更改单一持久化对象</th>
+</tr>
+<tr>
+<th>MemberDataService.getMemberDatebase</th>
+<th>得到Member数据库的服务的引用</th>
+</tr>
+</table>
 
 （4）业务逻辑层的动态模型<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
