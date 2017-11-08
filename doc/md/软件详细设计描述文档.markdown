@@ -452,7 +452,7 @@ Memberbl各个类的职责如图
 </table>
 <table><tbody>
 
-| **需要的服务（需接口）** |
+| **需要的服务（需接口）** | ---------- |
 | MemberDataService.findMember | 根据ID进行查找单一持久化对象 |
 | MemberDataService.addMember | 插入单一持久化对象 |
 | MemberDataService.updateMember | 更新单一持久化对象 |
