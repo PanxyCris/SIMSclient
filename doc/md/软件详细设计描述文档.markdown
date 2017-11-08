@@ -16,7 +16,7 @@
     **1.1　编制目的**
     **1.2　词汇表**
     **1.3　参考资料**
-    
+
 ### 2.产品概述
 
 ### 3.体系结构设计概述
@@ -383,8 +383,75 @@ memberbl模块的职责及接口参见软件系统结构描述文档表<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. MemberBLService接口。业务逻辑层和数据层之间添加dataservice. MemberDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了MemberController，这样MemberController会将对客户的逻辑业务处理委托给Member对象。MemberPO是作为客户的持久化对象被添加到设计模型中去的。
 Memberbl模块的设计如图
 
-（3）模块内部类的接口规范<br>
+<img src="../img/软件详细设计图/Member模块各个类的设计.png">
+<center>**member模块各个类的设计**</center>
 
+Memberbl各个类的职责如图
+| **模块** | **职责** |
+| MemberController | 负责实现客户管理界面所需要的服务 |
+| Member | 客户管理的领域模型对象，拥有客户数据的编号、分类、级别、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员 |
+
+（3）模块内部类的接口规范<br>
+<center>**Member的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Member.findMember</th>
+<th>语法</th>
+<th>public ResultMessage findMember(String keywords, string id)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>关键字符合输入条件，id符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>查询到目标客户</th>
+</tr>
+<tr>
+<th rowspan="3">Member.addMember</th>
+<th>语法</th>
+<th>public ResultMessage addMember(MemberPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>类型、名字、级别、电话、地址、邮编等符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>成功添加客户，持久化更新客户的数据</th>
+</tr>
+<tr>
+<th rowspan="3">Memner.updateMember</th>
+<th>语法</th>
+<th>public ResultMessage upddteMember(MemberPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>修改的属性符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>客户属性被成功修改，持久化更新客户的数据</th>
+</tr>
+<tr>
+<th rowspan="3">Memner.deleteMember</th>
+<th>语法</th>
+<th>public ResultMessage deleteMember(String name)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>输入的客户符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>客户被成功删除，持久化更新客户的数据</th>
+</tr>
+</table>
+<table><tbody>
+<tr>
 （4）业务逻辑层的动态模型<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
 该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>

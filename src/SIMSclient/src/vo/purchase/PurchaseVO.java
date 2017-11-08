@@ -1,11 +1,11 @@
 package SIMSclient.src.vo.purchase;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import SIMSclient.src.enumeration.BillState;
-import SIMSclient.src.enumeration.BillType;
-import SIMSclient.src.vo.ObjectVO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
+import SIMSclient.src.vo.bill.PurchaseAndSalesBillVO;
+import SIMSclient.src.vo.bill.WareHouse;
+import SIMSclient.src.vo.commodity.CommodityVO;
 
 /**  
 * 类说明   
@@ -13,52 +13,28 @@ import SIMSclient.src.vo.commodity.CommodityItemVO;
 * @author ****  
 * @date 2017年10月22日    
 */
-public class PurchaseVO extends ObjectVO{
+public class PurchaseVO extends PurchaseAndSalesBillVO{
 
 	public String clientID;
-	public String clientName;
-	public String user;
-	public ArrayList<CommodityItemVO> commodities;
-	public double beforePrice;
-	public String remark;
-	public BillType type;
-	public BillState state;
-
-
+	public String supplier;  //供应商
 	
-
 	/**
-	 * @param clientID
-	 * @param clientName
-	 * @param user
-	 * @param commodities
-	 * @param beforePrice
-	 * @param remark
-	 * @param type
-	 * @param state
+	 * @param i
+	 * @param d
+	 * @param s
+	 * @param des
+	 * @param warehouse
+	 * @param operator
+	 * @param amount
+	 * @param commodityList
 	 */
-	public PurchaseVO(String id, String date, String clientID, String clientName, String user, ArrayList<CommodityItemVO> commodities,
-			double beforePrice, String remark, BillType type, BillState state) {
-		super(id, date);
-		this.clientID = clientID;
-		this.clientName = clientName;
-		this.user = user;
-		this.commodities = commodities;
-		this.beforePrice = beforePrice;
-		this.remark = remark;
-		this.type = type;
-		this.state = state;
+	public PurchaseVO(String i, Date d, BillState s, String des, WareHouse warehouse, String operator, int amount,
+			ArrayList<CommodityVO> commodityList, String id, String supplier) {
+		super(i, d, s, des, warehouse, operator, amount, commodityList);
+		this.clientID = id;
+		this.supplier = supplier;
 	}
-
-
-
-
-	@Override
-	public String toString() {
-		return "[单据ID=" + ID + ", 客户ID=" + clientID + ", 客户姓名=" + clientName  + ", 操作员=" + user
-				+ ", 商品列表=" + commodities + ",\r\n商品总价=" + beforePrice + ", 备注=" + remark + ", 单据类型=" + type.value
-				+ ", 单据状态=" + state.value + "]";
-	}
-
-
+	
+	
+	
 }
