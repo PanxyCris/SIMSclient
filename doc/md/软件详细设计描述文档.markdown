@@ -366,14 +366,15 @@ salesbl模块的职责及接口参见软件系统结构描述文档表<br>
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleBLService接口。业务逻辑层和数据层之间添加dataservice. SaleDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SaleController，这样SaleController会将对销售的逻辑业务处理委托给Sale对象。SalePO是作为销售单的持久化对象被添加到设计模型中去的。
 Salebl模块的设计如图所示
-<img src="../img/软件详细设计图/Saales模块.png"><br>
+<img src="../img/软件详细设计图/Sales模块.png"><br>
 
 salesbl模块各个类的职责
-| 模块 | 职责 |
+| **模块** | **职责** |
+| ------- | --------- |
+| LoginController | 负责实现对应于登录界面所需要的服务 |
 | SalesController | 负责实现销售管理界面所需要的服务 |
 | Sales | 制定销售单的领域模型对象，拥有销售单的信息 |
-| SalesList | 负责每一个销售单的数据 |
-| SalesListItem | 销售单数据里的条目 |
+| user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
 
 （3）模块内部类的接口规范<br>
 <center>**SalesController的接口规范**</center>
@@ -460,6 +461,19 @@ salesbl模块各个类的职责
 <th>调用Sale领域对象的updateCommodities方法</th>
 </tr>
 <tr>
+<th rowspan="3">SalesController.getTotal</th>
+<th>语法</th>
+<th>public double getTotal()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象，已计算总额</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的getTotal方法</th>
+</tr>
+<tr>
 <th rowspan="3">SalesController.save</th>
 <th>语法</th>
 <th>public SlaesVO save()</th>
@@ -532,43 +546,70 @@ salesbl模块各个类的职责
 <th colspan="3">提供的服务（供接口）</th>
 </tr>
 <tr>
-<th rowspan="3">Commodity.addBill</th>
+<th rowspan="3">Sales.findCommodities</th>
 <th>语法</th>
-<th>public ResultMessage addBill(CommodityPO po)</th>
+<th>public ResultMessage findCommodities(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>启动一个商品增减回合</th>
+<th>启动一个销售回合</th>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>在一个商品增加回合中，生成一个单据</th>
+<th>在一个销售回合中，查找一个目标商品</th>
 </tr>
+
 <tr>
-<th rowspan="3">Commodity.addSales</th>
+<th rowspan="3">Sales.addCommodities</th>
 <th>语法</th>
-<th>public ResultMessage addSales(CommodityPO po)</th>
+<th>public ResultMessage addCommodities(CommodityPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>启动一个商品增减回合</th>
+<th>启动一个销售回合</th>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>在一个商品增加回合中，生成一次销售记录</th>
+<th>在一个销售回合中，添加一个商品</th>
 </tr>
 <tr>
-<th rowspan="3">Commodity.getTotal</th>
+<th rowspan="3">Sales.deleteCommodities</th>
+<th>语法</th>
+<th>public ResultMessage deleteCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个销售回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个销售回合中，删除一个商品</th>
+</tr>
+<tr>
+<th rowspan="3">Sales.updeteCommodities</th>
+<th>语法</th>
+<th>public ResultMessage updeteCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个销售回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个销售回合中，修改一个商品的属性，如数量</th>
+</tr>
+<tr>
+<th rowspan="3">Sales.getTotal</th>
 <th>语法</th>
 <th>public ResultMessage getTotal(CommodityPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>已进行一次商品的增减</th>
+<th>已完成一次销售(退货)单的制定</th>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>返回商品数量的总数</th>
+<th>返回此销售回合中的总额</th>
 </tr>
 </table>
 
@@ -581,35 +622,37 @@ salesbl模块各个类的职责
 <th>服务</th>
 </tr>
 <tr>
-<th>CommodityDataService.find(long id)</th>
+<th>SalesDataService.findCommodities(String id)</th>
 <th>根据ID进行查找单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.finds(String field,int value)</th>
+<th>SalesDataService.finds(String field,int value)</th>
 <th>根据字段名和值查找多个持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.insert(CommodityPO po)</th>
-<th>插入单一持久化对象</th>
+<th>SalesDataService.insert(CommodityPO po)</th>
+<th>增加单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.delete(CommodityPO po)</th>
+<th>SalesDataService.delete(CommodityPO po)</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.update(CommodityPO po)</th>
+<th>SalesDataService.update(CommodityPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
 <tr>
-<th>DataFactory.getCommodityDatabase</th>
+<th>DataFactory.getSalesDatabase</th>
 <th>得到Commodity数据库的服务的引用</th>
 </tr>
 </table>
 
 （4）业务逻辑层的动态模型<br>
 该图展示了进货销售人员想在销售单／销售退货单中添加一个商品的时候，销售业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/addCommodity.png">
+
 该图展示了进货销售人员想要提交一个销售单／销售退货单，销售业务逻辑处理的相关对象之间的协作<br>
-该图展示了进货销售人员想要保存一个销售单／销售退货单，销售业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/submitSales.png">
 
 4.1.5 memberbl 模块<br>
 （1）模块概述<br>
@@ -739,8 +782,7 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 
 （4）业务逻辑层的动态模型<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
-该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
-图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
+该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
 
 
 ##5.依赖视角
