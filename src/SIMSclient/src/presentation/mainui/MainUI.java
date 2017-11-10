@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class MainUI extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	        Scene scene = new Scene(root, 600, 400);
-	        primaryStage.initStyle(StageStyle.DECORATED);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("µÇÂ¼½çÃæ");
 	        primaryStage.show();
