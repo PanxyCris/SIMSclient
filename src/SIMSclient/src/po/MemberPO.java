@@ -148,5 +148,7 @@ public class MemberPO implements Serializable {
 		return saleMan;
 	}
 
-	public String getBackID();
+	public String getBackID() {
+		return ID;
+	};
 }

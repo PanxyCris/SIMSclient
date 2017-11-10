@@ -1,10 +1,10 @@
 package SIMSclient.src.vo.member;
 
-import SIMSclient.src.vo.ObjectVO;
 import SIMSclient.src.vo.bill.ClientCategory;
 import SIMSclient.src.vo.bill.MemberLevel;
 
-public class MemberVO extends ObjectVO {
+public class MemberVO {
+	public String ID;
 	public ClientCategory category; // 客户分类：进货商和销售商
 	public MemberLevel level; // 客户级别：五级，一级普通用户，五级VIP客户
 	public String name; // 客户名字
