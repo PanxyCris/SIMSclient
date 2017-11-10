@@ -38,6 +38,7 @@
 | 潘星宇 | 2017-11-08 | 添加billbl模块 | v1.1 |
 | 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.2 |
 | 潘星宇 | 2017-11-08 | 添加mainui模块 | v1.1 |
+| 王灿灿 | 2017-11-10 | 添加mfdoc模块，setupaccount模块 | v1.1 |
 >>>>>>> refs/remotes/origin/master
 
 
@@ -88,21 +89,331 @@
 
 　　accountbl模块各个类的职责如下所示
 
+|模块|职责|
+| --- | --- |
+|AccountController|负责实现账户管理界面所需要的服务|
+|AccountBL|账户管理的领域模型对象|
+
 　　　　(3)模块内部类的接口规范
 
-　　　　(4)业务逻辑层的动态模型
+　　　AccountController的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**AccountController.startManage**|语法|public ResultMessage startManage()|
+||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+||后置条件|调用AccountBL领域对象的startManage方法|
+|**AccountController.find**|语法|public AccoutPOList find(String message)|
+||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+||后置条件|调用AccountBL领域对象的check方法|
+|**AccountController.newBuild**|语法|public ResultMessage newBuild(AccountPO accountPO)|
+||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+||后置条|调用AccountBL领域对象的newBuild方法|
+|**AccountController.delete**|语法|public ResultMessage delete(AccountPOList accountPOList)|
+||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+||后置条件|调用AccountBL领域对象的delete方法|
+|**AccountController.modify**|语法|public ResultMessage modify(AccountPO accountPO)|
+||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+||后置条件|调用AccountBL领域对象的modify方法|　
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|AccountBL.find(string message)|根据查找内容查找账户|
+|AccountBL.newBuild(AccountPO accountPO)|添加账户|
+|AccountBL.delete(AccountPO accountPO)|删除账户|
+|AccountBL.modify(AccountPO accountPO)|修改账户|
+<br/>
+　　　AccountBL的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**AccountBL.startManage**|语法|public ResultMessage startManage()|
+||前置条件|用户已经登录|
+||后置条件|根据判断结果决定是否允许使用此功能|
+|**AccountBL.find**|语法|public AccoutPOList find(String message)|
+||前置条件|已输入正确的搜素关键词|
+||后置条件|返回查找到的账户列表|
+|**AccountBL.newBuild**|语法|public ResultMessage newBuild(AccountPO accountPO)|
+||前置条件|已输入正确的账户格式|
+||后置条件|持久化更新数据并返回消息|
+|**AccountBL.delete**|语法|public ResultMessage delete(AccountPO accountPO)|
+||前置条件|存在选中的待删除的银行账户|
+||后置条件|持久化更新数据并返回消息|
+|**AccountBL.modify**|语法|public ResultMessage modify(AccountPO accountPO)|
+||前置条件|选中一个待修改的银行账户且输入内容正确|
+||后置条件|持久化更新数据并返回消息|
+<br/>　
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|AccountDataService.find(String message)|根据信息查找多个持久化对象|
+|AccountDataService.newBuild(AccountPO accountPO)|新建单一持久化对象|
+|AccountDataService.delete(AccountPO accountPO)|删除单一持久化对象|
+|AccountDataService.modify(AccountPO accountPO)|更新单一持久化对象|
+|DatabaseFactory.getAccountDatabase|得到Account数据库的服务的引用|
+
+
+
+　　　　(4)业务逻辑层的动态模型  
 
 　　　　以下四个图分别表明了企业进销存系统中，对银行账户进行增删改查的逻辑处理的相关对象之间的协作
 
-<img src="../img/软件详细设计图/account_add顺序图.png">
+<img src="../img/软件详细设计图/account_add顺序图.png">  
+  
+<img src="../img/软件详细设图/account_delete顺序图.png">
 
-<img src="../img/软件详细设计图/account_delete顺序图.png">
+<img src="../img/软件详细设图/account_modify顺序图.png">
 
-<img src="../img/软件详细设计图/account_modify顺序图.png">
+<img src="../img/软件详细设计图/account_find顺序图.png">
+ 
+ 
+ 　　　　**4.1.2　mfdocbl模块**
+
+　　　　(1)模块概述  
+
+　　　　mfdocbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。  
+　　　　MFDocbl模块的职责及接口参见软件体系结构描述文档表。  
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.mfdocblservice.MFDocBLService接口。业务逻辑层和数据层之间添加dataservice.mfdocdataservice.MFDocDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了MFDocController，这样MFDocController将会对账户管理的业务逻辑处理委托给MFDoc对象。
+
+　　　　mfdocbl模块的设计如图所示。  
+
+<img src="../img/软件详细设计图/accountbl模块设计图.png">
+
+　　mfdocbl模块各个类的职责如下所示
+
+|模块|职责|
+| --- | --- |
+|SKDController|负责实现收款单界面所需要的服务|
+|XJFYDController|负责实现现金费用单界面所需要的服务|
+|SKDBL|收款单的领域模型对象|
+|XJFYDBL|现金费用单的领域模型对象|
+
+　　　　(3)模块内部类的接口规范
+
+　　　　SKDController的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**SKDController.newBuild**|语法|public ResultMessage newBuild(SKDPO skdPO)|
+||前置条件|已经创建一个SKDBL领域对象|
+||后置条件|调用SKDBL领域对象的newBuild方法|
+|**SKDController.modify**|语法|public ResultMessage modify(SKDPO skdPO)|
+||前置条件|已经创建一个SKDBL领域对象|
+||后置条件|调用SKDBL领域对象的modify方法|
+|**SKDController.delete**|语法|public ResultMessage delete(SKDPO skdPO)|
+||前置条件|已经创建一个SKDBL领域对象|
+||后置条件|调用SKDBL领域对象的delete方法|
+|**SKDController.find**|语法|public SKDPOList find(String message)|
+||前置条件|已经创建一个SKDBL领域对象|
+||后置条件|调用SKDBL领域对象的find方法|
+|**SKDController.commit**|语法|public ResultMessage commit(SKDPO skdPO)|
+||前置条件|已经创建一个SKDBL领域对象|
+||后置条件|调用SKDBL领域对象的commit方法|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|SKDBL.find(string message)|根据查找内容查找单据|
+|SKDBL.newBuild(SKDPO skdPO)|添加单据|
+|SKDBL.delete(SKDPO skdPO)|删除单据|
+|SKDBL.modify(SKDPO skdPO)|修改单据|
+|SKDBL.commit(SKDPO skdPO)|提交单据|
+<br/>
+　　　　SKDBL的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**SKDBL.newBuild**|语法|public ResultMessage newBuild(SKDPO skdPO)|
+||前置条件|输入正确的收款单单据内容|
+||后置条件|新建一个收款单单据并返回消息|
+|**SKDBL.modify**|语法|public ResultMessage modify(SKDPO skdPO)|
+||前置条件|选中一个收款单单据且输入内容正确|
+||后置条件|持久化更新数据并返回消息|
+|**SKDBL.delete**|语法|public ResultMessage delete(SKDPO skdPO)|
+||前置条件|存在选中的待删除单据|
+||后置条件|删除所选中的单据并返回消息|
+|**SKDBL.find**|语法|public SKDPOList find(String message)|
+||前置条件|已输入正确的搜索关键词|
+||后置条件|返回查找到的单据列表|
+|**SKDBL.commit**|语法|public ResultMessage commit(SKDPO skdPO)|
+||前置条件|选中待提交的单据|
+||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|SKDDataService.find(String message)|根据信息查找多个持久化对象|
+|SKDDataService.newBuild()|新建单一持久化对象|
+|SKDDataService.delete(SKDPO skdPO)|删除单一持久化对象|
+|SKDDataService.modify(SKDPO skdPO)|更新单一持久化对象|
+|SKDDataService.commit(SKDPO skdPO)|更新单一持久化对象|
+|DatabaseFactory.getSKDDatabase|得到SKD数据库的服务的引用|
+<br/>
+
+　　　　XJFYDController的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**XJFYDController.newBuild**|语法|public ResultMessage newBuild(XJFYDPO xjfydPO)|
+||前置条件|已经创建一个XJFYDBL领域对象|
+||后置条件|调用XJFYDBL领域对象的newBuild方法|
+|**XJFYDController.modify**|语法|public ResultMessage modify(XJFYDPO xjfydPO)|
+||前置条件|已经创建一个XJFYDBL领域对象|
+||后置条件|调用XJFYDBL领域对象的modify方法|
+|**XJFYDController.delete**|语法|public ResultMessage delete(XJFYDPO xjfydPO)|
+||前置条件|已经创建一个XJFYDBL领域对象|
+||后置条件|调用XJFYDBL领域对象的delete方法|
+|**XJFYDController.find**|语法|public XJFYDPOList find(String message)|
+||前置条件|已经创建一个XJFYDBL领域对象|
+||后置条件|调用XJFYDBL领域对象的find方法|
+|**XJFYDController.commit**|语法|public ResultMessage commit(XJFYDPO xjfydPO)|
+||前置条件|已经创建一个XJFYDBL领域对象|
+||后置条件|调用XJFYDBL领域对象的commit方法|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|XJFYDBL.find(string message)|根据查找内容查找单据|
+|XJFYDBL.newBuild(XJFYDPO xjfydPO)|添加单据|
+|XJFYDBL.delete(XJFYDPO xjfydPO)|删除单据|
+|XJFYDBL.modify(XJFYDPO xjfydPO)|修改单据|
+|XJFYDBL.commit(XJFYDPO xjfydPO)|提交单据|
+<br/>
+　　　　XJFYDBL的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**XJFYDBL.newBuild**|语法|public ResultMessage newBuild(XJFYDPO xjfydPO)|
+||前置条件|输入正确的收款单单据内容|
+||后置条件|新建一个收款单单据并返回消息|
+|**XJFYDBL.modify**|语法|public ResultMessage modify(XJFYDPO xjfydPO)|
+||前置条件|选中一个收款单单据且输入内容正确|
+||后置条件|持久化更新数据并返回消息|
+|**XJFYDBL.delete**|语法|public ResultMessage delete(XJFYDPO xjfydPO)|
+||前置条件|存在选中的待删除单据|
+||后置条件|删除所选中的单据并返回消息|
+|**XJFYDBL.find**|语法|public XJFYDPOList find(String message)|
+||前置条件|已输入正确的搜索关键词|
+||后置条件|返回查找到的单据列表|
+|**XJFYDBL.commit**|语法|public ResultMessage commit(XJFYDPO xjfydPO)|
+||前置条件|选中待提交的单据|
+||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|XJFYDDataService.find(String message)|根据信息查找多个持久化对象|
+|XJFYDDataService.newBuild()|新建单一持久化对象|
+|XJFYDDataService.delete(XJFYDPO xjfydPO)|删除单一持久化对象|
+|XJFYDDataService.modify(XJFYDPO xjfydPO)|更新单一持久化对象|
+|XJFYDDataService.commit(XJFYDPO xjfydPO)|更新单一持久化对象|
+|DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
+<br/>
+
+　　　　(4)业务逻辑层的动态模型  
+
+　　　　以下图分别表明了企业进销存系统中，对收款单和现金费用单进行增、删、改、查、提交等逻辑处理的相关对象之间的协作
+
+<img src="../img/软件详细设计图/account_add顺序图.png">  
+  
+<img src="../img/软件详细设图/account_delete顺序图.png">
+
+<img src="../img/软件详细设图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
 
-4.1.2 commoditybl 模块<br>
+　　　　**4.1.3　setupaccountbl模块**
+
+　　　　(1)模块概述  
+
+　　　　setupaccountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。  
+　　　　SetUpAccountbl模块的职责及接口参见软件体系结构描述文档表。  
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。业务逻辑层和数据层之间添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SetUpAccountController，这样SetUpAccountController将会对期初建账的业务逻辑处理委托给SetUpAccount对象。AccountBookPO是作为期初建账后账簿的持久化对象被添加到设计模型中去的。  
+
+　　　　setupaccountbl模块的设计如图所示。  
+
+<img src="../img/软件详细设计图/setupaccount模块设计图.png">
+
+　　setupaccountbl模块各个类的职责如下所示
+
+|模块|职责|
+| --- | --- |
+|SetUpAccountController|负责实现期初建账界面所需要的服务|
+|SetUpAccountBL|期初建账的领域模型对象|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SetUpAccountController的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookPO accountBookPO)|
+||前置条件|已创建一个SetUpAccountBL对象，并且输入符合规则|
+||后置条件|调用AccountBL领域对象的newBuild方法|
+|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookPO accountBookPO)|
+||前置条件|已经创建一个SetUpAccountBL对象|
+||后置条件|调用SetUpAccountBL领域对象的delete方法|
+|**SetUpAccountController.find**|语法|public AccountBookList find()|
+||前置条件|已经创建一个SetUpAccountBL对象|
+||后置条件|调用SetUpAccountBL领域对象的find方法|
+<br/>　
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|SetUpAccountBL.newBuild(AccountBookPO AccountBookPO)|添加账簿|
+|SetUpAccountBL.delete(AccountBookPO accountBookPO)|删除账簿|
+|SetUpAccountBL.find()|查找所有的账簿|
+<br/>
+　　　SetUpAccountBL的接口规范
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookPO accountBookPO)|
+||前置条件|输入正确的期初建账内容|
+||后置条件|新建账簿并返回消息|
+|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookPO accountBookPO)|
+||前置条件|存在所选中的待删除账簿|
+||后置条件|删除账簿并返回消息|
+|**SetUpAccountController.find**|语法|public AccountBookList find()|
+||前置条件|需要查找所有账簿|
+||后置条件|返回所有账簿的列表|
+<br/>　
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|SetUpAccountDataService.find()|查找多个持久化对象|
+|SetUpAccountDataService.newBuild(AccountBookPO accountBookPO)|新建单一持久化对象|
+|SetUpAccountDataService.delete(AccountBookPO accountBookPO)|删除单一持久化对象|
+|DatabaseFactory.getAccountBookDatabase|得到AccountBook数据库的服务的引用|
+
+
+
+　　　　(4)业务逻辑层的动态模型  
+
+　　　　以下三个图分别表明了企业进销存系统中，对账簿进行增删查的逻辑处理的相关对象之间的协作
+
+<img src="../img/软件详细设计图/setupaccount_newBuild顺序图.png">  
+  
+<img src="../img/软件详细设图/setupaccount_delete顺序图.png">
+
+<img src="../img/软件详细设图/setupaccount_find顺序图.png">
+
+4.1.4 commoditybl 模块<br>
 （1）模块概述<br>
 commoditybl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -303,7 +614,7 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 
 
 
-4.1.3 userbl 模块<br>
+4.1.5 userbl 模块<br>
 （1）模块概述<br>
 userbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 userbl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -399,7 +710,7 @@ userbl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/查询用户的顺序图.png"><br>
 
 
-4.1.4 salesbl 模块<br>
+4.1.6 salesbl 模块<br>
 （1）模块概述<br>
 salesbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 salesbl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -696,7 +1007,7 @@ salesbl模块各个类的职责
 该图展示了进货销售人员想要提交一个销售单／销售退货单，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/submitSales.png">
 
-4.1.5 memberbl 模块<br>
+4.1.7 memberbl 模块<br>
 （1）模块概述<br>
 memberbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 memberbl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -814,7 +1125,7 @@ Memberbl各个类的职责如图
 该图展示了当进货销售人员想要删除一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/deleteMember.png">
 
-4.1.6 purchasebl 模块<br>
+4.1.8 purchasebl 模块<br>
 （1）模块概述<br>
 purchasebl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -830,7 +1141,7 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
 
 <<<<<<< HEAD
-4.1.7 promotionbl 模块<br>
+4.1.9 promotionbl 模块<br>
 （1）模块概述<br>
 promotionbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 promotionbl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -916,7 +1227,7 @@ Promotionbl各个类的职责如图
 该图展示了当总经理想要制定销售策略的时候，制定销售策略业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/制定销售策略顺序图.png">
 =======
-4.1.7 billbl模块<br>
+4.1.10 billbl模块<br>
 （1）模块概述<br>
 billbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 billbl模块的职责及接口参见软件系统结构描述文档表<br>
@@ -1059,6 +1370,7 @@ billbl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/添加单据的顺序图.png"><br>
 该图表明了SIMS系统中，当用户点击输入查询单据之后，单据业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询单据的顺序图.png"><br>
+
 
 4.2.1 mainui模块<br>
 （1）模块概述<br>
