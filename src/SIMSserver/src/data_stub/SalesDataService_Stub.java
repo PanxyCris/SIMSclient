@@ -1,9 +1,7 @@
 package SIMSserver.src.data_stub;
 
 import java.util.ArrayList;
-
 import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;
 import SIMSclient.src.vo.sale.SalesAddVO;
@@ -37,7 +35,7 @@ public class SalesDataService_Stub implements SalesDataService{
 	}
 
 	
-	public void addCommodities(CommodityItemVO item) {
+	public void addCommodities(CommodityVO item) {
 		System.out.println("addCommodities Succeed!\n");
 		
 	}
@@ -66,6 +64,10 @@ public class SalesDataService_Stub implements SalesDataService{
 		System.out.println("End Succeed!\n");
 		
 	}
+
+
+	
+
 
 	
 }

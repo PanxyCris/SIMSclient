@@ -3,7 +3,6 @@ package SIMSserver.src.dataservice.salesdataservice;
 import java.util.ArrayList;
 
 import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;
 import SIMSclient.src.vo.sale.SalesAddVO;
@@ -29,7 +28,7 @@ public interface SalesDataService {
 	 * 增加商品
 	 * @param item
 	 */
-	public void addCommodities(CommodityItemVO item);
+	public void addCommodities(CommodityVO item);
 	
 	/**
 	 * 查看促销商品
