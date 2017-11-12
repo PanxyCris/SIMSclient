@@ -168,9 +168,9 @@
 
 <img src="../img/软件详细设计图/account_add顺序图.png">
 
-<img src="../img/软件详细设图/account_delete顺序图.png">
+<img src="../img/软件详细设计图/account_delete顺序图.png">
 
-<img src="../img/软件详细设图/account_modify顺序图.png">
+<img src="../img/软件详细设计图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
 
@@ -331,9 +331,9 @@
 
 <img src="../img/软件详细设计图/account_add顺序图.png">
 
-<img src="../img/软件详细设图/account_delete顺序图.png">
+<img src="../img/软件详细设计图/account_delete顺序图.png">
 
-<img src="../img/软件详细设图/account_modify顺序图.png">
+<img src="../img/软件详细设计图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
 
@@ -414,9 +414,9 @@
 
 <img src="../img/软件详细设计图/setupaccount_newBuild顺序图.png">
 
-<img src="../img/软件详细设图/setupaccount_delete顺序图.png">
+<img src="../img/软件详细设计图/setupaccount_delete顺序图.png">
 
-<img src="../img/软件详细设图/setupaccount_find顺序图.png">
+<img src="../img/软件详细设计图/setupaccount_find顺序图.png">
 
 4.1.4 commoditybl 模块<br>
 （1）模块概述<br>
