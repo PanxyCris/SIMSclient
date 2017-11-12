@@ -39,6 +39,11 @@
 | 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.2 |
 | 潘星宇 | 2017-11-08 | 添加mainui模块 | v1.1 |
 | 王灿灿 | 2017-11-10 | 添加mfdoc模块，setupaccount模块 | v1.1 |
+| 潘星宇 | 2017-11-12 | 修改commoditybl模块 | v1.3 |
+| 潘星宇 | 2017-11-12 | 添加commodityui模块 | v1.1 |
+| 潘星宇 | 2017-11-12 | 添加userui模块 | v1.1 |
+| 潘星宇 | 2017-11-12 | 添加commoditydata模块 | v1.1 |
+| 潘星宇 | 2017-11-12 | 添加userdata模块 | v1.1 |
 >>>>>>> refs/remotes/origin/master
 
 
@@ -157,31 +162,31 @@
 
 
 
-　　　　(4)业务逻辑层的动态模型  
+　　　　(4)业务逻辑层的动态模型
 
 　　　　以下四个图分别表明了企业进销存系统中，对银行账户进行增删改查的逻辑处理的相关对象之间的协作
 
-<img src="../img/软件详细设计图/account_add顺序图.png">  
-  
+<img src="../img/软件详细设计图/account_add顺序图.png">
+
 <img src="../img/软件详细设图/account_delete顺序图.png">
 
 <img src="../img/软件详细设图/account_modify顺序图.png">
 
 <img src="../img/软件详细设计图/account_find顺序图.png">
- 
- 
+
+
  　　　　**4.1.2　mfdocbl模块**
 
-　　　　(1)模块概述  
+　　　　(1)模块概述
 
-　　　　mfdocbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。  
-　　　　MFDocbl模块的职责及接口参见软件体系结构描述文档表。  
+　　　　mfdocbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　MFDocbl模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
 　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.mfdocblservice.MFDocBLService接口。业务逻辑层和数据层之间添加dataservice.mfdocdataservice.MFDocDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了MFDocController，这样MFDocController将会对账户管理的业务逻辑处理委托给MFDoc对象。
 
-　　　　mfdocbl模块的设计如图所示。  
+　　　　mfdocbl模块的设计如图所示。
 
 <img src="../img/软件详细设计图/accountbl模块设计图.png">
 
@@ -320,12 +325,12 @@
 |DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
 <br/>
 
-　　　　(4)业务逻辑层的动态模型  
+　　　　(4)业务逻辑层的动态模型
 
 　　　　以下图分别表明了企业进销存系统中，对收款单和现金费用单进行增、删、改、查、提交等逻辑处理的相关对象之间的协作
 
-<img src="../img/软件详细设计图/account_add顺序图.png">  
-  
+<img src="../img/软件详细设计图/account_add顺序图.png">
+
 <img src="../img/软件详细设图/account_delete顺序图.png">
 
 <img src="../img/软件详细设图/account_modify顺序图.png">
@@ -334,16 +339,16 @@
 
 　　　　**4.1.3　setupaccountbl模块**
 
-　　　　(1)模块概述  
+　　　　(1)模块概述
 
-　　　　setupaccountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。  
-　　　　SetUpAccountbl模块的职责及接口参见软件体系结构描述文档表。  
+　　　　setupaccountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　SetUpAccountbl模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。业务逻辑层和数据层之间添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SetUpAccountController，这样SetUpAccountController将会对期初建账的业务逻辑处理委托给SetUpAccount对象。AccountBookPO是作为期初建账后账簿的持久化对象被添加到设计模型中去的。  
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。业务逻辑层和数据层之间添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SetUpAccountController，这样SetUpAccountController将会对期初建账的业务逻辑处理委托给SetUpAccount对象。AccountBookPO是作为期初建账后账簿的持久化对象被添加到设计模型中去的。
 
-　　　　setupaccountbl模块的设计如图所示。  
+　　　　setupaccountbl模块的设计如图所示。
 
 <img src="../img/软件详细设计图/setupaccount模块设计图.png">
 
@@ -403,12 +408,12 @@
 
 
 
-　　　　(4)业务逻辑层的动态模型  
+　　　　(4)业务逻辑层的动态模型
 
 　　　　以下三个图分别表明了企业进销存系统中，对账簿进行增删查的逻辑处理的相关对象之间的协作
 
-<img src="../img/软件详细设计图/setupaccount_newBuild顺序图.png">  
-  
+<img src="../img/软件详细设计图/setupaccount_newBuild顺序图.png">
+
 <img src="../img/软件详细设图/setupaccount_delete顺序图.png">
 
 <img src="../img/软件详细设图/setupaccount_find顺序图.png">
@@ -418,7 +423,7 @@
 commoditybl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
  （2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityController，这样CommodityController会将对商品的业务逻辑处理委托给Commodity对象。CommodityPO是作为商品记录的持久化对象呗添加到设计模型中去的。而CommodityList和CommodityItem的添加时Billinfo的容器类。CommodityItem保有具体商品的数据，及相应的计算小计的职责。而Classification是作为商品的分类而聚合在其中。CommodityList封装了关于Commodity的数据集合的数据结构的秘密和计算总数的职责。Salesinfo和Billinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口和bussinesslogicservice.commodityblservice.ClassificationBLService接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口和dataservice.commoditydataservice.ClassificationDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityController，这样CommodityController会将对商品的业务逻辑处理委托给Commodity对象。CommodityPO和ClassificationPO是作为商品及其分类记录的持久化对象添加到设计模型中去的。而CommodityList和CommodityItem的添加时Billinfo的容器类。CommodityItem保有具体商品的数据，及相应的计算小计的职责。而Classification是作为商品的分类而聚合在其中。CommodityList封装了关于Commodity的数据集合的数据结构的秘密和计算总数的职责。Salesinfo和Billinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
 <img src="../img/软件详细设计图/commodity模块各个类的设计.png"><br>
 <center>**commodity模块各个类的设计**</center>
 <table><tbody>
@@ -427,15 +432,8 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <th>职  责</th>
 </tr>
 <tr>
-<th>LoginController</th>
-<th>负责实现对应于登录界面所需要的服务</th>
-</tr>
-<tr>
 <th>CommodityController</th>
 <th>负责实现商品界面所需要的服务</th>
-</tr>
-<th>User</th>
-<th>系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题</th>
 </tr>
 <tr>
 <th>Commodity</th>
@@ -454,6 +452,7 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <th>商品分类的领域模型对象，拥有一个商品分类所持有的下属商品等信息，可以帮助完成商品界面所需要的服务</th>
 </tr>
 </table>
+
 （3）模块内部类的接口规范
 <center>**CommodityController的接口规范**</center>
 <table><tbody>
@@ -574,20 +573,51 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <th>CommodityDataService.update(CommodityPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
-<tr>
 <th>DataFactory.getCommodityDatabase</th>
 <th>得到Commodity数据库的服务的引用</th>
 </tr>
+</table>
+
+
+<center>**CommodityList的接口规范**</center>
+<table><tbody>
 <tr>
-<th>CommodityDataService.insertClass(ClassificationPO po)</th>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>CommodityDataService.check(CommodityList list)</th>
+<th>查看库存中的一段时间的对象</th>
+</tr>
+<tr>
+<th>CommodityDataService.stock(CommodityList list)</th>
+<th>查看库存中的给定要求的商品对象</th>
+</tr>
+<tr>
+</table>
+
+<center>**Classification的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>ClassDataService.insertClass(ClassificationPO po)</th>
 <th>插入单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.deleteClass(ClassificationPO po)</th>
+<th>ClassDataService.deleteClass(ClassificationPO po)</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityDataService.updateClass(ClassificationPO po)</th>
+<th>ClassDataService.updateClass(ClassificationPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
 <tr>
@@ -611,6 +641,8 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/删除分类的顺序图.png"><br>
 该图表明了SIMS系统中，当用户点击输入修改的分类之后，商品分类业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/修改分类的顺序图.png"><br>
+
+
 
 
 
@@ -1435,6 +1467,303 @@ mainui模块的职责及接口为登录user的使用概况<br>
 <th>根据ID和密码判断是否存在该用户</th>
 </tr>
 </table>
+
+4.2.2 commodityui模块<br>
+（1）模块概述<br>
+commodityui模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+commodityui模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口与bussinesslogicservice.commodityblservice.ClassificationBLService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityControllerUI，这样CommodityControllerUI会将对商品的业务逻辑处理委托给Commodity对象。CommodityVO和ClassificationVO是作为商品和其分类的记录的可视化对象添加到设计模型中去的。presentation.billui.BillUI则是由发出单据制作要求后新起的一个界面而制定的一个链接。<br>
+<img src="../img/软件详细设计图/CommodityUI.png"><br>
+<center>**CommodityUI模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>CommodityControllerUI</th>
+<th>负责实现对应于库存管理人员主界面所需要的服务</th>
+</tr>
+<tr>
+<th>CommodityUI</th>
+<th>商品管理的模型对象，拥有一个商品所持有的数量、售价等信息以及其方法</th>
+</tr>
+<tr>
+<th>ClassificationUI</th>
+<th>商品分类管理的模型对象，拥有一个商品分类所持有的数量、商品等信息以及其方法</th>
+</tr>
+</table>
+
+（3）模块内部类的接口规范
+<center>**CommodityControllerUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">CommodityControllerUI.exit</th>
+<th>语法</th>
+<th>public ResultMessage exit()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>当界面需要注销</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用CommodityUI领域对象的exit方法</th>
+</tr>
+<tr>
+<th rowspan="3">CommodityControllerUI.makeInventoryBill</th>
+<th>语法</th>
+<th>public ResultMessage makeInventoryBill()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>需要进行制作单据操作</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用CommodityUI领域对象的makeInventoryBill</th>
+</tr>
+</table>
+
+<center>**CommodityUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>CommodityBLService.find(long id)</th>
+<th>根据ID进行查找单一可视化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.finds(String field,int value)</th>
+<th>根据字段名和值查找多个可视化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.insert(CommodityVO vo)</th>
+<th>插入单一可视化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.delete(CommodityVO vo)</th>
+<th>删除单一可视化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.update(CommodityVO vo)</th>
+<th>更新单一可视化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.check()</th>
+<th>查看库存中的一段时间的对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.stock()</th>
+<th>查看库存中的给定要求的商品对象</th>
+</tr>
+</table>
+
+<center>**ClassificationUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>ClassificationBLService.insertClass(ClassificationVO vo)</th>
+<th>插入单一可视化对象</th>
+</tr>
+<tr>
+<th>ClassificationBLService.deleteClass(ClassificationVO vo)</th>
+<th>删除单一可视化对象</th>
+</tr>
+<tr>
+<th>ClassificationBLService.updateClass(ClassificationVO vo)</th>
+<th>更新单一可视化对象</th>
+</tr>
+</table>
+
+4.2.3 userui模块<br>
+（1）模块概述<br>
+userui模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+userui模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。UserVO是作为用户的记录的可视化对象添加到设计模型中去的。<br>
+<center>**UserUI模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>UserUI</th>
+<th>用户管理的模型对象，拥有一个用户所持有的用户名密码等信息以及其方法</th>
+</tr>
+</table>
+
+<center>**UserUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>UserBLService.find(long id)</th>
+<th>根据ID进行查找单一可视化对象</th>
+</tr>
+<tr>
+<th>UserBLService.insert(UserVO vo)</th>
+<th>插入单一可视化对象</th>
+</tr>
+<tr>
+<th>UserBLService.delete(UserVO vo)</th>
+<th>删除单一可视化对象</th>
+</tr>
+<tr>
+<th>UserBLService.update(UserVO vo)</th>
+<th>更新单一可视化对象</th>
+</tr>
+</table>
+
+4.3.1 commoditydata模块<br>
+（1）模块概述<br>
+commoditydata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口和dataservice.commoditydataservice.ClassificationDataService接口。CommodityData是承接商品的各类数据的，而ClassificationData是作为商品的分类而聚合在其中。<br>
+<img src="../img/软件详细设计图/CommodityData.png"><br>
+<center>**CommodityData模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>CommodityData</th>
+<th>商品的模型对象，拥有一个商品各类数据及其方法</th>
+</tr>
+<tr>
+<th>ClassificationData</th>
+<th>商品分类的模型对象，拥有一个商品分类各类数据及其方法</th>
+</tr>
+</table>
+
+（3）模块内部类的接口规范
+<center>**CommodityData的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>CommodityData.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityData.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>CommodityData.insert(CommodityPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.delete(CommodityPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>CommodityBLService.update(CommodityPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+</table>
+
+<center>**ClassificationUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>ClassificationBLService.insertClass(ClassificationPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>ClassificationBLService.deleteClass(ClassificationPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>ClassificationBLService.updateClass(ClassificationPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+</table>
+
+4.3.2 userdata模块<br>
+（1）模块概述<br>
+userdata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+userdata模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.userdataservice.CommodityDataService接口。UserData是承接用户的各类数据的。<br>
+<center>**UserData模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>UserData</th>
+<th>用户的模型对象，拥有一个用户各类数据及其方法</th>
+</tr>
+</table>
+
+（3）模块内部类的接口规范
+<center>**UserData的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>UserData.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>UserData.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>UserData.insert(UserPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>UserService.delete(UserPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>UserBLService.update(UserPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+</table>
+
 >>>>>>> refs/remotes/origin/master
 
 ##5.依赖视角
