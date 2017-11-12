@@ -108,16 +108,16 @@
 |**AccountController.startManage**|语法|public ResultMessage startManage()|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的startManage方法|
-|**AccountController.find**|语法|public AccoutPOList find(String message)|
+|**AccountController.find**|语法|public AccoutPO find(String message)|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的check方法|
-|**AccountController.newBuild**|语法|public ResultMessage newBuild(AccountPO accountPO)|
+|**AccountController.newBuild**|语法|public ResultMessage newBuild(AccountVO accountVO)|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条|调用AccountBL领域对象的newBuild方法|
-|**AccountController.delete**|语法|public ResultMessage delete(AccountPOList accountPOList)|
+|**AccountController.delete**|语法|public ResultMessage delete(AccountVO accountVO)|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的delete方法|
-|**AccountController.modify**|语法|public ResultMessage modify(AccountPO accountPO)|
+|**AccountController.modify**|语法|public ResultMessage modify(AccountVO accountVO)|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的modify方法|　
 <br/>
@@ -126,9 +126,9 @@
 | --- | --- |
 |服务名|服务|
 |AccountBL.find(string message)|根据查找内容查找账户|
-|AccountBL.newBuild(AccountPO accountPO)|添加账户|
-|AccountBL.delete(AccountPO accountPO)|删除账户|
-|AccountBL.modify(AccountPO accountPO)|修改账户|
+|AccountBL.newBuild(AccountVO accountVO)|添加账户|
+|AccountBL.delete(AccountVO accountVO)|删除账户|
+|AccountBL.modify(AccountVO accountVO)|修改账户|
 <br/>
 　　　AccountBL的接口规范
 
@@ -137,16 +137,16 @@
 |**AccountBL.startManage**|语法|public ResultMessage startManage()|
 ||前置条件|用户已经登录|
 ||后置条件|根据判断结果决定是否允许使用此功能|
-|**AccountBL.find**|语法|public AccoutPOList find(String message)|
+|**AccountBL.find**|语法|public AccoutVO find(String message)|
 ||前置条件|已输入正确的搜素关键词|
 ||后置条件|返回查找到的账户列表|
-|**AccountBL.newBuild**|语法|public ResultMessage newBuild(AccountPO accountPO)|
+|**AccountBL.newBuild**|语法|public ResultMessage newBuild(AccountVO accountVO)|
 ||前置条件|已输入正确的账户格式|
 ||后置条件|持久化更新数据并返回消息|
-|**AccountBL.delete**|语法|public ResultMessage delete(AccountPO accountPO)|
+|**AccountBL.delete**|语法|public ResultMessage delete(AccountVO accountVO)|
 ||前置条件|存在选中的待删除的银行账户|
 ||后置条件|持久化更新数据并返回消息|
-|**AccountBL.modify**|语法|public ResultMessage modify(AccountPO accountPO)|
+|**AccountBL.modify**|语法|public ResultMessage modify(AccountVO accountVO)|
 ||前置条件|选中一个待修改的银行账户且输入内容正确|
 ||后置条件|持久化更新数据并返回消息|
 <br/>　
@@ -155,9 +155,9 @@
 | --- | --- |
 |服务名|服务|
 |AccountDataService.find(String message)|根据信息查找多个持久化对象|
-|AccountDataService.newBuild(AccountPO accountPO)|新建单一持久化对象|
-|AccountDataService.delete(AccountPO accountPO)|删除单一持久化对象|
-|AccountDataService.modify(AccountPO accountPO)|更新单一持久化对象|
+|AccountDataService.newBuild(AccountVO accountVO)|新建单一持久化对象|
+|AccountDataService.delete(AccountVO accountVO)|删除单一持久化对象|
+|AccountDataService.modify(AccountVO accountVO)|更新单一持久化对象|
 |DatabaseFactory.getAccountDatabase|得到Account数据库的服务的引用|
 
 
@@ -205,19 +205,19 @@
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SKDController.newBuild**|语法|public ResultMessage newBuild(SKDPO skdPO)|
+|**SKDController.newBuild**|语法|public ResultMessage newBuild(SKDVO skdVO)|
 ||前置条件|已经创建一个SKDBL领域对象|
 ||后置条件|调用SKDBL领域对象的newBuild方法|
-|**SKDController.modify**|语法|public ResultMessage modify(SKDPO skdPO)|
+|**SKDController.modify**|语法|public ResultMessage modify(SKDVO skdVO)|
 ||前置条件|已经创建一个SKDBL领域对象|
 ||后置条件|调用SKDBL领域对象的modify方法|
-|**SKDController.delete**|语法|public ResultMessage delete(SKDPO skdPO)|
+|**SKDController.delete**|语法|public ResultMessage delete(SKDVO skdVO)|
 ||前置条件|已经创建一个SKDBL领域对象|
 ||后置条件|调用SKDBL领域对象的delete方法|
-|**SKDController.find**|语法|public SKDPOList find(String message)|
+|**SKDController.find**|语法|public SKDVO find(String message)|
 ||前置条件|已经创建一个SKDBL领域对象|
 ||后置条件|调用SKDBL领域对象的find方法|
-|**SKDController.commit**|语法|public ResultMessage commit(SKDPO skdPO)|
+|**SKDController.commit**|语法|public ResultMessage commit(SKDVO skdVO)|
 ||前置条件|已经创建一个SKDBL领域对象|
 ||后置条件|调用SKDBL领域对象的commit方法|
 <br/>
@@ -226,28 +226,28 @@
 | --- | --- |
 |服务名|服务|
 |SKDBL.find(string message)|根据查找内容查找单据|
-|SKDBL.newBuild(SKDPO skdPO)|添加单据|
-|SKDBL.delete(SKDPO skdPO)|删除单据|
-|SKDBL.modify(SKDPO skdPO)|修改单据|
-|SKDBL.commit(SKDPO skdPO)|提交单据|
+|SKDBL.newBuild(SKDVO skdVO)|添加单据|
+|SKDBL.delete(SKDVO skdVO)|删除单据|
+|SKDBL.modify(SKDVO skdVO)|修改单据|
+|SKDBL.commit(SKDVO skdVO)|提交单据|
 <br/>
 　　　　SKDBL的接口规范
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SKDBL.newBuild**|语法|public ResultMessage newBuild(SKDPO skdPO)|
+|**SKDBL.newBuild**|语法|public ResultMessage newBuild(SKDVO skdVO)|
 ||前置条件|输入正确的收款单单据内容|
 ||后置条件|新建一个收款单单据并返回消息|
-|**SKDBL.modify**|语法|public ResultMessage modify(SKDPO skdPO)|
+|**SKDBL.modify**|语法|public ResultMessage modify(SKDVO skdVO)|
 ||前置条件|选中一个收款单单据且输入内容正确|
 ||后置条件|持久化更新数据并返回消息|
-|**SKDBL.delete**|语法|public ResultMessage delete(SKDPO skdPO)|
+|**SKDBL.delete**|语法|public ResultMessage delete(SKDVO skdVO)|
 ||前置条件|存在选中的待删除单据|
 ||后置条件|删除所选中的单据并返回消息|
-|**SKDBL.find**|语法|public SKDPOList find(String message)|
+|**SKDBL.find**|语法|public SKDVO find(String message)|
 ||前置条件|已输入正确的搜索关键词|
 ||后置条件|返回查找到的单据列表|
-|**SKDBL.commit**|语法|public ResultMessage commit(SKDPO skdPO)|
+|**SKDBL.commit**|语法|public ResultMessage commit(SKDVO skdVO)|
 ||前置条件|选中待提交的单据|
 ||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
 <br/>
@@ -257,9 +257,9 @@
 |服务名|服务|
 |SKDDataService.find(String message)|根据信息查找多个持久化对象|
 |SKDDataService.newBuild()|新建单一持久化对象|
-|SKDDataService.delete(SKDPO skdPO)|删除单一持久化对象|
-|SKDDataService.modify(SKDPO skdPO)|更新单一持久化对象|
-|SKDDataService.commit(SKDPO skdPO)|更新单一持久化对象|
+|SKDDataService.delete(SKDVO skdVO)|删除单一持久化对象|
+|SKDDataService.modify(SKDVO skdVO)|更新单一持久化对象|
+|SKDDataService.commit(SKDVO skdVO)|更新单一持久化对象|
 |DatabaseFactory.getSKDDatabase|得到SKD数据库的服务的引用|
 <br/>
 
@@ -267,19 +267,19 @@
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**XJFYDController.newBuild**|语法|public ResultMessage newBuild(XJFYDPO xjfydPO)|
+|**XJFYDController.newBuild**|语法|public ResultMessage newBuild(XJFYDVO xjfydVO)|
 ||前置条件|已经创建一个XJFYDBL领域对象|
 ||后置条件|调用XJFYDBL领域对象的newBuild方法|
-|**XJFYDController.modify**|语法|public ResultMessage modify(XJFYDPO xjfydPO)|
+|**XJFYDController.modify**|语法|public ResultMessage modify(XJFYDVO xjfydVO)|
 ||前置条件|已经创建一个XJFYDBL领域对象|
 ||后置条件|调用XJFYDBL领域对象的modify方法|
-|**XJFYDController.delete**|语法|public ResultMessage delete(XJFYDPO xjfydPO)|
+|**XJFYDController.delete**|语法|public ResultMessage delete(XJFYDVO xjfydVO)|
 ||前置条件|已经创建一个XJFYDBL领域对象|
 ||后置条件|调用XJFYDBL领域对象的delete方法|
-|**XJFYDController.find**|语法|public XJFYDPOList find(String message)|
+|**XJFYDController.find**|语法|public XJFYDVO find(String message)|
 ||前置条件|已经创建一个XJFYDBL领域对象|
 ||后置条件|调用XJFYDBL领域对象的find方法|
-|**XJFYDController.commit**|语法|public ResultMessage commit(XJFYDPO xjfydPO)|
+|**XJFYDController.commit**|语法|public ResultMessage commit(XJFYDVO xjfydVO)|
 ||前置条件|已经创建一个XJFYDBL领域对象|
 ||后置条件|调用XJFYDBL领域对象的commit方法|
 <br/>
@@ -288,28 +288,28 @@
 | --- | --- |
 |服务名|服务|
 |XJFYDBL.find(string message)|根据查找内容查找单据|
-|XJFYDBL.newBuild(XJFYDPO xjfydPO)|添加单据|
-|XJFYDBL.delete(XJFYDPO xjfydPO)|删除单据|
-|XJFYDBL.modify(XJFYDPO xjfydPO)|修改单据|
-|XJFYDBL.commit(XJFYDPO xjfydPO)|提交单据|
+|XJFYDBL.newBuild(XJFYDVO xjfydVO)|添加单据|
+|XJFYDBL.delete(XJFYDVO xjfydVO)|删除单据|
+|XJFYDBL.modify(XJFYDVO xjfydVO)|修改单据|
+|XJFYDBL.commit(XJFYDVO xjfydVO)|提交单据|
 <br/>
 　　　　XJFYDBL的接口规范
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**XJFYDBL.newBuild**|语法|public ResultMessage newBuild(XJFYDPO xjfydPO)|
+|**XJFYDBL.newBuild**|语法|public ResultMessage newBuild(XJFYDVO xjfydVO)|
 ||前置条件|输入正确的收款单单据内容|
 ||后置条件|新建一个收款单单据并返回消息|
-|**XJFYDBL.modify**|语法|public ResultMessage modify(XJFYDPO xjfydPO)|
+|**XJFYDBL.modify**|语法|public ResultMessage modify(XJFYDVO xjfydVO)|
 ||前置条件|选中一个收款单单据且输入内容正确|
 ||后置条件|持久化更新数据并返回消息|
-|**XJFYDBL.delete**|语法|public ResultMessage delete(XJFYDPO xjfydPO)|
+|**XJFYDBL.delete**|语法|public ResultMessage delete(XJFYDVO xjfydVO)|
 ||前置条件|存在选中的待删除单据|
 ||后置条件|删除所选中的单据并返回消息|
-|**XJFYDBL.find**|语法|public XJFYDPOList find(String message)|
+|**XJFYDBL.find**|语法|public XJFYDVO find(String message)|
 ||前置条件|已输入正确的搜索关键词|
 ||后置条件|返回查找到的单据列表|
-|**XJFYDBL.commit**|语法|public ResultMessage commit(XJFYDPO xjfydPO)|
+|**XJFYDBL.commit**|语法|public ResultMessage commit(XJFYDVO xjfydVO)|
 ||前置条件|选中待提交的单据|
 ||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
 <br/>
@@ -319,9 +319,9 @@
 |服务名|服务|
 |XJFYDDataService.find(String message)|根据信息查找多个持久化对象|
 |XJFYDDataService.newBuild()|新建单一持久化对象|
-|XJFYDDataService.delete(XJFYDPO xjfydPO)|删除单一持久化对象|
-|XJFYDDataService.modify(XJFYDPO xjfydPO)|更新单一持久化对象|
-|XJFYDDataService.commit(XJFYDPO xjfydPO)|更新单一持久化对象|
+|XJFYDDataService.delete(XJFYDVO xjfydVO)|删除单一持久化对象|
+|XJFYDDataService.modify(XJFYDVO xjfydVO)|更新单一持久化对象|
+|XJFYDDataService.commit(XJFYDVO xjfydVO)|更新单一持久化对象|
 |DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
 <br/>
 
@@ -365,13 +365,13 @@
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookPO accountBookPO)|
+|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookVO accountBookVO)|
 ||前置条件|已创建一个SetUpAccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的newBuild方法|
-|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookPO accountBookPO)|
+|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookVO accountBookVO)|
 ||前置条件|已经创建一个SetUpAccountBL对象|
 ||后置条件|调用SetUpAccountBL领域对象的delete方法|
-|**SetUpAccountController.find**|语法|public AccountBookList find()|
+|**SetUpAccountController.find**|语法|public AccountBookVO find()|
 ||前置条件|已经创建一个SetUpAccountBL对象|
 ||后置条件|调用SetUpAccountBL领域对象的find方法|
 <br/>　
@@ -379,18 +379,18 @@
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|SetUpAccountBL.newBuild(AccountBookPO AccountBookPO)|添加账簿|
-|SetUpAccountBL.delete(AccountBookPO accountBookPO)|删除账簿|
+|SetUpAccountBL.newBuild(AccountBookVO AccountBookVO)|添加账簿|
+|SetUpAccountBL.delete(AccountBookVO accountBookVO)|删除账簿|
 |SetUpAccountBL.find()|查找所有的账簿|
 <br/>
 　　　SetUpAccountBL的接口规范
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookPO accountBookPO)|
+|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookVO accountBookVO)|
 ||前置条件|输入正确的期初建账内容|
 ||后置条件|新建账簿并返回消息|
-|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookPO accountBookPO)|
+|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookVO accountBookVO)|
 ||前置条件|存在所选中的待删除账簿|
 ||后置条件|删除账簿并返回消息|
 |**SetUpAccountController.find**|语法|public AccountBookList find()|
@@ -402,8 +402,8 @@
 | --- | --- |
 |服务名|服务|
 |SetUpAccountDataService.find()|查找多个持久化对象|
-|SetUpAccountDataService.newBuild(AccountBookPO accountBookPO)|新建单一持久化对象|
-|SetUpAccountDataService.delete(AccountBookPO accountBookPO)|删除单一持久化对象|
+|SetUpAccountDataService.newBuild(AccountBookVO accountBookVO)|新建单一持久化对象|
+|SetUpAccountDataService.delete(AccountBookVO accountBookVO)|删除单一持久化对象|
 |DatabaseFactory.getAccountBookDatabase|得到AccountBook数据库的服务的引用|
 
 
