@@ -6,7 +6,7 @@ import java.util.Date;
 import SIMSclient.src.po.BillPO;
 
 @SuppressWarnings("serial")
-public class FinancialDocPO extends BillPO {
+public class FinancialDocPO {
 	Date date;
 	String docID;// 单据编号
 	int userID;// 当前登录用户的ID
@@ -17,10 +17,6 @@ public class FinancialDocPO extends BillPO {
 		userID = u;
 		note = n;
 		this.date = date;
-	}
-
-	public FinancialDocPO(String c, String a, int tran, int tot) {
-
 	}
 
 	public String getDocID() {

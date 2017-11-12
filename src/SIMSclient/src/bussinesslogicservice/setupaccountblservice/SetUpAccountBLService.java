@@ -8,4 +8,6 @@ public interface SetUpAccountBLService {
 	
 	public void delete(AccountBookVO accountBookVO);//É¾³ý
 	
+	public AccountBookVO find();
+	
 }
