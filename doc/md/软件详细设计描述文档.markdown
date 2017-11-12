@@ -44,6 +44,8 @@
 | 潘星宇 | 2017-11-12 | 添加userui模块 | v1.1 |
 | 潘星宇 | 2017-11-12 | 添加commoditydata模块 | v1.1 |
 | 潘星宇 | 2017-11-12 | 添加userdata模块 | v1.1 |
+| 孙嘉杰 | 2017-11-12 | 修改promotionbl模块 | v1.2 |
+
 >>>>>>> refs/remotes/origin/master
 
 
@@ -1458,6 +1460,7 @@ Purchasebl各个类的职责如图<br>
 （1）模块概述<br>
 promotionbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
 promotionbl模块的职责及接口参见软件系统结构描述文档表<br>
+
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PromotionBLService接口。业务逻辑层和数据层之间添加dataservice. PromotionDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PromotionController，这样PromotionController会将对客户的逻辑业务处理委托给Promotion对象。PromotionPO是作为客户的持久化对象被添加到设计模型中去的。
 Promotionbl模块的设计如图
@@ -1684,6 +1687,89 @@ billbl模块的职责及接口参见软件系统结构描述文档表<br>
 该图表明了SIMS系统中，当用户点击输入查询单据之后，单据业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询单据的顺序图.png"><br>
 
+4.1.11 checktablebl 模块<br>
+（1）模块概述<br>
+checktablebl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+checktablebl模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. checktableBLService接口。业务逻辑层和数据层之间添加dataservice. checktableDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了checktableController，这样checktableController会将对客户的逻辑业务处理委托给checktable对象。checktablePO是作为客户的持久化对象被添加到设计模型中去的。
+checktablebl模块的设计如图
+
+checktablebl各个类的职责如图
+| **模块** | **职责** |
+| checktableController | 负责实现制定销售策略界面所需要的服务 |
+| checktable | 制定销售策略的领域模型对象 |
+（3）模块内部类的接口规范<br>
+<center>**checktable的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">checktable.FinancialDocPO viewReport</th>
+<th>语法</th>
+<th>FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>关键字符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>查询到目标报表</th>
+</tr>
+<tr>
+<th rowspan="3">checktable.exportReport</th>
+<th>语法</th>
+<th>public void exportReport()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>导出报表</th>
+</tr>
+<tr>
+<th rowspan="3">checktable.writeOff</th>
+<th>语法</th>
+<th>public void writeOff()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>属性符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>红冲</th>
+</tr>
+<tr>
+<th rowspan="3">checktable.writeOffAndCopy</th>
+<th>语法</th>
+<th>public void writeOffAndCopy(BillPO billPO)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>符合输入条件</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>红冲并复制</th>
+</tr>
+</table>
+<table><tbody>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+
+</tr>
+</table>
+
+（4）业务逻辑层的动态模型<br>
+该图展示了当财务人员想要查看表格的时候，查看表格业务逻辑处理的相关对象之间的协作<br>
 
 4.2.1 mainui模块<br>
 （1）模块概述<br>
