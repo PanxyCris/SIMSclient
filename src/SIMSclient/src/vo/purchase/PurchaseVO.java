@@ -22,19 +22,21 @@ public class PurchaseVO extends PurchaseAndSalesBillVO{
 	 * @param i
 	 * @param d
 	 * @param s
+	 * @param t
 	 * @param des
 	 * @param warehouse
 	 * @param operator
 	 * @param amount
 	 * @param commodityList
+	 * @param clientID
+	 * @param supplier
 	 */
-	public PurchaseVO(String i, Date d, BillState s, String des, WareHouse warehouse, String operator, int amount,
-			ArrayList<CommodityVO> commodityList, String id, String supplier) {
-		super(i, d, s, des, warehouse, operator, amount, commodityList);
-		this.clientID = id;
+	public PurchaseVO(String i, Date d, BillState s, BillType t, String des, WareHouse warehouse, String operator,
+			int amount, ArrayList<CommodityVO> commodityList, String clientID, String supplier) {
+		super(i, d, s, t, des, warehouse, operator, amount, commodityList);
+		this.clientID = clientID;
 		this.supplier = supplier;
 	}
-	
 	
 	
 }

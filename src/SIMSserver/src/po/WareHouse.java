@@ -1,5 +1,20 @@
-package SIMSserver.src.dataservice.commoditydataservice;
+package SIMSserver.src.po;
 
 public enum WareHouse {
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

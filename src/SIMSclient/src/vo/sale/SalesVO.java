@@ -18,11 +18,17 @@ public class SalesVO extends PurchaseAndSalesBillVO{
 	public double allowance; // 折让金额
 	public double voucher; // 代金券金额
 	
+	
 	/**
 	 * @param i
 	 * @param d
 	 * @param s
+	 * @param t
 	 * @param des
+	 * @param warehouse
+	 * @param operator
+	 * @param amount
+	 * @param commodityList
 	 * @param clientID
 	 * @param retailer
 	 * @param saleMan
@@ -30,10 +36,10 @@ public class SalesVO extends PurchaseAndSalesBillVO{
 	 * @param allowance
 	 * @param voucher
 	 */
-	public SalesVO(String i, Date d, BillState s, String des, WareHouse warehouse, String operator, int amount,
-			ArrayList<CommodityVO> commodityList, String clientID, String retailer, String saleMan,
+	public SalesVO(String i, Date d, BillState s, BillType t, String des, WareHouse warehouse, String operator,
+			int amount, ArrayList<CommodityVO> commodityList, String clientID, String retailer, String saleMan,
 			double beforePrice, double allowance, double voucher) {
-		super(i, d, s, des, warehouse, operator, amount, commodityList);
+		super(i, d, s, t, des, warehouse, operator, amount, commodityList);
 		this.clientID = clientID;
 		this.retailer = retailer;
 		this.saleMan = saleMan;
@@ -41,6 +47,7 @@ public class SalesVO extends PurchaseAndSalesBillVO{
 		this.allowance = allowance;
 		this.voucher = voucher;
 	}
+	
 	
 	
 

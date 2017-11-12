@@ -1,6 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.checktableblservice;
 
-import SIMSclient.src.vo.BillVO;
+import SIMSclient.src.vo.bill.BillVO;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 import SIMSclient.src.vo.table.BusinessHistoryScheduleVO;
 

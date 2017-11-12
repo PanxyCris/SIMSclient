@@ -2,8 +2,8 @@ package SIMSclient.src.bussinesslogicservice.salesblservice;
 
 import java.util.*;
 
+import SIMSclient.src.bussinesslogic.commoditybl.CommodityItem;
 import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;
 import SIMSclient.src.vo.sale.SalesAddVO;
@@ -29,7 +29,7 @@ public interface SalesBLService {
 	 * 增加商品
 	 * @param item
 	 */
-	public void addCommodities(CommodityItemVO item);
+	public void addCommodities(CommodityItem item);
 	
 	/**
 	 * 查看促销商品

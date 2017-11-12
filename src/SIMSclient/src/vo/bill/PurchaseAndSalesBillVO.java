@@ -17,29 +17,25 @@ public class PurchaseAndSalesBillVO extends BillVO {
 	private String Operator;  //操作员
 	private int amount;  //总额
 	private ArrayList<CommodityVO> commodityList;  //商品清单
-	public PurchaseAndSalesBillVO(String i, Date d, BillState s, String des) {
-		super(i, d, s, des);
-		
-	}
+	
 	/**
 	 * @param i
 	 * @param d
 	 * @param s
+	 * @param t
 	 * @param des
 	 * @param warehouse
 	 * @param operator
 	 * @param amount
 	 * @param commodityList
 	 */
-	public PurchaseAndSalesBillVO(String i, Date d, BillState s, String des, WareHouse warehouse, String operator,
-			int amount, ArrayList<CommodityVO> commodityList) {
-		super(i, d, s, des);
+	public PurchaseAndSalesBillVO(String i, Date d, BillState s, BillType t, String des, WareHouse warehouse,
+			String operator, int amount, ArrayList<CommodityVO> commodityList) {
+		super(i, d, s, t, des);
 		this.warehouse = warehouse;
 		Operator = operator;
 		this.amount = amount;
 		this.commodityList = commodityList;
-	}
-
-	
+	}	
 	
 }
