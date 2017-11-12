@@ -642,10 +642,6 @@ commoditybl模块的职责及接口参见软件系统结构描述文档表<br>
 该图表明了SIMS系统中，当用户点击输入修改的分类之后，商品分类业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/修改分类的顺序图.png"><br>
 
-
-
-
-
 4.1.5 userbl 模块<br>
 （1）模块概述<br>
 userbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
@@ -760,6 +756,8 @@ salesbl模块各个类的职责
 | SalesController | 负责实现销售管理界面所需要的服务 |
 | Sales | 制定销售单的领域模型对象，拥有销售单的信息 |
 | user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
+| SalesList | 每一个销售单的数据信息 |
+| SaleslineItem | 销售单数据里面的条目 |
 
 （3）模块内部类的接口规范<br>
 <center>**SalesController的接口规范**</center>
@@ -861,7 +859,7 @@ salesbl模块各个类的职责
 <tr>
 <th rowspan="3">SalesController.save</th>
 <th>语法</th>
-<th>public SlaesVO save()</th>
+<th>public ResultMessage save()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -874,7 +872,7 @@ salesbl模块各个类的职责
 <tr>
 <th rowspan="3">SalesController.submit</th>
 <th>语法</th>
-<th>public Sales submit()</th>
+<th>public ResultMessage submit()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -896,23 +894,23 @@ salesbl模块各个类的职责
 </tr>
 <tr>
 <th>Sales.getSalesID</th>
-<th>获取进货单的ID</th>
+<th>获取销售单的ID</th>
 </tr>
 <tr>
 <th>Sales.getSaleBackID</th>
-<th>获取进货退货单的ID</th>
+<th>获取销售退货单的ID</th>
 </tr>
 <tr>
 <th>salesDataService.addCommodities(CommodityPO po)</th>
-<th>插入单一持久化对象</th>
+<th>添加商品</th>
 </tr>
 <tr>
 <th>SalesDataService.deleteCommodities(CommodityPO po)</th>
-<th>删除单一持久化对象</th>
+<th>删除商品</th>
 </tr>
 <tr>
 <th>SalesDataService.updateCommodities(CommodityPO po)</th>
-<th>更新单一持久化对象</th>
+<th>修改商品</th>
 </tr>
 <tr>
 <tr>
@@ -1028,7 +1026,7 @@ salesbl模块各个类的职责
 </tr>
 <tr>
 <th>DataFactory.getSalesDatabase</th>
-<th>得到Commodity数据库的服务的引用</th>
+<th>得到Sales数据库的服务的引用</th>
 </tr>
 </table>
 
@@ -1036,8 +1034,17 @@ salesbl模块各个类的职责
 该图展示了进货销售人员想在销售单／销售退货单中添加一个商品的时候，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/addCommodity.png">
 
-该图展示了进货销售人员想要提交一个销售单／销售退货单，销售业务逻辑处理的相关对象之间的协作<br>
+该图展示了进货销售人员对一个销售单／销售退货单进行提交审批时，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/submitSales.png">
+
+该图展示了进货销售人员对一个销售单／销售退货单进行保存草稿时，销售业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/saveSales.png">
+
+该图所示的状态图描述了Sales对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作。
+<img src="../img/软件详细设计图/Sales对象状态图.png">
+
+ (5)业务逻辑层的设计原理
+ 利用委托式风格，每个界面需要访问的业务逻辑由各自的控制器委托给不同的领域对象。
 
 4.1.7 memberbl 模块<br>
 （1）模块概述<br>
@@ -1157,6 +1164,12 @@ Memberbl各个类的职责如图
 该图展示了当进货销售人员想要删除一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/deleteMember.png">
 
+该图所示的状态图描述了Member对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作。
+<img src="../img/软件详细设计图/Member对象状态图.png">
+
+ (5)业务逻辑层的设计原理
+ 利用委托式风格，每个界面需要访问的业务逻辑由各自的控制器委托给不同的领域对象。
+
 4.1.8 purchasebl 模块<br>
 （1）模块概述<br>
 purchasebl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
@@ -1165,12 +1178,258 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PurchaseBLService接口。业务逻辑层和数据层之间添加dataservicePurchaseDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PurchaseController，这样PurchaseController会将对进货的逻辑业务处理委托给Purchase对象。PurchasePO是作为进货单的持久化对象被添加到设计模型中去的。
 如图展示了Purchaseb模块的设计
+<img src="../img/软件详细设计图/Purchase模块.png">
+
+Purchasebl各个类的职责如图
+| **模块** | **职责** |
+| -------| ------- |
+| PurchaseController | 负责实现制定进货单界面所需要的服务 |
+| Purchase | 制定进货单的领域模型对象，拥有进货单的信息 |
+| user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
+| PurchaseList | 每一个进货单的数据信息 |
+| PurchaselineItem | 进货单数据里面的条目 |
 
 （3）模块内部类的接口规范<br>
 
+<center>**PurchaseController的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.getPurchaseID</th>
+<th>语法</th>
+<th>public String getPurchaseID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Purchase领域对象的方法</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.getPurchaseBackID</th>
+<th>语法</th>
+<th>public String getPurchaseBackID()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Purchase领域对象的方法</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.addCommodities</th>
+<th>语法</th>
+<th>public ResultMessage addCommodities(CommodityItem item)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象，添加商品和数量，并且输入符合输入规则</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Purchase领域对象的addCommodities方法</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.getTotal</th>
+<th>语法</th>
+<th>public double getTotal()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象，已添加商品和数量</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Sale领域对象的getTotal方法</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.save</th>
+<th>语法</th>
+<th>public ResultMessage save()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Purchase领域对象的方法</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.submit</th>
+<th>语法</th>
+<th>public ResultMessage submit()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用Purchase领域对象的方法</th>
+</tr>
+</table>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>Sales.getSalesID</th>
+<th>获取进货单的ID</th>
+</tr>
+<tr>
+<th>Sales.getSaleBackID</th>
+<th>获取进货退货单的ID</th>
+</tr>
+<tr>
+<th>salesDataService.addCommodities(CommodityPO po)</th>
+<th>添加商品</th>
+</tr>
+<tr>
+<th>salesDataService.getTotal(CommodityPO po)</th>
+<th>计算总额</th>
+</tr>
+<tr>
+<th>Sales.save</th>
+<th>保存草稿</th>
+</tr>
+<th>Sales.submit</th>
+<th>提交单据</th>
+</tr>
+</table>
+
+<center>**Purchase的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan="3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">Purchase.findCommodities</th>
+<th>语法</th>
+<th>public ResultMessage findCommodities(String id)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个制定进货单回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个进货回合中，查找一个目标商品</th>
+</tr>
+<tr>
+<th rowspan="3">Purchase.addCommodities</th>
+<th>语法</th>
+<th>public ResultMessage addCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个进货回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个进货回合中，添加一个商品</th>
+</tr>
+<tr>
+<th rowspan="3">Purchase.deleteCommodities</th>
+<th>语法</th>
+<th>public ResultMessage deleteCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个进货回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个进货回合中，删除一个商品</th>
+</tr>
+<tr>
+<th rowspan="3">Purchase.updeteCommodities</th>
+<th>语法</th>
+<th>public ResultMessage updeteCommodities(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>启动一个进货回合</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在一个进货回合中，修改一个商品的属性，如数量</th>
+</tr>
+<tr>
+<th rowspan="3">Purchase.getTotal</th>
+<th>语法</th>
+<th>public ResultMessage getTotal(CommodityPO po)</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已完成一次进货(退货)单的制定</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回此进货回合中的总额</th>
+</tr>
+</table>
+
+<table><tbody>
+<tr>
+<th colspan = "2">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>PurchaseDataService.findCommodities(String id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>PurchaseDataService.finds(String field,int value)</th>
+<th>根据字段名和值查找多个持久化对象</th>
+</tr>
+<tr>
+<th>PurchaseDataService.insert(CommodityPO po)</th>
+<th>增加单一持久化对象</th>
+</tr>
+<tr>
+<th>PurchaseDataService.delete(CommodityPO po)</th>
+<th>删除单一持久化对象</th>
+</tr>
+<tr>
+<th>PurchaseDataService.update(CommodityPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+<tr>
+<th>DataFactory.getPurchaseDatabase</th>
+<th>得到Purchase数据库的服务的引用</th>
+</tr>
+</table>
+
 （4）业务逻辑层的动态模型<br>
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/Purchase.addCommodity.png">
+
+该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/submitPurchase.png">
+
 该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/savePurchase.png">
+
+该图所示的状态图描述了Purchase对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作。
+<img src="../img/软件详细设计图/Purchase对象状态图.png">
+
+ (5)业务逻辑层的设计原理
+ 利用委托式风格，每个界面需要访问的业务逻辑由各自的控制器委托给不同的领域对象。
 
 <<<<<<< HEAD
 4.1.9 promotionbl 模块<br>
