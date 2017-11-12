@@ -745,7 +745,9 @@ salesbl模块的职责及接口参见软件系统结构描述文档表<br>
 
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleBLService接口。业务逻辑层和数据层之间添加dataservice. SaleDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SaleController，这样SaleController会将对销售的逻辑业务处理委托给Sale对象。SalePO是作为销售单的持久化对象被添加到设计模型中去的。<br>
+
 Salebl模块的设计如图所示<br>
+
 <img src="../img/软件详细设计图/Sales模块.png"><br>
 
 salesbl模块各个类的职责<br>
@@ -1031,17 +1033,22 @@ salesbl模块各个类的职责<br>
 </table>
 
 （4）业务逻辑层的动态模型<br>
+
 该图展示了进货销售人员想在销售单／销售退货单中添加一个商品的时候，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/addCommodity.png">
+
 
 该图展示了进货销售人员对一个销售单／销售退货单进行提交审批时，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/submitSales.png">
 
+
 该图展示了进货销售人员对一个销售单／销售退货单进行保存草稿时，销售业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/saveSales.png">
 
+
 该图所示的状态图描述了Sales对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作<br>
 <img src="../img/软件详细设计图/Sales对象状态图.png">
+
 
  (5)业务逻辑层的设计原理<br>
 利用委托式风格，每个界面需要访问的业务逻辑由各自的控制器委托给不同的领域对象。
@@ -1053,6 +1060,7 @@ memberbl模块的职责及接口参见软件系统结构描述文档表<br>
 
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. MemberBLService接口。业务逻辑层和数据层之间添加dataservice. MemberDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了MemberController，这样MemberController会将对客户的逻辑业务处理委托给Member对象。MemberPO是作为客户的持久化对象被添加到设计模型中去的<br>
+
 Memberbl模块的设计如图<br>
 
 <img src="../img/软件详细设计图/Member模块各个类的设计.png">
@@ -1065,7 +1073,9 @@ Memberbl模块的设计如图<br>
 | Member | 客户管理的领域模型对象，拥有客户数据的编号、分类、级别、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员 |
 | user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
 
+
 （3）模块内部类的接口规范<br>
+
 <center>**Member的接口规范**</center>
 <table><tbody>
 <tr>
@@ -1157,14 +1167,18 @@ Memberbl模块的设计如图<br>
 </table>
 
 （4）业务逻辑层的动态模型<br>
+
 该图展示了当进货销售人员想要添加一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/addMember.png">
+
 
 该图展示了当进货销售人员想要删除一个客户的时候，客户管理业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/deleteMember.png">
 
+
 该图所示的状态图描述了Member对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作。
 <img src="../img/软件详细设计图/Member对象状态图.png">
+
 
  (5)业务逻辑层的设计原理<br>
 利用委托式风格，每个界面需要访问的业务逻辑由各自的控制器委托给不同的领域对象。
@@ -1176,17 +1190,22 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 
 （2）整体结构<br>
 根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. PurchaseBLService接口。业务逻辑层和数据层之间添加dataservicePurchaseDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PurchaseController，这样PurchaseController会将对进货的逻辑业务处理委托给Purchase对象。PurchasePO是作为进货单的持久化对象被添加到设计模型中去的<br>
+
 如图展示了Purchaseb模块的设计<br>
 <img src="../img/软件详细设计图/Purchase模块.png">
 
+
 Purchasebl各个类的职责如图<br>
+
 | **模块** | **职责** |
-| -------| ------- |
-| PurchaseController | 负责实现制定进货单界面所需要的服务 |
+| ------- | --------- |
+| LoginController | 负责实现对应于登录界面所需要的服务 |
+| PurchaseController | 负责实现进货管理界面所需要的服务 |
 | Purchase | 制定进货单的领域模型对象，拥有进货单的信息 |
 | user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
 | PurchaseList | 每一个进货单的数据信息 |
-| PurchaselineItem | 进货单数据里面的条目 |
+| PurchaseLineItem | 进货单数据里面的条目 |
+
 
 （3）模块内部类的接口规范<br>
 
@@ -1415,14 +1434,18 @@ Purchasebl各个类的职责如图<br>
 </table>
 
 （4）业务逻辑层的动态模型<br>
+
 该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/Purchase.addCommodity.png">
+
 
 该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/submitPurchase.png">
 
+
 该图展示了进货人员需要进行单据的保存时，进货业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/savePurchase.png">
+
 
 该图所示的状态图描述了Purchase对象的生存期间的状态序列、引起转移的事件，以及因状态转移而伴随的动作<br>
 <img src="../img/软件详细设计图/Purchase对象状态图.png">
