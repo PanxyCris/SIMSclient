@@ -35,16 +35,15 @@
 | 潘星宇 | 2017-11-05 | 添加userbl模块 | v1.1 |
 | 李杰 | 2017-11-07 | 添加purchase模块 | v1.1 |
 | 孙嘉杰 | 2017-11-08 | 添加promotionbl模块 | v1.1 |
-| 潘星宇 | 2017-11-08 | 添加billbl模块 | v1.1 |
-| 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.2 |
-| 潘星宇 | 2017-11-08 | 添加mainui模块 | v1.1 |
+| 潘星宇 | 2017-11-08 | 添加billbl模块、mainui模块 | v1.1 |
+| 潘星宇 | 2017-11-08 | 修改commoditybl模块 | v1.1 |
 | 王灿灿 | 2017-11-10 | 添加mfdoc模块，setupaccount模块 | v1.1 |
 | 潘星宇 | 2017-11-12 | 修改commoditybl模块 | v1.3 |
-| 潘星宇 | 2017-11-12 | 添加commodityui模块 | v1.1 |
-| 潘星宇 | 2017-11-12 | 添加userui模块 | v1.1 |
-| 潘星宇 | 2017-11-12 | 添加commoditydata模块 | v1.1 |
-| 潘星宇 | 2017-11-12 | 添加userdata模块 | v1.1 |
+| 潘星宇 | 2017-11-12 | 添加commoditydata模块、userdata模块、userui模块、commodityui模块 | v1.1 |
 | 孙嘉杰 | 2017-11-12 | 修改promotionbl模块 | v1.2 |
+| 潘星宇 | 2017-11-13 | 添加billdata模块、billui模块 | v1.1 |
+| 潘星宇 | 2017-11-13 | 修改commoditydata模块、userdata模块 | v1.2 |
+
 
 >>>>>>> refs/remotes/origin/master
 
@@ -2003,6 +2002,101 @@ userui模块的职责及接口参见软件系统结构描述文档表<br>
 </tr>
 </table>
 
+4.2.4 billui模块<br>
+（1）模块概述<br>
+billui模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+billui模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.billblservice.BillBLService接口。各个BillVO是作为各类单据的记录的可视化对象添加到设计模型中去的。由各个单据的界面跳转到各个Bill的UI里<br>
+<img src="../img/软件详细设计图/BillUI.png"><br>
+<center>**BillUI模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>BillControllerUI</th>
+<th>负责实现对应于所有单据的界面所需要的服务</th>
+</tr>
+<tr>
+<th>InventoryBillUI</th>
+<th>库存类单据的模型对象，拥有一个库存单据所持有的商品等信息以及其方法</th>
+</tr>
+<tr>
+<th>PurchaseBillControllerUI</th>
+<th>进出货单据的模型对象，拥有一个进出货单据所持有的库存信息以及其方法</th>
+</tr>
+<tr>
+<th>SalesBillControllerUI</th>
+<th>销售单据的模型对象，拥有一个销售单据所持有的销售信息以及其方法</th>
+</tr>
+<tr>
+<th>SKDBillUI</th>
+<th>收款单据的模型对象，拥有一个收款单据所持有的账户信息以及其方法</th>
+</tr>
+<tr>
+<th>XJFYDBillUI</th>
+<th>付款单据的模型对象，拥有一个付款单据所持有的账户信息以及其方法</th>
+</tr>
+</table>
+
+（3）模块内部类的接口规范
+<center>**BillControllerUI的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "3">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th rowspan="3">BillControllerUI.makeBill</th>
+<th>语法</th>
+<th>public ResultMessage makeBill()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>需要进行制作单据操作</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用BillControllerUI领域对象的makeBill</th>
+</tr>
+<tr>
+<th rowspan="3">BillControllerUI.approve</th>
+<th>语法</th>
+<th>public ResultMessage approve()</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>需要进行审批单据操作</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>调用BillControllerUI领域对象的approve</th>
+</tr>
+</table>
+<table><tbody>
+<tr>
+<th colspan = "3">需要的服务（需接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>BillBLService.insert(BillVO vo)</th>
+<th>插入单一可视化对象</th>
+</tr>
+<tr>
+<th>BillBLService.update(BillVO vo)</th>
+<th>更新单一可视化对象</th>
+</tr>
+<tr>
+<th>BillBLService.find(long id)</th>
+<th>查询单一可视化对象</th>
+</tr>
+</table>
+
+
 4.3.1 commoditydata模块<br>
 （1）模块概述<br>
 commoditydata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
@@ -2049,16 +2143,16 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 <th>插入单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.delete(CommodityPO po)</th>
+<th>CommodityData.delete(CommodityPO po)</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.update(CommodityPO po)</th>
+<th>CommodityData.update(CommodityPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
 </table>
 
-<center>**ClassificationUI的接口规范**</center>
+<center>**ClassificationData的接口规范**</center>
 <table><tbody>
 <tr>
 <th colspan = "2">需要的服务（需接口）</th>
@@ -2068,15 +2162,15 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>ClassificationBLService.insertClass(ClassificationPO po)</th>
+<th>ClassificationData.insertClass(ClassificationPO po)</th>
 <th>插入单一持久化对象</th>
 </tr>
 <tr>
-<th>ClassificationBLService.deleteClass(ClassificationPO po)</th>
+<th>ClassificationData.deleteClass(ClassificationPO po)</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>ClassificationBLService.updateClass(ClassificationPO po)</th>
+<th>ClassificationData.updateClass(ClassificationPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
 </table>
@@ -2122,15 +2216,57 @@ userdata模块的职责及接口参见软件系统结构描述文档表<br>
 <th>插入单一持久化对象</th>
 </tr>
 <tr>
-<th>UserService.delete(UserPO po)</th>
+<th>UserData.delete(UserPO po)</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>UserBLService.update(UserPO po)</th>
+<th>UserData.update(UserPO po)</th>
 <th>更新单一持久化对象</th>
 </tr>
 </table>
 
+4.3.3 billdata模块<br>
+（1）模块概述<br>
+billdata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+billdata模块的职责及接口参见软件系统结构描述文档表<br>
+（2）整体结构<br>
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.billdataservice.BillDataService接口。BillData是承接单据的各类数据的。<br>
+<center>**BillData模块各个类的设计**</center>
+<table><tbody>
+<tr>
+<th>模  块</th>
+<th>职  责</th>
+</tr>
+<tr>
+<th>BillData</th>
+<th>单据的模型对象，拥有一个单据各类数据及其方法</th>
+</tr>
+
+</table>
+
+（3）模块内部类的接口规范
+<center>**BillData的接口规范**</center>
+<table><tbody>
+<tr>
+<th colspan = "2">提供的服务（供接口）</th>
+</tr>
+<tr>
+<th>服务名</th>
+<th>服务</th>
+</tr>
+<tr>
+<th>BillData.find(long id)</th>
+<th>根据ID进行查找单一持久化对象</th>
+</tr>
+<tr>
+<th>BillData.insert(BillPO po)</th>
+<th>插入单一持久化对象</th>
+</tr>
+<tr>
+<th>BillData.update(BillPO po)</th>
+<th>更新单一持久化对象</th>
+</tr>
+</table>
 >>>>>>> refs/remotes/origin/master
 
 ##5.依赖视角

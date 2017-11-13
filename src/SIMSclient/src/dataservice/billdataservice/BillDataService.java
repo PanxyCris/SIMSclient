@@ -7,7 +7,6 @@ import SIMSclient.src.po.BillPO.BillType;
 
 public interface BillDataService {
 
-
     public int getID();
 	public BillType getType();
 	public BillState getState();
