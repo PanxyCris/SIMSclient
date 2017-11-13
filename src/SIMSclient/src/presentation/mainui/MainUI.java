@@ -1,12 +1,37 @@
 package SIMSclient.src.presentation.mainui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainUI extends Application{
+
+	@FXML
+	TextField username;
+	@FXML
+	PasswordField password;
+	@FXML
+	AnchorPane pane;
+
+	@FXML
+	public void enterButton(ActionEvent event){
+		login();
+	}
+
+	@FXML
+	public void enterKey(KeyEvent event){
+		if(event.getCode()==KeyCode.ENTER)
+			login();
+	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -16,7 +41,11 @@ public class MainUI extends Application{
 	        primaryStage.setTitle("µÇÂ¼½çÃæ");
 	        primaryStage.show();
 	}
-	
+
+    public void login(){
+		     System.out.println("Success!");
+	}
+
 	public static void main(String[] args){
 		launch(args);
 	}
