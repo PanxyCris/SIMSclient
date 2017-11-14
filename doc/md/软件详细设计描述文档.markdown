@@ -44,7 +44,7 @@
 | 潘星宇 | 2017-11-13 | 添加billdata模块、billui模块 | v1.1 |
 | 潘星宇 | 2017-11-13 | 修改commoditydata模块、userdata模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 添加accountdata模块、mfdocdata模块、setupaccountdata模块 | v1.2 |
-
+| 王灿灿 | 2017-11-14| 添加accountui模块、mfdocui模块、setupaccountui模块 | v1.2 |
 
 >>>>>>> refs/remotes/origin/master
 
