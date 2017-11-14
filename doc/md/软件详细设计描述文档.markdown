@@ -45,6 +45,8 @@
 | 潘星宇 | 2017-11-13 | 修改commoditydata模块、userdata模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 添加accountdata模块、mfdocdata模块、setupaccountdata模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 添加accountui模块、mfdocui模块、setupaccountui模块 | v1.2 |
+| 王灿灿 | 2017-11-14| 修改mfdoc模块设计图 | v1.2 |
+
 
 >>>>>>> refs/remotes/origin/master
 
@@ -190,7 +192,8 @@
 
 　　　　mfdocbl模块的设计如图所示。
 
-<img src="../img/软件详细设计图/accountbl模块设计图.png">
+<img src="../img/软件详细设计图/skdbl模块设计图.png">
+现金费用单设计图类似
 
 　　mfdocbl模块各个类的职责如下所示
 
@@ -326,18 +329,6 @@
 |XJFYDDataService.commit(XJFYDVO xjfydVO)|更新单一持久化对象|
 |DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
 <br/>
-
-　　　　(4)业务逻辑层的动态模型
-
-　　　　以下图分别表明了企业进销存系统中，对收款单和现金费用单进行增、删、改、查、提交等逻辑处理的相关对象之间的协作
-
-<img src="../img/软件详细设计图/account_add顺序图.png">
-
-<img src="../img/软件详细设计图/account_delete顺序图.png">
-
-<img src="../img/软件详细设计图/account_modify顺序图.png">
-
-<img src="../img/软件详细设计图/account_find顺序图.png">
 
 　　　　**4.1.3　setupaccountbl模块**
 
