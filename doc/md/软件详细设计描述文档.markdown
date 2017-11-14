@@ -2089,6 +2089,118 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 </tr>
 </table>
 
+　　　　4.2.5　accountui模块
+
+　　　　(1)模块概述
+
+　　　　accountui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Accountui模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountblservice.AccountBLService接口。
+
+　　　　accountui模块的设计如图所示。
+
+　　accountui模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|AccountUI|账户管理界面的模型对象|
+
+　　　　(3)模块内部类的接口规范
+
+　　　AccountUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|AccountUI.find(string message)|根据查找内容查找账户|
+|AccountUI.newBuild(AccountVO accountVO)|添加账户|
+|AccountUI.delete(AccountVO accountVO)|删除账户|
+|AccountUI.modify(AccountVO accountVO)|修改账户|
+<br/>
+
+　　　　4.2.6　mfdocui模块
+
+　　　　(1)模块概述
+
+　　　　mfdocui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　MFDocUI模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.mfdocblservice.MFDocBLService接口。
+
+　　　　mfdocui模块的设计如图所示。
+
+　　mfdocui模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|SKDUI|收款单界面的模型对象|
+|XJFYDUI|付款单界面的模型对象|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SKDUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|SKDUI.find(string message)|根据查找内容查找单据|
+|SKDUI.newBuild(SKDVO skdVO)|添加单据|
+|SKDUI.delete(SKDVO skdVO)|删除单据|
+|SKDUI.modify(SKDVO skdVO)|修改单据|
+|SKDUI.commit(SKDVO skdVO)|提交单据|
+<br/>
+
+　　　XJFYDUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|XJFYDUI.find(string message)|根据查找内容查找单据|
+|XJFYDUI.newBuild(XJFYDVO xjfydVO)|添加单据|
+|XJFYDUI.delete(XJFYDVO xjfydVO)|删除单据|
+|XJFYDUI.modify(XJFYDVO xjfydVO)|修改单据|
+|XJFYDUI.commit(XJFYDVO xjfydVO)|提交单据|
+<br/>
+
+　　　　4.2.7　setupaccountui模块
+
+　　　　(1)模块概述
+
+　　　　setupaccountui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　SetUpAccountui模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。
+
+　　　　setupaccountui模块的设计如图所示。
+
+　　setupaccountui模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|SetUpAccountUI|账户管理界面的模型对象|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SetUpAccountUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|SetUpAccountUI.newBuild(AccountBookVO AccountBookVO)|添加账簿|
+|SetUpAccountUI.delete(AccountBookVO accountBookVO)|删除账簿|
+|SetUpAccountUI.find()|查找所有的账簿|
+<br/>
+
 
 4.3.1 commoditydata模块<br>
 （1）模块概述<br>
