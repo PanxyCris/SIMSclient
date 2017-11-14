@@ -1,12 +1,13 @@
 package SIMSclient.src.dataservice.setupaccountdataservice;
 
+import SIMSclient.src.ResultMessage;
 import SIMSclient.src.po.AccountBookPO;
 
 public interface SetUpAccountDataService {
 	
-	public void newBuild(AccountBookPO accountBookPO);//新建
+	public ResultMessage newBuild(AccountBookPO accountBookPO);//新建
 	
-	public void delete(AccountBookPO accountBookPO);//删除
+	public ResultMessage delete(AccountBookPO accountBookPO);//删除
 	
 	public AccountBookPO find();
 }

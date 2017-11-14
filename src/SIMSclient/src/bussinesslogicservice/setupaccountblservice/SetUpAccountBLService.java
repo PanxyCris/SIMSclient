@@ -1,12 +1,13 @@
 package SIMSclient.src.bussinesslogicservice.setupaccountblservice;
 
+import SIMSclient.src.ResultMessage;
 import SIMSclient.src.vo.AccountBookVO;
 
 public interface SetUpAccountBLService {
 	
-	public void newBuild(AccountBookVO accountBookVO);//新建
+	public ResultMessage newBuild(AccountBookVO accountBookVO);//新建
 	
-	public void delete(AccountBookVO accountBookVO);//删除
+	public ResultMessage delete(AccountBookVO accountBookVO);//删除
 	
 	public AccountBookVO find();
 	

@@ -1,5 +1,24 @@
 package SIMSclient.src.bussinesslogic.setupaccountbl;
 
-public class SetUpAccountBL {
+import SIMSclient.src.ResultMessage;
+import SIMSclient.src.bussinesslogicservice.setupaccountblservice.SetUpAccountBLService;
+import SIMSclient.src.vo.AccountBookVO;
+
+public class SetUpAccountBL implements SetUpAccountBLService{
+
+	@Override
+	public ResultMessage newBuild(AccountBookVO accountBookVO) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage delete(AccountBookVO accountBookVO) {
+		return null;
+	}
+
+	@Override
+	public AccountBookVO find() {
+		return null;
+	}
 
 }
