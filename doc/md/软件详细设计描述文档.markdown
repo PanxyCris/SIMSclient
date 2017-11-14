@@ -656,10 +656,6 @@ userbl模块的职责及接口参见软件系统结构描述文档表<br>
 <th>模  块</th>
 <th>职  责</th>
 </tr>
-<tr>
-<th>LoginController</th>
-<th>负责实现对应于登录界面所需要的服务</th>
-</tr>
 <th>User</th>
 <th>系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题</th>
 </tr>
@@ -1554,10 +1550,6 @@ billbl模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th>模  块</th>
 <th>职  责</th>
-</tr>
-<tr>
-<th>LoginController</th>
-<th>负责实现对应于登录界面所需要的服务</th>
 </tr>
 <tr>
 <th>BillController</th>
