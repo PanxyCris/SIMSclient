@@ -2261,6 +2261,117 @@ billdata模块的职责及接口参见软件系统结构描述文档表<br>
 </table>
 >>>>>>> refs/remotes/origin/master
 
+　　　　4.3.4　accountdata模块
+
+　　　　(1)模块概述
+
+　　　　accountdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Accountdata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.accountdataservice.AccountDataService接口。AccountPO是作为账户记录的持久化对象被添加到设计模型中去的。
+
+　　accountdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|AccountData|银行账户的模型对象，拥有银行账户的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　AccountData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|AccountData.find(String message)|根据信息查找多个持久化对象|
+|AccountData.newBuild(AccountPO accountPO)|新建单一持久化对象|
+|AccountData.delete(AccountPO accountPO)|删除单一持久化对象|
+|AccountData.modify(AccountPO accountPO)|更新单一持久化对象|
+|DatabaseFactory.getAccountDatabase|得到Account数据库的服务的引用|
+<br/>
+
+　　　　4.3.5　mfdocdata模块
+
+　　　　(1)模块概述
+
+　　　　mfdocdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　MFDocdata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.mfdocdataservice.MFDocDataService接口。SKDPO和XJFYDPO分别是作为收款单和现金费用单的持久化对象被添加到设计模型中去的。
+
+　　mfdocdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|SKDData|收款单的模型对象，拥有收款单的各类数据以及方法|
+|XJFYDData|收款单的模型对象，拥有收款单的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SKDData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|SKDData.find(String message)|根据信息查找多个持久化对象|
+|SKDData.newBuild()|新建单一持久化对象|
+|SKDData.delete(SKDPO skdPO)|删除单一持久化对象|
+|SKDData.modify(SKDPO skdPO)|更新单一持久化对象|
+|SKDData.commit(SKDPO skdPO)|更新单一持久化对象|
+|DatabaseFactory.getSKDDatabase|得到SKD数据库的服务的引用|
+<br/>
+
+　　　XJFYDData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|XJFYDData.find(String message)|根据信息查找多个持久化对象|
+|XJFYDData.newBuild()|新建单一持久化对象|
+|XJFYDData.delete(XJFYDPO xjfydPO)|删除单一持久化对象|
+|XJFYDData.modify(XJFYDPO xjfydPO)|更新单一持久化对象|
+|XJFYDData.commit(XJFYDPO xjfydPO)|更新单一持久化对象|
+|DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
+<br/>
+
+　　　　4.3.6　setupaccountdata模块
+
+　　　　(1)模块概述
+
+　　　　setupaccountdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　SetUpAccountdata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。AccountBookPO是作为账户记录的持久化对象被添加到设计模型中去的。
+
+　　setupaccountdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|SetUpAccountData|账簿的模型对象，拥有账簿的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SetUpAccountData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|SetUpAccountData.find()|查找多个持久化对象|
+|SetUpAccountData.newBuild(AccountBookPO accountBookPO)|新建单一持久化对象|
+|SetUpAccountData.delete(AccountBookPO accountBookPO)|删除单一持久化对象|
+|DatabaseFactory.getAccountBookDatabase|得到AccountBook数据库的服务的引用|
+<br/>
+
+
 ##5.依赖视角
 下面两图是客户端和服务器各自的包之间的依赖关系<br>
 <img src="../img/客户端开发包图.png"><br>
