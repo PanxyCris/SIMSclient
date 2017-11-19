@@ -11,7 +11,7 @@ public class CommodityUI extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		    Parent root = FXMLLoader.load(getClass().getResource("CommodityUI.fxml"));
-	        Scene scene = new Scene(root, 700, 500);
+	        Scene scene = new Scene(root, 900, 600);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("库存管理人员界面");
 	        primaryStage.show();
