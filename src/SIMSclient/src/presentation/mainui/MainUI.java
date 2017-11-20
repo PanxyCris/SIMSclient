@@ -35,7 +35,7 @@ public class MainUI extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		 Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		    Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 	        Scene scene = new Scene(root, 600, 400);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("µÇÂ¼½çÃæ");
