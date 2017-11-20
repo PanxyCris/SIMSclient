@@ -13,7 +13,7 @@
             <Image url="@img/尝试背景2.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="366.0" layoutY="246.0" prefHeight="109.0" prefWidth="294.0" text="欢迎你，库存管理人员！" textFill="#f8f8f8">
+      <Label layoutX="366.0" layoutY="246.0" prefHeight="109.0" prefWidth="294.0" text="欢迎你，进货销售人员！" textFill="#f8f8f8">
          <font>
             <Font size="24.0" />
          </font>
@@ -29,47 +29,20 @@
          </graphic>
       </Button>
       <Label layoutY="112.0" prefHeight="490.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" />
-      <Button layoutY="112.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="商品分类管理">
+      <Button layoutY="112.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="     客户管理">
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/购物车.jpg" />
+                  <Image url="@img/客户.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="180.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="       商品管理">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/商品.jpg" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutY="252.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="       库存查看">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/放大镜.jpg" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutY="408.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="       制作单据">
+      <Button layoutY="188.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="       制作单据">
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/盘点.jpg" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutY="326.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="       库存盘点">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/单据.jpg" />
                </image>
             </ImageView>
          </graphic>
