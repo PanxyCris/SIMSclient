@@ -1,19 +1,13 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package SIMSclient.src.po.sales;
 
-import java.rmi.RemoteException;
+import java.io.Serializable;
 
 /*
- * 销售单的出货商品清单的细列项目
- * 销售单通过审批后，系统自动更改客户的应收应付和库存数据
- * 编号,
- * 名称（从商品选择界面选择）,
- * 型号,
- * 数量（手工输入）,
- * 单价（默认为商品信息里的销售价，可修改）,
- * 金额（自动生成），商品备注
+ * 一条商品记录
  */
-public class SalesLineItem {
+public class CommodityItemPO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
 	private String model;  //商品型号
@@ -22,55 +16,47 @@ public class SalesLineItem {
 	private double sum;  //总额
 	private String remark;  //备注
 	
-	public SalesLineItem() {
-		
-	}
-
-	/**
-	 * @param id
-	 * @param name
-	 * @param model
-	 * @param numbers
-	 * @param price
-	 * @param sum
-	 * @param remark
-	 */
-	public SalesLineItem(String name, int number, double price, String remark) throws RemoteException {
+	
+	public CommodityItemPO(String id, String name, String model, int number, double price, String remark) {
 		super();
+		this.id = id;
 		this.name = name;
+		this.model = model;
 		this.number = number;
 		this.price = price;
 		this.sum = number * price;
 		this.remark = remark;
 	}
 
+	public CommodityItemPO(String name, int number, double price, String remark) {
+		this.name = name;
+		this.number = number;
+		this.price = price;
+		this.sum = price * number;
+		this.remark = remark;
+	}
+	
 	public String getId() {
 		return id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public String getModel() {
 		return model;
 	}
-
 	public int getNumber() {
 		return number;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public double getSum() {
 		return sum;
 	}
-
 	public String getRemark() {
 		return remark;
 	}
-	
+
 	
 }

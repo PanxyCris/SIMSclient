@@ -8,7 +8,7 @@ package SIMSclient.src.bussinesslogic_mock.salesbl_mock;
 
 import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.salesbl.SalesBL;
-import SIMSclient.src.po.SalesPO;
+import SIMSclient.src.po.sales.SalesPO;
 import SIMSclient.src.vo.sale.SalesVO;
 
 public class SalesBL_mock extends SalesBL{
