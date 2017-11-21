@@ -24,4 +24,5 @@ public interface UserBLService {
 	public void update(UserVO vo);
 	public void find(UserVO vo);
 
+
 }

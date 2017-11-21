@@ -58,4 +58,5 @@ public class UserVO implements Serializable {
      public ImageView getImage(){
     	 return image;
      }
+
 }
