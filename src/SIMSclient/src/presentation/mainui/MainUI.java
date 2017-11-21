@@ -1,12 +1,14 @@
 package SIMSclient.src.presentation.mainui;
 
-import SIMSclient.src.vo.UserVO;
+import SIMSclient.src.bussinesslogic.userbl.UserBL;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -46,6 +48,23 @@ public class MainUI extends Application{
     public void login(){
 		    String userName = username.toString();
 		    String passWord = password.toString();
+		    UserBL user = new UserBL();
+		    if(user.judge(userName,passWord)){
+		    	
+		    }else{
+		    	username.setText(null);
+		    	password.setText(null);
+		    	Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+							new RemindUI().start(new Stage());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+		    	
+		    }
 
 	}
 
