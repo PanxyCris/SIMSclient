@@ -7,7 +7,7 @@ import SIMSclient.src.vo.UserVO.Authority;
 import SIMSclient.src.vo.UserVO;
 
 public interface UserBLService {
-
+	
     public String getName();
 
     public int getID();
@@ -23,6 +23,8 @@ public interface UserBLService {
 	public void delelte(UserVO vo);
 	public void update(UserVO vo);
 	public void find(UserVO vo);
+
+	public boolean judge(String userName, String passWord);
 
 
 }

@@ -1,6 +1,13 @@
 package SIMSclient.src.presentation.mainui;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
+import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.presentation.accountui.AccountUI;
+import SIMSclient.src.presentation.commodityui.CommodityUI;
+import SIMSclient.src.presentation.promotionui.PromotionUI;
+import SIMSclient.src.presentation.salesui.SalesUI;
+import SIMSclient.src.presentation.userui.UserUI;
+import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -48,9 +54,65 @@ public class MainUI extends Application{
     public void login(){
 		    String userName = username.toString();
 		    String passWord = password.toString();
-		    UserBL user = new UserBL();
-		    if(user.judge(userName,passWord)){
-		    	
+
+		    UserBLService service = UserBL.getInstance().getUserService();
+		    
+		    if(service.judge(userName,passWord)){
+
+		    	UserRole role = service.getRole();
+
+		    	switch(role){
+
+		    	case MANAGER:Platform.runLater(new Runnable() {
+		    	                public void run() {
+		    	                   try {
+							              new PromotionUI().start(new Stage());
+						           } catch (Exception e) {
+							                 e.printStackTrace();
+						                    }
+		    	                  }
+		    	                 });break;
+		    	case FINANCIALSTAFF:Platform.runLater(new Runnable() {
+	                             public void run() {
+ 	                             try {
+					                  new AccountUI().start(new Stage());
+				                  } catch (Exception e) {
+					                 e.printStackTrace();
+				                    }
+ 	                                }
+ 	                              });break;
+		    	case SALESPERSON:Platform.runLater(new Runnable() {
+	                              public void run() {
+ 	                              try {
+					              new SalesUI().start(new Stage());
+				                  } catch (Exception e) {
+					                 e.printStackTrace();
+				                    }
+ 	                               }
+ 	                             });break;
+		    	case COMMODITYPERSON:Platform.runLater(new Runnable() {
+	                                       public void run() {
+ 	                                          try {
+					                              new CommodityUI().start(new Stage());
+				                              } catch (Exception e) {
+					                                  e.printStackTrace();
+				                                   }
+ 	                                      }
+ 	                                 });break;
+		    	case USERMANAGER:Platform.runLater(new Runnable() {
+	                                    public void run() {
+					                                 try {
+														new UserUI().start(new Stage());
+													} catch (Exception e) {
+														e.printStackTrace();
+													}
+ 	                                         }
+ 	                                  });break;
+
+		    	}
+		    	Stage stage = (Stage) pane.getScene().getWindow();
+			    stage.close();
+
 		    }else{
 		    	username.setText(null);
 		    	password.setText(null);
@@ -63,10 +125,11 @@ public class MainUI extends Application{
 						}
 		    	    }
 		    	});
-		    	
+
 		    }
 
 	}
+
 
 	public static void main(String[] args){
 		launch(args);
