@@ -1,5 +1,6 @@
 package SIMSclient.src.presentation.mainui;
 
+import SIMSclient.src.vo.UserVO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +44,9 @@ public class MainUI extends Application{
 	}
 
     public void login(){
-		     System.out.println("Success!");
+		    String userName = username.toString();
+		    String passWord = password.toString();
+
 	}
 
 	public static void main(String[] args){
