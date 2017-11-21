@@ -2,6 +2,8 @@ package SIMSclient.src.po;
 
 import java.io.*;
 
+import javafx.scene.image.ImageView;
+
 public class UserPO implements Serializable {
 
 	public enum Authority{
@@ -19,13 +21,15 @@ public class UserPO implements Serializable {
      String password;
      UserRole role;
      Authority authority;
+     ImageView image;
 
-     public UserPO(int i,String n,String p, UserRole r,Authority a){
+     public UserPO(int i,String n,String p, UserRole r,Authority a,ImageView im){
     	 id = i;
     	 name = n;
     	 password = p;
     	 role = r;
     	 authority = a;
+    	 image = im;
      }
 
      public String getName(){
@@ -46,5 +50,9 @@ public class UserPO implements Serializable {
 
      public Authority getAuthority(){
     	 return authority;
+     }
+
+     public ImageView getImage(){
+    	 return image;
      }
 }

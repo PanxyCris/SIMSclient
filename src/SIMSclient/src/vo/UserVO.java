@@ -2,6 +2,8 @@ package SIMSclient.src.vo;
 
 import java.io.*;
 
+import javafx.scene.image.ImageView;
+
 public class UserVO implements Serializable {
      /**
 	 *
@@ -21,14 +23,16 @@ public class UserVO implements Serializable {
      String password;
      UserRole role;
      Authority authority;
+     ImageView image;   //Í·Ïñ
 
 
-     public UserVO(int i,String n,String p, UserRole r,Authority a){
+     public UserVO(int i,String n,String p, UserRole r,Authority a, ImageView im){
     	 id = i;
     	 name = n;
     	 password = p;
     	 role = r;
     	 authority = a;
+    	 image = im;
      }
 
      public String getName(){
@@ -49,5 +53,9 @@ public class UserVO implements Serializable {
 
      public Authority getAuthority(){
     	 return authority;
+     }
+
+     public ImageView getImage(){
+    	 return image;
      }
 }
