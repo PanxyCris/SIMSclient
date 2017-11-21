@@ -1,4 +1,4 @@
-package SIMSclient.src.po;
+package SIMSclient.src.po.sales;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import SIMSclient.src.po.CommodityPO;
 
 public class SalesPO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String ID; // 单据编号
 	private String clientID;
 	private String clientName; // 客户姓名
