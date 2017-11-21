@@ -1,6 +1,8 @@
 package SIMSclient.src.po;
 
-public class AccountBookPO {
+import java.io.Serializable;
+
+public class AccountBookPO implements Serializable{
 	String date;
 	int clerkID;
 

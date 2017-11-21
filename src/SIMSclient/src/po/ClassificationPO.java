@@ -1,8 +1,9 @@
 package SIMSclient.src.po;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClassificationPO {
+public class ClassificationPO implements Serializable{
 
 	String name;
 	ArrayList<CommodityPO> po;

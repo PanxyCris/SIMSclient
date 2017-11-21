@@ -6,7 +6,7 @@ import java.util.Date;
 import SIMSclient.src.po.BillPO;
 
 @SuppressWarnings("serial")
-public class FinancialDocPO {
+public class FinancialDocPO implements Serializable{
 	Date date;
 	String docID;// 单据编号
 	int userID;// 当前登录用户的ID

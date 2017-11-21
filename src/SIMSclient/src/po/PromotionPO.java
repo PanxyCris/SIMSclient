@@ -1,6 +1,8 @@
 package SIMSclient.src.po;
 
-public class PromotionPO {
+import java.io.Serializable;
+
+public class PromotionPO implements Serializable{
 	public String BillID; // 单据ID
 	public String clientID; // 客户ID
 	public String clientName; // 客户名字

@@ -1,6 +1,8 @@
 package SIMSclient.src.po;
 
-public class CommodityPO {
+import java.io.Serializable;
+
+public class CommodityPO implements Serializable{
 
 
 	private int id;   //…Ã∆∑±‡∫≈
