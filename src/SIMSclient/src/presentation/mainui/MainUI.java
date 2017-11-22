@@ -56,7 +56,7 @@ public class MainUI extends Application{
 		    String passWord = password.toString();
 
 		    UserBLService service = UserBL.getInstance().getUserService();
-		    
+
 		    if(service.judge(userName,passWord)){
 
 		    	UserRole role = service.getRole();
