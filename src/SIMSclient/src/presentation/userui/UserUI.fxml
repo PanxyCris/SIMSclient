@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.userui.UserUI">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/尝试背景2.jpg" />
          </image>
@@ -66,11 +66,7 @@
          </graphic>
       </Button>
       <Label prefHeight="53.0" prefWidth="900.0" style="-fx-background-color: #ccccff;" />
-      <ImageView fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/用户.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="53.0" fitWidth="123.0" layoutX="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/Logo.jpg" />

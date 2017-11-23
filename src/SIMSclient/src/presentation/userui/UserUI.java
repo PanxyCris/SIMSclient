@@ -2,6 +2,7 @@ package SIMSclient.src.presentation.userui;
 
 import java.io.IOException;
 
+
 import java.util.*;
 
 import SIMSclient.src.presentation.ControlledStage;
@@ -12,6 +13,9 @@ import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,9 +25,9 @@ import javafx.stage.Stage;
 
 public class UserUI extends Application implements ControlledStage{
 
-
 	public static final String mainID = "UserUI";
-	public static final String mainFXML = "UserUI.fxml";
+	public static final String pack = "userui/";
+	public static final String mainFXML = pack+"UserUI.fxml";
 	static String previous;
 	static String current;
 	static Stack<String> stack;
@@ -36,9 +40,9 @@ public class UserUI extends Application implements ControlledStage{
 
 	@FXML
 	private AnchorPane pane;
-/*	@FXML
+	@FXML
 	private ImageView image;
-
+/*
 	@FXML
 	private TextField findingobject;
 	@FXML
@@ -91,7 +95,7 @@ public class UserUI extends Application implements ControlledStage{
 	public void userManage() throws IOException{
 
 		String currentID = "UserManageUI";
-		stageController.loadStage(currentID, "UserManageUI.fxml");
+		stageController.loadStage(currentID, pack+"UserManageUI.fxml");
 		stageController.setStage(currentID,mainID);
 		previous = current;
 		current = currentID;
@@ -117,7 +121,7 @@ public class UserUI extends Application implements ControlledStage{
 	public void find(){
 
 	}
-
+*/
 	@FXML
 	public void confirm(){
 
@@ -127,9 +131,10 @@ public class UserUI extends Application implements ControlledStage{
 	public void cancel(){
 
 	}
-*/
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
 
 		stageController = new StageController();
         stack = new Stack<>();
