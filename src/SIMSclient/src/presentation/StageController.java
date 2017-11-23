@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.userui;
+package SIMSclient.src.presentation;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

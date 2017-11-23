@@ -19,7 +19,7 @@ public class UserBL implements UserBLService {
 
 	public boolean judge(String userName, String passWord) {
 
-		return false;
+		return true;
 
 	}
 
@@ -46,7 +46,7 @@ public class UserBL implements UserBLService {
 	@Override
 	public UserRole getRole() {
 		// TODO Auto-generated method stub
-		return null;
+		return UserRole.USERMANAGER;
 	}
 
 	@Override

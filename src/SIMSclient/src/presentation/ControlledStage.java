@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.userui;
+package SIMSclient.src.presentation;
 
 public interface ControlledStage {
     public void setStageController(StageController stageController);

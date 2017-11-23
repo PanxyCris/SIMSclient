@@ -13,7 +13,7 @@
             <Image url="@img/尝试背景2.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="welcome" layoutX="366.0" layoutY="246.0" prefHeight="109.0" prefWidth="294.0" text="欢迎你，用户管理人员！" textFill="#f8f8f8">
+      <Label layoutX="366.0" layoutY="246.0" prefHeight="109.0" prefWidth="294.0" text="欢迎你，用户管理人员！" textFill="#f8f8f8">
          <font>
             <Font size="24.0" />
          </font>

@@ -102,7 +102,9 @@ public class MainUI extends Application{
 		    	case USERMANAGER:Platform.runLater(new Runnable() {
 	                                    public void run() {
 					                                 try {
-														new UserUI().start(new Stage());
+					                                	 UserUI userUI = new UserUI();
+														userUI.start(new Stage());
+													//	userUI.showImage(service.getImage());
 													} catch (Exception e) {
 														e.printStackTrace();
 													}

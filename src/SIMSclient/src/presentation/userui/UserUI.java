@@ -1,13 +1,21 @@
 package SIMSclient.src.presentation.userui;
 
 import java.io.IOException;
+
 import java.util.*;
 
+import SIMSclient.src.presentation.ControlledStage;
+import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
+import SIMSclient.src.vo.UserVO;
+import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,10 +35,21 @@ public class UserUI extends Application implements ControlledStage{
     }
 
 	@FXML
-	Label welcome;
-	@FXML
-	AnchorPane pane;
+	private AnchorPane pane;
+/*	@FXML
+	private ImageView image;
 
+	@FXML
+	private TextField findingobject;
+	@FXML
+	private TableView<UserVO> table;
+	@FXML
+	private TableColumn<UserVO,Integer> tableID;
+	@FXML
+	private TableColumn<UserVO,String> tableName;
+	@FXML
+	private TableColumn<UserVO,UserRole> tableRole;
+*/
 	@FXML
 	public void returnLast(){
         stageController.setStage(previous,current);
@@ -78,7 +97,37 @@ public class UserUI extends Application implements ControlledStage{
 		current = currentID;
 		stack.push(mainID);
 	}
+/*
+	@FXML
+	public void insert(){
 
+	}
+
+	@FXML
+	public void delete(){
+
+	}
+
+	@FXML
+	public void update(){
+
+	}
+
+	@FXML
+	public void find(){
+
+	}
+
+	@FXML
+	public void confirm(){
+
+	}
+
+	@FXML
+	public void cancel(){
+
+	}
+*/
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -92,9 +141,16 @@ public class UserUI extends Application implements ControlledStage{
         stack.push(mainID);
 
 	}
-
+/*
+	public void showImage(ImageView image) {
+		this.image = image;
+	}
+*/
 	public static void main(String[] args){
 		launch(args);
 	}
+
+
+
 
 }
