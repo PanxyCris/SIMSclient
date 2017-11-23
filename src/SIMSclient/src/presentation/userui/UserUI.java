@@ -1,8 +1,6 @@
 package SIMSclient.src.presentation.userui;
 
 import java.io.IOException;
-
-
 import java.util.*;
 
 import SIMSclient.src.presentation.ControlledStage;
@@ -12,10 +10,10 @@ import SIMSclient.src.vo.UserVO;
 import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -42,9 +40,11 @@ public class UserUI extends Application implements ControlledStage{
 	private AnchorPane pane;
 	@FXML
 	private ImageView image;
-/*
+
 	@FXML
 	private TextField findingobject;
+	@FXML
+	private Pagination pagination;
 	@FXML
 	private TableView<UserVO> table;
 	@FXML
@@ -53,7 +53,7 @@ public class UserUI extends Application implements ControlledStage{
 	private TableColumn<UserVO,String> tableName;
 	@FXML
 	private TableColumn<UserVO,UserRole> tableRole;
-*/
+
 	@FXML
 	public void returnLast(){
         stageController.setStage(previous,current);
@@ -95,13 +95,27 @@ public class UserUI extends Application implements ControlledStage{
 	public void userManage() throws IOException{
 
 		String currentID = "UserManageUI";
-		stageController.loadStage(currentID, pack+"UserManageUI.fxml");
+		stageController.loadStage(currentID, pack+"UserManagingUI.fxml");
 		stageController.setStage(currentID,mainID);
 		previous = current;
 		current = currentID;
 		stack.push(mainID);
+		//showList();
 	}
+
 /*
+    private void showList(){
+        ObservableList<UserVO> list = FXCollections.observableArrayList();
+
+        UserVO user1 = new UserVO(1,"Õı≤”≤”","161250136",UserRole.FINANCIALSTAFF);
+        UserVO user2 = new UserVO(2,"¿ÓΩ‹","161250058",UserRole.SALESPERSON);
+        list.add(user1);
+        list.add(user2);
+        table.setItems(list);
+
+    }
+*/
+
 	@FXML
 	public void insert(){
 
@@ -121,7 +135,7 @@ public class UserUI extends Application implements ControlledStage{
 	public void find(){
 
 	}
-*/
+
 	@FXML
 	public void confirm(){
 
@@ -134,7 +148,7 @@ public class UserUI extends Application implements ControlledStage{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+
 
 		stageController = new StageController();
         stack = new Stack<>();
@@ -154,6 +168,7 @@ public class UserUI extends Application implements ControlledStage{
 	public static void main(String[] args){
 		launch(args);
 	}
+
 
 
 

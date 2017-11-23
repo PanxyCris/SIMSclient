@@ -67,7 +67,51 @@
             <Image url="@img/Logo.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="323.0" layoutY="506.0" mnemonicParsing="false" onAction="#confirm" prefHeight="37.0" prefWidth="109.0" text="确     认" />
-      <Button layoutX="514.0" layoutY="506.0" mnemonicParsing="false" onAction="#cancel" prefHeight="37.0" prefWidth="109.0" text="取     消" />
+      <Button layoutX="180.0" layoutY="113.0" mnemonicParsing="false" onAction="#insert" prefHeight="37.0" prefWidth="124.0" text="      增加用户">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/加号.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="340.0" layoutY="113.0" mnemonicParsing="false" onAction="#delete" prefHeight="37.0" prefWidth="124.0" text="      删除用户">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/减号.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="500.0" layoutY="113.0" mnemonicParsing="false" onAction="#update" prefHeight="37.0" prefWidth="124.0" text="      修改用户">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/修改.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="660.0" layoutY="113.0" mnemonicParsing="false" onAction="#find" prefHeight="37.0" prefWidth="124.0" text="      查找用户">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/查找.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="329.0" layoutY="531.0" mnemonicParsing="false" onAction="#confirm" prefHeight="34.0" prefWidth="109.0" text="确    认" />
+      <Button layoutX="562.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="109.0" text="取    消" />
+      <Pagination fx:id="pagination" layoutX="229.0" layoutY="287.0" prefHeight="200.0" prefWidth="552.0" />
+      <TableView fx:id="table" layoutX="224.0" layoutY="171.0" prefHeight="271.0" prefWidth="552.0">
+        <columns>
+          <TableColumn fx:id="tableID" prefWidth="250.0" text="ID" />
+          <TableColumn fx:id="tableName" prefWidth="150.0" text="用户名" />
+            <TableColumn fx:id="tableRole" prefWidth="150.0" text="职务" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

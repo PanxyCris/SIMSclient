@@ -9,9 +9,9 @@ public class UserVO implements Serializable {
 	 *
 	 */
 	public enum Authority{
-		
+
 		HIGHEST("最高权限"),NORMAL("普通权限");
-		
+
 		public final String value;
 
 		Authority(String value){
@@ -39,13 +39,17 @@ public class UserVO implements Serializable {
      ImageView image;   //头像
 
 
-     public UserVO(int i,String n,String p, UserRole r,Authority a, ImageView im){
+     public UserVO(int i,String n,String p, UserRole r/*,ImageView im*/){
     	 id = i;
     	 name = n;
     	 password = p;
     	 role = r;
-    	 authority = a;
-    	 image = im;
+    	// image = im;
+    	 if(r==UserRole.MANAGER)
+    		 authority = Authority.HIGHEST;
+    	 else
+    		 authority = Authority.NORMAL;
+
      }
 
      public String getName(){
