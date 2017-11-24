@@ -8,52 +8,98 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Pagination;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class UserManagingUI extends UserUI implements Initializable{
-	 ObservableList<UserVO> list = FXCollections.observableArrayList();
+	    ObservableList<UserVO> list = FXCollections.observableArrayList();
+	    @FXML
+	    protected TextField idField;
+	    @FXML
+        protected TextField nameField;
+	    @FXML
+        protected TextField passwordField;
+	    @FXML
+        protected ChoiceBox<UserRole> roleChoice;
+    	@FXML
+    	protected Label idLabel;
+
+
 		@FXML
-		private Pagination pagination;
-		@FXML
-		private TableView<UserVO> table;
+		protected TableView<UserVO> table;
 		@FXML
 		private TableColumn<UserVO,String> tableID;
+		@FXML
+		private TableColumn<UserVO,String> tablePassword;
 		@FXML
 		private TableColumn<UserVO,String> tableName;
 		@FXML
 		private TableColumn<UserVO,String> tableRole;
 
 		@FXML
-		public void insert(){
-
+		public void insert() throws Exception{
+			Stage stage = new Stage();
+			new UserInsertUI().start(stage);
 		}
 
 		@FXML
-		public void delete(){
-
+		public void delete() throws Exception{
+			Stage stage = new Stage();
+			new UserDeleteUI().start(stage);
 		}
 
 		@FXML
 		public void update(){
+		/*	 UserVO user = new UserVO(idField.getText(), nameField.getText(), passwordField.getText(),roleChoice.getValue());
+	         UserBLService service = UserBL.getInstance().getUserService();
 
+	            if(!service.judgeLegal(user)){
+	            	Platform.runLater(new Runnable() {
+			    	    public void run() {
+			    	        try {
+								new RemindPrintUI().start(new Stage());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+			    	    }
+			    	});
+	            }
+	            else if(!service.judgeExist(idField.getText())){
+					  Platform.runLater(new Runnable() {
+				    	    public void run() {
+				    	        try {
+									new RemindnotExistUI().start(new Stage());
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+				    	    }
+				    	});
+				  }
+	            else if(service.find(user)){
+	            	Platform.runLater(new Runnable() {
+			    	    public void run() {
+			    	        try {
+								new RemindRepeatUI().start(new Stage());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+			    	    }
+			    	});
+	            }else{
+	            list.remove(service.find(idField.getText(),nameField.getText()));
+	            service.update(user);
+	            list.add(user);
+	            table.setItems(list);
+	            }*/
 		}
 
 		@FXML
 		public void find(){
-
-		}
-
-		@FXML
-		public void confirm(){
-
-		}
-
-		@FXML
-		public void cancel(){
 
 		}
 
@@ -65,6 +111,8 @@ public class UserManagingUI extends UserUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("ID"));
 	        tableName.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("name"));
+	        tablePassword.setCellValueFactory(
+	                new PropertyValueFactory<UserVO,String>("password"));
 	        tableRole.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("role"));
 	        list.addAll(user1,user2);
@@ -74,13 +122,20 @@ public class UserManagingUI extends UserUI implements Initializable{
 
 		@Override
 		public void start(Stage primaryStage) throws Exception {
-
-			    String currentID = "UserManageUI";
-	    		stageController.loadStage(currentID, pack+"UserManagingUI.fxml");
-	    		stageController.setStage(currentID,mainID);
-	    		previous = current;
-	    		current = currentID;
-	    		stack.push(currentID);
-
+			   changeStage("UserManageUI","UserManagingUI.fxml");
 		}
+
+
+		/**
+		 * 自动生成新id
+		 * @param id
+		 * @return 新id
+		 */
+		public String addOne(String id){
+			int tmp = Integer.parseInt(id);
+			tmp++;
+			String newID = String.valueOf(tmp);
+			return newID;
+		}
+
 }

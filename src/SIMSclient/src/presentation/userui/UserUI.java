@@ -100,6 +100,14 @@ public class UserUI extends Application implements ControlledStage{
 		launch(args);
 	}
 
+	public void changeStage(String currentID,String fxml){
+   		stageController.loadStage(currentID, pack+fxml);
+   		stageController.setStage(currentID,current);
+   		previous = current;
+   		current = currentID;
+   		stack.push(currentID);
+	}
+
 
 
 

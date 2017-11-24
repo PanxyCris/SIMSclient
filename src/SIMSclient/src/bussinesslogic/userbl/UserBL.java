@@ -8,6 +8,8 @@ import javafx.scene.image.ImageView;
 
 public class UserBL implements UserBLService {
 
+	UserVO vo;
+
 	private static UserBL userBL = new UserBL();
 	public static UserBL getInstance(){
 		return userBL;
@@ -17,10 +19,25 @@ public class UserBL implements UserBLService {
 		return (UserBLService)userBL;
 	}
 
-	public boolean judge(String userName, String passWord) {
-
+	public boolean judgeExist(String userName, String passWord) {
 		return true;
+	}
 
+	public boolean judgeExist(String id){
+		return false;
+	}
+
+	public boolean judgeLegal(UserVO vo){
+		return true;
+	}
+	/**
+	 * 两者择其一判断为真即为真
+	 * @param id
+	 * @param userName
+	 * @return
+	 */
+	public boolean judgeLegal(String id,String userName){
+		return true;
 	}
 
 
@@ -67,10 +84,10 @@ public class UserBL implements UserBLService {
 
 	}
 
-	@Override
-	public void delelte(UserVO vo) {
+    @Override
+	public UserVO delete(String id, String name) {
 		// TODO Auto-generated method stub
-
+           return vo;
 	}
 
 	@Override
@@ -80,9 +97,17 @@ public class UserBL implements UserBLService {
 	}
 
 	@Override
-	public void find(UserVO vo) {
+	public UserVO find(String id,String name) {
 		// TODO Auto-generated method stub
-
+        return vo;
 	}
+
+	@Override
+	public boolean find(UserVO vo) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
 
 }

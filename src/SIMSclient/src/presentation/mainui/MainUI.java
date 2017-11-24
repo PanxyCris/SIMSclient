@@ -57,7 +57,7 @@ public class MainUI extends Application{
 
 		    UserBLService service = UserBL.getInstance().getUserService();
 
-		    if(service.judge(userName,passWord)){
+		    if(service.judgeExist(userName,passWord)){
 
 		    	UserRole role = service.getRole();
 
