@@ -108,9 +108,9 @@
       <Pagination fx:id="pagination" layoutX="229.0" layoutY="287.0" prefHeight="200.0" prefWidth="552.0" />
       <TableView fx:id="table" editable="true" layoutX="224.0" layoutY="171.0" prefHeight="271.0" prefWidth="552.0">
         <columns>
-          <TableColumn id="idPro" fx:id="tableID" prefWidth="250.0" text="ID" />
-          <TableColumn id="namePro" fx:id="tableName" prefWidth="150.0" text="用户名" />
-            <TableColumn id="rolePro" fx:id="tableRole" prefWidth="150.0" text="职务" />
+          <TableColumn fx:id="tableID" prefWidth="250.0" text="ID" />
+          <TableColumn fx:id="tableName" prefWidth="150.0" text="用户名" />
+            <TableColumn fx:id="tableRole" prefWidth="150.0" text="职务" />
         </columns>
       </TableView>
    </children>
