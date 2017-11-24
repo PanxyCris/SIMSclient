@@ -62,11 +62,11 @@ public class UserManagingUI extends UserUI implements Initializable{
 			UserVO user1 = new UserVO("161250058","¿ÓΩ‹","161250058",UserRole.SALESPERSON);
 			UserVO user2 =new UserVO("161250136","Õı≤”≤”","161250136",UserRole.FINANCIALSTAFF);
 			tableID.setCellValueFactory(
-	                new PropertyValueFactory<UserVO,String>("idPro"));
+	                new PropertyValueFactory<UserVO,String>("ID"));
 	        tableName.setCellValueFactory(
-	                new PropertyValueFactory<UserVO,String>("namePro"));
+	                new PropertyValueFactory<UserVO,String>("name"));
 	        tableRole.setCellValueFactory(
-	                new PropertyValueFactory<UserVO,String>("rolePro"));
+	                new PropertyValueFactory<UserVO,String>("role"));
 	        list.addAll(user1,user2);
 	        table.setItems(list);
 
