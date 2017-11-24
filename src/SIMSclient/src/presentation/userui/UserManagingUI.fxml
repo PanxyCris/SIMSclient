@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.userui.UserUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.userui.UserManagingUI">
    <children>
       <ImageView fx:id="image" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -106,11 +106,11 @@
       <Button layoutX="329.0" layoutY="531.0" mnemonicParsing="false" onAction="#confirm" prefHeight="34.0" prefWidth="109.0" text="确    认" />
       <Button layoutX="562.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="109.0" text="取    消" />
       <Pagination fx:id="pagination" layoutX="229.0" layoutY="287.0" prefHeight="200.0" prefWidth="552.0" />
-      <TableView fx:id="table" layoutX="224.0" layoutY="171.0" prefHeight="271.0" prefWidth="552.0">
+      <TableView fx:id="table" editable="true" layoutX="224.0" layoutY="171.0" prefHeight="271.0" prefWidth="552.0">
         <columns>
-          <TableColumn fx:id="tableID" prefWidth="250.0" text="ID" />
-          <TableColumn fx:id="tableName" prefWidth="150.0" text="用户名" />
-            <TableColumn fx:id="tableRole" prefWidth="150.0" text="职务" />
+          <TableColumn id="idPro" fx:id="tableID" prefWidth="250.0" text="ID" />
+          <TableColumn id="namePro" fx:id="tableName" prefWidth="150.0" text="用户名" />
+            <TableColumn id="rolePro" fx:id="tableRole" prefWidth="150.0" text="职务" />
         </columns>
       </TableView>
    </children>

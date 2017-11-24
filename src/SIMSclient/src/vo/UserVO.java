@@ -2,6 +2,7 @@ package SIMSclient.src.vo;
 
 import java.io.*;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.ImageView;
 
 public class UserVO implements Serializable {
@@ -31,15 +32,17 @@ public class UserVO implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	int id;
+	String id;
      String name;
      String password;
      UserRole role;
      Authority authority;
      ImageView image;   //Í·Ïñ
+     private SimpleStringProperty idPro;
+     private SimpleStringProperty namePro;
+     private SimpleStringProperty rolePro;
 
-
-     public UserVO(int i,String n,String p, UserRole r/*,ImageView im*/){
+     public UserVO(String i,String n,String p, UserRole r/*,ImageView im*/){
     	 id = i;
     	 name = n;
     	 password = p;
@@ -49,15 +52,19 @@ public class UserVO implements Serializable {
     		 authority = Authority.HIGHEST;
     	 else
     		 authority = Authority.NORMAL;
+    	 idPro = new SimpleStringProperty(i);
+    	 namePro = new SimpleStringProperty(n);
+    	 rolePro = new SimpleStringProperty(r.value);
 
      }
+
 
      public String getName(){
-    	 return name;
+    	 return namePro.get();
      }
 
-     public int getID(){
-    	 return id;
+     public String getID(){
+    	 return idPro.get();
      }
 
      public String getPassword(){
@@ -66,6 +73,9 @@ public class UserVO implements Serializable {
 
      public UserRole getRole(){
     	 return role;
+     }
+     public String getProRole(){
+    	 return rolePro.get();
      }
 
      public Authority getAuthority(){

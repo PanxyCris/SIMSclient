@@ -1,22 +1,12 @@
 package SIMSclient.src.presentation.userui;
 
-import java.io.IOException;
 import java.util.*;
-
 import SIMSclient.src.presentation.ControlledStage;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
-import SIMSclient.src.vo.UserVO;
-import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -30,29 +20,16 @@ public class UserUI extends Application implements ControlledStage{
 	static String current;
 	static Stack<String> stack;
 
-	private StageController stageController;
+	static StageController stageController;
 
-	public void setStageController(StageController stageController) {
-        this.stageController = stageController;
+	public void setStageController(StageController controller) {
+        stageController = controller;
     }
-
 	@FXML
 	private AnchorPane pane;
 	@FXML
 	private ImageView image;
 
-	@FXML
-	private TextField findingobject;
-	@FXML
-	private Pagination pagination;
-	@FXML
-	private TableView<UserVO> table;
-	@FXML
-	private TableColumn<UserVO,Integer> tableID;
-	@FXML
-	private TableColumn<UserVO,String> tableName;
-	@FXML
-	private TableColumn<UserVO,UserRole> tableRole;
 
 	@FXML
 	public void returnLast(){
@@ -92,59 +69,13 @@ public class UserUI extends Application implements ControlledStage{
 	}
 
 	@FXML
-	public void userManage() throws IOException{
+	public void userManage() throws Exception{
 
-		String currentID = "UserManageUI";
-		stageController.loadStage(currentID, pack+"UserManagingUI.fxml");
-		stageController.setStage(currentID,mainID);
-		previous = current;
-		current = currentID;
-		stack.push(mainID);
-		//showList();
+		Stage stage = new Stage();
+		new UserManagingUI().start(stage);
 	}
 
-/*
-    private void showList(){
-        ObservableList<UserVO> list = FXCollections.observableArrayList();
 
-        UserVO user1 = new UserVO(1,"Õı≤”≤”","161250136",UserRole.FINANCIALSTAFF);
-        UserVO user2 = new UserVO(2,"¿ÓΩ‹","161250058",UserRole.SALESPERSON);
-        list.add(user1);
-        list.add(user2);
-        table.setItems(list);
-
-    }
-*/
-
-	@FXML
-	public void insert(){
-
-	}
-
-	@FXML
-	public void delete(){
-
-	}
-
-	@FXML
-	public void update(){
-
-	}
-
-	@FXML
-	public void find(){
-
-	}
-
-	@FXML
-	public void confirm(){
-
-	}
-
-	@FXML
-	public void cancel(){
-
-	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
