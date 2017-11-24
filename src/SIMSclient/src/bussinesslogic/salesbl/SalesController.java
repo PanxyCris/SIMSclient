@@ -82,7 +82,7 @@ public class SalesController implements SalesBLService{
 
 	@Override
 	public void endSales() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

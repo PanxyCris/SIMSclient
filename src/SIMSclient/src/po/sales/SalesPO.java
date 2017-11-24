@@ -2,24 +2,24 @@ package SIMSclient.src.po.sales;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import SIMSclient.src.po.WareHouse;
-import SIMSclient.src.po.CommodityPO;
+import SIMSclient.src.dataenum.Warehouse;
+import SIMSclient.src.po.sales.CommodityItemPO;
 
 public class SalesPO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String ID; // 单据编号
-	private String clientID;
-	private String clientName; // 客户姓名
-	private String user; // 操作员
-	private String saleMan; // 业务员
-	private WareHouse warehouse; // 仓库
-	private double beforePrice; // 折让前价格
-	private double allowance; // 折让金额
-	private double voucher; // 代金券金额
-	private double afterPrice; // 折让后金额
-	private String remark; // 备注
-	private ArrayList<CommodityPO> commodities; // 商品清单
+	public static final long serialVersionUID = 1L;
+	public String ID; // 单据编号
+	public String clientID;
+	public String clientName; // 客户姓名
+	public String operator; // 操作员
+	public String saleMan; // 业务员
+	public Warehouse warehouse; // 仓库
+	public double beforePrice; // 折让前价格
+	public double allowance; // 折让金额
+	public double voucher; // 代金券金额
+	public double afterPrice; // 折让后金额
+	public String remark; // 备注
+	public ArrayList<CommodityItemPO> commodities; // 商品清单
 
 	/**
 	 * @param iD
@@ -37,14 +37,14 @@ public class SalesPO implements Serializable {
 	 * @param state
 	 * @param commodities
 	 */
-	public SalesPO(String iD, String clientID, String clientName, String user, String saleMan, WareHouse warehouse,
+	public SalesPO(String iD, String clientID, String clientName, String saleMan, String operator, Warehouse warehouse,
 			double beforePrice, double allowance, double voucher, double afterPrice, String remark,
-			 ArrayList<CommodityPO> commodities) {
+			 ArrayList<CommodityItemPO> commodities) {
 		super();
 		ID = iD;
 		this.clientID = clientID;
 		this.clientName = clientName;
-		this.user = user;
+		this.operator = operator;
 		this.saleMan = saleMan;
 		this.warehouse = warehouse;
 		this.beforePrice = beforePrice;
@@ -59,97 +59,56 @@ public class SalesPO implements Serializable {
 		return ID;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
-	}
+	
 
 	public String getClientID() {
 		return clientID;
 	}
 
-	public void setClientID(String clientID) {
-		this.clientID = clientID;
-	}
-
+	
 	public String getClientName() {
 		return clientName;
 	}
 
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+
+	public String getOperator() {
+		return operator;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
 
 	public String getSaleMan() {
 		return saleMan;
 	}
 
-	public void setSaleMan(String saleMan) {
-		this.saleMan = saleMan;
-	}
-
-	public WareHouse getWarehouse() {
+	public Warehouse getWarehouse() {
 		return warehouse;
-	}
-
-	public void setWarehouse(WareHouse warehouse) {
-		this.warehouse = warehouse;
 	}
 
 	public double getBeforePrice() {
 		return beforePrice;
 	}
 
-	public void setBeforePrice(double beforePrice) {
-		this.beforePrice = beforePrice;
-	}
 
 	public double getAllowance() {
 		return allowance;
-	}
-
-	public void setAllowance(double allowance) {
-		this.allowance = allowance;
 	}
 
 	public double getVoucher() {
 		return voucher;
 	}
 
-	public void setVoucher(double voucher) {
-		this.voucher = voucher;
-	}
 
 	public double getAfterPrice() {
 		return afterPrice;
-	}
-
-	public void setAfterPrice(double afterPrice) {
-		this.afterPrice = afterPrice;
 	}
 
 	public String getRemark() {
 		return remark;
 	}
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
 
-
-	public ArrayList<CommodityPO> getCommodities() {
+	public ArrayList<CommodityItemPO> getCommodities() {
 		return commodities;
-	}
-
-	public void setCommodities(ArrayList<CommodityPO> commodities) {
-		this.commodities = commodities;
 	}
 
 }

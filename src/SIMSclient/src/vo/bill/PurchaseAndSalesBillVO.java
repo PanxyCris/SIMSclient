@@ -3,20 +3,18 @@ package SIMSclient.src.vo.bill;
 import java.util.ArrayList;
 import java.util.Date;
 
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
+import SIMSclient.src.dataenum.Warehouse;
 import SIMSclient.src.vo.commodity.CommodityVO;
+import SIMSclient.src.vo.sale.CommodityItemVO;
 
-/**  
-* 类说明   
-*  
-* @author ****  
-* @date 2017年11月7日    
-*/
 public class PurchaseAndSalesBillVO extends BillVO {
 	
-	private WareHouse warehouse; //仓库
-	private String Operator;  //操作员
-	private int amount;  //总额
-	private ArrayList<CommodityVO> commodityList;  //商品清单
+	public Warehouse warehouse; //仓库
+	public String operator;  //操作员
+	public double sum;  //总额
+	public ArrayList<CommodityItemVO> commodityList;  //商品清单
 	
 	/**
 	 * @param i
@@ -29,12 +27,12 @@ public class PurchaseAndSalesBillVO extends BillVO {
 	 * @param amount
 	 * @param commodityList
 	 */
-	public PurchaseAndSalesBillVO(String i, Date d, BillState s, BillType t, String des, WareHouse warehouse,
-			String operator, int amount, ArrayList<CommodityVO> commodityList) {
+	public PurchaseAndSalesBillVO(String i, Date d, BillState s, BillType t, String des, Warehouse warehouse,
+			String operator, double sum, ArrayList<CommodityItemVO> commodityList) {
 		super(i, d, s, t, des);
 		this.warehouse = warehouse;
-		Operator = operator;
-		this.amount = amount;
+		this.operator = operator;
+		this.sum = sum;
 		this.commodityList = commodityList;
 	}	
 	

@@ -2,43 +2,24 @@ package SIMSclient.src.vo.sale;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
+import SIMSclient.src.dataenum.Warehouse;
 import SIMSclient.src.vo.bill.PurchaseAndSalesBillVO;
 import SIMSclient.src.vo.bill.WareHouse;
-import SIMSclient.src.vo.commodity.CommodityVO;
-/**
- *
- * @author
- *
- */
-public class SalesVO extends PurchaseAndSalesBillVO{
+
+public class SalesVO extends PurchaseAndSalesBillVO {
 	public String clientID;
-	public String retailer;  //客户姓名
+	public String retailer; // 客户姓名
 	public String saleMan; // 业务员
 	public double beforePrice; // 折让前价格
 	public double allowance; // 折让金额
 	public double voucher; // 代金券金额
-	
-	
-	/**
-	 * @param i
-	 * @param d
-	 * @param s
-	 * @param t
-	 * @param des
-	 * @param warehouse
-	 * @param operator
-	 * @param amount
-	 * @param commodityList
-	 * @param clientID
-	 * @param retailer
-	 * @param saleMan
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
-	 */
-	public SalesVO(String i, Date d, BillState s, BillType t, String des, WareHouse warehouse, String operator,
-			int amount, ArrayList<CommodityVO> commodityList, String clientID, String retailer, String saleMan,
-			double beforePrice, double allowance, double voucher) {
+
+	public SalesVO(String i, Date d, String clientID, String retailer, String saleMan, String operator,
+			Warehouse warehouse, ArrayList<CommodityItemVO> commodityList, double beforePrice, double allowance,
+			double voucher, double amount, String des, BillState s, BillType t) {
 		super(i, d, s, t, des, warehouse, operator, amount, commodityList);
 		this.clientID = clientID;
 		this.retailer = retailer;
@@ -47,9 +28,5 @@ public class SalesVO extends PurchaseAndSalesBillVO{
 		this.allowance = allowance;
 		this.voucher = voucher;
 	}
-	
-	
-	
 
-	
 }
