@@ -1,7 +1,6 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
-
 import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
@@ -16,7 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
-public class UserInsertUI extends UserManagingUI {
+public class UserInsertUI extends UserManagingUI{
 
 	@FXML
 	public void confirm(){
@@ -48,25 +47,37 @@ public class UserInsertUI extends UserManagingUI {
         service.insert(user);
         list.add(user);
         table.setItems(list);
+        insertInit();
         }
 	}
 
 	@FXML
 	public void cancel(){
-		String initID = addOne(list.get(list.size()-1).getID());
+		insertInit();
+	}
+
+
+	public void insertInit(){
+
 		nameField.setText("admin");
-        idLabel.setText(initID);
-        passwordField.setText("admin");
+		passwordField.setText("admin");
+		if(!list.isEmpty()){
+	       String initID = addOne(list.get(list.size()-1).getID());
+           idLabel.setText(initID);
+        }else{
+           idLabel.setText("0000001");
+        }
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		cancel();
+		manageInit();
+		insertInit();
         roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER,
-        		                                              UserRole.FINANCIAL_MANAGER,
-        		                                              UserRole.INVENTORY_MANAGER,
-        		                                              UserRole.PUR_SALE_MANAGER,
-        		                                              UserRole.USER_MANAGER));
+                                                              UserRole.FINANCIAL_MANAGER,
+                                                              UserRole.INVENTORY_MANAGER,
+                                                              UserRole.PUR_SALE_MANAGER,
+                                                              UserRole.USER_MANAGER));
 	}
 
 	@Override

@@ -35,13 +35,13 @@ public class UserManagingUI extends UserUI implements Initializable{
 		@FXML
 		protected TableView<UserVO> table;
 		@FXML
-		private TableColumn<UserVO,String> tableID;
+		protected TableColumn<UserVO,String> tableID;
 		@FXML
-		private TableColumn<UserVO,String> tablePassword;
+		protected TableColumn<UserVO,String> tablePassword;
 		@FXML
-		private TableColumn<UserVO,String> tableName;
+		protected TableColumn<UserVO,String> tableName;
 		@FXML
-		private TableColumn<UserVO,String> tableRole;
+		protected TableColumn<UserVO,String> tableRole;
 
 		@FXML
 		public void insert() throws Exception{
@@ -107,6 +107,10 @@ public class UserManagingUI extends UserUI implements Initializable{
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+			manageInit();
+		}
+		
+		public void manageInit(){
 			UserVO user1 = new UserVO("161250058","¿ÓΩ‹","161250058",UserRole.PUR_SALE_MANAGER);
 			UserVO user2 =new UserVO("161250136","Õı≤”≤”","161250136",UserRole.FINANCIAL_MANAGER);
 			tableID.setCellValueFactory(
@@ -119,7 +123,6 @@ public class UserManagingUI extends UserUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("role"));
 	        list.addAll(user1,user2);
 	        table.setItems(list);
-
 		}
 
 		@Override
@@ -135,8 +138,11 @@ public class UserManagingUI extends UserUI implements Initializable{
 		 */
 		public String addOne(String id){
 			int tmp = Integer.parseInt(id);
+			int n = id.length();
 			tmp++;
 			String newID = String.valueOf(tmp);
+			while(newID.length()<n)
+				newID = "0"+newID;
 			return newID;
 		}
 

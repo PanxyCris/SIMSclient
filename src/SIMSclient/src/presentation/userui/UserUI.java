@@ -34,8 +34,10 @@ public class UserUI extends Application implements ControlledStage{
 	@FXML
 	public void returnLast(){
         stageController.setStage(previous,current);
+        if(!stack.isEmpty()){
         stack.pop();
         current = previous;
+        }
         if(stack.size()>1)
             previous = stack.lastElement();
 	}
