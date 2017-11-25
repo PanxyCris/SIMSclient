@@ -2,8 +2,8 @@ package SIMSclient.src.bussinesslogic_mock.commoditybl_mock;
 
 import java.util.*;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.commoditybl.CommodityList;
+import SIMSclient.src.dataenum.ResultMessage;
 
 public class CommodityList_Mock extends CommodityList{
 

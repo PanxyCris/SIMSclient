@@ -2,8 +2,8 @@ package SIMSclient.src.bussiness_stub;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogicservice.memberblservice.MemberBLService;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.member.MemberVO;
 
 /**  

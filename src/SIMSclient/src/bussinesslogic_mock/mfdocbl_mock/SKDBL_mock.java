@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.mfdocbl_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.skdbl.SKDBL;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.SKDVO;
 
 public class SKDBL_mock extends SKDBL{

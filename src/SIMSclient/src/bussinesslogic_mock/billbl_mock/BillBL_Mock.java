@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.billbl_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.billbl.BillBL;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.BillPO;
 import SIMSclient.src.vo.bill.BillVO;
 

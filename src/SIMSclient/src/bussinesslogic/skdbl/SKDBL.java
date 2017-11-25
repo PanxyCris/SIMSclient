@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic.skdbl;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.SKDVO;
 
 public class SKDBL implements skdblservice{

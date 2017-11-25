@@ -1,8 +1,9 @@
 package SIMSclient.src.bussinesslogicservice.billblservice;
 
 import java.util.Date;
-import SIMSclient.src.vo.bill.BillVO.BillState;
-import SIMSclient.src.vo.bill.BillVO.BillType;
+
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
 
 public interface BillBLService {
 

@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic.xjfydbl;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.xjfydblservice;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.XJFYDVO;
 
 public class XJFYDBL implements xjfydblservice{

@@ -1,6 +1,6 @@
 package SIMSclient.src.dataservice.accountdataservice;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
 
 public interface AccountDataService {

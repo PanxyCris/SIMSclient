@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.commoditybl_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.commoditybl.CommodityController;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public class CommodityController_Mock extends CommodityController{

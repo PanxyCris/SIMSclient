@@ -6,7 +6,7 @@ package SIMSclient.src.bussinesslogic_mock.member_mock;
 * @date 2017Äê11ÔÂ14ÈÕ    
 */
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.MemberPO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;

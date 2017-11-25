@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic.accountbl;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
 
 public class AccountBL implements AccountBLService{

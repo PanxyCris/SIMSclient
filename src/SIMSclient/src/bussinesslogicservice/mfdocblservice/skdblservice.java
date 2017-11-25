@@ -1,6 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.mfdocblservice;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.SKDVO;
 
 public interface skdblservice {

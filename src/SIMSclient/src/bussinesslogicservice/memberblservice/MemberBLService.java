@@ -2,7 +2,7 @@ package SIMSclient.src.bussinesslogicservice.memberblservice;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.member.MemberVO;
 
 public interface MemberBLService {

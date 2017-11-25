@@ -6,8 +6,8 @@ package SIMSclient.src.bussinesslogic_mock.salesbl_mock;
 * @date 2017Äê11ÔÂ14ÈÕ    
 */
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.salesbl.Sales;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.sales.SalesPO;
 import SIMSclient.src.vo.sale.SalesVO;
 

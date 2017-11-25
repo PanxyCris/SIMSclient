@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.mfdocbl_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.xjfydbl.XJFYDBL;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.XJFYDVO;
 
 public class XJFYDBL_mock extends XJFYDBL{

@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.accountbl_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.accountbl.AccountBL;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
 
 public class AccountBL_mock extends AccountBL{

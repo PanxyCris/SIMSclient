@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic_mock.purchase_mock;
 
-import SIMSclient.src.ResultMessage;
 import SIMSclient.src.bussinesslogic.purchasebl.PurchaseBL;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.PurchasePO;
 import SIMSclient.src.vo.purchase.PurchaseVO;
 

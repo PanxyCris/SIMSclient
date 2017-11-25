@@ -1,6 +1,6 @@
 package SIMSserver.src.dataservice.mfdocsdataservice;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSserver.src.po.makefinancialdoc.XJFYDPO;
 
 /**  

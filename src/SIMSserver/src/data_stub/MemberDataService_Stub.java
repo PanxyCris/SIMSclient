@@ -2,7 +2,7 @@ package SIMSserver.src.data_stub;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.member.MemberVO;
 import SIMSserver.src.dataservice.memberdataservice.MemberDataService;
 
