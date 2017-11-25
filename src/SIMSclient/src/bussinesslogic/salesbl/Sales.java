@@ -13,13 +13,30 @@ public class Sales {
 	private SalesPO po;
 	private BillType type;
 	private String ID;
-	private ArrayList<String> commodityNames = new ArrayList<>();  
-	private ArrayList<Integer> commodityNumber = new ArrayList<>();
-	private SalesList list = new SalesList();
-	private SalesDataService saleData;
+	private ArrayList<String> commodityNames;  
+	private ArrayList<Integer> commodityNumber;
+	private SalesList list;  //销售单
+	private SalesDataService saleData;  //销售单数据
 	
 	public Sales() {
+		this.commodityNames = new ArrayList<>();
+		this.commodityNumber = new ArrayList<>();
+		this.list = new SalesList();
+		this.saleData = saleData;
+	}
+	
+	/*建立销售单*/
+	public void createSale() {
 		
+	}
+	
+	public SalesDataService getSalesData() {
+		try {
+			
+		} catch(Exception e) {
+			
+		}
+		return saleData;
 	}
 	
 	public String getSaleID() throws RemoteException {
