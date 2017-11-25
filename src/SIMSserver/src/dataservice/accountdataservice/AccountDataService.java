@@ -2,7 +2,7 @@ package SIMSserver.src.dataservice.accountdataservice;
 
 import java.rmi.RemoteException;
 
-import SIMSclient.src.ResultMessage;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
 
 public interface AccountDataService {
