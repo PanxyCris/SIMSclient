@@ -1,10 +1,8 @@
 package SIMSclient.src.dataservice.userdataservice;
 
 import java.rmi.RemoteException;
-
-import SIMSclient.src.po.UserPO.Authority;
-import SIMSclient.src.po.UserPO.UserRole;
 import javafx.scene.image.ImageView;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.po.UserPO;
 
 public interface UserDataService {
@@ -17,7 +15,7 @@ public interface UserDataService {
 
     public UserRole getRole();
 
-    public Authority getAuthority();
+    //public Authority getAuthority();
     public ImageView getImage();
 
     public void insert(UserPO po) throws RemoteException;

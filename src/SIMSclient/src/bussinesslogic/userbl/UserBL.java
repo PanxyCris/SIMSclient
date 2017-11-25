@@ -1,9 +1,8 @@
 package SIMSclient.src.bussinesslogic.userbl;
 
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.vo.UserVO;
-import SIMSclient.src.vo.UserVO.Authority;
-import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.scene.image.ImageView;
 
 public class UserBL implements UserBLService {
@@ -63,14 +62,14 @@ public class UserBL implements UserBLService {
 	@Override
 	public UserRole getRole() {
 		// TODO Auto-generated method stub
-		return UserRole.USERMANAGER;
+		return UserRole.USER_MANAGER;
 	}
-
-	@Override
-	public Authority getAuthority() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//
+//	@Override
+//	public Authority getAuthority() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public ImageView getImage() {

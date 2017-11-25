@@ -2,11 +2,11 @@ package SIMSclient.src.bussinesslogic.salesbl;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.po.WareHouse;
+import SIMSclient.src.dataenum.Warehouse;
 import SIMSclient.src.po.sales.CommodityItemPO;
 
 /*
- * 销售出货单，包括：
+ * 销售单，包括：
  * 单据编号（XSD-yyyyMMdd-xxxxx），
  * 客户（仅显示销售商），
  * 业务员（和这个客户打交道的公司员工，可以设置一个客户的默认业务员），
@@ -23,7 +23,7 @@ public class SalesList {
 
 	private String ID;
 	private String Name;
-	private WareHouse wareHouse;
+	private Warehouse warehouse;
 	private ArrayList<SalesLineItem> commodityList; // 商品列表清单
 	private double beforePrice;
 	private double allowance;
@@ -69,12 +69,12 @@ public class SalesList {
 		Name = name;
 	}
 
-	public WareHouse getWareHouse() {
-		return wareHouse;
+	public Warehouse getWareHouse() {
+		return warehouse;
 	}
 
-	public void setWareHouse(WareHouse wareHouse) {
-		this.wareHouse = wareHouse;
+	public void setWareHouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 
 

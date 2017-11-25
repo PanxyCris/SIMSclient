@@ -2,8 +2,8 @@ package SIMSclient.src.dataservice.billdataservice;
 
 import java.util.Date;
 
-import SIMSclient.src.po.BillPO.BillState;
-import SIMSclient.src.po.BillPO.BillType;
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
 
 public interface BillDataService {
 

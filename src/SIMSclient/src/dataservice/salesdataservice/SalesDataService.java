@@ -2,8 +2,8 @@ package SIMSclient.src.dataservice.salesdataservice;
 
 import java.rmi.RemoteException;
 
+import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataservice.DataService;
-import SIMSclient.src.po.BillPO.BillType;
 
 public interface SalesDataService extends DataService{
 

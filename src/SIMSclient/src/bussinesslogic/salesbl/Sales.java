@@ -2,10 +2,10 @@ package SIMSclient.src.bussinesslogic.salesbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import SIMSclient.src.po.BillPO.BillType;
 import SIMSclient.src.po.sales.SalesPO;
 import SIMSclient.src.vo.sale.CommodityItemVO;
 import SIMSclient.src.vo.sale.SalesVO;
+import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
 
 public class Sales {
