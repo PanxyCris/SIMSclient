@@ -2,46 +2,23 @@ package SIMSclient.src.po;
 
 import java.io.*;
 
+import SIMSclient.src.dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
 public class UserPO implements Serializable {
 
-     public enum Authority{
-
-		HIGHEST("最高权限"),NORMAL("普通权限");
-
-		public final String value;
-
-		Authority(String value){
-			this.value = value;
-		}
-	}
-
-	public enum UserRole {
-		MANAGER("总经理"), FINANCIALSTAFF("财务人员"), SALESPERSON("进货销售人员"), COMMODITYPERSON("库存管理人员"), USERMANAGER("用户管理人员");
-
-		public final String value;
-
-		UserRole(String value){
-			this.value = value;
-		}
-	}
-
-
 	private static final long serialVersionUID = 1L;
-	int id;
+	String id;
      String name;
      String password;
      UserRole role;
-     Authority authority;
      ImageView image;
 
-     public UserPO(int i,String n,String p, UserRole r,Authority a,ImageView im){
+     public UserPO(String i,String n,String p, UserRole r,ImageView im){
     	 id = i;
     	 name = n;
     	 password = p;
     	 role = r;
-    	 authority = a;
     	 image = im;
      }
 
@@ -49,7 +26,7 @@ public class UserPO implements Serializable {
     	 return name;
      }
 
-     public int getID(){
+     public String getID(){
     	 return id;
      }
 
@@ -59,10 +36,6 @@ public class UserPO implements Serializable {
 
      public UserRole getRole(){
     	 return role;
-     }
-
-     public Authority getAuthority(){
-    	 return authority;
      }
 
      public ImageView getImage(){

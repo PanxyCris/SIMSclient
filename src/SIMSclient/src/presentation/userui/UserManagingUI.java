@@ -1,9 +1,11 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
+
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.vo.UserVO;
-import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -105,8 +107,8 @@ public class UserManagingUI extends UserUI implements Initializable{
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			UserVO user1 = new UserVO("161250058","李杰","161250058",UserRole.SALESPERSON);
-			UserVO user2 =new UserVO("161250136","王灿灿","161250136",UserRole.FINANCIALSTAFF);
+			UserVO user1 = new UserVO("161250058","李杰","161250058",UserRole.PUR_SALE_MANAGER);
+			UserVO user2 =new UserVO("161250136","王灿灿","161250136",UserRole.FINANCIAL_MANAGER);
 			tableID.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("ID"));
 	        tableName.setCellValueFactory(

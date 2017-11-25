@@ -1,9 +1,8 @@
 package SIMSclient.src.bussinesslogicservice.userblservice;
 
-import SIMSclient.src.vo.UserVO.UserRole;
-import javafx.scene.image.ImageView;
-import SIMSclient.src.vo.UserVO.Authority;
 
+import javafx.scene.image.ImageView;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.vo.UserVO;
 
 public interface UserBLService {
@@ -15,7 +14,6 @@ public interface UserBLService {
     public String getPassword();
 
     public UserRole getRole();
-    public Authority getAuthority();
 
     public ImageView getImage();
 

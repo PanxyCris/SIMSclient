@@ -1,13 +1,14 @@
 package SIMSclient.src.presentation.mainui;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
+
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.accountui.AccountUI;
 import SIMSclient.src.presentation.commodityui.CommodityUI;
 import SIMSclient.src.presentation.promotionui.PromotionUI;
 import SIMSclient.src.presentation.salesui.SalesUI;
 import SIMSclient.src.presentation.userui.UserUI;
-import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -63,7 +64,7 @@ public class MainUI extends Application{
 
 		    	switch(role){
 
-		    	case MANAGER:Platform.runLater(new Runnable() {
+		    	case GENERAL_MANAGER:Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
 							              new PromotionUI().start(new Stage());
@@ -72,7 +73,7 @@ public class MainUI extends Application{
 						                    }
 		    	                  }
 		    	                 });break;
-		    	case FINANCIALSTAFF:Platform.runLater(new Runnable() {
+		    	case FINANCIAL_MANAGER:Platform.runLater(new Runnable() {
 	                             public void run() {
  	                             try {
 					                  new AccountUI().start(new Stage());
@@ -81,7 +82,7 @@ public class MainUI extends Application{
 				                    }
  	                                }
  	                              });break;
-		    	case SALESPERSON:Platform.runLater(new Runnable() {
+		    	case PUR_SALE_MANAGER:Platform.runLater(new Runnable() {
 	                              public void run() {
  	                              try {
 					              new SalesUI().start(new Stage());
@@ -90,7 +91,7 @@ public class MainUI extends Application{
 				                    }
  	                               }
  	                             });break;
-		    	case COMMODITYPERSON:Platform.runLater(new Runnable() {
+		    	case INVENTORY_MANAGER:Platform.runLater(new Runnable() {
 	                                       public void run() {
  	                                          try {
 					                              new CommodityUI().start(new Stage());
@@ -99,7 +100,7 @@ public class MainUI extends Application{
 				                                   }
  	                                      }
  	                                 });break;
-		    	case USERMANAGER:Platform.runLater(new Runnable() {
+		    	case USER_MANAGER:Platform.runLater(new Runnable() {
 	                                    public void run() {
 					                                 try {
 					                                	 UserUI userUI = new UserUI();

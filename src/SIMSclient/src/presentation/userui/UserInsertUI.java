@@ -1,15 +1,16 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.presentation.userui.UserManagingUI;
 import SIMSclient.src.presentation.userui.remindui.RemindExistUI;
 import SIMSclient.src.vo.UserVO;
-import SIMSclient.src.vo.UserVO.UserRole;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -61,11 +62,11 @@ public class UserInsertUI extends UserManagingUI {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cancel();
-        roleChoice.setItems(FXCollections.observableArrayList(UserRole.COMMODITYPERSON,
-        		                                              UserRole.FINANCIALSTAFF,
-        		                                              UserRole.MANAGER,
-        		                                              UserRole.SALESPERSON,
-        		                                              UserRole.USERMANAGER));
+        roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER,
+        		                                              UserRole.FINANCIAL_MANAGER,
+        		                                              UserRole.INVENTORY_MANAGER,
+        		                                              UserRole.PUR_SALE_MANAGER,
+        		                                              UserRole.USER_MANAGER));
 	}
 
 	@Override
