@@ -27,7 +27,7 @@ public class UserBL implements UserBLService {
 	}
 
 	public boolean judgeLegal(UserVO vo){
-		return true;
+		return false;
 	}
 	/**
 	 * 两者择其一判断为真即为真
@@ -64,12 +64,6 @@ public class UserBL implements UserBLService {
 		// TODO Auto-generated method stub
 		return UserRole.USER_MANAGER;
 	}
-//
-//	@Override
-//	public Authority getAuthority() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	@Override
 	public ImageView getImage() {
@@ -79,8 +73,7 @@ public class UserBL implements UserBLService {
 
 	@Override
 	public void insert(UserVO vo) {
-		// TODO Auto-generated method stub
-
+        System.out.println("Success!");
 	}
 
     @Override

@@ -20,7 +20,7 @@ public class UserInsertUI extends UserManagingUI{
 	@FXML
 	public void confirm(){
 
-        UserVO user = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),roleChoice.getValue());
+        UserVO user = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
         UserBLService service = UserBL.getInstance().getUserService();
 
         if(!service.judgeLegal(user)){
@@ -73,16 +73,17 @@ public class UserInsertUI extends UserManagingUI{
 	public void initialize(URL location, ResourceBundle resources) {
 		manageInit();
 		insertInit();
-        roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER,
-                                                              UserRole.FINANCIAL_MANAGER,
-                                                              UserRole.INVENTORY_MANAGER,
-                                                              UserRole.PUR_SALE_MANAGER,
-                                                              UserRole.USER_MANAGER));
+        roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
+                                                              UserRole.FINANCIAL_MANAGER.value,
+                                                              UserRole.INVENTORY_MANAGER.value,
+                                                              UserRole.PUR_SALE_MANAGER.value,
+                                                              UserRole.USER_MANAGER.value));
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		changeStage("UserInsertUI","UserInsertUI.fxml");
 	}
+
 
 }

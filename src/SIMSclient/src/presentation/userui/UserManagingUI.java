@@ -27,7 +27,7 @@ public class UserManagingUI extends UserUI implements Initializable{
 	    @FXML
         protected TextField passwordField;
 	    @FXML
-        protected ChoiceBox<UserRole> roleChoice;
+        protected ChoiceBox<String> roleChoice;
     	@FXML
     	protected Label idLabel;
 
@@ -109,10 +109,10 @@ public class UserManagingUI extends UserUI implements Initializable{
 		public void initialize(URL location, ResourceBundle resources) {
 			manageInit();
 		}
-		
+
 		public void manageInit(){
-			UserVO user1 = new UserVO("161250058","李杰","161250058",UserRole.PUR_SALE_MANAGER);
-			UserVO user2 =new UserVO("161250136","王灿灿","161250136",UserRole.FINANCIAL_MANAGER);
+			UserVO user1 = new UserVO("0000001","李杰","161250058",UserRole.PUR_SALE_MANAGER);
+			UserVO user2 =new UserVO("0000002","王灿灿","161250136",UserRole.FINANCIAL_MANAGER);
 			tableID.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("ID"));
 	        tableName.setCellValueFactory(
@@ -120,7 +120,7 @@ public class UserManagingUI extends UserUI implements Initializable{
 	        tablePassword.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("password"));
 	        tableRole.setCellValueFactory(
-	                new PropertyValueFactory<UserVO,String>("role"));
+	                new PropertyValueFactory<UserVO,String>("roleName"));
 	        list.addAll(user1,user2);
 	        table.setItems(list);
 		}

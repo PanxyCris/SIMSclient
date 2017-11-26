@@ -14,4 +14,15 @@ public enum UserRole {
 		this.value = value;
 	}
 
+	public static UserRole getRole(String value){
+		switch(value){
+		case "库存管理人员":return UserRole.INVENTORY_MANAGER;
+		case "进货销售人员":return UserRole.PUR_SALE_MANAGER;
+		case "财务人员":return UserRole.FINANCIAL_MANAGER;
+		case "总经理":return UserRole.GENERAL_MANAGER;
+		case "用户管理员":return UserRole.USER_MANAGER;
+		default:return UserRole.USER_MANAGER;
+		}
+	}
+
 }

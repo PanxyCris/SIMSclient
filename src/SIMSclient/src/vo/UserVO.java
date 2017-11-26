@@ -15,6 +15,7 @@ public class UserVO implements Serializable {
      String name;
      String password;
      UserRole role;
+     String roleName;
      ImageView image;   //Í·Ïñ
 
 
@@ -24,7 +25,7 @@ public class UserVO implements Serializable {
     	 password = p;
     	 role = r;
     	// image = im;
-
+         roleName = r.value;
 
      }
 
@@ -43,6 +44,10 @@ public class UserVO implements Serializable {
 
      public UserRole getRole(){
     	 return role;
+     }
+
+     public String getRoleName(){
+    	 return roleName;
      }
 
 
