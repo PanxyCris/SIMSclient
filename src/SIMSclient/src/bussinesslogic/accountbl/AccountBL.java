@@ -23,13 +23,9 @@ public class AccountBL implements AccountBLService{
 	public 
 	
 	AccountVO accountVO=new AccountVO("",0);
-	AccountDataService accountDataService;
 	
 	public AccountVO find(String message) {
 		
-		accountVO
-		
-	
 		
 		return accountVO;
 	}
