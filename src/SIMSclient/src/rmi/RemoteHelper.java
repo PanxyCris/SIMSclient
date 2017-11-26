@@ -9,7 +9,13 @@ import SIMSclient.src.dataservice.checktabledataservice.saleScheduleDataService;
 import SIMSclient.src.dataservice.checktabledataservice.statementOfOperationDataService;
 import SIMSclient.src.dataservice.commoditydataservice.ClassificationDataService;
 import SIMSclient.src.dataservice.commoditydataservice.CommodityDataService;
-import SIMSclient.src.dataservice.datafactoryservice.DataFactoryService;
+import SIMSclient.src.dataservice.memberdataservice.MemberDataService;
+import SIMSclient.src.dataservice.mfdocsdataservice.skddataservice;
+import SIMSclient.src.dataservice.mfdocsdataservice.xjfyddataservice;
+import SIMSclient.src.dataservice.promotiondataservice.PromotionDataService;
+import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
+import SIMSclient.src.dataservice.setupaccountdataservice.SetUpAccountDataService;
+import SIMSclient.src.dataservice.userdataservice.UserDataService;
 
 /**
  * 
@@ -65,5 +71,31 @@ public class RemoteHelper {
 		return (CommodityDataService)remote;
 	}
 	
-	public DataFactoryService
+	public MemberDataService getMemeberDataService(){
+		return (MemberDataService)remote;
+	}
+	
+	public skddataservice getskddataservice(){
+		return (skddataservice)remote;
+	}
+	
+	public xjfyddataservice getxjfyddataservice(){
+		return (xjfyddataservice)remote;
+	}
+	
+	public PromotionDataService getPromotionDataService(){
+		return (PromotionDataService)remote;
+	}
+	
+	public SalesDataService getSalesDataService(){
+		return (SalesDataService)remote;
+	}
+	
+	public SetUpAccountDataService getSetUpAccountDataService(){
+		return (SetUpAccountDataService)remote;
+	}
+	
+	public UserDataService getuserDataService(){
+		return (UserDataService)remote;
+	}
 }
