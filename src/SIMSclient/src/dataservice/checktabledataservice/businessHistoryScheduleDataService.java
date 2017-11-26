@@ -4,7 +4,7 @@ import SIMSclient.src.po.BillPO;
 import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
 import SIMSclient.src.po.table.BusinessHistorySchedulePO;
 
-public interface businessHistoryScheduleBLService {
+public interface businessHistoryScheduleDataService {
 	
 	public FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO);//传入筛选条件,返回单据
 	
