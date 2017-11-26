@@ -1,12 +1,13 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.presentation.userui.remindui.RemindnotExistUI;
+import SIMSclient.src.presentation.remindui.RemindnotExistUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ public class UserDeleteUI extends UserManagingUI {
 			  Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
-							new RemindnotExistUI().start(new Stage());
+							new RemindnotExistUI().start(new Stage(),remind);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

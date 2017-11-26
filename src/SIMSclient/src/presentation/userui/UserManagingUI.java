@@ -2,9 +2,11 @@ package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
 
+
 import java.util.ResourceBundle;
 
-import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.bussinesslogic.userbl.UserBL;
+import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.vo.UserVO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 
 public class UserManagingUI extends UserUI implements Initializable{
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
+        UserBLService service = UserBL.getInstance().getUserService();
 	    @FXML
 	    protected TextField idField;
 	    @FXML
@@ -111,8 +114,6 @@ public class UserManagingUI extends UserUI implements Initializable{
 		}
 
 		public void manageInit(){
-			UserVO user1 = new UserVO("0000001","¿ÓΩ‹","161250058",UserRole.PUR_SALE_MANAGER);
-			UserVO user2 =new UserVO("0000002","Õı≤”≤”","161250136",UserRole.FINANCIAL_MANAGER);
 			tableID.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("ID"));
 	        tableName.setCellValueFactory(
@@ -121,7 +122,7 @@ public class UserManagingUI extends UserUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("password"));
 	        tableRole.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("roleName"));
-	        list.addAll(user1,user2);
+            list.addAll(service.getUserList());
 	        table.setItems(list);
 		}
 

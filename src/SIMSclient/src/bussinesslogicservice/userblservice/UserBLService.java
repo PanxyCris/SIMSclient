@@ -2,6 +2,9 @@ package SIMSclient.src.bussinesslogicservice.userblservice;
 
 
 import javafx.scene.image.ImageView;
+
+import java.util.ArrayList;
+
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.vo.UserVO;
 
@@ -28,5 +31,6 @@ public interface UserBLService {
 	public boolean judgeLegal(UserVO vo);
 	public boolean judgeLegal(String id,String name);
 
+	public ArrayList<UserVO> getUserList();
 
 }

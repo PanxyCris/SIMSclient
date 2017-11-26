@@ -3,12 +3,10 @@ package SIMSclient.src.presentation.userui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import SIMSclient.src.bussinesslogic.userbl.UserBL;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.presentation.userui.UserManagingUI;
-import SIMSclient.src.presentation.userui.remindui.RemindExistUI;
+import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -21,7 +19,6 @@ public class UserInsertUI extends UserManagingUI{
 	public void confirm(){
 
         UserVO user = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
-        UserBLService service = UserBL.getInstance().getUserService();
 
         if(!service.judgeLegal(user)){
         	Platform.runLater(new Runnable() {
@@ -37,7 +34,7 @@ public class UserInsertUI extends UserManagingUI{
         	Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
-						new RemindExistUI().start(new Stage());
+						new RemindExistUI().start(new Stage(),remind);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

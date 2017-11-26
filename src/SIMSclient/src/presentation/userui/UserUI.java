@@ -1,6 +1,8 @@
 package SIMSclient.src.presentation.userui;
 
 import java.util.*;
+
+import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.ControlledStage;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
@@ -19,6 +21,7 @@ public class UserUI extends Application implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
+	public static final String remind = Remind.USER.value;
 
 	static StageController stageController;
 
@@ -109,8 +112,6 @@ public class UserUI extends Application implements ControlledStage{
    		current = currentID;
    		stack.push(currentID);
 	}
-
-
 
 
 
