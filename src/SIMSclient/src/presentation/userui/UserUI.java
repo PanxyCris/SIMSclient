@@ -21,7 +21,7 @@ public class UserUI extends Application implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-	public static final String remind = Remind.USER.value;
+	public static final Remind remind = Remind.USER;
 
 	static StageController stageController;
 

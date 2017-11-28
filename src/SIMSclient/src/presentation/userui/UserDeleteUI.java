@@ -2,12 +2,13 @@ package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
 
+
 import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.presentation.remindui.RemindnotExistUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ public class UserDeleteUI extends UserManagingUI {
 	@FXML
 	public void confirm(){
 		  UserBLService service = UserBL.getInstance().getUserService();
-		  if(!service.judgeLegal(idField.getText(), nameField.getText())){
+		  if(!service.judgeLegal(findingField.getText())){
 			  Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -29,11 +30,11 @@ public class UserDeleteUI extends UserManagingUI {
 		    	    }
 		    	});
 		  }
-		  else if(!service.judgeExist(idField.getText())){
+		  else if(!service.judgeExist(findingField.getText())){
 			  Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
-							new RemindnotExistUI().start(new Stage(),remind);
+							new RemindExistUI().start(remind,false);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -41,9 +42,10 @@ public class UserDeleteUI extends UserManagingUI {
 		    	});
 		  }
 		  else{
-			  UserVO user = service.delete(idField.getText(), nameField.getText());
+			  UserVO user = service.delete(findingField.getText());
 			  list.remove(user);
 	          table.setItems(list);
+	          cancel();
 		  }
 	}
 
@@ -56,6 +58,7 @@ public class UserDeleteUI extends UserManagingUI {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		manageInit();
 		cancel();
 	}
 

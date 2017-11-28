@@ -4,16 +4,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import SIMSclient.src.dataenum.UserRole;
-import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.presentation.userui.UserManagingUI;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
+import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
-public class UserInsertUI extends UserManagingUI{
+public class UserUpdateUI extends UserManagingUI{
 
 	@FXML
 	public void confirm(){
@@ -53,6 +52,11 @@ public class UserInsertUI extends UserManagingUI{
 		insertInit();
 	}
 
+	@FXML
+	public void blurFind(){
+
+	}
+
 
 	public void insertInit(){
 
@@ -79,8 +83,9 @@ public class UserInsertUI extends UserManagingUI{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		changeStage("UserInsertUI","UserInsertUI.fxml");
+		changeStage("UserUpdateUI","UserUpdateUI.fxml");
 	}
+
 
 
 }

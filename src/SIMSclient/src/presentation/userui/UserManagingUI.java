@@ -30,6 +30,8 @@ public class UserManagingUI extends UserUI implements Initializable{
 	    @FXML
         protected TextField passwordField;
 	    @FXML
+	    protected TextField findingField;
+	    @FXML
         protected ChoiceBox<String> roleChoice;
     	@FXML
     	protected Label idLabel;
@@ -60,47 +62,7 @@ public class UserManagingUI extends UserUI implements Initializable{
 
 		@FXML
 		public void update(){
-		/*	 UserVO user = new UserVO(idField.getText(), nameField.getText(), passwordField.getText(),roleChoice.getValue());
-	         UserBLService service = UserBL.getInstance().getUserService();
 
-	            if(!service.judgeLegal(user)){
-	            	Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-								new RemindPrintUI().start(new Stage());
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
-	            }
-	            else if(!service.judgeExist(idField.getText())){
-					  Platform.runLater(new Runnable() {
-				    	    public void run() {
-				    	        try {
-									new RemindnotExistUI().start(new Stage());
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-				    	    }
-				    	});
-				  }
-	            else if(service.find(user)){
-	            	Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-								new RemindRepeatUI().start(new Stage());
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
-	            }else{
-	            list.remove(service.find(idField.getText(),nameField.getText()));
-	            service.update(user);
-	            list.add(user);
-	            table.setItems(list);
-	            }*/
 		}
 
 		@FXML

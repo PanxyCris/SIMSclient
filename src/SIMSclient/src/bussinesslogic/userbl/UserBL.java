@@ -20,7 +20,7 @@ public class UserBL implements UserBLService {
 		return (UserBLService)userBL;
 	}
 
-	public boolean judgeExist(String userName, String passWord) {
+	public boolean login(String userName, String passWord) {
 		return true;
 	}
 
@@ -37,7 +37,7 @@ public class UserBL implements UserBLService {
 	 * @param userName
 	 * @return
 	 */
-	public boolean judgeLegal(String id,String userName){
+	public boolean judgeLegal(String info){
 		return true;
 	}
 
@@ -77,9 +77,9 @@ public class UserBL implements UserBLService {
 	}
 
     @Override
-	public UserVO delete(String id, String name) {
+	public UserVO delete(String info) {
 		// TODO Auto-generated method stub
-           return vo;
+         return vo;
 	}
 
 	@Override

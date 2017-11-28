@@ -46,7 +46,7 @@ public class MainUI extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		    Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-	        Scene scene = new Scene(root, 600, 400);
+	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("µÇÂ¼½çÃæ");
 	        primaryStage.show();
@@ -58,65 +58,31 @@ public class MainUI extends Application{
 
 		    UserBLService service = UserBL.getInstance().getUserService();
 
-		    if(service.judgeExist(userName,passWord)){
-
+		    if(service.login(userName,passWord)){
 		    	UserRole role = service.getRole();
 
-		    	switch(role){
-
-		    	case GENERAL_MANAGER:Platform.runLater(new Runnable() {
+		    	Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
-							              new PromotionUI().start(new Stage());
-						           } catch (Exception e) {
-							                 e.printStackTrace();
-						                    }
-		    	                  }
-		    	                 });break;
-		    	case FINANCIAL_MANAGER:Platform.runLater(new Runnable() {
-	                             public void run() {
- 	                             try {
-					                  new AccountUI().start(new Stage());
-				                  } catch (Exception e) {
-					                 e.printStackTrace();
-				                    }
- 	                                }
- 	                              });break;
-		    	case PUR_SALE_MANAGER:Platform.runLater(new Runnable() {
-	                              public void run() {
- 	                              try {
-					              new SalesUI().start(new Stage());
-				                  } catch (Exception e) {
-					                 e.printStackTrace();
-				                    }
- 	                               }
- 	                             });break;
-		    	case INVENTORY_MANAGER:Platform.runLater(new Runnable() {
-	                                       public void run() {
- 	                                          try {
-					                              new CommodityUI().start(new Stage());
-				                              } catch (Exception e) {
-					                                  e.printStackTrace();
-				                                   }
- 	                                      }
- 	                                 });break;
-		    	case USER_MANAGER:Platform.runLater(new Runnable() {
-	                                    public void run() {
-					                                 try {
-					                                	 UserUI userUI = new UserUI();
-														userUI.start(new Stage());
-													//	userUI.showImage(service.getImage());
+		    	                      switch(role){
+		    	                         case GENERAL_MANAGER:new PromotionUI().start(new Stage());break;
+		    	                         case FINANCIAL_MANAGER:new AccountUI().start(new Stage());break;
+		    	                         case PUR_SALE_MANAGER: new SalesUI().start(new Stage());break;
+		    	                         case INVENTORY_MANAGER: new CommodityUI().start(new Stage());break;
+				                         case USER_MANAGER: UserUI userUI = new UserUI();
+														    userUI.start(new Stage());
+													    //	userUI.showImage(service.getImage());
+														   break;
+		    	                      }
 													} catch (Exception e) {
 														e.printStackTrace();
 													}
  	                                         }
- 	                                  });break;
-
-		    	}
-		    	Stage stage = (Stage) pane.getScene().getWindow();
-			    stage.close();
-
-		    }else{
+ 	                                  });
+ 	                       Stage stage = (Stage) pane.getScene().getWindow();
+			              stage.close();
+                	}
+		     else{
 		    	username.setText(null);
 		    	password.setText(null);
 		    	Platform.runLater(new Runnable() {
