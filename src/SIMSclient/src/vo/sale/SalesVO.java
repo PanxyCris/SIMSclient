@@ -5,6 +5,7 @@ import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
 import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.commodity.CommodityItemVO;
 
 public class SalesVO extends BillVO {
 	public String retailerID;

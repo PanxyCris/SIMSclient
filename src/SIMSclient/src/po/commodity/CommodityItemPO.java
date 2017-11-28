@@ -1,4 +1,4 @@
-package SIMSclient.src.po.sales;
+package SIMSclient.src.po.commodity;
 
 import java.io.Serializable;
 

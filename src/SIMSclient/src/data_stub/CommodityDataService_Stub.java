@@ -2,9 +2,8 @@ package SIMSclient.src.data_stub;
 
 import java.rmi.RemoteException;
 
-
-import SIMSclient.src.po.CommodityPO;
-import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.PersistObject;
+import SIMSclient.src.po.commodity.CommodityPO;
 
 public class CommodityDataService_Stub {
 	public void insert(CommodityPO po) throws RemoteException{
@@ -25,13 +24,13 @@ public class CommodityDataService_Stub {
 	public void finish()throws RemoteException{
 		System.out.println("Finish Success.");
 	}
-	public void giftInventoryReceiptsMaking(BillPO po){
+	public void giftInventoryReceiptsMaking(PersistObject po){
 		System.out.println("Making Success.");
 	}
-	public void lossAndRevenueInventoryReceiptsMaking(BillPO po){
+	public void lossAndRevenueInventoryReceiptsMaking(PersistObject po){
 		System.out.println("Making Success.");
 	}
-	public void warningInventoryReceiptsMaking(BillPO po){
+	public void warningInventoryReceiptsMaking(PersistObject po){
 		System.out.println("Making Success.");
 	}
 }

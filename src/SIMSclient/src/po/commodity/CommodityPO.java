@@ -1,6 +1,8 @@
-package SIMSclient.src.po;
+package SIMSclient.src.po.commodity;
 
 import java.io.Serializable;
+
+import SIMSclient.src.po.ClassificationPO;
 
 public class CommodityPO implements Serializable{
 

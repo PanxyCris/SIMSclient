@@ -3,25 +3,21 @@ package SIMSclient.src.dataservice.userdataservice;
 import java.rmi.RemoteException;
 import javafx.scene.image.ImageView;
 import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataservice.DataService;
 import SIMSclient.src.po.UserPO;
 
-public interface UserDataService {
+public interface UserDataService extends DataService<UserPO>{
+	
+	public static final String NAME = "UserData";  //RMI绑定时候的名称
 
-    public String getName();
+    public String getName() throws RemoteException;
 
-    public int getID();
 
-    public String getPassword();
+    public String getPassword() throws RemoteException;
 
-    public UserRole getRole();
+    public UserRole getRole() throws RemoteException;
 
-    //public Authority getAuthority();
-    public ImageView getImage();
+    public ImageView getImage() throws RemoteException;
 
-    public void insert(UserPO po) throws RemoteException;
-	public void delelte(UserPO po) throws RemoteException;
-	public void update(UserPO po) throws RemoteException;
-	public void find(UserPO po) throws RemoteException;
-	public void init() throws RemoteException;
 	public void finish() throws RemoteException;
 }

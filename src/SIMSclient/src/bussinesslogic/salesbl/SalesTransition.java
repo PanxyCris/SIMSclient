@@ -6,9 +6,9 @@ import java.util.Date;
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.sales.CommodityItemPO;
+import SIMSclient.src.po.commodity.CommodityItemPO;
 import SIMSclient.src.po.sales.SalesPO;
-import SIMSclient.src.vo.sale.CommodityItemVO;
+import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.sale.SalesVO;
 
 /**

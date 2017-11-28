@@ -5,13 +5,13 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.PersistObject;
 
 /*
  * 公共的数据层父类
  * 包括数据的增删改查
  */
-public interface DataService<PO extends BillPO> extends Remote{
+public interface DataService<PO extends PersistObject> extends Remote{
 
 	/*初始化数据层接口*/
 	public void init() throws RemoteException;

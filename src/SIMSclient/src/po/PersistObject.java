@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BillPO implements Serializable{
+/**
+ * 
+* @ClassName: PersistObject 
+* @Description: 持久化对象PO的公共父类
+* @author lijie
+* @date 2017年11月28日 上午8:21:54 
+*
+ */
+public class PersistObject implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	protected String date;
@@ -13,7 +21,7 @@ public class BillPO implements Serializable{
 	/*
 	 *自动生成单据编号和日期 
 	 */
-	public BillPO(String id) {
+	public PersistObject(String id) {
 		this.id = id;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		date = sdf.format(new Date());

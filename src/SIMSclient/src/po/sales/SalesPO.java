@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.BillPO;
-import SIMSclient.src.po.sales.CommodityItemPO;
+import SIMSclient.src.po.PersistObject;
+import SIMSclient.src.po.commodity.CommodityItemPO;
 
-public class SalesPO extends BillPO {
+public class SalesPO extends PersistObject {
 
 	private static final long serialVersionUID = 1L;
 	private String clientId;

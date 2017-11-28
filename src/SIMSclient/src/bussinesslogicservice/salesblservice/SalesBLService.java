@@ -3,9 +3,9 @@ package SIMSclient.src.bussinesslogicservice.salesblservice;
 import java.util.*;
 
 import SIMSclient.src.vo.PromotionVO;
+import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;
-import SIMSclient.src.vo.sale.CommodityItemVO;
 import SIMSclient.src.vo.sale.SalesAddVO;
 import SIMSclient.src.vo.sale.SalesVO;
 

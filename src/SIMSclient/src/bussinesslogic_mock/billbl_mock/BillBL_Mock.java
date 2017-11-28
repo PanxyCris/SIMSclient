@@ -2,13 +2,13 @@ package SIMSclient.src.bussinesslogic_mock.billbl_mock;
 
 import SIMSclient.src.bussinesslogic.billbl.BillBL;
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.PersistObject;
 import SIMSclient.src.vo.bill.BillVO;
 
 public class BillBL_Mock extends BillBL{
 
      BillVO vo;
-     BillPO po;
+     PersistObject po;
 
      public BillBL_Mock(){
 

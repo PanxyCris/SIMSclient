@@ -4,8 +4,9 @@ import java.rmi.RemoteException;
 
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataservice.DataService;
+import SIMSclient.src.po.sales.SalesPO;
 
-public interface SalesDataService extends DataService{
+public interface SalesDataService extends DataService<SalesPO>{
 
 	/*RMI绑定时候的名称 */
 	public static final String NAME = "SaleData";

@@ -1,44 +1,58 @@
 package SIMSclient.src.po;
 
-import java.io.*;
-
 import SIMSclient.src.dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
-public class UserPO implements Serializable {
+public class UserPO extends PersistObject {
 
 	private static final long serialVersionUID = 1L;
-	String id;
-     String name;
-     String password;
-     UserRole role;
-     ImageView image;
+	private String name;
+	private String password;
+	private UserRole role;
+	private ImageView image;
 
-     public UserPO(String i,String n,String p, UserRole r,ImageView im){
-    	 id = i;
-    	 name = n;
-    	 password = p;
-    	 role = r;
-    	 image = im;
-     }
+	
 
-     public String getName(){
-    	 return name;
-     }
+	/** 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param id
+	* @param @param id2
+	* @param @param name
+	* @param @param password
+	* @param @param role
+	* @param @param image    设定文件 
+	* @return   返回类型 
+	* @throws 
+	*/
+	public UserPO(String id, String name, String password, UserRole role, ImageView image) {
+		super(id);
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.image = image;
+	}
 
-     public String getID(){
-    	 return id;
-     }
+	public String getName() {
+		return name;
+	}
 
-     public String getPassword(){
-    	 return password;
-     }
+	public String getID() {
+		return id;
+	}
 
-     public UserRole getRole(){
-    	 return role;
-     }
+	public String getPassword() {
+		return password;
+	}
 
-     public ImageView getImage(){
-    	 return image;
-     }
+	public UserRole getRole() {
+		return role;
+	}
+
+	public ImageView getImage() {
+		return image;
+	}
+	
+	/**
+	 * 
+	 */
 }

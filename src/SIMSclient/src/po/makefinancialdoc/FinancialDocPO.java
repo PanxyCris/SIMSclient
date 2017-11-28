@@ -3,7 +3,7 @@ package SIMSclient.src.po.makefinancialdoc;
 import java.io.Serializable;
 import java.util.Date;
 
-import SIMSclient.src.po.BillPO;
+import SIMSclient.src.po.PersistObject;
 
 @SuppressWarnings("serial")
 public class FinancialDocPO implements Serializable{

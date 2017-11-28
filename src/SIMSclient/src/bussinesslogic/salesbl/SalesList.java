@@ -3,7 +3,7 @@ package SIMSclient.src.bussinesslogic.salesbl;
 import java.util.ArrayList;
 
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.sales.CommodityItemPO;
+import SIMSclient.src.po.commodity.CommodityItemPO;
 
 /*
  * 销售单，包括：

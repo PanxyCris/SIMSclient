@@ -3,7 +3,7 @@ package SIMSclient.src.bussinesslogic.salesbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import SIMSclient.src.po.sales.SalesPO;
-import SIMSclient.src.vo.sale.CommodityItemVO;
+import SIMSclient.src.vo.commodity.CommodityItemVO;
 import SIMSclient.src.vo.sale.SalesVO;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
@@ -22,14 +22,19 @@ public class Sales {
 		this.commodityNames = new ArrayList<>();
 		this.commodityNumber = new ArrayList<>();
 		this.list = new SalesList();
-		this.saleData = saleData;
+		this.saleData = getSalesData();
 	}
 	
 	/*建立销售单*/
-	public void createSale() {
-		
+	public SalesPO createSale() throws RemoteException {
+		String memberID;
+		String salesMan;
+		String operator;
+		return new SalesPO(ID, MemberID, clientName, saleMan, 
+				operator, list.getWareHouse(), list.getCommodities(), list.getBeforePrice(), 
+				list.getAllowance(), list.getVoucher(), list.getAfterPrice(), list.getRemark(), type);
 	}
-	
+	                          
 	public SalesDataService getSalesData() {
 		try {
 			

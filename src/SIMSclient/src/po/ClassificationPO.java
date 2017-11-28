@@ -3,6 +3,8 @@ package SIMSclient.src.po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import SIMSclient.src.po.commodity.CommodityPO;
+
 public class ClassificationPO implements Serializable{
 
 	String name;
