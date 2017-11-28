@@ -1,7 +1,6 @@
 package SIMSclient.src.presentation.mainui;
 
-import SIMSclient.src.bussinesslogic.userbl.UserBL;
-
+import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.accountui.AccountUI;
@@ -56,7 +55,7 @@ public class MainUI extends Application{
 		    String userName = username.toString();
 		    String passWord = password.toString();
 
-		    UserBLService service = UserBL.getInstance().getUserService();
+		    UserBLService service = UserController.getInstance().getUserService();
 
 		    if(service.login(userName,passWord)){
 		    	UserRole role = service.getRole();
