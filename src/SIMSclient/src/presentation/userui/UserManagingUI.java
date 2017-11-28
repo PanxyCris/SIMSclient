@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.userbl.UserBL;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -61,13 +63,15 @@ public class UserManagingUI extends UserUI implements Initializable{
 		}
 
 		@FXML
-		public void update(){
-
+		public void update() throws Exception{
+			Stage stage = new Stage();
+			new UserUpdateUI().start(stage);
 		}
 
 		@FXML
-		public void find(){
-
+		public void find() throws Exception{
+			Stage stage = new Stage();
+			new UserFindUI().start(stage);
 		}
 
 		@Override
@@ -87,6 +91,7 @@ public class UserManagingUI extends UserUI implements Initializable{
             list.addAll(service.getUserList());
 	        table.setItems(list);
 		}
+
 
 		@Override
 		public void start(Stage primaryStage) throws Exception {

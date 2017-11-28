@@ -12,7 +12,7 @@ public interface UserBLService {
 
     public String getName();
 
-    public int getID();
+    public String getID();
 
     public String getPassword();
 
@@ -25,6 +25,7 @@ public interface UserBLService {
 	public void update(UserVO vo);
 	public boolean find(UserVO vo);
 	public UserVO find(String id,String name);
+	public UserVO blurFind(String info);
 
 	public boolean login(String userName, String passWord);
 	public boolean judgeExist(String id);

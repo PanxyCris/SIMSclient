@@ -51,8 +51,7 @@ public class UserDeleteUI extends UserManagingUI {
 
 	@FXML
 	public void cancel(){
-		nameField.setText("ÓÃ»§Ãû");
-		idField.setText("ID");
+		findingField.setText(null);
 	}
 
 

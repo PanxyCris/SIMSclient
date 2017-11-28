@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.userui.remindui;
+package SIMSclient.src.presentation.remindui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class RemindRepeatUI {
+public class RemindNotPrintUI {
 
 	@FXML
 	Button button;
@@ -34,7 +34,7 @@ public class RemindRepeatUI {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("RemindRepeatUI.fxml"));
+		    Parent root = FXMLLoader.load(getClass().getResource("fxml/RemindNotPrintUI.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.show();

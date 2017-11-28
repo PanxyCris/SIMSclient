@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class UserUI extends Application implements ControlledStage{
 
 	public static final String mainID = "UserUI";
-	public static final String pack = "userui/";
+	public static final String pack = "userui/fxml/";
 	public static final String mainFXML = pack+"UserUI.fxml";
 	static String previous;
 	static String current;

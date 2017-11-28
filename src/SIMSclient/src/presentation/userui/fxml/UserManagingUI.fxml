@@ -6,11 +6,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.userui.UserUpdateUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.userui.UserManagingUI">
    <children>
       <ImageView fx:id="image" fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/尝试背景2.jpg" />
+            <Image url="@../img/尝试背景2.jpg" />
          </image>
       </ImageView>
       <Label layoutY="53.0" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #9999FF;" />
@@ -18,7 +18,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/返回.jpg" />
+                  <Image url="@../img/返回.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -28,7 +28,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/加号.jpg" />
+                  <Image url="@../img/加号.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -37,7 +37,7 @@
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/主页.jpg" />
+                  <Image url="@../img/主页.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -46,7 +46,7 @@
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/消息.jpg" />
+                  <Image url="@../img/消息.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -55,7 +55,7 @@
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/注销.jpg" />
+                  <Image url="@../img/注销.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -64,12 +64,10 @@
       <ImageView fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="53.0" fitWidth="123.0" layoutX="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/Logo.jpg" />
+            <Image url="@../img/Logo.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="329.0" layoutY="531.0" mnemonicParsing="false" onAction="#confirm" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="确    认" />
-      <Button layoutX="562.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="取    消" />
-      <TableView fx:id="table" editable="true" layoutX="229.0" layoutY="134.0" prefHeight="271.0" prefWidth="552.0">
+      <TableView fx:id="table" editable="true" layoutX="229.0" layoutY="153.0" prefHeight="271.0" prefWidth="552.0">
         <columns>
           <TableColumn fx:id="tableID" prefWidth="150.0" text="ID" />
           <TableColumn fx:id="tableName" prefWidth="100.0" text="用户名" />
@@ -81,7 +79,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/减号.jpg" />
+                  <Image url="@../img/减号.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -90,7 +88,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/修改.jpg" />
+                  <Image url="@../img/修改.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -99,16 +97,10 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/查找.jpg" />
+                  <Image url="@../img/查找.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="nameField" layoutX="379.0" layoutY="476.0" prefHeight="23.0" prefWidth="100.0" />
-      <TextField fx:id="passwordField" layoutX="479.0" layoutY="476.0" prefHeight="23.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="roleChoice" layoutX="629.0" layoutY="476.0" prefWidth="150.0" />
-      <TextField fx:id="idField" layoutX="229.0" layoutY="476.0" prefHeight="23.0" prefWidth="150.0" />
-      <TextField fx:id="findingField" layoutX="229.0" layoutY="429.0" prefHeight="23.0" prefWidth="498.0" />
-      <Button layoutX="727.0" layoutY="429.0" mnemonicParsing="false" onAction="#blurFind" prefHeight="23.0" prefWidth="54.0" style="-fx-background-color: #CCCCFF;" text="查找" />
    </children>
 </AnchorPane>

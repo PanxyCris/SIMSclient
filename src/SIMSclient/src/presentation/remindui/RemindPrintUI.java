@@ -34,7 +34,7 @@ public class RemindPrintUI {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("RemindPrintUI.fxml"));
+		    Parent root = FXMLLoader.load(getClass().getResource("fxml/RemindPrintUI.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.show();

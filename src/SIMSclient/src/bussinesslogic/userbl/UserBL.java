@@ -48,9 +48,9 @@ public class UserBL implements UserBLService {
 	}
 
 	@Override
-	public int getID() {
+	public String getID() {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
@@ -108,6 +108,14 @@ public class UserBL implements UserBLService {
 		list.add(user1);
 		list.add(user2);
 		return list;
+	}
+    /**
+     * 模糊查找，若输入值不符合格式或者该信息不存在返回null，若存在，返回该UserVO
+     */
+	@Override
+	public UserVO blurFind(String info) {
+		// TODO Auto-generated method stub
+		return vo;
 	}
 
 
