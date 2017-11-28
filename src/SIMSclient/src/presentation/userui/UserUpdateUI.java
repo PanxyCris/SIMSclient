@@ -1,10 +1,8 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
-import java.util.ResourceBundle;
 
-import SIMSclient.src.bussinesslogic.userbl.UserBL;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import java.util.ResourceBundle;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindNotPrintUI;
@@ -73,7 +71,6 @@ public class UserUpdateUI extends UserManagingUI{
 
 	@FXML
 	public void blurFind(){
-		UserBLService service = UserBL.getInstance().getUserService();
 	       UserVO user = service.blurFind(findingField.getText());
 	       if(user==null){
 	    	   Platform.runLater(new Runnable() {

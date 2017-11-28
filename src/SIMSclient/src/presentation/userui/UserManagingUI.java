@@ -2,14 +2,10 @@ package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
 
-
 import java.util.ResourceBundle;
-
-import SIMSclient.src.bussinesslogic.userbl.UserBL;
+import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,7 +20,7 @@ import javafx.stage.Stage;
 
 public class UserManagingUI extends UserUI implements Initializable{
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
-        UserBLService service = UserBL.getInstance().getUserService();
+	    UserBLService service = UserController.getInstance().getUserService();
 	    @FXML
 	    protected TextField idField;
 	    @FXML

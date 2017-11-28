@@ -1,12 +1,7 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
-
-
 import java.util.ResourceBundle;
-
-import SIMSclient.src.bussinesslogic.userbl.UserBL;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
@@ -18,7 +13,6 @@ public class UserDeleteUI extends UserManagingUI {
 
 	@FXML
 	public void confirm(){
-		  UserBLService service = UserBL.getInstance().getUserService();
 		  if(!service.judgeLegal(findingField.getText())){
 			  Platform.runLater(new Runnable() {
 		    	    public void run() {
