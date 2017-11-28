@@ -4,7 +4,7 @@ import SIMSclient.src.po.PersistObject;
 import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
 import SIMSclient.src.po.table.BusinessHistorySchedulePO;
 
-public interface businessHistoryScheduleBLService {
+public interface businessHistoryScheduleDataService {
 	
 	public FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO);
 	

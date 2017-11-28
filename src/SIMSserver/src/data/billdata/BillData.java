@@ -1,5 +1,7 @@
 package SIMSserver.src.data.billdata;
 
-public class BillData {
+import SIMSserver.src.dataservice.billdataservice.BillDataService;
+
+public class BillData implements BillDataService {
 
 }
