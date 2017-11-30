@@ -20,8 +20,6 @@ public class AccountBL implements AccountBLService{
 		return accountBL;
 	}
 	
-	public 
-	
 	AccountVO accountVO=new AccountVO("",0);
 	
 	public AccountVO find(String message) {
