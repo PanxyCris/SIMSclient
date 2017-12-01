@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.accountui.AccountDeleteUI">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/尝试背景2.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutY="53.0" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #9999FF;" />
+      <Button layoutX="7.0" layoutY="54.0" mnemonicParsing="false" onAction="#returnLast" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: #9999FF;">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/返回.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutY="112.0" prefHeight="490.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" />
+      <Button layoutY="112.0" mnemonicParsing="false" onAction="#insert" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="     增加账户">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/加号.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="68.0" layoutY="56.0" mnemonicParsing="false" onAction="#mainPage" prefHeight="44.0" prefWidth="54.0" style="-fx-background-color: #9999FF;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/主页.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="132.0" layoutY="59.0" mnemonicParsing="false" onAction="#message" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: #9999FF;">
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/消息.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="829.0" layoutY="60.0" mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: #9999FF;">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/注销.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label prefHeight="53.0" prefWidth="900.0" style="-fx-background-color: #ccccff;" />
+      <ImageView fx:id="image" fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="53.0" fitWidth="123.0" layoutX="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Logo.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="table" editable="true" layoutX="229.0" layoutY="153.0" prefHeight="271.0" prefWidth="560.0">
+        <columns>
+          <TableColumn fx:id="tableName" prefWidth="280.0" text="名称" />
+          <TableColumn fx:id="tableMoney" prefWidth="280.0" text="金额" />
+        </columns>
+      </TableView>
+      <Button layoutY="194.0" mnemonicParsing="false" onAction="#delete" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="     删除账户">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/减号.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="276.0" mnemonicParsing="false" onAction="#update" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="     修改账户">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/修改.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="358.0" mnemonicParsing="false" onAction="#find" prefHeight="82.0" prefWidth="151.0" style="-fx-background-color: #CCCCFF;" text="     查询账户">
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/查找.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="findingField" layoutX="229.0" layoutY="465.0" prefHeight="23.0" prefWidth="560.0" />
+      <Button layoutX="334.0" layoutY="524.0" mnemonicParsing="false" onAction="#confirm" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="确     认" />
+      <Button layoutX="553.0" layoutY="524.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="取    消" />
+   </children>
+</AnchorPane>

@@ -19,17 +19,13 @@ import javafx.stage.Stage;
 
 public class AccountManageUI extends AccountUI implements Initializable{
 	 ObservableList<AccountVO> list = FXCollections.observableArrayList();
-	    AccountBLService service = AccountController.getInstance().getAccountService();
-        @FXML
-	    protected TextField idField;
+	    AccountBLService service = AccountController.getInstance().getContoller();
 	    @FXML
         protected TextField nameField;
 	    @FXML
-        protected TextField passwordField;
+        protected TextField moneyField;
 	    @FXML
 	    protected TextField findingField;
- 	   @FXML
- 	    protected Label idLabel;
 
 
 		@FXML
@@ -73,7 +69,7 @@ public class AccountManageUI extends AccountUI implements Initializable{
 	                new PropertyValueFactory<AccountVO,String>("name"));
 	        tableMoney.setCellValueFactory(
 	                new PropertyValueFactory<AccountVO,Integer>("money"));
-         list.addAll(service.getAccountList());
+            list.addAll(service.getAccountList());
 	        table.setItems(list);
 		}
 
