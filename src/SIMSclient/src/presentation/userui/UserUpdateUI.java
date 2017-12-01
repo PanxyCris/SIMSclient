@@ -2,6 +2,7 @@ package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
@@ -56,23 +57,20 @@ public class UserUpdateUI extends UserManagingUI{
 	    	});
         }else{
            service.update(user);
-           list.remove(updatingUser);
-           list.add(user);
-           table.setItems(list);
-           updateInit();
+           table.refresh();
         }
 	  }
 	}
 
 	@FXML
 	public void cancel(){
-		updateInit();
+
 	}
 
 	@FXML
 	public void blurFind(){
-	       UserVO user = service.blurFind(findingField.getText());
-	       if(user==null){
+	       ArrayList<UserVO> list = service.blurFind(findingField.getText(),findChoice.getValue());
+	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -84,7 +82,7 @@ public class UserUpdateUI extends UserManagingUI{
 		    	});
 	       }
 	       else{
-
+              UserVO user = list.get(0);
 	    	  idLabel.setText(user.getID());
 	    	  nameField.setText(user.getName());
 	    	  passwordField.setText(user.getPassword());
@@ -94,24 +92,11 @@ public class UserUpdateUI extends UserManagingUI{
 	}
 
 
-	public void updateInit(){
-
-		idLabel.setText(null);
-		nameField.setText(null);
-		passwordField.setText(null);
-		roleChoice.setValue(null);
-
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		manageInit();
-		updateInit();
-        roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
-                                                              UserRole.FINANCIAL_MANAGER.value,
-                                                              UserRole.INVENTORY_MANAGER.value,
-                                                              UserRole.PUR_SALE_MANAGER.value,
-                                                              UserRole.USER_MANAGER.value));
+        roleChoice.setItems(roleList);
+        findChoice.setItems(FXCollections.observableArrayList("ID","ÓÃ»§Ãû"));
 	}
 
 	@Override

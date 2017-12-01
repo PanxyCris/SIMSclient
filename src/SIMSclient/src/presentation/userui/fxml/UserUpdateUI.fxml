@@ -69,7 +69,7 @@
       </ImageView>
       <Button layoutX="329.0" layoutY="531.0" mnemonicParsing="false" onAction="#confirm" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="确    认" />
       <Button layoutX="562.0" layoutY="531.0" mnemonicParsing="false" onAction="#cancel" prefHeight="34.0" prefWidth="109.0" style="-fx-background-color: #CCCCFF;" text="取    消" />
-      <TableView fx:id="table" editable="true" layoutX="229.0" layoutY="134.0" prefHeight="271.0" prefWidth="552.0">
+      <TableView fx:id="table" editable="true" layoutX="229.0" layoutY="134.0" prefHeight="288.0" prefWidth="552.0">
         <columns>
           <TableColumn fx:id="tableID" prefWidth="150.0" text="ID" />
           <TableColumn fx:id="tableName" prefWidth="100.0" text="用户名" />
@@ -104,11 +104,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="nameField" layoutX="379.0" layoutY="476.0" prefHeight="23.0" prefWidth="100.0" />
-      <TextField fx:id="passwordField" layoutX="479.0" layoutY="476.0" prefHeight="23.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="roleChoice" layoutX="629.0" layoutY="476.0" prefWidth="150.0" />
-      <TextField fx:id="findingField" layoutX="229.0" layoutY="429.0" prefHeight="23.0" prefWidth="498.0" />
-      <Button layoutX="727.0" layoutY="429.0" mnemonicParsing="false" onAction="#blurFind" prefHeight="23.0" prefWidth="54.0" style="-fx-background-color: #CCCCFF;" text="查找" />
-      <Label fx:id="idLabel" layoutX="229.0" layoutY="476.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF;" />
+      <TextField fx:id="findingField" layoutX="229.0" layoutY="449.0" prefHeight="23.0" prefWidth="428.0" />
+      <ChoiceBox fx:id="findChoice" layoutX="657.0" layoutY="449.0" prefHeight="23.0" prefWidth="72.0" />
+      <Button layoutX="729.0" layoutY="449.0" mnemonicParsing="false" onAction="#blurFind" prefHeight="23.0" prefWidth="52.0" text="查 询" />
+      <Label fx:id="idLabel" layoutX="229.0" layoutY="495.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF;" />
+      <TextField fx:id="nameField" layoutX="379.0" layoutY="495.0" prefHeight="23.0" prefWidth="100.0" />
+      <TextField fx:id="passwordField" layoutX="479.0" layoutY="495.0" prefHeight="23.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="roleChoice" layoutX="629.0" layoutY="495.0" prefHeight="23.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

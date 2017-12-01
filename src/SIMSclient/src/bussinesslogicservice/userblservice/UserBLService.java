@@ -21,11 +21,11 @@ public interface UserBLService {
     public ImageView getImage();
 
     public void insert(UserVO vo);
-    public UserVO delete(String info);
+    public void delete(UserVO vo);
 	public void update(UserVO vo);
 	public boolean find(UserVO vo);
 	public UserVO find(String id,String name);
-	public UserVO blurFind(String info);
+	public ArrayList<UserVO> blurFind(String info,String properties);
 
 	public boolean login(String userName, String passWord);
 	public boolean judgeExist(String id);

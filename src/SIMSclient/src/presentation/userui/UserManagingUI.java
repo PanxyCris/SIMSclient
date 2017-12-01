@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
+import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.vo.UserVO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,11 @@ import javafx.stage.Stage;
 
 public class UserManagingUI extends UserUI implements Initializable{
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
+	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
+                UserRole.FINANCIAL_MANAGER.value,
+                UserRole.INVENTORY_MANAGER.value,
+                UserRole.PUR_SALE_MANAGER.value,
+                UserRole.USER_MANAGER.value);
 	    UserBLService service = UserController.getInstance().getUserService();
 	    @FXML
 	    protected TextField idField;
@@ -31,6 +37,8 @@ public class UserManagingUI extends UserUI implements Initializable{
 	    protected TextField findingField;
 	    @FXML
         protected ChoiceBox<String> roleChoice;
+	    @FXML
+	    protected ChoiceBox<String> findChoice;
     	@FXML
     	protected Label idLabel;
 

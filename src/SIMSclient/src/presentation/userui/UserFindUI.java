@@ -1,10 +1,13 @@
 package SIMSclient.src.presentation.userui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
@@ -12,8 +15,8 @@ public class UserFindUI extends UserManagingUI{
 
 	@FXML
 	public void blurFind(){
-	       UserVO user = service.blurFind(findingField.getText());
-	       if(user==null){
+	       ArrayList<UserVO> list = service.blurFind(findingField.getText(),findChoice.getValue());
+	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -25,7 +28,9 @@ public class UserFindUI extends UserManagingUI{
 		    	});
 	       }
 	       else{
-	    	  findingField.setText(user.getID()+" "+user.getName()+" "+user.getPassword()+" "+user.getRoleName());
+	    	   ObservableList<UserVO> newList = FXCollections.observableArrayList();
+	    	   newList.addAll(list);
+	    	   table.setItems(newList);
 	       }
 
 	}
@@ -33,7 +38,7 @@ public class UserFindUI extends UserManagingUI{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		manageInit();
+		findChoice.setItems(FXCollections.observableArrayList("ID","用户名","职务"));
 	}
 
 	@Override

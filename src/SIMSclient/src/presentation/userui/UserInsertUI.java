@@ -70,11 +70,7 @@ public class UserInsertUI extends UserManagingUI{
 	public void initialize(URL location, ResourceBundle resources) {
 		manageInit();
 		insertInit();
-        roleChoice.setItems(FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
-                                                              UserRole.FINANCIAL_MANAGER.value,
-                                                              UserRole.INVENTORY_MANAGER.value,
-                                                              UserRole.PUR_SALE_MANAGER.value,
-                                                              UserRole.USER_MANAGER.value));
+        roleChoice.setItems(FXCollections.observableArrayList(roleList));
 	}
 
 	@Override

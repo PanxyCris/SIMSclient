@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 public class UserController implements UserBLService{
 
 	UserVO vo;
+	ArrayList<UserVO> list;
 
 	private static UserController userController = new UserController();
 	public static UserController getInstance(){
@@ -30,7 +31,7 @@ public class UserController implements UserBLService{
 	 */
 
 	public boolean judgeExist(String id){
-		return true;
+		return false;
 	}
 	/**
 	 * 判断该vo的信息是否都合法
@@ -87,17 +88,17 @@ public class UserController implements UserBLService{
      * 模糊查找，若输入值不符合格式或者该信息不存在返回null，若存在，返回该UserVO
      */
 	@Override
-	public UserVO blurFind(String info) {
+	public ArrayList<UserVO> blurFind(String info,String properties) {
 		// TODO Auto-generated method stub
-		return vo;
+		return list;
 	}
 	/**
 	 * 通过模糊查找返回需要删除的vo,同时进行delete操作
 	 */
     @Override
-	public UserVO delete(String info) {
+	public void delete(UserVO vo) {
 		// TODO Auto-generated method stub
-         return vo;
+
 	}
 
 	@Override

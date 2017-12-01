@@ -104,6 +104,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="findingField" layoutX="228.0" layoutY="476.0" prefHeight="23.0" prefWidth="552.0" />
+      <TextField fx:id="findingField" layoutX="224.0" layoutY="452.0" prefHeight="23.0" prefWidth="458.0" />
+      <ChoiceBox fx:id="findChoice" layoutX="680.0" layoutY="452.0" prefHeight="23.0" prefWidth="101.0" />
    </children>
 </AnchorPane>
