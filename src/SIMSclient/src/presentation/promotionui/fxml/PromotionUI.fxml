@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="900.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/尝试背景2.jpg" />
+            <Image url="@../img/尝试背景2.jpg" />
          </image>
       </ImageView>
       <Label layoutX="414.0" layoutY="246.0" prefHeight="109.0" prefWidth="294.0" text="欢迎你，总经理！" textFill="#f8f8f8">
@@ -23,7 +23,7 @@
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/返回.jpg" />
+                  <Image url="@../img/返回.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -33,7 +33,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/审批.jpg" />
+                  <Image url="@../img/审批.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -42,7 +42,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/策略.jpg" />
+                  <Image url="@../img/策略.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -51,7 +51,7 @@
          <graphic>
             <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/表格.jpg" />
+                  <Image url="@../img/表格.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -60,7 +60,7 @@
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/主页.jpg" />
+                  <Image url="@../img/主页.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -69,7 +69,7 @@
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/消息.jpg" />
+                  <Image url="@../img/消息.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -78,20 +78,16 @@
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/注销.jpg" />
+                  <Image url="@../img/注销.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
       <Label prefHeight="53.0" prefWidth="900.0" style="-fx-background-color: #ccccff;" />
-      <ImageView fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/用户.jpg" />
-         </image>
-      </ImageView>
+      <ImageView fitHeight="46.0" fitWidth="90.0" layoutX="796.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="53.0" fitWidth="123.0" layoutX="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/Logo.jpg" />
+            <Image url="@../img/Logo.jpg" />
          </image>
       </ImageView>
    </children>
