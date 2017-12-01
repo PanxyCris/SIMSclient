@@ -7,33 +7,36 @@ import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
 
 /**
- *
+ * 
  * @author Íõ²Ó²Ó
- *
+ * @version 2017-12-1
+ * 
+ * AccountBLÄ£¿éµÄcontroller
+ * 
  */
 public class AccountController implements AccountBLService{
-
+	
 	AccountBL accountBL=new AccountBL();
 	AccountVO accountVO;
-
+	
 	public static AccountController accountController=new AccountController();
-
-	public static AccountController getInstance(){
+	
+	public AccountController getInstance(){
 		return accountController;
 	}
-
-	public AccountBLService getAccountService(){
+	
+	public AccountBLService getContoller(){
 		return (AccountBLService)accountController;
 	}
 
 	@Override
-	public AccountVO find(String message) {
+	public ArrayList<AccountVO> find(String message) {
 		return accountBL.find(message);
 	}
 
 	@Override
-	public ResultMessage newBuild() {
-		return accountBL.newBuild();
+	public ResultMessage newBuild(String name, double money) {
+		return accountBL.newBuild(name,money);
 	}
 
 	@Override
@@ -45,12 +48,6 @@ public class AccountController implements AccountBLService{
 	public ResultMessage modify(String name) {
 		return accountBL.modify(name);
 	}
-
-	@Override
-	public ArrayList<AccountVO> getAccountList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
+	
 }
