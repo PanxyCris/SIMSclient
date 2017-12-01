@@ -15,32 +15,21 @@ public class AccountDeleteUI extends AccountManageUI{
 	@FXML
 	public void confirm(){
 		ResultMessage message = service.delete(nameField.getText());
-	    if(message == ResultMessage.ILLEGALINPUTNAME){
-			  Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-							new RemindPrintUI().start(new Stage());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
-		  }
-	    else if(message == ResultMessage.NOTFOUND){
-			  Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-							new RemindExistUI().start(remind,false);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
-		  }
-		  else{
-			table.refresh();
-	          cancel();
-		  }
+		Platform.runLater(new Runnable() {
+    	    public void run() {
+    	        try {
+    	        switch(message){
+    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(new Stage());break;
+    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(new Stage());break;
+    	        case NOTFOUND:new RemindExistUI().start(remind,false);break;
+    	        case SUCCESS:table.refresh();cancel();break;
+    	        default:break;
+    	        }
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
 	}
 
 	@FXML

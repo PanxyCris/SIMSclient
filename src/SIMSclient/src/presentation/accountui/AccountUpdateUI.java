@@ -20,21 +20,21 @@ public class AccountUpdateUI extends AccountManageUI{
         int money = Integer.parseInt(moneyField.getText());
 
         ResultMessage message = service.modify(name,money);
-		if(message == ResultMessage.ILLEGALINPUTNAME||message == ResultMessage.ILLEGALINPUTNAME){
-			Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-						new RemindPrintUI().start(new Stage());
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
-		}
-		else if(message == ResultMessage.SUCCESS){
-          table.refresh();
-          cancel();
-	  }
+        Platform.runLater(new Runnable() {
+    	    public void run() {
+    	        try {
+    	        	switch(message){
+    	        	case ILLEGALINPUTNAME:new RemindPrintUI().start(new Stage());break;
+    	        	case ILLEAGLINPUTDATA:new RemindPrintUI().start(new Stage());break;
+    	        	case SUCCESS:table.refresh();cancel();break;
+    	        	default:break;
+    	        	}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    	    }
+    	});
 	}
 
 	@FXML

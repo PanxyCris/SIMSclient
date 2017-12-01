@@ -1,37 +1,22 @@
 package SIMSclient.src.bussinesslogicservice.userblservice;
 
-
-import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.UserVO;
 
 public interface UserBLService {
 
-    public String getName();
+	public ArrayList<UserVO> find(String info,String properties);//info是信息，properties是属性
 
-    public String getID();
+	public ResultMessage insert(UserVO vo);//新建一个用户
 
-    public String getPassword();
+	public ResultMessage delete(String info,String properties);//删除
 
-    public UserRole getRole();
+	public ResultMessage update(UserVO vo);//修改
 
-    public ImageView getImage();
-
-    public void insert(UserVO vo);
-    public void delete(UserVO vo);
-	public void update(UserVO vo);
-	public boolean find(UserVO vo);
-	public UserVO find(String id,String name);
-	public ArrayList<UserVO> blurFind(String info,String properties);
-
+	public ArrayList<UserVO> getUserList();  //改了一下接口，返回一个账户list
 	public boolean login(String userName, String passWord);
-	public boolean judgeExist(String id);
-	public boolean judgeLegal(UserVO vo);
-	public boolean judgeLegal(String info);
 
-	public ArrayList<UserVO> getUserList();
 
 }

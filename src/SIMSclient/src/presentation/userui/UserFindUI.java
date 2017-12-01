@@ -15,7 +15,7 @@ public class UserFindUI extends UserManagingUI{
 
 	@FXML
 	public void blurFind(){
-	       ArrayList<UserVO> list = service.blurFind(findingField.getText(),findChoice.getValue());
+	       ArrayList<UserVO> list = service.find(findingField.getText(),findChoice.getValue());
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
