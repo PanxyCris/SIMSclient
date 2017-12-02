@@ -1,5 +1,7 @@
 package SIMSserver.src.data.accountdata;
 
+import java.util.ArrayList;
+
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
@@ -26,7 +28,7 @@ public class AccountDataServiceMySqlImpl implements AccountDataService{
 	}
 	
 	@Override
-	public AccountPO find(String message) {
+	public ArrayList<AccountPO> find(String message) {
 		// TODO Auto-generated method stub
 		return null;
 	}

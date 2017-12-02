@@ -12,9 +12,9 @@ import java.io.Serializable;
  */
 public class AccountPO implements Serializable {
 	private String name;
-	private double money;
+	private String money;
 
-	public AccountPO(String n, double m) {
+	public AccountPO(String n, String m) {
 		name = n;
 		money = m;
 	}
@@ -27,13 +27,15 @@ public class AccountPO implements Serializable {
 		this.name = name;
 	}
 
-	public double getMoney() {
+	public String getMoney() {
 		return money;
 	}
 
-	public void setMoney(double money) {
+	public void setMoney(String money) {
 		this.money = money;
 	}
+
+
 
 
 }

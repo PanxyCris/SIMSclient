@@ -23,14 +23,16 @@ public class AccountBL implements AccountBLService{
 	}
 	
 	AccountDataService accountDataService;
-	AccountVO accountVO = new AccountVO("", 0);
-	AccountPO accountPO = new AccountPO("", 0); 
+	AccountVO accountVO = new AccountVO("", "");
+	AccountPO accountPO = new AccountPO("", ""); 
+	
 
 /**
  * @author 王灿灿
  * @param message为检索内容
  * 
  */
+	@Override
 	public ArrayList<AccountVO> find(String message) {
 		
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
@@ -54,23 +56,59 @@ public class AccountBL implements AccountBLService{
  * @author 王灿灿
  * @param name,money均为从ui得到的参数
  */
-	public ResultMessage newBuild(String name,double money) {
+	@Override
+	public ResultMessage newBuild(String name,String money) {
 		
-		boolean judge=false;
+		double m = Double.valueOf(money);
 		
-		accountVO.setName(name);
-		accountVO.setMoney(money);
+		ResultMessage message = null;
 		
-		ResultMessage message=accountDataService.newBuild(accountVO);
-		
-		return message;
+		boolean judge=true;
+		if (!find(name).isEmpty()) {
+			judge=false;
+			return message.ILLEGALINPUTNAME;
+		}
+		if(0 > m || Double.MAX_VALUE < m){
+			judge=false;
+			return message.ILLEAGLINPUTDATA;
+		}
+		if(judge){
+			
+			accountVO.setName(name);
+			accountVO.setMoney(money);
+			
+			message=accountDataService.newBuild(accountVO);
+			
+		}
+		return message.SUCCESS;
 	}
 
-	public ResultMessage delete(AccountVO accountVO) {
+/**
+ * @author 王灿灿
+ * @param name为待删除账户名称
+ * 
+ */
+	@Override
+	public ResultMessage delete(String name) {
+		
+		accountDataService.delete(name);
+		
+		
 		return null;
 	}
 
-	public ResultMessage modify(String name) {
+/**
+ * @author 王灿灿
+ * @param preName为修改前名称，targetName为待修改成的名称
+ * 
+ */
+	@Override
+	public ResultMessage modifyName(String preName,String targetName) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<AccountVO> getAccountList() {
 		return null;
 	}
 

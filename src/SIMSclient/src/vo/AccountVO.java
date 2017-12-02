@@ -9,9 +9,9 @@ import java.io.Serializable;
 public class AccountVO implements Serializable{
 	
 	private String name;
-	private double money;
+	private String money;
 	
-	public AccountVO(String n,int m){
+	public AccountVO(String n,String m){
 		name=n;
 		money=m;
 	}
@@ -24,13 +24,15 @@ public class AccountVO implements Serializable{
 		this.name = name;
 	}
 
-	public double getMoney() {
+	public String getMoney() {
 		return money;
 	}
 
-	public void setMoney(double d) {
-		this.money = d;
+	public void setMoney(String money) {
+		this.money = money;
 	}
+
+
 	
 	
 

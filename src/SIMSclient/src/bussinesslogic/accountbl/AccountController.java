@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
+import SIMSserver.src.po.BillPO;
 
 /**
  *
@@ -35,27 +36,31 @@ public class AccountController implements AccountBLService{
 	}
 
 	@Override
-	public ResultMessage newBuild(String name, double money) {
+	public ResultMessage newBuild(String name, String money) {
 		return accountBL.newBuild(name,money);
 	}
 
 	@Override
 	public ResultMessage delete(String name) {//这里改了一下，输入名称就好了
-		return accountBL.delete(accountVO);
+		return accountBL.delete(name);
 	}
 
 	@Override
-	public ResultMessage modify(String name,double money) {//这里改了一下，修改两个都可能要改
-		return accountBL.modify(name);
+	public ResultMessage modifyName(String preName,String targetName) {//这里改了一下，修改两个都可能要改
+		return accountBL.modifyName(preName, targetName);
 	}
 
+	@Override
+	public ResultMessage enterItem(BillPO billPO) {
+		return accountBL.enterItem(billPO);
+	}
+	
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
-		AccountVO account1 = new AccountVO("王灿灿", 500000);
+		AccountVO account1 = new AccountVO("王灿灿", "50000");
 		ArrayList<AccountVO> list = new ArrayList<>();
 		list.add(account1);
         return list;
 	}
-
 
 }
