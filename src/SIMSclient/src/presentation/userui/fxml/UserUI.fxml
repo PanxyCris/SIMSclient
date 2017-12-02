@@ -19,7 +19,7 @@
          </font>
       </Label>
       <Label layoutY="53.0" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #9999FF;" />
-      <Button layoutX="7.0" layoutY="54.0" mnemonicParsing="false" onAction="#returnLast" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: #9999FF;">
+      <Button fx:id="ret" layoutX="7.0" layoutY="54.0" mnemonicParsing="false" onAction="#returnLast" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: #9999FF;">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                <image>

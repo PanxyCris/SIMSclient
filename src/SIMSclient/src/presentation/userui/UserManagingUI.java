@@ -54,6 +54,7 @@ public class UserManagingUI extends UserUI implements Initializable{
 		@FXML
 		protected TableColumn<UserVO,String> tableRole;
 
+
 		@FXML
 		public void insert() throws Exception{
 			Stage stage = new Stage();

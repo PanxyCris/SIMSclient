@@ -44,7 +44,7 @@ public class AccountFindUI extends AccountManageUI{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		changeStage("UserFindUI","UserFindUI.fxml");
+		changeStage("AccountFindUI","AccountFindUI.fxml");
 	}
 
 

@@ -51,7 +51,7 @@ public class AccountController implements AccountBLService{
 
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
-		AccountVO account1 = new AccountVO("Íõ²Ó²Ó", 500000);
+		AccountVO account1 = new AccountVO("Íõ²Ó²Ó", "500000");
 		ArrayList<AccountVO> list = new ArrayList<>();
 		list.add(account1);
         return list;

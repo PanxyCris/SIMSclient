@@ -41,7 +41,7 @@ public class AccountUI extends Application implements ControlledStage{
         stack.pop();
         current = previous;
         }
-        if(stack.size()>1)
+        if(stack.size()>=1)
             previous = stack.lastElement();
 	}
 

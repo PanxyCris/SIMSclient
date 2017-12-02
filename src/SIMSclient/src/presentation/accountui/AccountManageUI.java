@@ -6,16 +6,26 @@ import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.accountbl.AccountController;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
+import SIMSclient.src.common.EditingCell;
 import SIMSclient.src.vo.AccountVO;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class AccountManageUI extends AccountUI implements Initializable{
 	 ObservableList<AccountVO> list = FXCollections.observableArrayList();
@@ -33,7 +43,7 @@ public class AccountManageUI extends AccountUI implements Initializable{
 		@FXML
 		protected TableColumn<AccountVO,String> tableName;
 		@FXML
-		protected TableColumn<AccountVO,Integer> tableMoney;
+		protected TableColumn<AccountVO,String> tableMoney;
 
 		@FXML
 		public void insert() throws Exception{
@@ -59,6 +69,12 @@ public class AccountManageUI extends AccountUI implements Initializable{
 			new AccountFindUI().start(stage);
 		}
 
+		@FXML
+		public void save(){
+	        
+	        
+	         }
+
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			manageInit();
@@ -68,11 +84,42 @@ public class AccountManageUI extends AccountUI implements Initializable{
 	        tableName.setCellValueFactory(
 	                new PropertyValueFactory<AccountVO,String>("name"));
 	        tableMoney.setCellValueFactory(
-	                new PropertyValueFactory<AccountVO,Integer>("money"));
-            list.addAll(service.getAccountList());
+	                new PropertyValueFactory<AccountVO,String>("money"));
+
+	        tableName.setCellFactory(TextFieldTableCell.forTableColumn());
+	        tableMoney.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            edit();
+   
+
+
+	        list.addAll(service.getAccountList());
 	        table.setItems(list);
 		}
 
+
+
+		public void edit(){
+			Callback<TableColumn<AccountVO, String>,
+	            TableCell<AccountVO, String>> cellFactory
+	                = (TableColumn<AccountVO, String> p) -> new EditingCell<AccountVO>();
+
+	        tableName.setCellFactory(cellFactory);
+	        tableName.setOnEditCommit(
+	            (CellEditEvent<AccountVO, String> t) -> {
+	                ((AccountVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setName(t.getNewValue());
+	        });
+
+	        tableMoney.setCellFactory(cellFactory);
+	        tableMoney.setOnEditCommit(
+	            (CellEditEvent<AccountVO, String> t) -> {
+	                ((AccountVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setMoney(t.getNewValue());
+	        });
+		}
 
 		@Override
 		public void start(Stage primaryStage) throws Exception {
