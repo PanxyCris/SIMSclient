@@ -1,6 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.checktableblservice;
 
-import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.ValueObject;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 import SIMSclient.src.vo.table.BusinessHistoryScheduleVO;
 
@@ -12,6 +12,6 @@ public interface businessHistoryScheduleBLService {
 
 	public void writeOff();//ºì³å
 
-	public void writeOffAndCopy(BillVO billVO);//ºì³å²¢¸´ÖÆ
+	public void writeOffAndCopy(ValueObject billVO);//ºì³å²¢¸´ÖÆ
 
 }

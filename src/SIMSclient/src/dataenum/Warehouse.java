@@ -2,7 +2,8 @@ package SIMSclient.src.dataenum;
 
 public enum Warehouse {
 
-	WAREHOUSE("²Ö¿â");
+	WAREHOUSE1("²Ö¿â1"),
+	WAREHOUSE2("²Ö¿â2");
 
 	public final String value;
 

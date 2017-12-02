@@ -2,13 +2,13 @@ package SIMSclient.src.po;
 
 import java.io.Serializable;
 
-import SIMSclient.src.vo.bill.ClientCategory;
-import SIMSclient.src.vo.bill.MemberLevel;
+import SIMSclient.src.dataenum.MemberCategory;
+import SIMSclient.src.dataenum.MemberLevel;
 
 public class MemberPO implements Serializable {
 
 	private String ID;
-	private ClientCategory category; // 客户分类：进货商和销售商
+	private MemberCategory category; // 客户分类：进货商和销售商
 	private MemberLevel level; // 客户级别：五级，一级普通用户，五级VIP客户
 	private String name; // 客户名字
 	private String cellNumber; // 电话号码
@@ -34,7 +34,7 @@ public class MemberPO implements Serializable {
 	 * @param payable
 	 * @param saleMan
 	 */
-	public MemberPO(String iD, ClientCategory category, MemberLevel level, String name, String cellNumber,
+	public MemberPO(String iD, MemberCategory category, MemberLevel level, String name, String cellNumber,
 			String address, String post, String email, double receivableLimit, double receivable, double payable,
 			String saleMan) {
 		super();
@@ -68,11 +68,11 @@ public class MemberPO implements Serializable {
 		this.level = level;
 	}
 
-	public ClientCategory getCategory() {
+	public MemberCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(ClientCategory category) {
+	public void setCategory(MemberCategory category) {
 		this.category = category;
 	}
 

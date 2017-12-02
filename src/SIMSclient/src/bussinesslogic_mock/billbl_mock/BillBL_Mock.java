@@ -3,26 +3,26 @@ package SIMSclient.src.bussinesslogic_mock.billbl_mock;
 import SIMSclient.src.bussinesslogic.billbl.BillBL;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.PersistObject;
-import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.ValueObject;
 
 public class BillBL_Mock extends BillBL{
 
-     BillVO vo;
+     ValueObject vo;
      PersistObject po;
 
      public BillBL_Mock(){
 
      }
 
-     public ResultMessage insert(BillVO vo){
+     public ResultMessage insert(ValueObject vo){
      	return ResultMessage.SUCCESS;
      }
 
-     public ResultMessage delete(BillVO vo){
+     public ResultMessage delete(ValueObject vo){
      	return ResultMessage.SUCCESS;
      }
 
-     public ResultMessage update(BillVO vo){
+     public ResultMessage update(ValueObject vo){
      	return ResultMessage.SUCCESS;
      }
 

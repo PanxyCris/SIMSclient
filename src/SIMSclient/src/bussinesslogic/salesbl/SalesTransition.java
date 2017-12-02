@@ -36,7 +36,6 @@ public class SalesTransition {
 
 	public static SalesVO POtoVO(SalesPO po) {
 		String id = po.getID();
-		Date date = null;
 		String retailerId = po.getClientId();
 		String retailer = po.getClientName();
 		String salesMan = po.getSaleMan();

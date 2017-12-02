@@ -28,12 +28,20 @@ public class CommodityItemPO implements Serializable {
 		this.remark = remark;
 	}
 
-	public CommodityItemPO(String name, int number, double price, String remark) {
+	public CommodityItemPO(String id, String name, int number, double price, String remark) {
+		this.id = id;
 		this.name = name;
 		this.number = number;
 		this.price = price;
 		this.sum = price * number;
 		this.remark = remark;
+	}
+	
+	public CommodityItemPO(String id, int number, double price) {
+		this.id = id;
+		this.number = number;
+		this.price = price;
+		this.sum = price * number;
 	}
 	
 	public String getId() {

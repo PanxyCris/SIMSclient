@@ -1,7 +1,7 @@
 package SIMSclient.src.bussinesslogic.commoditybl;
 
 import SIMSclient.src.bussinesslogicservice.commodityblservice.CommodityBLService;
-import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.ValueObject;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public class CommodityController implements CommodityBLService{
@@ -159,24 +159,7 @@ public class CommodityController implements CommodityBLService{
 
 	}
 
-	@Override
-	public void giftInventoryReceiptsMaking(BillVO vo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void lossAndRevenueInventoryReceiptsMaking(BillVO vo) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void warningInventoryReceiptsMaking(BillVO vo) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public void check() {
 		// TODO Auto-generated method stub
@@ -187,6 +170,18 @@ public class CommodityController implements CommodityBLService{
 	public void stock() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void giftInventoryReceiptsMaking(ValueObject vo) {
+	}
+
+	@Override
+	public void lossAndRevenueInventoryReceiptsMaking(ValueObject vo) {
+	}
+
+	@Override
+	public void warningInventoryReceiptsMaking(ValueObject vo) {
 	}
 
 }

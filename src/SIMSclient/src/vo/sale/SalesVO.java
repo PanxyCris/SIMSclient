@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.vo.bill.BillVO;
+import SIMSclient.src.vo.ValueObject;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 
-public class SalesVO extends BillVO {
+public class SalesVO extends ValueObject {
 	public String retailerID;
 	public String retailer; // 客户姓名
 	public String saleMan; // 业务员

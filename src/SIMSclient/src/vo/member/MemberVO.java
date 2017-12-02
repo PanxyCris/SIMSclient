@@ -1,11 +1,11 @@
 package SIMSclient.src.vo.member;
 
-import SIMSclient.src.vo.bill.ClientCategory;
-import SIMSclient.src.vo.bill.MemberLevel;
+import SIMSclient.src.dataenum.MemberCategory;
+import SIMSclient.src.dataenum.MemberLevel;
 
 public class MemberVO {
 	public String ID;
-	public ClientCategory category; // 客户分类：进货商和销售商
+	public MemberCategory category; // 客户分类：进货商和销售商
 	public MemberLevel level; // 客户级别：五级，一级普通用户，五级VIP客户
 	public String name; // 客户名字
 	public String cellNumber; // 电话号码
@@ -30,7 +30,7 @@ public class MemberVO {
 	 * @param payable
 	 * @param saleMan
 	 */
-	public MemberVO(String ID, ClientCategory category, MemberLevel level, String name, String cellNumber,
+	public MemberVO(String ID, MemberCategory category, MemberLevel level, String name, String cellNumber,
 			String address, String post, String email, double receivableLimit, double receivable, double payable,
 			String saleMan) {
 		super();

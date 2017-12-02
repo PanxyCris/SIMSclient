@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import SIMSclient.src.po.PersistObject;
 import SIMSclient.src.po.commodity.CommodityPO;
 
-public interface CommodityDataService {
+public interface CommodityDataService{
 	public void setID(int id);
 	public int getID();
 
