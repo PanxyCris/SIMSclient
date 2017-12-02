@@ -7,8 +7,10 @@ import SIMSclient.src.vo.commodity.CommodityVO;
 import SIMSclient.src.vo.member.MemberVO;
 import SIMSclient.src.vo.sale.SalesAddVO;
 import SIMSclient.src.vo.sale.SalesVO;
+import SIMSserver.src.dataservice.CommonDataService;
+import SIMSserver.src.po.SalesPO;
 
-public interface SalesDataService {
+public interface SalesDataService extends CommonDataService<SalesPO> {
 
 	/**
 	 * 获取销售单ID和销售退货单ID
