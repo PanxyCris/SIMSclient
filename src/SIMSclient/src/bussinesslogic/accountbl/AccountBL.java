@@ -7,6 +7,7 @@ import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.po.AccountPO;
 import SIMSclient.src.vo.AccountVO;
+import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 
 /**
  * 
@@ -109,6 +110,11 @@ public class AccountBL implements AccountBLService{
 
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
+		return null;
+	}
+
+	@Override
+	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
 		return null;
 	}
 

@@ -7,6 +7,7 @@ import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
 import SIMSclient.src.vo.AccountVO;
 import SIMSserver.src.po.BillPO;
+import SIMSserver.src.po.makefinancialdoc.FinancialDocPO;
 
 /**
  * 
@@ -25,5 +26,5 @@ public interface AccountDataService {
 	
 	public ArrayList<AccountPO> getAccountList();  //改了一下接口，返回一个账户list
 	
-	public ResultMessage enterItem(BillPO billPO); //收款单、付款单 入账
+	public ResultMessage enterItem(FinancialDocPO financialDocPO); //收款单、付款单 入账
 }

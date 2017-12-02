@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
+import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 import SIMSserver.src.po.BillPO;
 
 /**
@@ -51,8 +52,8 @@ public class AccountController implements AccountBLService{
 	}
 
 	@Override
-	public ResultMessage enterItem(BillPO billPO) {
-		return accountBL.enterItem(billPO);
+	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
+		return accountBL.enterItem(financialDocVO);
 	}
 	
 	@Override
