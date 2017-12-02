@@ -36,7 +36,7 @@ import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
 import SIMSserver.src.po.BillPO;
 import SIMSserver.src.po.BillPO.BillState;
 import SIMSserver.src.po.BillPO.BillType;
-import SIMSserver.src.po.CommodityPO;
+import SIMSserver.src.po.commodity.CommodityPO;
 import SIMSserver.src.po.SalesPO;
 import SIMSserver.src.po.makefinancialdoc.SKDPO;
 import SIMSserver.src.po.makefinancialdoc.XJFYDPO;

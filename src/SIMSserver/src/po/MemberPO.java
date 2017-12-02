@@ -1,19 +1,18 @@
 package SIMSserver.src.po;
 
-import java.io.Serializable;
+import SIMSserver.src.dataenum.MemberCategory;
+import SIMSserver.src.dataenum.MemberLevel;
+import SIMSserver.src.dataenum.UserRole;
 
-import SIMSclient.src.vo.bill.ClientCategory;
-import SIMSclient.src.vo.bill.MemberLevel;
+public class MemberPO extends PersistObject {
 
-public class MemberPO implements Serializable {
-
-	private String ID;
-	private ClientCategory category; // 客户分类：进货商和销售商
-	private MemberLevel level; // 客户级别：五级，一级普通用户，五级VIP客户
-	private String name; // 客户名字
-	private String cellNumber; // 电话号码
+	private static final long serialVersionUID = 1L;
+	private MemberCategory category;
+	private MemberLevel level;
+	private String name;
+	private String phone;
 	private String address;
-	private String post; // 邮编
+	private String post;
 	private String email;
 	private double receivableLimit; // 应收额度
 	private double receivable; // 应收
@@ -21,43 +20,32 @@ public class MemberPO implements Serializable {
 	private String saleMan; // 默认业务员
 
 	/**
-	 * @param iD
-	 * @param category
-	 * @param level
-	 * @param name
-	 * @param cellNumber
-	 * @param address
-	 * @param post
-	 * @param email
-	 * @param receivableLimit
-	 * @param receivable
-	 * @param payable
-	 * @param saleMan
+	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
+	 *               category @param @param level @param @param name @param @param
+	 *               phone @param @param adress @param @param post @param @param
+	 *               email @param @param rereceivableLimit @param @param saleMan
+	 *               设定文件 @return 返回类型 @throws
 	 */
-	public MemberPO(String iD, ClientCategory category, MemberLevel level, String name, String cellNumber,
-			String address, String post, String email, double receivableLimit, double receivable, double payable,
-			String saleMan) {
-		super();
-		ID = iD;
+	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String adress,
+			String post, String email, double rereceivableLimit, String saleMan) {
+		super(id);
 		this.category = category;
 		this.level = level;
 		this.name = name;
-		this.cellNumber = cellNumber;
-		this.address = address;
+		this.phone = phone;
+		this.address = adress;
 		this.post = post;
 		this.email = email;
-		this.receivableLimit = receivableLimit;
-		this.receivable = receivable;
-		this.payable = payable;
+		this.receivableLimit = rereceivableLimit;
 		this.saleMan = saleMan;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public MemberCategory getCategory() {
+		return category;
 	}
 
-	public String getID() {
-		return ID;
+	public void setCategory(MemberCategory category) {
+		this.category = category;
 	}
 
 	public MemberLevel getLevel() {
@@ -68,83 +56,108 @@ public class MemberPO implements Serializable {
 		this.level = level;
 	}
 
-	public ClientCategory getCategory() {
-		return category;
-	}
-
-	public void setCategory(ClientCategory category) {
-		this.category = category;
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setReceivableLimit(double receivableLimit) {
-		this.receivableLimit = receivableLimit;
-	}
-
-	public double getReceivableLimit() {
-		return receivableLimit;
-	}
-
-	public void setReceivable(double receivable) {
-		this.receivable = receivable;
-	}
-
-	public double getReceivable() {
-		return receivable;
-	}
-
-	public void setPayable(double payable) {
-		this.payable = payable;
-	}
-
-	public double getPayable() {
-		return payable;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getAddress() {
 		return address;
 	}
 
-	public void setPost(String post) {
-		this.post = post;
+	public void setAddress(String adress) {
+		this.address = adress;
 	}
 
 	public String getPost() {
 		return post;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPost(String post) {
+		this.post = post;
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setCellNumber(String cellNumber) {
-		this.cellNumber = cellNumber;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getCellNumber() {
-		return cellNumber;
+	public double getRereceivableLimit() {
+		return receivableLimit;
+	}
+
+	/**
+	 * 
+	 * @Title: setRereceivableLimit @Description: 应收额度仅最高权限可修改 ,仅有总经理可以修改 @param
+	 *         rereceivableLimit, role @return 是否修改成功 @throws
+	 */
+	public boolean setRereceivableLimit(double rereceivableLimit, UserRole role) {
+		if (role.equals(UserRole.GENERAL_MANAGER)) {
+			this.receivableLimit = rereceivableLimit;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public double getReceivable() {
+		return receivable;
+	}
+
+	public void setReceivable(double receivable) {
+		this.receivable = receivable;
+	}
+
+	public double getPayable() {
+		return payable;
+	}
+
+	public void setPayable(double payable) {
+		this.payable = payable;
+	}
+
+	public String getSaleMan() {
+		return saleMan;
 	}
 
 	public void setSaleMan(String saleMan) {
 		this.saleMan = saleMan;
 	}
 
-	public String getSaleMan() {
-		return saleMan;
+	/**
+	 * 客户是否重复
+	 */
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) return true;
+		if (!super.equals(object)) return false;
+		if (getClass() != object.getClass()) return false;
+		MemberPO other = (MemberPO) object;
+		if (this.name == null) {
+			if (other.name != null) return false;
+		} 
+		else if (!this.name.equals(other.name)) return false;
+		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return id + "|" + category.value + "|" + level.value + "|" + name + "|" + phone + "|" + address + "|" + post + "|" + email
+				+ "|" + receivableLimit + receivable + "|" + payable + "|" + "|" + saleMan;
+	}
+
 }

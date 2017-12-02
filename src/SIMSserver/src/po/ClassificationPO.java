@@ -2,7 +2,7 @@ package SIMSserver.src.po;
 
 import java.util.ArrayList;
 
-import SIMSserver.src.po.CommodityPO;
+import SIMSserver.src.po.commodity.CommodityPO;
 
 public class ClassificationPO {
 

@@ -52,7 +52,5 @@ public class UserPO extends PersistObject {
 		return image;
 	}
 	
-	/**
-	 * 
-	 */
+	
 }

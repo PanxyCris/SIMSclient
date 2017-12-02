@@ -1,59 +1,48 @@
 package SIMSserver.src.po;
 
-import java.io.*;
 
+import SIMSserver.src.dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
-public class UserPO implements Serializable {
-     /**
-	 *
-	 */
-	enum Authority{
-		HIGHEST,NORMAL
-	}
+public class UserPO extends PersistObject {
 
-	public enum UserRole {
-		MANAGER, FINANCIALSTAFF, SALESPERSON, COMMODITYPERSON
-	}
 	private static final long serialVersionUID = 1L;
-	int id;
-     String name;
-     String password;
-     UserRole role;
-     Authority authority;
-     ImageView image;
+	private String name;
+	private String password;
+	private UserRole role;
+	private ImageView image; // 用户头像
 
+	/**
+	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
+	 * name @param @param password @param @param role @param @param image
+	 * 设定文件 @return 返回类型 @throws
+	 */
+	public UserPO(String id, String name, String password, UserRole role, ImageView image) {
+		super(id);
+		this.name = name;
+		this.password = password;
+		this.role = role;
+		this.image = image;
+	}
 
-     public UserPO(int i,String n,String p, UserRole r,Authority a,ImageView im){
-    	 id = i;
-    	 name = n;
-    	 password = p;
-    	 role = r;
-    	 authority = a;
-    	 image = im;
-     }
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-     public String getName(){
-    	 return name;
-     }
+	public String getName() {
+		return name;
+	}
 
-     public int getID(){
-    	 return id;
-     }
+	public String getPassword() {
+		return password;
+	}
 
-     public String getPassword(){
-    	 return password;
-     }
+	public UserRole getRole() {
+		return role;
+	}
 
-     public UserRole getRole(){
-    	 return role;
-     }
+	public ImageView getImage() {
+		return image;
+	}
 
-     public Authority getAuthority(){
-    	 return authority;
-     }
-
-     public ImageView getImage(){
-    	 return image;
-     }
 }

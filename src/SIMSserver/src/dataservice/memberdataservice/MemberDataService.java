@@ -1,55 +1,24 @@
 package SIMSserver.src.dataservice.memberdataservice;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.member.MemberVO;
+import SIMSserver.src.dataenum.FindMemberType;
+import SIMSserver.src.dataservice.CommonDataService;
+import SIMSserver.src.po.MemberPO;
 
-public interface MemberDataService {
+public interface MemberDataService extends CommonDataService<MemberPO>{
 
+	public static final String NAME = "MemberData";  //rmi的名称
 	/**
-	 * 获取用户ID
-	 * @return ID
+	 * 
+	* @Title: find 
+	* @Description: 传入keyword, 选择查找类型，进行模糊查找
+	* @param keyword
+	* @param type
+	* @throws RemoteException     
+	* @return ArrayList<MemberPO>    
 	 */
-	public String getID();
-
-	/**
-	 * 显示客户信息
-	 * @return 客户列表
-	 */
-	public ArrayList<MemberVO> show();
-
-	/**
-	 * 模糊查找用户
-	 * @param keyword
-	 * @return 所有符合条件的客户列表
-	 */
-	public ArrayList<MemberVO> fuzzySearch(String keyword);
-
-	/**
-	 * 精确查找用户
-	 * @param ID
-	 * @return 精确客户
-	 */
-	public MemberVO exactSearch(String ID);
-
-	/**
-	 * 增加客户
-	 * @return 处理信息
-	 */
-	public ResultMessage add();
-
-	/**
-	 * 更新客户
-	 * @return 处理信息
-	 */
-	public ResultMessage update();
-
-	/**
-	 * 删除客户
-	 * @return 处理信息
-	 */
-	public ResultMessage delete();
-
+	public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException;
 
 }

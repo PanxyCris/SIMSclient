@@ -22,8 +22,8 @@ public class SalesPO extends PersistObject {
 	private double afterPrice; // 折让后金额
 	private String remark; // 备注
 	private ArrayList<CommodityItemPO> commodities; // 商品清单
-	BillState state;
-	BillType type;
+	private BillState state;
+	private BillType type;
 
 	/**
 	 * @param id
