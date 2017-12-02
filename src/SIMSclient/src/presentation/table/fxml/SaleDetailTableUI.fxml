@@ -53,8 +53,6 @@
          <image>
             <Image url="@../img/用户.png" />
          </image></ImageView>
-      <ChoiceBox fx:id="findChoice" layoutX="773.0" layoutY="66.0" prefHeight="23.0" prefWidth="114.0" />
-      <Button fx:id="find" layoutX="887.0" layoutY="66.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" text="查   看" />
       <ImageView fitHeight="60.0" fitWidth="114.0" layoutX="11.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Logo.png" />
@@ -116,14 +114,26 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="193.0" layoutY="123.0" prefHeight="418.0" prefWidth="765.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <DatePicker layoutX="193.0" layoutY="66.0" />
-      <Button layoutX="620.0" layoutY="66.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="101.0" text="导出Excel" />
-      <DatePicker layoutX="400.0" layoutY="66.0" />
+      <TableView layoutX="193.0" layoutY="157.0" prefHeight="418.0" prefWidth="765.0">
+         <columns>
+            <TableColumn prefWidth="270.0" text="时间" />
+            <TableColumn prefWidth="100.0" text="商品名" />
+            <TableColumn prefWidth="100.0" text="型号" />
+            <TableColumn prefWidth="100.0" text="数量" />
+            <TableColumn prefWidth="100.0" text="单价" />
+            <TableColumn prefWidth="100.0" text="总额" />
+         </columns></TableView>
+      <DatePicker layoutX="193.0" layoutY="112.0" />
+      <Button layoutX="191.0" layoutY="57.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="136.0" text="导   出">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <DatePicker layoutX="379.0" layoutY="112.0" />
+      <Button layoutX="871.0" layoutY="112.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
+      <TextField layoutX="596.0" layoutY="112.0" />
+      <ChoiceBox layoutX="757.0" layoutY="112.0" prefHeight="23.0" prefWidth="114.0" />
+      <Button fx:id="find" layoutX="888.0" layoutY="68.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" text="查   看" />
+      <ChoiceBox fx:id="findChoice" layoutX="774.0" layoutY="68.0" prefHeight="23.0" prefWidth="114.0" />
    </children>
 </AnchorPane>
