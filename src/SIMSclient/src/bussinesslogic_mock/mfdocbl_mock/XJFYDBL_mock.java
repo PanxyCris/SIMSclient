@@ -2,37 +2,37 @@ package SIMSclient.src.bussinesslogic_mock.mfdocbl_mock;
 
 import SIMSclient.src.bussinesslogic.xjfydbl.XJFYDBL;
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.makefinancialdoc.XJFYDVO;
+import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
 public class XJFYDBL_mock extends XJFYDBL{
 
-	XJFYDVO xjfydVO;
+	ReceiptBillVO xjfydVO;
 	
 	public XJFYDBL_mock() {
 	}
 	
 	@Override
-	public ResultMessage newBuild(XJFYDVO xjfydVO) {
+	public ResultMessage newBuild(ReceiptBillVO xjfydVO) {
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ResultMessage modify(XJFYDVO xjfydVO) {
+	public ResultMessage modify(ReceiptBillVO xjfydVO) {
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ResultMessage delete(XJFYDVO xjfydVO) {
+	public ResultMessage delete(ReceiptBillVO xjfydVO) {
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public XJFYDVO find(String message) {
+	public ReceiptBillVO find(String message) {
 		return xjfydVO;
 	}
 
 	@Override
-	public ResultMessage commit(XJFYDVO xjfydVO) {
+	public ResultMessage commit(ReceiptBillVO xjfydVO) {
 		return ResultMessage.SUCCESS;
 	}
 

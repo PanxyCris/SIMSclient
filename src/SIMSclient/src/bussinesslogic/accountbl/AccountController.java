@@ -6,12 +6,11 @@ import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountVO;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
-import SIMSserver.src.po.BillPO;
 
 /**
  *
  * @author 王灿灿
- * @version 2017-12-1
+ * @version 2017-12-2
  *
  * AccountBL模块的controller
  *
@@ -42,12 +41,12 @@ public class AccountController implements AccountBLService{
 	}
 
 	@Override
-	public ResultMessage delete(String name) {//这里改了一下，输入名称就好了
+	public ResultMessage delete(String name) {
 		return accountBL.delete(name);
 	}
 
 	@Override
-	public ResultMessage modifyName(String preName,String targetName) {//这里改了一下，修改两个都可能要改
+	public ResultMessage modifyName(String preName,String targetName) {
 		return accountBL.modifyName(preName, targetName);
 	}
 
@@ -58,10 +57,7 @@ public class AccountController implements AccountBLService{
 	
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
-		AccountVO account1 = new AccountVO("王灿灿", "50000");
-		ArrayList<AccountVO> list = new ArrayList<>();
-		list.add(account1);
-        return list;
+        return accountBL.getAccountList();
 	}
 
 }

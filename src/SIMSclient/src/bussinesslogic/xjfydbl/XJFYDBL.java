@@ -2,32 +2,32 @@ package SIMSclient.src.bussinesslogic.xjfydbl;
 
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.xjfydblservice;
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.makefinancialdoc.XJFYDVO;
+import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
 public class XJFYDBL implements xjfydblservice{
 
 	@Override
-	public ResultMessage newBuild(XJFYDVO xjfydVO) {
+	public ResultMessage newBuild(ReceiptBillVO xjfydVO) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage modify(XJFYDVO xjfydVO) {
+	public ResultMessage modify(ReceiptBillVO xjfydVO) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage delete(XJFYDVO xjfydVO) {
+	public ResultMessage delete(ReceiptBillVO xjfydVO) {
 		return null;
 	}
 
 	@Override
-	public XJFYDVO find(String message) {
+	public ReceiptBillVO find(String message) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage commit(XJFYDVO xjfydVO) {
+	public ResultMessage commit(ReceiptBillVO xjfydVO) {
 		return null;
 	}
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
 import SIMSclient.src.vo.AccountVO;
 
 /**
@@ -20,9 +19,9 @@ public interface AccountDataService {
 	
 	public ResultMessage delete(String name);//删除
 	
-	public ResultMessage modify(String preName,String targetName);//修改账户名
+	public ResultMessage modifyName(String preName,String targetName);//修改账户名
 	
 	public ArrayList<AccountPO> getAccountList();  //改了一下接口，返回一个账户list
 	
-	public ResultMessage enterItem(FinancialDocPO financialDocPO); //收款单、付款单 入账
+	public ResultMessage enterItem(ArrayList<String> name,ArrayList<String> transferAmount); //收款单、付款单 入账
 }

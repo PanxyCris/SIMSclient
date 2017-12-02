@@ -2,11 +2,12 @@ package SIMSserver.src.data.accountdata;
 
 import java.util.ArrayList;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.po.AccountPO;
 import SIMSclient.src.vo.AccountVO;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
-import SIMSserver.src.po.makefinancialdoc.FinancialDocPO;
 
 /**
  * 
@@ -45,7 +46,7 @@ public class AccountDataServiceMySqlImpl implements AccountDataService{
 	}
 
 	@Override
-	public ResultMessage modify(String preName, String targetName) {
+	public ResultMessage modifyName(String preName, String targetName) {
 		return null;
 	}
 
@@ -54,9 +55,9 @@ public class AccountDataServiceMySqlImpl implements AccountDataService{
 		return null;
 	}
 
-//这里负责实现将收付款单据入账，即修改account的Money数据
+//这里负责实现将收付款单据入账，即修改对应account的Money数据
 	@Override
-	public ResultMessage enterItem(FinancialDocPO financialDocPO) {
+	public ResultMessage enterItem(ArrayList<String> nameList,ArrayList<String> transferMoney) {
 		return null;
 	}
 	

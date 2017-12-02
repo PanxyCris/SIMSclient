@@ -2,32 +2,32 @@ package SIMSclient.src.bussinesslogic.skdbl;
 
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.makefinancialdoc.SKDVO;
+import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
 
 public class SKDBL implements skdblservice{
 
 	@Override
-	public ResultMessage newBuild(SKDVO skdVO) {
+	public ResultMessage newBuild(PaymentBillVO skdVO) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage modify(SKDVO skdVO) {
+	public ResultMessage modify(PaymentBillVO skdVO) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage delete(SKDVO skdVO) {
+	public ResultMessage delete(PaymentBillVO skdVO) {
 		return null;
 	}
 
 	@Override
-	public SKDVO find(String message) {
+	public PaymentBillVO find(String message) {
 		return null;
 	}
 
 	@Override
-	public ResultMessage commit(SKDVO skdVO) {
+	public ResultMessage commit(PaymentBillVO skdVO) {
 		return null;
 	}
 	

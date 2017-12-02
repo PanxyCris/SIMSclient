@@ -12,7 +12,7 @@ import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 /**
  * 
  * @author 王灿灿
- * @version 2017-12-1
+ * @version 2017-12-2
  *
  */
 public class AccountBL implements AccountBLService{
@@ -41,9 +41,9 @@ public class AccountBL implements AccountBLService{
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
 		accountPOs=accountDataService.find(message);
 		
-		if (accountPOs.isEmpty()) {
-			System.out.println(ResultMessage.NOTFOUND);
-		}
+//		if (accountPOs.isEmpty()) {
+//			System.out.println(ResultMessage.NOTFOUND);
+//		}
 		
 		for (int i = 0; i < accountPOs.size(); i++) {
 			accountVO.setMoney(accountPOs.get(i).getMoney());
@@ -91,7 +91,7 @@ public class AccountBL implements AccountBLService{
 	@Override
 	public ResultMessage delete(String name) {
 		
-		return accountDataService.delete(name);
+		return accountDataService.delete(name);//将删除逻辑放在data层
 	}
 
 /**
@@ -101,17 +101,46 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ResultMessage modifyName(String preName,String targetName) {
+		
 		return accountDataService.modifyName(preName, targetName);
+		
 	}
 
+/**
+ * 
+ * @author 王灿灿
+ * 得到当前服务器上银行账户的数据
+ * 
+ */
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
-		return null;
+		ArrayList<AccountPO> accountPOs=new ArrayList<>();
+		ArrayList<AccountVO> accountVOs=new ArrayList<>();
+		accountPOs=accountDataService.getAccountList();
+		if(!accountPOs.isEmpty()){
+			for (int i = 0; i < accountVOs.size(); i++) {
+				accountVO.setName(accountPOs.get(i).getName());
+				accountVO.setMoney(accountPOs.get(i).getMoney());
+				accountVOs.add(accountVO);
+			}
+		}
+		return accountVOs;
 	}
 
+/**
+ * 
+ * @author 王灿灿
+ * @param financialDocVO	是收款单付款单的父类对象，拥有银行账户名列表、转账金额列表等属性
+ *  
+ * 
+ */
 	@Override
 	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
-		return null;
+		
+		ArrayList<String> nameList=financialDocVO.getAccountName();
+		ArrayList<String> moneyList=financialDocVO.getMoney();
+		
+		return accountDataService.enterItem(nameList, moneyList);
 	}
 
 }

@@ -1,18 +1,18 @@
 package SIMSclient.src.bussinesslogicservice.mfdocblservice;
 
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.makefinancialdoc.XJFYDVO;
+import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
 public interface xjfydblservice {
 
-	public ResultMessage newBuild(XJFYDVO xjfydVO);
+	public ResultMessage newBuild(ReceiptBillVO xjfydVO);
 	
-	public ResultMessage modify(XJFYDVO xjfydVO);
+	public ResultMessage modify(ReceiptBillVO xjfydVO);
 	
-	public ResultMessage delete(XJFYDVO xjfydVO);
+	public ResultMessage delete(ReceiptBillVO xjfydVO);
 	
-	public XJFYDVO find(String message);
+	public ReceiptBillVO find(String message);
 	
-	public ResultMessage commit(XJFYDVO xjfydVO);
+	public ResultMessage commit(ReceiptBillVO xjfydVO);
 	
 }

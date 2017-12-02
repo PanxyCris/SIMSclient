@@ -1,47 +1,29 @@
 package SIMSclient.src.po.makefinancialdoc;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * 付款单
- * @author xxx
+ * 
+ * @author 王灿灿
+ *@version 2017-12-2
  *
  */
 @SuppressWarnings("serial")
 public class PaymentBillPO extends FinancialDocPO {
-	String docID;// 单据编号
-	int userID;// 操作员(当前登录用户)
-	String accountID;// 银行账户ID
+	private String docID;//单据编号
+	private String userID;//当前登录用户的ID
+	private String note;//备注
+	//转账列表
+	private ArrayList<String> accountName;//银行账户名
+	private ArrayList<String> money;//转账金额
+	private String customerID;//客户ID
+	
+	private String total;//转账总额	
 
-	// 条目清单
-	String entryName;// 条目名
-	int transferAmount;// 金额
-	String note;// 备注
-
-	int total;// 总额
-
-	/**
-	 * @param d
-	 * @param u
-	 * @param n
-	 * @param docID
-	 * @param userID
-	 * @param accountID
-	 * @param entryName
-	 * @param transferAmount
-	 * @param note
-	 * @param total
-	 */
-	public PaymentBillPO(String d, int u, String n, Date date, String docID, int userID, String accountID, String entryName,
-			int transferAmount, String note, int total) {
-		super(d, u, n, date);
-		this.docID = docID;
-		this.userID = userID;
-		this.accountID = accountID;
-		this.entryName = entryName;
-		this.transferAmount = transferAmount;
-		this.note = note;
-		this.total = total;
+	public PaymentBillPO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note,String total){
+		super(docID,userID,accountName,money,customerID,note);
+		this.total=total;
 	}
 
 	public String getDocID() {
@@ -52,36 +34,12 @@ public class PaymentBillPO extends FinancialDocPO {
 		this.docID = docID;
 	}
 
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
-	}
-
-	public String getAccountID() {
-		return accountID;
-	}
-
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
-	}
-
-	public String getEntryName() {
-		return entryName;
-	}
-
-	public void setEntryName(String entryName) {
-		this.entryName = entryName;
-	}
-
-	public int getTransferAmount() {
-		return transferAmount;
-	}
-
-	public void setTransferAmount(int transferAmount) {
-		this.transferAmount = transferAmount;
 	}
 
 	public String getNote() {
@@ -92,12 +50,37 @@ public class PaymentBillPO extends FinancialDocPO {
 		this.note = note;
 	}
 
-	public int getTotal() {
+	public ArrayList<String> getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(ArrayList<String> accountName) {
+		this.accountName = accountName;
+	}
+
+	public ArrayList<String> getMoney() {
+		return money;
+	}
+
+	public void setMoney(ArrayList<String> money) {
+		this.money = money;
+	}
+
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
+
+	public String getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(String total) {
 		this.total = total;
 	}
+
 
 }
