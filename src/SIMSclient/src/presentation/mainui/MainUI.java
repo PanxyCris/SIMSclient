@@ -41,7 +41,7 @@ public class MainUI extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		    Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("µÇÂ¼½çÃæ");
@@ -61,7 +61,7 @@ public class MainUI extends Application{
 		    	                public void run() {
 		    	                   try {
 		    	                      switch(role){
-		    	                         case GENERAL_MANAGER:new PromotionUI().start(new Stage());break;
+		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(new Stage());break;
 		    	                         case FINANCIAL_MANAGER:new AccountUI().start(new Stage());break;
 		    	                         case PUR_SALE_MANAGER: new SalesUI().start(new Stage());break;
 		    	                         case INVENTORY_MANAGER: new CommodityUI().start(new Stage());break;

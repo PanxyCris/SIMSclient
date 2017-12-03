@@ -55,4 +55,19 @@ public class UserVO implements Serializable {
     	 return image;
      }
 
+
+	public void setName(String name) {
+		this.name = name;
+
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+
+	}
+	public void setRole(String userRole) {
+		this.role = UserRole.getRole(userRole);
+
+	}
+
 }

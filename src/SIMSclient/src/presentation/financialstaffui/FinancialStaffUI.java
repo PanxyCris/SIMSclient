@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.accountui;
+package SIMSclient.src.presentation.financialstaffui;
 
 import java.util.Stack;
 
@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AccountUI extends Application implements ControlledStage{
+public class FinancialStaffUI extends Application implements ControlledStage{
 
 	public static final String mainID = "AccountUI";
 	public static final String pack = "accountui/fxml/";

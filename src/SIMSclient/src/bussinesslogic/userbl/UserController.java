@@ -34,7 +34,7 @@ public class UserController implements UserBLService{
 	 * 通过模糊查找返回需要删除的vo,同时进行delete操作
 	 */
     @Override
-	public ResultMessage delete(String info,String properties) {
+	public ResultMessage delete(UserVO vo) {
 		// TODO Auto-generated method stub
     	return ResultMessage.SUCCESS;
 	}

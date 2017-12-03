@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.accountui;
+package SIMSclient.src.presentation.financialstaffui;
 
 import java.net.URL;
 

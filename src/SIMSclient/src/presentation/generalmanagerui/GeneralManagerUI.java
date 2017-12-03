@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.promotionui;
+package SIMSclient.src.presentation.generalmanagerui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,12 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class PromotionUI extends Application{
+public class GeneralManagerUI extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("PromotionUI.fxml"));
-	        Scene scene = new Scene(root, 900, 600);
+		    Parent root = FXMLLoader.load(getClass().getResource("GeneralManagerUI.fxml"));
+	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setTitle("总经理界面");
 	        primaryStage.show();

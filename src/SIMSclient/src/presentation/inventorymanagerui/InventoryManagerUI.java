@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.commodityui;
+package SIMSclient.src.presentation.inventorymanagerui;
 
 import java.util.Stack;
 
@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CommodityUI extends Application{
+public class InventoryManagerUI extends Application{
 	public static final String mainID = "CommodityUI";
 	public static final String pack = "commodityui/fxml/";
 	public static final String mainFXML = pack+"CommodityUI.fxml";

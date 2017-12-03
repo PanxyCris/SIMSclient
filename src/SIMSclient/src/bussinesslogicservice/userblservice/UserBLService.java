@@ -11,7 +11,7 @@ public interface UserBLService {
 
 	public ResultMessage insert(UserVO vo);//新建一个用户
 
-	public ResultMessage delete(String info,String properties);//删除
+	public ResultMessage delete(UserVO vo);//删除
 
 	public ResultMessage update(UserVO vo);//修改
 

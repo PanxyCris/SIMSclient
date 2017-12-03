@@ -1,30 +1,23 @@
-package SIMSclient.src.presentation.userui;
-
+package SIMSclient.src.presentation.usermanagerui;
 
 import java.util.*;
-
 import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.ControlledStage;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserUI extends Application implements ControlledStage{
+public class UserManagerUI extends Application implements ControlledStage{
 
 	public static final String mainID = "UserUI";
-	public static final String pack = "userui/fxml/";
-	public static final String mainFXML = pack+"UserUI.fxml";
+	public static final String pack = "usermanagerui/fxml/";
+	public static final String mainFXML = pack+"UserManagerUI.fxml";
 	static String previous;
 	static String current;
 	static Stack<String> stack;
@@ -63,6 +56,11 @@ public class UserUI extends Application implements ControlledStage{
     }
 
 	@FXML
+	public void fresh(){
+		stageController.setStage(current,current);
+	}
+
+	@FXML
 	public void message(){
 
 	}
@@ -83,7 +81,7 @@ public class UserUI extends Application implements ControlledStage{
 	}
 
 	@FXML
-	public void userManage() throws Exception{
+	public void manage() throws Exception{
 
 		Stage stage = new Stage();
 		new UserManagingUI().start(stage);
