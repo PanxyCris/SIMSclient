@@ -74,8 +74,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(new Stage());break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(new Stage());break;
+		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
+		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
 		    	        case SUCCESS:table.refresh();cancel();break;
 		    	        default:break;
@@ -95,7 +95,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
 			    	        try {
-			    	        	new RemindPrintUI().start(new Stage());
+			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -118,8 +118,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	    public void run() {
 		    	        try {
 		    	        	switch(message){
-		    	        	case ILLEGALINPUTNAME:new RemindPrintUI().start(new Stage());break;
-		    	        	case ILLEAGLINPUTDATA:new RemindPrintUI().start(new Stage());break;
+		    	        	case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
+		    	        	case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        	case SUCCESS:table.refresh();cancel();break;
 		    	        	default:break;
 		    	        	}
@@ -215,22 +215,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            ResultMessage message = service.delete(clickedUser);
-	                            Platform.runLater(new Runnable() {
-	            		    	    public void run() {
-	            		    	        try {
-	            		    	        switch(message){
-	            		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(new Stage());break;
-	            		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(new Stage());break;
-	            		    	        case NOTFOUND:new RemindExistUI().start(remind,false);break;
-	            		    	        case SUCCESS:table.refresh();cancel();break;
-	            		    	        default:break;
-	            		    	        }
-	            						} catch (Exception e) {
-	            							e.printStackTrace();
-	            						}
-	            		    	    }
-	            		    	});
+	                            service.delete(clickedUser);
+	            		    	table.refresh();
 	                        });
 	                    }
 	                }

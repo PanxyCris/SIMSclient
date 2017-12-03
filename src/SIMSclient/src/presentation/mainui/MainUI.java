@@ -1,10 +1,13 @@
 package SIMSclient.src.presentation.mainui;
 
 import SIMSclient.src.bussinesslogic.userbl.UserController;
-
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
-
+import SIMSclient.src.presentation.financialstaffui.FinancialStaffUI;
+import SIMSclient.src.presentation.generalmanagerui.GeneralManagerUI;
+import SIMSclient.src.presentation.inventorymanagerui.InventoryManagerUI;
+import SIMSclient.src.presentation.salestockstaffui.SaleStockStaffUI;
+import SIMSclient.src.presentation.usermanagerui.UserManagerUI;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -55,17 +58,17 @@ public class MainUI extends Application{
 		    UserBLService service = UserController.getInstance().getUserService();
 
 		    if(service.login(userName,passWord)){
-		    	UserRole role = service.getRole();
 
 		    	Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
+		    	   UserRole role = service.find(userName, "ÓÃ»§Ãû").get(0).getRole();
 		    	                      switch(role){
 		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(new Stage());break;
-		    	                         case FINANCIAL_MANAGER:new AccountUI().start(new Stage());break;
-		    	                         case PUR_SALE_MANAGER: new SalesUI().start(new Stage());break;
-		    	                         case INVENTORY_MANAGER: new CommodityUI().start(new Stage());break;
-				                         case USER_MANAGER: UserUI userUI = new UserUI();
+		    	                         case FINANCIAL_MANAGER:new FinancialStaffUI().start(new Stage());break;
+		    	                         case PUR_SALE_MANAGER: new SaleStockStaffUI().start(new Stage());break;
+		    	                         case INVENTORY_MANAGER: new InventoryManagerUI().start(new Stage());break;
+				                         case USER_MANAGER: UserManagerUI userUI = new UserManagerUI();
 														    userUI.start(new Stage());
 													    //	userUI.showImage(service.getImage());
 														   break;

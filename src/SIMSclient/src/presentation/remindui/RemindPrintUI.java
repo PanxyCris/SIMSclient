@@ -1,42 +1,19 @@
 package SIMSclient.src.presentation.remindui;
 
-import javafx.fxml.FXML;
+import SIMSclient.src.dataenum.ResultMessage;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class RemindPrintUI {
 
-	@FXML
-	Button button;
-	@FXML
-	AnchorPane pane;
-
-	@FXML
-	public void confirm(){
-	   exit();
-	}
-
-	@FXML
-	public void exitKey(KeyEvent event){
-		if(event.getCode()==KeyCode.ENTER)
-			exit();
-	}
-
-	public void exit(){
-		Stage stage = (Stage) button.getScene().getWindow();
-	    stage.close();
-	}
-
-	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("fxml/RemindPrintUI.fxml"));
-	        Scene scene = new Scene(root);
-	        primaryStage.setScene(scene);
+	public void start(ResultMessage message) throws Exception {
+		    FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/RemindPrintUI.fxml"));
+	        Stage primaryStage = new Stage();
+	        primaryStage.setScene( new Scene((Pane) loader.load()));
+	        RemindPrintController controller = loader.<RemindPrintController>getController();
+	        controller.initData(message);
 	        primaryStage.show();
 	}
 

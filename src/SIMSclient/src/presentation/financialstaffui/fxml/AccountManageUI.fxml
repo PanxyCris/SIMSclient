@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.accountui.AccountManageUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.financialstaffui.AccountManageUI">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -56,7 +56,7 @@
       <TableView fx:id="table" editable="true" layoutX="201.0" layoutY="139.0" prefHeight="271.0" prefWidth="792.0">
         <columns>
           <TableColumn fx:id="tableName" prefWidth="350.0" text="名称" />
-          <TableColumn fx:id="tableMoney" prefWidth="350.0" text="金额" />
+          <TableColumn fx:id="tableMoney" editable="false" prefWidth="350.0" text="金额" />
             <TableColumn fx:id="tableDelete" prefWidth="90.0" text="是否删除？" />
         </columns>
       </TableView>

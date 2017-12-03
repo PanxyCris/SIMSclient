@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.salesui;
+package SIMSclient.src.presentation.salestockstaffui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class SalesUI extends Application{
+public class SaleStockStaffUI extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {

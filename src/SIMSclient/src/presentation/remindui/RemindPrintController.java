@@ -1,21 +1,22 @@
 package SIMSclient.src.presentation.remindui;
 
+import SIMSclient.src.dataenum.ResultMessage;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class RemindNotPrintUI {
+public class RemindPrintController {
 
 	@FXML
 	Button button;
 	@FXML
 	AnchorPane pane;
+	@FXML
+	Label info;
 
 	@FXML
 	public void confirm(){
@@ -33,14 +34,10 @@ public class RemindNotPrintUI {
 	    stage.close();
 	}
 
-	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("fxml/RemindNotPrintUI.fxml"));
-	        Scene scene = new Scene(root);
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
+	public void initData(ResultMessage message) {
+
+		info.setText("		"+message.value);
+
 	}
-
-
-
 
 }
