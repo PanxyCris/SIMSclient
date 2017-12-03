@@ -1,18 +1,19 @@
 package SIMSclient.src.po;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import SIMSclient.src.po.commodity.CommodityPO;
 
-public class ClassificationPO implements Serializable{
+public class ClassificationPO extends PersistObject{
 
-	String name;
-	ArrayList<CommodityPO> po;
-	ClassificationPO father;
-	ArrayList<ClassificationPO> children;
+	private static final long serialVersionUID = 1L;
+	private String name;
+	private ArrayList<CommodityPO> po;
+	private ClassificationPO father;
+	private ArrayList<ClassificationPO> children;
 
-	public ClassificationPO(String n,ArrayList<CommodityPO> p,ClassificationPO f,ArrayList<ClassificationPO> c){
+	public ClassificationPO(String id, String n,ArrayList<CommodityPO> p,ClassificationPO f,ArrayList<ClassificationPO> c){
+		super(id);
 		name = n;
 		po = p;
 		father = f;

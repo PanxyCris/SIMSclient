@@ -1,11 +1,12 @@
-package SIMSserver.src.dataservice.setupaccountdataservice;
+package SIMSclient.src.dataservice.setupaccountdataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataservice.DataService;
-import SIMSserver.src.po.AccountBookPO;
+import SIMSclient.src.dataenum.ResultMessage;
+import SIMSclient.src.dataservice.DataService;
+import SIMSclient.src.po.AccountBookPO;
+
 
 /**
  * 

@@ -1,9 +1,9 @@
-package SIMSserver.src.dataservice.salesdataservice;
+package SIMSclient.src.dataservice.salesdataservice;
 
 import java.rmi.RemoteException;
 
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.SalesPO;
+import SIMSclient.src.dataservice.CommonDataService;
+import SIMSclient.src.po.sales.SalesPO;
 
 public interface SalesDataService extends CommonDataService<SalesPO> {
 

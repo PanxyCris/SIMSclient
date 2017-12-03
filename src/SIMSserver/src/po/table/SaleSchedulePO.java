@@ -1,19 +1,28 @@
 package SIMSserver.src.po.table;
 
-public class SaleSchedulePO {
-	//筛选条件
-	String date;//时间,精确到天
-	String tradeName;//商品名
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
-	
-	public String getDate() {
-		return date;
-	}
+import SIMSserver.src.dataenum.Warehouse;
+import SIMSserver.src.po.PersistObject;
 
-	public void setDate(String date) {
-		this.date = date;
+/**
+ * 销售明细表 继承PersistObjct 将原本的属性用private修饰，增加serialVersionUID,去掉date, 因为date在父类PersistObject自动生成 
+ * 将clerkID转String
+ * 修改者：lijie
+ */
+public class SaleSchedulePO extends PersistObject {
+	private static final long serialVersionUID = 1L;
+	// 筛选条件
+	private String tradeName;// 商品名
+	private String customer;// 客户
+	private String clerkID;// 业务员
+	private Warehouse warehouse;// 仓库
+
+	
+	public SaleSchedulePO(String id, String tradeName, String customer, String clerkID, Warehouse warehouse) {
+		super(id);
+		this.tradeName = tradeName;
+		this.customer = customer;
+		this.clerkID = clerkID;
+		this.warehouse = warehouse;
 	}
 
 	public String getTradeName() {
@@ -32,28 +41,20 @@ public class SaleSchedulePO {
 		this.customer = customer;
 	}
 
-	public int getClerkID() {
+	public String getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(int clerkID) {
+	public void setClerkID(String clerkID) {
 		this.clerkID = clerkID;
 	}
 
-	public String getRepertory() {
-		return repertory;
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
 
-	public void setRepertory(String repertory) {
-		this.repertory = repertory;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 
-	public SaleSchedulePO(String d,String t,String cu,int cl,String r){
-		date=d;
-		tradeName=t;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
-	}
-	
 }

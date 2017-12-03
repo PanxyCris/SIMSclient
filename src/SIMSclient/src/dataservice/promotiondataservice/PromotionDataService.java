@@ -1,11 +1,12 @@
-package SIMSserver.src.dataservice.promotiondataservice;
+package SIMSclient.src.dataservice.promotiondataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.PromotionType;
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.PromotionPO;
+import SIMSclient.src.dataenum.PromotionType;
+import SIMSclient.src.dataservice.CommonDataService;
+import SIMSclient.src.po.PromotionPO;
+
 
 public interface PromotionDataService extends CommonDataService<PromotionPO>{
 

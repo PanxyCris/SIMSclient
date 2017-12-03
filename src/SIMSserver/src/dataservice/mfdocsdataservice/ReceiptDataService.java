@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import SIMSserver.src.dataenum.BillType;
 import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.makefinancialdoc.PaymentBillPO;
+import SIMSserver.src.po.makefinancialdoc.ReceiptBillPO;
 
 /**  
 * 类说明   
@@ -13,10 +13,10 @@ import SIMSserver.src.po.makefinancialdoc.PaymentBillPO;
 * @author ****  
 * @date 2017年11月12日    
 */
-public interface ReceiptDataService extends CommonDataService<PaymentBillPO>{
+public interface ReceiptDataService extends CommonDataService<ReceiptBillPO>{
 
 	public static final String NAME = "ReceiptBillData";
 	
-	public ArrayList<PaymentBillPO> show(BillType type) throws RemoteException;
+	public ArrayList<ReceiptBillPO> show(BillType type) throws RemoteException;
 
 }

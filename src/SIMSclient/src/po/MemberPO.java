@@ -19,13 +19,7 @@ public class MemberPO extends PersistObject {
 	private double payable; // 应付
 	private String saleMan; // 默认业务员
 
-	/**
-	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
-	 *               category @param @param level @param @param name @param @param
-	 *               phone @param @param adress @param @param post @param @param
-	 *               email @param @param rereceivableLimit @param @param saleMan
-	 *               设定文件 @return 返回类型 @throws
-	 */
+	
 	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String adress,
 			String post, String email, double rereceivableLimit, String saleMan) {
 		super(id);

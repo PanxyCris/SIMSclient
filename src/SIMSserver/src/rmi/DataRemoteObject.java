@@ -5,71 +5,196 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.po.PersistObject;
-import SIMSclient.src.po.makefinancialdoc.FinancialDocPO;
-import SIMSclient.src.po.table.BusinessHistorySchedulePO;
-import SIMSclient.src.po.table.SaleSchedulePO;
-import SIMSclient.src.po.table.StatementOfOperationPO;
-import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
-import SIMSclient.src.vo.member.MemberVO;
-import SIMSclient.src.vo.purchase.PurchaseVO;
-import SIMSclient.src.vo.sale.SalesAddVO;
-import SIMSclient.src.vo.sale.SalesVO;
 import SIMSserver.src.data.accountdata.AccountDataServiceMySqlImpl;
 import SIMSserver.src.data.billdata.BillData;
+import SIMSserver.src.dataenum.BillState;
+import SIMSserver.src.dataenum.BillType;
+import SIMSserver.src.dataenum.PromotionType;
+import SIMSserver.src.dataenum.ResultMessage;
+import SIMSserver.src.dataenum.findtype.FindAccountType;
+import SIMSserver.src.dataenum.findtype.FindCommodityType;
+import SIMSserver.src.dataenum.findtype.FindMemberType;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
 import SIMSserver.src.dataservice.billdataservice.BillDataService;
-import SIMSserver.src.dataservice.checktabledataservice.businessHistoryScheduleDataService;
-import SIMSserver.src.dataservice.checktabledataservice.saleScheduleDataService;
-import SIMSserver.src.dataservice.checktabledataservice.statementOfOperationDataService;
+import SIMSserver.src.dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
+import SIMSserver.src.dataservice.checktabledataservice.SaleScheduleDataService;
+import SIMSserver.src.dataservice.checktabledataservice.StatementOfOperationDataService;
 import SIMSserver.src.dataservice.commoditydataservice.CommodityDataService;
 import SIMSserver.src.dataservice.memberdataservice.MemberDataService;
-import SIMSserver.src.dataservice.mfdocsdataservice.skddataservice;
-import SIMSserver.src.dataservice.mfdocsdataservice.xjfyddataservice;
+import SIMSserver.src.dataservice.mfdocsdataservice.PaymentBillDataService;
+import SIMSserver.src.dataservice.mfdocsdataservice.ReceiptDataService;
 import SIMSserver.src.dataservice.promotiondataservice.PromotionDataService;
 import SIMSserver.src.dataservice.purchasedataservice.PurchaseDataService;
 import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
-import SIMSserver.src.po.BillPO;
-import SIMSserver.src.po.BillPO.BillState;
-import SIMSserver.src.po.BillPO.BillType;
-import SIMSserver.src.po.commodity.CommodityPO;
+import SIMSserver.src.po.AccountPO;
+import SIMSserver.src.po.MemberPO;
+import SIMSserver.src.po.PersistObject;
+import SIMSserver.src.po.PromotionPO;
+import SIMSserver.src.po.PurchasePO;
 import SIMSserver.src.po.SalesPO;
-import SIMSserver.src.po.makefinancialdoc.SKDPO;
-import SIMSserver.src.po.makefinancialdoc.XJFYDPO;
-
+import SIMSserver.src.po.commodity.CommodityPO;
+import SIMSserver.src.po.makefinancialdoc.FinancialDocPO;
+import SIMSserver.src.po.makefinancialdoc.PaymentBillPO;
+import SIMSserver.src.po.makefinancialdoc.ReceiptBillPO;
+import SIMSserver.src.po.table.BusinessHistorySchedulePO;
+import SIMSserver.src.po.table.SaleSchedulePO;
+import SIMSserver.src.po.table.StatementOfOperationPO;
 
 /**
  * 
  * @author 王灿灿
  * @version 2017-11-28
+ */
+
+/**
  * 
+ * @ClassName: DataRemoteObject
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author lijie
+ * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements AccountDataService,BillDataService,businessHistoryScheduleDataService,saleScheduleDataService,statementOfOperationDataService
-,CommodityDataService,MemberDataService,skddataservice,xjfyddataservice,PromotionDataService,PurchaseDataService,SalesDataService{
+public class DataRemoteObject extends UnicastRemoteObject
+		implements AccountDataService, BillDataService, BusinessHistoryScheduleDataService, SaleScheduleDataService,
+		StatementOfOperationDataService, CommodityDataService, MemberDataService, ReceiptDataService,
+		PaymentBillDataService, PromotionDataService, PurchaseDataService, SalesDataService {
 
-	
 	private static final long serialVersionUID = 4029039744279087114L;
 	private AccountDataService accountDataService;
 	private BillDataService billDataService;
-	private businessHistoryScheduleDataService businessHistoryScheduleDataService;
-	private saleScheduleDataService saleScheduleDataService;
-	private statementOfOperationDataService statementOfOperationDataService;
+	private BusinessHistoryScheduleDataService businessHistoryScheduleDataService;
+	private SaleScheduleDataService saleScheduleDataService;
+	private StatementOfOperationDataService statementOfOperationDataService;
 	private CommodityDataService commodityDataService;
 	private MemberDataService memberDataService;
-	private skddataservice skddataservice;
-	private xjfyddataservice xjfyddataservice;
+	private ReceiptDataService receiptDataService;
+	private PaymentBillDataService paymentBillDataService;
 	private PromotionDataService promotionDataService;
 	private PurchaseDataService purchaseDataService;
 	private SalesDataService salesDataService;
-	
+
 	protected DataRemoteObject() throws RemoteException {
-		accountDataService=new AccountDataServiceMySqlImpl();
-		billDataService=new BillData();
+		accountDataService = new AccountDataServiceMySqlImpl();
+		billDataService = new BillData();
+	}
+
+	@Override
+	public ResultMessage insert(AccountPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage delete(String ID) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(AccountPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ArrayList<AccountPO> show() throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public void init() throws RemoteException {
+	}
+
+	@Override
+	public String getID() throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(BusinessHistorySchedulePO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(BusinessHistorySchedulePO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(SaleSchedulePO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(SaleSchedulePO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(StatementOfOperationPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(StatementOfOperationPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(CommodityPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(CommodityPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(MemberPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(MemberPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(ReceiptBillPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(ReceiptBillPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(PaymentBillPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(PaymentBillPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(PromotionPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(PromotionPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insert(PurchasePO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(PurchasePO po) throws RemoteException {
+		return null;
 	}
 
 	@Override
@@ -88,262 +213,53 @@ public class DataRemoteObject extends UnicastRemoteObject implements AccountData
 	}
 
 	@Override
-	public String getSaleID() {
+	public String getSaleID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public String getBackID() {
+	public String getSaleBackID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public void addCommodities(CommodityVO item) {
-	}
-
-	@Override
-	public MemberVO getMember() {
+	public String getPurchaseID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public SalesVO submit(SalesAddVO Info) {
+	public String getPurchaseBackID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public SalesVO save(SalesAddVO Info) {
+	public ArrayList<PromotionPO> show(PromotionType type) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public String getPurchaseID() {
+	public ArrayList<ReceiptBillPO> show(BillType type) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public String getPurBackID() {
+	public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public CommodityVO getCommodityByID(int ID) {
+	public String getID(String fatherID) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID) {
+	public ArrayList<String> getAllID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public PurchaseVO submit(PurchaseVO Info) {
+	public ArrayList<CommodityPO> find(String keywords, FindCommodityType type) throws RemoteException {
 		return null;
-	}
-
-	@Override
-	public PurchaseVO save(PurchaseVO Info) {
-		return null;
-	}
-
-	@Override
-	public void endSales() {
-	}
-
-	@Override
-	public ResultMessage newBuild(XJFYDPO xjfydPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage modify(XJFYDPO xjfydPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage delete(XJFYDPO xjfydPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage commit(XJFYDPO xjfydPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage newBuild(SKDPO skdPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage modify(SKDPO skdPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage delete(SKDPO skdPO) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage commit(SKDPO skdPO) {
-		return null;
-	}
-
-	@Override
-	public String getID() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<MemberVO> show() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<MemberVO> fuzzySearch(String keyword) {
-		return null;
-	}
-
-	@Override
-	public MemberVO exactSearch(String ID) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage add() {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update() {
-		return null;
-	}
-
-	@Override
-	public ResultMessage delete() {
-		return null;
-	}
-
-	@Override
-	public void setID(int id) {
-	}
-
-	@Override
-	public void setName(String name) {
-	}
-
-	@Override
-	public String getName() {
-		return null;
-	}
-
-	@Override
-	public void setModel(String model) {
-	}
-
-	@Override
-	public String getModel() {
-		return null;
-	}
-
-	@Override
-	public void setClassification(String classification) {
-	}
-
-	@Override
-	public String getClassification() {
-		return null;
-	}
-
-	@Override
-	public void setNumber(int number) {
-	}
-
-	@Override
-	public int getNumber() {
-		return 0;
-	}
-
-	@Override
-	public void setPurPrice(double purPrice) {
-	}
-
-	@Override
-	public double getPurPrice() {
-		return 0;
-	}
-
-	@Override
-	public void setRetailedPrice(double retailedPrice) {
-	}
-
-	@Override
-	public double getRetailedPrice() {
-		return 0;
-	}
-
-	@Override
-	public void setRecentPurPrice(double recentPurPrice) {
-	}
-
-	@Override
-	public double getRecentPurPrice() {
-		return 0;
-	}
-
-	@Override
-	public void setRecentRetailedPrice(double recentRetailedPrice) {
-	}
-
-	@Override
-	public double getRecentRetailedPrice() {
-		return 0;
-	}
-
-	@Override
-	public void setWarmingValue(int warmingValue) {
-	}
-
-	@Override
-	public int getWarmingValue() {
-		return 0;
-	}
-
-	@Override
-	public void insert(CommodityPO po) throws RemoteException {
-	}
-
-	@Override
-	public void delelte(CommodityPO po) throws RemoteException {
-	}
-
-	@Override
-	public void update(CommodityPO po) throws RemoteException {
-	}
-
-	@Override
-	public void find(CommodityPO po) throws RemoteException {
-	}
-
-	@Override
-	public void giftInventoryReceiptsMaking(BillPO po) throws RemoteException {
-	}
-
-	@Override
-	public void lossAndRevenueInventoryReceiptsMaking(BillPO po) throws RemoteException {
-	}
-
-	@Override
-	public void warningInventoryReceiptsMaking(BillPO po) throws RemoteException {
-	}
-
-	@Override
-	public void init() throws RemoteException {
-	}
-
-	@Override
-	public void finish() throws RemoteException {
 	}
 
 	@Override
@@ -387,29 +303,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements AccountData
 	}
 
 	@Override
-	public ResultMessage newBuild(AccountVO accountVO) {
+	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException {
 		return null;
 	}
 
-	@Override
-	public ResultMessage delete(String name) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage modifyName(String preName, String targetName) {
-		return null;
-	}
-
-	@Override
-	public ArrayList<AccountPO> getAccountList() {
-		return null;
-	}
-
-	@Override
-	public ResultMessage enterItem(ArrayList<String> name, ArrayList<String> transferAmount) {
-		return null;
-	}
-
-
+	
 }

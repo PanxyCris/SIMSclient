@@ -1,60 +1,77 @@
 package SIMSclient.src.po.table;
 
+import SIMSclient.src.dataenum.BillType;
+import SIMSclient.src.po.PersistObject;
+import SIMSserver.src.dataenum.Warehouse;
 
-public class BusinessHistorySchedulePO {
+/**
+ * 经营历程表
+ * 继承PersistObjct
+ * 将原本的属性用private修饰，增加serialVersionUID,去掉date, 因为date在父类PersistObject自动生成
+ */
+public class BusinessHistorySchedulePO extends PersistObject{
+	private static final long serialVersionUID = 1L;
 	//筛选条件
-	String date;//时间
-	String billType;
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
+	private BillType type;
+	private String customer;//客户
+	private String clerkID;//业务员
+	private Warehouse warehouse;//仓库
 	
-	public BusinessHistorySchedulePO(String d,String b,String cu,int cl,String r){
-		date=d;
-		billType=b;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
+	/** 
+	* @Description: TODO(这里用一句话描述这个方法的作用) 
+	* @param @param id
+	* @param @param type
+	* @param @param customer
+	* @param @param clerkID
+	* @param @param warehouse    设定文件 
+	* @return   返回类型 
+	* @throws 
+	*/
+	public BusinessHistorySchedulePO(String id, BillType type, String customer, String clerkID, Warehouse warehouse) {
+		super(id);
+		this.type = type;
+		this.customer = customer;
+		this.clerkID = clerkID;
+		this.warehouse = warehouse;
 	}
 
-	public String getDate() {
-		return date;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getBillType() {
-		return billType;
-	}
-
-	public void setBillType(String billType) {
-		this.billType = billType;
+	public BillType getType() {
+		return type;
 	}
 
 	public String getCustomer() {
 		return customer;
 	}
 
+	public String getClerkID() {
+		return clerkID;
+	}
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+	public void setType(BillType type) {
+		this.type = type;
+	}
+
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 
-	public int getClerkID() {
-		return clerkID;
-	}
-
-	public void setClerkID(int clerkID) {
+	public void setClerkID(String clerkID) {
 		this.clerkID = clerkID;
 	}
 
-	public String getRepertory() {
-		return repertory;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
-
-	public void setRepertory(String repertory) {
-		this.repertory = repertory;
-	}
+	
+	
+	
 	
 }

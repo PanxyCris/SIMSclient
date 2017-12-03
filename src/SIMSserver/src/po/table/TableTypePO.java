@@ -1,5 +1,7 @@
 package SIMSserver.src.po.table;
 
+import SIMSserver.src.dataenum.TableType;
+
 public class TableTypePO {
 
 	TableType tableType;

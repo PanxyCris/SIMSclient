@@ -1,18 +1,13 @@
 package SIMSclient.src.po.table;
 
-public class StatementOfOperationPO {
-	//É¸Ñ¡Ìõ¼þ
-	String date;
+import SIMSclient.src.po.PersistObject;
+
+public class StatementOfOperationPO extends PersistObject{
+
+	private static final long serialVersionUID = 1L;
+	public StatementOfOperationPO(String id) {
+		super(id);
+	}
 	
-	public StatementOfOperationPO(String d) {
-		date=d;
-	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
 }
+

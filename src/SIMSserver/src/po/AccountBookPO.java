@@ -2,28 +2,20 @@ package SIMSserver.src.po;
 
 public class AccountBookPO extends PersistObject {
 	private static final long serialVersionUID = 1L;
-	private String date;
-	private int clerkID;
+	private String clerkID;
 
-	public AccountBookPO(String id, String d, int c) {
+	public AccountBookPO(String id, String c) {
 		super(id);
-		date = d;
 		clerkID = c;
 	}
 
-	public String getDate() {
-		return date;
+	
+
+	public String getClerkID() {
+		return this.clerkID;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public int getClerkID() {
-		return clerkID;
-	}
-
-	public void setClerkID(int clerkID) {
+	public void setClerkID(String clerkID) {
 		this.clerkID = clerkID;
 	}
 }

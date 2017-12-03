@@ -1,13 +1,9 @@
-package SIMSserver.src.dataservice.purchasedataservice;
+package SIMSclient.src.dataservice.purchasedataservice;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
-import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
-import SIMSclient.src.vo.purchase.PurchaseVO;
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.PurchasePO;
+import SIMSclient.src.dataservice.CommonDataService;
+import SIMSclient.src.po.PurchasePO;
 
 /**  
 * ภเหตร๗   
