@@ -31,6 +31,9 @@ public class AccountPO extends PersistObject {
 		this.money = money;
 	}
 
+	/**
+	 * 进行模糊查找
+	 */
 	@Override
 	public String toString() {
 		return id + "," + name + "," + money;

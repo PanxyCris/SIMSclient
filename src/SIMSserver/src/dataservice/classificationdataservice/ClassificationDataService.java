@@ -1,9 +1,13 @@
 package SIMSserver.src.dataservice.classificationdataservice;
 
-public interface ClassificationDataService {
+import java.rmi.RemoteException;
 
-	public void insert(ClassificationPO po);
-	public void delete(ClassificationPO po);
-	public void update(ClassificationPO po);
-	public void find(ClassificationPO po);
+import SIMSserver.src.dataservice.CommonDataService;
+import SIMSserver.src.po.ClassificationPO;
+
+public interface ClassificationDataService extends CommonDataService<ClassificationPO> {
+
+	public static final String NAME = "ClassificationData";
+	
+	public String getID(String fatherID) throws RemoteException;
 }
