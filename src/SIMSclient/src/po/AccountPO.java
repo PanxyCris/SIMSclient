@@ -1,8 +1,6 @@
 package SIMSclient.src.po;
 
-import java.io.Serializable;
-
-@SuppressWarnings("serial")
+import SIMSclient.src.po.PersistObject;
 
 /**
  * 
@@ -10,13 +8,16 @@ import java.io.Serializable;
  * @version 2017-12-1
  *
  */
-public class AccountPO implements Serializable {
+public class AccountPO extends PersistObject {
+	private static final long serialVersionUID = 1L;
 	private String name;
-	private String money;
+	private double money;
 
-	public AccountPO(String n, String m) {
-		name = n;
-		money = m;
+	
+	public AccountPO(String id, String name, double money) {
+		super(id);
+		this.name = name;
+		this.money = money;
 	}
 
 	public String getName() {
@@ -27,15 +28,17 @@ public class AccountPO implements Serializable {
 		this.name = name;
 	}
 
-	public String getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public void setMoney(String money) {
+	public void setMoney(double money) {
 		this.money = money;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return id + "," + name + "," + money;
+	}
 
 }

@@ -1,6 +1,4 @@
-package SIMSclient.src.dataservice.commoditydataservice;
-
-import SIMSclient.src.po.ClassificationPO;
+package SIMSserver.src.dataservice.classificationdataservice;
 
 public interface ClassificationDataService {
 

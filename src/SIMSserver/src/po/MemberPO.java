@@ -138,22 +138,6 @@ public class MemberPO extends PersistObject {
 		this.saleMan = saleMan;
 	}
 
-	/**
-	 * 客户是否重复
-	 */
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) return true;
-		if (!super.equals(object)) return false;
-		if (getClass() != object.getClass()) return false;
-		MemberPO other = (MemberPO) object;
-		if (this.name == null) {
-			if (other.name != null) return false;
-		} 
-		else if (!this.name.equals(other.name)) return false;
-		return true;
-	}
-	
 	@Override
 	public String toString() {
 		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post + "," + email

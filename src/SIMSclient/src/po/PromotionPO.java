@@ -7,6 +7,5 @@ public class PromotionPO extends PersistObject{
 	public PromotionPO(String id) {
 		super(id);
 	}
-
 	
 }
