@@ -15,9 +15,9 @@ import javafx.stage.Stage;
 
 public class FinancialStaffUI extends Application implements ControlledStage{
 
-	public static final String mainID = "AccountUI";
-	public static final String pack = "accountui/fxml/";
-	public static final String mainFXML = pack+"AccountUI.fxml";
+	public static final String mainID = "FinancialStaffUI";
+	public static final String pack = "financialstaffui/fxml/";
+	public static final String mainFXML = pack+"FinancialStaffUI.fxml";
 	static String previous;
 	static String current;
 	static Stack<String> stack;
@@ -56,6 +56,11 @@ public class FinancialStaffUI extends Application implements ControlledStage{
 	@FXML
 	public void message(){
 
+	}
+
+	@FXML
+	public void fresh(){
+		stageController.setStage(current, current);
 	}
 
 	@FXML

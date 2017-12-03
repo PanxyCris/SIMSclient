@@ -2,6 +2,7 @@ package SIMSclient.src.presentation.financialstaffui;
 
 import java.net.URL;
 
+
 import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.accountbl.AccountController;
@@ -27,7 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class AccountManageUI extends AccountUI implements Initializable{
+public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	 ObservableList<AccountVO> list = FXCollections.observableArrayList();
 	    AccountBLService service = AccountController.getInstance().getContoller();
 	    @FXML
@@ -71,9 +72,9 @@ public class AccountManageUI extends AccountUI implements Initializable{
 
 		@FXML
 		public void save(){
-	        
-	        
-	         }
+
+
+	    }
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
@@ -88,11 +89,7 @@ public class AccountManageUI extends AccountUI implements Initializable{
 
 	        tableName.setCellFactory(TextFieldTableCell.forTableColumn());
 	        tableMoney.setCellFactory(TextFieldTableCell.forTableColumn());
-
             edit();
-   
-
-
 	        list.addAll(service.getAccountList());
 	        table.setItems(list);
 		}

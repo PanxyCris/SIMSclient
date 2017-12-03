@@ -1,5 +1,5 @@
-package SIMSclient.src.presentation.accountui;
+package SIMSclient.src.presentation.financialstaffui;
 
-public class ViewTableUI extends AccountUI{
+public class ViewTableUI extends FinancialStaffUI{
 
 }

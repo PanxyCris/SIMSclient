@@ -57,7 +57,7 @@
         <columns>
           <TableColumn fx:id="tableName" prefWidth="350.0" text="名称" />
           <TableColumn fx:id="tableMoney" prefWidth="350.0" text="金额" />
-            <TableColumn text="是否删除？" />
+            <TableColumn fx:id="tableDelete" prefWidth="90.0" text="是否删除？" />
         </columns>
       </TableView>
       <ChoiceBox fx:id="findChoice" layoutX="201.0" layoutY="90.0" prefHeight="23.0" prefWidth="184.0" />

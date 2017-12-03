@@ -1,5 +1,5 @@
-package SIMSclient.src.presentation.accountui;
+package SIMSclient.src.presentation.financialstaffui;
 
-public class MakeReceiptUI extends AccountUI{
+public class MakeReceiptUI extends FinancialStaffUI{
 
 }
