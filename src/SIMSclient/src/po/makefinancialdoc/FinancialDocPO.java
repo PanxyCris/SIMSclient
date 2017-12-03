@@ -1,6 +1,5 @@
 package SIMSclient.src.po.makefinancialdoc;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import SIMSclient.src.po.PersistObject;

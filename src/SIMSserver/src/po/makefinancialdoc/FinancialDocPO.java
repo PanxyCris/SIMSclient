@@ -1,41 +1,60 @@
 package SIMSserver.src.po.makefinancialdoc;
 
-import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class FinancialDocPO implements Serializable {
-	String docID;//单据编号
-	int userID;//当前登录用户的ID
-	String note;//备注
+import java.util.ArrayList;
+
+import SIMSserver.src.po.PersistObject;
+
+public class FinancialDocPO extends PersistObject {
+	private String userID;//当前登录用户的ID
+	private String note;//备注
+	private ArrayList<String> accountName;//银行账户名
+	private ArrayList<String> money;//转账金额
+	private String customerID;//客户ID
 	
-	public FinancialDocPO(String d,int u,String n){
-		docID=d;
-		userID=u;
-		note=n;
+	public FinancialDocPO(String id, String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note){
+		super(id);
+		this.userID=userID;
+		this.note=note;
+		this.accountName=accountName;
+		this.money=money;
+		this.customerID=customerID;
 	}
 
-	public FinancialDocPO(String c, String a, int tran, int tot) {
-		
-	}
-
-	public String getDocID() {
-		return docID;
-	}
-
-	public void setDocID(String docID) {
-		this.docID = docID;
-	}
-
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 
 	public String getNote() {
 		return note;
+	}
+
+	public ArrayList<String> getAccountName() {
+		return accountName;
+	}
+
+	public void setAccountName(ArrayList<String> accountName) {
+		this.accountName = accountName;
+	}
+
+	public ArrayList<String> getMoney() {
+		return money;
+	}
+
+	public void setMoney(ArrayList<String> money) {
+		this.money = money;
+	}
+
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
 	}
 
 	public void setNote(String note) {
