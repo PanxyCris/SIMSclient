@@ -2,27 +2,24 @@ package SIMSserver.src.dataservice.accountdataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.vo.AccountVO;
+import SIMSserver.src.dataenum.findtype.FindAccountType;
+import SIMSserver.src.dataservice.CommonDataService;
+import SIMSserver.src.po.AccountPO;
 
 /**
  * 
  * @author 王灿灿
  * @version 2017-12-1
  */
-public interface AccountDataService {
+/**
+ * 
+* @ClassName: AccountDataService 
+* @author lijie
+* @date 2017年12月3日 上午10:03:44 
+*
+ */
+public interface AccountDataService extends CommonDataService<AccountPO>{
 	
-	public ArrayList<AccountPO> find(String message);//message是用户查找ID时输入的信息,经过数据层逻辑处理后返回AccountPOList
-	
-	public ResultMessage newBuild(AccountVO accountVO);//新建一个账户
-	
-	public ResultMessage delete(String name);//删除
-	
-	public ResultMessage modifyName(String preName,String targetName);//修改账户名
-	
-	public ArrayList<AccountPO> getAccountList();  //改了一下接口，返回一个账户list
-	
-	public ResultMessage enterItem(ArrayList<String> name,ArrayList<String> transferAmount); //收款单、付款单 入账
+	public static final String NAME = "AccountData";
+	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException;
 }

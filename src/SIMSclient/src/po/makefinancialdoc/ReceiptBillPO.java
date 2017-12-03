@@ -11,30 +11,22 @@ import java.util.Date;
  */
 @SuppressWarnings("serial")
 public class ReceiptBillPO extends FinancialDocPO {
-	private String docID;//单据编号
-	private String userID;//当前登录用户的ID
-	private ArrayList<String> accountName;//银行账户名，付款单，list里只会存在一个银行账户，但是为了减少代码，这里仍然用list存储
-	private ArrayList<String> money;//转账总金额(transferAmount数值的总和)，使用list理由同accountName
-	private String customerID;//客户ID
+	private static final long serialVersionUID = 1L;
+	private String userID;// 当前登录用户的ID
+	private ArrayList<String> accountName;// 银行账户名，付款单，list里只会存在一个银行账户，但是为了减少代码，这里仍然用list存储
+	private ArrayList<String> money;// 转账总金额(transferAmount数值的总和)，使用list理由同accountName
+	private String customerID;// 客户ID
 
 	// 条目清单
 	private ArrayList<String> entryName;// 条目名
 	private ArrayList<String> transferAmount;// 金额
 	private String note;// 备注
 
-	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			String note,ArrayList<String> entryName,ArrayList<String> transferAmount) {
-		super(docID,userID,accountName,money,customerID,note);
-		this.entryName=entryName;
-		this.transferAmount=transferAmount;
-	}
-
-	public String getDocID() {
-		return docID;
-	}
-
-	public void setDocID(String docID) {
-		this.docID = docID;
+	public ReceiptBillPO(String id, String userID, ArrayList<String> accountName, ArrayList<String> money,
+			String customerID, String note, ArrayList<String> entryName, ArrayList<String> transferAmount) {
+		super(id, userID, accountName, money, customerID, note);
+		this.entryName = entryName;
+		this.transferAmount = transferAmount;
 	}
 
 	public String getUserID() {
@@ -92,5 +84,5 @@ public class ReceiptBillPO extends FinancialDocPO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
+
 }

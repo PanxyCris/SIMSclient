@@ -3,6 +3,8 @@ package SIMSclient.src.po.makefinancialdoc;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import SIMSclient.src.po.PersistObject;
+
 /**
  * 
  * @author 王灿灿
@@ -10,29 +12,20 @@ import java.util.ArrayList;
  *
  */
 @SuppressWarnings("serial")
-public class FinancialDocPO implements Serializable{
-	private String docID;//单据编号
+public class FinancialDocPO extends PersistObject{
 	private String userID;//当前登录用户的ID
 	private String note;//备注
 	private ArrayList<String> accountName;//银行账户名
 	private ArrayList<String> money;//转账金额
 	private String customerID;//客户ID
 	
-	public FinancialDocPO(String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note){
-		this.docID=docID;
+	public FinancialDocPO(String id, String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note){
+		super(id);
 		this.userID=userID;
 		this.note=note;
 		this.accountName=accountName;
 		this.money=money;
 		this.customerID=customerID;
-	}
-
-	public String getDocID() {
-		return docID;
-	}
-
-	public void setDocID(String docID) {
-		this.docID = docID;
 	}
 
 	public String getUserID() {

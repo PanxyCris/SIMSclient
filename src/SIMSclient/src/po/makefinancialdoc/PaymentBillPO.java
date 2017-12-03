@@ -9,9 +9,8 @@ import java.util.Date;
  *@version 2017-12-2
  *
  */
-@SuppressWarnings("serial")
 public class PaymentBillPO extends FinancialDocPO {
-	private String docID;//单据编号
+	private static final long serialVersionUID = 1L;
 	private String userID;//当前登录用户的ID
 	private String note;//备注
 	//转账列表
@@ -21,17 +20,9 @@ public class PaymentBillPO extends FinancialDocPO {
 	
 	private String total;//转账总额	
 
-	public PaymentBillPO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note,String total){
-		super(docID,userID,accountName,money,customerID,note);
+	public PaymentBillPO (String id,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note,String total){
+		super(id,userID,accountName,money,customerID,note);
 		this.total=total;
-	}
-
-	public String getDocID() {
-		return docID;
-	}
-
-	public void setDocID(String docID) {
-		this.docID = docID;
 	}
 
 	public String getUserID() {

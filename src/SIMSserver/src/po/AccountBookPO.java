@@ -1,12 +1,12 @@
 package SIMSserver.src.po;
 
-import java.io.Serializable;
+public class AccountBookPO extends PersistObject {
+	private static final long serialVersionUID = 1L;
+	private String date;
+	private int clerkID;
 
-public class AccountBookPO implements Serializable {
-	String date;
-	int clerkID;
-
-	public AccountBookPO(String d, int c) {
+	public AccountBookPO(String id, String d, int c) {
+		super(id);
 		date = d;
 		clerkID = c;
 	}

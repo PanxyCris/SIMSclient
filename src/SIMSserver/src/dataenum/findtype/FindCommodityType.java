@@ -1,4 +1,4 @@
-package SIMSserver.src.dataenum;
+package SIMSserver.src.dataenum.findtype;
 /**     
 *  
 * @author Lijie 
