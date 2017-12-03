@@ -58,14 +58,14 @@
             <Image url="@../img/Logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="账户管理" textFill="WHITE">
+      <Button layoutY="260.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/账户.png" />
+                  <Image url="@../img/审批.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -78,19 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="7.0" layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制作单据" textFill="WHITE">
-         <font>
-            <Font name="syht Italic" size="16.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/盘点.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="7.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
+      <Button layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -102,42 +90,38 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="8.0" layoutY="437.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="期初建账" textFill="WHITE">
+      <Button layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/建账.png" />
+                  <Image url="@../img/策略.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="190.0" layoutY="143.0" prefHeight="432.0" prefWidth="472.0">
-        <columns>
-          <TableColumn prefWidth="150.0" text="单据编号" />
-          <TableColumn prefWidth="75.0" text="银行账户" />
+      <ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
+      <Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
+      <TableView layoutX="762.0" layoutY="104.0" prefHeight="432.0" prefWidth="228.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="条目名" />
+            <TableColumn prefWidth="75.0" text="金额" />
+            <TableColumn prefWidth="75.0" text="备注" />
+         </columns>
+      </TableView>
+      <TableView layoutX="192.0" layoutY="104.0" prefHeight="432.0" prefWidth="549.0">
+         <columns>
+            <TableColumn prefWidth="150.0" text="单据编号" />
+            <TableColumn prefWidth="75.0" text="银行账户" />
             <TableColumn prefWidth="75.0" text="总额" />
             <TableColumn prefWidth="75.0" text="操作员" />
             <TableColumn prefWidth="100.0" text="查看条目清单" />
-        </columns>
+            <TableColumn prefWidth="75.0" text="审批" />
+         </columns>
       </TableView>
-      <TableView layoutX="701.0" layoutY="143.0" prefHeight="432.0" prefWidth="287.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="条目名" />
-          <TableColumn prefWidth="75.0" text="金额" />
-            <TableColumn prefWidth="75.0" text="备注" />
-        </columns>
-      </TableView>
-      <Button layoutX="190.0" layoutY="77.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="制作付款单">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/返回.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <Button layoutX="342.0" layoutY="544.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="确    定" />
+      <Button layoutX="652.0" layoutY="544.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="136.0" text="取     消" />
    </children>
 </AnchorPane>

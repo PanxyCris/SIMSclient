@@ -104,11 +104,24 @@
       </Button>
       <ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
       <Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
-      <TableView layoutX="193.0" layoutY="123.0" prefHeight="392.0" prefWidth="495.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
+      <TableView layoutX="762.0" layoutY="104.0" prefHeight="432.0" prefWidth="228.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="银行账户" />
+            <TableColumn prefWidth="75.0" text="转账金额" />
+            <TableColumn prefWidth="75.0" text="备注" />
+         </columns>
       </TableView>
+      <TableView layoutX="192.0" layoutY="104.0" prefHeight="432.0" prefWidth="549.0">
+         <columns>
+            <TableColumn prefWidth="150.0" text="单据编号" />
+            <TableColumn prefWidth="75.0" text="客户" />
+            <TableColumn prefWidth="75.0" text="单据类型" />
+            <TableColumn prefWidth="75.0" text="操作员" />
+            <TableColumn prefWidth="100.0" text="查看转账列表" />
+            <TableColumn prefWidth="75.0" text="审批" />
+         </columns>
+      </TableView>
+      <Button layoutX="342.0" layoutY="544.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="确    定" />
+      <Button layoutX="652.0" layoutY="544.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="136.0" text="取     消" />
    </children>
 </AnchorPane>
