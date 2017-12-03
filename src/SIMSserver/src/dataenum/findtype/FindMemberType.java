@@ -1,4 +1,4 @@
-package SIMSserver.src.dataenum;
+package SIMSserver.src.dataenum.findtype;
 /**     
 *  模糊查找用户的类型
 * @author Lijie 

@@ -3,7 +3,7 @@ package SIMSserver.src.dataservice.commoditydataservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.FindCommodityType;
+import SIMSserver.src.dataenum.findtype.FindCommodityType;
 import SIMSserver.src.dataservice.CommonDataService;
 import SIMSserver.src.po.commodity.CommodityPO;
 

@@ -156,8 +156,8 @@ public class MemberPO extends PersistObject {
 	
 	@Override
 	public String toString() {
-		return id + "|" + category.value + "|" + level.value + "|" + name + "|" + phone + "|" + address + "|" + post + "|" + email
-				+ "|" + receivableLimit + receivable + "|" + payable + "|" + "|" + saleMan;
+		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post + "," + email
+				+ "," + receivableLimit + receivable + "," + payable + "," + "," + saleMan;
 	}
 
 }
