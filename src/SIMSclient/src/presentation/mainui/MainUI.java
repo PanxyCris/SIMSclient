@@ -1,13 +1,10 @@
 package SIMSclient.src.presentation.mainui;
 
 import SIMSclient.src.bussinesslogic.userbl.UserController;
+
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
-import SIMSclient.src.presentation.accountui.AccountUI;
-import SIMSclient.src.presentation.commodityui.CommodityUI;
-import SIMSclient.src.presentation.promotionui.PromotionUI;
-import SIMSclient.src.presentation.salesui.SalesUI;
-import SIMSclient.src.presentation.userui.UserUI;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
