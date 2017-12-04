@@ -47,7 +47,7 @@ public class UserController implements UserBLService{
 
 	@Override
 	public ArrayList<UserVO> find(String info,String properties) {
-		UserVO user1 = new UserVO("0000001","¿ÓΩ‹","161250058",UserRole.USER_MANAGER);
+		UserVO user1 = new UserVO("0000002","Õı≤”≤”","161250134",UserRole.FINANCIAL_MANAGER);
 		ArrayList<UserVO> userList = new ArrayList<>();
 		userList.add(user1);
 		return userList;
