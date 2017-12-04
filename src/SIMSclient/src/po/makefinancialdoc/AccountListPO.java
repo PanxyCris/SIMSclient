@@ -1,14 +1,14 @@
-package SIMSclient.src.vo.makefinancialdoc;
+package SIMSclient.src.po.makefinancialdoc;
 
 import java.util.ArrayList;
 
-public class AccountListVO {
+public class AccountListPO {
 	
 	protected ArrayList<String> accountName;//银行账户名
 	protected ArrayList<String> money;//转账金额
 	protected ArrayList<String> note;//备注
 	
-	public AccountListVO(ArrayList<String> accountName,ArrayList<String> money,ArrayList<String> note){
+	public AccountListPO(ArrayList<String> accountName,ArrayList<String> money,ArrayList<String> note){
 		this.accountName=accountName;
 		this.money=money;
 		this.note=note; 

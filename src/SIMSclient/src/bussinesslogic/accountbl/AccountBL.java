@@ -10,6 +10,7 @@ import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.po.AccountPO;
 import SIMSclient.src.vo.AccountVO;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
+import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
 
 /**
  * 
@@ -31,7 +32,9 @@ public class AccountBL implements AccountBLService{
 	AccountVO accountVO = new AccountVO("", "","");
 	AccountPO accountPO = new AccountPO("", "", ""); 
 	
+//	PaymentBillVO pfa=new PaymentBillVO(null, null, null, null, null, null, null);
 
+	
 /**
  * @author Íõ²Ó²Ó
  * @param messageÎª¼ìË÷ÄÚÈÝ
