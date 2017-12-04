@@ -63,8 +63,8 @@ public class UserManagerUI implements ControlledStage{
 	}
 
 	@FXML
-	public void message(){
-
+	public void message() throws Exception{
+          new UserMessageUI().start();
 	}
 
 	@FXML
@@ -111,14 +111,6 @@ public class UserManagerUI implements ControlledStage{
    		current = currentID;
    		stack.push(currentID);
 	}
-
-	public void initData(UserVO vo) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
 
 
 }

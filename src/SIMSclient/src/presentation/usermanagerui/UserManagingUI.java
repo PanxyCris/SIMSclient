@@ -1,7 +1,6 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import SIMSclient.src.bussinesslogic.userbl.UserController;

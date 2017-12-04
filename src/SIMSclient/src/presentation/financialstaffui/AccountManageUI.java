@@ -2,6 +2,7 @@ package SIMSclient.src.presentation.financialstaffui;
 
 import java.net.URL;
 
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -9,7 +10,6 @@ import SIMSclient.src.bussinesslogic.accountbl.AccountController;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.presentation.common.EditingCell;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
@@ -201,5 +201,71 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	public void start() throws Exception {
 		   changeStage("AccountManageUI","AccountManageUI.fxml");
 	}
+	
+	public class EditingCell<T> extends TableCell<T, String> {
+
+	    private TextField textField;
+
+	    public EditingCell() {
+	    }
+
+	    @Override
+	    public void startEdit() {
+	        if (!isEmpty()) {
+	            super.startEdit();
+	            createTextField();
+	            setText(null);
+	            setGraphic(textField);
+	            textField.selectAll();
+	        }
+	    }
+
+	    @Override
+	    public void cancelEdit() {
+	        super.cancelEdit();
+
+	        setText((String) getItem());
+	        setGraphic(null);
+	       
+	    }
+
+	    @Override
+	    public void updateItem(String item, boolean empty) {
+	        super.updateItem(item, empty);
+
+	        if (empty) {
+	            setText(null);
+	            setGraphic(null);
+	        } else {
+	            if (isEditing()) {
+	                if (textField != null) {
+	                    textField.setText(getString());
+	                }
+	                setText(null);
+	                setGraphic(textField);
+	            } else {
+	                setText(getString());
+	                setGraphic(null);
+	            }
+	        }
+	    }
+
+	    private void createTextField() {
+	        textField = new TextField(getString());
+	        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
+	        textField.focusedProperty().addListener(
+	            (ObservableValue<? extends Boolean> arg0,
+	            Boolean arg1, Boolean arg2) -> {
+	                if (!arg2) {
+	                    commitEdit(textField.getText());
+	                }
+	        });
+	    }
+
+	    private String getString() {
+	        return getItem() == null ? "" : getItem().toString();
+	    }
+	}
+
 
 }
