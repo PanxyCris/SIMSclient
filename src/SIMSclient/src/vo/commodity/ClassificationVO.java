@@ -4,16 +4,26 @@ import java.util.ArrayList;
 
 public class ClassificationVO {
 
+	String id;
 	String name;
 	ArrayList<CommodityVO> vo;
 	ClassificationVO father;
 	ArrayList<ClassificationVO> children;
 
-	public ClassificationVO(String n,ArrayList<CommodityVO> v,ClassificationVO f,ArrayList<ClassificationVO> c){
+	public ClassificationVO(String i,String n,ArrayList<CommodityVO> v,ClassificationVO f,ArrayList<ClassificationVO> c){
+		id = i;
 		name = n;
 		vo = v;
 		father = f;
 		children = c;
+	}
+
+	public void setID(String i){
+		id = i;
+	}
+
+	public String getID(){
+		return id;
 	}
 
 	public void setName(String n){
