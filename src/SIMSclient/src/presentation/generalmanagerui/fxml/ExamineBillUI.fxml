@@ -58,17 +58,6 @@
             <Image url="@../img/Logo.png" />
          </image>
       </ImageView>
-      <Button layoutY="260.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
-         <font>
-            <Font name="syht Italic" size="16.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/审批.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
       <Button layoutX="259.0" layoutY="9.0" mnemonicParsing="false" onAction="#fresh" prefHeight="44.0" prefWidth="68.0" style="-fx-background-color: rgba(0,0,0,0);">
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -78,7 +67,21 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
+      <ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
+      <Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
+      <Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/审批.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutY="331.0" mnemonicParsing="false" onAction="#checkTable" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -90,7 +93,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
+      <Button layoutY="391.0" mnemonicParsing="false" onAction="#makePromotion" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -102,7 +105,17 @@
             </ImageView>
          </graphic>
       </Button>
-      <ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
-      <Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
+      <Button layoutY="451.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/日志.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

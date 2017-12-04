@@ -58,7 +58,7 @@
             <Image url="@../img/Logo.png" />
          </image>
       </ImageView>
-      <Button layoutY="260.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
+      <Button layoutY="260.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -78,7 +78,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
+      <Button layoutY="320.0" mnemonicParsing="false" onAction="#checkTable" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -90,7 +90,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
+      <Button layoutY="380.0" mnemonicParsing="false" onAction="#makePromotion" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -107,5 +107,17 @@
             <Font size="53.0" />
          </font>
       </Label>
+      <Button layoutY="440.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/日志.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
