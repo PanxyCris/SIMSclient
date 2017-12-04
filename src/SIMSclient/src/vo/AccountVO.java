@@ -8,12 +8,14 @@ import java.io.Serializable;
  */
 public class AccountVO implements Serializable{
 	
-	private String name;
-	private String money;
+	private String id;//银行卡号
+	private String name;//银行账户名称
+	private String money;//账户余额
 	
-	public AccountVO(String n,String m){
-		name=n;
-		money=m;
+	public AccountVO(String id,String name,String money){
+		this.id=id;
+		this.name=name;
+		this.money=money;
 	}
 
 	public String getName() {

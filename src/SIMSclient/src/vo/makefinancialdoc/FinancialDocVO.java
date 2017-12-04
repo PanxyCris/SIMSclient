@@ -12,14 +12,14 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("serial")
 public class FinancialDocVO implements Serializable {
-	private String docID;//单据编号
-	private String userID;//当前登录用户的ID
-	private String note;//备注
-	private ArrayList<String> accountName;//银行账户名
-	private ArrayList<String> money;//转账金额
-	private String customerID;//客户ID
+	protected String docID;//单据编号
+	protected String userID;//当前登录用户的ID
+	protected ArrayList<String> note;//备注
+	protected ArrayList<String> accountName;//银行账户名
+	protected ArrayList<String> money;//转账金额
+	protected String customerID;//客户ID
 	
-	public FinancialDocVO(String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note){
+	public FinancialDocVO(String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,ArrayList<String> note){
 		this.docID=docID;
 		this.userID=userID;
 		this.accountName=accountName;
@@ -44,7 +44,7 @@ public class FinancialDocVO implements Serializable {
 		this.userID = userID;
 	}
 
-	public String getNote() {
+	public ArrayList<String> getNote() {
 		return note;
 	}
 
@@ -72,7 +72,7 @@ public class FinancialDocVO implements Serializable {
 		this.customerID = customerID;
 	}
 
-	public void setNote(String note) {
+	public void setNote(ArrayList<String> note) {
 		this.note = note;
 	}
 }

@@ -1,9 +1,11 @@
 package SIMSclient.src.bussinesslogic.accountbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.dataenum.ResultMessage;
+import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.po.AccountPO;
 import SIMSclient.src.vo.AccountVO;
@@ -25,8 +27,9 @@ public class AccountBL implements AccountBLService{
 	}
 	
 	AccountDataService accountDataService;
-	AccountVO accountVO = new AccountVO("", "");
-	AccountPO accountPO = new AccountPO("", ""); 
+	FindAccountType findAccountType;
+	AccountVO accountVO = new AccountVO("", "","");
+	AccountPO accountPO = new AccountPO("", "", ""); 
 	
 
 /**
@@ -35,16 +38,18 @@ public class AccountBL implements AccountBLService{
  * 
  */
 	@Override
-	public ArrayList<AccountVO> find(String message) {
+	public ArrayList<AccountVO> find(String message,FindAccountType findType) {
 		
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
-		accountPOs=accountDataService.find(message);
-		
+		try {
+			accountPOs=accountDataService.find(message,findType);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}	
 //		if (accountPOs.isEmpty()) {
 //			System.out.println(ResultMessage.NOTFOUND);
-//		}
-		
+//		}	
 		for (int i = 0; i < accountPOs.size(); i++) {
 			accountVO.setMoney(accountPOs.get(i).getMoney());
 			accountVO.setName(accountPOs.get(i).getName());
@@ -59,12 +64,12 @@ public class AccountBL implements AccountBLService{
  * @param name,money均为从ui得到的参数
  */
 	@Override
-	public ResultMessage newBuild(String name,String money) {
+	public ResultMessage newBuild(String id,String name,String money) {
 		
 		double m = Double.valueOf(money);
 		
 		boolean judge=true;
-		if (!find(name).isEmpty()) {
+		if (!find(id,findAccountType.ID).isEmpty()) {
 			judge=false;
 			return resultMessage.ILLEGALINPUTNAME;
 		}
@@ -89,21 +94,15 @@ public class AccountBL implements AccountBLService{
  * 
  */
 	@Override
-	public ResultMessage delete(String name) {
+	public ResultMessage delete(String id) {
 		
-		return accountDataService.delete(name);//将删除逻辑放在data层
-	}
-
-/**
- * @author 王灿灿
- * @param preName为修改前名称，targetName为待修改成的名称
- * 
- */
-	@Override
-	public ResultMessage modifyName(String preName,String targetName) {
-		
-		return accountDataService.modifyName(preName, targetName);
-		
+		try {
+			return accountDataService.delete(id);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//将删除逻辑放在data层
+		return resultMessage.NOTFOUND;
 	}
 
 /**
@@ -142,5 +141,10 @@ public class AccountBL implements AccountBLService{
 		
 		return accountDataService.enterItem(nameList, moneyList);
 	}
+
+@Override
+public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
+	return null;
+}
 
 }

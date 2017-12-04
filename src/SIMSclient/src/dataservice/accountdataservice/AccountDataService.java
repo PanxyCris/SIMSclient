@@ -3,9 +3,11 @@ package SIMSclient.src.dataservice.accountdataservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.dataservice.CommonDataService;
 import SIMSclient.src.po.AccountPO;
+import SIMSclient.src.vo.AccountVO;
 
 /**
  * 
@@ -23,4 +25,7 @@ public interface AccountDataService extends CommonDataService<AccountPO>{
 	
 	public static final String NAME = "AccountData";
 	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException;
+	public ArrayList<AccountPO> getAccountList();
+	public ResultMessage enterItem(ArrayList<String> nameList, ArrayList<String> moneyList);
+	public ResultMessage newBuild(AccountVO accountVO);
 }

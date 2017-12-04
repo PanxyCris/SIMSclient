@@ -11,10 +11,10 @@ import SIMSclient.src.po.PersistObject;
 public class AccountPO extends PersistObject {
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private double money;
+	private String money;
 
 	
-	public AccountPO(String id, String name, double money) {
+	public AccountPO(String id, String name, String money) {
 		super(id);
 		this.name = name;
 		this.money = money;
@@ -28,11 +28,11 @@ public class AccountPO extends PersistObject {
 		this.name = name;
 	}
 
-	public double getMoney() {
+	public String getMoney() {
 		return money;
 	}
 
-	public void setMoney(double money) {
+	public void setMoney(String money) {
 		this.money = money;
 	}
 

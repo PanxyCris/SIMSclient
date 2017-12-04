@@ -7,8 +7,7 @@ package SIMSclient.src.dataenum.findtype;
 public enum FindAccountType {
 
 	ID("账户ID"),
-	NAME("账户名称"),
-	MONEY("账户金额");
+	NAME("账户名称");
 	
 	public final String value;
 

@@ -3,6 +3,7 @@ package SIMSclient.src.bussinesslogicservice.accountblservice;
 import java.util.ArrayList;
 
 import SIMSclient.src.dataenum.ResultMessage;
+import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.vo.AccountVO;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 
@@ -14,14 +15,30 @@ import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
  *
  */
 public interface AccountBLService {
+	
+	/**
+	 * @param message 用户查找时输入的keywords
+	 * @param findType 选择的查找类型
+	 * @return 账户list
+	 */
+	public ArrayList<AccountVO> find(String message,FindAccountType findType);
 
-	public ArrayList<AccountVO> find(String message);//message是用户查找ID时输入的信息，经过逻辑处理后返回一个AccountVO对象
+	/**
+	 * @param id 账户id
+	 * @param name 账户名称
+	 * @param money 账户余额
+	 */
+	public ResultMessage newBuild(String id,String name,String money);
+		
+	/**
+	 * @param accountVOs为待保存的账户列表
+	 */
+	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs);
 
-	public ResultMessage newBuild(String name,String money);//新建一个账户,返回一个AccountPO对象
-
-	public ResultMessage delete(String name);//删除
-
-	public ResultMessage modifyName(String preName,String targetName);//修改账户名
+	/**
+	 * @param id 待删除账户id
+	 */
+	public ResultMessage delete(String id);//删除
 
 	public ArrayList<AccountVO> getAccountList();  //改了一下接口，返回一个账户list
 	
