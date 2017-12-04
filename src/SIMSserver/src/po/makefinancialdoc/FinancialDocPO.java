@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import SIMSserver.src.po.PersistObject;
 
 public class FinancialDocPO extends PersistObject {
-	private String userID;//当前登录用户的ID
-	private String note;//备注
-	private ArrayList<String> accountName;//银行账户名
-	private ArrayList<String> money;//转账金额
-	private String customerID;//客户ID
+	protected String userID;//当前登录用户的ID
+	protected ArrayList<String> note;//备注
+	protected ArrayList<String> accountName;//银行账户名
+	protected ArrayList<String> money;//转账金额
+	protected String customerID;//客户ID
 	
-	public FinancialDocPO(String id, String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,String note){
+	public FinancialDocPO(String id, String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,ArrayList<String> note2){
 		super(id);
 		this.userID=userID;
-		this.note=note;
+		this.note=note2;
 		this.accountName=accountName;
 		this.money=money;
 		this.customerID=customerID;
@@ -29,7 +29,7 @@ public class FinancialDocPO extends PersistObject {
 		this.userID = userID;
 	}
 
-	public String getNote() {
+	public ArrayList<String> getNote() {
 		return note;
 	}
 
@@ -57,7 +57,7 @@ public class FinancialDocPO extends PersistObject {
 		this.customerID = customerID;
 	}
 
-	public void setNote(String note) {
+	public void setNote(ArrayList<String> note) {
 		this.note = note;
 	}
 }
