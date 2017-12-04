@@ -3,6 +3,8 @@ package SIMSclient.src.po.makefinancialdoc;
 import java.util.ArrayList;
 import java.util.Date;
 
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.vo.makefinancialdoc.AccountListVO;
 
 /**
@@ -16,8 +18,9 @@ public class PaymentBillPO extends FinancialDocPO {
 	private String total;//×ªÕË×Ü¶î	
 	private AccountListPO accountListPO;
 	
-	public PaymentBillPO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,ArrayList<String> note,String total){
-		super(docID,userID,accountName,money,customerID,note);
+	public PaymentBillPO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
+			ArrayList<String> note,String total,BillType billType,BillState billState){
+		super(docID,userID,accountName,money,customerID,note,billType,billState);
 		accountListPO=new AccountListPO(accountName, money, note);
 		this.total=total;
 	}

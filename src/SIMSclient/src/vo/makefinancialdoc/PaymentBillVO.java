@@ -2,6 +2,9 @@ package SIMSclient.src.vo.makefinancialdoc;
 
 import java.util.ArrayList;
 
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
+
 /**
  * 
  * @author Íõ²Ó²Ó
@@ -13,8 +16,9 @@ public class PaymentBillVO extends FinancialDocVO {
 	private String total;//×ªÕË×Ü¶î	
 	private AccountListVO accountListVO;
 	
-	public PaymentBillVO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,ArrayList<String> note,String total){
-		super(docID,userID,accountName,money,customerID,note);
+	public PaymentBillVO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
+			ArrayList<String> note,String total,BillType billType,BillState billState){
+		super(docID,userID,accountName,money,customerID,note,billType,billState);
 		accountListVO=new AccountListVO(accountName, money, note);
 		this.total=total;
 	}

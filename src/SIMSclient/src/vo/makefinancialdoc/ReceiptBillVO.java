@@ -2,6 +2,9 @@ package SIMSclient.src.vo.makefinancialdoc;
 
 import java.util.ArrayList;
 
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
+
 @SuppressWarnings("serial")
 public class ReceiptBillVO extends FinancialDocVO {
 
@@ -12,8 +15,8 @@ public class ReceiptBillVO extends FinancialDocVO {
 	private EntryListVO entryListVO;
 
 	public ReceiptBillVO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount) {
-		super(docID,userID,accountName,money,customerID,note);
+			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount,BillType billType,BillState billState) {
+		super(docID,userID,accountName,money,customerID,note,billType,billState);
 		entryListVO=new EntryListVO(entryName, transferAmount, note);
 	}
 
