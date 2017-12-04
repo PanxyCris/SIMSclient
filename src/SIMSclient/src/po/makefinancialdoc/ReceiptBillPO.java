@@ -3,6 +3,9 @@ package SIMSclient.src.po.makefinancialdoc;
 import java.util.ArrayList;
 import java.util.Date;
 
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
+
 /**
  *
  * @author Íõ²Ó²Ó
@@ -19,8 +22,8 @@ public class ReceiptBillPO extends FinancialDocPO {
 	private EntryListPO entryListPO;
 
 	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount) {
-		super(docID,userID,accountName,money,customerID,note);
+			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount,BillType billType,BillState billState) {
+		super(docID,userID,accountName,money,customerID,note,billType,billState);
 		entryListPO=new EntryListPO(entryName, transferAmount, note);
 	}
 

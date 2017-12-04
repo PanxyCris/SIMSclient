@@ -7,7 +7,7 @@ import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.dataservice.CommonDataService;
 import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.vo.AccountVO;
+import SIMSclient.src.po.PersistObject;
 
 /**
  * 
@@ -27,5 +27,5 @@ public interface AccountDataService extends CommonDataService<AccountPO>{
 	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException;
 	public ArrayList<AccountPO> getAccountList();
 	public ResultMessage enterItem(ArrayList<String> nameList, ArrayList<String> moneyList);
-	public ResultMessage newBuild(AccountVO accountVO);
+	public ResultMessage newBuild(PersistObject po);
 }

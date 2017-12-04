@@ -2,6 +2,8 @@ package SIMSserver.src.po.makefinancialdoc;
 
 import java.util.ArrayList;
 
+import SIMSserver.src.dataenum.BillState;
+import SIMSserver.src.dataenum.BillType;
 import SIMSserver.src.po.makefinancialdoc.EntryListPO;
 
 public class ReceiptBillPO extends FinancialDocPO {
@@ -13,8 +15,8 @@ public class ReceiptBillPO extends FinancialDocPO {
 	private EntryListPO entryListPO;
 
 	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount) {
-		super(docID,userID,accountName,money,customerID,note);
+			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount,BillType billType,BillState billState) {
+		super(docID,userID,accountName,money,customerID,note,billType,billState);
 		entryListPO=new EntryListPO(entryName, transferAmount, note);
 	}
 

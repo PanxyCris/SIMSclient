@@ -8,6 +8,7 @@ import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.po.AccountPO;
+import SIMSclient.src.po.PersistObject;
 import SIMSclient.src.vo.AccountVO;
 import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
 import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
@@ -31,6 +32,7 @@ public class AccountBL implements AccountBLService{
 	FindAccountType findAccountType;
 	AccountVO accountVO = new AccountVO("", "","");
 	AccountPO accountPO = new AccountPO("", "", ""); 
+	PersistObject po=new PersistObject("");
 	
 //	PaymentBillVO pfa=new PaymentBillVO(null, null, null, null, null, null, null);
 
@@ -82,10 +84,13 @@ public class AccountBL implements AccountBLService{
 		}
 		if(judge){
 			
-			accountVO.setName(name);
-			accountVO.setMoney(money);
+			accountPO.setID(id);
+			accountPO.setName(name);
+			accountPO.setMoney(money);
 			
-			resultMessage=accountDataService.newBuild(accountVO);
+			po=accountPO;
+			
+			resultMessage=accountDataService.newBuild(po);
 			
 		}
 		return resultMessage.SUCCESS;
