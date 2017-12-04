@@ -20,4 +20,20 @@ public enum BillType {
 		this.value = value;
 		this.prefix = prefix;
 	}
+
+	public static BillType getType(String value){
+		switch(value){
+		case "库存赠送单":return BillType.INVENTORYGIFTBILL;
+		case "库存报损单":return BillType.INVENTORYLOSSBILL;
+		case "库存报溢单":return BillType.INVENTORYREVENUEBILL;
+		case "库存报警单":return BillType.INVENTORYWARNINGBILL;
+		case "销售单":return BillType.SALESBILL;
+		case "进货单":return BillType.PURCHASEBILL;
+		case "销售退货单":return BillType.SALESBACKBILL;
+		case "进货退货单":return BillType.PURCHASEBACKBILL;
+		case "收款单":return BillType.SKD;
+		case "付款单":return BillType.XJFYD;
+		default:return BillType.XJFYD;
+		}
+	}
 }

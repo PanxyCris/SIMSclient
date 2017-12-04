@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.accountui.AccountManageUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.financialstaffui.ViewTableUI">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -53,8 +53,8 @@
          <image>
             <Image url="@../img/用户.png" />
          </image></ImageView>
-      <ChoiceBox fx:id="findChoice" layoutX="773.0" layoutY="66.0" prefHeight="23.0" prefWidth="114.0" />
-      <Button fx:id="find" layoutX="887.0" layoutY="66.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" text="查   看" />
+      <ChoiceBox fx:id="tableChoice" layoutX="773.0" layoutY="66.0" prefHeight="23.0" prefWidth="114.0" />
+      <Button layoutX="887.0" layoutY="66.0" mnemonicParsing="false" onAction="#chooseTable" prefHeight="23.0" prefWidth="68.0" text="查   看" />
       <ImageView fitHeight="60.0" fitWidth="114.0" layoutX="11.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/Logo.png" />

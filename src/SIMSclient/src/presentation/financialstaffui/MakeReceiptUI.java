@@ -2,6 +2,8 @@ package SIMSclient.src.presentation.financialstaffui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import SIMSclient.src.dataenum.BillType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,10 +15,11 @@ public class MakeReceiptUI extends FinancialStaffUI implements Initializable{
 	ChoiceBox<String> receiptChoice;
 	@FXML
 	public void chooseReceipt() throws Exception{
-		String value = receiptChoice.getValue();
-		switch(value){
-		case "收款单":new ReceiveMakeBillUI().start();break;
-		case "付款单":new PaymentMakeBillUI().start();break;
+		BillType type = BillType.getType(receiptChoice.getValue());
+		switch(type){
+		case SKD:new ReceiveMakeBillUI().start();break;
+		case XJFYD:new PaymentMakeBillUI().start();break;
+		default:break;
 		}
 	}
 
@@ -26,8 +29,7 @@ public class MakeReceiptUI extends FinancialStaffUI implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		receiptChoice.setItems(FXCollections.observableArrayList("付款单","收款单"));
-
+		receiptChoice.setItems(FXCollections.observableArrayList(BillType.SKD.value,BillType.XJFYD.value));
 	}
 
 }
