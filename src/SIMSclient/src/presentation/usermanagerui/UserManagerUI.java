@@ -1,11 +1,12 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.util.*;
+
 import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.ControlledStage;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
-import javafx.application.Application;
+import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class UserManagerUI extends Application implements ControlledStage{
+public class UserManagerUI implements ControlledStage{
 
 	public static final String mainID = "UserUI";
 	public static final String pack = "usermanagerui/fxml/";
@@ -22,6 +23,7 @@ public class UserManagerUI extends Application implements ControlledStage{
 	static String current;
 	static Stack<String> stack;
 	public static final Remind remind = Remind.USER;
+	UserVO user;
 
 	static StageController stageController;
 
@@ -82,17 +84,13 @@ public class UserManagerUI extends Application implements ControlledStage{
 
 	@FXML
 	public void manage() throws Exception{
-
-		Stage stage = new Stage();
-		new UserManagingUI().start(stage);
+		new UserManagingUI().start();
 	}
 
 
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
 
-
+	public void start(UserVO user) throws Exception {
 		stageController = new StageController();
         stack = new Stack<>();
 
@@ -101,16 +99,10 @@ public class UserManagerUI extends Application implements ControlledStage{
         stageController.setStage(mainID);
         previous = current = mainID;
         stack.push(mainID);
+        this.user = user;
+     //   image = user.getImage();
+	}
 
-	}
-/*
-	public void showImage(ImageView image) {
-		this.image = image;
-	}
-*/
-	public static void main(String[] args){
-		launch(args);
-	}
 
 	public void changeStage(String currentID,String fxml){
    		stageController.loadStage(currentID, pack+fxml);
@@ -118,6 +110,11 @@ public class UserManagerUI extends Application implements ControlledStage{
    		previous = current;
    		current = currentID;
    		stack.push(currentID);
+	}
+
+	public void initData(UserVO vo) {
+		// TODO Auto-generated method stub
+
 	}
 
 

@@ -1,6 +1,7 @@
 package SIMSclient.src.presentation.financialstaffui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -8,7 +9,7 @@ import SIMSclient.src.bussinesslogic.accountbl.AccountController;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.common.EditingCell;
+import SIMSclient.src.presentation.common.EditingCell;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
@@ -197,10 +198,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
         });
 	}
 
-
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start() throws Exception {
 		   changeStage("AccountManageUI","AccountManageUI.fxml");
 	}
 

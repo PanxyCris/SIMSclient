@@ -1,19 +1,18 @@
 package SIMSclient.src.presentation.financialstaffui;
 
 import java.util.Stack;
-
 import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.ControlledStage;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
-import javafx.application.Application;
+import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class FinancialStaffUI extends Application implements ControlledStage{
+public class FinancialStaffUI implements ControlledStage{
 
 	public static final String mainID = "FinancialStaffUI";
 	public static final String pack = "financialstaffui/fxml/";
@@ -22,6 +21,7 @@ public class FinancialStaffUI extends Application implements ControlledStage{
 	static String current;
 	static Stack<String> stack;
 	public static final Remind remind = Remind.ACCOUNT;
+	UserVO user;
 
 	static StageController stageController;
 
@@ -80,33 +80,22 @@ public class FinancialStaffUI extends Application implements ControlledStage{
 
 	@FXML
 	public void accountManage() throws Exception{
-
-		Stage stage = new Stage();
-		new AccountManageUI().start(stage);
+		new AccountManageUI().start();
 	}
 	@FXML
 	public void makeReceipt() throws Exception{
-
-		Stage stage = new Stage();
-		new MakeReceiptUI().start(stage);
+		new MakeReceiptUI().start();
 	}
 	@FXML
 	public void viewTable() throws Exception{
-
-		Stage stage = new Stage();
-		new ViewTableUI().start(stage);
+		new ViewTableUI().start();
 	}
 	@FXML
 	public void initAccount() throws Exception{
-
-		Stage stage = new Stage();
-		new InitAccountUI().start(stage);
+		new InitAccountUI().start();
 	}
 
-
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(UserVO user) throws Exception {
 
 
 		stageController = new StageController();
@@ -117,15 +106,9 @@ public class FinancialStaffUI extends Application implements ControlledStage{
         stageController.setStage(mainID);
         previous = current = mainID;
         stack.push(mainID);
+        this.user = user;
+     //   this.image = user.getImage();
 
-	}
-/*
-	public void showImage(ImageView image) {
-		this.image = image;
-	}
-*/
-	public static void main(String[] args){
-		launch(args);
 	}
 
 	public void changeStage(String currentID,String fxml){

@@ -47,8 +47,10 @@ public class UserController implements UserBLService{
 
 	@Override
 	public ArrayList<UserVO> find(String info,String properties) {
-		// TODO Auto-generated method stub
-        return list;
+		UserVO user1 = new UserVO("0000001","¿ÓΩ‹","161250058",UserRole.USER_MANAGER);
+		ArrayList<UserVO> userList = new ArrayList<>();
+		userList.add(user1);
+		return userList;
 	}
 
 	@Override

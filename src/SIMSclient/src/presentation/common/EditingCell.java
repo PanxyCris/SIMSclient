@@ -1,4 +1,4 @@
-package SIMSclient.src.common;
+package SIMSclient.src.presentation.common;
 
 
 import javafx.beans.value.ObservableValue;

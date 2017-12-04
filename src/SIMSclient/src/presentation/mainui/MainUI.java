@@ -8,6 +8,7 @@ import SIMSclient.src.presentation.generalmanagerui.GeneralManagerUI;
 import SIMSclient.src.presentation.inventorymanagerui.InventoryManagerUI;
 import SIMSclient.src.presentation.salestockstaffui.SaleStockStaffUI;
 import SIMSclient.src.presentation.usermanagerui.UserManagerUI;
+import SIMSclient.src.vo.UserVO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -62,14 +63,14 @@ public class MainUI extends Application{
 		    	Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
-		    	   UserRole role = service.find(userName, "用户名").get(0).getRole();
+		    	   UserVO user = service.find(userName, "用户名").get(0);
+		    	   UserRole role = user.getRole();
 		    	                      switch(role){
-		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(new Stage());break;
-		    	                         case FINANCIAL_MANAGER:new FinancialStaffUI().start(new Stage());break;
-		    	                         case PUR_SALE_MANAGER: new SaleStockStaffUI().start(new Stage());break;
-		    	                         case INVENTORY_MANAGER: new InventoryManagerUI().start(new Stage());break;
-				                         case USER_MANAGER: UserManagerUI userUI = new UserManagerUI();
-														    userUI.start(new Stage());
+		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(user);break;
+		    	                         case FINANCIAL_MANAGER:new FinancialStaffUI().start(user);break;
+		    	                         case PUR_SALE_MANAGER: new SaleStockStaffUI().start(user);break;
+		    	                         case INVENTORY_MANAGER: new InventoryManagerUI().start(user);break;
+				                         case USER_MANAGER: new UserManagerUI().start(user);
 													    //	userUI.showImage(service.getImage());
 														   break;
 		    	                      }

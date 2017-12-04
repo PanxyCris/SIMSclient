@@ -5,6 +5,7 @@ import java.util.Stack;
 import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
+import SIMSclient.src.vo.UserVO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class InventoryManagerUI extends Application{
+public class InventoryManagerUI{
 	public static final String mainID = "CommodityUI";
 	public static final String pack = "commodityui/fxml/";
 	public static final String mainFXML = pack+"CommodityUI.fxml";
@@ -20,6 +21,7 @@ public class InventoryManagerUI extends Application{
 	static String current;
 	static Stack<String> stack;
 	public static final Remind remind = Remind.COMMODITY;
+	UserVO user;
 
 	static StageController stageController;
 
@@ -98,8 +100,7 @@ public class InventoryManagerUI extends Application{
 
 
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(UserVO user) throws Exception {
 
 
 		stageController = new StageController();
@@ -110,15 +111,9 @@ public class InventoryManagerUI extends Application{
         stageController.setStage(mainID);
         previous = current = mainID;
         stack.push(mainID);
+        this.user = user;
+   //     this.image = user.getImage();
 
-	}
-/*
-	public void showImage(ImageView image) {
-		this.image = image;
-	}
-*/
-	public static void main(String[] args){
-		launch(args);
 	}
 
 	public void changeStage(String currentID,String fxml){

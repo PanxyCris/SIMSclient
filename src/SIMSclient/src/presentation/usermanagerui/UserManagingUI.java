@@ -1,11 +1,12 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.common.EditingCell;
+import SIMSclient.src.presentation.common.EditingCell;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
@@ -25,7 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
@@ -68,8 +68,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@FXML
 		public void insert(){
-			 UserVO user = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
-		        ResultMessage message = service.insert(user);
+			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
+		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -228,8 +228,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 
 
-		@Override
-		public void start(Stage primaryStage) throws Exception {
+		public void start() throws Exception {
 			   changeStage("UserManagingUI","UserManagingUI.fxml");
 		}
 
