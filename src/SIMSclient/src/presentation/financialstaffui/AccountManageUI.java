@@ -12,6 +12,7 @@ import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.AccountVO;
@@ -43,6 +44,8 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	ObservableList<AccountVO> list = FXCollections.observableArrayList();
     AccountBLService service = AccountController.getInstance().getContoller();
     @FXML
+    protected TextField idField;
+    @FXML
     protected TextField nameField;
     @FXML
     protected TextField moneyField;
@@ -55,6 +58,8 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	@FXML
 	protected TableView<AccountVO> table;
 	@FXML
+	protected TableColumn<AccountVO,String> tableID;
+	@FXML
 	protected TableColumn<AccountVO,String> tableName;
 	@FXML
 	protected TableColumn<AccountVO,String> tableMoney;
@@ -64,9 +69,10 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 
 	@FXML
 	public void insert(){
+		String id = idField.getText();
 		String name = nameField.getText();
 		String money = moneyField.getText();
-	        ResultMessage message = service.newBuild(name, money);
+	        ResultMessage message = service.newBuild(id, name, money);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
@@ -87,7 +93,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 
 	@FXML
 	public void find(){
-		ArrayList<AccountVO> list = service.find(findingField.getText());
+		ArrayList<AccountVO> list = service.find(findingField.getText(), FindAccountType.getFindType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -167,7 +173,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
         tableMoney.setCellValueFactory(
                 new PropertyValueFactory<AccountVO,String>("money"));
         deleteInit();
-        findChoice.setItems(FXCollections.observableArrayList("Ãû³Æ","½ð¶î"));
+        findChoice.setItems(FXCollections.observableArrayList(FindAccountType.ID.value,FindAccountType.NAME.value));
         list.addAll(service.getAccountList());
         table.setItems(list);
 	}
@@ -201,7 +207,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	public void start() throws Exception {
 		   changeStage("AccountManageUI","AccountManageUI.fxml");
 	}
-	
+
 	public class EditingCell<T> extends TableCell<T, String> {
 
 	    private TextField textField;
@@ -226,7 +232,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 
 	        setText((String) getItem());
 	        setGraphic(null);
-	       
+
 	    }
 
 	    @Override
