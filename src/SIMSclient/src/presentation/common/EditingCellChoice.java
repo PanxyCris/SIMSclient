@@ -29,7 +29,6 @@ public class EditingCellChoice<T> extends TableCell<T, String> {
     @Override
     public void cancelEdit() {
         super.cancelEdit();
-
         setText((String) getItem());
         setGraphic(null);
     }

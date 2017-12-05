@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 public class EditingCell<T> extends TableCell<T, String> {
 
     private TextField textField;
-    private String newValue;
 
     public EditingCell() {
     }
@@ -29,7 +28,6 @@ public class EditingCell<T> extends TableCell<T, String> {
         super.cancelEdit();
         setText((String) getItem());
         setGraphic(null);
-        newValue = getString();
     }
 
     @Override
@@ -69,7 +67,4 @@ public class EditingCell<T> extends TableCell<T, String> {
         return getItem() == null ? "" : getItem().toString();
     }
 
-    public String getNewValue(){
-    	return newValue==null?"":newValue;
-    }
 }

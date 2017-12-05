@@ -1,7 +1,6 @@
 package SIMSclient.src.bussinesslogicservice.userblservice;
 
 import java.util.ArrayList;
-
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindUserType;
 import SIMSclient.src.vo.UserVO;

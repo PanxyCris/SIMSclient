@@ -31,14 +31,13 @@ import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
 	    boolean canUpdate;
+	    UserBLService service = UserController.getInstance().getUserService();
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
-	    ObservableList<UserVO> updatingList;
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
                 UserRole.FINANCIAL_MANAGER.value,
                 UserRole.INVENTORY_MANAGER.value,
                 UserRole.PUR_SALE_MANAGER.value,
                 UserRole.USER_MANAGER.value);
-	    UserBLService service = UserController.getInstance().getUserService();
 	    @FXML
 	    protected TextField idField;
 	    @FXML
@@ -71,6 +70,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@FXML
 		public void insert(){
+			if(canUpdate){
 			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
 		        ResultMessage message = service.modify(vo);
 		        Platform.runLater(new Runnable() {
@@ -80,7 +80,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:updatingList.add(vo);table.setItems(updatingList);break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -88,13 +88,16 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 						}
 		    	    }
 		    	});
+			}
+			else
+				couldNotOperation();
 		}
 
 
 		@FXML
 		public void find(){
 			canUpdate = false;
-			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.valueOf(findChoice.getValue()));
+			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
@@ -107,10 +110,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			    	});
 		       }
 		       else{
-		    	   ObservableList<UserVO> newList = FXCollections.observableArrayList();
-		    	   newList.addAll(list);
-		    	   deleteInit();
-		    	   table.setItems(newList);
+		    	   table.getItems().clear();
+		    	   table.getItems().addAll(list);
 		       }
 		}
 
@@ -118,77 +119,74 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		public void save(){
 			if(canUpdate){
 				ArrayList<UserVO> finalList = new ArrayList<>();
-				for(int i=0;i<updatingList.size();i++)
-					finalList.add(updatingList.get(i));
-			       service.update(finalList);
+				for(int i=0;i<list.size();i++)
+					finalList.add(list.get(i));
+			    service.update(finalList);
+			    cancel();
 			}else{
-				Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.COULDNOTUPDATE);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+				couldNotOperation();
 			}
 		}
 
 		@FXML
 		public void cancel(){
+			findingField.setText(null);
+			list.removeAll();
+			list.addAll(service.getUserList());
+		    table.getItems().clear();
+			table.getItems().addAll(service.getUserList());
 			nameField.setText("admin");
 			passwordField.setText("admin");
-			if(!list.isEmpty()){
-		       String initID = addOne(list.get(list.size()-1).getID());
-	           idLabel.setText(initID);
-	        }else{
-	           idLabel.setText("0000001");
-	        }
-			findingField.setText(null);
-			updatingList = list;
-			table.setItems(list);
+			addID();
+			deleteInit();
+			canUpdate = true;
 		}
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+			cancel();
 			manageInit();
 			edit();
-			cancel();
-			canUpdate = true;
 		}
 
 		public void edit(){
 			Callback<TableColumn<UserVO, String>,
 	            TableCell<UserVO, String>> cellFactory
 	                = (TableColumn<UserVO, String> p) -> new EditingCell<UserVO>();
-	                Callback<TableColumn<UserVO, String>,
-		            TableCell<UserVO, String>> choiceFactory
-		                = (TableColumn<UserVO, String> p) -> new EditingCellChoice<UserVO>(roleList);
+	        Callback<TableColumn<UserVO, String>,
+		        TableCell<UserVO, String>> choiceFactory
+		            = (TableColumn<UserVO, String> p) -> new EditingCellChoice<UserVO>(roleList);
 
 	        tableName.setCellFactory(cellFactory);
 	        tableName.setOnEditCommit(
 	            (CellEditEvent<UserVO, String> t) -> {
-	            	UserVO lastVO  = (UserVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow());
-	                ((UserVO) t.getTableView().getItems().get(
+	            	String tmp = t.getOldValue();
+	               ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setName(t.getNewValue());
 	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow()));
-	        /*        if(!modify(newVO))
-	                	  ((UserVO) t.getTableView().getItems().get(
+	               if(modify(newVO)){
+	                   ((UserVO)t.getTableView().getItems().get(
 	  	                        t.getTablePosition().getRow())
-	  	                        ).setName(lastVO.getName());
-	                */
+	  	                        ).setName(tmp);
+	               }
 
 	        });
 
 	        tablePassword.setCellFactory(cellFactory);
 	        tablePassword.setOnEditCommit(
 	            (CellEditEvent<UserVO, String> t) -> {
-	                ((UserVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setPassword(t.getNewValue());
+	            	String tmp = t.getOldValue();
+		               ((UserVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setPassword(t.getNewValue());
+		                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow()));
+		               if(!modify(newVO))
+		                	  (t.getTableView().getItems().get(
+		  	                        t.getTablePosition().getRow())
+		  	                        ).setPassword(tmp);
 	        });
 
 	        tableRole.setCellFactory(choiceFactory);
@@ -212,7 +210,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	        switch(message){
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        case SUCCESS:updatingList.add(vo);table.setItems(updatingList);break;
+		    	        case SUCCESS:break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -232,11 +230,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("password"));
 	        tableRole.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("roleName"));
-	        deleteInit();
+	        roleChoice.setItems(roleList);
 	        findChoice.setItems(FXCollections.observableArrayList(FindUserType.ID.value,FindUserType.NAME.value,FindUserType.USERROLE.value));
-            list.addAll(service.getUserList());
-            roleChoice.setItems(roleList);
-	        table.setItems(list);
 		}
 
 		public void deleteInit(){
@@ -253,8 +248,13 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        Button delBtn = new Button("删除");
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
+	                        	if(canUpdate){
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            updatingList.remove(clickedUser);
+	                                list.remove(clickedUser);
+	                                table.setItems(list);
+	                        	}
+	                        	else
+	                        		couldNotOperation();
 	                        });
 	                    }
 	                }
@@ -268,6 +268,14 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			   changeStage("UserManagingUI","UserManagingUI.fxml");
 		}
 
+        public void addID(){
+        	if(!list.isEmpty()){
+ 		       String initID = addOne(list.get(list.size()-1).getID());
+ 	           idLabel.setText(initID);
+ 	        }else{
+ 	           idLabel.setText("0000001");
+ 	        }
+        }
 
 		/**
 		 * 自动生成新id
@@ -282,6 +290,18 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			while(newID.length()<n)
 				newID = "0"+newID;
 			return newID;
+		}
+
+		public void couldNotOperation(){
+			Platform.runLater(new Runnable() {
+	    	    public void run() {
+	    	        try {
+	    	        	new RemindPrintUI().start(ResultMessage.COULDNOTUPDATE);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	    	    }
+	    	});
 		}
 
 }

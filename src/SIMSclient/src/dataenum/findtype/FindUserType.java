@@ -8,4 +8,12 @@ public enum FindUserType {
 	FindUserType(String value) {
 		this.value = value;
 	}
+
+	public static FindUserType getType(String value){
+		switch(value){
+		case "ID":return ID;
+		case "ÓÃ»§Ãû":return NAME;
+		default:return USERROLE;
+		}
+	}
 }

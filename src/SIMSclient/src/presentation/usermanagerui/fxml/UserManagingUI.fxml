@@ -64,7 +64,7 @@
       </TableView>
       <ChoiceBox fx:id="findChoice" layoutX="201.0" layoutY="90.0" prefHeight="23.0" prefWidth="184.0" />
       <TextField fx:id="findingField" layoutX="385.0" layoutY="90.0" prefHeight="23.0" prefWidth="541.0" />
-      <Button fx:id="find" layoutX="926.0" layoutY="90.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" text="查  询" />
+      <Button layoutX="926.0" layoutY="90.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="68.0" text="查  询" />
       <TextField fx:id="nameField" layoutX="421.0" layoutY="455.0" prefHeight="23.0" prefWidth="120.0" />
       <TextField fx:id="passwordField" layoutX="541.0" layoutY="455.0" prefHeight="23.0" prefWidth="220.0" />
       <Button layoutX="902.0" layoutY="455.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="95.0" text="增   加" />
