@@ -4,14 +4,14 @@ import java.rmi.Remote;
 
 import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.dataservice.billdataservice.BillDataService;
-import SIMSclient.src.dataservice.checktabledataservice.businessHistoryScheduleDataService;
-import SIMSclient.src.dataservice.checktabledataservice.saleScheduleDataService;
-import SIMSclient.src.dataservice.checktabledataservice.statementOfOperationDataService;
-import SIMSclient.src.dataservice.commoditydataservice.ClassificationDataService;
+import SIMSclient.src.dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
+import SIMSclient.src.dataservice.checktabledataservice.SaleScheduleDataService;
+import SIMSclient.src.dataservice.checktabledataservice.StatementOfOperationDataService;
+import SIMSclient.src.dataservice.classificationdataservice.ClassificationDataService;
 import SIMSclient.src.dataservice.commoditydataservice.CommodityDataService;
 import SIMSclient.src.dataservice.memberdataservice.MemberDataService;
-import SIMSclient.src.dataservice.mfdocsdataservice.skddataservice;
-import SIMSclient.src.dataservice.mfdocsdataservice.xjfyddataservice;
+import SIMSclient.src.dataservice.mfdocsdataservice.PaymentBillDataService;
+import SIMSclient.src.dataservice.mfdocsdataservice.ReceiptDataService;
 import SIMSclient.src.dataservice.promotiondataservice.PromotionDataService;
 import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
 import SIMSclient.src.dataservice.setupaccountdataservice.SetUpAccountDataService;
@@ -51,16 +51,16 @@ public class RemoteHelper {
 		return (BillDataService)remote;
 	}
 	
-	public businessHistoryScheduleDataService getbusinessHistoryScheduleDataService(){
-		return (businessHistoryScheduleDataService)remote;
+	public BusinessHistoryScheduleDataService getbusinessHistoryScheduleDataService(){
+		return (BusinessHistoryScheduleDataService)remote;
 	}
 	
-	public saleScheduleDataService getsaleScheduleDataService(){
-		return (saleScheduleDataService)remote;
+	public SaleScheduleDataService getsaleScheduleDataService(){
+		return (SaleScheduleDataService)remote;
 	}
 	
-	public statementOfOperationDataService getstatementOfOperationDataService(){
-		return (statementOfOperationDataService)remote;
+	public StatementOfOperationDataService getstatementOfOperationDataService(){
+		return (StatementOfOperationDataService)remote;
 	}
 	
 	public ClassificationDataService getClassificationDataService(){
@@ -75,12 +75,12 @@ public class RemoteHelper {
 		return (MemberDataService)remote;
 	}
 	
-	public skddataservice getskddataservice(){
-		return (skddataservice)remote;
+	public ReceiptDataService getReceiptDataService(){
+		return (ReceiptDataService)remote;
 	}
 	
-	public xjfyddataservice getxjfyddataservice(){
-		return (xjfyddataservice)remote;
+	public PaymentBillDataService getPaymentDataService(){
+		return (PaymentBillDataService)remote;
 	}
 	
 	public PromotionDataService getPromotionDataService(){
