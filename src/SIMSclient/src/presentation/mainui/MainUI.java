@@ -3,6 +3,7 @@ package SIMSclient.src.presentation.mainui;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataenum.findtype.FindUserType;
 import SIMSclient.src.presentation.financialstaffui.FinancialStaffUI;
 import SIMSclient.src.presentation.generalmanagerui.GeneralManagerUI;
 import SIMSclient.src.presentation.inventorymanagerui.InventoryManagerUI;
@@ -63,7 +64,7 @@ public class MainUI extends Application{
 		    	Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
-		    	   UserVO user = service.find(userName, "ÓÃ»§Ãû").get(0);
+		    	   UserVO user = service.find(userName, FindUserType.NAME).get(0);
 		    	   UserRole role = user.getRole();
 		    	                      switch(role){
 		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(user);break;

@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.presentation.common.EditingCell;
+import SIMSclient.src.presentation.common.EditingCellChoice;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataenum.findtype.FindUserType;
 import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.UserVO;
@@ -28,7 +30,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
+	    boolean canUpdate;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
+	    ObservableList<UserVO> updatingList;
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
                 UserRole.FINANCIAL_MANAGER.value,
                 UserRole.INVENTORY_MANAGER.value,
@@ -68,7 +72,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		@FXML
 		public void insert(){
 			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
-		        ResultMessage message = service.insert(vo);
+		        ResultMessage message = service.modify(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -76,7 +80,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:table.refresh();cancel();break;
+		    	        case SUCCESS:updatingList.add(vo);table.setItems(updatingList);break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -89,7 +93,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@FXML
 		public void find(){
-			ArrayList<UserVO> list = service.find(findingField.getText(),findChoice.getValue());
+			canUpdate = false;
+			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.valueOf(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
@@ -111,18 +116,16 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@FXML
 		public void save(){
-			for(int i=0;i<list.size();i++){
-			ResultMessage message = service.update(list.get(i));
+			if(canUpdate){
+				ArrayList<UserVO> finalList = new ArrayList<>();
+				for(int i=0;i<updatingList.size();i++)
+					finalList.add(updatingList.get(i));
+			       service.update(finalList);
+			}else{
 				Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
-		    	        	switch(message){
-		    	        	case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        	case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        	case SUCCESS:table.refresh();cancel();break;
-		    	        	default:break;
-		    	        	}
-
+		    	        	new RemindPrintUI().start(ResultMessage.COULDNOTUPDATE);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -142,6 +145,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	           idLabel.setText("0000001");
 	        }
 			findingField.setText(null);
+			updatingList = list;
+			table.setItems(list);
 		}
 
 		@Override
@@ -149,19 +154,33 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			manageInit();
 			edit();
 			cancel();
+			canUpdate = true;
 		}
 
 		public void edit(){
 			Callback<TableColumn<UserVO, String>,
 	            TableCell<UserVO, String>> cellFactory
 	                = (TableColumn<UserVO, String> p) -> new EditingCell<UserVO>();
+	                Callback<TableColumn<UserVO, String>,
+		            TableCell<UserVO, String>> choiceFactory
+		                = (TableColumn<UserVO, String> p) -> new EditingCellChoice<UserVO>(roleList);
 
 	        tableName.setCellFactory(cellFactory);
 	        tableName.setOnEditCommit(
 	            (CellEditEvent<UserVO, String> t) -> {
+	            	UserVO lastVO  = (UserVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow());
 	                ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setName(t.getNewValue());
+	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow()));
+	        /*        if(!modify(newVO))
+	                	  ((UserVO) t.getTableView().getItems().get(
+	  	                        t.getTablePosition().getRow())
+	  	                        ).setName(lastVO.getName());
+	                */
+
 	        });
 
 	        tablePassword.setCellFactory(cellFactory);
@@ -169,18 +188,39 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	            (CellEditEvent<UserVO, String> t) -> {
 	                ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
-	                        ).setName(t.getNewValue());
+	                        ).setPassword(t.getNewValue());
 	        });
 
-	        tableRole.setCellFactory(cellFactory);
+	        tableRole.setCellFactory(choiceFactory);
 	        tableRole.setOnEditCommit(
 	            (CellEditEvent<UserVO, String> t) -> {
 	                ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
-	                        ).setName(t.getNewValue());
+	                        ).setRole(t.getNewValue());
 	        });
 
 
+		}
+
+		public boolean modify(UserVO vo){
+			 ResultMessage message = service.modify(vo);
+			 Boolean result = message == ResultMessage.SUCCESS?true:false;
+		        Platform.runLater(new Runnable() {
+
+		    	    public void run() {
+		    	        try {
+		    	        switch(message){
+		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
+		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
+		    	        case SUCCESS:updatingList.add(vo);table.setItems(updatingList);break;
+		    	        default:break;
+		    	        }
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+		     return result;
 		}
 
 		public void manageInit(){
@@ -193,7 +233,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	        tableRole.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("roleName"));
 	        deleteInit();
-	        findChoice.setItems(FXCollections.observableArrayList("ID","用户名","职务"));
+	        findChoice.setItems(FXCollections.observableArrayList(FindUserType.ID.value,FindUserType.NAME.value,FindUserType.USERROLE.value));
             list.addAll(service.getUserList());
             roleChoice.setItems(roleList);
 	        table.setItems(list);
@@ -214,8 +254,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            service.delete(clickedUser);
-	            		    	table.refresh();
+	                            updatingList.remove(clickedUser);
 	                        });
 	                    }
 	                }
@@ -224,8 +263,6 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	            return cell;
 	        });
 		}
-
-
 
 		public void start() throws Exception {
 			   changeStage("UserManagingUI","UserManagingUI.fxml");

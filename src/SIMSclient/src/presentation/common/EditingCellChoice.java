@@ -1,35 +1,37 @@
 package SIMSclient.src.presentation.common;
 
-
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
-import javafx.scene.control.TextField;
 
-public class EditingCell<T> extends TableCell<T, String> {
+public class EditingCellChoice<T> extends TableCell<T, String> {
 
-    private TextField textField;
-    private String newValue;
+    private ChoiceBox<String> choice;
+    ObservableList<String> list;
 
-    public EditingCell() {
+    public EditingCellChoice(ObservableList<String> roleList) {
+    	this.list = roleList;
     }
 
     @Override
     public void startEdit() {
         if (!isEmpty()) {
             super.startEdit();
-            createTextField();
+            createChoiceBox();
             setText(null);
-            setGraphic(textField);
-            textField.selectAll();
+            setGraphic(choice);
+
         }
     }
 
     @Override
     public void cancelEdit() {
         super.cancelEdit();
+
         setText((String) getItem());
         setGraphic(null);
-        newValue = getString();
     }
 
     @Override
@@ -41,11 +43,11 @@ public class EditingCell<T> extends TableCell<T, String> {
             setGraphic(null);
         } else {
             if (isEditing()) {
-                if (textField != null) {
-                    textField.setText(getString());
+                if (choice != null) {
+                   choice.setValue(getString());
                 }
                 setText(null);
-                setGraphic(textField);
+                setGraphic(choice);
             } else {
                 setText(getString());
                 setGraphic(null);
@@ -53,23 +55,21 @@ public class EditingCell<T> extends TableCell<T, String> {
         }
     }
 
-    private void createTextField() {
-        textField = new TextField(getString());
-        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
-        textField.focusedProperty().addListener(
+    private void createChoiceBox() {
+        choice = new ChoiceBox<>();
+        choice.setItems(FXCollections.observableArrayList(list));
+        choice.setValue(getString());
+        choice.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
+        choice.focusedProperty().addListener(
             (ObservableValue<? extends Boolean> arg0,
             Boolean arg1, Boolean arg2) -> {
                 if (!arg2) {
-                    commitEdit(textField.getText());
+                    commitEdit(choice.getValue());
                 }
         });
     }
 
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
-    }
-
-    public String getNewValue(){
-    	return newValue==null?"":newValue;
     }
 }

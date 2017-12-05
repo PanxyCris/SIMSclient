@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
+import SIMSclient.src.dataenum.findtype.FindUserType;
 import SIMSclient.src.vo.UserVO;
 
 public class UserController implements UserBLService{
@@ -26,27 +27,21 @@ public class UserController implements UserBLService{
 		return true;
 	}
 
-	@Override
-	public ResultMessage insert(UserVO vo) {
-        return ResultMessage.SUCCESS;
-	}
-	/**
-	 * 通过模糊查找返回需要删除的vo,同时进行delete操作
-	 */
+
     @Override
-	public ResultMessage delete(UserVO vo) {
+	public ResultMessage modify(UserVO vo) {
 		// TODO Auto-generated method stub
-    	return ResultMessage.SUCCESS;
+    	return ResultMessage.ILLEAGLINPUTDATA;
 	}
 
 	@Override
-	public ResultMessage update(UserVO vo) {
+	public ResultMessage update(ArrayList<UserVO> list) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ArrayList<UserVO> find(String info,String properties) {
+	public ArrayList<UserVO> find(String info,FindUserType properties) {
 		UserVO user1 = new UserVO("0000002","王灿灿","161250134",UserRole.USER_MANAGER);
 		ArrayList<UserVO> userList = new ArrayList<>();
 		userList.add(user1);
