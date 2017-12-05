@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
+import SIMSclient.src.vo.BillVO;
 import SIMSclient.src.vo.ValueObject;
 
 
@@ -15,19 +16,17 @@ import SIMSclient.src.vo.ValueObject;
  *
  */
 @SuppressWarnings("serial")
-public class FinancialDocVO extends ValueObject implements Serializable {
+public class FinancialDocVO extends BillVO implements Serializable {
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
 	protected ArrayList<String> note;//备注
 	protected ArrayList<String> accountName;//银行账户名
 	protected ArrayList<String> money;//转账金额
 	protected String customerID;//客户ID
-	protected BillType billType;//单据类型
-	protected BillState billState;//单据状态
 	
 	public FinancialDocVO(String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
 			ArrayList<String> note,BillType billType,BillState billState){
-		
+		super(billType, billState);
 		this.docID=docID;
 		this.userID=userID;
 		this.accountName=accountName;

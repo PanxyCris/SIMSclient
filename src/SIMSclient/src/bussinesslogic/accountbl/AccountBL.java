@@ -30,9 +30,9 @@ public class AccountBL implements AccountBLService{
 	
 	AccountDataService accountDataService;
 	FindAccountType findAccountType;
-	AccountVO accountVO = new AccountVO("", "","");
-	AccountPO accountPO = new AccountPO("", "", ""); 
-	PersistObject po=new PersistObject("");
+	AccountVO accountVO;
+	AccountPO accountPO; 
+	PersistObject po;
 	
 //	PaymentBillVO pfa=new PaymentBillVO(null, null, null, null, null, null, null);
 
@@ -44,6 +44,8 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ArrayList<AccountVO> find(String message,FindAccountType findType) {
+		
+		accountVO=new AccountVO("","","");
 		
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
@@ -70,6 +72,8 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ResultMessage newBuild(String id,String name,String money) {
+		
+		accountPO=new AccountPO("","","");
 		
 		double m = Double.valueOf(money);
 		
@@ -98,19 +102,13 @@ public class AccountBL implements AccountBLService{
 
 /**
  * @author 王灿灿
- * @param name为待删除账户名称
+ * @param accountVO 为传入的已修改的account对象
  * 
  */
 	@Override
-	public ResultMessage delete(String id) {
-		
-		try {
-			return accountDataService.delete(id);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//将删除逻辑放在data层
-		return resultMessage.NOTFOUND;
+	public ResultMessage judgeLegal(AccountVO accountVO) {
+		String name=accountVO.getName();
+		return resultMessage.SUCCESS;
 	}
 
 /**
@@ -121,6 +119,9 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
+		
+		accountVO=new AccountVO("","","");
+		
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
 		accountPOs=accountDataService.getAccountList();
@@ -150,9 +151,20 @@ public class AccountBL implements AccountBLService{
 		return accountDataService.enterItem(nameList, moneyList);
 	}
 
-@Override
-public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
-	return null;
-}
+/**
+ * @author 王灿灿
+ */
+	@Override
+	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
+			accountPO=new AccountPO("", "", "");
+			ArrayList<PersistObject> persistObjects = new ArrayList<>();	
+		for (AccountVO accountVO : accountVOs) {
+			accountPO.setID(accountVO.getId());
+			accountPO.setName(accountVO.getName());
+			accountPO.setMoney(accountVO.getMoney());
+			persistObjects.add((PersistObject)accountPO);
+		}
+		return accountDataService.saveChange(persistObjects);
+	}
 
 }

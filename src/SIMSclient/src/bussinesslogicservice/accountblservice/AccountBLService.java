@@ -36,9 +36,9 @@ public interface AccountBLService {
 	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs);
 
 	/**
-	 * @param id 待删除账户id
+	 * @param 
 	 */
-	public ResultMessage delete(String id);//删除
+	public ResultMessage judgeLegal(AccountVO accountVO);
 
 	public ArrayList<AccountVO> getAccountList();  //改了一下接口，返回一个账户list
 	

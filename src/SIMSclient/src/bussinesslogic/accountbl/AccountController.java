@@ -57,8 +57,8 @@ public class AccountController implements AccountBLService{
 	}
 
 	@Override
-	public ResultMessage delete(String id) {
-		return accountBL.delete(id);
+	public ResultMessage judgeLegal(AccountVO accountVO) {
+		return accountBL.judgeLegal(accountVO);
 	}
 
 }

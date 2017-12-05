@@ -26,6 +26,7 @@ public interface AccountDataService extends CommonDataService<AccountPO>{
 	public static final String NAME = "AccountData";
 	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException;
 	public ArrayList<AccountPO> getAccountList();
-	public ResultMessage enterItem(ArrayList<String> nameList, ArrayList<String> moneyList);
+	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<String> moneyList);
 	public ResultMessage newBuild(PersistObject po);
+	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects);
 }
