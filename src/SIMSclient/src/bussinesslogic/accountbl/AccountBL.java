@@ -29,12 +29,12 @@ public class AccountBL implements AccountBLService{
 	}
 	
 	AccountDataService accountDataService;
+	AccountTransition accountTransition;
 	FindAccountType findAccountType;
 	AccountVO accountVO;
 	AccountPO accountPO; 
 	PersistObject po;
 	
-//	PaymentBillVO pfa=new PaymentBillVO(null, null, null, null, null, null, null);
 
 	
 /**
@@ -53,13 +53,9 @@ public class AccountBL implements AccountBLService{
 			accountPOs=accountDataService.find(message,findType);
 		} catch (RemoteException e) {
 			e.printStackTrace();
-		}	
-//		if (accountPOs.isEmpty()) {
-//			System.out.println(ResultMessage.NOTFOUND);
-//		}	
+		}		
 		for (int i = 0; i < accountPOs.size(); i++) {
-			accountVO.setMoney(accountPOs.get(i).getMoney());
-			accountVO.setName(accountPOs.get(i).getName());
+			accountVO=accountTransition.POtoVO(accountPO);
 			accountVOs.add(accountVO);
 		}
 		
@@ -159,9 +155,7 @@ public class AccountBL implements AccountBLService{
 			accountPO=new AccountPO("", "", "");
 			ArrayList<PersistObject> persistObjects = new ArrayList<>();	
 		for (AccountVO accountVO : accountVOs) {
-			accountPO.setID(accountVO.getId());
-			accountPO.setName(accountVO.getName());
-			accountPO.setMoney(accountVO.getMoney());
+			accountPO=accountTransition.VOtoPO(accountVO);
 			persistObjects.add((PersistObject)accountPO);
 		}
 		return accountDataService.saveChange(persistObjects);
