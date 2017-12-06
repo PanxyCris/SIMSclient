@@ -50,12 +50,12 @@ import SIMSserver.src.po.table.StatementOfOperationPO;
 /**
  * 
  * @ClassName: DataRemoteObject
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 数据层的增删改查等通用操作
  * @author lijie
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommonDataService<PersistObject> {
+public class DataRemoteObject<PO extends PersistObject> extends UnicastRemoteObject implements CommonDataService<PO> {
 
 	private static final long serialVersionUID = 4029039744279087114L;
 	
@@ -79,7 +79,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommonDataS
 	}
 
 	@Override
-	public PersistObject find(String ID) throws RemoteException {
+	public PO find(String ID) throws RemoteException {
 		return null;
 	}
 
@@ -99,7 +99,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommonDataS
 	}
 
 	@Override
-	public ArrayList<PersistObject> show() throws RemoteException {
+	public ArrayList<PO> show() throws RemoteException {
 		return null;
 	}
 

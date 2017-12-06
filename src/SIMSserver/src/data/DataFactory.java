@@ -8,16 +8,21 @@ package SIMSserver.src.data;
 import java.rmi.RemoteException;
 
 import SIMSserver.src.data.accountdata.AccountData;
+import SIMSserver.src.data.salesdata.SalesData;
 import SIMSserver.src.dataservice.DataService;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
+import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
 import SIMSserver.src.po.PersistObject;
 
 public class DataFactory {
 
-	public static DataService<PersistObject> createDataService(String name) throws RemoteException{
+	public static DataService<?> createDataService(String name) throws RemoteException{
 		switch(name) {
 		case AccountDataService.NAME:
 			return new AccountData();
+		case SalesDataService.NAME:
+		   
 		}
+		return null;
 	}
 }

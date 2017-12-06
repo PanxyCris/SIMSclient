@@ -2,6 +2,7 @@ package SIMSserver.src.data.salesdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import SIMSserver.src.dataenum.ResultMessage;
@@ -10,16 +11,16 @@ import SIMSserver.src.po.SalesPO;
 
 public class SalesDataServiceImpl extends UnicastRemoteObject implements SalesDataService{
 	private static final long serialVersionUID = 1L;
-	Sales sale = new Sales();
+	SalesData sale = new SalesData();
 
-	protected SalesDataServiceImpl() throws RemoteException {
+	public SalesDataServiceImpl() throws RemoteException {
 		super();
 	}
 
 	@Override
 	public ResultMessage createTable() throws RemoteException {
 		try {
-			sale.createTable();;
+			sale.createTable();
 			return ResultMessage.SUCCESS;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,16 +41,31 @@ public class SalesDataServiceImpl extends UnicastRemoteObject implements SalesDa
 
 	@Override
 	public ResultMessage delete(String ID) throws RemoteException {
+		try {
+			return sale.delete(ID);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ResultMessage update(SalesPO po) throws RemoteException {
-		return null;
+		try {
+			return sale.update(po);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
 	}
 
 	@Override
 	public ArrayList<SalesPO> show() throws RemoteException {
+		try {
+			return sale.show();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		return null;
 	}
 
