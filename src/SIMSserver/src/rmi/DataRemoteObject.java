@@ -14,6 +14,7 @@ import SIMSserver.src.dataenum.ResultMessage;
 import SIMSserver.src.dataenum.findtype.FindAccountType;
 import SIMSserver.src.dataenum.findtype.FindCommodityType;
 import SIMSserver.src.dataenum.findtype.FindMemberType;
+import SIMSserver.src.dataservice.CommonDataService;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
 import SIMSserver.src.dataservice.billdataservice.BillDataService;
 import SIMSserver.src.dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
@@ -54,47 +55,17 @@ import SIMSserver.src.po.table.StatementOfOperationPO;
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject
-		implements AccountDataService, BillDataService, BusinessHistoryScheduleDataService, SaleScheduleDataService,
-		StatementOfOperationDataService, CommodityDataService, MemberDataService, ReceiptDataService,
-		PaymentBillDataService, PromotionDataService, PurchaseDataService, SalesDataService {
+public class DataRemoteObject extends UnicastRemoteObject implements CommonDataService<PersistObject> {
 
 	private static final long serialVersionUID = 4029039744279087114L;
-	private AccountDataService accountDataService;
-	private BillDataService billDataService;
-	private BusinessHistoryScheduleDataService businessHistoryScheduleDataService;
-	private SaleScheduleDataService saleScheduleDataService;
-	private StatementOfOperationDataService statementOfOperationDataService;
-	private CommodityDataService commodityDataService;
-	private MemberDataService memberDataService;
-	private ReceiptDataService receiptDataService;
-	private PaymentBillDataService paymentBillDataService;
-	private PromotionDataService promotionDataService;
-	private PurchaseDataService purchaseDataService;
-	private SalesDataService salesDataService;
+	
 
 	protected DataRemoteObject() throws RemoteException {
-		accountDataService = new AccountDataServiceMySqlImpl();
-		billDataService = new BillData();
+		
 	}
 
 	@Override
-	public ResultMessage insert(AccountPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage delete(String ID) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(AccountPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<AccountPO> show() throws RemoteException {
+	public ResultMessage createTable() throws RemoteException {
 		return null;
 	}
 
@@ -108,204 +79,29 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage insert(BusinessHistorySchedulePO po) throws RemoteException {
+	public PersistObject find(String ID) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ResultMessage update(BusinessHistorySchedulePO po) throws RemoteException {
+	public ResultMessage insert(PersistObject po) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ResultMessage insert(SaleSchedulePO po) throws RemoteException {
+	public ResultMessage delete(String ID) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ResultMessage update(SaleSchedulePO po) throws RemoteException {
+	public ResultMessage update(PersistObject po) throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ResultMessage insert(StatementOfOperationPO po) throws RemoteException {
+	public ArrayList<PersistObject> show() throws RemoteException {
 		return null;
 	}
 
-	@Override
-	public ResultMessage update(StatementOfOperationPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(CommodityPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(CommodityPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(MemberPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(MemberPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(ReceiptBillPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(ReceiptBillPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(PaymentBillPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(PaymentBillPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(PromotionPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(PromotionPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(PurchasePO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(PurchasePO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage insert(SalesPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(SalesPO po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public SalesPO find(String ID) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public String getSaleID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public String getSaleBackID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public String getPurchaseID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public String getPurchaseBackID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PromotionPO> show(PromotionType type) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<ReceiptBillPO> show(BillType type) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public String getID(String fatherID) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getAllID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<CommodityPO> find(String keywords, FindCommodityType type) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public void viewRport(StatementOfOperationPO statementOfOperationPO) {
-	}
-
-	@Override
-	public void viewReport(SaleSchedulePO saleSchedulePO) {
-	}
-
-	@Override
-	public FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO) {
-		return null;
-	}
-
-	@Override
-	public void exportReport() {
-	}
-
-	@Override
-	public void writeOff() {
-	}
-
-	@Override
-	public void writeOffAndCopy(PersistObject billPO) {
-	}
-
-	@Override
-	public Date getDate() {
-		return null;
-	}
-
-	@Override
-	public BillType getType() {
-		return null;
-	}
-
-	@Override
-	public BillState getState() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException {
-		return null;
-	}
-
-	
+		
 }

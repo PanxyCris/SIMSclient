@@ -2,10 +2,12 @@ package SIMSserver.src.po;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.commodity.CommodityItemPO;
+import SIMSserver.src.dataenum.BillState;
+import SIMSserver.src.dataenum.BillType;
+import SIMSserver.src.dataenum.Warehouse;
+import SIMSserver.src.po.commodity.CommodityItemPO;
+
+
 
 public class SalesPO extends PersistObject {
 	private static final long serialVersionUID = 1L;
@@ -23,22 +25,11 @@ public class SalesPO extends PersistObject {
 	private BillState state;
 	private BillType type;
 
-	/**
-	 * @param id
-	 * @param clientId
-	 * @param clientName
-	 * @param operator
-	 * @param saleMan
-	 * @param warehouse
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
-	 * @param afterPrice
-	 * @param remark
-	 * @param commodities
-	 * @param state
-	 * @param type
-	 */
+	
+	public SalesPO() {
+		
+	}
+
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
 			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, double voucher,
 			double afterPrice, String remark, BillType type) {

@@ -13,6 +13,11 @@ public class PersistObject {
 	protected String date;
 	protected String id;
 	
+	
+	public PersistObject() {
+		
+	}
+	
 	/*
 	 *自动生成单据编号和日期 
 	 */

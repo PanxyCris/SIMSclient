@@ -6,7 +6,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-
 /**
  * 
  * @author Íõ²Ó²Ó
@@ -14,17 +13,17 @@ import java.rmi.registry.LocateRegistry;
  * 
  */
 public class RemoteHelper {
-	public RemoteHelper(){
+	public RemoteHelper() {
 		initServer();
 	}
-	
-	public void initServer(){
+
+	public void initServer() {
 		DataRemoteObject dataRemoteObject;
 		try {
-			dataRemoteObject=new DataRemoteObject();
+			dataRemoteObject = new DataRemoteObject();
 			LocateRegistry.createRegistry(8887);
 			Naming.bind("rmi://127.0.0.1:8887/DataRemoteObject", dataRemoteObject);
-			
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
