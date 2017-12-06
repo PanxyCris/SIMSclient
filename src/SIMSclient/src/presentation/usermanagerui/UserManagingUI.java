@@ -30,7 +30,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
-	    boolean canUpdate;
 	    UserBLService service = UserController.getInstance().getUserService();
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
@@ -70,9 +69,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@FXML
 		public void insert(){
-			if(canUpdate){
 			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
-		        ResultMessage message = service.modify(vo);
+		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -80,7 +78,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:list.add(vo);table.setItems(list);break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);addID();break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -88,15 +86,11 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 						}
 		    	    }
 		    	});
-			}
-			else
-				couldNotOperation();
 		}
 
 
 		@FXML
 		public void find(){
-			canUpdate = false;
 			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
@@ -116,20 +110,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		}
 
 		@FXML
-		public void save(){
-			if(canUpdate){
-				ArrayList<UserVO> finalList = new ArrayList<>();
-				for(int i=0;i<list.size();i++)
-					finalList.add(list.get(i));
-			    service.update(finalList);
-			    cancel();
-			}else{
-				couldNotOperation();
-			}
-		}
-
-		@FXML
-		public void cancel(){
+		public void refresh(){
 			findingField.setText(null);
 			list.removeAll();
 			list.addAll(service.getUserList());
@@ -138,13 +119,11 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			nameField.setText("admin");
 			passwordField.setText("admin");
 			addID();
-			deleteInit();
-			canUpdate = true;
 		}
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			cancel();
+			refresh();
 			manageInit();
 			edit();
 		}
@@ -166,7 +145,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        ).setName(t.getNewValue());
 	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow()));
-	               if(modify(newVO)){
+	               if(update(newVO)){
 	                   ((UserVO)t.getTableView().getItems().get(
 	  	                        t.getTablePosition().getRow())
 	  	                        ).setName(tmp);
@@ -183,7 +162,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		                        ).setPassword(t.getNewValue());
 		                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow()));
-		               if(!modify(newVO))
+		               if(!update(newVO))
 		                	  (t.getTableView().getItems().get(
 		  	                        t.getTablePosition().getRow())
 		  	                        ).setPassword(tmp);
@@ -200,11 +179,10 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		}
 
-		public boolean modify(UserVO vo){
-			 ResultMessage message = service.modify(vo);
+		public boolean update(UserVO vo){
+			 ResultMessage message = service.update(vo);
 			 Boolean result = message == ResultMessage.SUCCESS?true:false;
 		        Platform.runLater(new Runnable() {
-
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
@@ -232,6 +210,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("roleName"));
 	        roleChoice.setItems(roleList);
 	        findChoice.setItems(FXCollections.observableArrayList(FindUserType.ID.value,FindUserType.NAME.value,FindUserType.USERROLE.value));
+			deleteInit();
 		}
 
 		public void deleteInit(){
@@ -248,13 +227,10 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        Button delBtn = new Button("É¾³ý");
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
-	                        	if(canUpdate){
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                                list.remove(clickedUser);
-	                                table.setItems(list);
-	                        	}
-	                        	else
-	                        		couldNotOperation();
+	                            service.delete(clickedUser);
+	                            list.remove(clickedUser);
+	                            table.setItems(list);
 	                        });
 	                    }
 	                }
@@ -292,16 +268,5 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 			return newID;
 		}
 
-		public void couldNotOperation(){
-			Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        	new RemindPrintUI().start(ResultMessage.COULDNOTUPDATE);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
-		}
 
 }

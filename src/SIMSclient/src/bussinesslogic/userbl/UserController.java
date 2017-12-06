@@ -29,13 +29,19 @@ public class UserController implements UserBLService{
 
 
     @Override
-	public ResultMessage modify(UserVO vo) {
+	public ResultMessage insert(UserVO vo) {
 		// TODO Auto-generated method stub
     	return ResultMessage.SUCCESS;
 	}
 
+    @Override
+   	public ResultMessage delete(UserVO vo) {
+   		// TODO Auto-generated method stub
+       	return ResultMessage.SUCCESS;
+   	}
+
 	@Override
-	public ResultMessage update(ArrayList<UserVO> list) {
+	public ResultMessage update(UserVO vo) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
