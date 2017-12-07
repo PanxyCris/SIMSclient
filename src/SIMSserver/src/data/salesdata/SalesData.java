@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import SIMSserver.src.data.CommonData;
 import SIMSserver.src.data.DBManager;
 import SIMSserver.src.dataenum.BillState;
 import SIMSserver.src.dataenum.BillType;
@@ -29,7 +27,7 @@ public class SalesData{
 		super();
 	}
 	
-	public void createTable() throws SQLException, RemoteException {
+	public void createTable() throws SQLException {
 		Connection conn = DBManager.getConnection();
 		String sql = "create table Sales (id varchar(25) not null, memberID varchar(20) not null, member varchar(20) not null, "
 				+ "saleMan varchar(20), operator varchar(20), warehouse varchar(20), beforePrice double, allowance double, "
@@ -45,7 +43,7 @@ public class SalesData{
 		}
 	}
 	
-	public void insert(SalesPO po) throws RemoteException, SQLException {
+	public void insert(SalesPO po) throws RemoteException {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		String sql = "" + "insert into sales values(?,?,?,?,?,?,?,?,?,?,?,?);";
 		try{
@@ -70,7 +68,7 @@ public class SalesData{
 	}
 	
 	@SuppressWarnings("unlikely-arg-type")
-	public SalesPO find(String ID) throws RemoteException, SQLException {
+	public SalesPO find(String ID) throws RemoteException {
 		SalesPO po = null;
 		Connection conn = DBManager.getConnection();
 		String sql = "select * from sales where id = ?";
@@ -128,7 +126,7 @@ public class SalesData{
 		return po;
 	}
 
-	public ResultMessage delete(String ID) throws RemoteException, SQLException {
+	public ResultMessage delete(String ID) throws RemoteException {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from sales where id = ?";
 		try {
@@ -143,7 +141,7 @@ public class SalesData{
 		
 	}
 
-	public ResultMessage update(SalesPO po) throws RemoteException, SQLException {
+	public ResultMessage update(SalesPO po) throws RemoteException {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update sales set memberID = ?, member = ?,"
 				    + " saleMan = ?, operator = ?, warehouse = ?, beforePrice = ?,"

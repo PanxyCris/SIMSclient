@@ -41,12 +41,7 @@ public class SalesDataServiceImpl extends UnicastRemoteObject implements SalesDa
 
 	@Override
 	public ResultMessage delete(String ID) throws RemoteException {
-		try {
-			return sale.delete(ID);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return sale.delete(ID);
 	}
 
 	@Override

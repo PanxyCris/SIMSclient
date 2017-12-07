@@ -1,50 +1,76 @@
 package SIMSserver.src.data.accountdata;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import SIMSserver.src.dataenum.ResultMessage;
+import SIMSserver.src.dataenum.findtype.FindAccountType;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
 import SIMSserver.src.po.AccountPO;
+import SIMSserver.src.po.PersistObject;
 /**
  * 
  * @author 王灿灿
  * @version 2017-12-2
  * 
  */
-public class AccountDataServiceMySqlImpl implements AccountDataService{
-	
-	private static AccountDataServiceMySqlImpl accountDataServiceMySqlImpl=new AccountDataServiceMySqlImpl();
+public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements AccountDataService{
 
-	public AccountDataServiceMySqlImpl getInstance(){
-		return accountDataServiceMySqlImpl;
+	private AccountData account = null;
+	
+	protected AccountDataServiceMySqlImpl() throws RemoteException {
+		super();
 	}
 	
-	public AccountDataServiceMySqlImpl() {
+	@Override
+	public ResultMessage createTable() throws RemoteException {
+		account = new AccountData();
+		return account.createTable();
 	}
 	
-	public AccountDataService getService(){
-		return (AccountDataService)accountDataServiceMySqlImpl;
+	@Override
+	public ResultMessage insert(AccountPO po) throws RemoteException {
+		account = new AccountData();
+		return account.insert(po);
 	}
 
 	@Override
-	public ArrayList<AccountPO> find(String message) {
+	public ResultMessage delete(String ID) throws RemoteException {
+		account = new AccountData();
+		return account.delete(ID);
+	}
+
+	@Override
+	public ResultMessage update(AccountPO po) throws RemoteException {
+		account = new AccountData();
+		return account.update(po);
+	}
+
+	@Override
+	public ArrayList<AccountPO> show() throws RemoteException {
+		account = new AccountData();
+		return account.show();
+	}
+
+
+	@Override
+	public void init() throws RemoteException {
+	}
+
+	@Override
+	public String getID() throws RemoteException {
 		return null;
 	}
 
 	@Override
-	public ResultMessage newBuild(AccountVO accountVO) {
-		return null;
+	public AccountPO find(String ID) throws RemoteException {
+		account = new AccountData();
+		return account.find(ID);
 	}
 
 	@Override
-	public ResultMessage delete(String name) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage modifyName(String preName, String targetName) {
+	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException {
 		return null;
 	}
 
@@ -53,12 +79,20 @@ public class AccountDataServiceMySqlImpl implements AccountDataService{
 		return null;
 	}
 
-//这里负责实现将收付款单据入账，即修改对应account的Money数据
 	@Override
-	public ResultMessage enterItem(ArrayList<String> nameList,ArrayList<String> transferMoney) {
+	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<String> moneyList) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage newBuild(PersistObject po) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects) {
 		return null;
 	}
 	
-
-
+	
 }
