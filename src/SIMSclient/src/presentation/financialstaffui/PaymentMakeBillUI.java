@@ -6,12 +6,16 @@ import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.skdbl.SKDBL;
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
+import SIMSclient.src.dataenum.BillState;
+import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
 import SIMSclient.src.presentation.common.EditingCell;
+import SIMSclient.src.presentation.remindui.RemindExistUI;
 import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.AccountVO;
 import SIMSclient.src.vo.makefinancialdoc.EntryVO;
+import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +39,9 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	@FXML
 	TextField accountField;
 	@FXML
-	TextField sumField;
+	TextField memberField;
+	@FXML
+	Label sumLabel;
 	@FXML
 	Label operatorLabel;
 
@@ -59,12 +65,31 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 
 	@FXML
 	public void insert(){
-
+		 EntryVO vo = new EntryVO(itemField.getText(), moneyField.getText(), descriptionArea.getText());
+	        ResultMessage message = service.;
+	        Platform.runLater(new Runnable() {
+	    	    public void run() {
+	    	        try {
+	    	        switch(message){
+	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
+	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
+	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+	    	        case SUCCESS:list.add(vo);table.setItems(list);
+	    	                     int result = Integer.parseInt(sumLabel.getText())+Integer.parseInt(moneyField.getText());
+	    	                     sumLabel.setText(String.valueOf(result));break;
+	    	        default:break;
+	    	        }
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	    	    }
+	    	});
 	}
 
 	@FXML
 	public void save(){
-
+         PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberField.getText(),
+        		            accountField.getText(),list,sumLabel.getText(),BillType.XJFYD,BillState.DRAFT);
 	}
 
 	@FXML
@@ -75,15 +100,15 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	@FXML
 	public void fresh(){
 		 accountField.setText(null);
-         sumField.setText(null);
+         memberField.setText(null);
          itemField.setText(null);
          moneyField.setText(null);
          descriptionArea.setText(null);
 	}
 
 	@FXML
-	public void checkBefore(){
-
+	public void checkBefore() throws Exception{
+            new PaymentCheckBillUI().start();
 	}
 
 	public void start() throws Exception {
@@ -93,6 +118,7 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		idLabel.setText(service.);
+		sumLabel.setText("0");
 		fresh();
         operatorLabel.setText(user.getName());
 	}
@@ -132,6 +158,11 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	                	  (t.getTableView().getItems().get(
 	  	                        t.getTablePosition().getRow())
 	  	                        ).setTransferAmount(tmp);
+	               else{
+	            	   String newTmp = newVO.getTransferAmount();
+	            	   int result = Integer.parseInt(sumLabel.getText())-Integer.parseInt(tmp)+Integer.parseInt(newTmp);
+	            	   sumLabel.setText(String.valueOf(result));
+	               }
         });
 
         tableDescription.setCellFactory(cellFactory);
@@ -197,6 +228,9 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
                         	EntryVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
+                            int tmp = Integer.parseInt(clickedItem.getTransferAmount());
+                            int result = Integer.parseInt(sumLabel.getText())-tmp;
+                            sumLabel.setText(String.valueOf(result));
                         });
                     }
                 }
