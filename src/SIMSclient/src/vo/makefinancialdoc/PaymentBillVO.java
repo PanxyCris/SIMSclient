@@ -6,21 +6,31 @@ import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 
 /**
- * 
+ *
  * @author 王灿灿
  *@version 2017-12-2
  *
  */
 @SuppressWarnings("serial")
 public class PaymentBillVO extends FinancialDocVO {
-	private String total;//转账总额	
-	private AccountListVO accountListVO;
-	
-	public PaymentBillVO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
-			ArrayList<String> note,String total,BillType billType,BillState billState){
-		super(docID,userID,accountName,money,customerID,note,billType,billState);
-		accountListVO=new AccountListVO(accountName, money, note);
+	private String total;//转账总额
+	private String accountID;
+	private ArrayList<EntryVO> entryListVO;
+
+	public PaymentBillVO (String docID,String userID,String customerID,String accountID,ArrayList<EntryVO> entryListVO,
+			String total,BillType billType,BillState billState){
+		super(docID,userID,customerID,billType,billState);
+		entryListVO=new ArrayList<EntryVO>();
+		this.accountID = accountID;
 		this.total=total;
+	}
+
+	public String getAccountID(){
+		return accountID;
+	}
+
+	public void setAccountID(String accountID){
+		this.accountID = accountID;
 	}
 
 	public String getTotal() {
@@ -31,13 +41,13 @@ public class PaymentBillVO extends FinancialDocVO {
 		this.total = total;
 	}
 
-	public AccountListVO getAccountListVO() {
-		return accountListVO;
+	public ArrayList<EntryVO> getAccountListVO() {
+		return entryListVO;
 	}
 
-	public void setAccountListVO(AccountListVO accountListVO) {
-		this.accountListVO = accountListVO;
+	public void setAccountListVO(ArrayList<EntryVO> entryListVO) {
+		this.entryListVO = entryListVO;
 	}
 
-	
+
 }

@@ -6,9 +6,13 @@ import java.util.ResourceBundle;
 
 import SIMSclient.src.bussinesslogic.skdbl.SKDBL;
 import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
+import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
+import SIMSclient.src.presentation.common.EditingCell;
+import SIMSclient.src.presentation.remindui.RemindPrintUI;
 import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.makefinancialdoc.EntryListVO;
+import SIMSclient.src.vo.makefinancialdoc.EntryVO;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,11 +23,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class PaymentMakeBillUI extends MakeReceiptUI{
 	skdblservice service = SKDBL.getInstance().getSKDBLService();
-	ObservableList<EntryListVO> list = FXCollections.observableArrayList();
+	ObservableList<EntryVO> list = FXCollections.observableArrayList();
 	@FXML
 	Label idLabel;
 	@FXML
@@ -34,15 +40,15 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	Label operatorLabel;
 
 	@FXML
-	TableView<EntryListVO> table;
+	TableView<EntryVO> table;
 	@FXML
-	TableColumn<EntryListVO,String> tableItem;
+	TableColumn<EntryVO,String> tableItem;
 	@FXML
-	TableColumn<EntryListVO,String> tableMoney;
+	TableColumn<EntryVO,String> tableMoney;
 	@FXML
-	TableColumn<EntryListVO,String> tableDescription;
+	TableColumn<EntryVO,String> tableDescription;
 	@FXML
-	TableColumn<EntryListVO,String> tableDelete;
+	TableColumn<EntryVO,String> tableDelete;
 
 	@FXML
 	TextField itemField;
@@ -91,19 +97,92 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
         operatorLabel.setText(user.getName());
 	}
 
+	public void edit(){
+		Callback<TableColumn<EntryVO, String>,
+            TableCell<EntryVO, String>> cellFactory
+                = (TableColumn<EntryVO, String> p) -> new EditingCell<EntryVO>();
+
+        tableItem.setCellFactory(cellFactory);
+        tableItem.setOnEditCommit(
+            (CellEditEvent<EntryVO, String> t) -> {
+            	String tmp = t.getOldValue();
+               ((EntryVO) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                        ).setEntryName(t.getNewValue());
+               EntryVO newVO = ((EntryVO) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow()));
+               if(update(newVO)){
+                   ((EntryVO)t.getTableView().getItems().get(
+  	                        t.getTablePosition().getRow())
+  	                        ).setEntryName(tmp);
+               }
+
+        });
+
+        tableMoney.setCellFactory(cellFactory);
+        tableMoney.setOnEditCommit(
+            (CellEditEvent<EntryVO, String> t) -> {
+            	String tmp = t.getOldValue();
+	               ((EntryVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setTransferAmount(t.getNewValue());
+	               EntryVO newVO = ((EntryVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow()));
+	               if(!update(newVO))
+	                	  (t.getTableView().getItems().get(
+	  	                        t.getTablePosition().getRow())
+	  	                        ).setTransferAmount(tmp);
+        });
+
+        tableDescription.setCellFactory(cellFactory);
+        tableDescription.setOnEditCommit(
+            (CellEditEvent<EntryVO, String> t) -> {
+            	String tmp = t.getOldValue();
+	               ((EntryVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNote(t.getNewValue());
+	               EntryVO newVO = ((EntryVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow()));
+	               if(!update(newVO))
+	                	  (t.getTableView().getItems().get(
+	  	                        t.getTablePosition().getRow())
+	  	                        ).setNote(tmp);
+        });
+	}
+
+	public boolean update(EntryVO vo){
+		 ResultMessage message = service.;
+		 Boolean result = message == ResultMessage.SUCCESS?true:false;
+	        Platform.runLater(new Runnable() {
+	    	    public void run() {
+	    	        try {
+	    	        switch(message){
+	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
+	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
+	    	        case SUCCESS:break;
+	    	        default:break;
+	    	        }
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	    	    }
+	    	});
+	     return result;
+	}
+
 	public void manageInit(){
 		tableItem.setCellValueFactory(
-                new PropertyValueFactory<EntryListVO,String>("entryName"));
+                new PropertyValueFactory<EntryVO,String>("entryName"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<EntryListVO,String>("transferAmount"));
+                new PropertyValueFactory<EntryVO,String>("transferAmount"));
         tableDescription.setCellValueFactory(
-                new PropertyValueFactory<EntryListVO,String>("note"));
+                new PropertyValueFactory<EntryVO,String>("note"));
         deleteInit();
 	}
 
 	public void deleteInit(){
 		tableDelete.setCellFactory((col) -> {
-            TableCell<EntryListVO, String> cell = new TableCell<EntryListVO, String>() {
+            TableCell<EntryVO, String> cell = new TableCell<EntryVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -115,7 +194,7 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
                         Button delBtn = new Button("É¾³ý");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	EntryListVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	EntryVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
                         });

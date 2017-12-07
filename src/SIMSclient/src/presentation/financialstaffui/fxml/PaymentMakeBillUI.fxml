@@ -127,8 +127,8 @@
       <Label fx:id="idLabel" layoutX="182.0" layoutY="88.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DDDDDD;" />
       <Label layoutX="187.0" layoutY="165.0" text="银行账户" />
       <TextField fx:id="accountField" layoutX="181.0" layoutY="180.0" />
-      <Label layoutX="182.0" layoutY="275.0" prefHeight="15.0" prefWidth="79.0" text="总额" />
-      <TextField fx:id="sumField" layoutX="179.0" layoutY="289.0" />
+      <Label layoutX="182.0" layoutY="275.0" prefHeight="15.0" prefWidth="79.0" text="客户" />
+      <TextField fx:id="memberField" layoutX="179.0" layoutY="289.0" />
       <Label layoutX="182.0" layoutY="395.0" prefHeight="15.0" prefWidth="79.0" text="操作员" />
       <Label fx:id="operatorLabel" layoutX="182.0" layoutY="415.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DDDDDD;" />
       <Button layoutX="296.0" layoutY="497.0" mnemonicParsing="false" onAction="#save" prefHeight="46.0" prefWidth="136.0" text="保     存" />
