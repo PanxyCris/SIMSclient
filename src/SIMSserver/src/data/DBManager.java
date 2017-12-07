@@ -13,9 +13,9 @@ import java.sql.Statement;
  */
 public class DBManager {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/mysql";
-	private static final String NAME = "sims";
-	private static final String PASSWORD = "plsw16";
+	private static final String URL = "jdbc:mysql://localhost/mysql?useSSL=true";
+	private static final String NAME = "root";
+	private static final String PASSWORD = "lijie160582";
 	private static Connection conn = null;
 	private static final String driver = "com.mysql.jdbc.Driver";
 
@@ -26,6 +26,9 @@ public class DBManager {
 			Class.forName(driver);
 			// 2.获得数据库的连接
 			conn = DriverManager.getConnection(URL, NAME, PASSWORD);
+			
+			if (!conn.isClosed())
+				System.out.println("Succeeded connecting to the Database!");
 		} catch (ClassNotFoundException e) {
 			System.out.println("没有找到数据库驱动程序");
 		} catch (SQLException e) {

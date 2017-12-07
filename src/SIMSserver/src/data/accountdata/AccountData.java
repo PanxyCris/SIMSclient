@@ -56,8 +56,9 @@ public class AccountData {
         }catch(SQLException e){
             e.printStackTrace();    
         }
+		return null;
 	}
-	}
+	
 
 	public ResultMessage delete(String ID) throws RemoteException {
 		Connection conn = DBManager.getConnection();

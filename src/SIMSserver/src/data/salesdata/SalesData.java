@@ -12,7 +12,6 @@ import SIMSserver.src.dataenum.BillState;
 import SIMSserver.src.dataenum.BillType;
 import SIMSserver.src.dataenum.ResultMessage;
 import SIMSserver.src.dataenum.Warehouse;
-import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
 import SIMSserver.src.po.SalesPO;
 import SIMSserver.src.po.commodity.CommodityItemPO;
 
