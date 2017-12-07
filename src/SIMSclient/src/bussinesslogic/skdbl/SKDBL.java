@@ -6,6 +6,15 @@ import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
 
 public class SKDBL implements skdblservice{
 
+	private static SKDBL skdController = new SKDBL();
+	public static SKDBL getInstance(){
+		return skdController;
+	}
+
+	public skdblservice getSKDBLService(){
+		return (skdblservice)skdController;
+	}
+
 	@Override
 	public ResultMessage newBuild(PaymentBillVO skdVO) {
 		return null;
@@ -30,5 +39,5 @@ public class SKDBL implements skdblservice{
 	public ResultMessage commit(PaymentBillVO skdVO) {
 		return null;
 	}
-	
+
 }

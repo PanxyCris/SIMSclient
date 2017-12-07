@@ -116,9 +116,10 @@
       </Button>
       <TableView fx:id="table" layoutX="426.0" layoutY="67.0" prefHeight="245.0" prefWidth="431.0">
         <columns>
-          <TableColumn fx:id="tableItem" prefWidth="75.0" text="条目名" />
+          <TableColumn fx:id="tableItem" prefWidth="110.0" text="条目名" />
           <TableColumn fx:id="tableMoney" prefWidth="75.0" text="金额" />
-            <TableColumn fx:id="tableDescription" prefWidth="75.0" text="备注" />
+            <TableColumn fx:id="tableDescription" prefWidth="170.0" text="备注" />
+            <TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
         </columns>
       </TableView>
       <Button layoutX="826.0" layoutY="528.0" mnemonicParsing="false" onAction="#checkBefore" prefHeight="44.0" prefWidth="150.0" text="查看过往付款单" />

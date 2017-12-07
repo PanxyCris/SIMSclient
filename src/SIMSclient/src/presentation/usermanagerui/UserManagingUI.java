@@ -110,12 +110,11 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		}
 
 		@FXML
-		public void refresh(){
+		public void fresh(){
 			findingField.setText(null);
 			list.removeAll();
 			list.addAll(service.getUserList());
-		    table.getItems().clear();
-			table.getItems().addAll(service.getUserList());
+			table.setItems(list);
 			nameField.setText("admin");
 			passwordField.setText("admin");
 			addID();
@@ -123,9 +122,10 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			refresh();
-			manageInit();
+			fresh();
 			edit();
+			manageInit();
+
 		}
 
 		public void edit(){
@@ -208,9 +208,9 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                new PropertyValueFactory<UserVO,String>("password"));
 	        tableRole.setCellValueFactory(
 	                new PropertyValueFactory<UserVO,String>("roleName"));
+	        deleteInit();
 	        roleChoice.setItems(roleList);
 	        findChoice.setItems(FXCollections.observableArrayList(FindUserType.ID.value,FindUserType.NAME.value,FindUserType.USERROLE.value));
-			deleteInit();
 		}
 
 		public void deleteInit(){
