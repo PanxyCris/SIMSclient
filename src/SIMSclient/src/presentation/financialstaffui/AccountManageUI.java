@@ -106,7 +106,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 		@FXML
 		public void fresh(){
 			findingField.setText(null);
-			list.removeAll();
+			list.clear();
 			list.addAll(service.getAccountList());
 			table.setItems(list);
 			idField.setText(null);

@@ -1,9 +1,10 @@
 package SIMSclient.src.presentation.financialstaffui;
 
 import java.util.Stack;
+
 import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.presentation.ControlledStage;
-import SIMSclient.src.presentation.StageController;
+import SIMSclient.src.presentation.common.ControlledStage;
+import SIMSclient.src.presentation.common.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 public class FinancialStaffUI implements ControlledStage{
 
 	public static final String mainID = "FinancialStaffUI";
-	public static final String pack = "financialstaffui/fxml/";
+	public static final String pack = "../financialstaffui/fxml/";
 	public static final String mainFXML = pack+"FinancialStaffUI.fxml";
 	static String previous;
 	static String current;

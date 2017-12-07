@@ -1,10 +1,9 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.util.*;
-
 import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.presentation.ControlledStage;
-import SIMSclient.src.presentation.StageController;
+import SIMSclient.src.presentation.common.ControlledStage;
+import SIMSclient.src.presentation.common.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
@@ -17,7 +16,7 @@ import javafx.stage.Stage;
 public class UserManagerUI implements ControlledStage{
 
 	public static final String mainID = "UserUI";
-	public static final String pack = "usermanagerui/fxml/";
+	public static final String pack = "../usermanagerui/fxml/";
 	public static final String mainFXML = pack+"UserManagerUI.fxml";
 	static String previous;
 	static String current;

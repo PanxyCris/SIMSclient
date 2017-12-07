@@ -112,7 +112,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		@FXML
 		public void fresh(){
 			findingField.setText(null);
-			list.removeAll();
+			list.clear();
 			list.addAll(service.getUserList());
 			table.setItems(list);
 			nameField.setText("admin");
