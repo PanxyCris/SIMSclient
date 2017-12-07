@@ -1,10 +1,10 @@
-package SIMSclient.src.bussinesslogic.xjfydbl;
+package SIMSclient.src.bussinesslogic.paymentbillbl;
 
-import SIMSclient.src.bussinesslogicservice.mfdocblservice.xjfydblservice;
+import SIMSclient.src.bussinesslogicservice.mfdocblservice.PaymentBillBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
-public class XJFYDBL implements xjfydblservice{
+public class XJFYDBL implements PaymentBillBLService{
 
 	@Override
 	public ResultMessage newBuild(ReceiptBillVO xjfydVO) {

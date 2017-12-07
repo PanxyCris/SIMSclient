@@ -1,9 +1,9 @@
-package SIMSclient.src.bussinesslogicservice.setupaccountblservice;
+package SIMSclient.src.bussinesslogicservice.accountbookblservice;
 
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.AccountBookVO;
 
-public interface SetUpAccountBLService {
+public interface AccountBookBLService {
 	
 	public ResultMessage newBuild(AccountBookVO accountBookVO);//ÐÂ½¨
 	

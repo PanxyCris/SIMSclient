@@ -1,18 +1,18 @@
-package SIMSclient.src.bussinesslogic.skdbl;
+package SIMSclient.src.bussinesslogic.receiptbillbl;
 
-import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
+import SIMSclient.src.bussinesslogicservice.mfdocblservice.ReceiptBillBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
 
-public class SKDBL implements skdblservice{
+public class SKDBL implements ReceiptBillBLService{
 
 	private static SKDBL skdController = new SKDBL();
 	public static SKDBL getInstance(){
 		return skdController;
 	}
 
-	public skdblservice getSKDBLService(){
-		return (skdblservice)skdController;
+	public ReceiptBillBLService getSKDBLService(){
+		return (ReceiptBillBLService)skdController;
 	}
 
 	@Override

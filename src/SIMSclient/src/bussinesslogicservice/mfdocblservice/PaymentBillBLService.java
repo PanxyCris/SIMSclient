@@ -3,7 +3,7 @@ package SIMSclient.src.bussinesslogicservice.mfdocblservice;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
-public interface xjfydblservice {
+public interface PaymentBillBLService {
 
 	public ResultMessage newBuild(ReceiptBillVO xjfydVO);
 	

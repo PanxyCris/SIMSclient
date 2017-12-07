@@ -140,11 +140,9 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
+		//waiting for coding
+		return resultMessage.SUCCESS;
 		
-		ArrayList<String> nameList=financialDocVO.getAccountName();
-		ArrayList<String> moneyList=financialDocVO.getMoney();
-		
-		return accountDataService.enterItem(nameList, moneyList);
 	}
 
 /**
