@@ -2,22 +2,22 @@ package SIMSclient.src.vo.commodity;
 
 public class CommodityVO {
 
-		private int id;   //商品编号
+		private String id;   //商品编号
 		private String name;
 		private String model; //商品型号
 		private ClassificationVO classification;
-		private int number; //商品数量
-		private double purPrice; //进价
-		private double retailedPrice; //零售价
-		private double recentPurPrice; //最新进价
-		private double recentRetailedPrice; //最新零售价
-		private int warmingValue; //警戒值
+		private String number; //商品数量
+		private String purPrice; //进价
+		private String retailedPrice; //零售价
+		private String recentPurPrice; //最新进价
+		private String recentRetailedPrice; //最新零售价
+		private String warmingValue; //警戒值
 
-		public void setID(int id){
+		public void setID(String id){
 			this.id = id;
 		}
 
-		public int getID(){
+		public String getID(){
 			return id;
 		}
 
@@ -45,51 +45,51 @@ public class CommodityVO {
 			return classification;
 		}
 
-		public void setNumber(int number){
+		public void setNumber(String number){
 			this.number = number;
 		}
 
-		public int getNumber(){
+		public String getNumber(){
 			return number;
 		}
 
-	    public void setPurPrice(double purPrice){
+	    public void setPurPrice(String purPrice){
 	    	this.purPrice = purPrice;
 	    }
 
-		public double getPurPrice(){
+		public String getPurPrice(){
 			return purPrice;
 		}
 
-		public void setRetailedPrice(double retailedPrice){
+		public void setRetailedPrice(String retailedPrice){
 			this.retailedPrice = retailedPrice;
 		}
 
-		public double getRetailedPrice(){
+		public String getRetailedPrice(){
 			return retailedPrice;
 		}
 
-		public void setRecentPurPrice(double recentPurPrice){
+		public void setRecentPurPrice(String recentPurPrice){
 			this.recentPurPrice = recentPurPrice;
 		}
 
-		public double getRecentPurPrice(){
+		public String getRecentPurPrice(){
 			 return recentPurPrice;
 		}
 
-		public void setRecentRetailedPrice(double recentRetailedPrice){
+		public void setRecentRetailedPrice(String recentRetailedPrice){
 			this.recentRetailedPrice = recentRetailedPrice;
 		}
 
-		public double getRecentRetailedPrice(){
+		public String getRecentRetailedPrice(){
 			return recentRetailedPrice;
 		}
 
-		public void setWarmingValue(int warmingValue){
+		public void setWarmingValue(String warmingValue){
 			this.warmingValue = warmingValue;
 		}
 
-		public int getWarmingValue(){
+		public String getWarmingValue(){
 			return warmingValue;
 		}
 

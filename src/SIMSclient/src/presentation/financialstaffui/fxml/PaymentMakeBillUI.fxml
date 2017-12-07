@@ -127,10 +127,10 @@
       <Label fx:id="idLabel" layoutX="182.0" layoutY="88.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DDDDDD;" />
       <Label layoutX="187.0" layoutY="165.0" text="银行账户" />
       <TextField fx:id="accountField" layoutX="181.0" layoutY="180.0" />
-      <Label layoutX="182.0" layoutY="275.0" prefHeight="15.0" prefWidth="79.0" text="客户" />
-      <TextField fx:id="memberField" layoutX="179.0" layoutY="289.0" />
-      <Label layoutX="182.0" layoutY="395.0" prefHeight="15.0" prefWidth="79.0" text="操作员" />
-      <Label fx:id="operatorLabel" layoutX="182.0" layoutY="415.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DDDDDD;" />
+      <Label layoutX="182.0" layoutY="253.0" prefHeight="15.0" prefWidth="79.0" text="客户" />
+      <TextField fx:id="memberField" layoutX="181.0" layoutY="268.0" />
+      <Label layoutX="182.0" layoutY="440.0" prefHeight="15.0" prefWidth="79.0" text="操作员" />
+      <Label fx:id="operatorLabel" layoutX="182.0" layoutY="455.0" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DDDDDD;" />
       <Button layoutX="296.0" layoutY="497.0" mnemonicParsing="false" onAction="#save" prefHeight="46.0" prefWidth="136.0" text="保     存" />
       <Button layoutX="537.0" layoutY="497.0" mnemonicParsing="false" onAction="#submit" prefHeight="46.0" prefWidth="136.0" text="提     交" />
       <TextField fx:id="itemField" layoutX="472.0" layoutY="333.0" />
@@ -140,5 +140,7 @@
       <Label layoutX="655.0" layoutY="337.0" text="金额" />
       <Label layoutX="432.0" layoutY="373.0" text="备注" />
       <Button layoutX="788.0" layoutY="369.0" mnemonicParsing="false" onAction="#insert" prefHeight="115.0" prefWidth="79.0" text="增加条目" />
+      <Label layoutX="182.0" layoutY="345.0" prefHeight="15.0" prefWidth="79.0" text="总额" />
+      <Label fx:id="sumLabel" layoutX="181.0" layoutY="358.0" prefHeight="23.0" prefWidth="161.0" style="-fx-background-color: #DDDDDD;" />
    </children>
 </AnchorPane>

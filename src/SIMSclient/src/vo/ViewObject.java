@@ -3,10 +3,10 @@ package SIMSclient.src.vo;
 
 /**
  * 
-* @ClassName: ValueObject 
+* @ClassName: ViewObject 
 * @Description: 数据对象 
  */
-public class ValueObject {
+public class ViewObject {
 
 	public String id;
 	public String date;

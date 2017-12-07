@@ -2,13 +2,14 @@ package SIMSclient.src.vo.purchase;
 
 import java.util.ArrayList;
 
+
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.vo.ValueObject;
+import SIMSclient.src.vo.ViewObject;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 
-public class PurchaseVO extends ValueObject{
+public class PurchaseVO extends ViewObject{
 
 	public String supplierID;
 	public String supplier;  //供应商
@@ -19,10 +20,10 @@ public class PurchaseVO extends ValueObject{
 	public String remark;
 	public BillType type;
 	public BillState state;
-	
-	
-	/** 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
+
+
+	/**
+	* @Description: TODO(这里用一句话描述这个方法的作用)
 	* @param @param supplierID
 	* @param @param supplier
 	* @param @param warehouse
@@ -31,9 +32,9 @@ public class PurchaseVO extends ValueObject{
 	* @param @param sum
 	* @param @param remark
 	* @param @param type
-	* @param @param state    设定文件 
-	* @return   返回类型 
-	* @throws 
+	* @param @param state    设定文件
+	* @return   返回类型
+	* @throws
 	*/
 	public PurchaseVO(String supplierID, String supplier, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemVO> commodities, double sum, String remark, BillType type, BillState state) {
@@ -61,7 +62,7 @@ public class PurchaseVO extends ValueObject{
 				+ remark + ", 单据类型=" + type.value + ", 单据状态=" + state.value
 				+ "]";
 	}
-	
-	
-	
+
+
+
 }

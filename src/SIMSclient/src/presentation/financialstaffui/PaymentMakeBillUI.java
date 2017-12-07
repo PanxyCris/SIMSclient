@@ -66,7 +66,7 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
 	@FXML
 	public void insert(){
 		 EntryVO vo = new EntryVO(itemField.getText(), moneyField.getText(), descriptionArea.getText());
-	        ResultMessage message = service.;
+	        ResultMessage message = service;
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
@@ -222,7 +222,7 @@ public class PaymentMakeBillUI extends MakeReceiptUI{
                     this.setGraphic(null);
 
                     if (!empty) {
-                        Button delBtn = new Button("É¾³ý");
+                        Button delBtn = new Button("É¾ï¿½ï¿½");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	EntryVO clickedItem = this.getTableView().getItems().get(this.getIndex());

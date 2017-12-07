@@ -3,11 +3,11 @@ package SIMSclient.src.vo;
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 
-public class BillVO extends ValueObject{
-	
+public class BillVO extends ViewObject{
+
 	protected BillType billType;//单据类型
 	protected BillState billState;//单据状态
-	
+
 	public BillVO(BillType billType,BillState billState) {
 		this.billType=billType;
 		this.billState=billState;
@@ -28,6 +28,6 @@ public class BillVO extends ValueObject{
 	public void setBillState(BillState billState) {
 		this.billState = billState;
 	}
-	
-	
+
+
 }

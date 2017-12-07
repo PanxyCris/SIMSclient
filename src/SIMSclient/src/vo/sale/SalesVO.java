@@ -1,13 +1,14 @@
 package SIMSclient.src.vo.sale;
 
 import java.util.ArrayList;
+
 import SIMSclient.src.dataenum.BillState;
 import SIMSclient.src.dataenum.BillType;
 import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.vo.ValueObject;
+import SIMSclient.src.vo.ViewObject;
 import SIMSclient.src.vo.commodity.CommodityItemVO;
 
-public class SalesVO extends ValueObject {
+public class SalesVO extends ViewObject {
 	public String retailerID;
 	public String retailer; // 客户姓名
 	public String saleMan; // 业务员
@@ -21,7 +22,7 @@ public class SalesVO extends ValueObject {
 	public String remark;
 	public BillState state;
 	public BillType type;
-	
+
 	/**
 	 * @param retailerID
 	 * @param retailer
@@ -63,5 +64,5 @@ public class SalesVO extends ValueObject {
 				+ ", 操作员=" + operator + ", 商品列表=" + commodity + ",\r\n折让前总额 =" + beforePrice + ", 折让金额=" + allowance
 				+ ", 代金券总额=" + voucher + ", 折让后总额=" + afterPrice + ", 备注=" + remark + ", 单据状态=" + state.value + "]";
 	}
-	
+
 }

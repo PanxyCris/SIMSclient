@@ -1,50 +1,23 @@
 package SIMSclient.src.bussinesslogicservice.commodityblservice;
+import java.util.ArrayList;
 
-import SIMSclient.src.vo.ValueObject;
+import SIMSclient.src.dataenum.ResultMessage;
+import SIMSclient.src.dataenum.findtype.FindCommodityType;
 import SIMSclient.src.vo.commodity.CommodityVO;
 
 public interface CommodityBLService {
-	public void setID(int id);
-	public int getID();
 
-	public void setName(String name);
-	public String getName();
+	public ResultMessage insert(CommodityVO vo);
 
-    public void setModel(String model);
-	public String getModel();
-
-	public void setClassification(String classification);
-	public String getClassification();
-
-	public void setNumber(int number);
-	public int getNumber();
-
-    public void setPurPrice(double purPrice);
-	public double getPurPrice();
-
-	public void setRetailedPrice(double retailedPrice);
-	public double getRetailedPrice();
-
-	public void setRecentPurPrice(double recentPurPrice);
-	public double getRecentPurPrice();
-
-	public void setRecentRetailedPrice(double recentRetailedPrice);
-	public double getRecentRetailedPrice();
-
-	public void setWarmingValue(int warmingValue);
-	public int getWarmingValue();
-
-	public void insert(CommodityVO vo);
 	public void delelte(CommodityVO vo);
-	public void update(CommodityVO vo);
-	public void find(CommodityVO vo);
-	public void giftInventoryReceiptsMaking(ValueObject vo);  //制定库存赠送单
-	public void lossAndRevenueInventoryReceiptsMaking(ValueObject vo);//制定库存报损报溢单
-	public void warningInventoryReceiptsMaking(ValueObject vo);//制定库存警戒单
+
+	public ResultMessage update(CommodityVO vo);
+
+	public ArrayList<CommodityVO> find(String info,FindCommodityType properties);
+
+	public ArrayList<CommodityVO> getCommodityList();
+
 	public void check();   //库存查看
+
 	public void stock();   //库存盘点
-
-
-
-
 }
