@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.financialstaffui.FinancialStaffUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.salestockui.SaleStockStaffUI">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -58,7 +58,7 @@
             <Image url="@../img/Logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="7.0" layoutY="260.0" mnemonicParsing="false" onAction="#accountManage" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="客户管理" textFill="WHITE">
+      <Button layoutX="7.0" layoutY="260.0" mnemonicParsing="false" onAction="#memberManage" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="客户管理" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
          </font>
@@ -90,10 +90,38 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="312.0" layoutY="206.0" prefHeight="168.0" prefWidth="590.0" text="欢迎你，进货销售人员！">
-         <font>
-            <Font size="53.0" />
-         </font>
-      </Label>
+      <TableView layoutX="164.0" layoutY="122.0" prefHeight="366.0" prefWidth="866.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="编号" />
+          <TableColumn prefWidth="50.0" text="分类" />
+            <TableColumn prefWidth="50.0" text="级别" />
+            <TableColumn prefWidth="75.0" text="姓名" />
+            <TableColumn prefWidth="75.0" text="电话" />
+            <TableColumn prefWidth="75.0" text="地址" />
+            <TableColumn prefWidth="75.0" text="邮编" />
+            <TableColumn prefWidth="75.0" text="电子邮箱" />
+            <TableColumn prefWidth="75.0" text="应收额度" />
+            <TableColumn prefWidth="50.0" text="应收" />
+            <TableColumn prefWidth="50.0" text="应付" />
+            <TableColumn prefWidth="75.0" text="默认业务员" />
+            <TableColumn prefWidth="70.0" text="是否删除" />
+        </columns>
+      </TableView>
+      <ChoiceBox layoutX="164.0" layoutY="75.0" prefWidth="150.0" />
+      <TextField layoutX="314.0" layoutY="75.0" prefHeight="23.0" prefWidth="655.0" />
+      <Button layoutX="969.0" layoutY="75.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="61.0" text="查  询" />
+      <Label layoutX="164.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
+      <TextField layoutX="239.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField layoutX="339.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="414.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="564.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="489.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="714.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="639.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField layoutX="839.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField layoutX="789.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField layoutX="889.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <Button layoutX="964.0" layoutY="512.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="70.0" text="增   加" />
+      <ChoiceBox layoutX="289.0" layoutY="512.0" prefWidth="50.0" />
    </children>
 </AnchorPane>

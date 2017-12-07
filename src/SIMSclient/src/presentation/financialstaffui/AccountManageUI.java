@@ -10,6 +10,7 @@ import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.presentation.common.EditingCell;
 import SIMSclient.src.presentation.common.EditingCellChoice;
+import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.dataenum.findtype.FindAccountType;
@@ -36,6 +37,7 @@ import javafx.util.Callback;
 
 public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	    AccountBLService service = AccountController.getInstance().getContoller();
+		public static final Remind remind = Remind.ACCOUNT;
 	    ObservableList<AccountVO> list = FXCollections.observableArrayList();
 	    @FXML
 	    protected TextField idField;

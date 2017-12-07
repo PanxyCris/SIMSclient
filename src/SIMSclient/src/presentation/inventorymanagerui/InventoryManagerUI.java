@@ -3,20 +3,20 @@ package SIMSclient.src.presentation.inventorymanagerui;
 import java.util.Stack;
 
 import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.presentation.StageController;
+import SIMSclient.src.presentation.common.ControlledStage;
+import SIMSclient.src.presentation.common.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
 import SIMSclient.src.vo.UserVO;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class InventoryManagerUI{
-	public static final String mainID = "CommodityUI";
-	public static final String pack = "commodityui/fxml/";
-	public static final String mainFXML = pack+"CommodityUI.fxml";
+public class InventoryManagerUI implements ControlledStage{
+	public static final String mainID = "InventoryManagerUI";
+	public static final String pack = "../inventorymanagerui/fxml/";
+	public static final String mainFXML = pack+"InventoryManagerUI.fxml";
 	static String previous;
 	static String current;
 	static Stack<String> stack;
@@ -52,6 +52,12 @@ public class InventoryManagerUI{
       current = mainID;
       stack.push(current);
     }
+		
+	@FXML
+	public void fresh(){
+		stageController.setStage(current, current);
+	}
+	
 
 	@FXML
 	public void message(){
@@ -74,8 +80,8 @@ public class InventoryManagerUI{
 	}
 
 	@FXML
-	public void classificationManage() throws Exception{
-
+	public void classManage() throws Exception{
+       new ClassificationManageUI().start();
 	}
 
 	@FXML
@@ -94,7 +100,7 @@ public class InventoryManagerUI{
 	}
 
 	@FXML
-	public void makeBill() throws Exception{
+	public void makeReceipt() throws Exception{
 
 	}
 

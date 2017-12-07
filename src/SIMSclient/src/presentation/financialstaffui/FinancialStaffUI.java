@@ -1,8 +1,6 @@
 package SIMSclient.src.presentation.financialstaffui;
 
 import java.util.Stack;
-
-import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.common.ControlledStage;
 import SIMSclient.src.presentation.common.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
@@ -21,7 +19,6 @@ public class FinancialStaffUI implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-	public static final Remind remind = Remind.ACCOUNT;
 	UserVO user;
 
 	static StageController stageController;

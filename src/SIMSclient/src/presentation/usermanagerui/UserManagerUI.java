@@ -1,14 +1,12 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.util.*;
-import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.presentation.common.ControlledStage;
 import SIMSclient.src.presentation.common.StageController;
 import SIMSclient.src.presentation.mainui.MainUI;
 import SIMSclient.src.vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -21,7 +19,7 @@ public class UserManagerUI implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-	public static final Remind remind = Remind.USER;
+
 	UserVO user;
 
 	static StageController stageController;
@@ -33,8 +31,6 @@ public class UserManagerUI implements ControlledStage{
 	protected AnchorPane pane;
 	@FXML
 	private ImageView image;
-	@FXML
-	Button ret;
 
 
 	@FXML

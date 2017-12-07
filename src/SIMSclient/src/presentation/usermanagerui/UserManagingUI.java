@@ -7,6 +7,7 @@ import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.presentation.common.EditingCell;
 import SIMSclient.src.presentation.common.EditingCellChoice;
+import SIMSclient.src.dataenum.Remind;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.dataenum.findtype.FindUserType;
@@ -31,6 +32,7 @@ import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
 	    UserBLService service = UserController.getInstance().getUserService();
+		public static final Remind remind = Remind.USER;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
                 UserRole.FINANCIAL_MANAGER.value,

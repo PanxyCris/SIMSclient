@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import SIMSclient.src.dataenum.BillType;
+import SIMSclient.src.dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.ChoiceBox;
 
 public class MakeReceiptUI extends FinancialStaffUI implements Initializable{
 
+	public static final Remind remind = Remind.BILL;
 	@FXML
 	ChoiceBox<String> receiptChoice;
 	@FXML
