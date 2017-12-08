@@ -56,17 +56,17 @@ public class MainUI extends Application{
 	}
 
     public void login() throws RemoteException{
-		    String userName = username.toString();
+		    String id = username.toString();
 		    String passWord = password.toString();
 
 		    UserBLService service = UserController.getInstance().getUserService();
 
-		    if(service.login(userName,passWord)){
+		    if(service.login(id,passWord)){
 
 		    	Platform.runLater(new Runnable() {
 		    	                public void run() {
 		    	                   try {
-		    	   UserVO user = service.find(userName, FindUserType.NAME).get(0);
+		    	   UserVO user = service.find(id, FindUserType.ID).get(0);
 		    	   UserRole role = user.getRole();
 		    	                      switch(role){
 		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(user);break;

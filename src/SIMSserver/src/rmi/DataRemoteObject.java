@@ -42,13 +42,13 @@ import SIMSserver.src.po.table.SaleSchedulePO;
 import SIMSserver.src.po.table.StatementOfOperationPO;
 
 /**
- * 
+ *
  * @author 王灿灿
  * @version 2017-11-28
  */
 
 /**
- * 
+ *
  * @ClassName: DataRemoteObject
  * @Description: 数据层的增删改查等通用操作
  * @author lijie
@@ -58,10 +58,10 @@ import SIMSserver.src.po.table.StatementOfOperationPO;
 public class DataRemoteObject<PO extends PersistObject> extends UnicastRemoteObject implements CommonDataService<PO> {
 
 	private static final long serialVersionUID = 4029039744279087114L;
-	
+
 
 	protected DataRemoteObject() throws RemoteException {
-		
+
 	}
 
 	@Override
@@ -78,10 +78,6 @@ public class DataRemoteObject<PO extends PersistObject> extends UnicastRemoteObj
 		return null;
 	}
 
-	@Override
-	public PO find(String ID) throws RemoteException {
-		return null;
-	}
 
 	@Override
 	public ResultMessage insert(PersistObject po) throws RemoteException {
@@ -103,5 +99,5 @@ public class DataRemoteObject<PO extends PersistObject> extends UnicastRemoteObj
 		return null;
 	}
 
-		
+
 }

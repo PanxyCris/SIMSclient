@@ -1,6 +1,7 @@
 package SIMSclient.src.bussinesslogic.userbl;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.ResultMessage;
