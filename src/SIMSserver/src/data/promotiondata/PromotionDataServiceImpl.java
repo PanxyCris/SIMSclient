@@ -11,6 +11,11 @@ import SIMSserver.src.po.PromotionPO;
 
 public class PromotionDataServiceImpl extends UnicastRemoteObject implements PromotionDataService{
 
+	/** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = -7653073542012573879L;
 	private PromotionData promotion;
 	
 	protected PromotionDataServiceImpl() throws RemoteException {
@@ -51,10 +56,6 @@ public class PromotionDataServiceImpl extends UnicastRemoteObject implements Pro
 		return null;
 	}
 
-	@Override
-	public PromotionPO find(String ID) throws RemoteException {
-		return null;
-	}
 
 	@Override
 	public ArrayList<PromotionPO> show(PromotionType type) throws RemoteException {

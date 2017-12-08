@@ -34,10 +34,6 @@ public class MemberDataServiceImpl extends UnicastRemoteObject implements Member
 		return null;
 	}
 
-	@Override
-	public MemberPO find(String ID) throws RemoteException {
-		return member.find(ID);
-	}
 	
 	@Override
 	public ArrayList<MemberPO> show() throws RemoteException {

@@ -27,8 +27,8 @@ public class UserController implements UserBLService{
      * 登录的用户名及密码判断
      * @throws RemoteException
      */
-	public boolean login(String userName, String passWord) throws RemoteException {
-		return service.login(userName,passWord);
+	public boolean login(String id, String passWord) throws RemoteException {
+		return service.login(id,passWord);
 	}
 
 

@@ -16,6 +16,7 @@ import SIMSserver.src.po.PurchasePO;
 */
 public class PurchaseDataServiceImpl extends UnicastRemoteObject implements PurchaseDataService{
 
+	private static final long serialVersionUID = 7329137070125442396L;
 	private PurchaseData purchase;
 	public PurchaseDataServiceImpl() throws RemoteException {
 		super();
@@ -59,11 +60,6 @@ public class PurchaseDataServiceImpl extends UnicastRemoteObject implements Purc
 		return null;
 	}
 
-	@Override
-	public PurchasePO find(String ID) throws RemoteException {
-		purchase = new PurchaseData();
-		return purchase.find(ID);
-	}
 
 	@Override
 	public String getPurchaseID() throws RemoteException {

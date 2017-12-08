@@ -1,6 +1,10 @@
 package SIMSclient.src.rmi;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 
 import SIMSclient.src.dataservice.accountbilldataservice.PaymentBillDataService;
 import SIMSclient.src.dataservice.accountbilldataservice.ReceiptDataService;
@@ -28,10 +32,9 @@ public class RemoteHelper {
 
 	private Remote remote;
 
-	private static RemoteHelper remoteHelper=new RemoteHelper();
+	private static RemoteHelper remoteHelper = new RemoteHelper();
 
 	public static RemoteHelper getInstance(){
-
 		return remoteHelper;
 
 	}

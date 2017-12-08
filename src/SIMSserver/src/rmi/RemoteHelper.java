@@ -26,9 +26,10 @@ public class RemoteHelper {
 		UserDataService dataRemoteObject;
 		try {
 			dataRemoteObject = new UserDataServiceImpl();
-			LocateRegistry.createRegistry(8887);
-			Naming.bind("rmi://127.0.0.1:8887/DataRemoteObject", dataRemoteObject);
+			LocateRegistry.createRegistry(9999);
+			Naming.bind("rmi://localhost:9999/DataRemoteObject", dataRemoteObject);
 
+			System.out.println("server：对象绑定成功");
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
