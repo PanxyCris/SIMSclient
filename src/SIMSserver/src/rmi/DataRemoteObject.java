@@ -55,7 +55,7 @@ import SIMSserver.src.po.table.StatementOfOperationPO;
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject<PO extends PersistObject> extends UnicastRemoteObject implements CommonDataService<PO> {
+public class DataRemoteObject extends UnicastRemoteObject implements CommonDataService {
 
 	private static final long serialVersionUID = 4029039744279087114L;
 

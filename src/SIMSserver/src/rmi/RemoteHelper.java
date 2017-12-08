@@ -10,6 +10,7 @@ import SIMSserver.src.data.salesdata.SalesDataServiceImpl;
 import SIMSserver.src.data.userdata.UserDataServiceImpl;
 import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
 import SIMSserver.src.dataservice.userdataservice.UserDataService;
+import SIMSserver.src.po.PersistObject;
 
 /**
  * 
