@@ -32,7 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class UserManagingUI extends UserManagerUI implements Initializable{
-	    UserBLService service = UserController.getInstance().getUserService();
+	    UserBLService service = new UserController();
 		public static final Remind remind = Remind.USER;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,

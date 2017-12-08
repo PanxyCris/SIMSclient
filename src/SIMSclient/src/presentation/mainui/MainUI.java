@@ -59,7 +59,7 @@ public class MainUI extends Application{
 		    String id = username.toString();
 		    String passWord = password.toString();
 
-		    UserBLService service = UserController.getInstance().getUserService();
+		    UserBLService service = new UserController();
 
 		    if(service.login(id,passWord)){
 
