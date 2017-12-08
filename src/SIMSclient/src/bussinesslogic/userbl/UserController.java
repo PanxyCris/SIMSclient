@@ -1,16 +1,18 @@
 package SIMSclient.src.bussinesslogic.userbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.UserRole;
 import SIMSclient.src.dataenum.findtype.FindUserType;
+import SIMSclient.src.dataservice.userdataservice.UserDataService;
+import SIMSclient.src.po.UserPO;
+import SIMSclient.src.rmi.RemoteHelper;
 import SIMSclient.src.vo.UserVO;
 
 public class UserController implements UserBLService{
 
-	UserVO vo;
-	ArrayList<UserVO> list;
+	UserDataService service = RemoteHelper.getInstance().getuserDataService();
 
 	private static UserController userController = new UserController();
 	public static UserController getInstance(){
@@ -22,52 +24,60 @@ public class UserController implements UserBLService{
 	}
     /**
      * µ«¬ºµƒ”√ªß√˚º∞√‹¬Î≈–∂œ
+     * @throws RemoteException
      */
-	public boolean login(String userName, String passWord) {
-		return true;
+	public boolean login(String userName, String passWord) throws RemoteException {
+		return service.login(userName,passWord);
 	}
 
 
     @Override
-	public ResultMessage insert(UserVO vo) {
+	public ResultMessage insert(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-    	return ResultMessage.SUCCESS;
+    	return service.insert(voTopo(vo));
 	}
 
     @Override
-   	public ResultMessage delete(UserVO vo) {
+   	public ResultMessage delete(UserVO vo) throws RemoteException {
    		// TODO Auto-generated method stub
-       	return ResultMessage.SUCCESS;
+       	return service.delete(vo.getID());
    	}
 
 	@Override
-	public ResultMessage update(UserVO vo) {
+	public ResultMessage update(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return service.update(voTopo(vo));
 	}
 
 	@Override
-	public ArrayList<UserVO> find(String info,FindUserType properties) {
-		UserVO user1 = new UserVO("0000002","Õı≤”≤”","161250134",UserRole.INVENTORY_MANAGER);
-		ArrayList<UserVO> userList = new ArrayList<>();
-		userList.add(user1);
-		return userList;
+	public ArrayList<UserVO> find(String info,FindUserType properties) throws RemoteException {
+		ArrayList<UserVO> voList = new ArrayList<>();
+		ArrayList<UserPO> poList = service.find(info, properties);
+		for(int i=0;i<poList.size();i++)
+			voList.add(poTovo(poList.get(i)));
+		return voList;
 	}
 
 	@Override
-	public ArrayList<UserVO> getUserList() {
-		UserVO user1 = new UserVO("0000001","¿ÓΩ‹","161250058",UserRole.PUR_SALE_MANAGER);
-		UserVO user2 =new UserVO("0000002","Õı≤”≤”","161250134",UserRole.FINANCIAL_MANAGER);
-		UserVO user3 =new UserVO("0000003","ÀÔºŒΩ‹","161250122",UserRole.GENERAL_MANAGER);
-		UserVO user4 =new UserVO("0000004","≈À–«”Ó","161250095",UserRole.INVENTORY_MANAGER);
-		ArrayList<UserVO> list = new ArrayList<>();
-		list.add(user1);
-		list.add(user2);
-		list.add(user3);
-		list.add(user4);
-		return list;
+	public ArrayList<UserVO> getUserList() throws RemoteException {
+		ArrayList<UserVO> voList = new ArrayList<>();
+		ArrayList<UserPO> poList = service.show();
+		for(int i=0;i<poList.size();i++)
+			voList.add(poTovo(poList.get(i)));
+		return voList;
 	}
 
+	public UserPO voTopo(UserVO vo){
+		UserPO po = new UserPO(vo.getID(),vo.getName(),vo.getPassword(),vo.getRole(),vo.getImage());
+		return po;
+
+	}
+
+	public UserVO poTovo(UserPO po){
+		UserVO vo = new UserVO(po.getID(),po.getName(),po.getPassword(),po.getRole(),po.getImage());
+		return vo;
+
+	}
 
 
 

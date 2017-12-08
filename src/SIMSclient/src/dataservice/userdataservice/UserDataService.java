@@ -2,9 +2,8 @@ package SIMSclient.src.dataservice.userdataservice;
 
 
 import java.rmi.RemoteException;
-
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.UserRole;
+import java.util.ArrayList;
+import SIMSclient.src.dataenum.findtype.FindUserType;
 import SIMSclient.src.dataservice.CommonDataService;
 import SIMSclient.src.po.UserPO;
 
@@ -12,7 +11,7 @@ import SIMSclient.src.po.UserPO;
 public interface UserDataService extends CommonDataService<UserPO>{
 
 	public static final String NAME = "UserData"; //rmi的名称
-	public ResultMessage updateAdmin(String oldPass, String newPass) throws RemoteException;  //更改管理员密码
-    public UserRole login() throws RemoteException;
+    public boolean login(String username,String password) throws RemoteException;
+    public ArrayList<UserPO> find(String info,FindUserType type) throws RemoteException;
 
 }

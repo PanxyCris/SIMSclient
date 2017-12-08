@@ -11,18 +11,18 @@ public class UserPO extends PersistObject {
 	private UserRole role;
 	private ImageView image;
 
-	
 
-	/** 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
+
+	/**
+	* @Description: TODO(这里用一句话描述这个方法的作用)
 	* @param @param id
 	* @param @param id2
 	* @param @param name
 	* @param @param password
 	* @param @param role
-	* @param @param image    设定文件 
-	* @return   返回类型 
-	* @throws 
+	* @param @param image    设定文件
+	* @return   返回类型
+	* @throws
 	*/
 	public UserPO(String id, String name, String password, UserRole role, ImageView image) {
 		super(id);
@@ -51,6 +51,6 @@ public class UserPO extends PersistObject {
 	public ImageView getImage() {
 		return image;
 	}
-	
-	
+
+
 }

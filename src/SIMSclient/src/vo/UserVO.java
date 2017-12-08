@@ -19,12 +19,12 @@ public class UserVO implements Serializable {
      ImageView image;   //Í·Ïñ
 
 
-     public UserVO(String i,String n,String p,UserRole r/*,ImageView im*/){
+     public UserVO(String i,String n,String p,UserRole r,ImageView im){
     	 ID = i;
     	 name = n;
     	 password = p;
     	 role = r;
-    	// image = im;
+    	 image = im;
          roleName = r.value;
 
      }
