@@ -2,6 +2,9 @@ package SIMSclient.src.rmi;
 
 import java.rmi.Remote;
 
+import SIMSclient.src.dataservice.accountbilldataservice.PaymentBillDataService;
+import SIMSclient.src.dataservice.accountbilldataservice.ReceiptDataService;
+import SIMSclient.src.dataservice.accountbookdataservice.SetUpAccountDataService;
 import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
 import SIMSclient.src.dataservice.billdataservice.BillDataService;
 import SIMSclient.src.dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
@@ -10,11 +13,8 @@ import SIMSclient.src.dataservice.checktabledataservice.StatementOfOperationData
 import SIMSclient.src.dataservice.classificationdataservice.ClassificationDataService;
 import SIMSclient.src.dataservice.commoditydataservice.CommodityDataService;
 import SIMSclient.src.dataservice.memberdataservice.MemberDataService;
-import SIMSclient.src.dataservice.mfdocsdataservice.PaymentBillDataService;
-import SIMSclient.src.dataservice.mfdocsdataservice.ReceiptDataService;
 import SIMSclient.src.dataservice.promotiondataservice.PromotionDataService;
 import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
-import SIMSclient.src.dataservice.setupaccountdataservice.SetUpAccountDataService;
 import SIMSclient.src.dataservice.userdataservice.UserDataService;
 
 /**

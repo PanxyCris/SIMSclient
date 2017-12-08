@@ -1,4 +1,4 @@
-package SIMSclient.src.dataservice.mfdocsdataservice;
+package SIMSclient.src.dataservice.accountbilldataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package SIMSclient.src.dataservice.setupaccountdataservice;
+package SIMSclient.src.dataservice.accountbookdataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
