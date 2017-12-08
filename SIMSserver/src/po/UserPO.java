@@ -1,9 +1,9 @@
-package SIMSserver.src.po;
+package po;
 
 
 import java.io.Serializable;
 
-import SIMSserver.src.dataenum.UserRole;
+import dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
 public class UserPO extends PersistObject implements Serializable{

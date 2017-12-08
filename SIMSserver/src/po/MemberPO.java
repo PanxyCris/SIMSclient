@@ -1,8 +1,8 @@
-package SIMSserver.src.po;
+package po;
 
-import SIMSserver.src.dataenum.MemberCategory;
-import SIMSserver.src.dataenum.MemberLevel;
-import SIMSserver.src.dataenum.UserRole;
+import dataenum.MemberCategory;
+import dataenum.MemberLevel;
+import dataenum.UserRole;
 
 public class MemberPO extends PersistObject {
 

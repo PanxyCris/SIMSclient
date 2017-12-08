@@ -1,11 +1,11 @@
-package SIMSserver.src.dataservice.commoditydataservice;
+package dataservice.commoditydataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.findtype.FindCommodityType;
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.commodity.CommodityPO;
+import dataenum.findtype.FindCommodityType;
+import dataservice.CommonDataService;
+import po.commodity.CommodityPO;
 
 public interface CommodityDataService extends CommonDataService<CommodityPO>{
 	public static final String NAME = "CommodityData";

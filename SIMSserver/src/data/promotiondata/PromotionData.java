@@ -1,9 +1,9 @@
-package SIMSserver.src.data.promotiondata;
+package data.promotiondata;
 
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.po.PromotionPO;
+import dataenum.ResultMessage;
+import po.PromotionPO;
 
 /**     
 *  

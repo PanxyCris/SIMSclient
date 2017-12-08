@@ -1,4 +1,4 @@
-package SIMSserver.src.data.salesdata;
+package data.salesdata;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import SIMSserver.src.data.DBManager;
-import SIMSserver.src.dataenum.BillState;
-import SIMSserver.src.dataenum.BillType;
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.Warehouse;
-import SIMSserver.src.po.SalesPO;
-import SIMSserver.src.po.commodity.CommodityItemPO;
+
+import data.DBManager;
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.ResultMessage;
+import dataenum.Warehouse;
+import po.SalesPO;
+import po.commodity.CommodityItemPO;
 
 /**
  * 

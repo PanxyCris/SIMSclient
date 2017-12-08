@@ -1,6 +1,6 @@
-package SIMSserver.src.runner;
+package runner;
 
-import SIMSserver.src.rmi.RemoteHelper;
+import rmi.RemoteHelper;
 
 public class ServerRunner {
 	

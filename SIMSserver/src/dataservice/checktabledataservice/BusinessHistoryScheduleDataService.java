@@ -1,9 +1,9 @@
-package SIMSserver.src.dataservice.checktabledataservice;
+package dataservice.checktabledataservice;
 
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.PersistObject;
-import SIMSserver.src.po.makefinancialdoc.FinancialDocPO;
-import SIMSserver.src.po.table.BusinessHistorySchedulePO;
+import dataservice.CommonDataService;
+import po.PersistObject;
+import po.makefinancialdoc.FinancialDocPO;
+import po.table.BusinessHistorySchedulePO;
 
 /**
  * 查看经营历程表

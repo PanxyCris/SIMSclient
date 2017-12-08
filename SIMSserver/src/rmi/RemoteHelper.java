@@ -1,4 +1,4 @@
-package SIMSserver.src.rmi;
+package rmi;
 
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;

@@ -1,13 +1,12 @@
-package SIMSserver.src.data.purchasedata;
+package data.purchasedata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataservice.purchasedataservice.PurchaseDataService;
-import SIMSserver.src.po.PurchasePO;
-
+import dataenum.ResultMessage;
+import dataservice.purchasedataservice.PurchaseDataService;
+import po.PurchasePO;
 
 /**     
 *  

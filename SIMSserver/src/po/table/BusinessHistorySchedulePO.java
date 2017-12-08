@@ -1,8 +1,8 @@
-package SIMSserver.src.po.table;
+package po.table;
 
-import SIMSserver.src.dataenum.BillType;
-import SIMSserver.src.dataenum.Warehouse;
-import SIMSserver.src.po.PersistObject;
+import dataenum.BillType;
+import dataenum.Warehouse;
+import po.PersistObject;
 
 /**
  * 经营历程表

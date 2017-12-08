@@ -1,15 +1,21 @@
-package SIMSserver.src.data.memberdata;
+package data.memberdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.findtype.FindMemberType;
-import SIMSserver.src.dataservice.memberdataservice.MemberDataService;
-import SIMSserver.src.po.MemberPO;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindMemberType;
+import dataservice.memberdataservice.MemberDataService;
+import po.MemberPO;
+
 
 public class MemberDataServiceImpl extends UnicastRemoteObject implements MemberDataService {
+	/** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = 1540803719725644071L;
 	private MemberData member;
 
 	protected MemberDataServiceImpl() throws RemoteException {

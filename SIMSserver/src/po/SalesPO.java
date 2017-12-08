@@ -1,12 +1,11 @@
-package SIMSserver.src.po;
+package po;
 
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.BillState;
-import SIMSserver.src.dataenum.BillType;
-import SIMSserver.src.dataenum.Warehouse;
-import SIMSserver.src.po.commodity.CommodityItemPO;
-
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.Warehouse;
+import po.commodity.CommodityItemPO;
 
 
 public class SalesPO extends PersistObject {

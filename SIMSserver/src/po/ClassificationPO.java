@@ -1,8 +1,9 @@
-package SIMSserver.src.po;
+package po;
 
 import java.util.ArrayList;
 
-import SIMSserver.src.po.commodity.CommodityPO;
+import po.commodity.CommodityPO;
+
 
 public class ClassificationPO extends PersistObject{
 

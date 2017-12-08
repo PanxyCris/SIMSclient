@@ -1,7 +1,7 @@
-package SIMSserver.src.po.commodity;
+package po.commodity;
 
-import SIMSserver.src.po.ClassificationPO;
-import SIMSserver.src.po.PersistObject;
+import po.ClassificationPO;
+import po.PersistObject;
 
 public class CommodityPO extends PersistObject {
 

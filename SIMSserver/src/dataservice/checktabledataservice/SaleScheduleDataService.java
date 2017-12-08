@@ -1,8 +1,7 @@
-package SIMSserver.src.dataservice.checktabledataservice;
+package dataservice.checktabledataservice;
 
-
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.table.SaleSchedulePO;
+import dataservice.CommonDataService;
+import po.table.SaleSchedulePO;
 
 public interface SaleScheduleDataService extends CommonDataService<SaleSchedulePO>{
 	public static final String NAME = "SaleScheduleData";

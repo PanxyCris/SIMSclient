@@ -1,14 +1,15 @@
-package SIMSserver.src.data.accountdata;
+package data.accountdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.findtype.FindAccountType;
-import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
-import SIMSserver.src.po.AccountPO;
-import SIMSserver.src.po.PersistObject;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountType;
+import dataservice.accountdataservice.AccountDataService;
+import po.AccountPO;
+import po.PersistObject;
+
 /**
  * 
  * @author Íõ²Ó²Ó
@@ -17,6 +18,11 @@ import SIMSserver.src.po.PersistObject;
  */
 public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements AccountDataService{
 
+	/** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = -2234101610458753475L;
 	private AccountData account = null;
 	
 	protected AccountDataServiceMySqlImpl() throws RemoteException {
@@ -61,12 +67,6 @@ public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements 
 	@Override
 	public String getID() throws RemoteException {
 		return null;
-	}
-
-	@Override
-	public AccountPO find(String ID) throws RemoteException {
-		account = new AccountData();
-		return account.find(ID);
 	}
 
 	@Override

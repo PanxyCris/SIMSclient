@@ -1,4 +1,4 @@
-package SIMSserver.src.po.commodity;
+package po.commodity;
 /**     
 *  
 * @author Lijie 

@@ -1,4 +1,4 @@
-package SIMSserver.src.data.userdata;
+package data.userdata;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -13,13 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import SIMSclient.src.bussinesslogic.userbl.User;
-import SIMSserver.src.data.DBManager;
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.UserRole;
-import SIMSserver.src.dataenum.findtype.FindUserType;
-import SIMSserver.src.po.PurchasePO;
-import SIMSserver.src.po.UserPO;
+import data.DBManager;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindUserType;
+import po.UserPO;
 
 /**     
 *  

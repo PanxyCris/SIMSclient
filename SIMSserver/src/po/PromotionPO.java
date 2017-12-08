@@ -1,4 +1,4 @@
-package SIMSserver.src.po;
+package po;
 
 public class PromotionPO extends PersistObject{
 

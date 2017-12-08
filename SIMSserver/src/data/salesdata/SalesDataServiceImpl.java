@@ -1,13 +1,13 @@
-package SIMSserver.src.data.salesdata;
+package data.salesdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
-import SIMSserver.src.po.SalesPO;
+import dataenum.ResultMessage;
+import dataservice.salesdataservice.SalesDataService;
+import po.SalesPO;
 
 public class SalesDataServiceImpl extends UnicastRemoteObject implements SalesDataService{
 	private static final long serialVersionUID = 1L;
@@ -74,15 +74,7 @@ public class SalesDataServiceImpl extends UnicastRemoteObject implements SalesDa
 		return null;
 	}
 
-	@Override
-	public SalesPO find(String ID) throws RemoteException {
-		try {
-			return sale.find(ID);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+	
 
 	@Override
 	public String getSaleID() throws RemoteException {

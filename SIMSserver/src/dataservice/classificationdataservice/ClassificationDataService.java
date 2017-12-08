@@ -1,9 +1,10 @@
-package SIMSserver.src.dataservice.classificationdataservice;
+package dataservice.classificationdataservice;
 
 import java.rmi.RemoteException;
 
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.ClassificationPO;
+import dataservice.CommonDataService;
+import po.ClassificationPO;
+
 
 public interface ClassificationDataService extends CommonDataService<ClassificationPO> {
 

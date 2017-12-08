@@ -1,10 +1,9 @@
-package SIMSserver.src.dataservice.billdataservice;
+package dataservice.billdataservice;
 
 import java.util.Date;
 
-import SIMSserver.src.dataenum.BillState;
-import SIMSserver.src.dataenum.BillType;
-
+import dataenum.BillState;
+import dataenum.BillType;
 public interface BillDataService {
 
 	public Date getDate();

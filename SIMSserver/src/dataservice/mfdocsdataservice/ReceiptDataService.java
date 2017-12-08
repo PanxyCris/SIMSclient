@@ -1,11 +1,11 @@
-package SIMSserver.src.dataservice.mfdocsdataservice;
+package dataservice.mfdocsdataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.BillType;
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.makefinancialdoc.ReceiptBillPO;
+import dataenum.BillType;
+import dataservice.CommonDataService;
+import po.makefinancialdoc.ReceiptBillPO;
 
 /**  
 * ภเหตร๗   

@@ -1,4 +1,4 @@
-package SIMSserver.src.data.memberdata;
+package data.memberdata;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -12,8 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import SIMSserver.src.data.DBManager;
-import SIMSserver.src.po.MemberPO;
+import data.DBManager;
+import po.MemberPO;
 
 /**
  * 

@@ -1,13 +1,13 @@
-package SIMSserver.src.data.promotiondata;
+package data.promotiondata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.PromotionType;
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataservice.promotiondataservice.PromotionDataService;
-import SIMSserver.src.po.PromotionPO;
+import dataenum.PromotionType;
+import dataenum.ResultMessage;
+import dataservice.promotiondataservice.PromotionDataService;
+import po.PromotionPO;
 
 public class PromotionDataServiceImpl extends UnicastRemoteObject implements PromotionDataService{
 

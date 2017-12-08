@@ -1,4 +1,4 @@
-package SIMSserver.src.dataenum;
+package dataenum;
 
 public enum ResultMessage {
 

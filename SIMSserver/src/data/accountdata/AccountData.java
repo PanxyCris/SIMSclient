@@ -1,4 +1,4 @@
-package SIMSserver.src.data.accountdata;
+package data.accountdata;
 
 import java.rmi.RemoteException;
 import java.rmi.server.RMIClientSocketFactory;
@@ -9,13 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import SIMSserver.src.data.CommonData;
-import SIMSserver.src.data.DBManager;
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.findtype.FindAccountType;
-import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
-import SIMSserver.src.po.AccountPO;
-import SIMSserver.src.po.PersistObject;
+import data.DBManager;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountType;
+import po.AccountPO;
 
 /**     
 *  

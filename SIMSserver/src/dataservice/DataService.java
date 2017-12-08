@@ -1,10 +1,10 @@
-package SIMSserver.src.dataservice;
+package dataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.po.PersistObject;
+import dataenum.ResultMessage;
+import po.PersistObject;
 
 
 /**     

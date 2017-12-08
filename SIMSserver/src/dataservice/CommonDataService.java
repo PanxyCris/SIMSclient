@@ -1,11 +1,10 @@
-package SIMSserver.src.dataservice;
+package dataservice;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.po.PersistObject;
-
+import dataenum.ResultMessage;
+import po.PersistObject;
 
 /**     
 *  通用的数据层接口，包括数据的增删改查

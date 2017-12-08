@@ -1,4 +1,4 @@
-package SIMSserver.src.data.purchasedata;
+package data.purchasedata;
 /**     
 *  
 * @author Lijie 
@@ -17,9 +17,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import SIMSserver.src.data.DBManager;
-import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.po.PurchasePO;
+import data.DBManager;
+import dataenum.ResultMessage;
+import po.PurchasePO;
+
 
 public class PurchaseData {
 

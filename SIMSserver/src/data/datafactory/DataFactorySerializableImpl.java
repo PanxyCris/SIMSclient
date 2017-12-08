@@ -1,4 +1,4 @@
-package SIMSserver.src.data.datafactory;
+package data.datafactory;
 
 public class DataFactorySerializableImpl {
 

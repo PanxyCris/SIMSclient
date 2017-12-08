@@ -1,4 +1,4 @@
-package SIMSserver.src.data.commoditydata;
+package data.commoditydata;
 
 public class CommodityDataServiceMySqlImpl {
 

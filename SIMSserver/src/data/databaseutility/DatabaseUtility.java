@@ -1,4 +1,4 @@
-package SIMSserver.src.data.databaseutility;
+package data.databaseutility;
 
 public class DatabaseUtility {
 

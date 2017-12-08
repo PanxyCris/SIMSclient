@@ -1,6 +1,6 @@
-package SIMSserver.src.po.table;
+package po.table;
 
-import SIMSserver.src.po.PersistObject;
+import po.PersistObject;
 
 public class StatementOfOperationPO extends PersistObject{
 

@@ -1,23 +1,23 @@
-package SIMSserver.src.po.makefinancialdoc;
+package po.makefinancialdoc;
 
 import java.util.ArrayList;
 
-import SIMSserver.src.dataenum.BillState;
-import SIMSserver.src.dataenum.BillType;
-import SIMSserver.src.po.makefinancialdoc.EntryListPO;
+import dataenum.BillState;
+import dataenum.BillType;
 
 public class ReceiptBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
 	// 条目清单
 	private ArrayList<String> entryName;// 条目名
 	private ArrayList<String> transferAmount;// 金额
-	
+
 	private EntryListPO entryListPO;
 
-	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount,BillType billType,BillState billState) {
-		super(docID,userID,accountName,money,customerID,note,billType,billState);
-		entryListPO=new EntryListPO(entryName, transferAmount, note);
+	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money,
+			String customerID, ArrayList<String> note, ArrayList<String> entryName, ArrayList<String> transferAmount,
+			BillType billType, BillState billState) {
+		super(docID, userID, accountName, money, customerID, note, billType, billState);
+		entryListPO = new EntryListPO(entryName, transferAmount, note);
 	}
 
 	public ArrayList<String> getEntryName() {

@@ -1,7 +1,7 @@
-package SIMSserver.src.dataservice.checktabledataservice;
+package dataservice.checktabledataservice;
 
-import SIMSserver.src.dataservice.CommonDataService;
-import SIMSserver.src.po.table.StatementOfOperationPO;
+import dataservice.CommonDataService;
+import po.table.StatementOfOperationPO;
 
 public interface StatementOfOperationDataService extends CommonDataService<StatementOfOperationPO>{
 	public static final String NAME = "statementOfOperationData";
