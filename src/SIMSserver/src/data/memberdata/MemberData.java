@@ -121,7 +121,7 @@ public class MemberData {
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  
-		return null;
+		return list;
 		
 	}
 }
