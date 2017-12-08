@@ -10,13 +10,13 @@ import SIMSserver.src.data.salesdata.SalesDataServiceImpl;
 import SIMSserver.src.data.userdata.UserDataServiceImpl;
 import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
 import SIMSserver.src.dataservice.userdataservice.UserDataService;
-import SIMSserver.src.po.PersistObject;
+import SIMSserver.src.po.UserPO;
 
 /**
- * 
+ *
  * @author 王灿灿
  * @version 2017-11-28
- * 
+ *
  */
 public class RemoteHelper {
 	public RemoteHelper() {
@@ -27,8 +27,8 @@ public class RemoteHelper {
 		UserDataService dataRemoteObject;
 		try {
 			dataRemoteObject = new UserDataServiceImpl();
-			LocateRegistry.createRegistry(9999);
-			Naming.bind("rmi://localhost:9999/DataRemoteObject", dataRemoteObject);
+			LocateRegistry.createRegistry(8887);
+			Naming.bind("rmi://127.0.0.1:8887/DataRemoteObject", dataRemoteObject);
 
 			System.out.println("server：对象绑定成功");
 		} catch (RemoteException e) {

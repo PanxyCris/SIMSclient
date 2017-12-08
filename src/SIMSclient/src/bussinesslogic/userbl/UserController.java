@@ -15,14 +15,6 @@ public class UserController implements UserBLService{
 
 	UserDataService service = RemoteHelper.getInstance().getuserDataService();
 
-	private static UserController userController = new UserController();
-	public static UserController getInstance(){
-		return userController;
-	}
-
-	public UserBLService getUserService(){
-		return (UserBLService)userController;
-	}
     /**
      * 登录的用户名及密码判断
      * @throws RemoteException
