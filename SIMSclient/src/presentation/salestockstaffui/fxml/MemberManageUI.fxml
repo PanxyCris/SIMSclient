@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.salestockui.SaleStockStaffUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.salestockui.MemberManageUI">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -121,7 +121,7 @@
       <TextField fx:id="payField" layoutX="839.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
       <TextField fx:id="receiveField" layoutX="789.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
       <Button layoutX="964.0" layoutY="512.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="70.0" text="增   加" />
-      <ChoiceBox fx:id="levalChoice" layoutX="289.0" layoutY="512.0" prefWidth="50.0" />
+      <ChoiceBox fx:id="levelChoice" layoutX="289.0" layoutY="512.0" prefWidth="50.0" />
       <Label fx:id="operatorLabel" layoutX="889.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
    </children>
 </AnchorPane>

@@ -36,7 +36,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 public class AccountManageUI extends FinancialStaffUI implements Initializable{
-	    AccountBLService service = AccountController.getInstance().getContoller();
+	    AccountBLService service = new AccountController();
 		public static final Remind remind = Remind.ACCOUNT;
 	    ObservableList<AccountVO> list = FXCollections.observableArrayList();
 	    @FXML

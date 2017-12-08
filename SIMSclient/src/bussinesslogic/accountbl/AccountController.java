@@ -21,21 +21,11 @@ public class AccountController implements AccountBLService{
 	AccountBL accountBL=new AccountBL();
 	AccountVO accountVO;
 
-	public static AccountController accountController=new AccountController();
-
-	public static AccountController getInstance(){
-		return accountController;
-	}
-
-	public AccountBLService getContoller(){
-		return (AccountBLService)accountController;
-	}
-
 	@Override
 	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
 		return accountBL.enterItem(financialDocVO);
 	}
-	
+
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
         return accountBL.getAccountList();
