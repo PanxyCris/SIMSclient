@@ -221,7 +221,7 @@ public class AccountManageUI extends FinancialStaffUI implements Initializable{
 	                    this.setGraphic(null);
 
 	                    if (!empty) {
-	                        Button delBtn = new Button("É¾ï¿½ï¿½");
+	                        Button delBtn = new Button("É¾³ý");
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                        	AccountVO clickedAccount = this.getTableView().getItems().get(this.getIndex());

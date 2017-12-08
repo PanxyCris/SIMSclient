@@ -143,6 +143,5 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="511.0" layoutY="536.0" mnemonicParsing="false" onAction="#submit" prefHeight="38.0" prefWidth="150.0" text="提    交" />
    </children>
 </AnchorPane>
