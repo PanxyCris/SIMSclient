@@ -30,7 +30,7 @@ public class UserManagerUI implements ControlledStage{
 	@FXML
 	protected AnchorPane pane;
 	@FXML
-	private ImageView image;
+	protected ImageView image;
 
 
 	@FXML

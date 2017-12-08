@@ -1,5 +1,7 @@
 package SIMSclient.src.presentation.mainui;
 
+import java.rmi.RemoteException;
+
 import SIMSclient.src.bussinesslogic.userbl.UserController;
 import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
 import SIMSclient.src.dataenum.UserRole;
@@ -34,12 +36,12 @@ public class MainUI extends Application{
 	AnchorPane pane;
 
 	@FXML
-	public void enterButton(ActionEvent event){
+	public void enterButton(ActionEvent event) throws RemoteException{
 		login();
 	}
 
 	@FXML
-	public void enterKey(KeyEvent event){
+	public void enterKey(KeyEvent event) throws RemoteException{
 		if(event.getCode()==KeyCode.ENTER)
 			login();
 	}
@@ -53,7 +55,7 @@ public class MainUI extends Application{
 	        primaryStage.show();
 	}
 
-    public void login(){
+    public void login() throws RemoteException{
 		    String userName = username.toString();
 		    String passWord = password.toString();
 
@@ -71,9 +73,7 @@ public class MainUI extends Application{
 		    	                         case FINANCIAL_MANAGER:new FinancialStaffUI().start(user);break;
 		    	                         case PUR_SALE_MANAGER: new SaleStockStaffUI().start(user);break;
 		    	                         case INVENTORY_MANAGER: new InventoryManagerUI().start(user);break;
-				                         case USER_MANAGER: new UserManagerUI().start(user);
-													    //	userUI.showImage(service.getImage());
-														   break;
+				                         case USER_MANAGER: new UserManagerUI().start(user);break;
 		    	                      }
 													} catch (Exception e) {
 														e.printStackTrace();

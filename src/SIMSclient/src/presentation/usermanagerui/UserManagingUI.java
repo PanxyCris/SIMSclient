@@ -1,6 +1,7 @@
 package SIMSclient.src.presentation.usermanagerui;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import SIMSclient.src.bussinesslogic.userbl.UserController;
@@ -70,8 +71,8 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 
 		@FXML
-		public void insert(){
-			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()));
+		public void insert() throws RemoteException{
+			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), image);
 		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -92,7 +93,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 
 		@FXML
-		public void find(){
+		public void find() throws RemoteException{
 			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
@@ -115,7 +116,12 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		public void fresh(){
 			findingField.setText(null);
 			list.clear();
-			list.addAll(service.getUserList());
+			try {
+				list.addAll(service.getUserList());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			table.setItems(list);
 			nameField.setText("admin");
 			passwordField.setText("admin");
@@ -147,11 +153,16 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        ).setName(t.getNewValue());
 	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow()));
-	               if(update(newVO)){
-	                   ((UserVO)t.getTableView().getItems().get(
-	  	                        t.getTablePosition().getRow())
-	  	                        ).setName(tmp);
-	               }
+	               try {
+					if(update(newVO)){
+					       ((UserVO)t.getTableView().getItems().get(
+					                t.getTablePosition().getRow())
+					                ).setName(tmp);
+					   }
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 	        });
 
@@ -164,10 +175,15 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 		                        ).setPassword(t.getNewValue());
 		                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow()));
-		               if(!update(newVO))
-		                	  (t.getTableView().getItems().get(
-		  	                        t.getTablePosition().getRow())
-		  	                        ).setPassword(tmp);
+		               try {
+						if(!update(newVO))
+						    	  (t.getTableView().getItems().get(
+						                t.getTablePosition().getRow())
+						                ).setPassword(tmp);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	        });
 
 	        tableRole.setCellFactory(choiceFactory);
@@ -181,7 +197,7 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 
 		}
 
-		public boolean update(UserVO vo){
+		public boolean update(UserVO vo) throws RemoteException{
 			 ResultMessage message = service.update(vo);
 			 Boolean result = message == ResultMessage.SUCCESS?true:false;
 		        Platform.runLater(new Runnable() {
@@ -230,7 +246,12 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            service.delete(clickedUser);
+	                            try {
+									service.delete(clickedUser);
+								} catch (RemoteException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 	                            list.remove(clickedUser);
 	                            table.setItems(list);
 	                        });
