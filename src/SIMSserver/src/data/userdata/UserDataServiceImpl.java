@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import SIMSserver.src.dataenum.ResultMessage;
 import SIMSserver.src.dataenum.UserRole;
+import SIMSserver.src.dataenum.findtype.FindUserType;
 import SIMSserver.src.dataservice.userdataservice.UserDataService;
 import SIMSserver.src.po.UserPO;
 
@@ -56,19 +57,26 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements UserData
 		return null;
 	}
 
+
 	@Override
-	public UserPO find(String ID) throws RemoteException {
-		return user.find(ID);
+	public boolean login(String id, String password) throws RemoteException {
+		user = new UserData();
+		ArrayList<UserPO> list = user.show();
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getID().equals(id) && list.get(i).getPassword().equals(password)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
-	public ResultMessage updateAdmin(String oldPass, String newPass) throws RemoteException {
-		return null;
+	public ArrayList<UserPO> find(String info, FindUserType type) throws RemoteException {
+		user = new UserData();
+		return user.find(info, type);
 	}
 
-	@Override
-	public UserRole login() throws RemoteException {
-		return null;
-	}
+	
 
+	
 }

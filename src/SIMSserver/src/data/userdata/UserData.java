@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import SIMSclient.src.bussinesslogic.userbl.User;
 import SIMSserver.src.data.DBManager;
 import SIMSserver.src.dataenum.ResultMessage;
 import SIMSserver.src.dataenum.UserRole;
+import SIMSserver.src.dataenum.findtype.FindUserType;
 import SIMSserver.src.po.PurchasePO;
 import SIMSserver.src.po.UserPO;
 
@@ -25,15 +27,15 @@ import SIMSserver.src.po.UserPO;
 * @date 2017年12月7日    
 */
 public class UserData {
-
 	public ResultMessage insert(UserPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
-		String sql = "" + "insert userrole values (?, ?)";
+		String sql = "" + "insert into userrole values (?, ?, ?)";
 		try{
 			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, po.getID());
-            ps.setObject(2, po);
+			ps.setInt(1, 1);
+			ps.setString(2, po.getID());
+            ps.setObject(3, po);
             ps.executeUpdate();
             conn.commit();
             ps.close();
@@ -61,16 +63,17 @@ public class UserData {
 		}
 	}
 	
-	public UserPO find(String id) {
+	@SuppressWarnings("unlikely-arg-type")
+	public ArrayList<UserPO> find(String keyword, FindUserType type) {
+		ArrayList<UserPO> list = new ArrayList<>();
 		UserPO po = null;
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "select * from userrole where id = ?";
+		String sql = "" + "select object from userrole";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				// 以下是读取的方法一定要注意了！
 				Blob inblob = (Blob) rs.getBlob("object");
 				InputStream is = inblob.getBinaryStream();
@@ -81,12 +84,29 @@ public class UserData {
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				po = (UserPO) in.readObject();
+				
+				if(type.equals(FindUserType.ID)) {
+					if(po.getID().equals(keyword)) {
+						list.add(po);
+					}
+				}
+				else if (type.equals(FindUserType.NAME)) {
+					if(po.getName().equals(keyword)) {
+						list.add(po);
+					}
+				}
+				else if (type.equals(FindUserType.USERROLE)) {
+					if(po.getRole().equals(keyword)) {
+						list.add(po);
+					}
+				}
+				
 			}
 					
 		}catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  
-		return po;
+		return list;
 	}
 	
 	public ResultMessage update(UserPO po) {

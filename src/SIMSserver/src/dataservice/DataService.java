@@ -17,6 +17,4 @@ public interface DataService<PO extends PersistObject> extends Remote {
 	public ResultMessage createTable() throws RemoteException;
 	public void init() throws RemoteException;
 	public String getID() throws RemoteException;
-	public PO find(String ID) throws RemoteException;
-
 }
