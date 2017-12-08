@@ -6,11 +6,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-import SIMSserver.src.data.salesdata.SalesDataServiceImpl;
-import SIMSserver.src.data.userdata.UserDataServiceImpl;
-import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
-import SIMSserver.src.dataservice.userdataservice.UserDataService;
-import SIMSserver.src.po.UserPO;
 
 /**
  *
@@ -24,9 +19,9 @@ public class RemoteHelper {
 	}
 
 	public void initServer() {
-		UserDataService dataRemoteObject;
+		DataRemoteObject dataRemoteObject;
 		try {
-			dataRemoteObject = new UserDataServiceImpl();
+			dataRemoteObject = new DataRemoteObject();
 			LocateRegistry.createRegistry(8887);
 			Naming.bind("rmi://127.0.0.1:8887/DataRemoteObject", dataRemoteObject);
 

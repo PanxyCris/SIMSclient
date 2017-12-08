@@ -7,6 +7,7 @@ import java.util.Date;
 
 import SIMSserver.src.data.accountdata.AccountDataServiceMySqlImpl;
 import SIMSserver.src.data.billdata.BillData;
+import SIMSserver.src.data.userdata.UserDataServiceImpl;
 import SIMSserver.src.dataenum.BillState;
 import SIMSserver.src.dataenum.BillType;
 import SIMSserver.src.dataenum.PromotionType;
@@ -14,6 +15,7 @@ import SIMSserver.src.dataenum.ResultMessage;
 import SIMSserver.src.dataenum.findtype.FindAccountType;
 import SIMSserver.src.dataenum.findtype.FindCommodityType;
 import SIMSserver.src.dataenum.findtype.FindMemberType;
+import SIMSserver.src.dataenum.findtype.FindUserType;
 import SIMSserver.src.dataservice.CommonDataService;
 import SIMSserver.src.dataservice.accountdataservice.AccountDataService;
 import SIMSserver.src.dataservice.billdataservice.BillDataService;
@@ -27,12 +29,14 @@ import SIMSserver.src.dataservice.mfdocsdataservice.ReceiptDataService;
 import SIMSserver.src.dataservice.promotiondataservice.PromotionDataService;
 import SIMSserver.src.dataservice.purchasedataservice.PurchaseDataService;
 import SIMSserver.src.dataservice.salesdataservice.SalesDataService;
+import SIMSserver.src.dataservice.userdataservice.UserDataService;
 import SIMSserver.src.po.AccountPO;
 import SIMSserver.src.po.MemberPO;
 import SIMSserver.src.po.PersistObject;
 import SIMSserver.src.po.PromotionPO;
 import SIMSserver.src.po.PurchasePO;
 import SIMSserver.src.po.SalesPO;
+import SIMSserver.src.po.UserPO;
 import SIMSserver.src.po.commodity.CommodityPO;
 import SIMSserver.src.po.makefinancialdoc.FinancialDocPO;
 import SIMSserver.src.po.makefinancialdoc.PaymentBillPO;
@@ -55,23 +59,52 @@ import SIMSserver.src.po.table.StatementOfOperationPO;
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements CommonDataService {
+public class DataRemoteObject extends UnicastRemoteObject implements UserDataService {
 
 	private static final long serialVersionUID = 4029039744279087114L;
 
+	private UserDataService user;
 
-	protected DataRemoteObject() throws RemoteException {
+	public DataRemoteObject() throws RemoteException {
 
+		user = new UserDataServiceImpl();
 	}
+
+
+	@Override
+	public ResultMessage insert(UserPO po) throws RemoteException {
+		return user.insert(po);
+	}
+
+
+	@Override
+	public ResultMessage delete(String ID) throws RemoteException {
+		return user.delete(ID);
+	}
+
+
+	@Override
+	public ResultMessage update(UserPO po) throws RemoteException {
+		return user.update(po);
+	}
+
+
+	@Override
+	public ArrayList<UserPO> show() throws RemoteException {
+		return user.show();
+	}
+
 
 	@Override
 	public ResultMessage createTable() throws RemoteException {
 		return null;
 	}
 
+
 	@Override
 	public void init() throws RemoteException {
 	}
+
 
 	@Override
 	public String getID() throws RemoteException {
@@ -80,24 +113,14 @@ public class DataRemoteObject extends UnicastRemoteObject implements CommonDataS
 
 
 	@Override
-	public ResultMessage insert(PersistObject po) throws RemoteException {
-		return null;
+	public boolean login(String id, String password) throws RemoteException {
+		return false;
 	}
+
 
 	@Override
-	public ResultMessage delete(String ID) throws RemoteException {
-		return null;
+	public ArrayList<UserPO> find(String info, FindUserType type) throws RemoteException {
+		return user.find(info, type);
 	}
-
-	@Override
-	public ResultMessage update(PersistObject po) throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PO> show() throws RemoteException {
-		return null;
-	}
-
 
 }

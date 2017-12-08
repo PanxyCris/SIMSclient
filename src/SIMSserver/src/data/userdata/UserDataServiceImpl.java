@@ -10,10 +10,8 @@ import SIMSserver.src.dataenum.findtype.FindUserType;
 import SIMSserver.src.dataservice.userdataservice.UserDataService;
 import SIMSserver.src.po.UserPO;
 
-public class UserDataServiceImpl extends UnicastRemoteObject implements UserDataService {
+public class UserDataServiceImpl implements UserDataService {
 
-	private static final long serialVersionUID = 6193895084068716534L;
-	
 	private UserData user;
 	
 	public UserDataServiceImpl() throws RemoteException {
