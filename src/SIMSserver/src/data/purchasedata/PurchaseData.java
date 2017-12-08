@@ -1,4 +1,9 @@
-package SIMSserver.src.data.userdata;
+package SIMSserver.src.data.purchasedata;
+/**     
+*  
+* @author Lijie 
+* @date 2017年12月8日    
+*/
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -10,48 +15,57 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import SIMSserver.src.data.DBManager;
 import SIMSserver.src.dataenum.ResultMessage;
-import SIMSserver.src.dataenum.UserRole;
 import SIMSserver.src.po.PurchasePO;
-import SIMSserver.src.po.UserPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月7日    
-*/
-public class UserData {
+public class PurchaseData {
 
-	public ResultMessage insert(UserPO po) {
-		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
-		String sql = "" + "insert userrole values (?, ?)";
-		try{
+	public ResultMessage insert(PurchasePO po) {
+		Connection conn = DBManager.getConnection();
+		String sql = "" + "insert into purchase(object) value(?)";
+		try {
 			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, po.getID());
-            ps.setObject(2, po);
-            ps.executeUpdate();
-            conn.commit();
-            ps.close();
-            conn.close();
-            return ResultMessage.SUCCESS;
-        }catch(SQLException e){
-            e.printStackTrace();    
-        }
+			ps.setObject(1, po);
+			ps.executeUpdate();
+			conn.commit();
+			ps.close();
+			conn.close();
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return ResultMessage.FAIL;
+		
 	}
 	
-	public ResultMessage delete(String id)  {
+	public ResultMessage delete(String id) {
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "delete from userrole where id = ?";
+		String sql = "" + "delete from purchase where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.execute();
+			ps.close();
+			conn.close();
+            return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+	
+	public ResultMessage update(PurchasePO po) {
+		Connection conn = DBManager.getConnection();
+		String sql = "" + "update purchase set object = ? where id = ?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setObject(1, po);
+			ps.setString(2, po.getID());
+			ps.executeUpdate();
 			ps.close();
 			conn.close();
 			return ResultMessage.SUCCESS;
@@ -61,10 +75,10 @@ public class UserData {
 		}
 	}
 	
-	public UserPO find(String id) {
-		UserPO po = null;
+	public PurchasePO find(String id) {
+		PurchasePO po = null;
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "select * from userrole where id = ?";
+		String sql = "" + "select * from purchase where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
@@ -80,36 +94,20 @@ public class UserData {
 				while (-1 != (input.read(buff, 0, buff.length)));
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
-				po = (UserPO) in.readObject();
+				po = (PurchasePO) in.readObject();
 			}
 					
 		}catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  
+				
 		return po;
 	}
 	
-	public ResultMessage update(UserPO po) {
+	public ArrayList<PurchasePO> show() {
+		ArrayList<PurchasePO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "update userrole set object = ? where id = ?";
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setObject(1, po);
-			ps.setString(2, po.getID());
-			ps.executeUpdate();
-			ps.close();
-			conn.close();
-			return ResultMessage.SUCCESS;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return ResultMessage.FAIL;
-		}
-	}
-	
-	public ArrayList<UserPO> show() {
-		ArrayList<UserPO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
-		String sql = "select object from user";
+		String sql = "select object from purchase";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
@@ -121,7 +119,7 @@ public class UserData {
                 
                 while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    UserPO po = (UserPO)in.readObject();                   //读出对象  
+                    PurchasePO po = (PurchasePO)in.readObject();                   //读出对象  
                       
                     list.add(po);  
                 }  
@@ -135,5 +133,4 @@ public class UserData {
 		return list;
 		
 	}
-
 }

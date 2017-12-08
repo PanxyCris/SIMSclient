@@ -11,28 +11,35 @@ import SIMSserver.src.po.UserPO;
 
 public class UserDataServiceImpl extends UnicastRemoteObject implements UserDataService {
 
+	private static final long serialVersionUID = 6193895084068716534L;
+	
+	private UserData user;
+	
 	public UserDataServiceImpl() throws RemoteException {
 		super();
 	}
 
 	@Override
 	public ResultMessage insert(UserPO po) throws RemoteException {
-		return null;
+		user = new UserData();
+		return user.insert(po);
 	}
 
 	@Override
 	public ResultMessage delete(String ID) throws RemoteException {
-		return null;
+		user = new UserData();
+		return user.delete(ID);
 	}
 
 	@Override
 	public ResultMessage update(UserPO po) throws RemoteException {
-		return null;
+		user = new UserData();
+		return user.update(po);
 	}
 
 	@Override
 	public ArrayList<UserPO> show() throws RemoteException {
-		return null;
+		return user.show();
 	}
 
 	@Override
@@ -51,7 +58,7 @@ public class UserDataServiceImpl extends UnicastRemoteObject implements UserData
 
 	@Override
 	public UserPO find(String ID) throws RemoteException {
-		return null;
+		return user.find(ID);
 	}
 
 	@Override
