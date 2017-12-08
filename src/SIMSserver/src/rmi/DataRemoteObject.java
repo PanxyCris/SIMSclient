@@ -114,7 +114,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 	@Override
 	public boolean login(String id, String password) throws RemoteException {
-		return false;
+		return user.login(id, password);
 	}
 
 
