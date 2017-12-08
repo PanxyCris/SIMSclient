@@ -1,10 +1,10 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.util.Stack;
-import SIMSclient.src.presentation.common.ControlledStage;
-import SIMSclient.src.presentation.common.StageController;
-import SIMSclient.src.presentation.mainui.MainUI;
-import SIMSclient.src.vo.UserVO;
+import presentation.common.ControlledStage;
+import presentation.common.StageController;
+import presentation.mainui.MainUI;
+import vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

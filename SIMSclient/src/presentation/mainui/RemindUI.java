@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.mainui;
+package presentation.mainui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,13 +21,13 @@ public class RemindUI {
 	public void confirm(){
 	   exit();
 	}
-	
+
 	@FXML
 	public void exitKey(KeyEvent event){
 		if(event.getCode()==KeyCode.ENTER)
 			exit();
 	}
-	
+
 	public void exit(){
 		Stage stage = (Stage) button.getScene().getWindow();
 	    stage.close();

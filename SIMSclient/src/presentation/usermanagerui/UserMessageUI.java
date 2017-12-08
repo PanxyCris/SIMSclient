@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.usermanagerui;
+package presentation.usermanagerui;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class UserMessageUI extends UserManagerUI implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		messageTable.setItems(FXCollections.observableArrayList("chocolate", "salmon", "gold", "coral", "darkorchid",
 	            "darkgoldenrod", "lightsalmon", "black", "rosybrown", "blue",
 	            "blueviolet", "brown"));

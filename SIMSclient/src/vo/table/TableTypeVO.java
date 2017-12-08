@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.table;
+package vo.table;
 
 public class TableTypeVO {
 

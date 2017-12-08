@@ -1,9 +1,10 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
-import SIMSclient.src.dataenum.TableType;
+import dataenum.TableType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

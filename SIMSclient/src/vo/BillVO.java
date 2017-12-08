@@ -1,7 +1,8 @@
-package SIMSclient.src.vo;
+package vo;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
+import dataenum.BillState;
+
+import dataenum.BillType;
 
 public class BillVO extends ViewObject{
 

@@ -1,12 +1,13 @@
-package SIMSclient.src.presentation.inventorymanagerui;
+package presentation.inventorymanagerui;
 
 import java.util.Stack;
 
-import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.presentation.common.ControlledStage;
-import SIMSclient.src.presentation.common.StageController;
-import SIMSclient.src.presentation.mainui.MainUI;
-import SIMSclient.src.vo.UserVO;
+
+import dataenum.Remind;
+import presentation.common.ControlledStage;
+import presentation.common.StageController;
+import presentation.mainui.MainUI;
+import vo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -52,12 +53,12 @@ public class InventoryManagerUI implements ControlledStage{
       current = mainID;
       stack.push(current);
     }
-		
+
 	@FXML
 	public void fresh(){
 		stageController.setStage(current, current);
 	}
-	
+
 
 	@FXML
 	public void message(){

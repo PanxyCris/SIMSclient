@@ -1,10 +1,11 @@
-package SIMSclient.src.bussinesslogicservice.userblservice;
+package bussinesslogicservice.userblservice;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.vo.UserVO;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindUserType;
+import vo.UserVO;
 
 public interface UserBLService {
 

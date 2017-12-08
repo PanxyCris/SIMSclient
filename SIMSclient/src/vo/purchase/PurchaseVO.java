@@ -1,13 +1,14 @@
-package SIMSclient.src.vo.purchase;
+package vo.purchase;
 
 import java.util.ArrayList;
 
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.vo.ViewObject;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
+
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.Warehouse;
+import vo.ViewObject;
+import vo.commodity.CommodityItemVO;
 
 public class PurchaseVO extends ViewObject{
 

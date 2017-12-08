@@ -1,9 +1,9 @@
-package SIMSclient.src.vo.inventorybill;
+package vo.inventorybill;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.vo.BillVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
+import dataenum.BillState;
+import dataenum.BillType;
+import vo.BillVO;
+import vo.commodity.CommodityVO;
 
 public class InventoryBillVO extends BillVO{
 

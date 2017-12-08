@@ -1,17 +1,19 @@
-package SIMSclient.src.presentation.mainui;
+package presentation.mainui;
+
 
 import java.rmi.RemoteException;
 
-import SIMSclient.src.bussinesslogic.userbl.UserController;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.dataenum.UserRole;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.presentation.financialstaffui.FinancialStaffUI;
-import SIMSclient.src.presentation.generalmanagerui.GeneralManagerUI;
-import SIMSclient.src.presentation.inventorymanagerui.InventoryManagerUI;
-import SIMSclient.src.presentation.salestockstaffui.SaleStockStaffUI;
-import SIMSclient.src.presentation.usermanagerui.UserManagerUI;
-import SIMSclient.src.vo.UserVO;
+
+import bussinesslogic.userbl.UserController;
+import bussinesslogicservice.userblservice.UserBLService;
+import dataenum.UserRole;
+import dataenum.findtype.FindUserType;
+import presentation.financialstaffui.FinancialStaffUI;
+import presentation.generalmanagerui.GeneralManagerUI;
+import presentation.inventorymanagerui.InventoryManagerUI;
+import presentation.salestockstaffui.SaleStockStaffUI;
+import presentation.usermanagerui.UserManagerUI;
+import vo.UserVO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

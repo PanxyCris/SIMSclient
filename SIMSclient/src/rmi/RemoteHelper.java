@@ -1,25 +1,26 @@
-package SIMSclient.src.rmi;
+package rmi;
 
 import java.net.MalformedURLException;
+
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import SIMSclient.src.dataservice.accountbilldataservice.PaymentBillDataService;
-import SIMSclient.src.dataservice.accountbilldataservice.ReceiptDataService;
-import SIMSclient.src.dataservice.accountbookdataservice.SetUpAccountDataService;
-import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
-import SIMSclient.src.dataservice.billdataservice.BillDataService;
-import SIMSclient.src.dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
-import SIMSclient.src.dataservice.checktabledataservice.SaleScheduleDataService;
-import SIMSclient.src.dataservice.checktabledataservice.StatementOfOperationDataService;
-import SIMSclient.src.dataservice.classificationdataservice.ClassificationDataService;
-import SIMSclient.src.dataservice.commoditydataservice.CommodityDataService;
-import SIMSclient.src.dataservice.memberdataservice.MemberDataService;
-import SIMSclient.src.dataservice.promotiondataservice.PromotionDataService;
-import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
-import SIMSclient.src.dataservice.userdataservice.UserDataService;
+import dataservice.accountbilldataservice.PaymentBillDataService;
+import dataservice.accountbilldataservice.ReceiptDataService;
+import dataservice.accountbookdataservice.SetUpAccountDataService;
+import dataservice.accountdataservice.AccountDataService;
+import dataservice.billdataservice.BillDataService;
+import dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
+import dataservice.checktabledataservice.SaleScheduleDataService;
+import dataservice.checktabledataservice.StatementOfOperationDataService;
+import dataservice.classificationdataservice.ClassificationDataService;
+import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.memberdataservice.MemberDataService;
+import dataservice.promotiondataservice.PromotionDataService;
+import dataservice.salesdataservice.SalesDataService;
+import dataservice.userdataservice.UserDataService;
 
 /**
  *

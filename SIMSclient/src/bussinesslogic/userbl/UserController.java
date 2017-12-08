@@ -1,15 +1,16 @@
-package SIMSclient.src.bussinesslogic.userbl;
+package bussinesslogic.userbl;
 
 import java.rmi.RemoteException;
 
+
 import java.util.ArrayList;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.dataservice.userdataservice.UserDataService;
-import SIMSclient.src.po.UserPO;
-import SIMSclient.src.rmi.RemoteHelper;
-import SIMSclient.src.vo.UserVO;
+import bussinesslogicservice.userblservice.UserBLService;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindUserType;
+import dataservice.userdataservice.UserDataService;
+import po.UserPO;
+import rmi.RemoteHelper;
+import vo.UserVO;
 
 public class UserController implements UserBLService{
 

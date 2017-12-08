@@ -1,10 +1,11 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataenum.Remind;
+import dataenum.BillType;
+import dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

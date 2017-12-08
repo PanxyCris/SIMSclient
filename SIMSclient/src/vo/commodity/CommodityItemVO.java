@@ -1,6 +1,6 @@
-package SIMSclient.src.vo.commodity;
+package vo.commodity;
 
-import SIMSclient.src.vo.ViewObject;
+import vo.ViewObject;
 
 public class CommodityItemVO extends ViewObject {
 

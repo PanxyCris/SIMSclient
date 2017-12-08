@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.net.URL;
 import java.util.ResourceBundle;

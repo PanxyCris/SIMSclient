@@ -1,4 +1,4 @@
-package SIMSclient.src.vo;
+package vo;
 
 public class PromotionVO {
 
@@ -13,7 +13,7 @@ public class PromotionVO {
 	public double voucher; // 代金券金额
 	public double afterPrice; // 折让后金额
 	public String remark; // 备注
-	 
+
 	public PromotionVO(String BillID, String clientID, String clientName, String cellNumber, String user, String saleMan,
 			double beforePrice, double allowance, double voucher, double afterPrice, String remark) {
 		super();

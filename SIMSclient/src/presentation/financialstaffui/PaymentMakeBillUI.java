@@ -1,21 +1,22 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import SIMSclient.src.bussinesslogic.skdbl.SKDBL;
-import SIMSclient.src.bussinesslogicservice.mfdocblservice.skdblservice;
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.findtype.FindAccountType;
-import SIMSclient.src.presentation.common.EditingCell;
-import SIMSclient.src.presentation.remindui.RemindExistUI;
-import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.makefinancialdoc.EntryVO;
-import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
+import bussinesslogic.skdbl.SKDBL;
+import bussinesslogicservice.mfdocblservice.skdblservice;
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountType;
+import presentation.common.EditingCell;
+import presentation.remindui.RemindExistUI;
+import presentation.remindui.RemindPrintUI;
+import vo.AccountVO;
+import vo.makefinancialdoc.EntryVO;
+import vo.makefinancialdoc.PaymentBillVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

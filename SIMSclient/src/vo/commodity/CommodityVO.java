@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.commodity;
+package vo.commodity;
 
 public class CommodityVO {
 

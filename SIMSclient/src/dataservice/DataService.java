@@ -1,13 +1,14 @@
-package SIMSclient.src.dataservice;
+package dataservice;
 import java.rmi.Remote;
+
 import java.rmi.RemoteException;
 
-import SIMSclient.src.po.PersistObject;
+import po.PersistObject;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月2日    
+/**
+*
+* @author Lijie
+* @date 2017年12月2日
 */
 public interface DataService<PO extends PersistObject> extends Remote {
 

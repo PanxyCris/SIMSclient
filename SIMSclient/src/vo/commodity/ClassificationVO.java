@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.commodity;
+package vo.commodity;
 
 import java.util.ArrayList;
 

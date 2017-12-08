@@ -1,4 +1,4 @@
-package SIMSclient.src.vo;
+package vo;
 
 public class AccountBookVO {
 	String date;

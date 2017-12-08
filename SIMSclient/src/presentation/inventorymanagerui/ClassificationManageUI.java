@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.inventorymanagerui;
+package presentation.inventorymanagerui;
 
 public class ClassificationManageUI extends InventoryManagerUI{
 

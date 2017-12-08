@@ -1,6 +1,6 @@
-package SIMSclient.src.presentation.remindui;
+package presentation.remindui;
 
-import SIMSclient.src.dataenum.Remind;
+import dataenum.Remind;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.table;
+package vo.table;
 
 
 public class BusinessHistoryScheduleVO {
@@ -8,7 +8,7 @@ public class BusinessHistoryScheduleVO {
 	String customer;//客户
 	int clerkID;//业务员
 	String repertory;//仓库
-	
+
 	public BusinessHistoryScheduleVO(String d,String b,String cu,int cl,String r){
 		date=d;
 		billType=b;
@@ -56,5 +56,5 @@ public class BusinessHistoryScheduleVO {
 	public void setRepertory(String repertory) {
 		this.repertory = repertory;
 	}
-	
+
 }

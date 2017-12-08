@@ -1,4 +1,4 @@
-package SIMSclient.src.dataenum.findtype;
+package dataenum.findtype;
 
 public enum FindUserType {
     ID("ID"),NAME("用户名"),USERROLE("职务");

@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.table;
+package vo.table;
 
 public class SaleScheduleVO {
 	//筛选条件
@@ -7,7 +7,7 @@ public class SaleScheduleVO {
 	String customer;//客户
 	int clerkID;//业务员
 	String repertory;//仓库
-	
+
 	public String getDate() {
 		return date;
 	}
@@ -55,5 +55,5 @@ public class SaleScheduleVO {
 		clerkID=cl;
 		repertory=r;
 	}
-	
+
 }

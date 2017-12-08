@@ -1,8 +1,9 @@
-package SIMSclient.src.vo;
+package vo;
 
 import java.io.*;
 
-import SIMSclient.src.dataenum.UserRole;
+
+import dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
 public class UserVO implements Serializable {

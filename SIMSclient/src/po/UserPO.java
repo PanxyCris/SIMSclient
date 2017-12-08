@@ -1,6 +1,7 @@
-package SIMSclient.src.po;
+package po;
 
-import SIMSclient.src.dataenum.UserRole;
+import dataenum.UserRole;
+
 import javafx.scene.image.ImageView;
 
 public class UserPO extends PersistObject {

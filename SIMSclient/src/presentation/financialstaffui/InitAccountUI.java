@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 public class InitAccountUI extends FinancialStaffUI{
 

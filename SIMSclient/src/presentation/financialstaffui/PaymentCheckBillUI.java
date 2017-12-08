@@ -1,4 +1,4 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

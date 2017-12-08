@@ -1,20 +1,21 @@
-package SIMSclient.src.presentation.usermanagerui;
+package presentation.usermanagerui;
 
 import java.net.URL;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import SIMSclient.src.bussinesslogic.userbl.UserController;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.presentation.common.EditingCell;
-import SIMSclient.src.presentation.common.EditingCellChoice;
-import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.UserRole;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.presentation.remindui.RemindExistUI;
-import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.vo.UserVO;
+import bussinesslogic.userbl.UserController;
+import bussinesslogicservice.userblservice.UserBLService;
+import presentation.common.EditingCell;
+import presentation.common.EditingCellChoice;
+import dataenum.Remind;
+import dataenum.ResultMessage;
+import dataenum.UserRole;
+import dataenum.findtype.FindUserType;
+import presentation.remindui.RemindExistUI;
+import presentation.remindui.RemindPrintUI;
+import vo.UserVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

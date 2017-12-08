@@ -1,24 +1,25 @@
-package SIMSclient.src.presentation.financialstaffui;
+package presentation.financialstaffui;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import SIMSclient.src.bussinesslogic.accountbl.AccountController;
-import SIMSclient.src.bussinesslogic.userbl.UserController;
-import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
-import SIMSclient.src.bussinesslogicservice.userblservice.UserBLService;
-import SIMSclient.src.presentation.common.EditingCell;
-import SIMSclient.src.presentation.common.EditingCellChoice;
-import SIMSclient.src.dataenum.Remind;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.UserRole;
-import SIMSclient.src.dataenum.findtype.FindAccountType;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.presentation.remindui.RemindExistUI;
-import SIMSclient.src.presentation.remindui.RemindPrintUI;
-import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.UserVO;
+import bussinesslogic.accountbl.AccountController;
+import bussinesslogic.userbl.UserController;
+import bussinesslogicservice.accountblservice.AccountBLService;
+import bussinesslogicservice.userblservice.UserBLService;
+import presentation.common.EditingCell;
+import presentation.common.EditingCellChoice;
+import dataenum.Remind;
+import dataenum.ResultMessage;
+import dataenum.UserRole;
+import dataenum.findtype.FindAccountType;
+import dataenum.findtype.FindUserType;
+import presentation.remindui.RemindExistUI;
+import presentation.remindui.RemindPrintUI;
+import vo.AccountVO;
+import vo.UserVO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

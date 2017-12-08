@@ -1,9 +1,10 @@
-package SIMSclient.src.vo.makefinancialdoc;
+package vo.makefinancialdoc;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
+
+import dataenum.BillState;
+import dataenum.BillType;
 
 /**
  *

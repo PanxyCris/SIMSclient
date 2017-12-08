@@ -1,8 +1,8 @@
-package SIMSclient.src.rmi;
-/**     
-*  
-* @author Lijie 
-* @date 2017年11月28日    
+package rmi;
+/**
+*
+* @author Lijie
+* @date 2017年11月28日
 */
 public class Rmi {
 

@@ -1,4 +1,4 @@
-package SIMSclient.src.rmi;
+package rmi;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +50,6 @@ public class ParseXML {
 	private Element selectSingleNode(String string, Element root2) {
 		return null;
 	}
-	
-	
+
+
 }

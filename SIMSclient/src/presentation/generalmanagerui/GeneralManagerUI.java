@@ -1,6 +1,6 @@
-package SIMSclient.src.presentation.generalmanagerui;
+package presentation.generalmanagerui;
 
-import SIMSclient.src.vo.UserVO;
+import vo.UserVO;
 
 public class GeneralManagerUI{
 

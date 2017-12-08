@@ -1,4 +1,4 @@
-package SIMSclient.src.vo.makefinancialdoc;
+package vo.makefinancialdoc;
 
 public class EntryVO {
 	// 条目清单

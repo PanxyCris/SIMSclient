@@ -1,11 +1,12 @@
-package SIMSclient.src.dataservice.userdataservice;
+package dataservice.userdataservice;
 
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
-import SIMSclient.src.dataenum.findtype.FindUserType;
-import SIMSclient.src.dataservice.CommonDataService;
-import SIMSclient.src.po.UserPO;
+import dataenum.findtype.FindUserType;
+import dataservice.CommonDataService;
+import po.UserPO;
 
 
 public interface UserDataService extends CommonDataService<UserPO>{

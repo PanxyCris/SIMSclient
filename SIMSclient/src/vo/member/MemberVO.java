@@ -1,7 +1,8 @@
-package SIMSclient.src.vo.member;
+package vo.member;
 
-import SIMSclient.src.dataenum.MemberCategory;
-import SIMSclient.src.dataenum.MemberLevel;
+import dataenum.MemberCategory;
+
+import dataenum.MemberLevel;
 
 public class MemberVO {
 	public String ID;
