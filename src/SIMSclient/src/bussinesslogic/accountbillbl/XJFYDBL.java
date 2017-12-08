@@ -1,6 +1,6 @@
-package SIMSclient.src.bussinesslogic.paymentbillbl;
+package SIMSclient.src.bussinesslogic.accountbillbl;
 
-import SIMSclient.src.bussinesslogicservice.mfdocblservice.PaymentBillBLService;
+import SIMSclient.src.bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import SIMSclient.src.dataenum.ResultMessage;
 import SIMSclient.src.vo.makefinancialdoc.ReceiptBillVO;
 
