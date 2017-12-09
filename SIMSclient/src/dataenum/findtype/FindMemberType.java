@@ -1,8 +1,8 @@
-package SIMSclient.src.dataenum.findtype;
-/**     
+package dataenum.findtype;
+/**
 *  模糊查找用户的类型
-* @author Lijie 
-* @date 2017年12月2日    
+* @author Lijie
+* @date 2017年12月2日
 */
 public enum FindMemberType {
 
@@ -17,11 +17,13 @@ public enum FindMemberType {
 	RECEIVABLELIMIT("应收额度"),
 	RECEIVABLE("应收"),
 	PAYABLE("应付"),
-	SALESMAN("默认业务员");	
-	
+	SALESMAN("默认业务员");
+
 	public final String value;
 
 	FindMemberType(String value) {
 		this.value = value;
 	}
+
+
 }

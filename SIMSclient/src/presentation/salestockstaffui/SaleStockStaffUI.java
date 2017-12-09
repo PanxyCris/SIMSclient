@@ -2,7 +2,7 @@ package presentation.salestockstaffui;
 
 import java.util.Stack;
 
-
+import presentation.common.ControlledStage;
 import presentation.common.StageController;
 import presentation.mainui.MainUI;
 import vo.UserVO;
@@ -13,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class SaleStockStaffUI{
+public class SaleStockStaffUI implements ControlledStage{
 	public static final String mainID = "SaleStockStaffUI";
 	public static final String pack = "../salestockstaffui/fxml/";
 	public static final String mainFXML = pack+"SaleStockStaffUI.fxml";
@@ -80,7 +80,7 @@ public class SaleStockStaffUI{
 
 	@FXML
 	public void memberManage() throws Exception{
-
+         new MemberManageUI().start();
 	}
 
 	@FXML

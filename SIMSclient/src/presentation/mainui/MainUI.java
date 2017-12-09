@@ -3,7 +3,7 @@ package presentation.mainui;
 
 import java.rmi.RemoteException;
 
-
+import bussiness_stub.UserBLService_Stub;
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
 import dataenum.UserRole;

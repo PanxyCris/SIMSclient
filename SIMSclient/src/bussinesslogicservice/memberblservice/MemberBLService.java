@@ -1,9 +1,10 @@
-package SIMSclient.src.bussinesslogicservice.memberblservice;
+package bussinesslogicservice.memberblservice;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.vo.member.MemberVO;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindMemberType;
+import vo.member.MemberVO;
 
 public interface MemberBLService {
 
@@ -24,7 +25,7 @@ public interface MemberBLService {
 	 * @param keyword
 	 * @return 所有符合条件的客户列表
 	 */
-	public ArrayList<MemberVO> fuzzySearch(String keyword);
+	public ArrayList<MemberVO> fuzzySearch(String keyword,FindMemberType properties);
 
 	/**
 	 * 精确查找用户
@@ -37,18 +38,18 @@ public interface MemberBLService {
 	 * 增加客户
 	 * @return 处理信息
 	 */
-	public ResultMessage add();
+	public ResultMessage add(MemberVO vo);
 
 	/**
 	 * 更新客户
 	 * @return 处理信息
 	 */
-	public ResultMessage update();
+	public ResultMessage update(MemberVO vo);
 
 	/**
 	 * 删除客户
 	 * @return 处理信息
 	 */
-	public ResultMessage delete();
+	public ResultMessage delete(MemberVO vo);
 
 }

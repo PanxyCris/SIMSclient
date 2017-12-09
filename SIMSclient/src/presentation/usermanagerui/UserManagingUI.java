@@ -5,6 +5,8 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import bussiness_stub.UserBLService_Stub;
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
 import presentation.common.EditingCell;
@@ -193,6 +195,14 @@ public class UserManagingUI extends UserManagerUI implements Initializable{
 	                ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setRole(t.getNewValue());
+	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow()));
+	                try {
+						service.update(newVO);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	        });
 
 
