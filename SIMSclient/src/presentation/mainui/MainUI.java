@@ -103,7 +103,7 @@ public class MainUI extends Application{
 	}
 
     public void run(String[] args){
-		Application.launch(args);
+		launch(args);
 	}
 
 }
