@@ -102,7 +102,8 @@ public class MainUI extends Application{
 
 	}
 
-	public static void main(String[] args){
-		launch(args);
+    public void run(String[] args){
+		Application.launch(args);
 	}
+
 }
