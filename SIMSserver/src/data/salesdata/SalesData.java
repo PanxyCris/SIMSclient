@@ -43,7 +43,7 @@ public class SalesData{
 		}
 	}
 	
-	public void insert(SalesPO po) throws RemoteException {
+	public ResultMessage insert(SalesPO po) throws RemoteException {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		String sql = "" + "insert into sales values(?,?,?,?,?,?,?,?,?,?,?,?);";
 		try{
@@ -62,8 +62,12 @@ public class SalesData{
             ps.setString(12, String.valueOf(po.getType()));
             ps.setString(13, String.valueOf(po.getState()));
             ps.execute();
+            ps.close();
+            conn.close();
+            return ResultMessage.SUCCESS;
         }catch(SQLException e){
             e.printStackTrace();    
+            return ResultMessage.FAIL;
         }
 	}
 	

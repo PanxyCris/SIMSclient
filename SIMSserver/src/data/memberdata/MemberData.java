@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import data.DBManager;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindMemberType;
 import po.MemberPO;
 
 /**
@@ -22,7 +24,7 @@ import po.MemberPO;
  */
 public class MemberData {
 
-	public void insert(MemberPO po) {
+	public ResultMessage insert(MemberPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "insert into Member (object) values (?)";
 		try {
@@ -31,12 +33,14 @@ public class MemberData {
 			ps.setObject(1, po);
 			ps.executeUpdate();
 			conn.commit();
+			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
 	}
 
-	public void delete(String id) {
+	public ResultMessage delete(String id) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from member where id = ?";
 		try {
@@ -44,12 +48,16 @@ public class MemberData {
 			ps.setString(1, id);
 			ps.execute();
 
+			ps.close();
+			conn.close();
+			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
 	}
 
-	public void update(MemberPO po) {
+	public ResultMessage update(MemberPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update member set object = ? where id = ?";
 		try {
@@ -57,18 +65,22 @@ public class MemberData {
 			ps.setObject(1, po);
 			ps.setString(2, po.getID());
 			ps.executeUpdate();
+			ps.close();
+			conn.close();
+			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
 	}
 
-	public MemberPO find(String id) {
-		MemberPO po = null;
+	@SuppressWarnings("unlikely-arg-type")
+	public ArrayList<MemberPO> find(String keyword, FindMemberType type) {
+		ArrayList<MemberPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "select * from member where id = ?";
+		String sql = "" + "select object from member";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -83,19 +95,61 @@ public class MemberData {
 
 					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 
-					po = (MemberPO) in.readObject();
+					MemberPO po = (MemberPO) in.readObject();
+					
+					switch (type) {
+					case ADDRESS: 
+						if (po.getAddress().equals(keyword)) list.add(po);
+						break;
+					case ID:
+						if (po.getID().equals(keyword)) list.add(po);
+						break;
+					case EMAIL:
+						if (po.getEmail().equals(keyword)) list.add(po);
+						break;
+					case NAME: 
+						if (po.getName().equals(keyword)) list.add(po);
+						break;
+					case LEVEL: 
+						if (po.getLevel().equals(keyword)) list.add(po);
+						break;
+					case KIND:
+						if (po.getCategory().equals(keyword)) list.add(po);
+						break;
+					case PHONE: 
+						if (po.getPhone().equals(keyword)) list.add(po);
+						break;
+					case POST: 
+						if (po.getPost().equals(keyword)) list.add(po);
+						break;
+					case PAYABLE:
+						if (po.getPayable() == Double.parseDouble(keyword)) list.add(po);
+						break;
+					case RECEIVABLE: 
+						if (po.getReceivable() == Double.parseDouble(keyword)) list.add(po);
+						break;
+					case RECEIVABLELIMIT:
+						if (po.getRereceivableLimit() == Double.parseDouble(keyword)) list.add(po);
+						break;
+					case SALESMAN:
+						if (po.getSaleMan().equals(keyword)) list.add(po);
+						break;
+					default:
+						break;
+					}
+					
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
-				} // 从IO流中读取出来.可以得到一个对象了
-
+				} 
+				
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return po;
+		return list;
 	}
 	
 	public ArrayList<MemberPO> show() {

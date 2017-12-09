@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
-import dataservice.DataService;
+import dataservice.CommonDataService;
 import po.AccountBookPO;
 
 /**
@@ -15,7 +15,7 @@ import po.AccountBookPO;
 * @date 2017年12月3日 上午11:10:47 
 *
  */
-public interface SetUpAccountDataService extends DataService<AccountBookPO> {
+public interface SetUpAccountDataService extends CommonDataService<AccountBookPO> {
 	public static final String NAME = "AccountBookData";
     public ResultMessage insert(AccountBookPO po) throws RemoteException;
 	public ArrayList<AccountBookPO> show() throws RemoteException;

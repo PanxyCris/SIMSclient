@@ -10,59 +10,40 @@ import dataservice.memberdataservice.MemberDataService;
 import po.MemberPO;
 
 
-public class MemberDataServiceImpl extends UnicastRemoteObject implements MemberDataService {
-	/** 
-	* <p>Title: </p> 
-	* <p>Description: </p> 
-	*/
-	private static final long serialVersionUID = 1540803719725644071L;
+public class MemberDataServiceImpl implements MemberDataService {
+	
 	private MemberData member;
 
-	protected MemberDataServiceImpl() throws RemoteException {
-		super();
+	@Override
+	public ResultMessage insertMember(MemberPO po) throws RemoteException {
+		member = new MemberData();
+		return member.insert(po);
 	}
 
 	@Override
-	public ResultMessage insert(MemberPO po) throws RemoteException {
-		member.insert(po);
-		return null;
+	public ResultMessage deleteMember(String ID) throws RemoteException {
+		member = new MemberData();
+		return member.delete(ID);
 	}
 
 	@Override
-	public ResultMessage delete(String ID) throws RemoteException {
-		member.delete(ID);
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(MemberPO po) throws RemoteException {
-		member.update(po);
-		return null;
+	public ResultMessage updateMember(MemberPO po) throws RemoteException {
+		member = new MemberData();
+		return member.update(po);
 	}
 
 	
 	@Override
-	public ArrayList<MemberPO> show() throws RemoteException {
+	public ArrayList<MemberPO> showMember() throws RemoteException {
+		member = new MemberData();
 		return member.show();
 	}
 
-	@Override
-	public ResultMessage createTable() throws RemoteException {
-		return null;
-	}
 
 	@Override
-	public void init() throws RemoteException {
-	}
-
-	@Override
-	public String getID() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException {
-		return null;
+	public ArrayList<MemberPO> findMember(String keyword, FindMemberType type) throws RemoteException {
+		member = new MemberData();
+		return member.find(keyword, type);
 	}
 
 }

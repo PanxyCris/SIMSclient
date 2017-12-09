@@ -19,40 +19,26 @@ public class UserDataServiceImpl implements UserDataService {
 	}
 
 	@Override
-	public ResultMessage insert(UserPO po) throws RemoteException {
+	public ResultMessage insertUser(UserPO po) throws RemoteException {
 		user = new UserData();
 		return user.insert(po);
 	}
 
 	@Override
-	public ResultMessage delete(String ID) throws RemoteException {
+	public ResultMessage deleteUser(String ID) throws RemoteException {
 		user = new UserData();
 		return user.delete(ID);
 	}
 
 	@Override
-	public ResultMessage update(UserPO po) throws RemoteException {
+	public ResultMessage updateUser(UserPO po) throws RemoteException {
 		user = new UserData();
 		return user.update(po);
 	}
 
 	@Override
-	public ArrayList<UserPO> show() throws RemoteException {
+	public ArrayList<UserPO> showUser() throws RemoteException {
 		return user.show();
-	}
-
-	@Override
-	public ResultMessage createTable() throws RemoteException {
-		return null;
-	}
-
-	@Override
-	public void init() throws RemoteException {
-	}
-
-	@Override
-	public String getID() throws RemoteException {
-		return null;
 	}
 
 
@@ -69,7 +55,7 @@ public class UserDataServiceImpl implements UserDataService {
 	}
 
 	@Override
-	public ArrayList<UserPO> find(String info, FindUserType type) throws RemoteException {
+	public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteException {
 		user = new UserData();
 		return user.find(info, type);
 	}
