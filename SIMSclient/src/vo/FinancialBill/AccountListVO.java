@@ -1,25 +1,25 @@
-package vo.makefinancialdoc;
+package vo.FinancialBill;
 
 import java.util.ArrayList;
 
 public class AccountListVO {
 
-	protected String accountName;//银行账户名
+	protected String accountID;//银行账户ID
 	protected String money;//转账金额
 	protected String note;//备注
 
-	public AccountListVO(String accountName,String money,String note){
-		this.accountName=accountName;
+	public AccountListVO(String accountID,String money,String note){
+		this.accountID=accountID;
 		this.money=money;
 		this.note=note;
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getAccountID() {
+		return accountID;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+	public void setAccountID(String accountID) {
+		this.accountID = accountID;
 	}
 
 	public String getMoney() {

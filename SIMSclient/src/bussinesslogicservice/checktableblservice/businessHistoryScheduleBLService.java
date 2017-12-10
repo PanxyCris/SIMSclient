@@ -1,7 +1,7 @@
 package bussinesslogicservice.checktableblservice;
 
 import vo.ViewObject;
-import vo.makefinancialdoc.FinancialDocVO;
+import vo.FinancialBill.FinancialDocVO;
 import vo.table.BusinessHistoryScheduleVO;
 
 public interface businessHistoryScheduleBLService {

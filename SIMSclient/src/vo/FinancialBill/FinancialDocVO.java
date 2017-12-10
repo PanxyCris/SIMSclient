@@ -1,4 +1,4 @@
-package vo.makefinancialdoc;
+package vo.FinancialBill;
 
 import java.io.Serializable;
 

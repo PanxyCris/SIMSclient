@@ -4,20 +4,22 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import bussinesslogicservice.accountblservice.AccountBLService;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
 import po.PersistObject;
 import vo.AccountVO;
-import vo.makefinancialdoc.FinancialDocVO;
-import vo.makefinancialdoc.PaymentBillVO;
+import vo.FinancialBill.AccountListVO;
+import vo.FinancialBill.FinancialDocVO;
+import vo.FinancialBill.PaymentBillVO;
+import vo.FinancialBill.ReceiptBillVO;
 
 /**
  * 
  * @author 王灿灿
- * @version 2017-12-2
- *
+ * @version 2017-12-10
  */
 public class AccountBL implements AccountBLService{
 
@@ -137,14 +139,38 @@ public class AccountBL implements AccountBLService{
 
 /**
  * 
+ * 单据入账，修改银行账户金额并修改客户的应收应付数据
  * @author 王灿灿
  * @param financialDocVO	是收款单付款单的父类对象，拥有银行账户名列表、转账金额列表等属性
  *  
  * 
  */
 	@Override
-	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
+	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
 		//waiting for coding
+		
+		ArrayList<String> accountID=new ArrayList<>();
+		ArrayList<Double> accountMoney=new ArrayList<>();
+		String memberID="";
+		
+		if(billType.equals(billType.SKD)){
+			ReceiptBillVO receiptBillVO = (ReceiptBillVO)financialDocVO;
+			ArrayList<AccountListVO> accountVOs = receiptBillVO.getAccountListVOs();
+			for (int i = 0; i < accountVOs.size(); i++) {
+				accountID.add(accountVOs.get(i).getAccountID());
+				accountMoney.add(Double.valueOf(accountVOs.get(i).getMoney()));
+			}
+			memberID=receiptBillVO.getCustomerID();
+		}
+		if(billType.equals(billType.XJFYD)){
+			PaymentBillVO paymentBillVO=(PaymentBillVO)financialDocVO;
+			accountID.add(paymentBillVO.getAccountID());
+			accountMoney.add(Double.valueOf(paymentBillVO.getTotal()));
+			memberID=paymentBillVO.getCustomerID();
+		}
+		
+		accountDataService.enterItem(accountID, accountMoney, memberID);
+		
 		return resultMessage.SUCCESS;
 		
 	}

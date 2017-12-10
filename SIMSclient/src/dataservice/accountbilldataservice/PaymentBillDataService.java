@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.BillType;
-import po.makefinancialdoc.PaymentBillPO;
+import po.FinancialBill.PaymentBillPO;
 
 /**  
 * ภเหตร๗   

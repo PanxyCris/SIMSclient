@@ -1,4 +1,4 @@
-package po.makefinancialdoc;
+package po.FinancialBill;
 
 import java.util.ArrayList;
 

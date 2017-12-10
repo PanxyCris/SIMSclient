@@ -1,7 +1,7 @@
 package bussinesslogicservice.accountbillblservice;
 
 import dataenum.ResultMessage;
-import vo.makefinancialdoc.ReceiptBillVO;
+import vo.FinancialBill.ReceiptBillVO;
 
 public interface ReceiptBillBLService {
 	

@@ -1,4 +1,4 @@
-package vo.makefinancialdoc;
+package vo.FinancialBill;
 
 public class EntryVO {
 	// 条目清单

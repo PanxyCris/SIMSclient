@@ -2,7 +2,7 @@ package bussinesslogic.accountbillbl;
 
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import dataenum.ResultMessage;
-import vo.makefinancialdoc.PaymentBillVO;
+import vo.FinancialBill.PaymentBillVO;
 
 public class PaymentBillBL implements PaymentBillBLService{
 

@@ -2,8 +2,8 @@ package bussinesslogic.accountbillbl;
 
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.ResultMessage;
-import vo.makefinancialdoc.PaymentBillVO;
-import vo.makefinancialdoc.ReceiptBillVO;
+import vo.FinancialBill.PaymentBillVO;
+import vo.FinancialBill.ReceiptBillVO;
 
 public class ReceiptBillBL implements ReceiptBillBLService{
 

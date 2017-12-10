@@ -3,10 +3,11 @@ package bussinesslogic.accountbl;
 import java.util.ArrayList;
 
 import bussinesslogicservice.accountblservice.AccountBLService;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import vo.AccountVO;
-import vo.makefinancialdoc.FinancialDocVO;
+import vo.FinancialBill.FinancialDocVO;
 
 /**
  *
@@ -41,8 +42,8 @@ public class AccountController implements AccountBLService{
 		return accountBL.getAccountList();
 	}
 	@Override
-	public ResultMessage enterItem(FinancialDocVO financialDocVO) {
-		return accountBL.enterItem(financialDocVO);
+	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
+		return accountBL.enterItem(financialDocVO,billType);
 	}
 
 	
