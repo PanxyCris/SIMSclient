@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import data.DBManager;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
 import po.UserPO;
 
@@ -24,15 +25,26 @@ import po.UserPO;
 * @date 2017年12月7日    
 */
 public class UserData {
+	public static void main(String[] args) {
+		UserData user = new UserData();
+		UserPO po = new UserPO("000001", "liuqing", "admin", UserRole.FINANCIAL_MANAGER, null);
+		user.delete("00002");
+		user.insert(po);
+		ArrayList<UserPO> list = user.show();
+		for(UserPO u: list) {
+			System.out.println(u.getID() + " " + u.getName() + " " + u.getPassword());
+		}
+		
+		
+	}
 	public ResultMessage insert(UserPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
-		String sql = "" + "insert into userrole values (?, ?, ?)";
+		String sql = "" + "insert into userrole(id, object) values (?,?)";
 		try{
 			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, 1);
-			ps.setString(2, po.getID());
-            ps.setObject(3, po);
+			ps.setString(1, po.getID());
+            ps.setObject(2, po);
             ps.executeUpdate();
             conn.commit();
             ps.close();
@@ -126,7 +138,7 @@ public class UserData {
 	public ArrayList<UserPO> show() {
 		ArrayList<UserPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
-		String sql = "select object from user";
+		String sql = "select object from userrole";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();

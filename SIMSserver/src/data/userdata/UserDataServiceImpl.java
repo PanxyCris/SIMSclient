@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import data.userdata.UserData;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
@@ -16,6 +17,20 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	public UserDataServiceImpl() throws RemoteException {
 		super();
+	}
+	
+	public static void main(String[] args) throws RemoteException {
+		UserDataServiceImpl u = new UserDataServiceImpl();
+		UserPO p = new UserPO("000002", "wangcancan", "admin", UserRole.PUR_SALE_MANAGER, null);
+		u.insertUser(p);
+		ArrayList<UserPO> list = u.showUser();
+		for(UserPO po: list) {
+			System.out.println(po.toString());
+			if ("000001".equals(String.valueOf(po.getID())) && "admin".equals(String.valueOf(po.getPassword()))){
+				System.out.println("true");
+			}
+		}
+		System.out.println(u.login("000001", "admin"));
 	}
 
 	@Override
@@ -38,6 +53,7 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public ArrayList<UserPO> showUser() throws RemoteException {
+		user = new UserData();
 		return user.show();
 	}
 
@@ -46,8 +62,8 @@ public class UserDataServiceImpl implements UserDataService {
 	public boolean login(String id, String password) throws RemoteException {
 		user = new UserData();
 		ArrayList<UserPO> list = user.show();
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i).getID().equals(id) && list.get(i).getPassword().equals(password)) {
+		for (UserPO po: list) {
+			if (id.equals(String.valueOf(po.getID())) && password.equals(String.valueOf(po.getPassword()))){
 				return true;
 			}
 		}

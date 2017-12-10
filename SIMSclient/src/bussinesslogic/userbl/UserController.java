@@ -28,25 +28,25 @@ public class UserController implements UserBLService{
     @Override
 	public ResultMessage insert(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-    	return service.insert(voTopo(vo));
+    	return service.insertUser(voTopo(vo));
 	}
 
     @Override
    	public ResultMessage delete(UserVO vo) throws RemoteException {
    		// TODO Auto-generated method stub
-       	return service.delete(vo.getID());
+       	return service.deleteUser(vo.getID());
    	}
 
 	@Override
 	public ResultMessage update(UserVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return service.update(voTopo(vo));
+		return service.updateUser(voTopo(vo));
 	}
 
 	@Override
 	public ArrayList<UserVO> find(String info,FindUserType properties) throws RemoteException {
 		ArrayList<UserVO> voList = new ArrayList<>();
-		ArrayList<UserPO> poList = service.find(info, properties);
+		ArrayList<UserPO> poList = service.findUser(info, properties);
 		for(int i=0;i<poList.size();i++)
 			voList.add(poTovo(poList.get(i)));
 		return voList;
@@ -55,7 +55,7 @@ public class UserController implements UserBLService{
 	@Override
 	public ArrayList<UserVO> getUserList() throws RemoteException {
 		ArrayList<UserVO> voList = new ArrayList<>();
-		ArrayList<UserPO> poList = service.show();
+		ArrayList<UserPO> poList = service.showUser();
 		for(int i=0;i<poList.size();i++)
 			voList.add(poTovo(poList.get(i)));
 		return voList;

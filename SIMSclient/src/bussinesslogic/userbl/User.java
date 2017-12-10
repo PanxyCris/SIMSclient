@@ -1,4 +1,4 @@
-package SIMSclient.src.bussinesslogic.userbl;
+package bussinesslogic.userbl;
 /**     
 *  
 * @author Lijie 
