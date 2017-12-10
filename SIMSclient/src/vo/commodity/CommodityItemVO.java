@@ -5,17 +5,21 @@ import vo.ViewObject;
 public class CommodityItemVO extends ViewObject {
 
 
-	CommodityVO commodity;
-	public String price;
-	public String sum;  //×Ü¶î
+	public CommodityVO commodity;
+	public double price;
+	public double sum;  //×Ü¶î
 	public String remark;  //±¸×¢
 
+	public CommodityItemVO() {
+		
+	}
+	
 	public CommodityItemVO(CommodityVO commodity, String remark) {
 		this.commodity = commodity;
 		this.remark = remark;
 	}
 
-	public void setPrice(String price){
+	public void setPrice(double price){
 		this.price = price;
 	}
 

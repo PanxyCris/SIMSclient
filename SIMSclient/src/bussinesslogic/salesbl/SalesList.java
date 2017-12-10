@@ -1,9 +1,9 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package bussinesslogic.salesbl;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.commodity.CommodityItemPO;
+import dataenum.Warehouse;
+import po.commodity.CommodityItemPO;
 
 /*
  * 销售单，包括：

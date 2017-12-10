@@ -1,14 +1,7 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package bussinesslogic.salesbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import SIMSclient.src.bussinesslogicservice.salesblservice.SalesBLService;
-import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
-import SIMSclient.src.vo.member.MemberVO;
-import SIMSclient.src.vo.sale.SalesAddVO;
-import SIMSclient.src.vo.sale.SalesVO;
 
 /*
  * 负责实现销售界面所需要的服务

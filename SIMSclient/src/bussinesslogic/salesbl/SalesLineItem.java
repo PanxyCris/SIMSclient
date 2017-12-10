@@ -1,4 +1,4 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package bussinesslogic.salesbl;
 
 import java.rmi.RemoteException;
 

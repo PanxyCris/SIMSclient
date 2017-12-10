@@ -6,12 +6,12 @@ public class CommodityVO {
 		private String name;
 		private String model; //商品型号
 		private ClassificationVO classification;
-		private String number; //商品数量
-		private String purPrice; //进价
-		private String retailedPrice; //零售价
-		private String recentPurPrice; //最新进价
-		private String recentRetailedPrice; //最新零售价
-		private String warmingValue; //警戒值
+		private int number; //商品数量
+		private double purPrice; //进价
+		private double retailedPrice; //零售价
+		private double recentPurPrice; //最新进价
+		private double recentRetailedPrice; //最新零售价
+		private int warmingValue; //警戒值
 
 		public void setID(String id){
 			this.id = id;
@@ -45,51 +45,51 @@ public class CommodityVO {
 			return classification;
 		}
 
-		public void setNumber(String number){
+		public void setNumber(int number){
 			this.number = number;
 		}
 
-		public String getNumber(){
+		public int getNumber(){
 			return number;
 		}
 
-	    public void setPurPrice(String purPrice){
+	    public void setPurPrice(double purPrice){
 	    	this.purPrice = purPrice;
 	    }
 
-		public String getPurPrice(){
+		public double getPurPrice(){
 			return purPrice;
 		}
 
-		public void setRetailedPrice(String retailedPrice){
+		public void setRetailedPrice(double retailedPrice){
 			this.retailedPrice = retailedPrice;
 		}
 
-		public String getRetailedPrice(){
+		public double getRetailedPrice(){
 			return retailedPrice;
 		}
 
-		public void setRecentPurPrice(String recentPurPrice){
+		public void setRecentPurPrice(double recentPurPrice){
 			this.recentPurPrice = recentPurPrice;
 		}
 
-		public String getRecentPurPrice(){
+		public double getRecentPurPrice(){
 			 return recentPurPrice;
 		}
 
-		public void setRecentRetailedPrice(String recentRetailedPrice){
+		public void setRecentRetailedPrice(double recentRetailedPrice){
 			this.recentRetailedPrice = recentRetailedPrice;
 		}
 
-		public String getRecentRetailedPrice(){
+		public double getRecentRetailedPrice(){
 			return recentRetailedPrice;
 		}
 
-		public void setWarmingValue(String warmingValue){
+		public void setWarmingValue(int warmingValue){
 			this.warmingValue = warmingValue;
 		}
 
-		public String getWarmingValue(){
+		public int getWarmingValue(){
 			return warmingValue;
 		}
 

@@ -15,7 +15,7 @@ public class CommodityItemTran {
 	public static ArrayList<CommodityItemPO> VOtoPO(ArrayList<CommodityItemVO> vo) {
 		ArrayList<CommodityItemPO> itemPO = new ArrayList<>();
 		for(CommodityItemVO c : vo) {
-			CommodityItemPO po = new CommodityItemPO(c.id, c.name, c.number, c.price, c.remark);
+			CommodityItemPO po = new CommodityItemPO();
 			itemPO.add(po);
 		}
 		return itemPO;
@@ -24,7 +24,7 @@ public class CommodityItemTran {
 	public static ArrayList<CommodityItemVO> POtoVO(ArrayList<CommodityItemPO> po) {
 		ArrayList<CommodityItemVO> itemVO = new ArrayList<>();
 		for(CommodityItemPO c : po) {
-			CommodityItemVO vo = new CommodityItemVO(c.getId(), c.getName(), c.getModel(), c.getNumber(), c.getPrice(), c.getRemark());
+			CommodityItemVO vo = new CommodityItemVO();
 			itemVO.add(vo);
 		}
 		return itemVO;

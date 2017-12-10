@@ -6,4 +6,5 @@ package po.commodity;
 */
 public class CommodityItemPO {
 
+	
 }
