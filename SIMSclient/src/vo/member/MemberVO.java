@@ -35,7 +35,6 @@ public class MemberVO {
 	public MemberVO(String ID, MemberCategory category, MemberLevel level, String name, String cellNumber,
 			String address, String post, String email, String receivableLimit, String receivable, String payable,
 			String saleMan) {
-		super();
 		this.ID = ID;
 		this.category = category;
 		this.level = level;

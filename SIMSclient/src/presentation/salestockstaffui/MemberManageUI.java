@@ -162,8 +162,7 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 			amountField.setText(null);
 			receiveField.setText(null);
 			payField.setText(null);
-			operatorLabel.setText("csxas");
-
+		//	operatorLabel.setText(user.getName());
 		}
 
 		@Override
