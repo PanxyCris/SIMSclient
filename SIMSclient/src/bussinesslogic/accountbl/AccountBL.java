@@ -3,15 +3,15 @@ package bussinesslogic.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.findtype.FindAccountType;
-import SIMSclient.src.dataservice.accountdataservice.AccountDataService;
-import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.po.PersistObject;
-import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
-import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
+import bussinesslogicservice.accountblservice.AccountBLService;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountType;
+import dataservice.accountdataservice.AccountDataService;
+import po.AccountPO;
+import po.PersistObject;
+import vo.AccountVO;
+import vo.makefinancialdoc.FinancialDocVO;
+import vo.makefinancialdoc.PaymentBillVO;
 
 /**
  * 
@@ -50,7 +50,7 @@ public class AccountBL implements AccountBLService{
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
 		try {
-			accountPOs=accountDataService.find(message,findType);
+			accountPOs=accountDataService.findAccount(message,findType);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}		
@@ -69,7 +69,7 @@ public class AccountBL implements AccountBLService{
 	@Override
 	public ResultMessage newBuild(String id,String name,String money) {
 		
-		accountPO=new AccountPO("","","");
+		accountPO=new AccountPO("","",0.0);
 		
 		double m = Double.valueOf(money);
 		
@@ -86,7 +86,7 @@ public class AccountBL implements AccountBLService{
 			
 			accountPO.setID(id);
 			accountPO.setName(name);
-			accountPO.setMoney(money);
+			accountPO.setMoney(m);
 			
 			po=accountPO;
 			
@@ -120,11 +120,15 @@ public class AccountBL implements AccountBLService{
 		
 		ArrayList<AccountPO> accountPOs=new ArrayList<>();
 		ArrayList<AccountVO> accountVOs=new ArrayList<>();
-		accountPOs=accountDataService.getAccountList();
+		try {
+			accountPOs=accountDataService.showAccount();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		if(!accountPOs.isEmpty()){
 			for (int i = 0; i < accountVOs.size(); i++) {
 				accountVO.setName(accountPOs.get(i).getName());
-				accountVO.setMoney(accountPOs.get(i).getMoney());
+				accountVO.setMoney(Double.toString(accountPOs.get(i).getMoney()));
 				accountVOs.add(accountVO);
 			}
 		}
@@ -150,7 +154,7 @@ public class AccountBL implements AccountBLService{
  */
 	@Override
 	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
-			accountPO=new AccountPO("", "", "");
+			accountPO=new AccountPO("", "",0.0);
 			ArrayList<PersistObject> persistObjects = new ArrayList<>();	
 		for (AccountVO accountVO : accountVOs) {
 			accountPO=accountTransition.VOtoPO(accountVO);

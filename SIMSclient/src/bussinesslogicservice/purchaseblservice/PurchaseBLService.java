@@ -1,10 +1,10 @@
-package SIMSclient.src.bussinesslogicservice.purchaseblservice;
+package bussinesslogicservice.purchaseblservice;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
-import SIMSclient.src.vo.purchase.PurchaseVO;
+import vo.PromotionVO;
+import vo.commodity.CommodityVO;
+import vo.purchase.PurchaseVO;
 
 /**  
 * 类说明   进货

@@ -1,4 +1,4 @@
-package SIMSclient.src.bussinesslogic;
+package bussinesslogic;
 /**     
 *  
 * @author Lijie 
@@ -7,8 +7,8 @@ package SIMSclient.src.bussinesslogic;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.po.commodity.CommodityItemPO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
+import po.commodity.CommodityItemPO;
+import vo.commodity.CommodityItemVO;
 
 public class CommodityItemTran {
 
