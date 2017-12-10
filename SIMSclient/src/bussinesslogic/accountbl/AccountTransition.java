@@ -1,7 +1,7 @@
-package SIMSclient.src.bussinesslogic.accountbl;
+package bussinesslogic.accountbl;
 
-import SIMSclient.src.po.AccountPO;
-import SIMSclient.src.vo.AccountVO;
+import po.AccountPO;
+import vo.AccountVO;
 
 public class AccountTransition {
 		

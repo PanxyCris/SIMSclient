@@ -1,4 +1,4 @@
-package SIMSclient.src.bussinesslogic.accountbl;
+package bussinesslogic.accountbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;

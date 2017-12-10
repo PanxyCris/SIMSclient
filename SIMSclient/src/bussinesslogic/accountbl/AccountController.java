@@ -1,12 +1,10 @@
-package SIMSclient.src.bussinesslogic.accountbl;
+package bussinesslogic.accountbl;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.bussinesslogicservice.accountblservice.AccountBLService;
-import SIMSclient.src.dataenum.ResultMessage;
-import SIMSclient.src.dataenum.findtype.FindAccountType;
-import SIMSclient.src.vo.AccountVO;
-import SIMSclient.src.vo.makefinancialdoc.FinancialDocVO;
+import dataenum.ResultMessage;
+import vo.AccountVO;
+import vo.makefinancialdoc.FinancialDocVO;
 
 /**
  *
