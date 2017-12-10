@@ -1,8 +1,8 @@
-package SIMSclient.src.po;
+package po;
 
-import SIMSclient.src.dataenum.MemberCategory;
-import SIMSclient.src.dataenum.MemberLevel;
-import SIMSclient.src.dataenum.UserRole;
+import dataenum.MemberCategory;
+import dataenum.MemberLevel;
+import dataenum.UserRole;
 
 public class MemberPO extends PersistObject {
 
@@ -19,7 +19,13 @@ public class MemberPO extends PersistObject {
 	private double payable; // 应付
 	private String saleMan; // 默认业务员
 
-	
+	/**
+	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
+	 *               category @param @param level @param @param name @param @param
+	 *               phone @param @param adress @param @param post @param @param
+	 *               email @param @param rereceivableLimit @param @param saleMan
+	 *               设定文件 @return 返回类型 @throws
+	 */
 	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String adress,
 			String post, String email, double rereceivableLimit, String saleMan) {
 		super(id);
@@ -132,29 +138,10 @@ public class MemberPO extends PersistObject {
 		this.saleMan = saleMan;
 	}
 
-	/**
-	 * 客户是否重复
-	 */
-	@Override
-	public boolean equals(Object object) {
-		if (this == object)
-			return true;
-		if (!super.equals(object))
-			return false;
-		if (getClass() != object.getClass())
-			return false;
-		MemberPO other = (MemberPO) object;
-		if (this.name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!this.name.equals(other.name))
-			return false;
-		return true;
-	}
-
 	@Override
 	public String toString() {
-		return id + "|" + category.value + "|" + level.value + "|" + name + "|" + phone + "|" + address + "|" + post
-				+ "|" + email + "|" + receivableLimit + receivable + "|" + payable + "|" + "|" + saleMan;
+		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post + "," + email
+				+ "," + receivableLimit + receivable + "," + payable + "," + "," + saleMan;
 	}
+
 }

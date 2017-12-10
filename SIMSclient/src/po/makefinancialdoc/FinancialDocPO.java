@@ -1,38 +1,30 @@
-package SIMSclient.src.po.makefinancialdoc;
+package po.makefinancialdoc;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.po.PersistObject;
+import dataenum.BillState;
+import dataenum.BillType;
+import po.PersistObject;
 
-/**
- * 
- * @author 王灿灿
- * @version2017-12-2
- *
- */
-@SuppressWarnings("serial")
-public class FinancialDocPO extends PersistObject{
-	protected String userID;//当前登录用户的ID
-	protected ArrayList<String> note;//备注
-	protected ArrayList<String> accountName;//银行账户名
-	protected ArrayList<String> money;//转账金额
-	protected String customerID;//客户ID
+public class FinancialDocPO extends PersistObject {
+	protected String userID;// 当前登录用户的ID
+	protected ArrayList<String> note;// 备注
+	protected ArrayList<String> accountName;// 银行账户名
+	protected ArrayList<String> money;// 转账金额
+	protected String customerID;// 客户ID
 	protected BillType billType;
 	protected BillState billState;
-	
-	public FinancialDocPO(String id, String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
-			ArrayList<String> note,BillType billType,BillState billState){
-		
+
+	public FinancialDocPO(String id, String userID, ArrayList<String> accountName, ArrayList<String> money,
+			String customerID, ArrayList<String> note, BillType billType, BillState billState) {
 		super(id);
-		this.userID=userID;
-		this.note=note;
-		this.accountName=accountName;
-		this.money=money;
-		this.customerID=customerID;
-		this.billType=billType;
-		this.billState=billState;
+		this.userID = userID;
+		this.note = note;
+		this.accountName = accountName;
+		this.money = money;
+		this.customerID = customerID;
+		this.billType = billType;
+		this.billState = billState;
 	}
 
 	public String getUserID() {

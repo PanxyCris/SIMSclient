@@ -1,13 +1,14 @@
 package dataservice.commoditydataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.findtype.FindCommodityType;
-import dataservice.CommonDataService;
 import po.commodity.CommodityPO;
 
-public interface CommodityDataService extends CommonDataService<CommodityPO>{
+public interface CommodityDataService extends Remote {
+	
 	public static final String NAME = "CommodityData";
 	
 	public String getID(String fatherID) throws RemoteException;

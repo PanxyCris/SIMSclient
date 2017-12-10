@@ -1,10 +1,10 @@
-package dataservice.mfdocsdataservice;
+package dataservice.accountbilldataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.BillType;
-import dataservice.CommonDataService;
 import po.makefinancialdoc.ReceiptBillPO;
 
 /**  
@@ -13,7 +13,7 @@ import po.makefinancialdoc.ReceiptBillPO;
 * @author ****  
 * @date 2017Äê11ÔÂ12ÈÕ    
 */
-public interface ReceiptDataService extends CommonDataService<ReceiptBillPO>{
+public interface ReceiptDataService extends Remote{
 
 	public static final String NAME = "ReceiptBillData";
 	

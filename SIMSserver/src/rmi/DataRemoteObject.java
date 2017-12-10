@@ -11,15 +11,18 @@ import data.purchasedata.PurchaseDataServiceImpl;
 import data.salesdata.SalesDataServiceImpl;
 import data.userdata.UserDataServiceImpl;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountBookType;
 import dataenum.findtype.FindMemberType;
 import dataenum.findtype.FindPromotionType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
+import dataservice.accountbookdataservice.AccountBookDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
+import po.AccountBookPO;
 import po.MemberPO;
 import po.PromotionPO;
 import po.PurchasePO;
@@ -42,7 +45,7 @@ import po.UserPO;
  *
  */
 public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService, 
-    PromotionDataService, PurchaseDataService {
+    PromotionDataService, PurchaseDataService, AccountBookDataService {
 
 	private static final long serialVersionUID = 4029039744279087114L;
 
@@ -51,6 +54,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	private SalesDataService sale;
 	private PromotionDataService promotion;
 	private PurchaseDataService purchase;
+	private AccountBookDataService accountbook;
 
 	public DataRemoteObject() throws RemoteException {
 
@@ -217,6 +221,36 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	@Override
 	public ArrayList<PurchasePO> showPurchase() throws RemoteException {
 		return purchase.showPurchase();
+	}
+
+
+	@Override
+	public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException {
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage deleteAccountBook(String ID) throws RemoteException {
+		return null;
+	}
+
+
+	@Override
+	public ResultMessage updateAccountBook(AccountBookPO po) throws RemoteException {
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<AccountBookPO> find(String keyword, FindAccountBookType type) throws RemoteException {
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<AccountBookPO> showAccountBook() throws RemoteException {
+		return null;
 	}
 
 }

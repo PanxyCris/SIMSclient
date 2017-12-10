@@ -1,13 +1,12 @@
-package SIMSclient.src.dataservice.classificationdataservice;
+package dataservice.classificationdataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import SIMSclient.src.dataservice.CommonDataService;
-import SIMSclient.src.po.ClassificationPO;
+import po.ClassificationPO;
 
 
-
-public interface ClassificationDataService extends CommonDataService<ClassificationPO> {
+public interface ClassificationDataService extends Remote {
 
 	public static final String NAME = "ClassificationData";
 	

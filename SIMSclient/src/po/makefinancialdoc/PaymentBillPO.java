@@ -1,28 +1,21 @@
-package SIMSclient.src.po.makefinancialdoc;
+package po.makefinancialdoc;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.vo.makefinancialdoc.AccountListVO;
+import dataenum.BillState;
+import dataenum.BillType;
 
-/**
- * 
- * @author 王灿灿
- *@version 2017-12-2
- *
- */
+@SuppressWarnings("serial")
 public class PaymentBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
-	private String total;//转账总额	
+	private String total;// 转账总额
 	private AccountListPO accountListPO;
-	
-	public PaymentBillPO (String docID,String userID,ArrayList<String> accountName,ArrayList<String> money,String customerID,
-			ArrayList<String> note,String total,BillType billType,BillState billState){
-		super(docID,userID,accountName,money,customerID,note,billType,billState);
-		accountListPO=new AccountListPO(accountName, money, note);
-		this.total=total;
+
+	public PaymentBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money,
+			String customerID, ArrayList<String> note, String total, BillType billType, BillState billState) {
+		super(docID, userID, accountName, money, customerID, note, billType, billState);
+		accountListPO = new AccountListPO(accountName, money, note);
+		this.total = total;
 	}
 
 	public String getTotal() {
@@ -40,6 +33,5 @@ public class PaymentBillPO extends FinancialDocPO {
 	public void setAccountListPO(AccountListPO accountListPO) {
 		this.accountListPO = accountListPO;
 	}
-
 
 }

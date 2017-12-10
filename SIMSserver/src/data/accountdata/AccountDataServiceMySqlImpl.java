@@ -16,23 +16,12 @@ import po.PersistObject;
  * @version 2017-12-2
  * 
  */
-public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements AccountDataService{
+public class AccountDataServiceMySqlImpl  implements AccountDataService{
 
-	/** 
-	* <p>Title: </p> 
-	* <p>Description: </p> 
-	*/
-	private static final long serialVersionUID = -2234101610458753475L;
 	private AccountData account = null;
 	
 	protected AccountDataServiceMySqlImpl() throws RemoteException {
 		super();
-	}
-	
-	@Override
-	public ResultMessage createTable() throws RemoteException {
-		account = new AccountData();
-		return account.createTable();
 	}
 	
 	@Override
@@ -59,16 +48,6 @@ public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements 
 		return account.show();
 	}
 
-
-	@Override
-	public void init() throws RemoteException {
-	}
-
-	@Override
-	public String getID() throws RemoteException {
-		return null;
-	}
-
 	@Override
 	public ArrayList<AccountPO> find(String keywords, FindAccountType type) throws RemoteException {
 		return null;
@@ -91,6 +70,16 @@ public class AccountDataServiceMySqlImpl extends UnicastRemoteObject implements 
 
 	@Override
 	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ArrayList<AccountPO> showAccount() throws RemoteException {
 		return null;
 	}
 	

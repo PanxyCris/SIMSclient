@@ -1,4 +1,4 @@
-package SIMSclient.src.po.makefinancialdoc;
+package po.makefinancialdoc;
 
 import java.util.ArrayList;
 

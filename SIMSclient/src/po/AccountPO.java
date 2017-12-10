@@ -1,20 +1,15 @@
-package SIMSclient.src.po;
+package po;
 
-import SIMSclient.src.po.PersistObject;
-
-/**
- * 
- * @author 王灿灿
- * @version 2017-12-1
- *
- */
 public class AccountPO extends PersistObject {
 	private static final long serialVersionUID = 1L;
 	private String name;
-	private String money;
+	private double money;
 
-	
-	public AccountPO(String id, String name, String money) {
+	/**
+	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
+	 * name @param @param money 设定文件 @return 返回类型 @throws
+	 */
+	public AccountPO(String id, String name, double money) {
 		super(id);
 		this.name = name;
 		this.money = money;
@@ -28,14 +23,17 @@ public class AccountPO extends PersistObject {
 		this.name = name;
 	}
 
-	public String getMoney() {
+	public double getMoney() {
 		return money;
 	}
 
-	public void setMoney(String money) {
+	public void setMoney(double money) {
 		this.money = money;
 	}
 
+	/**
+	 * 进行模糊查找
+	 */
 	@Override
 	public String toString() {
 		return id + "," + name + "," + money;
