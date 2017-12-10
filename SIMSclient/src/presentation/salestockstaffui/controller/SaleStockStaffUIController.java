@@ -7,12 +7,14 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import presentation.common.ControlledStage;
 import presentation.common.StageController;
 import presentation.mainui.MainUI;
 import presentation.salestockstaffui.MemberManageUI;
+import presentation.salestockstaffui.SaleStockStaffUI;
 import vo.UserVO;
 
-public class SaleStockStaffUIController {
+public class SaleStockStaffUIController implements ControlledStage {
 
 	public static final String mainID = "SaleStockStaffUI";
 	public static final String pack = "../salestockstaffui/fxml/";
@@ -23,12 +25,28 @@ public class SaleStockStaffUIController {
 
 	UserVO user ;
 
-	static StageController stageController;
+    StageController stageController;
+
+	public void setStageController(StageController controller) {
+        stageController = controller;
+    }
 
 	@FXML
 	protected AnchorPane pane;
 	@FXML
 	private ImageView image;
+
+
+	@FXML
+	public void returnLast(){
+        stageController.setStage(previous,current);
+        if(!stack.isEmpty()){
+        stack.pop();
+        current = previous;
+        }
+        if(stack.size()>1)
+            previous = stack.lastElement();
+	}
 
 	@FXML
 	public void mainPage() throws Exception{
@@ -75,6 +93,10 @@ public class SaleStockStaffUIController {
 
 
 	public void initData(UserVO user) {
+        stageController.setStage(SaleStockStaffUI.mainID);
+        stack = new Stack<>();
+        previous = current = mainID;
+        stack.push(mainID);
 		this.user = user;
 		image = user.getImage();
 	}
@@ -86,6 +108,5 @@ public class SaleStockStaffUIController {
    		current = currentID;
    		stack.push(currentID);
 	}
-
 
 }

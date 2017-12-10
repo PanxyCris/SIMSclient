@@ -31,9 +31,10 @@ import javafx.util.Callback;
 import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
+import presentation.salestockstaffui.controller.SaleStockStaffUIController;
 import vo.member.MemberVO;
 
-public class MemberManageUI extends SaleStockStaffUI implements Initializable{
+public class MemberManageUI extends SaleStockStaffUIController implements Initializable{
 
 	    MemberBLService service = new MemberBLService_Stub();
 		public static final Remind remind = Remind.MEMBER;
