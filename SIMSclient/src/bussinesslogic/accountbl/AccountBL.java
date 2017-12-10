@@ -20,7 +20,7 @@ import SIMSclient.src.vo.makefinancialdoc.PaymentBillVO;
  *
  */
 public class AccountBL implements AccountBLService{
-	
+
 	private static AccountBL accountBL=new AccountBL();
 	ResultMessage resultMessage = null;
 	
