@@ -99,7 +99,7 @@ public class RemoteHelper {
 		return (AccountBookDataService)remote;
 	}
 
-	public UserDataService getuserDataService(){
+	public UserDataService getUserDataService(){
 		return (UserDataService)remote;
 	}
 }

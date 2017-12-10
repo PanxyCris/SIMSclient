@@ -9,9 +9,7 @@ import dataenum.findtype.FindUserType;
 import po.UserPO;
 
 public interface UserDataService extends Remote {
-
-	public static final String NAME = "UserData"; // rmiµÄÃû³Æ
-
+	
 	public boolean login(String id, String password) throws RemoteException;
 
 	public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteException;

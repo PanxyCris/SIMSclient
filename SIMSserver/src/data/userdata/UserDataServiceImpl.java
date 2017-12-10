@@ -1,9 +1,20 @@
 package data.userdata;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import data.DBManager;
 import data.userdata.UserData;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
@@ -19,19 +30,19 @@ public class UserDataServiceImpl implements UserDataService {
 		super();
 	}
 	
-	public static void main(String[] args) throws RemoteException {
-		UserDataServiceImpl u = new UserDataServiceImpl();
-		UserPO p = new UserPO("000002", "wangcancan", "admin", UserRole.PUR_SALE_MANAGER, null);
-		u.insertUser(p);
-		ArrayList<UserPO> list = u.showUser();
-		for(UserPO po: list) {
-			System.out.println(po.toString());
-			if ("000001".equals(String.valueOf(po.getID())) && "admin".equals(String.valueOf(po.getPassword()))){
-				System.out.println("true");
-			}
-		}
-		System.out.println(u.login("000001", "admin"));
-	}
+//	public static void main(String[] args) throws RemoteException {
+//		UserDataServiceImpl u = new UserDataServiceImpl();
+//		UserPO p = new UserPO("000002", "wangcancan", "admin", UserRole.PUR_SALE_MANAGER, null);
+//		u.insertUser(p);
+//		ArrayList<UserPO> list = u.showUser();
+//		for(UserPO po: list) {
+//			System.out.println(po.toString());
+//			if ("000001".equals(String.valueOf(po.getID())) && "admin".equals(String.valueOf(po.getPassword()))){
+//				System.out.println("true");
+//			}
+//		}
+//		System.out.println(u.login("000003", "admin"));
+//	}
 
 	@Override
 	public ResultMessage insertUser(UserPO po) throws RemoteException {
@@ -60,8 +71,32 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public boolean login(String id, String password) throws RemoteException {
-		user = new UserData();
-		ArrayList<UserPO> list = user.show();
+		ArrayList<UserPO> list = new ArrayList<>();
+		Connection conn = DBManager.getConnection();
+		String sql = "select object from userrole";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+                byte[] buff = new byte[(int) inBlob.length()];
+                
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
+                    UserPO po = (UserPO)in.readObject();                   //读出对象  
+                      
+                    list.add(po);  
+                }  
+			}
+			rs.close();
+			ps.close();
+			conn.close();
+		} catch (SQLException | IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}  
+
 		for (UserPO po: list) {
 			if (id.equals(String.valueOf(po.getID())) && password.equals(String.valueOf(po.getPassword()))){
 				return true;

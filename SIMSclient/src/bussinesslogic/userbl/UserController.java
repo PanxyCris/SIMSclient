@@ -14,12 +14,13 @@ import vo.UserVO;
 
 public class UserController implements UserBLService{
 
-	UserDataService service = RemoteHelper.getInstance().getuserDataService();
+	UserDataService service = RemoteHelper.getInstance().getUserDataService();
 
     /**
      * 登录的用户名及密码判断
      * @throws RemoteException
      */
+	@Override
 	public boolean login(String id, String passWord) throws RemoteException {
 		return service.login(id,passWord);
 	}

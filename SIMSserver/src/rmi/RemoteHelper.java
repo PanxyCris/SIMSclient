@@ -17,7 +17,8 @@ public class RemoteHelper {
 	public RemoteHelper() {
 		initServer();
 	}
-
+	
+	
 	public void initServer() {
 		DataRemoteObject dataRemoteObject;
 		try {
