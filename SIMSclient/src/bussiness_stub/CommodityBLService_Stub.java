@@ -1,7 +1,7 @@
-package SIMSclient.src.bussiness_stub;
+package bussiness_stub;
 
-import SIMSclient.src.vo.ViewObject;
-import SIMSclient.src.vo.commodity.CommodityVO;
+import vo.ViewObject;
+import vo.commodity.CommodityVO;
 
 public class CommodityBLService_Stub {
 

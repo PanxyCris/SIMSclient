@@ -1,12 +1,12 @@
-package SIMSclient.src.bussinesslogic.purchasebl;
+package bussinesslogic.purchasebl;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.bussinesslogic.CommodityItemTran;
-import SIMSclient.src.po.PurchasePO;
-import SIMSclient.src.po.commodity.CommodityItemPO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
-import SIMSclient.src.vo.purchase.PurchaseVO;
+import bussinesslogic.CommodityItemTran;
+import po.PurchasePO;
+import po.commodity.CommodityItemPO;
+import vo.commodity.CommodityItemVO;
+import vo.purchase.PurchaseVO;
 
 /**     
 *  用于PO与VO的互相转换

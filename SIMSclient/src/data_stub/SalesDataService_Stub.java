@@ -1,13 +1,13 @@
-package SIMSclient.src.data_stub;
+package data_stub;
 
 import java.util.ArrayList;
 
-import SIMSclient.src.bussinesslogic.commoditybl.CommodityItem;
-import SIMSclient.src.vo.PromotionVO;
-import SIMSclient.src.vo.commodity.CommodityVO;
-import SIMSclient.src.vo.member.MemberVO;
-import SIMSclient.src.vo.sale.SalesAddVO;
-import SIMSclient.src.vo.sale.SalesVO;
+import bussinesslogic.commoditybl.CommodityItem;
+import vo.PromotionVO;
+import vo.commodity.CommodityVO;
+import vo.member.MemberVO;
+import vo.sale.SalesAddVO;
+import vo.sale.SalesVO;
 
 /**  
 * ÀàËµÃ÷   

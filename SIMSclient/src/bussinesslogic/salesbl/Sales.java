@@ -1,15 +1,15 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package bussinesslogic.salesbl;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import SIMSclient.src.po.sales.SalesPO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
-import SIMSclient.src.vo.sale.SalesVO;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataservice.salesdataservice.SalesDataService;
+import po.sales.SalesPO;
+import vo.commodity.CommodityItemVO;
+import vo.sale.SalesVO;
+import dataenum.BillType;
+import dataservice.salesdataservice.SalesDataService;
 
 /**
  * 
