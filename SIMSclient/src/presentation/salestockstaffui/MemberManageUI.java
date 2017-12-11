@@ -1,5 +1,10 @@
 package presentation.salestockstaffui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -162,7 +167,8 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 			amountField.setText(null);
 			receiveField.setText(null);
 			payField.setText(null);
-		//	operatorLabel.setText(user.getName());
+			operatorLabel.setText(readFile());
+
 		}
 
 		@Override
@@ -258,5 +264,27 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 		public void start() throws Exception {
 			   changeStage("MemberManageUI","MemberManageUI.fxml");
 		}
+
+
+		public String readFile(){
+			StringBuffer str=new StringBuffer();
+			try{
+			FileReader fileReader=new FileReader("src/presentation/salestockstaffui/doc/tmp.txt");
+
+			BufferedReader reader=new BufferedReader(fileReader);
+
+			String line=null;
+
+			while((line=reader.readLine())!=null){
+					str.append(line);
+					str.append("\n");
+			}
+			reader.close();
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			return str.toString();
+		}
+
 
 }

@@ -111,7 +111,7 @@ public class SaleStockStaffUI implements ControlledStage{
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
-    	BufferedWriter fw = new BufferedWriter(new FileWriter("doc\\tmp.txt"));
+    	BufferedWriter fw = new BufferedWriter(new FileWriter("src/presentation/salestockstaffui/doc/tmp.txt"));
 		fw.write(user.getName());
 		fw.close();
      //   image = user.getImage();
