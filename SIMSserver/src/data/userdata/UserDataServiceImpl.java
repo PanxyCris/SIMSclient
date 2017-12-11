@@ -28,6 +28,7 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	public UserDataServiceImpl() throws RemoteException {
 		super();
+		user = new UserData();
 	}
 	
 //	public static void main(String[] args) throws RemoteException {
@@ -46,25 +47,21 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public ResultMessage insertUser(UserPO po) throws RemoteException {
-		user = new UserData();
 		return user.insert(po);
 	}
 
 	@Override
 	public ResultMessage deleteUser(String ID) throws RemoteException {
-		user = new UserData();
 		return user.delete(ID);
 	}
 
 	@Override
 	public ResultMessage updateUser(UserPO po) throws RemoteException {
-		user = new UserData();
 		return user.update(po);
 	}
 
 	@Override
 	public ArrayList<UserPO> showUser() throws RemoteException {
-		user = new UserData();
 		return user.show();
 	}
 
@@ -107,7 +104,6 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteException {
-		user = new UserData();
 		return user.find(info, type);
 	}
 
