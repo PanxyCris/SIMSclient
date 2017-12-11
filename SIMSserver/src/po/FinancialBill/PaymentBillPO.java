@@ -46,5 +46,4 @@ public class PaymentBillPO extends FinancialDocPO {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

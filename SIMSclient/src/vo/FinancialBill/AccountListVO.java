@@ -1,6 +1,5 @@
 package vo.FinancialBill;
 
-import java.util.ArrayList;
 
 public class AccountListVO {
 

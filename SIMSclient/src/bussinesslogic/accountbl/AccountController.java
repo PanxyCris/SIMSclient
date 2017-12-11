@@ -20,7 +20,7 @@ import vo.FinancialBill.FinancialDocVO;
 public class AccountController implements AccountBLService{
 
 	AccountBL accountBL=new AccountBL();
-	AccountVO accountVO;
+	
 	@Override
 	public ArrayList<AccountVO> find(String message, FindAccountType findType) {
 		return accountBL.find(message, findType);

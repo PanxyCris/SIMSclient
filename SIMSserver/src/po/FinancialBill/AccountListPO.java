@@ -1,24 +1,23 @@
 package po.FinancialBill;
 
-
 public class AccountListPO {
 	
-	protected String accountID;//银行账户ID
+	protected String accountName;//银行账户名
 	protected String money;//转账金额
 	protected String note;//备注
 	
-	public AccountListPO(String accountID,String money,String note){
-		this.accountID=accountID;
+	public AccountListPO(String accountName,String money,String note){
+		this.accountName=accountName;
 		this.money=money;
 		this.note=note; 
 	}
 
-	public String getAccountID() {
-		return accountID;
+	public String getAccountName() {
+		return accountName;
 	}
 
-	public void setAccountID(String accountID) {
-		this.accountID = accountID;
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
 	public String getMoney() {
@@ -36,7 +35,5 @@ public class AccountListPO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-
 	
 }

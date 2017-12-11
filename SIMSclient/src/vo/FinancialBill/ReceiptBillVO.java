@@ -9,12 +9,14 @@ import dataenum.BillType;
 @SuppressWarnings("serial")
 public class ReceiptBillVO extends FinancialDocVO {
 
-	// 条目清单
-	private ArrayList<AccountListVO> accountListVOs;
+	private ArrayList<AccountListVO> accountListVOs;//转账列表
+	
+	private String total;//总额
 
-	public ReceiptBillVO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money, String customerID,
-			ArrayList<String> note,ArrayList<String> entryName,ArrayList<String> transferAmount,BillType billType,BillState billState) {
+	public ReceiptBillVO(String docID, String userID,String customerID,BillType billType,BillState billState
+			,ArrayList<AccountListVO> accountListVOs,String total) {
 		super(docID,userID,customerID,billType,billState);
+		this.total=total;
 		accountListVOs=new ArrayList<AccountListVO>();
 	}
 
@@ -26,6 +28,15 @@ public class ReceiptBillVO extends FinancialDocVO {
 		this.accountListVOs = accountListVOs;
 	}
 
+	public String getTotal() {
+		return total;
+	}
+
+	public void setTotal(String total) {
+		this.total = total;
+	}
+
+	
 
 
 }

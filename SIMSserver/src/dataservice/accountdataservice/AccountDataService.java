@@ -26,7 +26,7 @@ public interface AccountDataService extends Remote{
 	public static final String NAME = "AccountData";
 	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException;
 	public ArrayList<AccountPO> showAccount() throws RemoteException;
-	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<String> moneyList);
+	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<Double> moneyList,String memberID);
 	public ResultMessage newBuild(PersistObject po);
 	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects);
 }
