@@ -161,6 +161,15 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return sale.showSale();
 	}
 	
+	@Override
+	public String getSaleID() throws RemoteException {
+		return sale.getSaleID();
+	}
+
+	@Override
+	public String getSaleBackID() throws RemoteException {
+		return sale.getSaleBackID();
+	}
 
 
 	@Override

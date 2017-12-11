@@ -2,30 +2,66 @@ package vo.commodity;
 
 import vo.ViewObject;
 
-public class CommodityItemVO extends ViewObject {
+public class CommodityItemVO {
 
+	private String id;
+	private String name;
+	private String model;
+	private int number;
+	private double price;
+	private double total;
+	private String remark;
 
-	public CommodityVO commodity;
-	public double price;
-	public double sum;  //总额
-	public String remark;  //备注
-
-	public CommodityItemVO() {
-		
-	}
-	
-	public CommodityItemVO(CommodityVO commodity, String remark) {
-		this.commodity = commodity;
+	public CommodityItemVO(String ID, String name, String model, int number, double price, String remark) {
+		this.id = ID;
+		this.name = name;
+		this.model = model;
+		this.number = number;
+		this.price = price;
 		this.remark = remark;
+		this.total = number * price;
 	}
 
-	public void setPrice(double price){
+	public String getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "\r\n\t[商品ID=" + id + ", 商品名称=" + commodity.getName() + ", 商品型号=" + commodity.getModel() + ", 商品数量=" + commodity.getModel() + ", 商品单价=" + price
-				+ ", 商品总价=" + sum + ", 备注=" + remark + "]";
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
+	
+	
+
 }

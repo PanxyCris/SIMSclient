@@ -1,15 +1,16 @@
-package SIMSclient.src.bussinesslogic.salesbl;
+package bussinesslogic.salesbl;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import SIMSclient.src.dataenum.BillState;
-import SIMSclient.src.dataenum.BillType;
-import SIMSclient.src.dataenum.Warehouse;
-import SIMSclient.src.po.commodity.CommodityItemPO;
-import SIMSclient.src.po.sales.SalesPO;
-import SIMSclient.src.vo.commodity.CommodityItemVO;
-import SIMSclient.src.vo.sale.SalesVO;
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.Warehouse;
+import po.commodity.CommodityItemPO;
+import po.sales.SalesPO;
+import vo.commodity.CommodityItemVO;
+import vo.sale.SalesVO;
+
 
 /**
  * 用于PO与VO的相互转换

@@ -14,8 +14,12 @@ import vo.UserVO;
 
 public class UserController implements UserBLService{
 
-	UserDataService service = RemoteHelper.getInstance().getUserDataService();
+	private UserDataService service;
 
+	public UserController() {
+		super();
+		service = RemoteHelper.getInstance().getUserDataService();
+	}
     /**
      * 登录的用户名及密码判断
      * @throws RemoteException

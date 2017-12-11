@@ -6,7 +6,7 @@ import bussinesslogic.commoditybl.CommodityItem;
 import vo.PromotionVO;
 import vo.commodity.CommodityVO;
 import vo.member.MemberVO;
-import vo.sale.SalesAddVO;
+import vo.sale.SalesInputVO;
 import vo.sale.SalesVO;
 
 /**  
@@ -51,12 +51,12 @@ public class SalesDataService_Stub {
 		return null;
 	}
 
-	public SalesVO submit(SalesAddVO Info) {
+	public SalesVO submit(SalesInputVO Info) {
 		System.out.println("Submit Succeed!\n");
 		return null;
 	}
 
-	public SalesVO save(SalesAddVO Info) {
+	public SalesVO save(SalesInputVO Info) {
 		System.out.println("Save Succeed!\n");
 		return null;
 	}

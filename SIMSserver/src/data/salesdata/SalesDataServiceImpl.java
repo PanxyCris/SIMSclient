@@ -55,6 +55,16 @@ public class SalesDataServiceImpl implements SalesDataService{
 	public ArrayList<SalesPO> findSale(String info, FindSalesType type) throws RemoteException {
 		return null;
 	}
+
+	@Override
+	public String getSaleID() throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public String getSaleBackID() throws RemoteException {
+		return null;
+	}
 	
 } 
 

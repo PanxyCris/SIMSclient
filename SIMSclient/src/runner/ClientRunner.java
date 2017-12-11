@@ -5,13 +5,13 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
-import bussinesslogic.userbl.UserController;
 import presentation.mainui.MainUI;
 import rmi.RemoteHelper;
 
 public class ClientRunner {
 
 	private RemoteHelper remoteHelper;
+	
 
 	public static final double VERSION = 0.1;
 	
@@ -34,7 +34,7 @@ public class ClientRunner {
 
 	public static void main(String[] args) throws Exception {
 		ClientRunner runner = new ClientRunner();
-		//runner.test();
+//		runner.test();
 		runner.linkToServer();
 		try {
 			new MainUI().run(args);

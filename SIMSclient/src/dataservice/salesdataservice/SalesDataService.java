@@ -21,6 +21,10 @@ public interface SalesDataService extends Remote {
 	public ResultMessage updateSale(SalesPO po) throws RemoteException;
 	
 	public ArrayList<SalesPO> showSale() throws RemoteException;
+	
+	public String getSaleID() throws RemoteException;
+	
+	public String getSaleBackID() throws RemoteException;
 
 		
 }
