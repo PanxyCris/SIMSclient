@@ -42,13 +42,12 @@ public class PaymentBillVO extends FinancialDocVO {
 		this.total = total;
 	}
 
-	public ArrayList<EntryVO> getAccountListVO() {
+	public ArrayList<EntryVO> getEntryListVO() {
 		return entryListVO;
 	}
 
-	public void setAccountListVO(ArrayList<EntryVO> entryListVO) {
+	public void setEntryListVO(ArrayList<EntryVO> entryListVO) {
 		this.entryListVO = entryListVO;
 	}
-
 
 }
