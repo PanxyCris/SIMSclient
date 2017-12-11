@@ -1,12 +1,10 @@
 package po.FinancialBill;
 
-import java.io.Serializable;
-
 import dataenum.BillState;
 import dataenum.BillType;
 import po.BillPO;
 
-public class FinancialDocPO extends BillPO implements Serializable {
+public class FinancialDocPO extends BillPO {
 	
 	private static final long serialVersionUID = 1L;
 	protected String docID;//µ¥¾Ý±àºÅ
@@ -50,4 +48,5 @@ public class FinancialDocPO extends BillPO implements Serializable {
 
 	
 	
+
 }

@@ -1,6 +1,5 @@
 package po.FinancialBill;
 
-
 public class AccountListPO {
 	
 	protected String accountName;//银行账户名
@@ -36,7 +35,5 @@ public class AccountListPO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-
 	
 }

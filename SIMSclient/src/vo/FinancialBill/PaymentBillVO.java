@@ -14,9 +14,9 @@ import dataenum.BillType;
  */
 @SuppressWarnings("serial")
 public class PaymentBillVO extends FinancialDocVO {
-	private String total;//转账总额
+	private String total;//总额
 	private String accountID;
-	private ArrayList<EntryVO> entryListVO;
+	private ArrayList<EntryVO> entryListVO;//条目清单
 
 	public PaymentBillVO (String docID,String userID,String customerID,String accountID,ArrayList<EntryVO> entryListVO,
 			String total,BillType billType,BillState billState){

@@ -7,40 +7,37 @@ import dataenum.BillType;
 
 public class ReceiptBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
-	// 条目清单
-	private ArrayList<String> entryName;// 条目名
-	private ArrayList<String> transferAmount;// 金额
+	private ArrayList<AccountListPO> accountListPOs;//转账列表
+	
+	private String total;//总额
 
-	private EntryListPO entryListPO;
-
-	public ReceiptBillPO(String docID, String userID, ArrayList<String> accountName, ArrayList<String> money,
-			String customerID, ArrayList<String> note, ArrayList<String> entryName, ArrayList<String> transferAmount,
-			BillType billType, BillState billState) {
-		super(docID, userID, accountName, money, customerID, note, billType, billState);
-		entryListPO = new EntryListPO(entryName, transferAmount, note);
+	public ReceiptBillPO(String docID, String userID,String customerID,BillType billType,BillState billState
+			,ArrayList<AccountListPO> accountListPOs,String total) {
+		super(docID,userID,customerID,billType,billState);
+		this.total=total;
+		accountListPOs=new ArrayList<AccountListPO>();
 	}
 
-	public ArrayList<String> getEntryName() {
-		return entryName;
+	public ArrayList<AccountListPO> getAccountListPOs() {
+		return accountListPOs;
 	}
 
-	public void setEntryName(ArrayList<String> entryName) {
-		this.entryName = entryName;
+	public void setAccountListPOs(ArrayList<AccountListPO> accountListPOs) {
+		this.accountListPOs = accountListPOs;
 	}
 
-	public ArrayList<String> getTransferAmount() {
-		return transferAmount;
+	public String getTotal() {
+		return total;
 	}
 
-	public void setTransferAmount(ArrayList<String> transferAmount) {
-		this.transferAmount = transferAmount;
+	public void setTotal(String total) {
+		this.total = total;
 	}
 
-	public EntryListPO getEntryListPO() {
-		return entryListPO;
-	}
-
-	public void setEntryListPO(EntryListPO entryListPO) {
-		this.entryListPO = entryListPO;
-	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
+	
+	
+	
 }

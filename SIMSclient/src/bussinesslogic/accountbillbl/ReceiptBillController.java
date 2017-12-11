@@ -4,52 +4,44 @@ import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.ResultMessage;
 import vo.FinancialBill.ReceiptBillVO;
 
-public class ReceiptBillBL implements ReceiptBillBLService{
+public class ReceiptBillController implements ReceiptBillBLService{
 
-	private static ReceiptBillBL skdController = new ReceiptBillBL();
-	public static ReceiptBillBL getInstance(){
-		return skdController;
-	}
-
-	public ReceiptBillBLService getSKDBLService(){
-		return (ReceiptBillBLService)skdController;
-	}
+	ReceiptBillBL receiptBillBL=new ReceiptBillBL();
 
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
-		return null;
+		return receiptBillBL.save(receiptBillVO);
 	}
 
 	@Override
 	public ResultMessage delete(ReceiptBillVO receiptBillVO) {
-		return null;
+		return receiptBillBL.delete(receiptBillVO);
 	}
 
 	@Override
 	public ReceiptBillVO find() {
-		return null;
+		return receiptBillBL.find();
 	}
 
 	@Override
 	public ResultMessage getAccountList() {
-		return null;
+		return receiptBillBL.getAccountList();
 	}
 
 	@Override
 	public ResultMessage getCustomerList() {
-		return null;
+		return receiptBillBL.getCustomerList();
 	}
 
 	@Override
 	public ResultMessage judgeLegal(String money) {
-		return null;
+		return receiptBillBL.judgeLegal(money);
 	}
 
 	@Override
 	public ResultMessage commit(ReceiptBillVO receiptBillVO) {
-		return null;
+		return receiptBillBL.commit(receiptBillVO);
 	}
-
 	
-
+	
 }
