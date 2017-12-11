@@ -5,21 +5,14 @@ import vo.UserVO;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Stack;
-
-import dataenum.Remind;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.common.ControlledStage;
 import presentation.common.StageController;
 import presentation.mainui.MainUI;
-import presentation.remindui.RemindExistController;
-
 
 public class SaleStockStaffUI implements ControlledStage{
 
@@ -30,9 +23,6 @@ public class SaleStockStaffUI implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-
-
-	UserVO user ;
 
     static StageController stageController;
 
@@ -110,7 +100,6 @@ public class SaleStockStaffUI implements ControlledStage{
         stageController.setStage(mainID);
         previous = current = mainID;
         stack.push(mainID);
-        this.user = user;
     	BufferedWriter fw = new BufferedWriter(new FileWriter("src/presentation/salestockstaffui/doc/tmp.txt"));
 		fw.write(user.getName());
 		fw.close();
@@ -125,7 +114,5 @@ public class SaleStockStaffUI implements ControlledStage{
    		current = currentID;
    		stack.push(currentID);
 	}
-
-
 
 }

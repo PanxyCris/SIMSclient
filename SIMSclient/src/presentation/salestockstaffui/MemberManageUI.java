@@ -167,7 +167,8 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 			amountField.setText(null);
 			receiveField.setText(null);
 			payField.setText(null);
-			operatorLabel.setText(readFile());
+			SaleStockStaffUI ui = new SaleStockStaffUI();
+			operatorLabel.setText(readUserName());
 
 		}
 
@@ -266,7 +267,7 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 		}
 
 
-		public String readFile(){
+		public String readUserName(){
 			StringBuffer str=new StringBuffer();
 			try{
 			FileReader fileReader=new FileReader("src/presentation/salestockstaffui/doc/tmp.txt");
