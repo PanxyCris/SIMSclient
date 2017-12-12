@@ -169,53 +169,104 @@ public class SalesController implements SalesBLService, SalesShowService{
 
 	@Override
 	public ArrayList<SalesVO> showSale() {
+		try {
+			return saleshow.showAllSaleBill();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> showSaleBack() {
+		try {
+			return saleshow.showAllSaleBackBill();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSaleApproving() {
+	public ArrayList<SalesVO> showSaleCommited() {
+		try {
+			return saleshow.showSaleCommited();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSaleBackApproving() {
+	public ArrayList<SalesVO> showSaleBackCommited() {
+		try {
+			return saleshow.showSaleBackCommited();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSalePass() {
+	public ArrayList<SalesVO> showSaleSuccess() {
+		try {
+			return saleshow.showSaleSuccess();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSaleBackPass() {
+	public ArrayList<SalesVO> showSaleBackSuccess() {
+		try {
+			return saleshow.showSaleBackSuccess();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSaleFailure() {
+	public ArrayList<SalesVO> showSaleFail() {
+		try {
+			return saleshow.showSaleFail();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
-	public ArrayList<SalesVO> showSaleBackFailure() {
+	public ArrayList<SalesVO> showSaleBackFail() {
+		try {
+			return saleshow.showSaleBackFail();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> showSaleDraft() {
+		try {
+			return saleshow.showSaleDraft();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> showSaleBackDraft() {
+		try {
+			return saleshow.showSaleBackDraft();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
+	
 	
 }

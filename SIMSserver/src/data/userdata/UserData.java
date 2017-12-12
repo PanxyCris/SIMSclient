@@ -27,10 +27,10 @@ import po.UserPO;
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
-		UserPO po = new UserPO("000001", "liuqing", "admin", UserRole.FINANCIAL_MANAGER, null);
+		UserPO po = new UserPO("000003", "liuqing", "admin", UserRole.USER_MANAGER, null);
 		user.delete("00002");
 		user.insert(po);
-		ArrayList<UserPO> list = user.find("000002", FindUserType.ID);
+		ArrayList<UserPO> list = user.find("000001", FindUserType.ID);
 		for(UserPO u: list) {
 			System.out.println(u.getID() + " " + u.getName() + " " + u.getPassword());
 		}

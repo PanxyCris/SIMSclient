@@ -13,14 +13,14 @@ public interface SalesShowService {
 	public ArrayList<SalesVO> showSale();
 	public ArrayList<SalesVO> showSaleBack();
 
-	public ArrayList<SalesVO> showSaleApproving();
-	public ArrayList<SalesVO> showSaleBackApproving();
+	public ArrayList<SalesVO> showSaleCommited();
+	public ArrayList<SalesVO> showSaleBackCommited();
 	
-	public ArrayList<SalesVO> showSalePass();
-	public ArrayList<SalesVO> showSaleBackPass();
+	public ArrayList<SalesVO> showSaleSuccess();
+	public ArrayList<SalesVO> showSaleBackSuccess();
 	
-	public ArrayList<SalesVO> showSaleFailure();
-	public ArrayList<SalesVO> showSaleBackFailure();
+	public ArrayList<SalesVO> showSaleFail();
+	public ArrayList<SalesVO> showSaleBackFail();
 	
 	public ArrayList<SalesVO> showSaleDraft();
 	public ArrayList<SalesVO> showSaleBackDraft();
