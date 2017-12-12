@@ -134,5 +134,6 @@
       <Button layoutX="619.0" layoutY="546.0" mnemonicParsing="false" onAction="#submit" prefHeight="44.0" prefWidth="127.0" text="提    交" />
       <Label layoutX="435.0" layoutY="424.0" text="备注" />
       <TextField fx:id="noteField" layoutX="435.0" layoutY="443.0" prefHeight="23.0" prefWidth="372.0" />
+      <Label fx:id="typeLabel" layoutX="184.0" layoutY="87.0" prefHeight="23.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

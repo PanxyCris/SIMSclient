@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import presentation.financialstaffui.PaymentMakeBillUI;
 
 public class MakeReceiptUI extends SaleStockStaffUI implements Initializable{
 
@@ -20,8 +19,8 @@ public class MakeReceiptUI extends SaleStockStaffUI implements Initializable{
 	public void chooseReceipt() throws Exception{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
-		case PURCHASEBILL:new PurchaseMakeBillUI().start();break;
-		case PURCHASEBACKBILL:new PaymentMakeBillUI().start();break;
+		case PURCHASEBILL:new PurchaseMakeBillUI().start(type);break;
+		case PURCHASEBACKBILL:new PurchaseMakeBillUI().start(type);break;
 		case SALESBILL:
 		case SALESBACKBILL:
 		default:break;

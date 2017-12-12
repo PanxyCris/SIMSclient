@@ -38,6 +38,10 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
 
 	PurchaseBLService service = new PurchaseController();
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
+    BillType type;
+
+    @FXML
+    Label typeLabel;
 
 	@FXML
 	Label idLabel;
@@ -100,9 +104,9 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
-	    	                     int result = Integer.parseInt(moneyLabel.getText())+Integer.parseInt(priceField.getText());
+	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(priceField.getText());
 	    	                     moneyLabel.setText(String.valueOf(result));
-	    	                     int tmp = Integer.parseInt(sumLabel.getText());
+	    	                     double tmp = Double.parseDouble(sumLabel.getText());
 	    	                     sumLabel.setText(String.valueOf(tmp+result));break;
 	    	        default:break;
 	    	        }
@@ -141,11 +145,15 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
 
 	@FXML
 	public void checkBefore() throws Exception{
-          //  new PaymentCheckBillUI().start();
+          //  new PurchaseCheckBillUI().start();
 	}
 
-	public void start() throws Exception {
+	public void start(BillType type) throws Exception {
 		   changeStage("PurchaseMakeBillUI","PurchaseMakeBillUI.fxml");
+		   this.type = type;
+		   System.out.println(type.value);
+		   typeLabel.setText(type.value);
+
 	}
 
 	@Override
@@ -179,11 +187,11 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
 	  	                        ).setNumber(tmp);
 	               else{
 	            	   String newTmp = newVO.getNumber();
-	            	   int result = Integer.parseInt(sumLabel.getText())-(Integer.parseInt(tmp)-Integer.parseInt(newTmp))*Integer.parseInt(newVO.getPrice());
+	            	   double result = Double.parseDouble(sumLabel.getText())-(Integer.parseInt(tmp)-Integer.parseInt(newTmp))*Double.parseDouble(newVO.getPrice());
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(String.valueOf(result));
-	            	   sumLabel.setText(String.valueOf(Integer.parseInt(sumLabel.getText())-Integer.parseInt(tmpTotal)+result));
+	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-Double.parseDouble(tmpTotal)+result));
 	               }
         });
 
@@ -205,11 +213,11 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
 	  	                        ).setPrice(tmp);
 	               else{
 	            	   String newTmp = newVO.getNumber();
-	            	   int result = Integer.parseInt(sumLabel.getText())-(Integer.parseInt(tmp)-Integer.parseInt(newTmp))*Integer.parseInt(newVO.getNumber());
+	            	   double result = Double.parseDouble(sumLabel.getText())-(Double.parseDouble(tmp)-Double.parseDouble(newTmp))*Integer.parseInt(newVO.getNumber());
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(String.valueOf(result));
-	            	   sumLabel.setText(String.valueOf(Integer.parseInt(sumLabel.getText())-Integer.parseInt(tmpTotal)+result));
+	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-Double.parseDouble(tmpTotal)+result));
 	               }
         });
 
@@ -279,8 +287,8 @@ public class PurchaseMakeBillUI extends MakeReceiptUI {
                         	CommodityItemVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
-                            int tmp = Integer.parseInt(clickedItem.getTotal());
-                            int result = Integer.parseInt(sumLabel.getText())-tmp;
+                            double tmp = Double.parseDouble(clickedItem.getTotal());
+                            double result = Double.parseDouble(sumLabel.getText())-tmp;
                             sumLabel.setText(String.valueOf(result));
                         });
                     }
