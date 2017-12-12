@@ -3,14 +3,16 @@ package bussinesslogic.purchasebl;
 import java.util.ArrayList;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import dataenum.ResultMessage;
 import vo.PromotionVO;
+import vo.commodity.CommodityItemVO;
 import vo.commodity.CommodityVO;
 import vo.purchase.PurchaseVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月1日    
+/**
+*
+* @author Lijie
+* @date 2017年12月1日
 */
 public class PurchaseController implements PurchaseBLService{
 
@@ -46,6 +48,12 @@ public class PurchaseController implements PurchaseBLService{
 
 	@Override
 	public void endSales() {
+	}
+
+	@Override
+	public ResultMessage isLegal(CommodityItemVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

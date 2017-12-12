@@ -1,25 +1,23 @@
 package vo.commodity;
 
-import vo.ViewObject;
-
 public class CommodityItemVO {
 
 	private String id;
 	private String name;
 	private String model;
-	private int number;
-	private double price;
-	private double total;
+	private String number;
+	private String price;
+	private String total;
 	private String remark;
 
-	public CommodityItemVO(String ID, String name, String model, int number, double price, String remark) {
+	public CommodityItemVO(String ID, String name, String model, String number, String price,String total, String remark) {
 		this.id = ID;
 		this.name = name;
 		this.model = model;
 		this.number = number;
 		this.price = price;
 		this.remark = remark;
-		this.total = number * price;
+		this.total = total;
 	}
 
 	public String getId() {
@@ -34,15 +32,15 @@ public class CommodityItemVO {
 		return model;
 	}
 
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public double getTotal() {
+	public String getTotal() {
 		return total;
 	}
 
@@ -50,18 +48,22 @@ public class CommodityItemVO {
 		return remark;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	
+
+	public void setTotal(String total){
+		this.total = total;
+	}
+
+
 
 }

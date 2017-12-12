@@ -2,7 +2,9 @@ package presentation.salestockstaffui;
 
 import vo.UserVO;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Stack;
 import javafx.application.Platform;
@@ -23,6 +25,7 @@ public class SaleStockStaffUI implements ControlledStage{
 	static String previous;
 	static String current;
 	static Stack<String> stack;
+	UserVO user;
 
     static StageController stageController;
 
@@ -87,16 +90,14 @@ public class SaleStockStaffUI implements ControlledStage{
 
 	@FXML
 	public void makeReceipt() throws Exception{
-
+         new MakeReceiptUI().start();
 	}
 
 
 	public void start(UserVO user) throws Exception {
 		stageController = new StageController();
         stack = new Stack<>();
-
         stageController.loadStage(mainID, mainFXML);
-
         stageController.setStage(mainID);
         previous = current = mainID;
         stack.push(mainID);
@@ -114,5 +115,26 @@ public class SaleStockStaffUI implements ControlledStage{
    		current = currentID;
    		stack.push(currentID);
 	}
+
+	public String readUserName(){
+		StringBuffer str=new StringBuffer();
+		try{
+		FileReader fileReader=new FileReader("src/presentation/salestockstaffui/doc/tmp.txt");
+
+		BufferedReader reader=new BufferedReader(fileReader);
+
+		String line=null;
+
+		while((line=reader.readLine())!=null){
+				str.append(line);
+				str.append("\n");
+		}
+		reader.close();
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return str.toString();
+	}
+
 
 }
