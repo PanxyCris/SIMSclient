@@ -17,7 +17,7 @@ public class PurchaseVO extends ViewObject{
 	public Warehouse warehouse;
 	public String operator;
 	public ArrayList<CommodityItemVO> commodities;  //入库商品列表
-	public double sum;
+	public String sum;
 	public String remark;
 	public BillType type;
 	public BillState state;
@@ -38,7 +38,7 @@ public class PurchaseVO extends ViewObject{
 	* @throws
 	*/
 	public PurchaseVO(String supplierID, String supplier, Warehouse warehouse, String operator,
-			ArrayList<CommodityItemVO> commodities, double sum, String remark, BillType type, BillState state) {
+			ArrayList<CommodityItemVO> commodities, String sum, String remark, BillType type, BillState state) {
 		super();
 		this.supplierID = supplierID;
 		this.supplier = supplier;

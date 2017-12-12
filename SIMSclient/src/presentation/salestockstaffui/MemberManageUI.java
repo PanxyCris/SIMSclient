@@ -1,10 +1,7 @@
 package presentation.salestockstaffui;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -132,7 +129,7 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 
 		@FXML
 		public void find() throws RemoteException{
-			ArrayList<MemberVO> list = service.fuzzySearch(findingField.getText(),FindMemberType.valueOf(findChoice.getValue()));
+			ArrayList<MemberVO> list = service.fuzzySearch(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
@@ -167,7 +164,6 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 			amountField.setText(null);
 			receiveField.setText(null);
 			payField.setText(null);
-			SaleStockStaffUI ui = new SaleStockStaffUI();
 			operatorLabel.setText(readUserName());
 
 		}
@@ -231,7 +227,7 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 	        levelChoice.setItems(levelList);
 	        findChoice.setItems(FXCollections.observableArrayList(FindMemberType.ID.value,FindMemberType.NAME.value,
 	        		FindMemberType.KIND.value,FindMemberType.ADDRESS.value,FindMemberType.EMAIL.value,FindMemberType.LEVEL.value,
-	        		FindMemberType.PAYABLE.value,FindMemberType.PHONE.value,FindMemberType.POST.value,FindMemberType.RECEIVABLE.value,
+	        		FindMemberType.PHONE.value,FindMemberType.POST.value,FindMemberType.PAYABLE.value,FindMemberType.RECEIVABLE.value,
 	        		FindMemberType.RECEIVABLELIMIT.value,FindMemberType.SALESMAN.value));
 		}
 
@@ -267,25 +263,6 @@ public class MemberManageUI extends SaleStockStaffUI implements Initializable{
 		}
 
 
-		public String readUserName(){
-			StringBuffer str=new StringBuffer();
-			try{
-			FileReader fileReader=new FileReader("src/presentation/salestockstaffui/doc/tmp.txt");
-
-			BufferedReader reader=new BufferedReader(fileReader);
-
-			String line=null;
-
-			while((line=reader.readLine())!=null){
-					str.append(line);
-					str.append("\n");
-			}
-			reader.close();
-			}catch(Exception ex){
-				ex.printStackTrace();
-			}
-			return str.toString();
-		}
 
 
 }
