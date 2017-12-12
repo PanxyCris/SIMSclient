@@ -33,14 +33,11 @@ public class UserDataServiceImpl implements UserDataService {
 	
 //	public static void main(String[] args) throws RemoteException {
 //		UserDataServiceImpl u = new UserDataServiceImpl();
-//		UserPO p = new UserPO("000002", "wangcancan", "admin", UserRole.PUR_SALE_MANAGER, null);
+//		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
 //		u.insertUser(p);
-//		ArrayList<UserPO> list = u.showUser();
+//		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
 //		for(UserPO po: list) {
 //			System.out.println(po.toString());
-//			if ("000001".equals(String.valueOf(po.getID())) && "admin".equals(String.valueOf(po.getPassword()))){
-//				System.out.println("true");
-//			}
 //		}
 //		System.out.println(u.login("000003", "admin"));
 //	}

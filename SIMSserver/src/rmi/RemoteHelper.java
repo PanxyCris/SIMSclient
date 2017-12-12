@@ -18,6 +18,10 @@ public class RemoteHelper {
 		initServer();
 	}
 	
+	public static void main(String[] args) throws RemoteException {
+		DataRemoteObject dataRemoteObject = new DataRemoteObject();
+		System.out.println(dataRemoteObject.login("002", "admin"));
+	}
 	
 	public void initServer() {
 		DataRemoteObject dataRemoteObject;

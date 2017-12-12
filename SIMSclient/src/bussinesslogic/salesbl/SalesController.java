@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import bussinesslogicservice.salesblservice.SalesBLService;
+import bussinesslogicservice.salesblservice.SalesShowService;
 import dataenum.ResultMessage;
 import po.sales.SalesPO;
 import vo.PromotionVO;
@@ -19,12 +20,14 @@ import vo.sale.SalesVO;
 /*
  * 负责实现销售界面所需要的服务
  */
-public class SalesController implements SalesBLService{
+public class SalesController implements SalesBLService, SalesShowService{
 
 	private Sales sale;
+	private SaleShow saleshow;
 	
 	public SalesController() {
 		sale = new Sales();
+		saleshow = new SaleShow();
 	}
 
 	@Override
@@ -161,6 +164,56 @@ public class SalesController implements SalesBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSale() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleBack() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleApproving() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleBackApproving() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSalePass() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleBackPass() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleFailure() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleBackFailure() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleDraft() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> showSaleBackDraft() {
 		return null;
 	}
 
