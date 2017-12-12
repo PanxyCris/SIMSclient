@@ -1,6 +1,9 @@
 package po.sales;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dataenum.BillState;
 import dataenum.BillType;
@@ -9,9 +12,10 @@ import po.PersistObject;
 import po.commodity.CommodityItemPO;
 
 
-public class SalesPO extends PersistObject {
+public class SalesPO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2078643903406807067L;
+	private String id;
 	private String clientId;
 	private String clientName; // 客户姓名
 	private String operator; // 操作员
@@ -25,6 +29,7 @@ public class SalesPO extends PersistObject {
 	private ArrayList<CommodityItemPO> commodities; // 商品清单
 	private BillState state;
 	private BillType type;
+	private String date;
 
 	/**
 	 * @param id
@@ -45,7 +50,7 @@ public class SalesPO extends PersistObject {
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
 			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, double voucher,
 			double afterPrice, String remark, BillType type) {
-		super(id);
+		this.id = id;
 		this.clientId = clientId;
 		this.clientName = clientName;
 		this.operator = operator;
@@ -59,8 +64,18 @@ public class SalesPO extends PersistObject {
 		this.commodities = commodities;
 		this.state = BillState.COMMITED;
 		this.type = type;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		this.date = sdf.format(new Date());
 	}
-
+	
+	public String getDate() {
+		return this.date;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
 	public void setState(BillState state) {
 		this.state = state;
 	}

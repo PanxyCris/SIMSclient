@@ -9,8 +9,6 @@ import dataenum.findtype.FindSalesType;
 import po.sales.SalesPO;
 
 public interface SalesDataService extends Remote {
-
-	public static final String NAME = "SaleData";  //rmi接口的名称
 	
     public ArrayList<SalesPO> findSale(String info, FindSalesType type) throws RemoteException;
 	

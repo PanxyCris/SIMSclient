@@ -23,10 +23,9 @@ import po.PersistObject;
  */
 public interface AccountDataService extends Remote{
 	
-	public static final String NAME = "AccountData";
 	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException;
 	public ArrayList<AccountPO> showAccount() throws RemoteException;
-	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<Double> accountMoney,String memberID);
-	public ResultMessage newBuild(PersistObject po);
-	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects);
+	public ResultMessage insertAccount(AccountPO po) throws RemoteException;
+	public ResultMessage updateAccount(AccountPO po) throws RemoteException;
+	public ResultMessage deleteAccount(String id) throws RemoteException;
 }

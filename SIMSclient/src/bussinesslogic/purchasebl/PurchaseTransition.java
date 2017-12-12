@@ -24,6 +24,6 @@ public class PurchaseTransition {
 	public static PurchaseVO POtoVO(PurchasePO po) {
 		ArrayList<CommodityItemVO> commodities = CommodityItemTran.POtoVO(po.getCommodities());
 		return new PurchaseVO(po.getMemberID(), po.getMember(), po.getWarehouse(), 
-				po.getOperator(), commodities, po.getSum(), po.getRemark(), po.getType(), po.getState());
+				po.getOperator(), commodities, String.valueOf(po.getSum()), po.getRemark(), po.getType(), po.getState());
 	}
 }

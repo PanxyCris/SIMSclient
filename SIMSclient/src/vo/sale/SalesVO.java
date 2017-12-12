@@ -24,21 +24,7 @@ public class SalesVO extends ViewObject {
 	public BillState state;
 	public BillType type;
 
-	/**
-	 * @param retailerID
-	 * @param retailer
-	 * @param saleMan
-	 * @param operator
-	 * @param warehouse
-	 * @param commodity
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
-	 * @param afterPrice
-	 * @param remark
-	 * @param state
-	 * @param type
-	 */
+	
 	public SalesVO(String id, String retailerID, String retailer, String saleMan, String operator, Warehouse warehouse,
 			ArrayList<CommodityItemVO> commodity, double beforePrice, double allowance, double voucher,
 			double afterPrice, String remark, BillState state, BillType type) {
@@ -57,13 +43,6 @@ public class SalesVO extends ViewObject {
 		this.remark = remark;
 		this.state = state;
 		this.type = type;
-	}
-
-	@Override
-	public String toString() {
-		return "[单据ID=" + id + "单据类型=" + type.value + ", 客户ID=" + retailerID + ", 客户姓名=" + retailer +", 业务员=" + saleMan
-				+ ", 操作员=" + operator + ", 商品列表=" + commodity + ",\r\n折让前总额 =" + beforePrice + ", 折让金额=" + allowance
-				+ ", 代金券总额=" + voucher + ", 折让后总额=" + afterPrice + ", 备注=" + remark + ", 单据状态=" + state.value + "]";
 	}
 
 }

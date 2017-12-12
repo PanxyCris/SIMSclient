@@ -19,30 +19,35 @@ import po.PersistObject;
 public class AccountDataServiceMySqlImpl  implements AccountDataService{
 
 	private AccountData account;
+	
+	public AccountDataServiceMySqlImpl() {
+		account = new AccountData();
+	}
 
 	@Override
 	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException {
-		return null;
+		return account.find(keywords, type);
 	}
 
 	@Override
 	public ArrayList<AccountPO> showAccount() throws RemoteException {
-		return null;
+		return account.show();
+	}
+
+
+	@Override
+	public ResultMessage insertAccount(AccountPO po) throws RemoteException {
+		return account.update(po);
 	}
 
 	@Override
-	public ResultMessage newBuild(PersistObject po) {
-		return null;
+	public ResultMessage deleteAccount(String id) throws RemoteException {
+		return account.delete(id);
 	}
 
 	@Override
-	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<Double> moneyList, String memberID) {
-		return null;
+	public ResultMessage updateAccount(AccountPO po) throws RemoteException {
+		return account.update(po);
 	}
 	
 	

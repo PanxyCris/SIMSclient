@@ -27,12 +27,12 @@ import po.UserPO;
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
-		UserPO po = new UserPO("000003", "liuqing", "admin", UserRole.USER_MANAGER, null);
-		user.delete("00002");
-		user.insert(po);
-		ArrayList<UserPO> list = user.find("000001", FindUserType.ID);
+		UserPO po = new UserPO("000003", "liumang", "zhaijuan", UserRole.USER_MANAGER, null);
+//		user.delete("00002");
+		user.update(po);
+		ArrayList<UserPO> list = user.show();
 		for(UserPO u: list) {
-			System.out.println(u.getID() + " " + u.getName() + " " + u.getPassword());
+			System.out.println(u.toString());
 		}
 		
 		

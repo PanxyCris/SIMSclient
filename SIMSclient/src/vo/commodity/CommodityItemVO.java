@@ -10,14 +10,14 @@ public class CommodityItemVO {
 	private String total;
 	private String remark;
 
-	public CommodityItemVO(String ID, String name, String model, String number, String price,String total, String remark) {
+	public CommodityItemVO(String ID, String name, String model, String number, String price, String remark) {
 		this.id = ID;
 		this.name = name;
 		this.model = model;
 		this.number = number;
 		this.price = price;
 		this.remark = remark;
-		this.total = total;
+		this.total = String.valueOf(Double.parseDouble(price) * Integer.parseInt(number));
 	}
 
 	public String getId() {

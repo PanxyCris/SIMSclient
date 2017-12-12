@@ -5,16 +5,20 @@ package po;
 * @date 2017年12月2日    
 */
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
 import po.commodity.CommodityItemPO;
 
-public class PurchasePO extends PersistObject {
+public class PurchasePO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -63964493022423340L;
+	private String id;
 	private String memberID;
 	private String member;
 	private Warehouse warehouse;
@@ -24,23 +28,11 @@ public class PurchasePO extends PersistObject {
 	private double sum;
 	private BillType type;
 	private BillState state;
-	/** 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @param id
-	* @param @param memberID
-	* @param @param member
-	* @param @param warehouse
-	* @param @param operator
-	* @param @param commodities
-	* @param @param remark
-	* @param @param sum
-	* @param @param type    设定文件 
-	* @return   返回类型 
-	* @throws 
-	*/
+	private String date;
+	
 	public PurchasePO(String id, String memberID, String member, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemPO> commodities, String remark, double sum, BillType type) {
-		super(id);
+		this.id = id;
 		this.memberID = memberID;
 		this.member = member;
 		this.warehouse = warehouse;
@@ -50,10 +42,18 @@ public class PurchasePO extends PersistObject {
 		this.sum = sum;
 		this.type = type;
 		this.state = BillState.COMMITED;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		this.date = sdf.format(new Date());
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	
+	public String getDate() {
+		return this.date;
 	}
+	
+	public String getId() {
+		return this.id;
+	}
+	
 	public String getMemberID() {
 		return memberID;
 	}

@@ -9,8 +9,6 @@ import po.commodity.CommodityPO;
 
 public interface CommodityDataService extends Remote {
 	
-	public static final String NAME = "CommodityData";
-	
 	public String getID(String fatherID) throws RemoteException;
 
 	public ArrayList<String> getAllID() throws RemoteException;

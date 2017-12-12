@@ -52,7 +52,7 @@ public class Sales {
 		this.NumberList = new ArrayList<>();
 		this.promotioninfo = new PromotionInfo();
 		this.list = new SalesList();
-		this.saledataservice = (SalesDataService) remoteHelper.getUserDataService();
+		this.saledataservice = RemoteHelper.getInstance().getSalesDataService();
 	}
 	
 	public String getSaleID() throws RemoteException {
@@ -79,10 +79,10 @@ public class Sales {
 	             
 	
 	public void addCommodities(CommodityItemVO vo) throws RemoteException {
-		SalesLineItem item = new SalesLineItem(vo.getId(), vo.getNumber(), vo.getPrice(), vo.getRemark());
+		SalesLineItem item = new SalesLineItem(vo.getId(), Integer.parseInt(vo.getNumber()), Double.parseDouble(vo.getPrice()), vo.getRemark());
 		list.add(item);
 		IDList.add(vo.getId());
-		NumberList.add(vo.getNumber());
+		NumberList.add(Integer.parseInt(vo.getNumber()));
 	}
 	
 	
