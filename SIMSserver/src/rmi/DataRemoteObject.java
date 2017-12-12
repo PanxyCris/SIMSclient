@@ -10,6 +10,7 @@ import data.promotiondata.PromotionDataServiceImpl;
 import data.purchasedata.PurchaseDataServiceImpl;
 import data.salesdata.SalesDataServiceImpl;
 import data.userdata.UserDataServiceImpl;
+import data_stub.UserDataService_Stub;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBookType;
 import dataenum.findtype.FindMemberType;

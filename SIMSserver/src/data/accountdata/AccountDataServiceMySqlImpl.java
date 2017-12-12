@@ -31,17 +31,17 @@ public class AccountDataServiceMySqlImpl  implements AccountDataService{
 	}
 
 	@Override
-	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<String> moneyList) {
-		return null;
-	}
-
-	@Override
 	public ResultMessage newBuild(PersistObject po) {
 		return null;
 	}
 
 	@Override
 	public ResultMessage saveChange(ArrayList<PersistObject> persistObjects) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage enterItem(ArrayList<String> idList, ArrayList<Double> moneyList, String memberID) {
 		return null;
 	}
 	

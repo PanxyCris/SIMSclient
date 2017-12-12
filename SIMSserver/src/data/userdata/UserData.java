@@ -30,7 +30,7 @@ public class UserData {
 		UserPO po = new UserPO("000001", "liuqing", "admin", UserRole.FINANCIAL_MANAGER, null);
 		user.delete("00002");
 		user.insert(po);
-		ArrayList<UserPO> list = user.show();
+		ArrayList<UserPO> list = user.find("000002", FindUserType.ID);
 		for(UserPO u: list) {
 			System.out.println(u.getID() + " " + u.getName() + " " + u.getPassword());
 		}
@@ -94,18 +94,18 @@ public class UserData {
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				po = (UserPO) in.readObject();
 				
-				if(type.equals(FindUserType.ID)) {
-					if(po.getID().equals(keyword)) {
+				if(type == FindUserType.ID) {
+					if(keyword.equals(po.getID())) {
 						list.add(po);
 					}
 				}
-				else if (type.equals(FindUserType.NAME)) {
-					if(po.getName().equals(keyword)) {
+				else if (type == FindUserType.NAME) {
+					if(keyword.equals(po.getName())) {
 						list.add(po);
 					}
 				}
-				else if (type.equals(FindUserType.USERROLE)) {
-					if(po.getRole().equals(keyword)) {
+				else if (type == FindUserType.USERROLE) {
+					if(keyword.equals(po.getRole())) {
 						list.add(po);
 					}
 				}
