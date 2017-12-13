@@ -15,11 +15,11 @@ import vo.purchase.PurchaseVO;
 */
 public class PurchaseTransition {
 
-//	public static PurchasePO VOtoPO(PurchaseVO vo) {
-//		ArrayList<CommodityItemPO> commodities = CommodityItemTran.VOtoPO(vo.commodities);
-//		return new PurchasePO(vo.id, vo.supplierID, vo.supplier, vo.warehouse, 
-//				vo.operator, commodities, vo.sum, vo.remark, vo.state, vo.type);
-//	}
+	public static PurchasePO VOtoPO(PurchaseVO vo) {
+		ArrayList<CommodityItemPO> commodities = CommodityItemTran.VOtoPO(vo.commodities);
+		return new PurchasePO(vo.id, vo.supplierID, vo.supplier, vo.warehouse, 
+				vo.operator, commodities, Double.parseDouble(vo.sum), vo.remark, vo.state, vo.type);
+	}
 	
 	public static PurchaseVO POtoVO(PurchasePO po) {
 		ArrayList<CommodityItemVO> commodities = CommodityItemTran.POtoVO(po.getCommodities());

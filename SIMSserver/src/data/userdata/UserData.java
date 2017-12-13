@@ -27,9 +27,9 @@ import po.UserPO;
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
-		UserPO po = new UserPO("000003", "liumang", "zhaijuan", UserRole.USER_MANAGER, null);
+		UserPO po = new UserPO("000004", "王灿灿", "1245678", UserRole.FINANCIAL_MANAGER, null);
 //		user.delete("00002");
-		user.update(po);
+		user.insert(po);
 		ArrayList<UserPO> list = user.show();
 		for(UserPO u: list) {
 			System.out.println(u.toString());
@@ -39,20 +39,34 @@ public class UserData {
 	}
 	public ResultMessage insert(UserPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
-		String sql = "" + "insert into userrole(id, object) values (?,?)";
-		try{
-			conn.setAutoCommit(false);
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, po.getID());
-            ps.setObject(2, po);
-            ps.executeUpdate();
-            conn.commit();
-            ps.close();
-            conn.close();
-            return ResultMessage.SUCCESS;
-        }catch(SQLException e){
-            e.printStackTrace();    
-        }
+		try {
+			Statement ps0 = conn.createStatement();
+			ResultSet rs = ps0.executeQuery("select count(*) from userrole where id = " + po.getID());
+			int count = 0;
+			if (rs.next()) {
+				count = rs.getInt(1);
+				if (count == 0) {
+					String sql = "" + "insert into userrole(id, object) values (?,?)";
+					
+					conn.setAutoCommit(false);
+					PreparedStatement ps = conn.prepareStatement(sql);
+					ps.setString(1, po.getID());
+			        ps.setObject(2, po);
+			        ps.executeUpdate();
+			        conn.commit();
+			        ps.close();
+			        conn.close();
+			        return ResultMessage.SUCCESS;
+				}
+				else {
+					System.out.println("客户ID已存在");
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return ResultMessage.FAIL;
 	}
 	

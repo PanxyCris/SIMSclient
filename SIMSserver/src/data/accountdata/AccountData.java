@@ -27,6 +27,16 @@ import po.AccountPO;
 * @date 2017年12月3日    
 */
 public class AccountData {
+//	public static void main(String[] args) throws RemoteException {
+//		AccountData a = new AccountData();
+//		AccountPO po = new AccountPO("000007", "王灿灿", 4000);
+//		a.delete("000005");
+//		ArrayList<AccountPO> list = a.show();
+//		for (AccountPO p : list) {
+//			System.out.println(p.getId() + " " + p.getName() + " " + p.getMoney());
+//		}
+//		
+//	}
 
 	public ResultMessage insert(AccountPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
@@ -64,7 +74,7 @@ public class AccountData {
 		}
 	}
 
-	public ResultMessage update(AccountPO po) throws RemoteException {
+	public ResultMessage update(AccountPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update account set object = ? where id = ?";
 		try {
@@ -81,7 +91,7 @@ public class AccountData {
 		}
 	}
 
-	public ArrayList<AccountPO> show() throws RemoteException {
+	public ArrayList<AccountPO> show() {
 		ArrayList<AccountPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from account";
@@ -112,7 +122,7 @@ public class AccountData {
 	}
 
 
-	public ArrayList<AccountPO> find(String keyword, FindAccountType type) throws RemoteException { 
+	public ArrayList<AccountPO> find(String keyword, FindAccountType type) { 
 		ArrayList<AccountPO> list = new ArrayList<>();
 		AccountPO po = null;
 		Connection conn = DBManager.getConnection();

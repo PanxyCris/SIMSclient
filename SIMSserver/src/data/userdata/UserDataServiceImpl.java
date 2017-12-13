@@ -31,16 +31,16 @@ public class UserDataServiceImpl implements UserDataService {
 		user = new UserData();
 	}
 	
-//	public static void main(String[] args) throws RemoteException {
-//		UserDataServiceImpl u = new UserDataServiceImpl();
-//		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
+	public static void main(String[] args) throws RemoteException {
+		UserDataServiceImpl u = new UserDataServiceImpl();
+		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
 //		u.insertUser(p);
-//		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
-//		for(UserPO po: list) {
-//			System.out.println(po.toString());
-//		}
-//		System.out.println(u.login("000003", "admin"));
-//	}
+		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
+		for(UserPO po: list) {
+			System.out.println(po.toString());
+		}
+		System.out.println(u.login("000003", "admin"));
+	}
 
 	@Override
 	public ResultMessage insertUser(UserPO po) throws RemoteException {
