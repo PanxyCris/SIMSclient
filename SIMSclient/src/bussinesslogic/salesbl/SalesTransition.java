@@ -3,6 +3,7 @@ package bussinesslogic.salesbl;
 import java.util.ArrayList;
 import java.util.Date;
 
+import bussinesslogic.common.CommodityItemTran;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
@@ -18,13 +19,13 @@ import vo.sale.SalesVO;
 public class SalesTransition {
 
 	public static SalesPO VOtoPO(SalesVO vo) {
-		String id = vo.id;
+		String id = vo.getId();
 		String retailerId = vo.retailerID;
 		String retailer = vo.retailer; // 销售商客户
 		String saleMan = vo.saleMan; // 业务员
 		String operator = vo.operator; // 操作员
 		Warehouse warehouse = vo.warehouse;
-		ArrayList<CommodityItemPO> commodity = null;
+		ArrayList<CommodityItemPO> commodity = CommodityItemTran.VOtoPO(vo.commodity);
 		double beforePrice = vo.beforePrice;
 		double allowance = vo.allowance; // 折让
 		double voucher = vo.voucher; // 使用代金券金额
@@ -42,7 +43,7 @@ public class SalesTransition {
 		String salesMan = po.getSaleMan();
 		String operator = po.getOperator();
 		Warehouse warehouse = po.getWarehouse();
-		ArrayList<CommodityItemVO> commodity = null;
+		ArrayList<CommodityItemVO> commodity = CommodityItemTran.POtoVO(po.getCommodities());
 		double beforePrice = po.getBeforePrice();
 		double allowance = po.getAllowance(); // 折让
 		double voucher = po.getVoucher(); // 使用代金券金额

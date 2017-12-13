@@ -5,19 +5,19 @@ public class CommodityItemVO {
 	private String id;
 	private String name;
 	private String model;
-	private String number;
-	private String price;
-	private String total;
+	private Integer number;
+	private Double price;
+	private Double total;
 	private String remark;
 
-	public CommodityItemVO(String ID, String name, String model, String number, String price, String remark) {
+	public CommodityItemVO(String ID, String name, String model, Integer number, Double price, String remark) {
 		this.id = ID;
 		this.name = name;
 		this.model = model;
 		this.number = number;
 		this.price = price;
 		this.remark = remark;
-		this.total = String.valueOf(Double.parseDouble(price) * Integer.parseInt(number));
+		this.total = price * number;
 	}
 
 	public String getId() {
@@ -32,15 +32,15 @@ public class CommodityItemVO {
 		return model;
 	}
 
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public String getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public String getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
@@ -48,11 +48,11 @@ public class CommodityItemVO {
 		return remark;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -60,7 +60,7 @@ public class CommodityItemVO {
 		this.remark = remark;
 	}
 
-	public void setTotal(String total){
+	public void setTotal(Double total){
 		this.total = total;
 	}
 

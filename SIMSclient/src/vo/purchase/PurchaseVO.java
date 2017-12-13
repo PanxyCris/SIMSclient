@@ -17,15 +17,16 @@ public class PurchaseVO extends ViewObject{
 	public Warehouse warehouse;
 	public String operator;
 	public ArrayList<CommodityItemVO> commodities;  //入库商品列表
-	public String sum;
+	public Double sum;
 	public String remark;
 	public BillType type;
 	public BillState state;
 
 
-	public PurchaseVO(String supplierID, String supplier, Warehouse warehouse, String operator,
-			ArrayList<CommodityItemVO> commodities, String sum, String remark, BillType type, BillState state) {
+	public PurchaseVO(String id, String supplierID, String supplier, Warehouse warehouse, String operator,
+			ArrayList<CommodityItemVO> commodities, String remark, Double sum, BillType type, BillState state) {
 		super();
+		this.id = id;
 		this.supplierID = supplierID;
 		this.supplier = supplier;
 		this.warehouse = warehouse;

@@ -16,18 +16,18 @@ public class SalesVO extends ViewObject {
 	public String operator;
 	public Warehouse warehouse;
 	public ArrayList<CommodityItemVO> commodity;
-	public double beforePrice; // 折让前价格
-	public double allowance; // 折让金额
-	public double voucher; // 代金券金额
-	public double afterPrice;
+	public Double beforePrice; // 折让前价格
+	public Double allowance; // 折让金额
+	public Double voucher; // 代金券金额
+	public Double afterPrice;
 	public String remark;
 	public BillState state;
 	public BillType type;
 
 	
 	public SalesVO(String id, String retailerID, String retailer, String saleMan, String operator, Warehouse warehouse,
-			ArrayList<CommodityItemVO> commodity, double beforePrice, double allowance, double voucher,
-			double afterPrice, String remark, BillState state, BillType type) {
+			ArrayList<CommodityItemVO> commodity, Double beforePrice, Double allowance, Double voucher,
+			Double afterPrice, String remark, BillState state, BillType type) {
 		super();
 		this.id = id;
 		this.retailerID = retailerID;

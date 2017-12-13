@@ -31,7 +31,7 @@ public class PurchasePO implements Serializable {
 	private String date;
 	
 	public PurchasePO(String id, String memberID, String member, Warehouse warehouse, String operator,
-			ArrayList<CommodityItemPO> commodities, String remark, double sum, BillType type) {
+			ArrayList<CommodityItemPO> commodities, String remark, double sum, BillType type, BillState state) {
 		this.id = id;
 		this.memberID = memberID;
 		this.member = member;
@@ -41,7 +41,7 @@ public class PurchasePO implements Serializable {
 		this.remark = remark;
 		this.sum = sum;
 		this.type = type;
-		this.state = BillState.COMMITED;
+		this.state = state;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.date = sdf.format(new Date());
 	}

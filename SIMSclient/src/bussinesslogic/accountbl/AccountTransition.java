@@ -15,7 +15,7 @@ public class AccountTransition {
 	}
 	
 	public AccountVO POtoVO(AccountPO accountPO){
-		String id=accountPO.getID();
+		String id=accountPO.getId();
 		String name=accountPO.getName();
 		String money=Double.toString(accountPO.getMoney());
 		

@@ -79,10 +79,10 @@ public class Sales {
 	             
 	
 	public void addCommodities(CommodityItemVO vo) throws RemoteException {
-		SalesLineItem item = new SalesLineItem(vo.getId(), Integer.parseInt(vo.getNumber()), Double.parseDouble(vo.getPrice()), vo.getRemark());
+		SalesLineItem item = new SalesLineItem(vo.getId(), vo.getNumber(), vo.getPrice(), vo.getRemark());
 		list.add(item);
 		IDList.add(vo.getId());
-		NumberList.add(Integer.parseInt(vo.getNumber()));
+		NumberList.add(vo.getNumber());
 	}
 	
 	

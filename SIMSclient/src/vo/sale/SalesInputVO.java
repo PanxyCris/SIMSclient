@@ -11,12 +11,12 @@ import dataenum.Warehouse;
 public class SalesInputVO {
 
 	public Warehouse warehouse;
-	public double allowance;
-	public double voucher;
+	public Double allowance;
+	public Double voucher;
 	public String remark;
 	
 	
-	public SalesInputVO(Warehouse warehouse, double allowance, double voucher, String remark) {
+	public SalesInputVO(Warehouse warehouse, Double allowance, Double voucher, String remark) {
 		super();
 		this.warehouse = warehouse;
 		this.allowance = allowance;
