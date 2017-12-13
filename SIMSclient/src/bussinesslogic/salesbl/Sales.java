@@ -149,7 +149,7 @@ public class Sales {
 		ArrayList<SalesPO> list = saledataservice.findSale(id, FindSalesType.ID);
 		SalesPO po = null;
 		for (SalesPO p:list) {
-			if (id.equals(p.getID().toString())) {
+			if (id.equals(p.getId())) {
 				po = p;
 				break;
 			}

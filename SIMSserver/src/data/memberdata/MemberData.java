@@ -26,13 +26,16 @@ public class MemberData {
 
 	public ResultMessage insert(MemberPO po) {
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "insert into Member (object) values (?)";
+		String sql = "" + "insert into Member (id, object) values (?,?)";
 		try {
 			conn.setAutoCommit(false);
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setObject(1, po);
+			ps.setString(1, po.getId());
+			ps.setObject(2, po);
 			ps.executeUpdate();
 			conn.commit();
+			ps.close();
+			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,7 +50,6 @@ public class MemberData {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.execute();
-
 			ps.close();
 			conn.close();
 			return ResultMessage.SUCCESS;
@@ -63,7 +65,7 @@ public class MemberData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getID());
+			ps.setString(2, po.getId());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();
@@ -74,7 +76,6 @@ public class MemberData {
 		}
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public ArrayList<MemberPO> find(String keyword, FindMemberType type) {
 		ArrayList<MemberPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
@@ -83,7 +84,7 @@ public class MemberData {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				// 以下是读取的方法一定要注意了！
 				try {
 					Blob inblob = (Blob) rs.getBlob("object");
@@ -99,28 +100,28 @@ public class MemberData {
 					
 					switch (type) {
 					case ADDRESS: 
-						if (po.getAddress().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getAddress())) list.add(po);
 						break;
 					case ID:
-						if (po.getID().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getId())) list.add(po);
 						break;
 					case EMAIL:
-						if (po.getEmail().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getEmail())) list.add(po);
 						break;
 					case NAME: 
-						if (po.getName().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getName())) list.add(po);
 						break;
 					case LEVEL: 
-						if (po.getLevel().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getLevel().value)) list.add(po);
 						break;
 					case KIND:
-						if (po.getCategory().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getCategory().value)) list.add(po);
 						break;
 					case PHONE: 
-						if (po.getPhone().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getPhone())) list.add(po);
 						break;
 					case POST: 
-						if (po.getPost().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getPost())) list.add(po);
 						break;
 					case PAYABLE:
 						if (po.getPayable() == Double.parseDouble(keyword)) list.add(po);
@@ -132,7 +133,7 @@ public class MemberData {
 						if (po.getRereceivableLimit() == Double.parseDouble(keyword)) list.add(po);
 						break;
 					case SALESMAN:
-						if (po.getSaleMan().equals(keyword)) list.add(po);
+						if (keyword.equals(po.getSaleMan())) list.add(po);
 						break;
 					default:
 						break;

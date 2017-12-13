@@ -7,10 +7,10 @@ package dataenum.findtype;
 public enum FindSalesType {
 
 	ID("单据编号"),
-	CLIENT("客户"),
+	MEMBER("客户"),
 	OPERATOR("操作员"),
 	SALEMAN("业务员"),
-	SUM("总额");
+	TOTAL("总额");
 	
 	public final String value;
 	

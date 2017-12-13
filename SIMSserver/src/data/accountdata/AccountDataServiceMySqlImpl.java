@@ -37,7 +37,7 @@ public class AccountDataServiceMySqlImpl  implements AccountDataService{
 
 	@Override
 	public ResultMessage insertAccount(AccountPO po) throws RemoteException {
-		return account.update(po);
+		return account.insert(po);
 	}
 
 	@Override

@@ -13,30 +13,34 @@ public class PromotionDataServiceImpl implements PromotionDataService{
 
 	private PromotionData promotion;
 	
+	public PromotionDataServiceImpl() {
+		promotion = new PromotionData();
+	}
+	
 
 	@Override
 	public ResultMessage insertPromotion(PromotionPO po) throws RemoteException {
-		return null;
+		return promotion.insert(po);
 	}
 
 	@Override
-	public ResultMessage deletePromotion(String ID) throws RemoteException {
-		return null;
+	public ResultMessage deletePromotion(String id) throws RemoteException {
+		return promotion.delete(id);
 	}
 
 	@Override
 	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException {
-		return null;
+		return promotion.update(po);
 	}
 
 	@Override
 	public ArrayList<PromotionPO> showPromotion() throws RemoteException {
-		return null;
+		return promotion.show();
 	}
 
 	@Override
 	public ArrayList<PromotionPO> findPromotion(String keyword, FindPromotionType type) throws RemoteException {
-		return null;
+		return promotion.find(keyword, type);
 	}
 
 
