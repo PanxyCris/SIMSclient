@@ -34,10 +34,9 @@ public class UserData {
 		System.out.println("555");
 		for(UserPO u: list) {
 			System.out.println(u.toString());
-		}
-		
-		
+		}	
 	}
+	
 	public ResultMessage insert(UserPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
