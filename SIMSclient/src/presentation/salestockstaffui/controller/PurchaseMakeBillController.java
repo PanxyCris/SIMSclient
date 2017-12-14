@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.MemberBLService_Stub;
+import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.purchasebl.PurchaseController;
@@ -17,6 +18,7 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
+import dataenum.findtype.FindCommodityType;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -47,7 +49,7 @@ import vo.purchase.PurchaseVO;
 public class PurchaseMakeBillController extends MakeReceiptController implements Initializable{
 
 
-	PurchaseBLService service = new PurchaseController();
+	PurchaseBLService service = new PurchaseBLService_Stub();
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
     BillType type;
     UserVO user;
@@ -99,7 +101,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	@FXML
 	Label moneyLabel;
 	@FXML
-	TextField noteField;
+	TextArea remarkArea;
 
 	@FXML
 	TextArea noteArea;
@@ -124,7 +126,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	@FXML
 	public void insert(){
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
-				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), noteField.getText());
+				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
 	        ResultMessage message = service.isLegal(vo);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
@@ -134,10 +136,9 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
-	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(priceField.getText());
-	    	                     moneyLabel.setText(String.valueOf(result));
-	    	                     double tmp = Double.parseDouble(sumLabel.getText());
-	    	                     sumLabel.setText(String.valueOf(tmp+result));break;
+	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(sumLabel.getText());
+	    	                     sumLabel.setText(String.valueOf(result));
+	    	                    break;
 	    	        default:break;
 	    	        }
 					} catch (Exception e) {
@@ -170,7 +171,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 
 		 numberField.setText(null);
          priceField.setText(null);
-         noteField.setText(null);
+         remarkArea.setText(null);
          if(purchase == null)
          noteArea.setText(null);
          else
@@ -188,16 +189,22 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		   this.user = user;
 		   this.purchase = purchase;
 		   typeLabel.setText(type.value);
-		   operatorLabel.setText(user.getName());
+		   
 			if(purchase == null){
-				idLabel.setText(service.getPurchaseID());
-				sumLabel.setText("0");
+				if(type == BillType.PURCHASEBILL)
+				    idLabel.setText(service.getPurchaseID());
+				else
+					idLabel.setText(service.getPurChaseBackID());
+			    sumLabel.setText("0");
+				operatorLabel.setText(user.getName());
 				}
 				else{
 					idLabel.setText(purchase.getId());
 					sumLabel.setText(String.valueOf(purchase.getSum()));
 					list.addAll(purchase.getCommodities());
 					table.setItems(list);
+					operatorLabel.setText(purchase.getOperator());
+					
 				}
 				fresh();
 				edit();
@@ -329,12 +336,25 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
         for(int i=0;i<memberService.show().size();i++)
         	memberList.add(memberService.show().get(i).getName());
         memberChoice.setItems(memberList);
+        
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
+        
         ObservableList<String> commodityList = FXCollections.observableArrayList();
         CommodityBLService commodityService = new CommodityBLService_Stub();
         for(int i=0;i<commodityService.getCommodityList().size();i++)
         	commodityList.add(commodityService.getCommodityList().get(i).getName());
+        
         nameChoice.setItems(commodityList);
+        nameChoice.getSelectionModel().selectedItemProperty().addListener(
+        		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
+        			commodityIDLabel.setText(commodityService.find(newValue, FindCommodityType.NAME).get(0).getID());
+        			ObservableList<String> modelList = FXCollections.observableArrayList();
+        			modelList.clear();
+        			for(int i=0;i<commodityService.find(newValue, FindCommodityType.NAME).size();i++)
+        			modelList.add(commodityService.find(newValue, FindCommodityType.NAME).get(i).getModel());
+        			modelChoice.setItems(modelList);
+        		});
+        		
 
         if(purchase!=null){
         	memberChoice.setValue(purchase.getSupplier());
