@@ -31,6 +31,7 @@ public class UserData {
 //		user.delete("00002");
 		user.insert(po);
 		ArrayList<UserPO> list = user.show();
+		System.out.println("555");
 		for(UserPO u: list) {
 			System.out.println(u.toString());
 		}
