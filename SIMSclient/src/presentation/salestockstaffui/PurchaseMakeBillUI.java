@@ -7,15 +7,16 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.salestockstaffui.controller.PurchaseMakeBillController;
 import vo.UserVO;
+import vo.purchase.PurchaseVO;
 
 public class PurchaseMakeBillUI extends MakeReceiptUI {
 
-	public void start(UserVO user,BillType type) throws Exception{
+	public void start(UserVO user,BillType type,PurchaseVO purchase) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PurchaseMakeBillUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
         PurchaseMakeBillController controller = loader.<PurchaseMakeBillController>getController();
-        controller.initData(user,type);
+        controller.initData(user,type,purchase);
         primaryStage.show();
 	}
 

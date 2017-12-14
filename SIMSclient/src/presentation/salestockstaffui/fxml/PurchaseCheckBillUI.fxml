@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.salestockstaffui.controller.PurchaseCheckController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.salestockstaffui.controller.PurchaseCheckBillController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -108,7 +108,7 @@
             <TableColumn fx:id="tableSum" prefWidth="75.0" text="总额总计" />
             <TableColumn fx:id="tableOperator" prefWidth="75.0" text="操作员" />
             <TableColumn fx:id="tableNote" prefWidth="75.0" text="单据备注" />
-            <TableColumn fx:id="tableList" prefWidth="75.0" text="查看商品列表" />
+            <TableColumn fx:id="tableList" prefWidth="100.0" text="查看商品列表" />
             <TableColumn fx:id="tableState" prefWidth="75.0" text="单据状态" />
             <TableColumn fx:id="tableSubmit" prefWidth="75.0" text="是否提交" />
             <TableColumn fx:id="tableRedo" prefWidth="75.0" text="是否重做" />

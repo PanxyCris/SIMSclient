@@ -6,12 +6,26 @@ public class CommodityVO {
 		private String name;
 		private String model; //商品型号
 		private ClassificationVO classification;
-		private int number; //商品数量
-		private double purPrice; //进价
-		private double retailedPrice; //零售价
-		private double recentPurPrice; //最新进价
-		private double recentRetailedPrice; //最新零售价
-		private int warmingValue; //警戒值
+		private Integer number; //商品数量
+		private Double purPrice; //进价
+		private Double retailedPrice; //零售价
+		private Double recentPurPrice; //最新进价
+		private Double recentRetailedPrice; //最新零售价
+		private Integer warmingValue; //警戒值
+
+		public CommodityVO(String id,String name,String model,ClassificationVO classification,
+				int number,double purPrice,double retailedPrice,int warmingValue){
+			this.id = id;
+			this.name = name;
+			this.model = model;
+			this.classification = classification;
+			this.number = number;
+			this.purPrice = purPrice;
+			this.recentPurPrice  = purPrice;
+			this.retailedPrice = retailedPrice;
+			this.recentRetailedPrice = retailedPrice;
+			this.warmingValue = warmingValue;
+		}
 
 		public void setID(String id){
 			this.id = id;

@@ -106,7 +106,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 					 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),
 					 emailField.getText(),amountField.getText(),receiveField.getText(),payField.getText(),
 					 operatorLabel.getText());
-		        ResultMessage message = service.add(vo);
+		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
@@ -127,7 +127,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 		@FXML
 		public void find() throws RemoteException{
-			ArrayList<MemberVO> list = service.fuzzySearch(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
+			ArrayList<MemberVO> list = service.find(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
@@ -150,7 +150,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 			findingField.setText(null);
 			list.clear();
 			list.addAll(service.show());
-			idLabel.setText(service.getID());
+			idLabel.setText(service.getId());
 			classChoice.setValue(null);
 			levelChoice.setValue(null);
 			table.setItems(list);
@@ -242,7 +242,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                        	MemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            service.delete(clickedUser);
+	                            service.delete(clickedUser.getID());
 	                            list.remove(clickedUser);
 	                            table.setItems(list);
 	                        });
@@ -257,9 +257,5 @@ public class MemberManageController extends SaleStockStaffController implements 
 		public void initData(UserVO user) throws Exception {
 			operatorLabel.setText(user.getName());
 		}
-
-
-
-
 
 }

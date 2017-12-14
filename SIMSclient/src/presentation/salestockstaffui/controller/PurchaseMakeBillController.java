@@ -1,10 +1,17 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import bussiness_stub.CommodityBLService_Stub;
+import bussiness_stub.MemberBLService_Stub;
+import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.purchasebl.PurchaseController;
+import bussinesslogicservice.commodityblservice.CommodityBLService;
+import bussinesslogicservice.memberblservice.MemberBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -44,6 +51,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
     BillType type;
     UserVO user;
+    PurchaseVO purchase;
 
     @FXML
     Label typeLabel;
@@ -98,7 +106,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous,user,null);
+        startUI(previous,user,null,null,null);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -109,8 +117,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID,user,type);
-
+		changeStage(mainID,user,type,null,null);
     }
 
 
@@ -160,28 +167,42 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 
 	@FXML
 	public void fresh(){
+
 		 numberField.setText(null);
          priceField.setText(null);
          noteField.setText(null);
+         if(purchase == null)
          noteArea.setText(null);
+         else
+        	 noteArea.setText(purchase.remark);
+
 	}
 
 	@FXML
 	public void checkBefore() throws Exception{
-          //  new PurchaseCheckBillUI().start();
+         changeStage("PurchaseCheckBillUI",user,type,null,null);
 	}
 
-	public void initData(UserVO user,BillType type) throws Exception {
+	public void initData(UserVO user,BillType type,PurchaseVO purchase) throws Exception {
 		   this.type = type;
 		   this.user = user;
+		   this.purchase = purchase;
 		   typeLabel.setText(type.value);
-		    operatorLabel.setText(user.getName());
+		   operatorLabel.setText(user.getName());
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if(purchase == null){
 		idLabel.setText(service.getPurchaseID());
 		sumLabel.setText("0");
+		}
+		else{
+			idLabel.setText(purchase.getId());
+			sumLabel.setText(String.valueOf(purchase.sum));
+			list.addAll(purchase.commodities);
+			table.setItems(list);
+		}
 		fresh();
 		edit();
 		manageInit();
@@ -296,8 +317,31 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
                 new PropertyValueFactory<CommodityItemVO,Double>("total"));
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("remark"));
+		choiceInit();
         textFieldInit();
         deleteInit();
+	}
+
+	public void choiceInit(){
+        super.choiceInit();
+
+        ObservableList<String> memberList = FXCollections.observableArrayList();
+        MemberBLService memberService = new MemberBLService_Stub();
+        for(int i=0;i<memberService.show().size();i++)
+        	memberList.add(memberService.show().get(i).getName());
+        memberChoice.setItems(memberList);
+        warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
+        ObservableList<String> commodityList = FXCollections.observableArrayList();
+        CommodityBLService commodityService = new CommodityBLService_Stub();
+        for(int i=0;i<commodityService.getCommodityList().size();i++)
+        	commodityList.add(commodityService.getCommodityList().get(i).getName());
+        nameChoice.setItems(commodityList);
+
+        if(purchase!=null){
+        	memberChoice.setValue(purchase.supplier);
+        	warehouseChoice.setValue(purchase.warehouse.value);
+        }
+
 	}
 
 	public void textFieldInit(){

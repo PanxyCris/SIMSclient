@@ -22,8 +22,8 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 	public void chooseReceipt() throws Exception{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
-		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type);break;
-		case PURCHASEBACKBILL:changeStage("PurchaseMakeBillUI",user,type);break;
+		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
+		case PURCHASEBACKBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
 		case SALESBILL:
 		case SALESBACKBILL:
 		default:break;
@@ -36,6 +36,10 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		choiceInit();
+	}
+
+	public void choiceInit(){
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.PURCHASEBILL.value,BillType.PURCHASEBACKBILL.value,
 				BillType.SALESBILL.value,BillType.SALESBACKBILL.value));
 	}

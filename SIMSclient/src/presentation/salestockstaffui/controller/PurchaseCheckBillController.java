@@ -3,13 +3,11 @@ package presentation.salestockstaffui.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.ResultMessage;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,20 +16,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-import presentation.common.EditingCell;
-import presentation.common.EditingCellDouble;
-import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindPrintUI;
 import vo.UserVO;
 import vo.commodity.CommodityItemVO;
 import vo.purchase.PurchaseVO;
 
 public class PurchaseCheckBillController extends SaleStockStaffController implements Initializable {
 
-	PurchaseBLService service = new PurchaseController();
+	PurchaseBLService service = new PurchaseBLService_Stub();
 	ObservableList<PurchaseVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
 	UserVO user;
@@ -83,11 +75,12 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 
 	@FXML
 	public void makePurchaseBill() throws Exception{
-         changeStage("PurchaseMakeBillUI",user,type);
+         changeStage("PurchaseMakeBillUI",user,type,null,null);
 	}
 
-	public void initData(UserVO user) {
+	public void initData(UserVO user,BillType type) {
 		this.user = user;
+		this.type = type;
 	}
 
 	@Override
@@ -138,8 +131,9 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            list.remove(clickedItem);
-                            table.setItems(list);
+                            commodityList.clear();
+                            commodityList.addAll(clickedItem.commodities);
+                            commodity.setItems(commodityList);
 
                         });
                     }
@@ -148,14 +142,70 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
             };
             return cell;
         });
-		
+
 	}
 
 	public void submitInit(){
 
+		tableSubmit.setCellFactory((col) -> {
+            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+              for(int i=0;i< this.getTableView().getItems().size();i++){
+                   BillState clickedState = this.getTableView().getItems().get(i).state;
+                    if (!empty&&clickedState == BillState.DRAFT) {
+                        Button delBtn = new Button("提交");
+                        this.setGraphic(delBtn);
+                        delBtn.setOnMouseClicked((me) -> {
+                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                            service.submit(clickedItem);
+                        });
+                    }
+                  }
+                }
+
+            };
+            return cell;
+        });
+
 	}
 
 	public void redoInit(){
+
+		tableRedo.setCellFactory((col) -> {
+            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+                    for(int i=0;i< this.getTableView().getItems().size();i++){
+                   BillState clickedState = this.getTableView().getItems().get(i).state;
+                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                        Button delBtn = new Button("重做");
+                        this.setGraphic(delBtn);
+                        delBtn.setOnMouseClicked((me) -> {
+                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                            try {
+								changeStage("PurchaseMakeBillUI",user,clickedItem.type,clickedItem,null);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                        });
+                    }
+                    }
+                }
+
+            };
+            return cell;
+        });
+
 
 	}
 
@@ -169,8 +219,9 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-
-                    if (!empty) {
+                    for(int i=0;i< this.getTableView().getItems().size();i++){
+                    BillState clickedState = this.getTableView().getItems().get(i).state;
+                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -181,7 +232,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         });
                     }
                 }
-
+              }
             };
             return cell;
         });

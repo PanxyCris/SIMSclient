@@ -12,9 +12,12 @@ import presentation.common.StageController;
 import presentation.mainui.MainUI;
 import presentation.salestockstaffui.MakeReceiptUI;
 import presentation.salestockstaffui.MemberManageUI;
+import presentation.salestockstaffui.PurchaseCheckBillUI;
 import presentation.salestockstaffui.PurchaseMakeBillUI;
 import presentation.salestockstaffui.SaleStockStaffUI;
 import vo.UserVO;
+import vo.purchase.PurchaseVO;
+import vo.sale.SalesVO;
 
 public class SaleStockStaffController {
 
@@ -26,12 +29,6 @@ public class SaleStockStaffController {
 	UserVO user;
 	BillType type;
 
-    static StageController stageController;
-
-	public void setStageController(StageController controller) {
-        stageController = controller;
-    }
-
 	@FXML
 	protected AnchorPane pane;
 	@FXML
@@ -40,7 +37,7 @@ public class SaleStockStaffController {
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous,user,null);
+        startUI(previous,user,null,null,null);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -51,13 +48,13 @@ public class SaleStockStaffController {
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID,user,type);
+		changeStage(mainID,user,type,null,null);
 
     }
 
 	@FXML
 	public void fresh() throws Exception{
-		startUI(current,user,type);
+		startUI(current,user,type,null,null);
 	}
 
 
@@ -83,12 +80,12 @@ public class SaleStockStaffController {
 
 	@FXML
 	public void memberManage() throws Exception{
-         changeStage("MemberManageUI",user,type);
+         changeStage("MemberManageUI",user,type,null,null);
 	}
 
 	@FXML
 	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type);
+		 changeStage("MakeReceiptUI",user,type,null,null);
 	}
 
 
@@ -101,15 +98,15 @@ public class SaleStockStaffController {
 	}
 
 
-	public void changeStage(String currentID,UserVO user,BillType type) throws Exception{
+	public void changeStage(String currentID,UserVO user,BillType type,PurchaseVO purchase,SalesVO sales) throws Exception{
 
-   	    startUI(currentID,user,type);
+   	    startUI(currentID,user,type,purchase,sales);
 	    previous = current;
 	    current = currentID;
 	    stack.push(current);
 	}
 
-	public void startUI(String currentID,UserVO user,BillType type){
+	public void startUI(String currentID,UserVO user,BillType type,PurchaseVO purchase,SalesVO sales){
 	    Stage stage = (Stage) pane.getScene().getWindow();
 	    stage.close();
 			Platform.runLater(new Runnable() {
@@ -119,7 +116,8 @@ public class SaleStockStaffController {
    		            case mainID:new SaleStockStaffUI().start(user);break;
    		            case "MemberManageUI":new MemberManageUI().start(user);break;
    		            case "MakeReceiptUI":new MakeReceiptUI().start(user);break;
-   		            case "PurchaseMakeBillUI":new PurchaseMakeBillUI().start(user,type);break;
+   		            case "PurchaseMakeBillUI":new PurchaseMakeBillUI().start(user,type,purchase);break;
+   		            case "PurchaseCheckBillUI":new PurchaseCheckBillUI().start(user,type);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();
