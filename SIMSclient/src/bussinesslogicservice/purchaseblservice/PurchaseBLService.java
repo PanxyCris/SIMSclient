@@ -23,6 +23,8 @@ public interface PurchaseBLService {
 
 	public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID);
 
+	public ArrayList<PurchaseVO> show();
+
 	public PurchaseVO submit(PurchaseVO Info);
 
 	public PurchaseVO save(PurchaseVO Info);

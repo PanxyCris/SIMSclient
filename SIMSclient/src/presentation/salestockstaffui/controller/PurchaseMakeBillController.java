@@ -11,6 +11,8 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,6 +29,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
+import presentation.common.EditingCellDouble;
+import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.UserVO;
@@ -64,11 +68,11 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	@FXML
 	TableColumn<CommodityItemVO,String> tableModel;
 	@FXML
-	TableColumn<CommodityItemVO,String> tableNumber;
+	TableColumn<CommodityItemVO,Integer> tableNumber;
 	@FXML
-	TableColumn<CommodityItemVO,String> tablePrice;
+	TableColumn<CommodityItemVO,Double> tablePrice;
 	@FXML
-	TableColumn<CommodityItemVO,String> tableMoney;
+	TableColumn<CommodityItemVO,Double> tableMoney;
 	@FXML
 	TableColumn<CommodityItemVO,String> tableNote;
 	@FXML
@@ -113,7 +117,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	@FXML
 	public void insert(){
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
-				 numberField.getText(),priceField.getText(), noteField.getText());
+				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), noteField.getText());
 	        ResultMessage message = service.isLegal(vo);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
@@ -141,7 +145,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,sumLabel.getText(),noteArea.getText(),BillType.PURCHASEBILL,BillState.DRAFT);
+        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
          service.save(vo);
 	}
 
@@ -150,7 +154,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,sumLabel.getText(),noteArea.getText(),BillType.PURCHASEBILL,BillState.DRAFT);
+        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
          service.submit(vo);
 	}
 
@@ -179,6 +183,8 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		idLabel.setText(service.getPurchaseID());
 		sumLabel.setText("0");
 		fresh();
+		edit();
+		manageInit();
 
 	}
 
@@ -186,12 +192,18 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		Callback<TableColumn<CommodityItemVO, String>,
             TableCell<CommodityItemVO, String>> cellFactory
                 = (TableColumn<CommodityItemVO, String> p) -> new EditingCell<CommodityItemVO>();
+        Callback<TableColumn<CommodityItemVO, Integer>,
+            TableCell<CommodityItemVO, Integer>> cellFactoryInteger
+                = (TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
+        Callback<TableColumn<CommodityItemVO,Double>,
+            TableCell<CommodityItemVO, Double>> cellFactoryDouble
+                = (TableColumn<CommodityItemVO, Double> p) -> new EditingCellDouble<CommodityItemVO>();
 
-        tableNumber.setCellFactory(cellFactory);
+        tableNumber.setCellFactory(cellFactoryInteger);
         tableNumber.setOnEditCommit(
-            (CellEditEvent<CommodityItemVO, String> t) -> {
-            	String tmp = t.getOldValue();
-            	String tmpTotal = ((CommodityItemVO) t.getTableView().getItems().get(
+            (CellEditEvent<CommodityItemVO, Integer> t) -> {
+            	Integer tmp = t.getOldValue();
+            	Double tmpTotal = ((CommodityItemVO) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).getTotal();
 	               ((CommodityItemVO) t.getTableView().getItems().get(
@@ -204,20 +216,20 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	  	                        t.getTablePosition().getRow())
 	  	                        ).setNumber(tmp);
 	               else{
-	            	   String newTmp = newVO.getNumber();
-	            	   double result = Double.parseDouble(sumLabel.getText())-(Integer.parseInt(tmp)-Integer.parseInt(newTmp))*Double.parseDouble(newVO.getPrice());
+	            	   Integer newTmp = newVO.getNumber();
+	            	   double result = Double.parseDouble(sumLabel.getText())-(tmp-newTmp*newVO.getPrice());
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
-		                        ).setTotal(String.valueOf(result));
-	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-Double.parseDouble(tmpTotal)+result));
+		                        ).setTotal(result);
+	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-tmpTotal+result));
 	               }
         });
 
-        tableMoney.setCellFactory(cellFactory);
+        tableMoney.setCellFactory(cellFactoryDouble);
         tableMoney.setOnEditCommit(
-            (CellEditEvent<CommodityItemVO, String> t) -> {
-            	String tmp = t.getOldValue();
-            	String tmpTotal = ((CommodityItemVO) t.getTableView().getItems().get(
+            (CellEditEvent<CommodityItemVO, Double> t) -> {
+            	Double tmp = t.getOldValue();
+            	Double tmpTotal = ((CommodityItemVO) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).getTotal();
 	               ((CommodityItemVO) t.getTableView().getItems().get(
@@ -230,12 +242,12 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	  	                        t.getTablePosition().getRow())
 	  	                        ).setPrice(tmp);
 	               else{
-	            	   String newTmp = newVO.getNumber();
-	            	   double result = Double.parseDouble(sumLabel.getText())-(Double.parseDouble(tmp)-Double.parseDouble(newTmp))*Integer.parseInt(newVO.getNumber());
+	            	   Integer newTmp = newVO.getNumber();
+	            	   double result = Double.parseDouble(sumLabel.getText())-(tmp-newTmp)*newVO.getNumber();
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
-		                        ).setTotal(String.valueOf(result));
-	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-Double.parseDouble(tmpTotal)+result));
+		                        ).setTotal(result);
+	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-tmpTotal+result));
 	               }
         });
 
@@ -277,15 +289,71 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		tableModel.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("model"));
 		tableNumber.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("numder"));
+                new PropertyValueFactory<CommodityItemVO,Integer>("numder"));
 		tablePrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("price"));
+                new PropertyValueFactory<CommodityItemVO,Double>("price"));
 		tableMoney.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("total"));
+                new PropertyValueFactory<CommodityItemVO,Double>("total"));
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("remark"));
-
+        textFieldInit();
         deleteInit();
+	}
+
+	public void textFieldInit(){
+		numberField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	boolean numberLegal = true,priceLegal = true;
+            	for(int i=0;i<numberField.getText().length();i++)
+            		if(numberField.getText().charAt(i)<='9'&&numberField.getText().charAt(i)>='0')
+            			continue;
+            		else{
+            			numberLegal = false;
+            			break;
+            		}
+            	for(int i=0;i<priceField.getText().length();i++)
+            		if((priceField.getText().charAt(i)<='9'&&priceField.getText().charAt(i)>='0')||priceField.getText().charAt(i)=='.')
+            			continue;
+            		else{
+            			priceLegal = false;
+            			break;
+            		}
+
+
+            	if(numberField.getText()==null||priceField.getText()==null||!priceLegal||!numberLegal)
+            		moneyLabel.setText("0");
+            	else
+                moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
+            }
+        });
+
+		priceField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	boolean numberLegal = true,priceLegal = true;
+            	for(int i=0;i<numberField.getText().length();i++)
+            		if(numberField.getText().charAt(i)<='9'&&numberField.getText().charAt(i)>='0')
+            			continue;
+            		else{
+            			numberLegal = false;
+            			break;
+            		}
+            	for(int i=0;i<priceField.getText().length();i++)
+            		if((priceField.getText().charAt(i)<='9'&&priceField.getText().charAt(i)>='0')||priceField.getText().charAt(i)=='.')
+            			continue;
+            		else{
+            			priceLegal = false;
+            			break;
+            		}
+
+
+            	if(numberField.getText()==null||priceField.getText()==null||!priceLegal||!numberLegal)
+            		moneyLabel.setText("0");
+            	else
+                moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
+            }
+        });
 	}
 
 	public void deleteInit(){
@@ -305,7 +373,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
                         	CommodityItemVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
-                            double tmp = Double.parseDouble(clickedItem.getTotal());
+                            double tmp = clickedItem.getTotal();
                             double result = Double.parseDouble(sumLabel.getText())-tmp;
                             sumLabel.setText(String.valueOf(result));
                         });

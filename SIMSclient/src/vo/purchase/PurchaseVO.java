@@ -12,7 +12,6 @@ import vo.commodity.CommodityItemVO;
 
 public class PurchaseVO extends ViewObject{
 
-	public String supplierID;
 	public String supplier;  //π©”¶…Ã
 	public Warehouse warehouse;
 	public String operator;
@@ -23,11 +22,10 @@ public class PurchaseVO extends ViewObject{
 	public BillState state;
 
 
-	public PurchaseVO(String id, String supplierID, String supplier, Warehouse warehouse, String operator,
+	public PurchaseVO(String id, String supplier, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemVO> commodities, String remark, Double sum, BillType type, BillState state) {
 		super();
 		this.id = id;
-		this.supplierID = supplierID;
 		this.supplier = supplier;
 		this.warehouse = warehouse;
 		this.operator = operator;
