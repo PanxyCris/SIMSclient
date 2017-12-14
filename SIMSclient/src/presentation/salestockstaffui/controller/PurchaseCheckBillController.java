@@ -96,11 +96,11 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("id"));
 		tableType.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("type"));
+                new PropertyValueFactory<PurchaseVO,String>("typeString"));
 		tableMember.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("supplier"));
 		tableWarehouse.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("warehouse"));
+                new PropertyValueFactory<PurchaseVO,String>("warehouseString"));
 		tableSum.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,Double>("sum"));
 		tableOperator.setCellValueFactory(
@@ -108,7 +108,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("remark"));
 		tableState.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("state"));
+                new PropertyValueFactory<PurchaseVO,String>("stateString"));
 		checkInit();
 		submitInit();
 		redoInit();
@@ -194,7 +194,6 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                             try {
 								changeStage("PurchaseMakeBillUI",user,clickedItem.type,clickedItem,null);
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
                         });
@@ -246,7 +245,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 		commodityModel.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("model"));
 		commodityNumber.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,Integer>("numder"));
+                new PropertyValueFactory<CommodityItemVO,Integer>("number"));
 		commodityPrice.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,Double>("price"));
 		commodityMoney.setCellValueFactory(

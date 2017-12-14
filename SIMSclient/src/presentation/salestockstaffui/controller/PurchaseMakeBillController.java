@@ -189,23 +189,24 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		   this.purchase = purchase;
 		   typeLabel.setText(type.value);
 		   operatorLabel.setText(user.getName());
+			if(purchase == null){
+				idLabel.setText(service.getPurchaseID());
+				sumLabel.setText("0");
+				}
+				else{
+					idLabel.setText(purchase.getId());
+					sumLabel.setText(String.valueOf(purchase.sum));
+					list.addAll(purchase.commodities);
+					table.setItems(list);
+				}
+				fresh();
+				edit();
+				manageInit();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(purchase == null){
-		idLabel.setText(service.getPurchaseID());
-		sumLabel.setText("0");
-		}
-		else{
-			idLabel.setText(purchase.getId());
-			sumLabel.setText(String.valueOf(purchase.sum));
-			list.addAll(purchase.commodities);
-			table.setItems(list);
-		}
-		fresh();
-		edit();
-		manageInit();
+
 
 	}
 
@@ -310,7 +311,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		tableModel.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("model"));
 		tableNumber.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,Integer>("numder"));
+                new PropertyValueFactory<CommodityItemVO,Integer>("number"));
 		tablePrice.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,Double>("price"));
 		tableMoney.setCellValueFactory(
@@ -323,8 +324,6 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 	}
 
 	public void choiceInit(){
-        super.choiceInit();
-
         ObservableList<String> memberList = FXCollections.observableArrayList();
         MemberBLService memberService = new MemberBLService_Stub();
         for(int i=0;i<memberService.show().size();i++)
@@ -356,6 +355,9 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
             			numberLegal = false;
             			break;
             		}
+            	if(numberField.getText()==null||priceField.getText()==null)
+            		moneyLabel.setText("0");
+            	else{
             	for(int i=0;i<priceField.getText().length();i++)
             		if((priceField.getText().charAt(i)<='9'&&priceField.getText().charAt(i)>='0')||priceField.getText().charAt(i)=='.')
             			continue;
@@ -365,17 +367,21 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
             		}
 
 
-            	if(numberField.getText()==null||priceField.getText()==null||!priceLegal||!numberLegal)
+            	if(!priceLegal||!numberLegal)
             		moneyLabel.setText("0");
             	else
                 moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
             }
+            	}
         });
 
 		priceField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	boolean numberLegal = true,priceLegal = true;
+            	if(numberField.getText()==null||priceField.getText()==null)
+            		moneyLabel.setText("0");
+            	else{
             	for(int i=0;i<numberField.getText().length();i++)
             		if(numberField.getText().charAt(i)<='9'&&numberField.getText().charAt(i)>='0')
             			continue;
@@ -392,11 +398,12 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
             		}
 
 
-            	if(numberField.getText()==null||priceField.getText()==null||!priceLegal||!numberLegal)
+            	if(!priceLegal||!numberLegal)
             		moneyLabel.setText("0");
             	else
                 moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
             }
+            	}
         });
 	}
 
