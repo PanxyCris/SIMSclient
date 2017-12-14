@@ -42,10 +42,10 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 	public ArrayList<PurchaseVO> show() {
 		ArrayList<PurchaseVO> list = new ArrayList<>();
 		ArrayList<CommodityItemVO> commodities = new ArrayList<>();
-		CommodityItemVO commodity = new CommodityItemVO("001","°×³ãµÆ","L",89,45.0,"cnjwdfcj");
+		CommodityItemVO commodity = new CommodityItemVO("001","°×³ãµÆ","L",89,45.00,"cnjwdfcj");
 		commodities.add(commodity);
 		PurchaseVO purchase1 = new PurchaseVO("0001","Àî½Ü",Warehouse.WAREHOUSE1,"Panxy",commodities,
-				"ncibwcfhbwvhu",500.0,BillType.PURCHASEBILL,BillState.DRAFT);
+				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.DRAFT);
 		list.add(purchase1);
 		return list;
 	}

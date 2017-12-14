@@ -14,12 +14,15 @@ public class PurchaseVO extends ViewObject{
 
 	public String supplier;  //供应商
 	public Warehouse warehouse;
+	public String warehouseString;
 	public String operator;
 	public ArrayList<CommodityItemVO> commodities;  //入库商品列表
 	public Double sum;
 	public String remark;
 	public BillType type;
+	public String typeString;
 	public BillState state;
+	public String stateString;
 
 
 	public PurchaseVO(String id, String supplier, Warehouse warehouse, String operator,
@@ -34,6 +37,9 @@ public class PurchaseVO extends ViewObject{
 		this.remark = remark;
 		this.type = type;
 		this.state = state;
+		warehouseString = warehouse.value;
+		typeString = type.value;
+		stateString = state.value;
 	}
 
 
