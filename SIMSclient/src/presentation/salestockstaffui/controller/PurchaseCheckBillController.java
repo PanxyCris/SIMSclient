@@ -132,7 +132,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             commodityList.clear();
-                            commodityList.addAll(clickedItem.commodities);
+                            commodityList.addAll(clickedItem.getCommodities());
                             commodity.setItems(commodityList);
 
                         });
@@ -156,7 +156,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                     this.setText(null);
                     this.setGraphic(null);
               for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).state;
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&clickedState == BillState.DRAFT) {
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
@@ -185,14 +185,14 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).state;
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             try {
-								changeStage("PurchaseMakeBillUI",user,clickedItem.type,clickedItem,null);
+								changeStage("PurchaseMakeBillUI",user,clickedItem.getType(),clickedItem,null);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -219,7 +219,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).state;
+                    BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);

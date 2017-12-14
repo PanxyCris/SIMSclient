@@ -109,8 +109,8 @@ public class MemberVO {
 		return saleMan;
 	}
 
-	public String categoryString(){
-		return categoryStr;
+	public String getCategoryStr(){
+		return category.value;
 	}
 
 	public String getLevelString(){

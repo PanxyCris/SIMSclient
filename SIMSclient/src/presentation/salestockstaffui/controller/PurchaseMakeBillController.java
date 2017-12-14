@@ -174,7 +174,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
          if(purchase == null)
          noteArea.setText(null);
          else
-        	 noteArea.setText(purchase.remark);
+        	 noteArea.setText(purchase.getRemark());
 
 	}
 
@@ -195,8 +195,8 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 				}
 				else{
 					idLabel.setText(purchase.getId());
-					sumLabel.setText(String.valueOf(purchase.sum));
-					list.addAll(purchase.commodities);
+					sumLabel.setText(String.valueOf(purchase.getSum()));
+					list.addAll(purchase.getCommodities());
 					table.setItems(list);
 				}
 				fresh();
@@ -337,8 +337,8 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
         nameChoice.setItems(commodityList);
 
         if(purchase!=null){
-        	memberChoice.setValue(purchase.supplier);
-        	warehouseChoice.setValue(purchase.warehouse.value);
+        	memberChoice.setValue(purchase.getSupplier());
+        	warehouseChoice.setValue(purchase.getWarehouse().value);
         }
 
 	}
