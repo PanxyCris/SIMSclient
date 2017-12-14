@@ -12,6 +12,7 @@ import vo.commodity.CommodityItemVO;
 
 public class PurchaseVO extends ViewObject{
 
+	public String id;
 	public String supplier;  //π©”¶…Ã
 	public Warehouse warehouse;
 	public String operator;
