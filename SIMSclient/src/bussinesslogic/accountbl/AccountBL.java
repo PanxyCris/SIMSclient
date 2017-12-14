@@ -9,7 +9,6 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
-import po.PersistObject;
 import vo.AccountVO;
 import vo.FinancialBill.AccountListVO;
 import vo.FinancialBill.FinancialDocVO;
@@ -35,7 +34,6 @@ public class AccountBL implements AccountBLService{
 	FindAccountType findAccountType;
 	AccountVO accountVO;
 	AccountPO accountPO; 
-	PersistObject po;
 	
 
 	
@@ -86,13 +84,15 @@ public class AccountBL implements AccountBLService{
 		}
 		if(judge){
 			
-			accountPO.setID(id);
+			accountPO.setId(id);
 			accountPO.setName(name);
 			accountPO.setMoney(m);
-			
-			po=accountPO;
-			
-			resultMessage=accountDataService.newBuild(po);
+					
+			try {
+				resultMessage=accountDataService.insertAccount(accountPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		return resultMessage.SUCCESS;
@@ -129,6 +129,7 @@ public class AccountBL implements AccountBLService{
 		}
 		if(!accountPOs.isEmpty()){
 			for (int i = 0; i < accountVOs.size(); i++) {
+				accountVO.setId(accountPOs.get(i).getId());
 				accountVO.setName(accountPOs.get(i).getName());
 				accountVO.setMoney(Double.toString(accountPOs.get(i).getMoney()));
 				accountVOs.add(accountVO);
@@ -169,7 +170,7 @@ public class AccountBL implements AccountBLService{
 			memberID=paymentBillVO.getCustomerID();
 		}
 		
-		accountDataService.enterItem(accountID, accountMoney, memberID);
+		
 		
 		return resultMessage.SUCCESS;
 		
@@ -181,12 +182,15 @@ public class AccountBL implements AccountBLService{
 	@Override
 	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
 			accountPO=new AccountPO("", "",0.0);
-			ArrayList<PersistObject> persistObjects = new ArrayList<>();	
 		for (AccountVO accountVO : accountVOs) {
 			accountPO=accountTransition.VOtoPO(accountVO);
-			persistObjects.add((PersistObject)accountPO);
+			try {
+				accountDataService.updateAccount(accountPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 		}
-		return accountDataService.saveChange(persistObjects);
+		return resultMessage.SUCCESS;
 	}
 
 }
