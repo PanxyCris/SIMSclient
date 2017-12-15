@@ -3,6 +3,7 @@ package bussinesslogic.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import bussinesslogic.memberbl.MemberInfo;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
@@ -31,9 +32,11 @@ public class AccountBL implements AccountBLService{
 	
 	AccountDataService accountDataService;
 	AccountTransition accountTransition;
-	FindAccountType findAccountType;
 	AccountVO accountVO;
 	AccountPO accountPO; 
+	
+	FindAccountType findAccountType;
+	
 	
 
 	
@@ -99,13 +102,36 @@ public class AccountBL implements AccountBLService{
 	}
 
 /**
+ * 判断输入的account是否合法
  * @author 王灿灿
  * @param accountVO 为传入的已修改的account对象
  * 
  */
 	@Override
 	public ResultMessage judgeLegal(AccountVO accountVO) {
+		String id=accountVO.getId();
 		String name=accountVO.getName();
+		String money=accountVO.getMoney();
+		
+		//id的字符必须为0~9
+		for (int i = 0; i < id.length(); i++) {
+			if(!('0'<= id.charAt(i) && id.charAt(i) <='9')){
+				return resultMessage.ILLEAGLINPUTDATA;
+			}
+		}
+		
+		//accountName不允许有空格
+		for (int i = 0; i < name.length(); i++) {
+			if(32 == name.charAt(i)){
+				return resultMessage.ILLEGALINPUTNAME;
+			}
+		}
+		
+		//money不能为负数
+		if(Double.valueOf(money)<0){
+			return resultMessage.ILLEAGLINPUTDATA;
+		}
+		
 		return resultMessage.SUCCESS;
 	}
 
