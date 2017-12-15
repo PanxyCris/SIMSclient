@@ -26,14 +26,6 @@ public class AccountController implements AccountBLService{
 		return accountBL.find(message, findType);
 	}
 	@Override
-	public ResultMessage newBuild(String id, String name, String money) {
-		return accountBL.newBuild(id, name, money);
-	}
-	@Override
-	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs) {
-		return accountBL.saveChange(accountVOs);
-	}
-	@Override
 	public ResultMessage judgeLegal(AccountVO accountVO) {
 		return accountBL.judgeLegal(accountVO);
 	}
@@ -44,6 +36,18 @@ public class AccountController implements AccountBLService{
 	@Override
 	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
 		return accountBL.enterItem(financialDocVO,billType);
+	}
+	@Override
+	public ResultMessage add(AccountVO accountVO) {
+		return accountBL.add(accountVO);
+	}
+	@Override
+	public ResultMessage modify(AccountVO accountVO) {
+		return accountBL.modify(accountVO);
+	}
+	@Override
+	public void delete(AccountVO accountVO) {
+		accountBL.delete(accountVO);
 	}
 
 	

@@ -8,7 +8,6 @@ import dataenum.findtype.FindAccountType;
 import vo.AccountVO;
 import vo.FinancialBill.FinancialDocVO;
 
-
 /**
  *
  * @author 王灿灿
@@ -16,34 +15,20 @@ import vo.FinancialBill.FinancialDocVO;
  *
  */
 public interface AccountBLService {
-	
-	/**
-	 * @param message 用户查找时输入的keywords
-	 * @param findType 选择的查找类型
-	 * @return 账户list
-	 */
-	public ArrayList<AccountVO> find(String message,FindAccountType findType);
 
-	/**
-	 * @param id 账户id
-	 * @param name 账户名称
-	 * @param money 账户余额
-	 */
-	public ResultMessage newBuild(String id,String name,String money);
-		
-	/**
-	 * @param accountVOs为待保存的账户列表
-	 */
-	public ResultMessage saveChange(ArrayList<AccountVO> accountVOs);
+	public ArrayList<AccountVO> find(String message, FindAccountType findType);
 
-	/**
-	 * @param 
-	 */
+	public ResultMessage add(AccountVO accountVO);
+
+	public ResultMessage modify(AccountVO accountVO);
+
+	public void delete(AccountVO accountVO);
+
 	public ResultMessage judgeLegal(AccountVO accountVO);
 
-	public ArrayList<AccountVO> getAccountList();  //改了一下接口，返回一个账户list
-	
-	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType); //收款单、付款单 入账
+	public ArrayList<AccountVO> getAccountList(); // 改了一下接口，返回一个账户list
 
+	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType); // 收款单、付款单
+																						// 入账
 
 }

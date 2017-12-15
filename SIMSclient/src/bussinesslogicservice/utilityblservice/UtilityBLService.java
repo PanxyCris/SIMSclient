@@ -8,6 +8,6 @@ public interface UtilityBLService {
 
 	public boolean isPrintLegal(ArrayList<String> list);
 	
-	public String generateID(BillType billType);
+	public String generateID(BillType billType,int number);
 
 }
