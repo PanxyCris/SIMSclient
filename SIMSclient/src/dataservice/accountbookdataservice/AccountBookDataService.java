@@ -17,10 +17,22 @@ import po.AccountBookPO;
 *
  */
 public interface AccountBookDataService extends Remote {
-	public static final String NAME = "AccountBookData";
     public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException;
     public ResultMessage deleteAccountBook(String ID) throws RemoteException;
     public ResultMessage updateAccountBook(AccountBookPO po) throws RemoteException;
     public ArrayList<AccountBookPO> find(String keyword, FindAccountBookType type) throws RemoteException;
 	public ArrayList<AccountBookPO> showAccountBook() throws RemoteException;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
