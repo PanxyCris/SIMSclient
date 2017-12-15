@@ -22,28 +22,29 @@ public class ReceiptDataServiceImpl implements ReceiptBillDataService {
 	}
 	
 	@Override
-	public ResultMessage insertPaymentBill(ReceiptBillPO po) throws RemoteException {
+	public ResultMessage insertReceiptBill(ReceiptBillPO po) throws RemoteException {
 		return receipt.insert(po);
 	}
 
 	@Override
-	public ResultMessage deletePaymentBill(String id) throws RemoteException {
+	public ResultMessage deleteReceiptBill(String id) throws RemoteException {
 		return receipt.delete(id);
 	}
 
 	@Override
-	public ResultMessage updatePaymentBill(ReceiptBillPO po) throws RemoteException {
+	public ResultMessage updateReceiptBill(ReceiptBillPO po) throws RemoteException {
 		return receipt.update(po);
 	}
 
 	@Override
-	public ArrayList<ReceiptBillPO> findPaymentBill(String keyword, FindAccountBillType type) throws RemoteException {
+	public ArrayList<ReceiptBillPO> findReceiptBill(String keyword, FindAccountBillType type) throws RemoteException {
 		return receipt.find(keyword, type);
 	}
 
 	@Override
-	public ArrayList<ReceiptBillPO> showPaymentBill() throws RemoteException {
+	public ArrayList<ReceiptBillPO> showReceiptBill() throws RemoteException {
 		return receipt.show();
 	}
+
 
 }
