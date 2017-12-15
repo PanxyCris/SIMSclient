@@ -1,7 +1,11 @@
 package bussinesslogicservice.accountbillblservice;
 
+import java.util.ArrayList;
+
 import dataenum.ResultMessage;
+import vo.AccountVO;
 import vo.FinancialBill.PaymentBillVO;
+import vo.member.MemberVO;
 
 public interface PaymentBillBLService {
 
@@ -11,9 +15,9 @@ public interface PaymentBillBLService {
 	
 	public PaymentBillVO find();
 	
-	public ResultMessage getAccountList();
+	public ArrayList<AccountVO> getAccountList();
 	
-	public ResultMessage getCustomerList();
+	public ArrayList<MemberVO> getCustomerList();
 	
 	public ResultMessage judgeLegal(String money);
 	

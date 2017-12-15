@@ -26,7 +26,7 @@ public class UtilityBL implements UtilityBLService{
 	}
 
 	@Override
-	public String generateID(BillType billType,int number) {//number为服务器上目前该类型单据的数目
+	public String generateID(BillType billType) {//number为服务器上目前该类型单据的数目
 		String id="";
 		
 		String type=billType.prefix;
