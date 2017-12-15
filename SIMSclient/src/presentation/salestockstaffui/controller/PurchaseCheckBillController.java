@@ -225,6 +225,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	service.delete(clickedItem);
                             list.remove(clickedItem);
                             table.setItems(list);
 

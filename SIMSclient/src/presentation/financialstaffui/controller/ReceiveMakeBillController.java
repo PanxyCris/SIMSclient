@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import bussiness_stub.PaymentBillBLService_Stub;
+import bussiness_stub.ReceiptBillBLService_Stub;
 import bussiness_stub.UtilityBLService_Stub;
-import bussinesslogic.accountbillbl.PaymentBillController;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
+import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -28,24 +29,26 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
-import presentation.financialstaffui.PaymentCheckBillUI;
+import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.UserVO;
+import vo.FinancialBill.AccountListVO;
 import vo.FinancialBill.EntryVO;
 import vo.FinancialBill.PaymentBillVO;
+import vo.FinancialBill.ReceiptBillVO;
 
-public class PaymentMakeBillController extends MakeReceiptController {
+public class ReceiveMakeBillController extends MakeReceiptController {
 
-	PaymentBillBLService service = new PaymentBillBLService_Stub();
-	ObservableList<EntryVO> list = FXCollections.observableArrayList();
+
+	ReceiptBillBLService service = new ReceiptBillBLService_Stub();
+	ObservableList<AccountListVO> list = FXCollections.observableArrayList();
 	UserVO user;
-	PaymentBillVO bill;
+	ReceiptBillVO bill;
+
 
 	@FXML
 	Label idLabel;
-	@FXML
-	ChoiceBox<String> accountChoice;
 	@FXML
 	ChoiceBox<String> memberChoice;
 	@FXML
@@ -54,18 +57,18 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	Label operatorLabel;
 
 	@FXML
-	TableView<EntryVO> table;
+	TableView<AccountListVO> table;
 	@FXML
-	TableColumn<EntryVO,String> tableItem;
+	TableColumn<AccountListVO,String> tableAccount;
 	@FXML
-	TableColumn<EntryVO,String> tableMoney;
+	TableColumn<AccountListVO,String> tableMoney;
 	@FXML
-	TableColumn<EntryVO,String> tableDescription;
+	TableColumn<AccountListVO,String> tableDescription;
 	@FXML
-	TableColumn<EntryVO,String> tableDelete;
+	TableColumn<AccountListVO,String> tableDelete;
 
 	@FXML
-	TextField itemField;
+	ChoiceBox<String> accountChoice;
 	@FXML
 	TextField moneyField;
 	@FXML
@@ -73,7 +76,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void insert(){
-		 EntryVO vo = new EntryVO(itemField.getText(), moneyField.getText(), noteArea.getText());
+		 AccountListVO vo = new  AccountListVO(accountChoice.getValue(), moneyField.getText(), noteArea.getText());
 	        ResultMessage message = service.judgeLegal(moneyField.getText());
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
@@ -96,50 +99,49 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void save(){
-		ArrayList<EntryVO> entryList = new ArrayList<>();
-		entryList.addAll(list);
-         PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            accountChoice.getValue(),entryList,sumLabel.getText(),BillType.XJFYD,BillState.DRAFT);
+		ArrayList<AccountListVO> accountList = new ArrayList<>();
+		accountList.addAll(list);
+         ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
+        		            BillType.XJFYD,BillState.DRAFT,accountList,sumLabel.getText());
          service.save(vo);
 	}
 
 	@FXML
 	public void submit(){
-		ArrayList<EntryVO> entryList = new ArrayList<>();
-		entryList.addAll(list);
-		PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-		            accountChoice.getValue(),entryList,sumLabel.getText(),BillType.XJFYD,BillState.COMMITED);
-        service.save(vo);
+		ArrayList<AccountListVO> accountList = new ArrayList<>();
+		accountList.addAll(list);
+         ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
+        		            BillType.XJFYD,BillState.COMMITED,accountList,sumLabel.getText());
+         service.commit(vo);
 	}
 
 	@FXML
 	public void fresh(){
 		if(bill != null){
-        	 accountChoice.setValue(bill.getAccountID());
              memberChoice.setValue(bill.getCustomerID());
         }
-         itemField.setText(null);
+         accountChoice.setValue(null);
          noteArea.setText(null);
 	}
 
 	@FXML
 	public void checkBefore() throws Exception{
-          changeStage("PaymentCheckBillUI",user,null,null);
+          changeStage("ReceiveCheckBillUI",user,null,null);
 	}
 
-	public void initData(UserVO user,PaymentBillVO bill) throws Exception {
+	public void initData(UserVO user,ReceiptBillVO bill) throws Exception {
 		   this.user = user;
 		   this.bill = bill;
 			if(bill == null){
 				UtilityBLService utilityService = new UtilityBLService_Stub();
-				idLabel.setText(utilityService.generateID(BillType.XJFYD));
+				idLabel.setText(utilityService.generateID(BillType.SKD));
 			    sumLabel.setText("0");
 				operatorLabel.setText(user.getName());
 				}
 				else{
 					idLabel.setText(bill.getDocID());
 					sumLabel.setText(bill.getTotal());
-					list.addAll(bill.getEntryListVO());
+					list.addAll(bill.getAccountListVOs());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
 
@@ -168,69 +170,51 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 
 	public void edit(){
-		Callback<TableColumn<EntryVO, String>,
-            TableCell<EntryVO, String>> cellFactory
-                = (TableColumn<EntryVO, String> p) -> new EditingCell<EntryVO>();
 
-        tableItem.setCellFactory(cellFactory);
-        tableItem.setOnEditCommit(
-            (CellEditEvent<EntryVO, String> t) -> {
-            	String tmp = t.getOldValue();
-               ((EntryVO) t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                        ).setEntryName(t.getNewValue());
-               EntryVO newVO = ((EntryVO) t.getTableView().getItems().get(
-                        t.getTablePosition().getRow()));
-               if(update(newVO)){
-                   ((EntryVO)t.getTableView().getItems().get(
-  	                        t.getTablePosition().getRow())
-  	                        ).setEntryName(tmp);
-               }
+		ObservableList<String> accountList = FXCollections.observableArrayList();
+		for(int i=0;i<service.getAccountList().size();i++)
+		accountList.add(service.getAccountList().get(i).getId());
 
-        });
+		Callback<TableColumn<AccountListVO, String>,
+            TableCell<AccountListVO, String>> cellFactory
+                = (TableColumn<AccountListVO, String> p) -> new EditingCell<AccountListVO>();
+        Callback<TableColumn<AccountListVO, String>,
+            TableCell<AccountListVO, String>> cellFactoryChoice
+                = (TableColumn<AccountListVO, String> p) -> new EditingCellChoice<AccountListVO>(accountList);
+
+        tableAccount.setCellFactory(cellFactoryChoice);
+        tableAccount.setOnEditCommit(
+             (CellEditEvent<AccountListVO, String> t) -> {
+    	               ((AccountListVO) t.getTableView().getItems().get(
+    	                        t.getTablePosition().getRow())
+    	                        ).setAccountID(t.getNewValue());
+            });
+
 
         tableDescription.setCellFactory(cellFactory);
         tableDescription.setOnEditCommit(
-            (CellEditEvent<EntryVO, String> t) -> {
-	               ((EntryVO) t.getTableView().getItems().get(
+            (CellEditEvent<AccountListVO, String> t) -> {
+	               ((AccountListVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNote(t.getNewValue());
         });
 	}
 
-	public boolean update(EntryVO vo){
-		 ResultMessage message = service.judgeLegal(vo.getTransferAmount());
-		 Boolean result = message == ResultMessage.SUCCESS?true:false;
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case SUCCESS:break;
-	    	        default:break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
-	     return result;
-	}
+
 
 	public void manageInit(){
-		tableItem.setCellValueFactory(
-                new PropertyValueFactory<EntryVO,String>("entryName"));
+		tableAccount.setCellValueFactory(
+                new PropertyValueFactory<AccountListVO,String>("accountID"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<EntryVO,String>("transferAmount"));
+                new PropertyValueFactory<AccountListVO,String>("money"));
         tableDescription.setCellValueFactory(
-                new PropertyValueFactory<EntryVO,String>("note"));
+                new PropertyValueFactory<AccountListVO,String>("note"));
         deleteInit();
 	}
 
 	public void deleteInit(){
 		tableDelete.setCellFactory((col) -> {
-            TableCell<EntryVO, String> cell = new TableCell<EntryVO, String>() {
+            TableCell<AccountListVO, String> cell = new TableCell<AccountListVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -242,10 +226,10 @@ public class PaymentMakeBillController extends MakeReceiptController {
                         Button delBtn = new Button("É¾³ý");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	EntryVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	AccountListVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
-                            double tmp = Double.parseDouble(clickedItem.getTransferAmount());
+                            double tmp = Double.parseDouble(clickedItem.getMoney());
                             double result = Double.parseDouble(sumLabel.getText())-tmp;
                             sumLabel.setText(String.valueOf(result));
                         });
@@ -256,6 +240,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
             return cell;
         });
 	}
+
 
 
 

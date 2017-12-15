@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.financialstaffui.PaymentCheckBillUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.financialstaffui.controller.PaymentCheckBillController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -129,9 +129,9 @@
       </TableView>
       <TableView fx:id="itemList" layoutX="739.0" layoutY="137.0" prefHeight="381.0" prefWidth="251.0">
         <columns>
-          <TableColumn fx:id="tableList" prefWidth="75.0" text="条目名" />
+          <TableColumn fx:id="tableItem" prefWidth="75.0" text="条目名" />
           <TableColumn fx:id="tableMoney" prefWidth="75.0" text="金额" />
-            <TableColumn fx:id="tableDescription" prefWidth="100.0" text="备注" />
+            <TableColumn fx:id="tableNote" prefWidth="100.0" text="备注" />
         </columns>
       </TableView>
       <Button layoutX="192.0" layoutY="70.0" mnemonicParsing="false" onAction="#makePaymentBill" prefHeight="44.0" prefWidth="150.0" text="制作付款单">

@@ -1,10 +1,6 @@
 package presentation.salestockstaffui.controller;
 
-import java.net.URL;
-
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.MemberBLService_Stub;
 import bussiness_stub.PurchaseBLService_Stub;
@@ -25,7 +21,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -46,7 +41,7 @@ import vo.UserVO;
 import vo.commodity.CommodityItemVO;
 import vo.purchase.PurchaseVO;
 
-public class PurchaseMakeBillController extends MakeReceiptController implements Initializable{
+public class PurchaseMakeBillController extends MakeReceiptController{
 
 
 	PurchaseBLService service = new PurchaseBLService_Stub();//׮
@@ -209,12 +204,6 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 				fresh();
 				edit();
 				manageInit();
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-
 	}
 
 	public void edit(){

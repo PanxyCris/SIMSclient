@@ -1,55 +1,26 @@
 package presentation.financialstaffui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.financialstaffui.controller.AccountManageController;
+import presentation.financialstaffui.controller.ReceiveCheckBillController;
+import vo.UserVO;
 
-public class ReceiveCheckBillUI extends MakeReceiptUI{
+public class ReceiveCheckBillUI{
 
-	@FXML
-	TableView table;
-	@FXML
-	TableColumn tableID;
-	@FXML
-	TableColumn tableMember;
-	@FXML
-	TableColumn tableSum;
-	@FXML
-	TableColumn tableOperator;
-	@FXML
-	TableColumn tableCheck;
-	@FXML
-	TableColumn tableState;
-	@FXML
-	TableColumn tableSubmit;
-	@FXML
-	TableColumn tableRedo;
-	@FXML
-	TableColumn tableDelete;
+	  public void start(UserVO user) throws Exception{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ReceiveCheckBillUI.fxml"));
+	        Stage primaryStage = new Stage();
+	        primaryStage.setScene( new Scene((Pane) loader.load()));
+	        ReceiveCheckBillController controller = loader.<ReceiveCheckBillController>getController();
+	        controller.initData(user);
+	        primaryStage.show();
+		}
 
-
-	@FXML
-	TableView accountList;
-	@FXML
-	TableColumn tableAccount;
-	@FXML
-	TableColumn tableMoney;
-	@FXML
-	TableColumn tableDescription;
-
-
-	@FXML
-	public void makeReceiveBill(){
-
-	}
-
-	@FXML
-	public void submit(){
-
-	}
-
-	public void start() throws Exception {
-		   changeStage("ReceiveCheckBillUI","ReceiveCheckBillUI.fxml");
-	}
 
 }

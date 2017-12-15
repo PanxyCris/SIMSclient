@@ -21,22 +21,23 @@ public interface PurchaseBLService {
 	public String getPurChaseBackID();
 
 	public PurchasePO createPurcashe();
-	
+
 	public void addCommodities(CommodityItemVO item);
-	
+
 	public void addMembers(String id);
-	
+
+    public void delete(PurchaseVO info);
 
 	public PurchaseVO submit(PurchaseVO Info);
 
 	public PurchaseVO save(PurchaseVO Info);
 
 	public ResultMessage updateDraft(PurchaseVO vo);
-	
+
 	public ResultMessage submitDraft(PurchaseVO vo);
 
 	public ResultMessage isLegal(CommodityItemVO vo);
-	
+
 	/**
 	 * œ‘ æµ•æ›
 	 */

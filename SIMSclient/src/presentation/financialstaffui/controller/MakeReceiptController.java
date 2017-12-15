@@ -22,8 +22,8 @@ public class MakeReceiptController extends FinancialStaffController implements I
 	public void chooseReceipt() throws Exception{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
-		case SKD:changeStage("ReceiveMakeBillUI",user);break;
-		case XJFYD:changeStage("PaymentMakeBillUI",user);break;
+		case SKD:changeStage("ReceiveMakeBillUI",user,null,null);break;
+		case XJFYD:changeStage("PaymentMakeBillUI",user,null,null);break;
 		default:break;
 		}
 	}

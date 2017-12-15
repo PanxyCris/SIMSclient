@@ -1,56 +1,22 @@
 package presentation.financialstaffui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.financialstaffui.controller.PaymentCheckBillController;
+import vo.UserVO;
 
-public class PaymentCheckBillUI extends MakeReceiptUI{
+public class PaymentCheckBillUI{
 
-
-	@FXML
-	TableView table;
-	@FXML
-	TableColumn tableID;
-	@FXML
-	TableColumn tableAccount;
-	@FXML
-	TableColumn tableSum;
-	@FXML
-	TableColumn tableOperator;
-	@FXML
-	TableColumn tableCheck;
-	@FXML
-	TableColumn tableState;
-	@FXML
-	TableColumn tableSubmit;
-	@FXML
-	TableColumn tableRedo;
-	@FXML
-	TableColumn tableDelete;
-
-
-	@FXML
-	TableView itemList;
-	@FXML
-	TableColumn tableItem;
-	@FXML
-	TableColumn tableMoney;
-	@FXML
-	TableColumn tableDescription;
-
-
-	@FXML
-	public void makePaymentBill(){
-
-	}
-
-	@FXML
-	public void submit(){
-
-	}
+	  public void start(UserVO user) throws Exception{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PaymentCheckBillUI.fxml"));
+	        Stage primaryStage = new Stage();
+	        primaryStage.setScene( new Scene((Pane) loader.load()));
+	        PaymentCheckBillController controller = loader.<PaymentCheckBillController>getController();
+	        controller.initData(user);
+	        primaryStage.show();
+		}
 
 
 }

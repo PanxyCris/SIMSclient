@@ -7,7 +7,9 @@ import dataenum.BillType;
 public class BillVO extends ViewObject{
 
 	protected BillType billType;//单据类型
+	protected String billTypeString;
 	protected BillState billState;//单据状态
+	protected String billStateString;
 
 	public BillVO(BillType billType,BillState billState) {
 		this.billType=billType;
@@ -28,6 +30,14 @@ public class BillVO extends ViewObject{
 
 	public void setBillState(BillState billState) {
 		this.billState = billState;
+	}
+
+	public String getBillTypeString(){
+		return billType.value;
+	}
+
+	public String getBillStateString(){
+		return billState.value;
 	}
 
 

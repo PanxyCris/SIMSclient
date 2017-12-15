@@ -3,68 +3,30 @@ package presentation.financialstaffui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.financialstaffui.controller.ReceiveCheckBillController;
+import presentation.financialstaffui.controller.ReceiveMakeBillController;
+import vo.UserVO;
+import vo.FinancialBill.ReceiptBillVO;
 
-public class ReceiveMakeBillUI extends MakeReceiptUI implements Initializable{
+public class ReceiveMakeBillUI {
 
-	@FXML
-	Label idLabel;
-	@FXML
-	TextField memberField;
-	@FXML
-	TextField sumField;
-	@FXML
-	Label operatorLabel;
-
-	@FXML
-	TableView table;
-	@FXML
-	TableColumn tableAccount;
-	@FXML
-	TableColumn tableMoney;
-	@FXML
-	TableColumn tableDescription;
-
-	@FXML
-	TextField accountField;
-	@FXML
-	TextField moneyField;
-	@FXML
-	TextArea descriptionArea;
-
-	@FXML
-	public void insert(){
-
-	}
-
-	@FXML
-	public void submit(){
-
-	}
-
-	@FXML
-	public void save(){
-
-	}
-
-	@FXML
-	public void checkBefore(){
-
-	}
-
-	public void start() throws Exception {
-		   changeStage("ReceiveMakeBillUI","ReceiveMakeBillUI.fxml");
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-        operatorLabel.setText(user.getName());
-	}
-
+	 public void start(UserVO user,ReceiptBillVO bill) throws Exception{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ReceiveMakeBillUI.fxml"));
+	        Stage primaryStage = new Stage();
+	        primaryStage.setScene( new Scene((Pane) loader.load()));
+	        ReceiveMakeBillController controller = loader.<ReceiveMakeBillController>getController();
+	        controller.initData(user,bill);
+	        primaryStage.show();
+		}
 
 }

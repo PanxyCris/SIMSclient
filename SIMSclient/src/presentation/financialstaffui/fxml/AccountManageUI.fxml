@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.financialstaffui.controller.AccountManageController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.financialstaffui.controller.AccountManageController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -63,7 +63,7 @@
       </TableView>
       <ChoiceBox fx:id="findChoice" layoutX="201.0" layoutY="90.0" prefHeight="23.0" prefWidth="184.0" />
       <TextField fx:id="findingField" layoutX="385.0" layoutY="90.0" prefHeight="23.0" prefWidth="541.0" />
-      <Button fx:id="find" layoutX="926.0" layoutY="90.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" text="查  询" />
+      <Button layoutX="926.0" layoutY="90.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="68.0" text="查  询" />
       <TextField fx:id="nameField" layoutX="502.0" layoutY="455.0" prefHeight="23.0" prefWidth="300.0" />
       <TextField fx:id="moneyField" layoutX="802.0" layoutY="455.0" prefHeight="23.0" prefWidth="100.0" />
       <Button layoutX="902.0" layoutY="455.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="95.0" text="增   加" />
