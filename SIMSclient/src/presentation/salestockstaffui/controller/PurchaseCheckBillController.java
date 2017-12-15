@@ -8,6 +8,7 @@ import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -162,7 +163,14 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            service.submit(clickedItem);
+                        	ResultMessage message = service.submit(clickedItem);
+                            if(message == ResultMessage.SUCCESS)
+     						try {
+     							fresh();
+     						} catch (Exception e) {
+     							// TODO Auto-generated catch block
+     							e.printStackTrace();
+     						}
                         });
                     }
                   }

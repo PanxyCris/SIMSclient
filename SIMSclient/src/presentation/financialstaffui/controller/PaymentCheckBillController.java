@@ -9,6 +9,7 @@ import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -109,7 +110,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
                     this.setGraphic(null);
 
                     if (!empty) {
-                        Button delBtn = new Button("查看商品列表");
+                        Button delBtn = new Button("查看条目清单");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -144,7 +145,14 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            service.commit(clickedItem);
+                        	ResultMessage message = service.commit(clickedItem);
+                            if(message == ResultMessage.SUCCESS)
+     						try {
+     							fresh();
+     						} catch (Exception e) {
+     							// TODO Auto-generated catch block
+     							e.printStackTrace();
+     						}
                         });
                     }
                   }
