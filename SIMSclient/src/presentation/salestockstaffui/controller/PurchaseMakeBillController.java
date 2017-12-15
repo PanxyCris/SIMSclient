@@ -49,7 +49,7 @@ import vo.purchase.PurchaseVO;
 public class PurchaseMakeBillController extends MakeReceiptController implements Initializable{
 
 
-	PurchaseBLService service = new PurchaseBLService_Stub();
+	PurchaseBLService service = new PurchaseBLService_Stub();//׮
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
     BillType type;
     UserVO user;
@@ -162,7 +162,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
+        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
          service.submit(vo);
 	}
 
@@ -189,7 +189,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 		   this.user = user;
 		   this.purchase = purchase;
 		   typeLabel.setText(type.value);
-		   
+
 			if(purchase == null){
 				if(type == BillType.PURCHASEBILL)
 				    idLabel.setText(service.getPurchaseID());
@@ -204,7 +204,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 					list.addAll(purchase.getCommodities());
 					table.setItems(list);
 					operatorLabel.setText(purchase.getOperator());
-					
+
 				}
 				fresh();
 				edit();
@@ -332,18 +332,18 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
 
 	public void choiceInit(){
         ObservableList<String> memberList = FXCollections.observableArrayList();
-        MemberBLService memberService = new MemberBLService_Stub();
+        MemberBLService memberService = new MemberBLService_Stub();//׮
         for(int i=0;i<memberService.show().size();i++)
         	memberList.add(memberService.show().get(i).getName());
         memberChoice.setItems(memberList);
-        
+
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
-        
+
         ObservableList<String> commodityList = FXCollections.observableArrayList();
-        CommodityBLService commodityService = new CommodityBLService_Stub();
+        CommodityBLService commodityService = new CommodityBLService_Stub();//׮
         for(int i=0;i<commodityService.getCommodityList().size();i++)
         	commodityList.add(commodityService.getCommodityList().get(i).getName());
-        
+
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(
         		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
@@ -354,7 +354,7 @@ public class PurchaseMakeBillController extends MakeReceiptController implements
         			modelList.add(commodityService.find(newValue, FindCommodityType.NAME).get(i).getModel());
         			modelChoice.setItems(modelList);
         		});
-        		
+
 
         if(purchase!=null){
         	memberChoice.setValue(purchase.getSupplier());

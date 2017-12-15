@@ -1,8 +1,10 @@
 package bussinesslogic.utilitybl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import bussinesslogicservice.utilityblservice.UtilityBLService;
+import dataenum.BillType;
 
 public class UtilityBL implements UtilityBLService{
 
@@ -20,4 +22,17 @@ public class UtilityBL implements UtilityBLService{
 		return false;
 	}
 
+	@Override
+	public String generateID(BillType billType) {
+		String id="";
+		
+		String type=billType.prefix;
+		
+		
+		
+		return id;
+	}
+	
+	
+	
 }

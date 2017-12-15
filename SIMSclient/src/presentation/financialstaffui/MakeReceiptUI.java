@@ -1,38 +1,21 @@
 package presentation.financialstaffui;
 
-import java.net.URL;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.financialstaffui.controller.MakeReceiptController;
+import vo.UserVO;
 
-import java.util.ResourceBundle;
+public class MakeReceiptUI {
 
-import dataenum.BillType;
-import dataenum.Remind;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-
-public class MakeReceiptUI extends FinancialStaffUI implements Initializable{
-
-	public static final Remind remind = Remind.BILL;
-	@FXML
-	ChoiceBox<String> receiptChoice;
-	@FXML
-	public void chooseReceipt() throws Exception{
-		BillType type = BillType.getType(receiptChoice.getValue());
-		switch(type){
-		case SKD:new ReceiveMakeBillUI().start();break;
-		case XJFYD:new PaymentMakeBillUI().start();break;
-		default:break;
+	  public void start(UserVO user) throws Exception{
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/MakeReceiptUI.fxml"));
+	        Stage primaryStage = new Stage();
+	        primaryStage.setScene( new Scene((Pane) loader.load()));
+	        MakeReceiptController controller = loader.<MakeReceiptController>getController();
+	        controller.initData(user);
+	        primaryStage.show();
 		}
-	}
-
-	public void start() throws Exception {
-		   changeStage("MakeReceiptUI","MakeReceiptUI.fxml");
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		receiptChoice.setItems(FXCollections.observableArrayList(BillType.SKD.value,BillType.XJFYD.value));
-	}
 
 }
