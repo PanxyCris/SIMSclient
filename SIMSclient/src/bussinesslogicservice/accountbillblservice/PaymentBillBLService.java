@@ -13,7 +13,7 @@ public interface PaymentBillBLService {
 	
 	public ResultMessage delete(PaymentBillVO paymentBillVO);
 	
-	public PaymentBillVO find();
+	public ArrayList<PaymentBillVO> find();
 	
 	public ArrayList<AccountVO> getAccountList();
 	

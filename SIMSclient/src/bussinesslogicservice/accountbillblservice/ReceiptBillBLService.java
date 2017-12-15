@@ -1,7 +1,11 @@
 package bussinesslogicservice.accountbillblservice;
 
+import java.util.ArrayList;
+
 import dataenum.ResultMessage;
+import vo.AccountVO;
 import vo.FinancialBill.ReceiptBillVO;
+import vo.member.MemberVO;
 
 public interface ReceiptBillBLService {
 	
@@ -9,11 +13,11 @@ public interface ReceiptBillBLService {
 	
 	public ResultMessage delete(ReceiptBillVO receiptBillVO);
 	
-	public ReceiptBillVO find();
+	public ArrayList<ReceiptBillVO> find();
 	
-	public ResultMessage getAccountList();
+	public ArrayList<AccountVO> getAccountList();
 	
-	public ResultMessage getCustomerList();
+	public ArrayList<MemberVO> getCustomerList();
 	
 	public ResultMessage judgeLegal(String money);
 	
