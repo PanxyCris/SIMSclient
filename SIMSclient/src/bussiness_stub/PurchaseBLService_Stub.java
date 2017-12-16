@@ -1,14 +1,16 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
+import po.PurchasePO;
+import vo.PromotionVO;
 import vo.commodity.CommodityItemVO;
+import vo.commodity.CommodityVO;
 import vo.purchase.PurchaseVO;
 
 public class PurchaseBLService_Stub implements PurchaseBLService{
@@ -34,6 +36,18 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 	}
 
 	@Override
+	public PurchaseVO submit(PurchaseVO Info) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PurchaseVO save(PurchaseVO Info) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public ResultMessage isLegal(CommodityItemVO vo) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
@@ -49,33 +63,40 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 
 
 
-
 	@Override
-	public void delete(PurchaseVO info) {
+	public PurchasePO createPurcashe() {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 
 
 	@Override
-	public ResultMessage submit(PurchaseVO Info) {
+	public void addCommodities(CommodityItemVO item) {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		
 	}
 
 
 
 	@Override
-	public ResultMessage save(PurchaseVO Info) {
+	public void addMembers(String id) {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		
 	}
 
 
 
 	@Override
-	public ArrayList<PurchaseVO> inventoryCheck(Date startDate, Date endDate) {
+	public ResultMessage updateDraft(PurchaseVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ResultMessage submitDraft(PurchaseVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

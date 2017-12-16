@@ -1,7 +1,6 @@
 package bussinesslogicservice.purchaseblservice;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import dataenum.ResultMessage;
 import po.PurchasePO;
@@ -21,15 +20,24 @@ public interface PurchaseBLService {
 	public String getPurchaseID();
 	public String getPurChaseBackID();
 
+	public PurchasePO createPurcashe();
+
+	public void addCommodities(CommodityItemVO item);
+
+	public void addMembers(String id);
+
     public void delete(PurchaseVO info);
 
-	public ResultMessage submit(PurchaseVO Info);
+	public PurchaseVO submit(PurchaseVO Info);
 
-	public ResultMessage save(PurchaseVO Info);
+	public PurchaseVO save(PurchaseVO Info);
+
+	public ResultMessage updateDraft(PurchaseVO vo);
+
+	public ResultMessage submitDraft(PurchaseVO vo);
 
 	public ResultMessage isLegal(CommodityItemVO vo);
 
-	public ArrayList<PurchaseVO> inventoryCheck(Date startDate,Date endDate);//这个方法用于库存查看，由于和进出货方法联系更为紧密，故设置在此处
 	/**
 	 * 显示单据
 	 */

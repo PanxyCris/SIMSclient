@@ -1,7 +1,5 @@
 package vo.commodity;
 
-import java.sql.Date;
-
 public class CommodityVO {
 
 		private String id;   //商品编号
@@ -13,15 +11,10 @@ public class CommodityVO {
 		private Double retailedPrice; //零售价
 		private Double recentPurPrice; //最新进价
 		private Double recentRetailedPrice; //最新零售价
-		private Double averagePrice;//库存均价
-		private Integer batch;//批次
-		private String batchNumber;//批号
-		private Date productionDate;//出厂日期
 		private Integer warmingValue; //警戒值
 
 		public CommodityVO(String id,String name,String model,ClassificationVO classification,
-				Integer number,Double purPrice,Double retailedPrice,Integer batch,String batchNumber,
-				Date productionDate,Integer warmingValue){
+				int number,double purPrice,double retailedPrice,int warmingValue){
 			this.id = id;
 			this.name = name;
 			this.model = model;
@@ -31,11 +24,11 @@ public class CommodityVO {
 			this.recentPurPrice  = purPrice;
 			this.retailedPrice = retailedPrice;
 			this.recentRetailedPrice = retailedPrice;
-			this.averagePrice = purPrice;
-			this.batch = batch;
-			this.batchNumber = batchNumber;
-			this.productionDate = productionDate;
 			this.warmingValue = warmingValue;
+		}
+
+		public void setID(String id){
+			this.id = id;
 		}
 
 		public String getID(){
@@ -70,57 +63,47 @@ public class CommodityVO {
 			this.number = number;
 		}
 
-		public Integer getNumber(){
+		public int getNumber(){
 			return number;
 		}
 
+	    public void setPurPrice(double purPrice){
+	    	this.purPrice = purPrice;
+	    }
 
-		public Double getPurPrice(){
+		public double getPurPrice(){
 			return purPrice;
 		}
 
-		public Double getRetailedPrice(){
+		public void setRetailedPrice(double retailedPrice){
+			this.retailedPrice = retailedPrice;
+		}
+
+		public double getRetailedPrice(){
 			return retailedPrice;
 		}
 
-		public void setRecentPurPrice(Double recentPurPrice){
+		public void setRecentPurPrice(double recentPurPrice){
 			this.recentPurPrice = recentPurPrice;
-			this.averagePrice = recentPurPrice;
 		}
 
-		public Double getRecentPurPrice(){
+		public double getRecentPurPrice(){
 			 return recentPurPrice;
 		}
 
-		public void setRecentRetailedPrice(Double recentRetailedPrice){
+		public void setRecentRetailedPrice(double recentRetailedPrice){
 			this.recentRetailedPrice = recentRetailedPrice;
 		}
 
-		public Double getRecentRetailedPrice(){
+		public double getRecentRetailedPrice(){
 			return recentRetailedPrice;
 		}
 
-		public Double getAveragePrice(){
-			return averagePrice;
-		}
-
-		public Integer getBatch(){
-			return batch;
-		}
-
-		public String getBatchNumber(){
-			return batchNumber;
-		}
-
-		public Date getProductionDate(){
-			return productionDate;
-		}
-
-		public void setWarmingValue(Integer warmingValue){
+		public void setWarmingValue(int warmingValue){
 			this.warmingValue = warmingValue;
 		}
 
-		public Integer getWarmingValue(){
+		public int getWarmingValue(){
 			return warmingValue;
 		}
 

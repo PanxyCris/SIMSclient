@@ -17,7 +17,7 @@ public class ReceiptBillVO extends FinancialDocVO {
 			,ArrayList<AccountListVO> accountListVOs,String total) {
 		super(docID,userID,customerID,billType,billState);
 		this.total=total;
-		this.accountListVOs = accountListVOs;
+		accountListVOs=new ArrayList<AccountListVO>();
 	}
 
 	public ArrayList<AccountListVO> getAccountListVOs() {

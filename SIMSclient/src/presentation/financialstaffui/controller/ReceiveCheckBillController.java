@@ -8,7 +8,6 @@ import bussiness_stub.ReceiptBillBLService_Stub;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
-import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -109,7 +108,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                     this.setGraphic(null);
 
                     if (!empty) {
-                        Button delBtn = new Button("查看转账列表");
+                        Button delBtn = new Button("查看商品列表");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	ReceiptBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -144,14 +143,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	ReceiptBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                       ResultMessage message = service.commit(clickedItem);
-                       if(message == ResultMessage.SUCCESS)
-						try {
-							fresh();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+                            service.commit(clickedItem);
                         });
                     }
                   }
