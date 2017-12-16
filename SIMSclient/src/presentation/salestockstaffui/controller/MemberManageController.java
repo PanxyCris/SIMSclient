@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import bussiness_stub.MemberBLService_Stub;
+import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
@@ -35,7 +36,7 @@ import vo.member.MemberVO;
 
 public class MemberManageController extends SaleStockStaffController implements Initializable {
 
-       MemberBLService service = new MemberBLService_Stub();
+       MemberBLService service = new MemberController();
 		public static final Remind remind = Remind.MEMBER;
 	    ObservableList<MemberVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> classList = FXCollections.observableArrayList(MemberCategory.RETAILER.value,MemberCategory.SUPPLIER.value,MemberCategory.BOTH.value);
@@ -146,7 +147,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		@FXML
-		public void fresh(){
+		public void fresh() throws RemoteException{
 			findingField.setText(null);
 			list.clear();
 			list.addAll(service.show());
@@ -166,7 +167,11 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			fresh();
+			try {
+				fresh();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			edit();
 			manageInit();
 
@@ -242,7 +247,11 @@ public class MemberManageController extends SaleStockStaffController implements 
 	                        this.setGraphic(delBtn);
 	                        delBtn.setOnMouseClicked((me) -> {
 	                        	MemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-	                            service.delete(clickedUser.getID());
+	                            try {
+									service.delete(clickedUser.getID());
+								} catch (RemoteException e) {
+									e.printStackTrace();
+								}
 	                            list.remove(clickedUser);
 	                            table.setItems(list);
 	                        });

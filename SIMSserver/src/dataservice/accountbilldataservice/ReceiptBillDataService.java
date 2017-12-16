@@ -3,8 +3,6 @@ package dataservice.accountbilldataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import po.FinancialBill.ReceiptBillPO;
@@ -15,7 +13,7 @@ import po.FinancialBill.ReceiptBillPO;
 * @author ****  
 * @date 2017Äê11ÔÂ12ÈÕ    
 */
-public interface ReceiptBillDataService extends Remote{
+public interface ReceiptBillDataService extends Remote {
 
 	public ResultMessage insertReceiptBill(ReceiptBillPO po) throws RemoteException;
 
@@ -26,5 +24,4 @@ public interface ReceiptBillDataService extends Remote{
 	public ArrayList<ReceiptBillPO> findReceiptBill(String keyword, FindAccountBillType type) throws RemoteException;
 
 	public ArrayList<ReceiptBillPO> showReceiptBill() throws RemoteException;
-
 }

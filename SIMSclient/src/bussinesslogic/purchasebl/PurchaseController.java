@@ -1,6 +1,7 @@
 package bussinesslogic.purchasebl;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.ResultMessage;
@@ -28,35 +29,16 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public PurchasePO createPurcashe() {
+	public void delete(PurchaseVO info) {
+	}
+
+	@Override
+	public ResultMessage submit(PurchaseVO Info) {
 		return null;
 	}
 
 	@Override
-	public void addCommodities(CommodityItemVO item) {
-	}
-
-	@Override
-	public void addMembers(String id) {
-	}
-
-	@Override
-	public PurchaseVO submit(PurchaseVO Info) {
-		return null;
-	}
-
-	@Override
-	public PurchaseVO save(PurchaseVO Info) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage updateDraft(PurchaseVO vo) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage submitDraft(PurchaseVO vo) {
+	public ResultMessage save(PurchaseVO Info) {
 		return null;
 	}
 
@@ -66,53 +48,14 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> showPurchase() {
+	public ArrayList<PurchaseVO> inventoryCheck(Date startDate, Date endDate) {
 		return null;
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> showPurchaseBack() {
+	public ArrayList<PurchaseVO> show() {
 		return null;
 	}
 
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseCommited() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackCommited() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseSuccess() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackSuccess() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseDraft() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackDraft() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseFail() {
-		return null;
-	}
-
-	@Override
-	public ArrayList<PurchaseVO> showPurchaseBackFail() {
-		return null;
-	}
-
+	
 }

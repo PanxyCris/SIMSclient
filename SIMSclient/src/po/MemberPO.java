@@ -24,7 +24,7 @@ public class MemberPO implements Serializable {
 
 	
 	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String adress,
-			String post, String email, double rereceivableLimit, String saleMan) {
+			String post, String email, double receivableLimit, String saleMan) {
 		this.id = id;
 		this.category = category;
 		this.level = level;
@@ -33,7 +33,7 @@ public class MemberPO implements Serializable {
 		this.address = adress;
 		this.post = post;
 		this.email = email;
-		this.receivableLimit = rereceivableLimit;
+		this.receivableLimit = receivableLimit;
 		this.saleMan = saleMan;
 	}
 
@@ -103,10 +103,12 @@ public class MemberPO implements Serializable {
 
 	/**
 	 * 
-	 * @Title: setRereceivableLimit @Description: 应收额度仅最高权限可修改 ,仅有总经理可以修改 @param
-	 *         rereceivableLimit, role @return 是否修改成功 @throws
+	 * @Title: setRereceivableLimit 
+	 * @Description: 应收额度仅最高权限可修改 ,仅有总经理可以修改
+	 *  @param rereceivableLimit, role
+	 *   @return 是否修改成功 
 	 */
-	public boolean setRereceivableLimit(double rereceivableLimit, UserRole role) {
+	public boolean setReceivableLimit(double rereceivableLimit, UserRole role) {
 		if (role.equals(UserRole.GENERAL_MANAGER)) {
 			this.receivableLimit = rereceivableLimit;
 			return true;
@@ -138,11 +140,4 @@ public class MemberPO implements Serializable {
 	public void setSaleMan(String saleMan) {
 		this.saleMan = saleMan;
 	}
-
-	@Override
-	public String toString() {
-		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post + "," + email
-				+ "," + receivableLimit + receivable + "," + payable + "," + "," + saleMan;
-	}
-
 }

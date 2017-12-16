@@ -3,17 +3,14 @@ package dataservice.accountbilldataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
-import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
 
 /**
  * 类说明
  * 
- * @author ****
+ * @author lijie
  * @date 2017年11月12日
  */
 public interface ReceiptBillDataService extends Remote {

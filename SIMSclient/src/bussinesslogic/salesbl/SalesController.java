@@ -267,6 +267,10 @@ public class SalesController implements SalesBLService, SalesShowService{
 		return null;
 	}
 
+	@Override
+	public void delte(SalesVO info) {
+	}
+
 	
 	
 }

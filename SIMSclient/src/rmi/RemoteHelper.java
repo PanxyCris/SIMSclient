@@ -8,7 +8,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import dataservice.accountbilldataservice.PaymentBillDataService;
-import dataservice.accountbilldataservice.ReceiptDataService;
+import dataservice.accountbilldataservice.ReceiptBillDataService;
 import dataservice.accountbookdataservice.AccountBookDataService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.BillDataService;
@@ -79,8 +79,8 @@ public class RemoteHelper {
 		return (MemberDataService)remote;
 	}
 
-	public ReceiptDataService getReceiptDataService(){
-		return (ReceiptDataService)remote;
+	public ReceiptBillDataService getReceiptDataService(){
+		return (ReceiptBillDataService)remote;
 	}
 
 	public PaymentBillDataService getPaymentDataService(){
