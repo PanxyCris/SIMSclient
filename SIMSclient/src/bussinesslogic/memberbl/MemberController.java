@@ -28,6 +28,11 @@ public class MemberController implements MemberBLService{
 		transition = new MemberTransition();
 	}
 	
+	public static void main(String[] args) throws RemoteException {
+		MemberController m = new MemberController();
+		System.out.println(m.getId());
+	}
+	
 	@Override
 	public String getId() throws RemoteException {
 		ArrayList<MemberPO> list = service.showMember();
@@ -37,7 +42,7 @@ public class MemberController implements MemberBLService{
 		}
 		Collections.sort(IDList);
 //		Collections.reverse(IDList);
-		String id = String.valueOf(IDList.get(IDList.size()-1));
+		String id = String.valueOf(IDList.get(IDList.size()-1)+1);
 		StringBuilder sb = new StringBuilder(id);
 		int len = id.length();
 		for (int i=0; i < 6-len; i++) {

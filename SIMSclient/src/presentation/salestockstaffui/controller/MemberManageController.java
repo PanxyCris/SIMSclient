@@ -115,7 +115,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:list.add(vo);table.setItems(list);idLabel.setText(service.getId());break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);System.out.print(service.getId());idLabel.setText(service.getId());break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
