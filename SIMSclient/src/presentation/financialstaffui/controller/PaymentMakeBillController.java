@@ -32,9 +32,9 @@ import presentation.common.EditingCell;
 import presentation.financialstaffui.PaymentCheckBillUI;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
+import vo.billvo.financialbillvo.EntryVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.uservo.UserVO;
 
 public class PaymentMakeBillController extends MakeReceiptController {
 
@@ -59,7 +59,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	@FXML
 	TableColumn<EntryVO,String> tableItem;
 	@FXML
-	TableColumn<EntryVO,String> tableMoney;
+	TableColumn<EntryVO,Double> tableMoney;
 	@FXML
 	TableColumn<EntryVO,String> tableDescription;
 	@FXML
@@ -74,7 +74,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void insert(){
-		 EntryVO vo = new EntryVO(itemField.getText(), moneyField.getText(), noteArea.getText());
+		 EntryVO vo = new EntryVO(itemField.getText(), Double.parseDouble(moneyField.getText()), noteArea.getText());
 	        ResultMessage message = service.judgeLegal(moneyField.getText());
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
@@ -100,7 +100,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
 		entryList.addAll(list);
          PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            accountChoice.getValue(),entryList,sumLabel.getText(),BillType.XJFYD,BillState.DRAFT);
+        		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT);
          service.save(vo);
 	}
 
@@ -138,8 +138,8 @@ public class PaymentMakeBillController extends MakeReceiptController {
 				operatorLabel.setText(user.getName());
 				}
 				else{
-					idLabel.setText(bill.getDocID());
-					sumLabel.setText(bill.getTotal());
+					idLabel.setText(bill.getId());
+					sumLabel.setText(String.valueOf(bill.getTotal()));
 					list.addAll(bill.getEntryListVO());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
@@ -153,17 +153,8 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	}
 
 	public void choiceInit(){
-
-
-		ArrayList<String> accountID = new ArrayList<>();
-		for(int i=0;i<service.getAccountList().size();i++)
-			accountID.add(service.getAccountList().get(i).getId());
-		accountChoice.setItems(FXCollections.observableArrayList(accountID));
-
-		ArrayList<String> memberID = new ArrayList<>();
-		for(int i=0;i<service.getCustomerList().size();i++)
-			memberID.add(service.getCustomerList().get(i).getID());
-		memberChoice.setItems(FXCollections.observableArrayList(memberID));
+		accountChoice.setItems(FXCollections.observableArrayList(service.getAccountList()));
+		memberChoice.setItems(FXCollections.observableArrayList(service.getCustomerList()));
 	}
 
 
@@ -180,14 +171,6 @@ public class PaymentMakeBillController extends MakeReceiptController {
                ((EntryVO) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).setEntryName(t.getNewValue());
-               EntryVO newVO = ((EntryVO) t.getTableView().getItems().get(
-                        t.getTablePosition().getRow()));
-               if(update(newVO)){
-                   ((EntryVO)t.getTableView().getItems().get(
-  	                        t.getTablePosition().getRow())
-  	                        ).setEntryName(tmp);
-               }
-
         });
 
         tableDescription.setCellFactory(cellFactory);
@@ -199,31 +182,12 @@ public class PaymentMakeBillController extends MakeReceiptController {
         });
 	}
 
-	public boolean update(EntryVO vo){
-		 ResultMessage message = service.judgeLegal(vo.getTransferAmount());
-		 Boolean result = message == ResultMessage.SUCCESS?true:false;
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case SUCCESS:break;
-	    	        default:break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
-	     return result;
-	}
 
 	public void manageInit(){
 		tableItem.setCellValueFactory(
                 new PropertyValueFactory<EntryVO,String>("entryName"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<EntryVO,String>("transferAmount"));
+                new PropertyValueFactory<EntryVO,Double>("transferAmount"));
         tableDescription.setCellValueFactory(
                 new PropertyValueFactory<EntryVO,String>("note"));
         deleteInit();
@@ -246,7 +210,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
                         	EntryVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
-                            double tmp = Double.parseDouble(clickedItem.getTransferAmount());
+                            double tmp = clickedItem.getTransferAmount();
                             double result = Double.parseDouble(sumLabel.getText())-tmp;
                             sumLabel.setText(String.valueOf(result));
                         });

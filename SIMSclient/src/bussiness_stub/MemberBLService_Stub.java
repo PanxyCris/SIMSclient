@@ -1,12 +1,14 @@
 package bussiness_stub;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
-import vo.member.MemberVO;
+import vo.membervo.MemberVO;
 
 /**
 * ภเหตร๗
@@ -65,5 +67,6 @@ public class MemberBLService_Stub implements MemberBLService{
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
+
 
 }

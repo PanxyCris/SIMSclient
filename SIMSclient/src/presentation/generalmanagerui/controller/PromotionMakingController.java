@@ -1,13 +1,14 @@
 package presentation.generalmanagerui.controller;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import dataenum.PromotionType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class PromotionMakingController extends GeneralManagerController implements Initializable{
 

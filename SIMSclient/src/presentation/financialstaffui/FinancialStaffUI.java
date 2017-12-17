@@ -1,7 +1,7 @@
 package presentation.financialstaffui;
 
 import presentation.financialstaffui.controller.FinancialStaffController;
-import vo.UserVO;
+import vo.uservo.UserVO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;

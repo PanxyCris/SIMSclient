@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.financialstaffui.controller.PaymentCheckBillController;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class PaymentCheckBillUI{
 

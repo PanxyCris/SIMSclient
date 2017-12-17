@@ -1,13 +1,14 @@
 package bussiness_stub;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 
 import bussinesslogicservice.userblservice.UserBLService;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class UserBLService_Stub implements UserBLService{
 

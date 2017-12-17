@@ -2,7 +2,6 @@ package presentation.financialstaffui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bussiness_stub.PaymentBillBLService_Stub;
 import bussiness_stub.ReceiptBillBLService_Stub;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
@@ -17,11 +16,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import vo.UserVO;
-import vo.FinancialBill.AccountListVO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.FinancialBill.ReceiptBillVO;
+import vo.billvo.financialbillvo.AccountListVO;
+import vo.billvo.financialbillvo.ReceiptBillVO;
+import vo.uservo.UserVO;
+
 
 public class ReceiveCheckBillController extends FinancialStaffController implements Initializable{
 
@@ -137,7 +135,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
               for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&clickedState == BillState.DRAFT) {
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
@@ -166,7 +164,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
@@ -200,7 +198,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                    BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);

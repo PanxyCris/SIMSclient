@@ -1,17 +1,16 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
-
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import dataenum.ResultMessage;
-import vo.AccountVO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.member.MemberVO;
+import vo.accountvo.AccountVO;
+import vo.billvo.financialbillvo.EntryVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.membervo.MemberVO;
 
 public class PaymentBillBLService_Stub implements PaymentBillBLService {
 
@@ -56,23 +55,21 @@ public class PaymentBillBLService_Stub implements PaymentBillBLService {
 	}
 
 	@Override
-	public ArrayList<AccountVO> getAccountList() {
-		ArrayList<AccountVO> list = new ArrayList<>();
-		AccountVO account1 = new AccountVO("00001","cancan","20000");
-		AccountVO account2 = new AccountVO("00002","lijie","50000");
+	public ArrayList<String> getAccountList() {
+		ArrayList<String> list = new ArrayList<>();
+		String account1 = "cancan(00001)";
+		String account2 = "lijie(00002)";
 		list.add(account1);
 		list.add(account2);
 		return list;
 	}
 
 	@Override
-	public ArrayList<MemberVO> getCustomerList() {
-		MemberVO member1 = new MemberVO("00001",MemberCategory.SUPPLIER,MemberLevel.LEVEL5,"李杰","1591515","南京大学",
-				"210064","lq@qq.com","50","20","50","NJU");
-		MemberVO member2 = new MemberVO("00002",MemberCategory.RETAILER,MemberLevel.LEVEL4,"NJU","15cs515","南京大学",
-				"210064","lq@qq.com","50","20","50","NJU");
+	public ArrayList<String> getCustomerList() {
+		String member1 = "李杰(00001)";
+		String member2 = "NJU(00002)";
 		System.out.println("Show Succeed!\n");
-		ArrayList<MemberVO> list = new ArrayList<>();
+		ArrayList<String> list = new ArrayList<>();
 		list.add(member1);
 		list.add(member2);
 		return list;

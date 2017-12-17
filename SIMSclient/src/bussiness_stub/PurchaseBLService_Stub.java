@@ -1,17 +1,14 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
-
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import po.PurchasePO;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import vo.commodity.CommodityVO;
-import vo.purchase.PurchaseVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 
 public class PurchaseBLService_Stub implements PurchaseBLService{
 
@@ -36,13 +33,13 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 	}
 
 	@Override
-	public PurchaseVO submit(PurchaseVO Info) {
+	public ResultMessage submit(PurchaseVO Info) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PurchaseVO save(PurchaseVO Info) {
+	public ResultMessage save(PurchaseVO Info) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -64,41 +61,11 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 
 
 	@Override
-	public PurchasePO createPurcashe() {
+	public void delete(PurchaseVO info) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 
-
-	@Override
-	public void addCommodities(CommodityItemVO item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void addMembers(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public ResultMessage updateDraft(PurchaseVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public ResultMessage submitDraft(PurchaseVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

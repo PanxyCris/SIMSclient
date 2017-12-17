@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -32,11 +33,10 @@ import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.FinancialBill.AccountListVO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.FinancialBill.ReceiptBillVO;
+import vo.billvo.financialbillvo.AccountListVO;
+import vo.billvo.financialbillvo.ReceiptBillVO;
+import vo.uservo.UserVO;
+
 
 public class ReceiveMakeBillController extends MakeReceiptController {
 
@@ -61,7 +61,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	@FXML
 	TableColumn<AccountListVO,String> tableAccount;
 	@FXML
-	TableColumn<AccountListVO,String> tableMoney;
+	TableColumn<AccountListVO,Double> tableMoney;
 	@FXML
 	TableColumn<AccountListVO,String> tableDescription;
 	@FXML
@@ -76,25 +76,11 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void insert(){
-		 AccountListVO vo = new  AccountListVO(accountChoice.getValue(), moneyField.getText(), noteArea.getText());
-	        ResultMessage message = service.judgeLegal(moneyField.getText());
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:list.add(vo);table.setItems(list);
-	    	                     double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
-	    	                     sumLabel.setText(String.valueOf(result));break;
-	    	        default:break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
+	 AccountListVO vo = new  AccountListVO(accountChoice.getValue(), Double.parseDouble(moneyField.getText()), noteArea.getText());
+        list.add(vo);table.setItems(list);
+	   double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
+	   sumLabel.setText(String.valueOf(result));
+
 	}
 
 	@FXML
@@ -139,7 +125,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 				operatorLabel.setText(user.getName());
 				}
 				else{
-					idLabel.setText(bill.getDocID());
+					idLabel.setText(bill.getId());
 					sumLabel.setText(bill.getTotal());
 					list.addAll(bill.getAccountListVOs());
 					table.setItems(list);
@@ -154,17 +140,8 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	}
 
 	public void choiceInit(){
-
-
-		ArrayList<String> accountID = new ArrayList<>();
-		for(int i=0;i<service.getAccountList().size();i++)
-			accountID.add(service.getAccountList().get(i).getId());
-		accountChoice.setItems(FXCollections.observableArrayList(accountID));
-
-		ArrayList<String> memberID = new ArrayList<>();
-		for(int i=0;i<service.getCustomerList().size();i++)
-			memberID.add(service.getCustomerList().get(i).getID());
-		memberChoice.setItems(FXCollections.observableArrayList(memberID));
+		accountChoice.setItems(FXCollections.observableArrayList(service.getAccountList()));
+		memberChoice.setItems(FXCollections.observableArrayList(service.getCustomerList()));
 	}
 
 
@@ -172,8 +149,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	public void edit(){
 
 		ObservableList<String> accountList = FXCollections.observableArrayList();
-		for(int i=0;i<service.getAccountList().size();i++)
-		accountList.add(service.getAccountList().get(i).getId());
+        accountList.addAll(service.getAccountList());
 
 		Callback<TableColumn<AccountListVO, String>,
             TableCell<AccountListVO, String>> cellFactory
@@ -206,7 +182,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		tableAccount.setCellValueFactory(
                 new PropertyValueFactory<AccountListVO,String>("accountID"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<AccountListVO,String>("money"));
+                new PropertyValueFactory<AccountListVO,Double>("money"));
         tableDescription.setCellValueFactory(
                 new PropertyValueFactory<AccountListVO,String>("note"));
         deleteInit();
@@ -229,7 +205,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
                         	AccountListVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             list.remove(clickedItem);
                             table.setItems(list);
-                            double tmp = Double.parseDouble(clickedItem.getMoney());
+                            double tmp = clickedItem.getMoney();
                             double result = Double.parseDouble(sumLabel.getText())-tmp;
                             sumLabel.setText(String.valueOf(result));
                         });

@@ -1,12 +1,11 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
-
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
-import vo.commodity.ClassificationVO;
-import vo.commodity.CommodityVO;
+import vo.commodityvo.ClassificationVO;
+import vo.commodityvo.CommodityVO;
 
 public class CommodityBLService_Stub implements CommodityBLService{
 
@@ -49,7 +48,7 @@ public class CommodityBLService_Stub implements CommodityBLService{
         list.add(commodity2);
 		return list;
 	}
-	
+
 	@Override
 	public void stock() {
 		// TODO Auto-generated method stub
@@ -64,6 +63,12 @@ public class CommodityBLService_Stub implements CommodityBLService{
 		list.add(id1);
 		list.add(id2);
 		return list;
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
