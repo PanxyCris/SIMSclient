@@ -71,7 +71,7 @@ public class MainUI extends Application{
 		    	   UserVO user = service.find(id, FindUserType.ID).get(0);
 		    	   UserRole role = user.getRole();
 		    	                      switch(role){
-		    	                         case GENERAL_MANAGER:System.out.println("Success");new GeneralManagerUI().start(user);break;
+		    	                         case GENERAL_MANAGER:new GeneralManagerUI().start(user);break;
 		    	                         case FINANCIAL_MANAGER:new FinancialStaffUI().start(user);break;
 		    	                         case PUR_SALE_MANAGER: new SaleStockStaffUI().start(user);break;
 		    	                         case INVENTORY_MANAGER: new InventoryManagerUI().start(user);break;

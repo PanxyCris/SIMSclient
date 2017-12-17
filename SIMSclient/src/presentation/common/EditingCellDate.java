@@ -20,13 +20,13 @@ public class EditingCellDate<T> extends TableCell<T, LocalDate> {
             createLocalDate();
             setText(null);
             setGraphic(datePicker);
-        }
+            }
     }
 
     @Override
     public void cancelEdit() {
         super.cancelEdit();
-        setValue((LocalDate) getItem());
+        setText(String.valueOf((LocalDate) getItem()));
         setGraphic(null);
     }
 
@@ -35,17 +35,17 @@ public class EditingCellDate<T> extends TableCell<T, LocalDate> {
         super.updateItem(item, empty);
 
         if (empty) {
-            setText(null);
+        	setText(null);
             setGraphic(null);
         } else {
             if (isEditing()) {
                 if (datePicker != null) {
                     datePicker.setValue(getLocalDate());
                 }
-                setValue(null);
+                setText(null);
                 setGraphic(datePicker);
             } else {
-                setValue(getLocalDate());
+            	setText(String.valueOf(getLocalDate()));
                 setGraphic(null);
             }
         }
@@ -64,11 +64,7 @@ public class EditingCellDate<T> extends TableCell<T, LocalDate> {
     }
 
     private LocalDate getLocalDate() {
-        return getItem() == null ? LocalDate.now() : getItem();
-    }
-
-    private void setValue(LocalDate date){
-    	datePicker.setValue(date);
+        return getItem() == null ? LocalDate.of(2000,01,01) : getItem();
     }
 
 }

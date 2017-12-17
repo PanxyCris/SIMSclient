@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import presentation.generalmanagerui.PromotionMakingUI;
+import presentation.generalmanagerui.PromotionMemberUI;
 import presentation.mainui.MainUI;
 import presentation.usermanagerui.UserManagerUI;
 import presentation.usermanagerui.UserManagingUI;
@@ -82,8 +84,13 @@ public class GeneralManagerController {
 
 
 	@FXML
-	public void makePromortion() throws Exception{
+	public void makePromotion() throws Exception{
 		changeStage("PromotionMakingUI");
+	}
+
+	@FXML
+	public void checkDiary() throws Exception{
+	//	changeStage("PromotionMakingUI");
 	}
 
 
@@ -114,6 +121,8 @@ public class GeneralManagerController {
                 try {
                    switch(currentID){
    		            case mainID:new UserManagerUI().start(user);break;
+   		            case "PromotionMakingUI":new PromotionMakingUI().start(user);break;
+   		            case "PromotionMemberUI":new PromotionMemberUI().start(user);break;
    		         //   case "UserManagingUI":new UserManagingUI().start(user);break;
    		         //   case "UserMessageUI":new UserMessageUI().start();break;
    		           }

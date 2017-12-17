@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -30,6 +31,7 @@ import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.UserVO;
+import vo.FinancialBill.PaymentBillVO;
 import vo.commodity.GiftVO;
 import vo.promotion.PromotionMemberVO;
 
@@ -99,7 +101,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:fresh();break;
+	    	        case SUCCESS:list.add(vo);table.setItems(list);break;
 	    	        default:break;
 	    	        }
 					} catch (Exception e) {
@@ -227,11 +229,47 @@ public class PromotionMemberController extends PromotionMakingController{
         tableVoucher.setCellValueFactory(
                 new PropertyValueFactory<PromotionMemberVO,Double>("voucher"));
 
+        tableName.setCellValueFactory(
+                new PropertyValueFactory<GiftVO,String>("name"));
+	    tableNumber.setCellValueFactory(
+                new PropertyValueFactory<GiftVO,Integer>("number"));
+	    checkInit();
         deleteInit();
+        deleteGiftInit();
         CommodityBLService commodityservice = new CommodityBLService_Stub();
         giftChoiceList.addAll(commodityservice.getCommodityIDList());
         giftChoice.setItems(giftChoiceList);
         levelChoice.setItems(levelList);
+
+	}
+
+	public void checkInit(){
+
+		tableCheck.setCellFactory((col) -> {
+            TableCell<PromotionMemberVO, String> cell = new TableCell<PromotionMemberVO, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+
+                    if (!empty) {
+                        Button delBtn = new Button("查看赠品列表");
+                        this.setGraphic(delBtn);
+                        delBtn.setOnMouseClicked((me) -> {
+                        	PromotionMemberVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                            giftList.clear();
+                            giftList.addAll(clickedItem.getGifts());
+                            giftTable.setItems(giftList);
+
+                        });
+                    }
+                }
+
+            };
+            return cell;
+        });
 
 	}
 
@@ -253,6 +291,37 @@ public class PromotionMemberController extends PromotionMakingController{
                             service.delete(clickedUser);
                             list.remove(clickedUser);
                             table.setItems(list);
+                        });
+                    }
+                }
+
+            };
+            return cell;
+        });
+
+
+
+	}
+
+    public void deleteGiftInit(){
+
+
+		tableDeleteGift.setCellFactory((col) -> {
+            TableCell<GiftVO, String> cell = new TableCell<GiftVO, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+
+                    if (!empty) {
+                        Button delBtn = new Button("删除");
+                        this.setGraphic(delBtn);
+                        delBtn.setOnMouseClicked((me) -> {
+                        	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+                            giftList.remove(clickedUser);
+                            giftTable.setItems(giftList);
                         });
                     }
                 }
