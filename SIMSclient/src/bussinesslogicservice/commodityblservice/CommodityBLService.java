@@ -17,7 +17,7 @@ public interface CommodityBLService {
 
 	public ArrayList<CommodityVO> getCommodityList();
 
-	public void check();   //ø‚¥Ê≤Èø¥
+	public ArrayList<String> getCommodityIDList();
 
 	public void stock();   //ø‚¥Ê≈Ãµ„
 }

@@ -13,7 +13,7 @@ public class UserBLService_Stub implements UserBLService{
 
 	@Override
 	public ArrayList<UserVO> find(String info, FindUserType properties) throws RemoteException {
-		UserVO user1 = new UserVO("000001","Panxy","161250134",UserRole.FINANCIAL_MANAGER,null);
+		UserVO user1 = new UserVO("000001","Panxy","161250134",UserRole.GENERAL_MANAGER,null);
 		ArrayList<UserVO> list = new ArrayList<>();
 		list.add(user1);
 		return list;

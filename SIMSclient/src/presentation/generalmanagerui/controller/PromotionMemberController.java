@@ -1,21 +1,15 @@
 package presentation.generalmanagerui.controller;
 
-import java.net.URL;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import bussiness_stub.PromotionBLService_Stub;
-import bussinesslogic.memberbl.MemberController;
-import bussinesslogicservice.memberblservice.MemberBLService;
-import bussinesslogicservice.promotionblservice.PromotionBLService;
-import dataenum.MemberCategory;
+import bussiness_stub.CommodityBLService_Stub;
+import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
+import bussinesslogicservice.commodityblservice.CommodityBLService;
+import bussinesslogicservice.promotionblservice.PromotionMemberBLService;
 import dataenum.MemberLevel;
-import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
-import dataenum.findtype.FindMemberType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,22 +24,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-import presentation.common.EditingCell;
-import presentation.common.EditingCellChoice;
+import presentation.common.EditingCellDate;
+import presentation.common.EditingCellDouble;
+import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.UserVO;
-import vo.commodity.CommodityVO;
 import vo.commodity.GiftVO;
-import vo.member.MemberVO;
 import vo.promotion.PromotionMemberVO;
 
 public class PromotionMemberController extends PromotionMakingController{
 
-	PromotionBLService service = new PromotionBLService_Stub();
+	PromotionMemberBLService service = new PromotionMemberBLService_Stub();
 	public static final Remind remind = Remind.PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();
-    ObservableList<String> giftList = FXCollections.observableArrayList();
+    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
+    ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
     ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
     UserVO user;
 
@@ -58,22 +52,22 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	TableColumn<PromotionMemberVO,Double> tableVoucher;
 	@FXML
-	TableColumn<PromotionMemberVO,String> tableStart;
+	TableColumn<PromotionMemberVO,LocalDate> tableStart;
 	@FXML
-	TableColumn<PromotionMemberVO,String> tableEnd;
+	TableColumn<PromotionMemberVO,LocalDate> tableEnd;
 	@FXML
 	TableColumn<PromotionMemberVO,String> tableCheck;
 	@FXML
 	TableColumn<PromotionMemberVO,String> tableDelete;
 
 	@FXML
-	TableView<CommodityVO> giftTable;
+	TableView<GiftVO> giftTable;
 	@FXML
-	TableColumn<CommodityVO,String> tableName;
+	TableColumn<GiftVO,String> tableName;
 	@FXML
-	TableColumn<CommodityVO,Integer> tableNumber;
+	TableColumn<GiftVO,Integer> tableNumber;
 	@FXML
-	TableColumn<CommodityVO,String> tableDeleteGift;
+	TableColumn<GiftVO,String> tableDeleteGift;
 
 	@FXML
 	ChoiceBox<String> levelChoice;
@@ -94,7 +88,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	public void insert(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
-		gifts.addAll(gifts);
+		gifts.addAll(giftList);
 		 PromotionMemberVO vo = new PromotionMemberVO(startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
 	        ResultMessage message = service.insert(vo);
@@ -117,49 +111,26 @@ public class PromotionMemberController extends PromotionMakingController{
 
 	@FXML
 	public void insertGift(){
-		 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
-				 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),
-				 emailField.getText(),amountField.getText(),receiveField.getText(),payField.getText(),
-				 operatorField.getText());
-	        ResultMessage message = service.insert(vo);
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:fresh();break;
-	    	        default:break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
+		 GiftVO vo = new GiftVO(giftChoice.getValue(),Integer.parseInt(numberField.getText()));
+	     giftList.add(vo);
+	     giftTable.setItems(giftList);
 	}
 
 	@FXML
 	public void fresh() throws RemoteException{
-		findingField.setText(null);
 		list.clear();
-		list.addAll(service.show());
-		idLabel.setText(service.getId());
-		classChoice.setValue(null);
+		list.addAll(service.getPromotionMemberList());
 		levelChoice.setValue(null);
 		table.setItems(list);
-		nameField.setText(null);
-		phoneField.setText(null);
-		addressField.setText(null);
-		zipcodeField.setText(null);
-		emailField.setText(null);
-		amountField.setText(null);
-		receiveField.setText(null);
-		payField.setText(null);
+		allowanceField.setText(null);
+		voucherField.setText(null);
+		startPicker.setValue(null);
+		endPicker.setValue(null);
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+
+	public void initData(UserVO user) throws Exception {
+		this.user = user;
 		try {
 			fresh();
 		} catch (RemoteException e) {
@@ -167,161 +138,106 @@ public class PromotionMemberController extends PromotionMakingController{
 		}
 		edit();
 		manageInit();
-
 	}
 
 	public void edit(){
-		Callback<TableColumn<MemberVO, String>,
-	        TableCell<MemberVO, String>> cellFactory
-	            = (TableColumn<MemberVO, String> p) -> new EditingCell<MemberVO>();
+		Callback<TableColumn<PromotionMemberVO, Double>,
+	        TableCell<PromotionMemberVO, Double>> cellFactoryDouble
+	            = (TableColumn<PromotionMemberVO, Double> p) -> new EditingCellDouble<PromotionMemberVO>();
 
-        Callback<TableColumn<MemberVO, String>,
-	        TableCell<MemberVO, String>> choiceFactory
-	            = (TableColumn<MemberVO, String> p) -> new EditingCellChoice<MemberVO>(levelList);
+	    Callback<TableColumn<GiftVO, Integer>,
+		    TableCell<GiftVO, Integer>> cellFactoryInteger
+		        = (TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
 
-	    tablePhone.setCellFactory(cellFactory);
-	    tablePhone.setOnEditCommit(
-	            (CellEditEvent<MemberVO, String> t) -> {
-	                ((MemberVO) t.getTableView().getItems().get(
+        Callback<TableColumn<PromotionMemberVO, LocalDate>,
+	        TableCell<PromotionMemberVO, LocalDate>> dateFactory
+	            = (TableColumn<PromotionMemberVO, LocalDate> p) -> new EditingCellDate<PromotionMemberVO>();
+
+	    tableAllowance.setCellFactory(cellFactoryDouble);
+	    tableAllowance.setOnEditCommit(
+	            (CellEditEvent<PromotionMemberVO, Double> t) -> {
+	                ((PromotionMemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
-	                        ).setCellNumber(t.getNewValue());
-	                try {
-						service.update((MemberVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-						        );
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	        });
-
-	    tableAddress.setCellFactory(cellFactory);
-	    tableAddress.setOnEditCommit(
-	            (CellEditEvent<MemberVO, String> t) -> {
-	                ((MemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setAddress(t.getNewValue());
-	                try {
-						service.update((MemberVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-						        );
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	        });
-
-	    tableZipcode.setCellFactory(cellFactory);
-	    tableZipcode.setOnEditCommit(
-	            (CellEditEvent<MemberVO, String> t) -> {
-	                ((MemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setPost(t.getNewValue());
-	                try {
-						service.update((MemberVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-						        );
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	        });
-
-	    tableEmail.setCellFactory(cellFactory);
-	    tableEmail.setOnEditCommit(
-	            (CellEditEvent<MemberVO, String> t) -> {
-	                ((MemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setEmail(t.getNewValue());
-	                try {
-						service.update((MemberVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-						        );
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	        });
-
-	    tableOperator.setCellFactory(cellFactory);
-	    tableOperator.setOnEditCommit(
-	            (CellEditEvent<MemberVO, String> t) -> {
-	                ((MemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setSaleMan(t.getNewValue());
-	                try {
-						service.update((MemberVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-						        );
-					} catch (RemoteException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-	        });
-
-        tableLevel.setCellFactory(choiceFactory);
-        tableLevel.setOnEditCommit(
-            (CellEditEvent<MemberVO, String> t) -> {
-                ((MemberVO) t.getTableView().getItems().get(
-                        t.getTablePosition().getRow())
-                        ).setLevel(t.getNewValue());
-                try {
-					service.update((MemberVO) t.getTableView().getItems().get(
+	                        ).setAllowance(t.getNewValue());
+	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
 					        );
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 
-        });
+	        });
 
+	    tableVoucher.setCellFactory(cellFactoryDouble);
+	    tableVoucher.setOnEditCommit(
+	            (CellEditEvent<PromotionMemberVO, Double> t) -> {
+	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setVoucher(t.getNewValue());
+	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+					        t.getTablePosition().getRow())
+					        );
+
+	        });
+
+	    tableStart.setCellFactory(dateFactory);
+	    tableStart.setOnEditCommit(
+	            (CellEditEvent<PromotionMemberVO, LocalDate> t) -> {
+	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setBeginDate(t.getNewValue());
+	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+					        t.getTablePosition().getRow())
+					        );
+
+	        });
+
+	    tableEnd.setCellFactory(dateFactory);
+	    tableEnd.setOnEditCommit(
+	            (CellEditEvent<PromotionMemberVO, LocalDate> t) -> {
+	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setEndDate(t.getNewValue());
+	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+					        t.getTablePosition().getRow())
+					        );
+
+	        });
+
+
+
+	    tableNumber.setCellFactory(cellFactoryInteger);
+	    tableNumber.setOnEditCommit(
+	            (CellEditEvent<GiftVO, Integer> t) -> {
+	                ((GiftVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNumber(t.getNewValue());
+
+	        });
 
 	}
 
 
 	public void manageInit(){
-		tableID.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("ID"));
-	    tableCategory.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("categoryStr"));
 		tableLevel.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("levelString"));
-        tableName.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("name"));
-        tablePhone.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("cellNumber"));
-        tableAddress.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("address"));
-        tableZipcode.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("post"));
-        tableEmail.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("email"));
-        tableAmount.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("receivableLimit"));
-        tableReceive.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("receivable"));
-        tablePay.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("payable"));
-        tableOperator.setCellValueFactory(
-                new PropertyValueFactory<MemberVO,String>("saleMan"));
+                new PropertyValueFactory<PromotionMemberVO,String>("levelString"));
+	    tableStart.setCellValueFactory(
+                new PropertyValueFactory<PromotionMemberVO,LocalDate>("beginDate"));
+        tableEnd.setCellValueFactory(
+                new PropertyValueFactory<PromotionMemberVO,LocalDate>("endDate"));
+        tableAllowance.setCellValueFactory(
+                new PropertyValueFactory<PromotionMemberVO,Double>("allowance"));
+        tableVoucher.setCellValueFactory(
+                new PropertyValueFactory<PromotionMemberVO,Double>("voucher"));
+
         deleteInit();
-        classChoice.setItems(classList);
+        CommodityBLService commodityservice = new CommodityBLService_Stub();
+        giftChoiceList.addAll(commodityservice.getCommodityIDList());
+        giftChoice.setItems(giftChoiceList);
         levelChoice.setItems(levelList);
-        findChoice.setItems(FXCollections.observableArrayList(FindMemberType.ID.value,FindMemberType.NAME.value,
-        		FindMemberType.KIND.value,FindMemberType.ADDRESS.value,FindMemberType.EMAIL.value,FindMemberType.LEVEL.value,
-        		FindMemberType.PHONE.value,FindMemberType.POST.value,FindMemberType.PAYABLE.value,FindMemberType.RECEIVABLE.value,
-        		FindMemberType.RECEIVABLELIMIT.value,FindMemberType.SALESMAN.value));
+
 	}
 
 	public void deleteInit(){
 		tableDelete.setCellFactory((col) -> {
-            TableCell<MemberVO, String> cell = new TableCell<MemberVO, String>() {
+            TableCell<PromotionMemberVO, String> cell = new TableCell<PromotionMemberVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -333,12 +249,8 @@ public class PromotionMemberController extends PromotionMakingController{
                         Button delBtn = new Button("É¾³ý");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	MemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            try {
-								service.delete(clickedUser.getID());
-							} catch (RemoteException e) {
-								e.printStackTrace();
-							}
+                        	PromotionMemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+                            service.delete(clickedUser);
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -349,10 +261,5 @@ public class PromotionMemberController extends PromotionMakingController{
             return cell;
         });
 	}
-
-	public void initData(UserVO user) throws Exception {
-		operatorField.setText(user.getName());
-	}
-
 
 }

@@ -15,6 +15,7 @@ public interface PromotionBLService {
 	public String getcellNumber(); // 电话号码
 	public String getuser(); // 操作员
 	public String getsaleMan(); // 业务员
-	public ResultMessage insert(PromotionMemberVO vo);
+
+
 
 }
