@@ -73,6 +73,10 @@ public class PromotionMemberVO extends PromotionVO {
 		return voucher;
 	}
 
+	public void setGifts(ArrayList<GiftVO> gifts){
+		this.gifts = gifts;
+	}
+
 	public ArrayList<GiftVO> getGifts(){
 		return gifts;
 	}

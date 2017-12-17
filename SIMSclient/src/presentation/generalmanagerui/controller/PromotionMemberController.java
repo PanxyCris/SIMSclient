@@ -1,6 +1,7 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
@@ -14,7 +15,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -41,9 +41,11 @@ public class PromotionMemberController extends PromotionMakingController{
 	public static final Remind remind = Remind.PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();
     ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
+    ObservableList<GiftVO> giftTmpList = FXCollections.observableArrayList();
     ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
     ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
     UserVO user;
+    PromotionMemberVO currentPromotion;
 
 	@FXML
 	TableView<PromotionMemberVO> table;
@@ -88,9 +90,22 @@ public class PromotionMemberController extends PromotionMakingController{
 	TextField numberField;
 
 	@FXML
+	TableView<GiftVO> giftTmpTable;
+	@FXML
+	TableColumn<GiftVO,String> tableTmpName;
+	@FXML
+	TableColumn<GiftVO,Integer> tableTmpNumber;
+	@FXML
+	TableColumn<GiftVO,String> tableTmpDeleteGift;
+	@FXML
+	ChoiceBox<String> giftTmpChoice;
+	@FXML
+	TextField numberTmpField;
+
+	@FXML
 	public void insert(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
-		gifts.addAll(giftList);
+		gifts.addAll(giftTmpList);
 		 PromotionMemberVO vo = new PromotionMemberVO(startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
 	        ResultMessage message = service.insert(vo);
@@ -116,6 +131,14 @@ public class PromotionMemberController extends PromotionMakingController{
 		 GiftVO vo = new GiftVO(giftChoice.getValue(),Integer.parseInt(numberField.getText()));
 	     giftList.add(vo);
 	     giftTable.setItems(giftList);
+	     updateGiftList();
+	}
+
+	@FXML
+	public void insertTmpGift(){
+		 GiftVO vo = new GiftVO(giftTmpChoice.getValue(),Integer.parseInt(numberTmpField.getText()));
+	     giftTmpList.add(vo);
+	     giftTmpTable.setItems(giftTmpList);
 	}
 
 	@FXML
@@ -123,6 +146,7 @@ public class PromotionMemberController extends PromotionMakingController{
 		list.clear();
 		list.addAll(service.getPromotionMemberList());
 		levelChoice.setValue(null);
+		giftTmpTable.getItems().clear();
 		table.setItems(list);
 		allowanceField.setText(null);
 		voucherField.setText(null);
@@ -211,9 +235,18 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((GiftVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNumber(t.getNewValue());
+	            updateGiftList();
 
 	        });
 
+	    tableTmpNumber.setCellFactory(cellFactoryInteger);
+	    tableTmpNumber.setOnEditCommit(
+	            (CellEditEvent<GiftVO, Integer> t) -> {
+	                ((GiftVO) t.getTableView().getItems().get(
+	                        t.getTablePosition().getRow())
+	                        ).setNumber(t.getNewValue());
+
+	        });
 	}
 
 
@@ -233,12 +266,17 @@ public class PromotionMemberController extends PromotionMakingController{
                 new PropertyValueFactory<GiftVO,String>("name"));
 	    tableNumber.setCellValueFactory(
                 new PropertyValueFactory<GiftVO,Integer>("number"));
+	    tableTmpName.setCellValueFactory(
+                new PropertyValueFactory<GiftVO,String>("name"));
+	    tableTmpNumber.setCellValueFactory(
+                new PropertyValueFactory<GiftVO,Integer>("number"));
 	    checkInit();
         deleteInit();
         deleteGiftInit();
         CommodityBLService commodityservice = new CommodityBLService_Stub();
         giftChoiceList.addAll(commodityservice.getCommodityIDList());
         giftChoice.setItems(giftChoiceList);
+        giftTmpChoice.setItems(giftChoiceList);
         levelChoice.setItems(levelList);
 
 	}
@@ -259,6 +297,7 @@ public class PromotionMemberController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionMemberVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	currentPromotion = clickedItem;
                             giftList.clear();
                             giftList.addAll(clickedItem.getGifts());
                             giftTable.setItems(giftList);
@@ -322,6 +361,31 @@ public class PromotionMemberController extends PromotionMakingController{
                         	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
                             giftList.remove(clickedUser);
                             giftTable.setItems(giftList);
+                            updateGiftList();
+                        });
+                    }
+                }
+
+            };
+            return cell;
+        });
+
+		tableTmpDeleteGift.setCellFactory((col) -> {
+            TableCell<GiftVO, String> cell = new TableCell<GiftVO, String>() {
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    this.setText(null);
+                    this.setGraphic(null);
+
+                    if (!empty) {
+                        Button delBtn = new Button("É¾³ý");
+                        this.setGraphic(delBtn);
+                        delBtn.setOnMouseClicked((me) -> {
+                        	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+                            giftTmpList.remove(clickedUser);
+                            giftTmpTable.setItems(giftTmpList);
                         });
                     }
                 }
@@ -330,5 +394,13 @@ public class PromotionMemberController extends PromotionMakingController{
             return cell;
         });
 	}
+
+    public void updateGiftList(){
+    	 PromotionMemberVO promotion = currentPromotion;
+         ArrayList<GiftVO> gifts = new ArrayList<>();
+    	 gifts.addAll(giftList);
+    	 promotion.setGifts(gifts);
+    	 service.update(promotion);
+    }
 
 }

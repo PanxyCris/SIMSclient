@@ -26,8 +26,6 @@ public interface PurchaseBLService {
 
 	public PurchaseVO save(PurchaseVO Info);
 
-	public void examine(ArrayList<PurchaseVO> list);
-
 	public ResultMessage isLegal(CommodityItemVO vo);
 
 	/**
