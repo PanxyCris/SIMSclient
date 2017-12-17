@@ -29,19 +29,6 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public PurchasePO createPurcashe() {
-		return null;
-	}
-
-	@Override
-	public void addCommodities(CommodityItemVO item) {
-	}
-
-	@Override
-	public void addMembers(String id) {
-	}
-
-	@Override
 	public void delete(PurchaseVO info) {
 	}
 
@@ -56,16 +43,6 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public ResultMessage updateDraft(PurchaseVO vo) {
-		return null;
-	}
-
-	@Override
-	public ResultMessage submitDraft(PurchaseVO vo) {
-		return null;
-	}
-
-	@Override
 	public ResultMessage isLegal(CommodityItemVO vo) {
 		return null;
 	}
@@ -74,5 +51,4 @@ public class PurchaseController implements PurchaseBLService{
 	public ArrayList<PurchaseVO> show() {
 		return null;
 	}
-
-	}
+}
