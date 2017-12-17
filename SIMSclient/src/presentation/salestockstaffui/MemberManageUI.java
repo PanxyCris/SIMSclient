@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.salestockstaffui.controller.MemberManageController;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class MemberManageUI extends SaleStockStaffUI {
 

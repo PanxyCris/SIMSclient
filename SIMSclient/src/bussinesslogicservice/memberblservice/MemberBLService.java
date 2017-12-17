@@ -1,11 +1,12 @@
 package bussinesslogicservice.memberblservice;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
-import vo.member.MemberVO;
+import vo.membervo.MemberVO;
 
 public interface MemberBLService {
 

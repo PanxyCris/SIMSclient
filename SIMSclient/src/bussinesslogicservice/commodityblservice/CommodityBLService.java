@@ -1,11 +1,14 @@
 package bussinesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
+
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
-import vo.commodity.CommodityVO;
+import vo.commodityvo.CommodityVO;
 
 public interface CommodityBLService {
+
+	public String getID();
 
 	public ResultMessage insert(CommodityVO vo);
 

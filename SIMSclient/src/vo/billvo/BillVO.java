@@ -7,38 +7,54 @@ import vo.ViewObject;
 
 public class BillVO extends ViewObject{
 
-	protected BillType billType;//单据类型
-	protected String billTypeString;
-	protected BillState billState;//单据状态
-	protected String billStateString;
+	protected String id;
+	protected String note;
+	protected BillType type;//单据类型
+	protected String typeString;
+	protected BillState state;//单据状态
+	protected String stateString;
 
-	public BillVO(BillType billType,BillState billState) {
-		this.billType=billType;
-		this.billState=billState;
+	public BillVO(String id,BillType type,BillState state,String note) {
+		this.id = id;
+		this.type = type;
+		this.state = state;
+		this.note = note;
 	}
 
-	public BillType getBillType() {
-		return billType;
+	public String getId(){
+		return id;
 	}
 
-	public void setBillType(BillType billType) {
-		this.billType = billType;
+	public BillType getType() {
+		return type;
 	}
 
-	public BillState getBillState() {
-		return billState;
+	public void setType(BillType type) {
+		this.type = type;
 	}
 
-	public void setBillState(BillState billState) {
-		this.billState = billState;
+	public BillState getState() {
+		return state;
 	}
 
-	public String getBillTypeString(){
-		return billType.value;
+	public void setState(BillState state) {
+		this.state = state;
 	}
 
-	public String getBillStateString(){
-		return billState.value;
+	public String getTypeString(){
+		return type.value;
+	}
+
+	public String getStateString(){
+		return state.value;
+	}
+
+	public void setNote(String note){
+		this.note = note;
+	}
+
+	public String getNote(){
+		return note;
 	}
 
 

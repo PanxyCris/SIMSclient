@@ -2,12 +2,12 @@ package bussinesslogicservice.salesblservice;
 
 import java.util.ArrayList;
 
-import vo.sale.SalesVO;
+import vo.billvo.salesbillvo.SalesVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月11日    
+/**
+*
+* @author Lijie
+* @date 2017年12月11日
 */
 public interface SalesShowService {
 	public ArrayList<SalesVO> showSale();
@@ -15,13 +15,13 @@ public interface SalesShowService {
 
 	public ArrayList<SalesVO> showSaleCommited();
 	public ArrayList<SalesVO> showSaleBackCommited();
-	
+
 	public ArrayList<SalesVO> showSaleSuccess();
 	public ArrayList<SalesVO> showSaleBackSuccess();
-	
+
 	public ArrayList<SalesVO> showSaleFail();
 	public ArrayList<SalesVO> showSaleBackFail();
-	
+
 	public ArrayList<SalesVO> showSaleDraft();
 	public ArrayList<SalesVO> showSaleBackDraft();
 }

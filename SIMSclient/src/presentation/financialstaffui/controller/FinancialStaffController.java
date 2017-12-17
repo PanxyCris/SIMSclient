@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.util.Stack;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -16,9 +17,9 @@ import presentation.financialstaffui.ReceiveCheckBillUI;
 import presentation.financialstaffui.ReceiveMakeBillUI;
 import presentation.financialstaffui.ViewTableUI;
 import presentation.mainui.MainUI;
-import vo.UserVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.FinancialBill.ReceiptBillVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.billvo.financialbillvo.ReceiptBillVO;
+import vo.uservo.UserVO;
 
 public class FinancialStaffController {
 

@@ -1,13 +1,13 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
-import bussinesslogicservice.promotionblservice.PromotionMemberBLService;
 import dataenum.MemberLevel;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -30,9 +30,9 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.commodity.GiftVO;
-import vo.promotion.PromotionMemberVO;
+import vo.uservo.UserVO;
+import vo.commodityvo.GiftVO;
+import vo.promotionvo.PromotionMemberVO;
 
 public class PromotionSpecialController {
 	PromotionMemberBLService service = new PromotionMemberBLService_Stub();

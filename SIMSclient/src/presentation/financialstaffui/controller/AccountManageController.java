@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -27,8 +28,8 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.AccountVO;
-import vo.UserVO;
+import vo.accountvo.AccountVO;
+import vo.uservo.UserVO;
 
 public class AccountManageController extends FinancialStaffController implements Initializable{
 
@@ -54,14 +55,14 @@ public class AccountManageController extends FinancialStaffController implements
         @FXML
         protected TableColumn<AccountVO,String> tableName;
         @FXML
-        protected TableColumn<AccountVO,String> tableMoney;
+        protected TableColumn<AccountVO,Double> tableMoney;
         @FXML
         protected TableColumn<AccountVO,String> tableDelete;
 
 
         @FXML
         public void insert(){
-             AccountVO vo = new AccountVO(idField.getText(), nameField.getText(), moneyField.getText());
+             AccountVO vo = new AccountVO(idField.getText(), nameField.getText(), Double.parseDouble(moneyField.getText()));
                 ResultMessage message = service.add(vo);
                 Platform.runLater(new Runnable() {
                     public void run() {
@@ -170,7 +171,7 @@ public class AccountManageController extends FinancialStaffController implements
             tableName.setCellValueFactory(
                     new PropertyValueFactory<AccountVO,String>("name"));
             tableMoney.setCellValueFactory(
-                    new PropertyValueFactory<AccountVO,String>("money"));
+                    new PropertyValueFactory<AccountVO,Double>("money"));
             deleteInit();
             findChoice.setItems(FXCollections.observableArrayList(FindAccountType.ID.value,FindAccountType.NAME.value));
         }

@@ -2,6 +2,7 @@ package presentation.salestockstaffui.controller;
 
 import java.util.Stack;
 
+
 import dataenum.BillType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -15,9 +16,9 @@ import presentation.salestockstaffui.MemberManageUI;
 import presentation.salestockstaffui.PurchaseCheckBillUI;
 import presentation.salestockstaffui.PurchaseMakeBillUI;
 import presentation.salestockstaffui.SaleStockStaffUI;
-import vo.UserVO;
-import vo.purchase.PurchaseVO;
-import vo.sale.SalesVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.billvo.salesbillvo.SalesVO;
+import vo.uservo.UserVO;
 
 public class SaleStockStaffController {
 

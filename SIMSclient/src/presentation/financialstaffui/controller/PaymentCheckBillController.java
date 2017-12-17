@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import bussiness_stub.PaymentBillBLService_Stub;
@@ -18,11 +19,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import vo.UserVO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.commodity.CommodityItemVO;
-import vo.purchase.PurchaseVO;
+import vo.billvo.financialbillvo.EntryVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.uservo.UserVO;
 
 public class PaymentCheckBillController extends FinancialStaffController implements Initializable{
 
@@ -36,7 +35,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	@FXML
 	TableColumn<PaymentBillVO,String> tableAccount;
 	@FXML
-	TableColumn<PaymentBillVO,String> tableSum;
+	TableColumn<PaymentBillVO,Double> tableSum;
 	@FXML
 	TableColumn<PaymentBillVO,String> tableOperator;
 	@FXML
@@ -56,7 +55,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	@FXML
 	TableColumn<EntryVO,String> tableItem;
 	@FXML
-	TableColumn<EntryVO,String> tableMoney;
+	TableColumn<EntryVO,Double> tableMoney;
 	@FXML
 	TableColumn<EntryVO,String> tableNote;
 
@@ -86,7 +85,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 		tableAccount.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("accountID"));
 		tableSum.setCellValueFactory(
-                new PropertyValueFactory<PaymentBillVO,String>("total"));
+                new PropertyValueFactory<PaymentBillVO,Double>("total"));
 		tableOperator.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("userID"));
 		tableState.setCellValueFactory(
@@ -138,7 +137,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
               for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&clickedState == BillState.DRAFT) {
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
@@ -167,7 +166,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                   BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
@@ -201,7 +200,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
                     this.setText(null);
                     this.setGraphic(null);
                     for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).getBillState();
+                    BillState clickedState = this.getTableView().getItems().get(i).getState();
                     if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
@@ -224,7 +223,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 		tableItem.setCellValueFactory(
                 new PropertyValueFactory<EntryVO,String>("entryName"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<EntryVO,String>("transferAmount"));
+                new PropertyValueFactory<EntryVO,Double>("transferAmount"));
         tableNote.setCellValueFactory(
                 new PropertyValueFactory<EntryVO,String>("note"));
 	}

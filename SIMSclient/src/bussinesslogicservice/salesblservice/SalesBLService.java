@@ -2,18 +2,15 @@ package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
 import java.util.*;
-
 import dataenum.ResultMessage;
 import po.sales.SalesPO;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import vo.commodity.CommodityVO;
-import vo.member.MemberVO;
-import vo.promotion.PromotionMemberVO;
-import vo.promotion.PromotionPricePacksVO;
-import vo.promotion.PromotionTotalVO;
-import vo.sale.SalesInputVO;
-import vo.sale.SalesVO;
+import vo.billvo.salesbillvo.SalesInputVO;
+import vo.billvo.salesbillvo.SalesVO;
+import vo.commodityvo.CommodityItemVO;
+import vo.promotionvo.PromotionMemberVO;
+import vo.promotionvo.PromotionPricePacksVO;
+import vo.promotionvo.PromotionTotalVO;
+
 
 /**
  *

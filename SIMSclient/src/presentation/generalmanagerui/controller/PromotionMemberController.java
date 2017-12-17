@@ -1,13 +1,12 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
-import bussinesslogicservice.promotionblservice.PromotionMemberBLService;
+import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -31,13 +30,14 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.commodity.GiftVO;
-import vo.promotion.PromotionMemberVO;
+import vo.commodityvo.GiftVO;
+import vo.promotionvo.PromotionMemberVO;
+import vo.uservo.UserVO;
+
 
 public class PromotionMemberController extends PromotionMakingController{
 
-	PromotionMemberBLService service = new PromotionMemberBLService_Stub();
+	PromotionBLService service = new PromotionBLService_Stub();
 	public static final Remind remind = Remind.PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();
     ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
@@ -124,7 +124,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	public void fresh() throws RemoteException{
 		list.clear();
-		list.addAll(service.getPromotionMemberList());
+		list.addAll(service.getPromotionList());
 		levelChoice.setValue(null);
 		table.setItems(list);
 		allowanceField.setText(null);

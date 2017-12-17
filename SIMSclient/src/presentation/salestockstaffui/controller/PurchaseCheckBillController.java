@@ -1,6 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import bussiness_stub.PurchaseBLService_Stub;
@@ -17,9 +18,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import vo.UserVO;
-import vo.commodity.CommodityItemVO;
-import vo.purchase.PurchaseVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
+import vo.uservo.UserVO;
 
 public class PurchaseCheckBillController extends SaleStockStaffController implements Initializable {
 

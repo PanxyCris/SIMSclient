@@ -1,6 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,8 +33,8 @@ import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.member.MemberVO;
+import vo.uservo.UserVO;
+import vo.membervo.MemberVO;
 
 public class MemberManageController extends SaleStockStaffController implements Initializable {
 

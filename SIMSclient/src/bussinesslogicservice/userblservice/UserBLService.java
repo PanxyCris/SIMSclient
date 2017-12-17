@@ -2,10 +2,11 @@ package bussinesslogicservice.userblservice;
 
 import java.rmi.RemoteException;
 
+
 import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public interface UserBLService {
 

@@ -1,11 +1,11 @@
 package presentation.salestockstaffui;
 
-import vo.UserVO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.salestockstaffui.controller.SaleStockStaffController;
+import vo.uservo.UserVO;
 
 public class SaleStockStaffUI{
 

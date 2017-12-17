@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
 import dataenum.BillType;
@@ -9,7 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class MakeReceiptController extends FinancialStaffController implements Initializable{
 

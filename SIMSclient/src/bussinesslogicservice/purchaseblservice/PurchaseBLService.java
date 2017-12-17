@@ -1,14 +1,9 @@
 package bussinesslogicservice.purchaseblservice;
 
 import java.util.ArrayList;
-
 import dataenum.ResultMessage;
-import po.PurchasePO;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import vo.commodity.CommodityVO;
-import vo.purchase.PurchaseVO;
-
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 /**
 * 类说明   进货
 *

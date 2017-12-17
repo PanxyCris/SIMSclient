@@ -1,6 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.MemberBLService_Stub;
@@ -38,9 +39,9 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
-import vo.commodity.CommodityItemVO;
-import vo.purchase.PurchaseVO;
+import vo.uservo.UserVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 
 public class PurchaseMakeBillController extends MakeReceiptController{
 

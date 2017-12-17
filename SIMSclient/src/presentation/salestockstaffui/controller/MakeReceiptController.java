@@ -1,6 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
+
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
@@ -10,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class MakeReceiptController extends SaleStockStaffController implements Initializable {
 

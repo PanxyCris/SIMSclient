@@ -1,11 +1,12 @@
 package presentation.generalmanagerui;
 
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.generalmanagerui.controller.GeneralManagerController;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class GeneralManagerUI{
 

@@ -1,12 +1,11 @@
 package bussinesslogicservice.accountblservice;
 
 import java.util.ArrayList;
-
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
-import vo.AccountVO;
-import vo.FinancialBill.FinancialDocVO;
+import vo.accountvo.AccountVO;
+import vo.billvo.financialbillvo.FinancialDocVO;
 
 /**
  *

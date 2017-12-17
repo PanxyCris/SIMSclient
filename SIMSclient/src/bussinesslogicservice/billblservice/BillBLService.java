@@ -1,15 +1,15 @@
 package bussinesslogicservice.billblservice;
 
-import java.util.Date;
-
-import dataenum.BillState;
-import dataenum.BillType;
+import dataenum.ResultMessage;
+import vo.billvo.BillVO;
 
 public interface BillBLService {
 
-	public int getID();
-	public Date getDate();
-	public BillState getState();
-	public BillType getType();
-	public String getDescription();
+	public ResultMessage save(BillVO bill);
+
+	public ResultMessage submit(BillVO bill);
+
+	public ResultMessage update(BillVO bill);
+
+	public void delete(BillVO bill);
 }
