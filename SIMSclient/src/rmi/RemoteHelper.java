@@ -19,6 +19,7 @@ import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.promotiondataservice.PromotionDataService;
+import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
 
@@ -101,5 +102,9 @@ public class RemoteHelper {
 
 	public UserDataService getUserDataService(){
 		return (UserDataService)remote;
+	}
+	
+	public PurchaseDataService getPurchaseDataService() {
+		return (PurchaseDataService)remote;
 	}
 }

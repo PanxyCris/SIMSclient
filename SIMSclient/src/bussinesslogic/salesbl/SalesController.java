@@ -1,12 +1,17 @@
 package bussinesslogic.salesbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import bussinesslogicservice.salesblservice.SalesBLService;
 import bussinesslogicservice.salesblservice.SalesShowService;
 import dataenum.ResultMessage;
+import dataservice.salesdataservice.SalesDataService;
 import po.sales.SalesPO;
+import rmi.RemoteHelper;
 import vo.PromotionVO;
 import vo.commodity.CommodityItemVO;
 import vo.commodity.CommodityVO;
@@ -24,30 +29,84 @@ public class SalesController implements SalesBLService, SalesShowService{
 
 	private Sales sale;
 	private SaleShow saleshow;
+	private SalesDataService service;
+	private String date;
 	
 	public SalesController() {
 		sale = new Sales();
 		saleshow = new SaleShow();
+		service = RemoteHelper.getInstance().getSalesDataService();
 	}
 
 	@Override
 	public String getSaleID() {
-		try {
-			return sale.getSaleID();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
+		ArrayList<SalesPO> list = new ArrayList<>();
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (SalesPO po: list) {
+			id = po.getId();
+			String temp[] = id.split("-");
+			
+			if (temp[0].equals("XSD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
 		}
+		
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("XSD-");
+		return s.append(day).append("-").append(id).toString();
 	}
 
 	@Override
 	public String getBackSaleID() {
-		try {
-			return sale.getSaleBackID();
-		} catch (RemoteException e) {
-			e.printStackTrace();
+		ArrayList<SalesPO> list = new ArrayList<>();
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (SalesPO po: list) {
+			id = po.getId();
+			String temp[] = id.split("-");
+			
+			if (temp[0].equals("XSD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
 		}
-		return null;
+		
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("XSD-");
+		return s.append(day).append("-").append(id).toString();
+
 	}
 
 	@Override
@@ -271,6 +330,10 @@ public class SalesController implements SalesBLService, SalesShowService{
 	public void delte(SalesVO info) {
 	}
 
-	
+	public String getDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		this.date = sdf.format(new Date());
+		return this.date;
+	}
 	
 }
