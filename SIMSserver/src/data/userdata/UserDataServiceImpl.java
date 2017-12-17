@@ -35,11 +35,11 @@ public class UserDataServiceImpl implements UserDataService {
 		UserDataServiceImpl u = new UserDataServiceImpl();
 		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
 //		u.insertUser(p);
-		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
-		for(UserPO po: list) {
-			System.out.println(po.toString());
-		}
-		System.out.println(u.login("000003", "admin"));
+//		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
+//		for(UserPO po: list) {
+//			System.out.println(po.toString());
+//		}
+		System.out.println(u.login("000002", "admin"));
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class UserDataServiceImpl implements UserDataService {
 		}  
 
 		for (UserPO po: list) {
-			if (id.equals(String.valueOf(po.getID())) && password.equals(String.valueOf(po.getPassword()))){
+			if (id.equals(po.getID()) && password.equals(po.getPassword())){
 				return true;
 			}
 		}

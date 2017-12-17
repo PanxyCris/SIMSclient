@@ -17,5 +17,4 @@ public class MemberManageUI extends SaleStockStaffUI {
         controller.initData(user);
         primaryStage.show();
 	}
-
 }

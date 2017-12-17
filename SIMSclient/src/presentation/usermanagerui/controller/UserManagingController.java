@@ -75,7 +75,7 @@ public class UserManagingController extends UserManagerController implements Ini
 
 		@FXML
 		public void insert() throws RemoteException{
-			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), image);
+			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), null);
 		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {

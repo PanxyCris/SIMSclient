@@ -27,11 +27,11 @@ import po.UserPO;
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
-		UserPO po = new UserPO("000004", "Õı≤”≤”", "1245678", UserRole.FINANCIAL_MANAGER, null);
-//		user.delete("00002");
+		UserPO po = new UserPO("000002", "¿ÓΩ‹", "admin", UserRole.PUR_SALE_MANAGER, null);
+//		user.delete(null);
 		user.insert(po);
 		ArrayList<UserPO> list = user.show();
-		System.out.println("555");
+//		System.out.println("555");
 		for(UserPO u: list) {
 			System.out.println(u.toString());
 		}	
