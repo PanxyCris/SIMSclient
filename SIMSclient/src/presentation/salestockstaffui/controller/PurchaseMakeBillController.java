@@ -1,5 +1,6 @@
 package presentation.salestockstaffui.controller;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.MemberBLService_Stub;
@@ -299,7 +300,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	     return result;
 	}
 
-	public void manageInit(){
+	public void manageInit() throws RemoteException{
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("id"));
 		tableName.setCellValueFactory(
@@ -319,7 +320,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         deleteInit();
 	}
 
-	public void choiceInit(){
+	public void choiceInit() throws RemoteException{
         ObservableList<String> memberList = FXCollections.observableArrayList();
         MemberBLService memberService = new MemberBLService_Stub();//׮
         for(int i=0;i<memberService.show().size();i++)

@@ -1,6 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 import dataenum.BillType;
@@ -36,10 +37,15 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		choiceInit();
+		try {
+			choiceInit();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void choiceInit(){
+	public void choiceInit() throws RemoteException{
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.PURCHASEBILL.value,BillType.PURCHASEBACKBILL.value,
 				BillType.SALESBILL.value,BillType.SALESBACKBILL.value));
 	}
