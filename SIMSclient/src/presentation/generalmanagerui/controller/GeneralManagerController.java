@@ -71,8 +71,19 @@ public class GeneralManagerController {
 	}
 
 	@FXML
-	public void manage() throws Exception{
-		changeStage("UserManagingUI");
+	public void checkBill() throws Exception{
+		changeStage("ExamineBillUI");
+	}
+
+	@FXML
+	public void checkTable() throws Exception{
+		changeStage("FinanceTableUI");
+	}
+
+
+	@FXML
+	public void makePromortion() throws Exception{
+		changeStage("PromotionMakingUI");
 	}
 
 

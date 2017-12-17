@@ -191,7 +191,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 	               MemberVO vo = ((MemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        );
-	                service.update(vo);
+
 	        });
 
 
