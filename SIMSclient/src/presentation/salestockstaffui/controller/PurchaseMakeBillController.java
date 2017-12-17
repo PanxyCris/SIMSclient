@@ -324,7 +324,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         ObservableList<String> memberList = FXCollections.observableArrayList();
         MemberBLService memberService = new MemberBLService_Stub();//׮
         for(int i=0;i<memberService.show().size();i++)
-        	memberList.add(memberService.show().get(i).getName());
+        	memberList.add(memberService.show().get(i).getName()+"("+memberService.show().get(i).getID()+")");
         memberChoice.setItems(memberList);
 
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));

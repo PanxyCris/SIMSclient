@@ -1,24 +1,44 @@
 package bussiness_stub;
 
+import java.util.ArrayList;
+
+import bussinesslogicservice.promotionblservice.PromotionBLService;
 import vo.PromotionVO;
 
-public class PromotionBLService_Stub {
-	public void getBillID(PromotionVO vo){
-    	System.out.println("getBillID Success.");
-    }
-	public void getclientID(PromotionVO vo){
-    	System.out.println("getclientID Success.");
-    }
-	public void getclientName(PromotionVO vo){
-    	System.out.println("getclientName Success.");
-    }
-	public void getcellNumber(PromotionVO vo){
-    	System.out.println("getcellNumber Success.");
-    }
-	public void getuser(PromotionVO vo){
-    	System.out.println("getuser Success.");
-    }
-	public void getsaleMan(PromotionVO vo){
-    	System.out.println("getsaleMan Success.");
-    }
+public class PromotionBLService_Stub implements PromotionBLService {
+	@Override
+	public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getBillID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getclientID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getclientName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getcellNumber() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getuser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getsaleMan() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

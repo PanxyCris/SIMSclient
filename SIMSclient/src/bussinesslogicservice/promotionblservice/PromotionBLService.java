@@ -2,7 +2,9 @@ package bussinesslogicservice.promotionblservice;
 
 import java.util.ArrayList;
 
+import dataenum.ResultMessage;
 import vo.PromotionVO;
+import vo.promotion.PromotionMemberVO;
 
 public interface PromotionBLService {
 //dffff
@@ -13,5 +15,6 @@ public interface PromotionBLService {
 	public String getcellNumber(); // 电话号码
 	public String getuser(); // 操作员
 	public String getsaleMan(); // 业务员
+	public ResultMessage insert(PromotionMemberVO vo);
 
 }

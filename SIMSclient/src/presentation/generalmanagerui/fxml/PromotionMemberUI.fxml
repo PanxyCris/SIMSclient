@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.accountui.AccountManageUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.generalmanagerui.PromotionMemberUI">
    <children>
       <ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -69,14 +69,15 @@
       </Button>
       <Button layoutX="342.0" layoutY="83.0" mnemonicParsing="false" text="选择策略类型" />
       <ChoiceBox layoutX="192.0" layoutY="83.0" prefWidth="150.0" />
-      <TableView layoutX="192.0" layoutY="165.0" prefHeight="271.0" prefWidth="601.0">
+      <TableView fx:id="table" layoutX="192.0" layoutY="165.0" prefHeight="271.0" prefWidth="562.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="客户类型" />
-            <TableColumn prefWidth="75.0" text="价格折让" />
-            <TableColumn prefWidth="75.0" text="代金券" />
-            <TableColumn prefWidth="150.0" text="起始时间" />
-            <TableColumn prefWidth="150.0" text="间隔时间" />
-          <TableColumn prefWidth="75.0" text="查看赠品" />
+          <TableColumn fx:id="tableLevel" prefWidth="75.0" text="客户等级" />
+            <TableColumn fx:id="tableAllowance" prefWidth="75.0" text="价格折让" />
+            <TableColumn fx:id="tableVoucher" prefWidth="75.0" text="代金券" />
+            <TableColumn fx:id="tableStart" prefWidth="130.0" text="起始时间" />
+            <TableColumn fx:id="tableEnd" prefWidth="130.0" text="结束时间" />
+          <TableColumn fx:id="tableCheck" prefWidth="75.0" text="查看赠品" />
+            <TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
         </columns>
       </TableView>
       <Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
@@ -127,11 +128,21 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="812.0" layoutY="165.0" prefHeight="271.0" prefWidth="200.0">
+      <TableView fx:id="giftTable" layoutX="759.0" layoutY="165.0" prefHeight="271.0" prefWidth="277.0">
         <columns>
-          <TableColumn prefWidth="125.0" text="赠品名" />
-          <TableColumn prefWidth="75.0" text="数量" />
+          <TableColumn fx:id="tableName" prefWidth="125.0" text="赠品名" />
+          <TableColumn fx:id="tableNumber" prefWidth="75.0" text="数量" />
+            <TableColumn fx:id="tableDeleteGift" prefWidth="75.0" text="是否删除" />
         </columns>
       </TableView>
+      <ChoiceBox fx:id="levelChoice" layoutX="192.0" layoutY="470.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="allowanceField" layoutX="267.0" layoutY="470.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="voucherField" layoutX="342.0" layoutY="470.0" prefHeight="23.0" prefWidth="75.0" />
+      <DatePicker fx:id="startPicker" layoutX="417.0" layoutY="470.0" prefHeight="23.0" prefWidth="130.0" />
+      <DatePicker fx:id="endPicker" layoutX="547.0" layoutY="470.0" prefHeight="23.0" prefWidth="130.0" />
+      <Button layoutX="677.0" layoutY="470.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="75.0" text="增   加" />
+      <ChoiceBox fx:id="giftChoice" layoutX="759.0" layoutY="470.0" prefHeight="23.0" prefWidth="125.0" />
+      <TextField fx:id="numberField" layoutX="884.0" layoutY="470.0" prefHeight="23.0" prefWidth="75.0" />
+      <Button layoutX="959.0" layoutY="470.0" mnemonicParsing="false" onAction="#insertGift" prefHeight="23.0" prefWidth="75.0" text="增加赠品" />
    </children>
 </AnchorPane>

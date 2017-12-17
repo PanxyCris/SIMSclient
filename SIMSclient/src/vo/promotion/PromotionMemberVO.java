@@ -1,35 +1,82 @@
 package vo.promotion;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月11日    
+/**
+*
+* @author Lijie
+* @date 2017年12月11日
 */
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import dataenum.MemberLevel;
 import vo.commodity.CommodityItemVO;
+import vo.commodity.GiftVO;
 
 public class PromotionMemberVO extends PromotionVO {
-	public String beginDate;
-	public String endDate;
-	public MemberLevel level;
-	public double allowance;
-	public double voucher;
-	public ArrayList<CommodityItemVO> gifts;
-	
-	public PromotionMemberVO(String id, String beginDate, String endDate, MemberLevel level, double allowance, double voucher,
-			ArrayList<CommodityItemVO> gifts) {
+	private LocalDate beginDate;
+	private LocalDate endDate;
+	private MemberLevel level;
+	private String levelString;
+	private Double allowance;
+	private Double voucher;
+	private ArrayList<GiftVO> gifts;
+
+	public PromotionMemberVO(LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
+			ArrayList<GiftVO> gifts) {
 		super();
-		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.level = level;
+		levelString = level.value;
 		this.allowance = allowance;
 		this.voucher = voucher;
 		this.gifts = gifts;
 	}
-	
-	
+
+	public void setBeginDate(LocalDate beginDate){
+		this.beginDate = beginDate;
+	}
+
+	public LocalDate getBeginDate(){
+		return beginDate;
+	}
+
+	public void setEndDate(LocalDate endDate){
+		this.endDate = endDate;
+	}
+
+	public LocalDate getEndDate(){
+		return endDate;
+	}
+
+	public void setAllowance(Double allowance){
+		this.allowance = allowance;
+	}
+
+	public Double getAllowance(){
+		return allowance;
+	}
+
+	public MemberLevel getLevel(){
+		return level;
+	}
+
+	public String getLevelString(){
+		return levelString;
+	}
+
+	public void setVoucher(Double voucher){
+		this.voucher = voucher;
+	}
+
+	public Double getVoucher(){
+		return voucher;
+	}
+
+	public ArrayList<GiftVO> getGifts(){
+		return gifts;
+	}
+
+
 
 }
