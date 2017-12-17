@@ -96,13 +96,13 @@
             <TableColumn fx:id="tableCategory" prefWidth="75.0" text="分类" />
             <TableColumn fx:id="tableLevel" prefWidth="50.0" text="级别" />
             <TableColumn fx:id="tableName" prefWidth="75.0" text="姓名" />
+            <TableColumn fx:id="tableAmount" prefWidth="75.0" text="应收额度" />
+            <TableColumn fx:id="tableReceive" prefWidth="50.0" text="应收" />
+            <TableColumn fx:id="tablePay" prefWidth="50.0" text="应付" />
             <TableColumn fx:id="tablePhone" prefWidth="75.0" text="电话" />
             <TableColumn fx:id="tableAddress" prefWidth="75.0" text="地址" />
             <TableColumn fx:id="tableZipcode" prefWidth="50.0" text="邮编" />
             <TableColumn fx:id="tableEmail" prefWidth="75.0" text="电子邮箱" />
-            <TableColumn fx:id="tableAmount" prefWidth="75.0" text="应收额度" />
-            <TableColumn fx:id="tableReceive" prefWidth="50.0" text="应收" />
-            <TableColumn fx:id="tablePay" prefWidth="50.0" text="应付" />
             <TableColumn fx:id="tableOperator" prefWidth="75.0" text="默认业务员" />
             <TableColumn fx:id="tableDelete" prefWidth="70.0" text="是否删除" />
         </columns>
@@ -112,13 +112,13 @@
       <Button layoutX="969.0" layoutY="75.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="61.0" text="查  询" />
       <Label fx:id="idLabel" layoutX="164.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
       <TextField fx:id="nameField" layoutX="364.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
-      <TextField fx:id="phoneField" layoutX="439.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
-      <TextField fx:id="zipcodeField" layoutX="589.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
-      <TextField fx:id="addressField" layoutX="514.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
-      <TextField fx:id="amountField" layoutX="714.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
-      <TextField fx:id="emailField" layoutX="639.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
-      <TextField fx:id="payField" layoutX="839.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
-      <TextField fx:id="receiveField" layoutX="789.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField fx:id="phoneField" layoutX="613.0" layoutY="512.0" prefHeight="23.0" prefWidth="76.0" />
+      <TextField fx:id="zipcodeField" layoutX="764.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField fx:id="addressField" layoutX="689.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="amountField" layoutX="438.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="emailField" layoutX="814.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="payField" layoutX="563.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
+      <TextField fx:id="receiveField" layoutX="513.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
       <Button layoutX="964.0" layoutY="512.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="70.0" text="增   加" />
       <ChoiceBox fx:id="levelChoice" layoutX="314.0" layoutY="512.0" prefWidth="50.0" />
       <Label fx:id="operatorLabel" layoutX="889.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />

@@ -6,14 +6,15 @@ import java.util.ResourceBundle;
 import dataenum.BillType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import vo.UserVO;
 
-public class PromotionMakingController {
+public class PromotionMakingController extends GeneralManagerController implements Initializable{
 
 	UserVO user;
 	@FXML
-	ChoiceBox<String> receiptChoice;
+	ChoiceBox<String> promotionChoice;
 
 	@FXML
 	public void chooseReceipt() throws Exception{

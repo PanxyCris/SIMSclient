@@ -67,8 +67,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <ChoiceBox layoutX="192.0" layoutY="83.0" prefWidth="150.0" />
-      <Button layoutX="342.0" layoutY="83.0" mnemonicParsing="false" text="选择策略类型" />
+      <ChoiceBox fx:id="promotionChoice" layoutX="192.0" layoutY="83.0" prefWidth="150.0" />
+      <Button layoutX="342.0" layoutY="83.0" mnemonicParsing="false" onAction="#choosePromotion" text="选择策略类型" />
       <Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
