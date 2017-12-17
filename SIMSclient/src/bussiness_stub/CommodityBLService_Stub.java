@@ -49,17 +49,21 @@ public class CommodityBLService_Stub implements CommodityBLService{
         list.add(commodity2);
 		return list;
 	}
-
+	
 	@Override
-	public void check() {
+	public void stock() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void stock() {
-		// TODO Auto-generated method stub
-
+	public ArrayList<String> getCommodityIDList() {
+		ArrayList<String> list = new ArrayList<>();
+		String id1 = "°×³ãµÆ(00001)";
+		String id2 = "Ì¨µÆ(00002)";
+		list.add(id1);
+		list.add(id2);
+		return list;
 	}
 
 }

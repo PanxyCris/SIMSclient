@@ -10,6 +10,7 @@ public class EditingCellDouble<T> extends TableCell<T, Double> {
     private TextField textField;
 
     public EditingCellDouble() {
+    	System.out.println(getString());
     }
 
     @Override

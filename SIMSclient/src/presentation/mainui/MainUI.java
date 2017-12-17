@@ -61,7 +61,7 @@ public class MainUI extends Application{
 		    String id = username.getText();
 		    String passWord = password.getText();
 
-		    UserBLService service = new UserController();
+		    UserBLService service = new UserBLService_Stub();
 
 		    if(service.login(id,passWord)){
 
