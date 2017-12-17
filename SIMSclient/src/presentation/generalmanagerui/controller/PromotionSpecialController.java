@@ -1,9 +1,9 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -35,8 +34,7 @@ import vo.UserVO;
 import vo.commodity.GiftVO;
 import vo.promotion.PromotionMemberVO;
 
-public class PromotionMemberController extends PromotionMakingController{
-
+public class PromotionSpecialController {
 	PromotionMemberBLService service = new PromotionMemberBLService_Stub();
 	public static final Remind remind = Remind.PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();

@@ -1,7 +1,7 @@
 package vo.promotion;
 
 /**
- * 
+ *
  * @author Lijie
  * @date 2017Äê12ÔÂ11ÈÕ
  */
@@ -11,7 +11,7 @@ public class PromotionGoodsVO {
 
 	public String name;
 
-	public int number;
+	public Integer number;
 
 	public PromotionGoodsVO(String id, String name, int number) {
 		this.id = id;

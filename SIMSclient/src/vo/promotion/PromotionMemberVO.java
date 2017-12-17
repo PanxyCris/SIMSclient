@@ -13,8 +13,6 @@ import vo.commodity.CommodityItemVO;
 import vo.commodity.GiftVO;
 
 public class PromotionMemberVO extends PromotionVO {
-	private LocalDate beginDate;
-	private LocalDate endDate;
 	private MemberLevel level;
 	private String levelString;
 	private Double allowance;
@@ -23,30 +21,12 @@ public class PromotionMemberVO extends PromotionVO {
 
 	public PromotionMemberVO(LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
 			ArrayList<GiftVO> gifts) {
-		super();
-		this.beginDate = beginDate;
-		this.endDate = endDate;
+		super( beginDate, endDate);
 		this.level = level;
 		levelString = level.value;
 		this.allowance = allowance;
 		this.voucher = voucher;
 		this.gifts = gifts;
-	}
-
-	public void setBeginDate(LocalDate beginDate){
-		this.beginDate = beginDate;
-	}
-
-	public LocalDate getBeginDate(){
-		return beginDate;
-	}
-
-	public void setEndDate(LocalDate endDate){
-		this.endDate = endDate;
-	}
-
-	public LocalDate getEndDate(){
-		return endDate;
 	}
 
 	public void setAllowance(Double allowance){

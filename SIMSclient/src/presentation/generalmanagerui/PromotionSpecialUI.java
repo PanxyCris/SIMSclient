@@ -1,21 +1,19 @@
 package presentation.generalmanagerui;
 
 import javafx.fxml.FXMLLoader;
-
-
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.generalmanagerui.controller.PromotionMemberController;
+import presentation.generalmanagerui.controller.PromotionSpecialController;
 import vo.UserVO;
 
-public class PromotionMemberUI {
+public class PromotionSpecialUI {
 
 	public void start(UserVO user) throws Exception{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PromotionMemberUI.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PromotionSpecialUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
-        PromotionMemberController controller = loader.<PromotionMemberController>getController();
+        PromotionSpecialController controller = loader.<PromotionSpecialController>getController();
         controller.initData(user);
         primaryStage.show();
 	}

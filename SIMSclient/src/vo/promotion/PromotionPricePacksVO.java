@@ -1,40 +1,40 @@
 package vo.promotion;
-/**     
+/**
 *  特价包
-* @author Lijie 
-* @date 2017年12月11日    
+* @author Lijie
+* @date 2017年12月11日
 */
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
-import dataenum.PromotionType;
-import vo.commodity.CommodityItemVO;
+import java.util.ArrayList;
+import vo.commodity.GiftVO;
 
 public class PromotionPricePacksVO extends PromotionVO {
-	public String beginDate;
-	public String endDate;
-	public ArrayList<CommodityItemVO> pricePacks;
-	public double beforeTotal;   //特价包优惠前的总价
-	public double afterTotal;   //促销后的价格
-	public PromotionType type;
-	
-	public PromotionPricePacksVO(String ID, String beginDate, String endDate, ArrayList<CommodityItemVO> pricePacks, 
-			double beforeTotal, double afterTotal) {
-		this.id = ID;
-		this.beginDate = beginDate;
-		this.endDate = endDate;
+	private ArrayList<GiftVO> pricePacks;
+	private Double discount;   //特价包优惠前的总价
+
+	public PromotionPricePacksVO(LocalDate beginDate, LocalDate endDate,Double discount, ArrayList<GiftVO> pricePacks) {
+		super(beginDate,endDate);
 		this.pricePacks = pricePacks;
-		this.beforeTotal = afterTotal;
-		this.afterTotal = afterTotal;
-		this.type = PromotionType.PRICEPACKS;
+		this.discount = discount;
 	}
 
-	public PromotionPricePacksVO(String beginDate, String endDate, double afterTotal) {
-		super();
-		this.beginDate = beginDate;
-		this.endDate = endDate;
-		this.afterTotal = afterTotal;
+	public void setPricePacks(ArrayList<GiftVO> pricePacks){
+		this.pricePacks = pricePacks;
 	}
 
-	
+	public ArrayList<GiftVO> getPricePacks(){
+		return pricePacks;
+	}
+
+	public void setDiscount(Double discount){
+		this.discount = discount;
+	}
+
+	public Double getDiscount(){
+		return discount;
+	}
+
+
 }
