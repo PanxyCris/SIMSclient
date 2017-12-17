@@ -22,9 +22,9 @@ public interface PurchaseBLService {
 
     public void delete(PurchaseVO info);
 
-	public PurchaseVO submit(PurchaseVO Info);
+	public ResultMessage submit(PurchaseVO Info);
 
-	public PurchaseVO save(PurchaseVO Info);
+	public ResultMessage save(PurchaseVO Info);
 
 	public ResultMessage isLegal(CommodityItemVO vo);
 

@@ -1,11 +1,16 @@
 package bussinesslogic.purchasebl;
 
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.ResultMessage;
+import dataservice.purchasedataservice.PurchaseDataService;
 import po.PurchasePO;
+import rmi.RemoteHelper;
 import vo.PromotionVO;
 import vo.commodity.CommodityItemVO;
 import vo.commodity.CommodityVO;
@@ -18,28 +23,108 @@ import vo.purchase.PurchaseVO;
 */
 public class PurchaseController implements PurchaseBLService{
 
+	private PurchaseDataService service;
+	private String date;
+	
+	public PurchaseController() {
+		service = RemoteHelper.getInstance().getPurchaseDataService();
+	}
+	
 	@Override
 	public String getPurchaseID() {
-		return null;
+		ArrayList<PurchasePO> list = new ArrayList<>();
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (PurchasePO po : list) {
+			id = po.getId();
+			String temp[] = id.split("-");
+			
+			if (temp[0].equals("JHD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
+		}
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("JHD-");
+		return s.append(day).append("-").append(id).toString();
 	}
 
 	@Override
 	public String getPurChaseBackID() {
-		return null;
+		ArrayList<PurchasePO> list = new ArrayList<>();
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (PurchasePO po : list) {
+			id = po.getId();
+			String temp[] = id.split("-");
+			
+			if (temp[0].equals("JHTHD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
+		}
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("JHTHD-");
+		return s.append(day).append("-").append(id).toString();
 	}
 
 	@Override
-	public void delete(PurchaseVO info) {
+	public void delete(PurchaseVO vo) {
+		try {
+			service.deletePurchase(vo.getId());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public PurchaseVO submit(PurchaseVO Info) {
-		return null;
+	public ResultMessage submit(PurchaseVO Info) {
+		try {
+			return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
 	}
 
 	@Override
-	public PurchaseVO save(PurchaseVO Info) {
-		return null;
+	public ResultMessage save(PurchaseVO Info) {
+		try {
+			return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
 	}
 
 	@Override
@@ -48,7 +133,21 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> show() {
-		return null;
+	public ArrayList<PurchaseVO> show() {		
+		ArrayList<PurchaseVO> list = new ArrayList<>();
+		ArrayList<PurchasePO> POList = new ArrayList<>();
+		PurchaseVO vo = null;
+		for (PurchasePO po : POList) {
+			vo = PurchaseTransition.POtoVO(po);
+			list.add(vo);
+		}
+		return list;
+	}
+	
+	
+	public String getDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		this.date = sdf.format(new Date());
+		return this.date;
 	}
 }
