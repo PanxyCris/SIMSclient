@@ -29,16 +29,39 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public void delete(PurchaseVO info) {
-	}
-
-	@Override
-	public ResultMessage submit(PurchaseVO Info) {
+	public PurchasePO createPurcashe() {
 		return null;
 	}
 
 	@Override
-	public ResultMessage save(PurchaseVO Info) {
+	public void addCommodities(CommodityItemVO item) {
+	}
+
+	@Override
+	public void addMembers(String id) {
+	}
+
+	@Override
+	public void delete(PurchaseVO info) {
+	}
+
+	@Override
+	public PurchaseVO submit(PurchaseVO Info) {
+		return null;
+	}
+
+	@Override
+	public PurchaseVO save(PurchaseVO Info) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage updateDraft(PurchaseVO vo) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage submitDraft(PurchaseVO vo) {
 		return null;
 	}
 
@@ -48,14 +71,8 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> inventoryCheck(Date startDate, Date endDate) {
-		return null;
-	}
-
-	@Override
 	public ArrayList<PurchaseVO> show() {
 		return null;
 	}
 
-	
-}
+	}
