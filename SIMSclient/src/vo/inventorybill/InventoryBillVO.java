@@ -2,7 +2,7 @@ package vo.inventorybill;
 
 import dataenum.BillState;
 import dataenum.BillType;
-import vo.BillVO;
+import vo.billvo.BillVO;
 import vo.commodity.CommodityVO;
 
 public class InventoryBillVO extends BillVO{

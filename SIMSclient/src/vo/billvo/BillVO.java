@@ -1,8 +1,9 @@
-package vo;
+package vo.billvo;
 
 import dataenum.BillState;
 
 import dataenum.BillType;
+import vo.ViewObject;
 
 public class BillVO extends ViewObject{
 

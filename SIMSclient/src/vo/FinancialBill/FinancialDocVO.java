@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import dataenum.BillState;
 import dataenum.BillType;
-import vo.BillVO;
+import vo.billvo.BillVO;
 
 
 /**
