@@ -69,7 +69,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 	    @FXML
         protected TextField payField;
 	    @FXML
-	    protected Label operatorLabel;
+	    protected TextField operatorField;
 
 		@FXML
 		protected TableView<MemberVO> table;
@@ -106,7 +106,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 			 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
 					 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),
 					 emailField.getText(),amountField.getText(),receiveField.getText(),payField.getText(),
-					 operatorLabel.getText());
+					 operatorField.getText());
 		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -115,7 +115,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:list.add(vo);table.setItems(list);break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);idLabel.setText(service.getId());break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -188,9 +188,6 @@ public class MemberManageController extends SaleStockStaffController implements 
 	                ((MemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setLevel(t.getNewValue());
-	               MemberVO vo = ((MemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        );
 
 	        });
 
@@ -264,7 +261,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		public void initData(UserVO user) throws Exception {
-			operatorLabel.setText(user.getName());
+			operatorField.setText(user.getName());
 		}
 
 }

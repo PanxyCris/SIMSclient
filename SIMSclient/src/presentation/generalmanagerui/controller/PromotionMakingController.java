@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dataenum.BillType;
+import dataenum.PromotionType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +18,7 @@ public class PromotionMakingController extends GeneralManagerController implemen
 	ChoiceBox<String> promotionChoice;
 
 	@FXML
-	public void chooseReceipt() throws Exception{
+	public void choosePromotion() throws Exception{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
 		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
@@ -38,8 +39,8 @@ public class PromotionMakingController extends GeneralManagerController implemen
 	}
 
 	public void choiceInit(){
-		receiptChoice.setItems(FXCollections.observableArrayList(BillType.PURCHASEBILL.value,BillType.PURCHASEBACKBILL.value,
-				BillType.SALESBILL.value,BillType.SALESBACKBILL.value));
+		promotionChoice.setItems(FXCollections.observableArrayList(PromotionType.LEVEL_PROMOTION.value,
+				PromotionType.LEVEL_PROMOTION.value,PromotionType.SUM_PROMOTION.value));
 	}
 
 

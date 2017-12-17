@@ -121,7 +121,7 @@
       <TextField fx:id="receiveField" layoutX="513.0" layoutY="512.0" prefHeight="23.0" prefWidth="50.0" />
       <Button layoutX="964.0" layoutY="512.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="70.0" text="增   加" />
       <ChoiceBox fx:id="levelChoice" layoutX="314.0" layoutY="512.0" prefWidth="50.0" />
-      <Label fx:id="operatorLabel" layoutX="889.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
       <ChoiceBox fx:id="classChoice" layoutX="239.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
+      <TextField fx:id="operatorField" layoutX="889.0" layoutY="512.0" prefHeight="23.0" prefWidth="75.0" />
    </children>
 </AnchorPane>
