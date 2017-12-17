@@ -49,7 +49,7 @@ public class MemberVO {
 		this.receivable = receivable;
 		this.payable = payable;
 		this.saleMan = saleMan;
-		
+
 	}
 
 	public String getID() {
@@ -115,6 +115,26 @@ public class MemberVO {
 
 	public String getLevelString(){
 		return levelString;
+	}
+
+	public void setCellNumber(String cellNumber){
+		this.cellNumber = cellNumber;
+	}
+
+	public void setAddress(String address){
+		this.address = address;
+	}
+
+	public void setPost(String post){
+		this.post = post;
+	}
+
+	public void setEmail(String email){
+		this.email = email;
+	}
+
+	public void setSaleMan(String saleMan){
+		this.saleMan = saleMan;
 	}
 
 }

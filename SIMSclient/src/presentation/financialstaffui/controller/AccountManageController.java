@@ -70,7 +70,7 @@ public class AccountManageController extends FinancialStaffController implements
                         case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
                         case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
                         case EXISTED:new RemindExistUI().start(remind,true);break;
-                        case SUCCESS:list.add(vo);table.setItems(list);break;
+                        case SUCCESS:fresh();break;
                         default:break;
                         }
                         } catch (Exception e) {

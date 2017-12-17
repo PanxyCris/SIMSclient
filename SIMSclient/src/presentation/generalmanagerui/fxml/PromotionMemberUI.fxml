@@ -69,18 +69,16 @@
       </Button>
       <Button layoutX="342.0" layoutY="83.0" mnemonicParsing="false" text="选择策略类型" />
       <ChoiceBox layoutX="192.0" layoutY="83.0" prefWidth="150.0" />
-      <Button layoutX="350.0" layoutY="471.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="161.0" text="完     成" />
-      <TableView layoutX="192.0" layoutY="165.0" prefHeight="271.0" prefWidth="799.0">
+      <TableView layoutX="192.0" layoutY="165.0" prefHeight="271.0" prefWidth="601.0">
         <columns>
           <TableColumn prefWidth="75.0" text="客户类型" />
-          <TableColumn prefWidth="75.0" text="赠品" />
             <TableColumn prefWidth="75.0" text="价格折让" />
             <TableColumn prefWidth="75.0" text="代金券" />
-            <TableColumn prefWidth="75.0" text="起始时间" />
-            <TableColumn prefWidth="75.0" text="间隔时间" />
+            <TableColumn prefWidth="150.0" text="起始时间" />
+            <TableColumn prefWidth="150.0" text="间隔时间" />
+          <TableColumn prefWidth="75.0" text="查看赠品" />
         </columns>
       </TableView>
-      <Button layoutX="651.0" layoutY="471.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="161.0" text="取    消" />
       <Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />
@@ -129,5 +127,11 @@
             </ImageView>
          </graphic>
       </Button>
+      <TableView layoutX="812.0" layoutY="165.0" prefHeight="271.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="125.0" text="赠品名" />
+          <TableColumn prefWidth="75.0" text="数量" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

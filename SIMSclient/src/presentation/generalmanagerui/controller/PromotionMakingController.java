@@ -2,8 +2,6 @@ package presentation.generalmanagerui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import dataenum.BillType;
 import dataenum.PromotionType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -19,12 +17,11 @@ public class PromotionMakingController extends GeneralManagerController implemen
 
 	@FXML
 	public void choosePromotion() throws Exception{
-		BillType type = BillType.getType(receiptChoice.getValue());
+		PromotionType type = PromotionType.getType(promotionChoice.getValue());
 		switch(type){
-		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
-		case PURCHASEBACKBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
-		case SALESBILL:
-		case SALESBACKBILL:
+		case LEVEL_PROMOTION:changeStage("PromotionMemberUI");break;
+		case PRICEPACKS:changeStage("PromotionSpecialUI");break;
+		case SUM_PROMOTION:changeStage("PromotionSumUI");break;
 		default:break;
 		}
 	}
@@ -40,7 +37,7 @@ public class PromotionMakingController extends GeneralManagerController implemen
 
 	public void choiceInit(){
 		promotionChoice.setItems(FXCollections.observableArrayList(PromotionType.LEVEL_PROMOTION.value,
-				PromotionType.LEVEL_PROMOTION.value,PromotionType.SUM_PROMOTION.value));
+				PromotionType.PRICEPACKS.value,PromotionType.SUM_PROMOTION.value));
 	}
 
 

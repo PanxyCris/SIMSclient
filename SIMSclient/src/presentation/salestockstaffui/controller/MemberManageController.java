@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
@@ -115,7 +116,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:list.add(vo);table.setItems(list);System.out.print(service.getId());idLabel.setText(service.getId());break;
+		    	        case SUCCESS:fresh();break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -178,9 +179,98 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		public void edit(){
+			Callback<TableColumn<MemberVO, String>,
+		        TableCell<MemberVO, String>> cellFactory
+		            = (TableColumn<MemberVO, String> p) -> new EditingCell<MemberVO>();
+
 	        Callback<TableColumn<MemberVO, String>,
 		        TableCell<MemberVO, String>> choiceFactory
 		            = (TableColumn<MemberVO, String> p) -> new EditingCellChoice<MemberVO>(levelList);
+
+		    tablePhone.setCellFactory(cellFactory);
+		    tablePhone.setOnEditCommit(
+		            (CellEditEvent<MemberVO, String> t) -> {
+		                ((MemberVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setCellNumber(t.getNewValue());
+		                try {
+							service.update((MemberVO) t.getTableView().getItems().get(
+							        t.getTablePosition().getRow())
+							        );
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+		        });
+
+		    tableAddress.setCellFactory(cellFactory);
+		    tableAddress.setOnEditCommit(
+		            (CellEditEvent<MemberVO, String> t) -> {
+		                ((MemberVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setAddress(t.getNewValue());
+		                try {
+							service.update((MemberVO) t.getTableView().getItems().get(
+							        t.getTablePosition().getRow())
+							        );
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+		        });
+
+		    tableZipcode.setCellFactory(cellFactory);
+		    tableZipcode.setOnEditCommit(
+		            (CellEditEvent<MemberVO, String> t) -> {
+		                ((MemberVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setPost(t.getNewValue());
+		                try {
+							service.update((MemberVO) t.getTableView().getItems().get(
+							        t.getTablePosition().getRow())
+							        );
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+		        });
+
+		    tableEmail.setCellFactory(cellFactory);
+		    tableEmail.setOnEditCommit(
+		            (CellEditEvent<MemberVO, String> t) -> {
+		                ((MemberVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setEmail(t.getNewValue());
+		                try {
+							service.update((MemberVO) t.getTableView().getItems().get(
+							        t.getTablePosition().getRow())
+							        );
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+		        });
+
+		    tableOperator.setCellFactory(cellFactory);
+		    tableOperator.setOnEditCommit(
+		            (CellEditEvent<MemberVO, String> t) -> {
+		                ((MemberVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setSaleMan(t.getNewValue());
+		                try {
+							service.update((MemberVO) t.getTableView().getItems().get(
+							        t.getTablePosition().getRow())
+							        );
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+		        });
 
 	        tableLevel.setCellFactory(choiceFactory);
 	        tableLevel.setOnEditCommit(
@@ -188,6 +278,14 @@ public class MemberManageController extends SaleStockStaffController implements 
 	                ((MemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setLevel(t.getNewValue());
+	                try {
+						service.update((MemberVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+						        );
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
