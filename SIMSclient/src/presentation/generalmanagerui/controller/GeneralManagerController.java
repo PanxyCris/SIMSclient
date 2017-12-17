@@ -1,6 +1,7 @@
-package presentation.usermanagerui.controller;
+package presentation.generalmanagerui.controller;
 
 import java.util.Stack;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -12,9 +13,9 @@ import presentation.usermanagerui.UserManagingUI;
 import presentation.usermanagerui.UserMessageUI;
 import vo.UserVO;
 
-public class UserManagerController{
+public class GeneralManagerController {
 
-	public static final String mainID = "UserManagerUI";
+	public static final String mainID = "GeneralManagerUI";
 	static String previous;
 	static String current;
 	static Stack<String> stack;
@@ -102,8 +103,8 @@ public class UserManagerController{
                 try {
                    switch(currentID){
    		            case mainID:new UserManagerUI().start(user);break;
-   		            case "UserManagingUI":new UserManagingUI().start(user);break;
-   		            case "UserMessageUI":new UserMessageUI().start();break;
+   		         //   case "UserManagingUI":new UserManagingUI().start(user);break;
+   		         //   case "UserMessageUI":new UserMessageUI().start();break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();
@@ -112,7 +113,6 @@ public class UserManagerController{
        });
 
 	}
-
 
 
 }
