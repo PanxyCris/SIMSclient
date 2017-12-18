@@ -18,9 +18,9 @@ public interface CommodityBLService {
 
 	public ArrayList<CommodityVO> find(String info,FindCommodityType properties);
 
-	public ArrayList<CommodityVO> getCommodityList();
+	public ArrayList<CommodityVO> show();
 
-	public ArrayList<String> getCommodityIDList();
+	public ArrayList<String> getIDandName();
 
 	public void stock();   //ø‚¥Ê≈Ãµ„
 }

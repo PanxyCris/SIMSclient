@@ -85,4 +85,14 @@ public class MemberController implements MemberBLService{
 		return service.deleteMember(id);
 	}
 
+	@Override
+	public ArrayList<String> getIDandName() throws RemoteException {
+		ArrayList<MemberVO> list = show();
+		ArrayList<String> result = new ArrayList<>();
+		for (MemberVO vo : list) {
+			result.add(vo.getName() + "(" + vo.getID() + ")");
+		}
+		return result;
+	}
+
 }

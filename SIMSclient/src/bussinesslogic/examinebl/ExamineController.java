@@ -12,7 +12,7 @@ import po.sales.SalesPO;
 import rmi.RemoteHelper;
 import vo.ViewObject;
 import vo.billvo.BillVO;
-import vo.sale.SalesVO;
+import vo.billvo.salesbillvo.SalesVO;
 
 /**     
 *  
