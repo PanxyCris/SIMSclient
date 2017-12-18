@@ -332,7 +332,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         ObservableList<String> commodityList = FXCollections.observableArrayList();
         CommodityBLService commodityService = new CommodityController();//׮
 
-   //     	commodityList.add(commodityService.getCommodityList().get(i).getName());
+    	commodityList.addAll(commodityService.getIDandName());
 
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(
