@@ -8,6 +8,7 @@ package vo.promotionvo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import dataenum.PromotionType;
 import vo.commodityvo.GiftVO;
 
 public class PromotionTotalVO extends PromotionVO {
@@ -19,7 +20,7 @@ public class PromotionTotalVO extends PromotionVO {
 
 	public PromotionTotalVO(LocalDate beginDate,LocalDate endDate, Double total,
 			Double voucher, ArrayList<GiftVO> gifts) {
-		super(beginDate,endDate);
+		super(beginDate,endDate,PromotionType.SUM_PROMOTION);
 		this.setVoucher(voucher);
 		this.setGifts(gifts);
 		this.setTotal(total);

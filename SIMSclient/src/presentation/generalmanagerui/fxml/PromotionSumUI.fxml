@@ -76,6 +76,7 @@
 				<TableColumn fx:id="tableVoucher" prefWidth="75.0" text="代金券" />
 				<TableColumn fx:id="tableStart" prefWidth="130.0" text="起始时间" />
 				<TableColumn fx:id="tableEnd" prefWidth="130.0" text="结束时间" />
+            <TableColumn fx:id="tableCheck" prefWidth="100.0" text="查看赠品列表" />
 				<TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
 			</columns>
 		</TableView>

@@ -1,15 +1,12 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
-import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionTotalBLService_Stub;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
-import dataenum.MemberLevel;
 import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -19,7 +16,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -48,7 +44,7 @@ public class PromotionSumController extends PromotionMakingController{
     ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
     ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
     UserVO user;
-    PromotionMemberVO currentPromotion;
+    PromotionTotalVO currentPromotion;
 
 	@FXML
 	TableView<PromotionTotalVO> table;
@@ -62,6 +58,8 @@ public class PromotionSumController extends PromotionMakingController{
 	TableColumn<PromotionTotalVO,LocalDate> tableStart;
 	@FXML
 	TableColumn<PromotionTotalVO,LocalDate> tableEnd;
+	@FXML
+	TableColumn<PromotionTotalVO,String> tableCheck;
 	@FXML
 	TableColumn<PromotionTotalVO,String> tableDelete;
 
@@ -126,9 +124,7 @@ public class PromotionSumController extends PromotionMakingController{
 	public void fresh() throws RemoteException{
 		list.clear();
 		list.addAll(service.getPromotionList(type));
-		levelChoice.setValue(null);
 		table.setItems(list);
-		allowanceField.setText(null);
 		voucherField.setText(null);
 		startPicker.setValue(null);
 		endPicker.setValue(null);
@@ -147,37 +143,25 @@ public class PromotionSumController extends PromotionMakingController{
 	}
 
 	public void edit(){
-		Callback<TableColumn<PromotionMemberVO, Double>,
-	        TableCell<PromotionMemberVO, Double>> cellFactoryDouble
-	            = (TableColumn<PromotionMemberVO, Double> p) -> new EditingCellDouble<PromotionMemberVO>();
+		Callback<TableColumn<PromotionTotalVO, Double>,
+	        TableCell<PromotionTotalVO, Double>> cellFactoryDouble
+	            = (TableColumn<PromotionTotalVO, Double> p) -> new EditingCellDouble<PromotionTotalVO>();
 
 	    Callback<TableColumn<GiftVO, Integer>,
 		    TableCell<GiftVO, Integer>> cellFactoryInteger
 		        = (TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
 
-        Callback<TableColumn<PromotionMemberVO, LocalDate>,
-	        TableCell<PromotionMemberVO, LocalDate>> dateFactory
-	            = (TableColumn<PromotionMemberVO, LocalDate> p) -> new EditingCellDate<PromotionMemberVO>();
-
-	    tableAllowance.setCellFactory(cellFactoryDouble);
-	    tableAllowance.setOnEditCommit(
-	            (CellEditEvent<PromotionMemberVO, Double> t) -> {
-	                ((PromotionMemberVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setAllowance(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		,type);
-
-	        });
+        Callback<TableColumn<PromotionTotalVO, LocalDate>,
+	        TableCell<PromotionTotalVO, LocalDate>> dateFactory
+	            = (TableColumn<PromotionTotalVO, LocalDate> p) -> new EditingCellDate<PromotionTotalVO>();
 
 	    tableVoucher.setCellFactory(cellFactoryDouble);
 	    tableVoucher.setOnEditCommit(
-	            (CellEditEvent<PromotionMemberVO, Double> t) -> {
-	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	            (CellEditEvent<PromotionTotalVO, Double> t) -> {
+	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setVoucher(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
 	                		,type);
 
@@ -185,11 +169,11 @@ public class PromotionSumController extends PromotionMakingController{
 
 	    tableStart.setCellFactory(dateFactory);
 	    tableStart.setOnEditCommit(
-	            (CellEditEvent<PromotionMemberVO, LocalDate> t) -> {
-	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	            (CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
+	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setBeginDate(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
 	                		,type);
 
@@ -197,11 +181,11 @@ public class PromotionSumController extends PromotionMakingController{
 
 	    tableEnd.setCellFactory(dateFactory);
 	    tableEnd.setOnEditCommit(
-	            (CellEditEvent<PromotionMemberVO, LocalDate> t) -> {
-	                ((PromotionMemberVO) t.getTableView().getItems().get(
+	            (CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
+	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setEndDate(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
+	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
 	                		,type);
 
@@ -223,16 +207,14 @@ public class PromotionSumController extends PromotionMakingController{
 
 
 	public void manageInit(){
-		tableLevel.setCellValueFactory(
-                new PropertyValueFactory<PromotionMemberVO,String>("levelString"));
+		tableSum.setCellValueFactory(
+	                new PropertyValueFactory<PromotionTotalVO,Double>("total"));
 	    tableStart.setCellValueFactory(
-                new PropertyValueFactory<PromotionMemberVO,LocalDate>("beginDate"));
+                new PropertyValueFactory<PromotionTotalVO,LocalDate>("beginDate"));
         tableEnd.setCellValueFactory(
-                new PropertyValueFactory<PromotionMemberVO,LocalDate>("endDate"));
-        tableAllowance.setCellValueFactory(
-                new PropertyValueFactory<PromotionMemberVO,Double>("allowance"));
+                new PropertyValueFactory<PromotionTotalVO,LocalDate>("endDate"));
         tableVoucher.setCellValueFactory(
-                new PropertyValueFactory<PromotionMemberVO,Double>("voucher"));
+                new PropertyValueFactory<PromotionTotalVO,Double>("voucher"));
 
         tableName.setCellValueFactory(
                 new PropertyValueFactory<GiftVO,String>("name"));
@@ -242,16 +224,15 @@ public class PromotionSumController extends PromotionMakingController{
         deleteInit();
         deleteGiftInit();
         CommodityBLService commodityservice = new CommodityBLService_Stub();
-        giftChoiceList.addAll(commodityservice.getCommodityIDList());
+        giftChoiceList.addAll(commodityservice.getIDandName());
         giftChoice.setItems(giftChoiceList);
-        levelChoice.setItems(levelList);
 
 	}
 
 	public void checkInit(){
 
 		tableCheck.setCellFactory((col) -> {
-            TableCell<PromotionMemberVO, String> cell = new TableCell<PromotionMemberVO, String>() {
+            TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -263,7 +244,7 @@ public class PromotionSumController extends PromotionMakingController{
                         Button delBtn = new Button("查看赠品列表");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PromotionMemberVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	PromotionTotalVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	currentPromotion = clickedItem;
                             giftList.clear();
                             giftList.addAll(clickedItem.getGifts());
@@ -281,7 +262,7 @@ public class PromotionSumController extends PromotionMakingController{
 
 	public void deleteInit(){
 		tableDelete.setCellFactory((col) -> {
-            TableCell<PromotionMemberVO, String> cell = new TableCell<PromotionMemberVO, String>() {
+            TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -293,7 +274,7 @@ public class PromotionSumController extends PromotionMakingController{
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PromotionMemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+                        	PromotionTotalVO clickedUser = this.getTableView().getItems().get(this.getIndex());
                             service.delete(clickedUser,type);
                             list.remove(clickedUser);
                             table.setItems(list);
@@ -339,7 +320,7 @@ public class PromotionSumController extends PromotionMakingController{
 	}
 
     public void updateGiftList(){
-    	 PromotionMemberVO promotion = currentPromotion;
+    	 PromotionTotalVO promotion = currentPromotion;
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(giftList);
     	 promotion.setGifts(gifts);

@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import dataenum.MemberLevel;
+import dataenum.PromotionType;
 import vo.commodityvo.GiftVO;
 
 public class PromotionMemberVO extends PromotionVO {
@@ -21,7 +22,7 @@ public class PromotionMemberVO extends PromotionVO {
 
 	public PromotionMemberVO(LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
 			ArrayList<GiftVO> gifts) {
-		super( beginDate, endDate);
+		super( beginDate, endDate,PromotionType.LEVEL_PROMOTION);
 		this.level = level;
 		levelString = level.value;
 		this.allowance = allowance;

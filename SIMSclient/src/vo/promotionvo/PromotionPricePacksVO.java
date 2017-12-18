@@ -8,6 +8,8 @@ package vo.promotionvo;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+
+import dataenum.PromotionType;
 import vo.commodityvo.GiftVO;
 
 public class PromotionPricePacksVO extends PromotionVO {
@@ -15,7 +17,7 @@ public class PromotionPricePacksVO extends PromotionVO {
 	private Double discount;   //特价包优惠前的总价
 
 	public PromotionPricePacksVO(LocalDate beginDate, LocalDate endDate,Double discount, ArrayList<GiftVO> pricePacks) {
-		super(beginDate,endDate);
+		super(beginDate,endDate,PromotionType.PRICEPACKS);
 		this.pricePacks = pricePacks;
 		this.discount = discount;
 	}
