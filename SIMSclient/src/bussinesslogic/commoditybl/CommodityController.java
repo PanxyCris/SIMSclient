@@ -123,10 +123,12 @@ public class CommodityController implements CommodityBLService{
 	public ArrayList<String> getIDandName() {
 		ArrayList<CommodityVO> list = show();
 		ArrayList<String> result = new ArrayList<>();
-		for (CommodityVO vo : list) {
-			result.add(vo.getName() + "(" + vo.getID() + ")");
-		}
-		return result;
+//		for (CommodityVO vo : list) {
+//			result.add(vo.getName() + "(" + vo.getID() + ")");
+//		}
+		ArrayList<String> a = new ArrayList<>();
+		a.add("¿ÓΩ‹(00001)");
+		return a;
 	}
 
 		

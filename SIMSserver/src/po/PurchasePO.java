@@ -29,20 +29,7 @@ public class PurchasePO implements Serializable{
 	private BillType type;
 	private BillState state;
 	private String date;
-	/** 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @param id
-	* @param @param memberID
-	* @param @param member
-	* @param @param warehouse
-	* @param @param operator
-	* @param @param commodities
-	* @param @param remark
-	* @param @param sum
-	* @param @param type    设定文件 
-	* @return   返回类型 
-	* @throws 
-	*/
+	
 	public PurchasePO(String id, String memberID, String member, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemPO> commodities, String remark, double sum, BillType type) {
 		this.id = id;

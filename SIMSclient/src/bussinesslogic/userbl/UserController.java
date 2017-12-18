@@ -10,7 +10,7 @@ import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
 import rmi.RemoteHelper;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class UserController implements UserBLService{
 

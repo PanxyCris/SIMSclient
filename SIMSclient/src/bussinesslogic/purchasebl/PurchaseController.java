@@ -28,38 +28,44 @@ public class PurchaseController implements PurchaseBLService{
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 	}
 	
+	public static void main(String[] args) {
+		PurchaseController pc = new PurchaseController();
+		pc.getPurchaseID();
+	}
+	
 	@Override
 	public String getPurchaseID() {
-		ArrayList<PurchasePO> list = new ArrayList<>();
-		ArrayList<Long> IDList = new ArrayList<>();
-		String id = null;
-		for (PurchasePO po : list) {
-			id = po.getId();
-			String temp[] = id.split("-");
-			
-			if (temp[0].equals("JHD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
-			}
-		}
-		Collections.sort(IDList);
-		String day = getDate();
-//		Collections.reverse(IDList);
-		String num = String.valueOf(IDList.get(IDList.size()-1));
-		if (day.equals(String.valueOf(num.substring(0, 8)))) {
-			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
-			StringBuilder sb = new StringBuilder(index);
-			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
-				sb.insert(0, "0");
-			}
-			id = sb.toString();
-		}
-		else {
-			id = "00001";
-		}
-		StringBuilder s = new StringBuilder("JHD-");
-		return s.append(day).append("-").append(id).toString();
+//		ArrayList<PurchasePO> list = new ArrayList<>();
+//		ArrayList<Long> IDList = new ArrayList<>();
+//		String id = null;
+//		for (PurchasePO po : list) {
+//			id = po.getId();
+//			String temp[] = id.split("-");
+//			
+//			if (temp[0].equals("JHD")) {
+//				IDList.add(Long.parseLong(temp[1]+temp[2]));
+//			}
+//		}
+//		Collections.sort(IDList);
+//		String day = getDate();
+////		Collections.reverse(IDList);
+//		String num = String.valueOf(IDList.get(IDList.size()-1));
+//		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+//			String index = num.substring(8, num.length());
+//			index = String.valueOf(Integer.parseInt(index)+1);
+//			StringBuilder sb = new StringBuilder(index);
+//			int len = index.length();
+//			for (int i=0; i < 5-len; i++) {
+//				sb.insert(0, "0");
+//			}
+//			id = sb.toString();
+//		}
+//		else {
+//			id = "00001";
+//		}
+//		StringBuilder s = new StringBuilder("JHD-");
+//		return s.append(day).append("-").append(id).toString();
+		return "000001";
 	}
 
 	@Override
@@ -133,7 +139,12 @@ public class PurchaseController implements PurchaseBLService{
 	@Override
 	public ArrayList<PurchaseVO> show() {		
 		ArrayList<PurchaseVO> list = new ArrayList<>();
-		ArrayList<PurchasePO> POList = new ArrayList<>();
+		ArrayList<PurchasePO> POList = null;
+		try {
+			POList = service.showPurchase();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		PurchaseVO vo = null;
 		for (PurchasePO po : POList) {
 			vo = PurchaseTransition.POtoVO(po);

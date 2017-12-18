@@ -107,7 +107,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 		tableOperator.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("operator"));
 		tableNote.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("remark"));
+                new PropertyValueFactory<PurchaseVO,String>("note"));
 		tableState.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("stateString"));
 		checkInit();

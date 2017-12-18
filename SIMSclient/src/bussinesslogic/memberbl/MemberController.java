@@ -90,7 +90,7 @@ public class MemberController implements MemberBLService{
 		ArrayList<MemberVO> list = show();
 		ArrayList<String> result = new ArrayList<>();
 		for (MemberVO vo : list) {
-			result.add(vo.getName() + "(" + vo.getID() + ")");
+			result.add(vo.getName() + "(" + vo.getID() + ")" + "(" + vo.getCategory().value + ")");
 		}
 		return result;
 	}

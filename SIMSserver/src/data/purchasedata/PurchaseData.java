@@ -19,21 +19,39 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
+import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
 import po.PurchasePO;
+import po.commodity.CommodityItemPO;
 
 public class PurchaseData {
 
+	public static void main(String[] args) {
+		PurchaseData p = new PurchaseData();
+		CommodityItemPO i = new CommodityItemPO("000003", "王灿灿", "脱单大佬", 100, 200, "清单大甩卖");
+		CommodityItemPO i1 = new CommodityItemPO("000002", "潘星宇", "单身旺", 1000, 300, "清单大甩卖");
+		ArrayList<CommodityItemPO> l = new ArrayList<>();
+		l.add(i);
+		l.add(i1);
+		PurchasePO po = new PurchasePO("JHD-20171218-00002", "000002", "王灿灿", Warehouse.WAREHOUSE2, "王灿灿", 
+				l, "记得付钱", 200000, BillType.PURCHASEBILL);
+		p.insert(po);
+//		ArrayList<PurchasePO> list = p.show();
+//		System.out.println(list.get(0).getCommodities().get(0).getModel());
+	}
+	
 	public ResultMessage insert(PurchasePO po) {
+		
 		Connection conn = DBManager.getConnection();
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
-			int count = 0;
-			if (rs.next()) {
-				count = rs.getInt(1);
-				if (count == 0) {
+//			Statement ps0 = conn.createStatement();
+//			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
+//			int count = 0;
+//			if (rs.next()) {
+//				count = rs.getInt(1);
+//				if (count == 0) {
 					String sql = "" + "insert into purchase(id,object) value(?, ?)";
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
@@ -44,11 +62,11 @@ public class PurchaseData {
 					ps.close();
 					conn.close();
 					return ResultMessage.SUCCESS;
-				}
-				else {
-					System.out.println("该销售单ID已存在");
-				}
-			}
+//				}
+//				else {
+//					System.out.println("该进货单已存在");
+//				}
+//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

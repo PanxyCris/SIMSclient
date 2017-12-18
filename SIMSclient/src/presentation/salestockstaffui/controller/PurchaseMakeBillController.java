@@ -337,11 +337,17 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(
         		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
-        			commodityIDLabel.setText(commodityService.find(newValue, FindCommodityType.NAME).get(0).getID());
         			ObservableList<String> modelList = FXCollections.observableArrayList();
         			modelList.clear();
-        			for(int i=0;i<commodityService.find(newValue, FindCommodityType.NAME).size();i++)
-        			modelList.add(commodityService.find(newValue, FindCommodityType.NAME).get(i).getModel());
+        			String s = "";
+        			for(int i=0;i<newValue.length();i++)
+        				if(newValue.charAt(i)=='(') {
+        					s = newValue.substring(i+1, newValue.length()-1);
+        			        break;
+        				}
+        			commodityIDLabel.setText(s);
+        			for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
+        			modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
         			modelChoice.setItems(modelList);
         		});
 

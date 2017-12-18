@@ -27,7 +27,7 @@ import po.UserPO;
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
-		UserPO po = new UserPO("000002", "¿ÓΩ‹", "admin", UserRole.PUR_SALE_MANAGER, null);
+		UserPO po = new UserPO("000005", "Õı≤”≤”", "admin", UserRole.FINANCIAL_MANAGER, null);
 //		user.delete(null);
 		user.insert(po);
 		ArrayList<UserPO> list = user.show();

@@ -17,7 +17,7 @@ import po.commodity.CommodityItemPO;
 
 public class PurchasePO implements Serializable {
 
-	private static final long serialVersionUID = -63964493022423340L;
+	private static final long serialVersionUID = 3444450733489092554L;
 	private String id;
 	private String memberID;
 	private String member;
