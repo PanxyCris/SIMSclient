@@ -1,6 +1,7 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
@@ -8,6 +9,7 @@ import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
+import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
 import javafx.application.Platform;
@@ -37,11 +39,11 @@ import vo.uservo.UserVO;
 
 public class PromotionMemberController extends PromotionMakingController{
 
-	PromotionBLService service = new PromotionBLService_Stub();
+	PromotionBLService<PromotionMemberVO> service = new PromotionMemberBLService_Stub();
 	public static final Remind remind = Remind.PROMOTION;
+	PromotionType type = PromotionType.LEVEL_PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();
     ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-    ObservableList<GiftVO> giftTmpList = FXCollections.observableArrayList();
     ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
     ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
     UserVO user;
@@ -91,11 +93,10 @@ public class PromotionMemberController extends PromotionMakingController{
 
 	@FXML
 	public void insert(){
-		ArrayList<GiftVO> gifts = new ArrayList<>();
-		gifts.addAll(giftTmpList);
+		ArrayList<GiftVO> gifts = null;
 		 PromotionMemberVO vo = new PromotionMemberVO(startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
-	        ResultMessage message = service.insert(vo);
+	        ResultMessage message = service.insert(vo,type);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
@@ -124,7 +125,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	public void fresh() throws RemoteException{
 		list.clear();
-		list.addAll(service.getPromotionList());
+		list.addAll(service.getPromotionList(type));
 		levelChoice.setValue(null);
 		table.setItems(list);
 		allowanceField.setText(null);
@@ -166,7 +167,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setAllowance(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        );
+	                		,type);
 
 	        });
 
@@ -178,7 +179,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setVoucher(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        );
+	                		,type);
 
 	        });
 
@@ -190,7 +191,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setBeginDate(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        );
+	                		,type);
 
 	        });
 
@@ -202,7 +203,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setEndDate(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        );
+	                		,type);
 
 	        });
 
@@ -241,7 +242,7 @@ public class PromotionMemberController extends PromotionMakingController{
         deleteInit();
         deleteGiftInit();
         CommodityBLService commodityservice = new CommodityBLService_Stub();
-        giftChoiceList.addAll(commodityservice.getCommodityIDList());
+        giftChoiceList.addAll(commodityservice.getIDandName());
         giftChoice.setItems(giftChoiceList);
         levelChoice.setItems(levelList);
 
@@ -293,7 +294,7 @@ public class PromotionMemberController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionMemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser);
+                            service.delete(clickedUser,type);
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -342,7 +343,7 @@ public class PromotionMemberController extends PromotionMakingController{
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(giftList);
     	 promotion.setGifts(gifts);
-    	 service.update(promotion);
+    	 service.update(promotion,type);
     }
 
 }

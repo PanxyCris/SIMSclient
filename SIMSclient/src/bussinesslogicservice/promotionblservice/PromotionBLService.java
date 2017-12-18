@@ -1,16 +1,18 @@
 package bussinesslogicservice.promotionblservice;
 
 import java.util.ArrayList;
+
+import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import vo.promotionvo.PromotionVO;
 
-public interface PromotionBLService {
+public interface PromotionBLService<P extends PromotionVO> {
 //dffff
 
-	public ResultMessage insert(PromotionVO vo);
-	public void delete(PromotionVO vo);
-	public ResultMessage update(PromotionVO vo);
-	public ArrayList<PromotionVO> getPromotionList();
+	public ResultMessage insert(P vo,PromotionType type);
+	public void delete(P vo,PromotionType type);
+	public ResultMessage update(P vo,PromotionType type);
+	public ArrayList<P> getPromotionList(PromotionType type);
 
 
 

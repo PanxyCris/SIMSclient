@@ -8,31 +8,23 @@ package vo.promotionvo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import vo.commodityvo.GiftVO;
+
 public class PromotionTotalVO extends PromotionVO {
 
 
 	private Double total;
-	private Double allowance;
 	private Double voucher;
-	private ArrayList<PromotionGoodsVO> gifts;
+	private ArrayList<GiftVO> gifts;
 
-	public PromotionTotalVO(String id,LocalDate beginDate,LocalDate endDate, Double total,
-			Double allowance,Double voucher, ArrayList<PromotionGoodsVO> gifts) {
+	public PromotionTotalVO(LocalDate beginDate,LocalDate endDate, Double total,
+			Double voucher, ArrayList<GiftVO> gifts) {
 		super(beginDate,endDate);
-		this.id = id;
-		this.setAllowance(allowance);
 		this.setVoucher(voucher);
 		this.setGifts(gifts);
 		this.setTotal(total);
 	}
 
-	public Double getAllowance() {
-		return allowance;
-	}
-
-	public void setAllowance(Double allowance) {
-		this.allowance = allowance;
-	}
 
 	public Double getTotal() {
 		return total;
@@ -50,11 +42,11 @@ public class PromotionTotalVO extends PromotionVO {
 		this.voucher = voucher;
 	}
 
-	public ArrayList<PromotionGoodsVO> getGifts() {
+	public ArrayList<GiftVO> getGifts() {
 		return gifts;
 	}
 
-	public void setGifts(ArrayList<PromotionGoodsVO> gifts) {
+	public void setGifts(ArrayList<GiftVO> gifts) {
 		this.gifts = gifts;
 	}
 

@@ -1,13 +1,11 @@
 package presentation.generalmanagerui;
 
 import javafx.fxml.FXMLLoader;
-
-
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.generalmanagerui.controller.PromotionMemberController;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class PromotionMemberUI {
 

@@ -46,7 +46,7 @@ import vo.commodityvo.CommodityItemVO;
 public class PurchaseMakeBillController extends MakeReceiptController{
 
 
-	PurchaseBLService service = new PurchaseBLService_Stub();//׮
+	PurchaseBLService service = new PurchaseController();//׮
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
     BillType type;
     UserVO user;
@@ -172,7 +172,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          if(purchase == null)
          noteArea.setText(null);
          else
-        	 noteArea.setText(purchase.getRemark());
+        	 noteArea.setText(purchase.getNote());
 
 	}
 
@@ -323,17 +323,16 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 	public void choiceInit() throws RemoteException{
         ObservableList<String> memberList = FXCollections.observableArrayList();
-        MemberBLService memberService = new MemberBLService_Stub();//׮
-        for(int i=0;i<memberService.show().size();i++)
-        	memberList.add(memberService.show().get(i).getName()+"("+memberService.show().get(i).getID()+")");
+        MemberBLService memberService = new MemberController();//׮
+        memberList.addAll(memberService.getIDandName());
         memberChoice.setItems(memberList);
 
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
 
         ObservableList<String> commodityList = FXCollections.observableArrayList();
-        CommodityBLService commodityService = new CommodityBLService_Stub();//׮
-        for(int i=0;i<commodityService.getCommodityList().size();i++)
-        	commodityList.add(commodityService.getCommodityList().get(i).getName());
+        CommodityBLService commodityService = new CommodityController();//׮
+
+   //     	commodityList.add(commodityService.getCommodityList().get(i).getName());
 
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(

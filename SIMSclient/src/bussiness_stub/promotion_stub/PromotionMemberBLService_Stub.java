@@ -3,34 +3,36 @@ package bussiness_stub.promotion_stub;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import bussinesslogicservice.promotionblservice.PromotionMemberBLService;
+import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
+import dataenum.PromotionType;
 import dataenum.ResultMessage;
-import vo.commodity.GiftVO;
-import vo.promotion.PromotionMemberVO;
+import vo.commodityvo.GiftVO;
+import vo.promotionvo.PromotionMemberVO;
 
-public class PromotionMemberBLService_Stub implements PromotionMemberBLService {
+
+public class PromotionMemberBLService_Stub implements PromotionBLService<PromotionMemberVO> {
 
 	@Override
-	public ResultMessage insert(PromotionMemberVO vo) {
+	public ResultMessage insert(PromotionMemberVO vo,PromotionType type) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public void delete(PromotionMemberVO vo) {
+	public void delete(PromotionMemberVO vo,PromotionType type) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public ResultMessage update(PromotionMemberVO vo) {
+	public ResultMessage update(PromotionMemberVO vo,PromotionType type) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public ArrayList<PromotionMemberVO> getPromotionMemberList() {
+	public ArrayList<PromotionMemberVO> getPromotionList(PromotionType type) {
 		ArrayList<PromotionMemberVO> list = new ArrayList<>();
 		LocalDate startDate = LocalDate.of(2016, 8, 28);
 		LocalDate endDate = LocalDate.of(2016, 12, 30);

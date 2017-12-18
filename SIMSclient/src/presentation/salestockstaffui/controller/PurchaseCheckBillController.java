@@ -24,7 +24,7 @@ import vo.uservo.UserVO;
 
 public class PurchaseCheckBillController extends SaleStockStaffController implements Initializable {
 
-	PurchaseBLService service = new PurchaseBLService_Stub();
+	PurchaseBLService service = new PurchaseController();
 	ObservableList<PurchaseVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
 	UserVO user;

@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SIMSclient.src.presentation.accountui.AccountManageUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.generalmanagerui.controller.PromotionSpecialController">
 	<children>
 		<ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
 			<image>
@@ -131,7 +131,7 @@
         <columns>
           <TableColumn fx:id="tableName" prefWidth="120.0" text="商品" />
           <TableColumn fx:id="tableNumber" prefWidth="75.0" text="数量" />
-            <TableColumn fx:id="tableDelete" prefWidth="100.0" text="是否删除" />
+            <TableColumn fx:id="tableDeleteCommodity" prefWidth="100.0" text="是否删除" />
         </columns>
       </TableView>
       <ChoiceBox fx:id="commodityChoice" layoutX="667.0" layoutY="463.0" prefHeight="23.0" prefWidth="120.0" />
