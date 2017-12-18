@@ -11,7 +11,7 @@ import dataenum.findtype.FindMemberType;
 import dataservice.memberdataservice.MemberDataService;
 import po.MemberPO;
 import rmi.RemoteHelper;
-import vo.member.MemberVO;
+import vo.membervo.MemberVO;
 
 /**     
 *  

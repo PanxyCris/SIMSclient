@@ -1,6 +1,7 @@
 package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**     
 *  
@@ -9,7 +10,7 @@ import java.rmi.RemoteException;
 */
 public interface Sale_MemberInfo {
 
-	public String getMember(String id) throws RemoteException;
+	public ArrayList<String> getIDandName() throws RemoteException;
 	
 	public String getSaleMan(String id) throws RemoteException;
 	

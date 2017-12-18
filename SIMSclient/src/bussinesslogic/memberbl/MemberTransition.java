@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import po.MemberPO;
-import vo.member.MemberVO;
+import vo.membervo.MemberVO;
 
 public class MemberTransition {
 

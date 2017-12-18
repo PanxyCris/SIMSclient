@@ -1,13 +1,16 @@
 package bussinesslogicservice.purchaseblservice;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+
 import dataenum.ResultMessage;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 /**
 * 类说明   进货
 *
-* @author ****
+* @author lijie
 * @date 2017年10月22日
 */
 public interface PurchaseBLService {
@@ -27,4 +30,5 @@ public interface PurchaseBLService {
 	 * 显示单据
 	 */
 	public ArrayList<PurchaseVO> show();
+	
 }

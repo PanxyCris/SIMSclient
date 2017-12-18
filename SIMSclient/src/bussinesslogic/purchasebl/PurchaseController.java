@@ -11,10 +11,8 @@ import dataenum.ResultMessage;
 import dataservice.purchasedataservice.PurchaseDataService;
 import po.PurchasePO;
 import rmi.RemoteHelper;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import vo.commodity.CommodityVO;
-import vo.purchase.PurchaseVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 
 /**
 *
@@ -150,4 +148,5 @@ public class PurchaseController implements PurchaseBLService{
 		this.date = sdf.format(new Date());
 		return this.date;
 	}
+	
 }

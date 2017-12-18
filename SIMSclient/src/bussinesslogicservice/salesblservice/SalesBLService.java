@@ -46,5 +46,7 @@ public interface SalesBLService {
 	public SalesVO save(SalesInputVO Info);
 	public ResultMessage updateDraft(SalesVO vo);
 	public ResultMessage submitDraft(String id);
+	
+	public ArrayList<String> getMemberIDandName();
 
 }

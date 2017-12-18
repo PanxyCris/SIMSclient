@@ -8,8 +8,8 @@ import dataenum.BillType;
 import dataenum.Warehouse;
 import po.PurchasePO;
 import po.commodity.CommodityItemPO;
-import vo.commodity.CommodityItemVO;
-import vo.purchase.PurchaseVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 
 /**     
 *  用于PO与VO的互相转换
@@ -25,7 +25,7 @@ public class PurchaseTransition {
 		String member = vo.getSupplier();
 		Warehouse warehouse = vo.getWarehouse();
 		String operator = vo.getOperator();
-		String remark = vo.getRemark();
+		String remark = vo.getNote();
 		Double sum = vo.getSum();
 		BillType type = vo.getType();
 		BillState state = vo.getState();
@@ -35,7 +35,16 @@ public class PurchaseTransition {
 	
 	public static PurchaseVO POtoVO(PurchasePO po) {
 		ArrayList<CommodityItemVO> commodities = CommodityItemTran.POtoVO(po.getCommodities());
-		PurchaseVO vo = null;
+		String id = po.getId();
+		String supplier = po.getMember();
+		Warehouse warehouse = po.getWarehouse();
+		String operator = po.getOperator();
+		String note = po.getRemark();
+		Double sum = po.getSum();
+		BillType type = po.getType();
+		BillState state = po.getState();
+		PurchaseVO vo = new PurchaseVO(id, supplier, warehouse, operator, commodities, note, sum, type, state);
 		return vo;
 	}
+	
 }

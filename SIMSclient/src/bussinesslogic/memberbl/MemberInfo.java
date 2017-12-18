@@ -15,10 +15,10 @@ import po.MemberPO;
 public class MemberInfo implements Sale_MemberInfo, Member_AccountInfo{
 
 	@Override
-	public String getMember(String id) throws RemoteException {
+	public ArrayList<String> getIDandName() throws RemoteException {
 		return null;
 	}
-
+	
 	@Override
 	public String getSaleMan(String id) throws RemoteException {
 		return null;
