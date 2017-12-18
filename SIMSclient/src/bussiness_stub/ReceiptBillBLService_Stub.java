@@ -33,7 +33,7 @@ public class ReceiptBillBLService_Stub implements ReceiptBillBLService {
 		accountList.add(account1);
 		accountList.add(account2);
 		ArrayList<ReceiptBillVO> list = new ArrayList<>();
-		ReceiptBillVO bill = new ReceiptBillVO("00001","Panxy","00001",BillType.XJFYD,BillState.DRAFT,accountList,9000.00);
+		ReceiptBillVO bill = new ReceiptBillVO("00001","Panxy","00001",BillType.XJFYD,BillState.DRAFT,accountList,9000.00,"ncidan");
 		list.add(bill);
 		return list;
 	}
@@ -57,6 +57,12 @@ public class ReceiptBillBLService_Stub implements ReceiptBillBLService {
 		list.add(member1);
 		list.add(member2);
 		return list;
+	}
+
+	@Override
+	public ResultMessage commit(ReceiptBillVO receiptBillVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

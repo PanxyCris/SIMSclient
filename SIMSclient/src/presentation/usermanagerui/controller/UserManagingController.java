@@ -1,6 +1,7 @@
 package presentation.usermanagerui.controller;
 
 import java.net.URL;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -31,7 +32,7 @@ import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class UserManagingController extends UserManagerController implements Initializable{
 

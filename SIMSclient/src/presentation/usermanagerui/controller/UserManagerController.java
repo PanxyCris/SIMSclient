@@ -1,6 +1,7 @@
 package presentation.usermanagerui.controller;
 
 import java.util.Stack;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -10,7 +11,7 @@ import presentation.mainui.MainUI;
 import presentation.usermanagerui.UserManagerUI;
 import presentation.usermanagerui.UserManagingUI;
 import presentation.usermanagerui.UserMessageUI;
-import vo.UserVO;
+import vo.uservo.UserVO;
 
 public class UserManagerController{
 

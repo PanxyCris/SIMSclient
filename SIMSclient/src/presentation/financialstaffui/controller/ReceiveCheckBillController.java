@@ -37,6 +37,8 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 	@FXML
 	TableColumn<ReceiptBillVO,String> tableOperator;
 	@FXML
+	TableColumn<ReceiptBillVO,String> tableRemark;
+	@FXML
 	TableColumn<ReceiptBillVO,String> tableCheck;
 	@FXML
 	TableColumn<ReceiptBillVO,String> tableState;
@@ -79,15 +81,17 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 
 	public void manageInit(){
 		tableID.setCellValueFactory(
-                new PropertyValueFactory<ReceiptBillVO,String>("docID"));
+                new PropertyValueFactory<ReceiptBillVO,String>("id"));
 		tableMember.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("customerID"));
 		tableSum.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("total"));
 		tableOperator.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("userID"));
+		tableRemark.setCellValueFactory(
+                new PropertyValueFactory<ReceiptBillVO,String>("note"));
 		tableState.setCellValueFactory(
-                new PropertyValueFactory<ReceiptBillVO,String>("billStateString"));
+                new PropertyValueFactory<ReceiptBillVO,String>("stateString"));
 		checkInit();
 		submitInit();
 		redoInit();
@@ -106,7 +110,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                     this.setGraphic(null);
 
                     if (!empty) {
-                        Button delBtn = new Button("查看商品列表");
+                        Button delBtn = new Button("查看转账列表");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	ReceiptBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());

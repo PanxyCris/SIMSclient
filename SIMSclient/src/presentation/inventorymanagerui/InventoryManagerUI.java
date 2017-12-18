@@ -3,11 +3,12 @@ package presentation.inventorymanagerui;
 import java.util.Stack;
 
 
+
 import dataenum.Remind;
 import presentation.common.ControlledStage;
 import presentation.common.StageController;
 import presentation.mainui.MainUI;
-import vo.UserVO;
+import vo.uservo.UserVO;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

@@ -53,6 +53,8 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	Label sumLabel;
 	@FXML
 	Label operatorLabel;
+	@FXML
+	TextArea receiptArea;
 
 	@FXML
 	TableView<EntryVO> table;
@@ -100,7 +102,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
 		entryList.addAll(list);
          PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT);
+        		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT,receiptArea.getText());
          service.save(vo);
 	}
 
@@ -109,7 +111,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
 		entryList.addAll(list);
 		PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-		            accountChoice.getValue(),entryList,sumLabel.getText(),BillType.XJFYD,BillState.COMMITED);
+		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,receiptArea.getText());
         service.save(vo);
 	}
 
@@ -118,9 +120,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		if(bill != null){
         	 accountChoice.setValue(bill.getAccountID());
              memberChoice.setValue(bill.getCustomerID());
+             receiptArea.setText(bill.getNote());
         }
          itemField.setText(null);
          noteArea.setText(null);
+         receiptArea.setText(null);
 	}
 
 	@FXML
@@ -155,6 +159,10 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	public void choiceInit(){
 		accountChoice.setItems(FXCollections.observableArrayList(service.getAccountList()));
 		memberChoice.setItems(FXCollections.observableArrayList(service.getCustomerList()));
+		if(bill!=null){
+			accountChoice.setValue(bill.getAccountID());
+			memberChoice.setValue(bill.getCustomerID());
+		}
 	}
 
 
@@ -167,7 +175,6 @@ public class PaymentMakeBillController extends MakeReceiptController {
         tableItem.setCellFactory(cellFactory);
         tableItem.setOnEditCommit(
             (CellEditEvent<EntryVO, String> t) -> {
-            	String tmp = t.getOldValue();
                ((EntryVO) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).setEntryName(t.getNewValue());

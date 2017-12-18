@@ -39,6 +39,8 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	@FXML
 	TableColumn<PaymentBillVO,String> tableOperator;
 	@FXML
+	TableColumn<PaymentBillVO,String> tableRemark;
+	@FXML
 	TableColumn<PaymentBillVO,String> tableCheck;
 	@FXML
 	TableColumn<PaymentBillVO,String> tableState;
@@ -81,15 +83,17 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 
 	public void manageInit(){
 		tableID.setCellValueFactory(
-                new PropertyValueFactory<PaymentBillVO,String>("docID"));
+                new PropertyValueFactory<PaymentBillVO,String>("id"));
 		tableAccount.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("accountID"));
 		tableSum.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,Double>("total"));
 		tableOperator.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("userID"));
+		tableRemark.setCellValueFactory(
+                new PropertyValueFactory<PaymentBillVO,String>("note"));
 		tableState.setCellValueFactory(
-                new PropertyValueFactory<PaymentBillVO,String>("billStateString"));
+                new PropertyValueFactory<PaymentBillVO,String>("stateString"));
 		checkInit();
 		submitInit();
 		redoInit();

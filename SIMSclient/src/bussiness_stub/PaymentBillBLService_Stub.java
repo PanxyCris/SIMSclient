@@ -43,13 +43,13 @@ public class PaymentBillBLService_Stub implements PaymentBillBLService {
 	@Override
 	public ArrayList<PaymentBillVO> find() {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
-		EntryVO entry1 = new EntryVO("QWERT","20","NCFIDJCN");
-		EntryVO entry2 = new EntryVO("RAT","789","NCJDJC");
+		EntryVO entry1 = new EntryVO("QWERT",20.00,"NCFIDJCN");
+		EntryVO entry2 = new EntryVO("RAT",789.00,"NCJDJC");
 		entryList.add(entry1);
 		entryList.add(entry2);
 
 		ArrayList<PaymentBillVO> list = new ArrayList<>();
-		PaymentBillVO bill1 = new PaymentBillVO("00001","Panxy","00001","00001",entryList,"809",BillType.XJFYD,BillState.DRAFT);
+		PaymentBillVO bill1 = new PaymentBillVO("00001","Panxy","00001","00001",entryList,809.00,BillType.XJFYD,BillState.DRAFT,"dsa");
 		list.add(bill1);
 		return list;
 	}

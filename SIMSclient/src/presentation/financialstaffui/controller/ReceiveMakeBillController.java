@@ -1,20 +1,12 @@
 package presentation.financialstaffui.controller;
 
-import java.net.URL;
-
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import bussiness_stub.PaymentBillBLService_Stub;
 import bussiness_stub.ReceiptBillBLService_Stub;
 import bussiness_stub.UtilityBLService_Stub;
-import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.ResultMessage;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,8 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
@@ -55,6 +45,8 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	Label sumLabel;
 	@FXML
 	Label operatorLabel;
+	@FXML
+	TextArea receiptArea;
 
 	@FXML
 	TableView<AccountListVO> table;
@@ -88,7 +80,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		ArrayList<AccountListVO> accountList = new ArrayList<>();
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            BillType.XJFYD,BillState.DRAFT,accountList,sumLabel.getText());
+        		            BillType.XJFYD,BillState.DRAFT,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
          service.save(vo);
 	}
 
@@ -97,7 +89,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		ArrayList<AccountListVO> accountList = new ArrayList<>();
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            BillType.XJFYD,BillState.COMMITED,accountList,sumLabel.getText());
+        		            BillType.XJFYD,BillState.COMMITED,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
          service.commit(vo);
 	}
 
@@ -126,7 +118,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 				}
 				else{
 					idLabel.setText(bill.getId());
-					sumLabel.setText(bill.getTotal());
+					sumLabel.setText(String.valueOf(bill.getTotal()));
 					list.addAll(bill.getAccountListVOs());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());

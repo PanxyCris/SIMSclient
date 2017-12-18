@@ -1,7 +1,8 @@
 package presentation.usermanagerui;
 
 import presentation.usermanagerui.controller.UserManagerController;
-import vo.UserVO;
+
+import vo.uservo.UserVO;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
