@@ -127,7 +127,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(beforeLabel.getText());
 	    	                     beforeLabel.setText(String.valueOf(result));
-	    	                     afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+	    	                     freshAfter();
 	    	                    break;
 	    	        default:break;
 	    	        }
@@ -166,6 +166,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		 numberField.setText(null);
          priceField.setText(null);
          remarkArea.setText(null);
+         allowanceField.setText(null);
          if(purchase == null)
          noteArea.setText(null);
          else
@@ -253,7 +254,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(result);
 	            	   beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())-tmpTotal+result));
-	            	   afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+	            	   freshAfter();
 	               }
         });
 
@@ -280,7 +281,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(result);
 	            	   beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())-tmpTotal+result));
-	            	   afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+	            	   freshAfter();
 	               }
         });
 
@@ -451,6 +452,24 @@ public class SalesMakeBillController extends MakeReceiptController{
             }
             	}
         });
+
+		allowanceField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            	boolean allowanceLegal = true;
+
+            	for(int i=0;i<allowanceField.getText().length();i++)
+            		if((allowanceField.getText().charAt(i)<='9'&&allowanceField.getText().charAt(i)>='0')||allowanceField.getText().charAt(i)=='.')
+            			continue;
+            		else{
+            			allowanceLegal = false;
+            			break;
+            		}
+            	if(allowanceLegal)
+                afterLabel.setText(String.valueOf(Double.parseDouble(afterLabel.getText())-Double.parseDouble(allowanceField.getText())));
+            }
+
+        });
 	}
 
 	public void deleteInit(){
@@ -473,7 +492,7 @@ public class SalesMakeBillController extends MakeReceiptController{
                             double tmp = clickedItem.getTotal();
                             double result = Double.parseDouble(beforeLabel.getText())-tmp;
                             beforeLabel.setText(String.valueOf(result));
-                            afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+                            freshAfter();
                         });
                     }
                 }
@@ -483,6 +502,22 @@ public class SalesMakeBillController extends MakeReceiptController{
         });
 	}
 
+	public void freshAfter(){
+		double tmp = 0;
+		boolean allowanceLegal = true;
+    	for(int i=0;i<allowanceField.getText().length();i++)
+    		if((allowanceField.getText().charAt(i)<='9'&&allowanceField.getText().charAt(i)>='0')||allowanceField.getText().charAt(i)=='.')
+    			continue;
+    		else{
+    			allowanceLegal = false;
+    			break;
+    		}
+		if(allowanceField.getText()!=null&&allowanceLegal)
+			tmp = Double.parseDouble(allowanceField.getText());
+		double before = Double.parseDouble(beforeLabel.getText());
+		 afterLabel.setText(String.valueOf(before-tmp-
+				 Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+	}
 
 
 

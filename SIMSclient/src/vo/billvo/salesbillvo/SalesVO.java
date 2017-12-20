@@ -13,6 +13,7 @@ public class SalesVO extends BillVO {
 	private String saleMan; // 业务员
 	private String operator;
 	private Warehouse warehouse;
+	private String warehouseString;
 	private ArrayList<CommodityItemVO> commodity;
 	private Double beforePrice; // 折让前价格
 	private Double allowance; // 折让金额
@@ -35,6 +36,7 @@ public class SalesVO extends BillVO {
 		this.setSaleMan(saleMan);
 		this.setOperator(operator);
 		this.setWarehouse(warehouse);
+		this.warehouseString = warehouse.value;
 		this.setCommodity(commodity);
 		this.setBeforePrice(beforePrice);
 		this.setAllowance(allowance);
@@ -140,6 +142,11 @@ public class SalesVO extends BillVO {
 
 	public void setAfterPrice(Double afterPrice) {
 		this.afterPrice = afterPrice;
+	}
+
+
+	public String getWarehouseString() {
+		return warehouseString;
 	}
 
 }

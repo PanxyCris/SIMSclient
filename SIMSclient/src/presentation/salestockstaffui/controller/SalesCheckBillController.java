@@ -1,59 +1,77 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import bussiness_stub.PurchaseBLService_Stub;
-import bussinesslogic.purchasebl.PurchaseController;
-import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import bussinesslogic.salesbl.SalesController;
+import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindSalesType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import vo.billvo.purchasebillvo.PurchaseVO;
+import presentation.remindui.RemindPrintUI;
+import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
 
-public class PurchaseCheckBillController extends SaleStockStaffController implements Initializable {
+public class SalesCheckBillController extends SaleStockStaffController implements Initializable {
 
-	PurchaseBLService service = new PurchaseController();
-	ObservableList<PurchaseVO> list = FXCollections.observableArrayList();
+	SalesBLService service = new SalesController();
+	ObservableList<SalesVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
 
 	@FXML
-	TableView<PurchaseVO> table;
+	ChoiceBox<String> findChoice;
 	@FXML
-	TableColumn<PurchaseVO,String> tableID;
+	TextField findingField;
+
 	@FXML
-	TableColumn<PurchaseVO,String> tableType;
+	TableView<SalesVO> table;
 	@FXML
-	TableColumn<PurchaseVO,String> tableMember;
+	TableColumn<SalesVO,String> tableID;
 	@FXML
-	TableColumn<PurchaseVO,String> tableWarehouse;
+	TableColumn<SalesVO,String> tableType;
 	@FXML
-	TableColumn<PurchaseVO,Double> tableSum;
+	TableColumn<SalesVO,String> tableMember;
 	@FXML
-	TableColumn<PurchaseVO,String> tableOperator;
+	TableColumn<SalesVO,String> tableSaleMan;
 	@FXML
-	TableColumn<PurchaseVO,String> tableNote;
+	TableColumn<SalesVO,String> tableWarehouse;
 	@FXML
-	TableColumn<PurchaseVO,String> tableList;
+	TableColumn<SalesVO,Double> tableBefore;
 	@FXML
-	TableColumn<PurchaseVO,String> tableState;
+	TableColumn<SalesVO,Double> tableVoucher;
 	@FXML
-	TableColumn<PurchaseVO,String> tableSubmit;
+	TableColumn<SalesVO,Double> tableAllowance;
 	@FXML
-	TableColumn<PurchaseVO,String> tableRedo;
+	TableColumn<SalesVO,Double> tableAfter;
 	@FXML
-	TableColumn<PurchaseVO,String> tableDelete;
+	TableColumn<SalesVO,String> tableOperator;
+	@FXML
+	TableColumn<SalesVO,String> tableNote;
+	@FXML
+	TableColumn<SalesVO,String> tableList;
+	@FXML
+	TableColumn<SalesVO,String> tableState;
+	@FXML
+	TableColumn<SalesVO,String> tableSubmit;
+	@FXML
+	TableColumn<SalesVO,String> tableRedo;
+	@FXML
+	TableColumn<SalesVO,String> tableDelete;
 
 	@FXML
 	TableView<CommodityItemVO> commodity;
@@ -73,13 +91,38 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	TableColumn<CommodityItemVO,String> commodityNote;
 
 	@FXML
-	public void makePurchaseBill() throws Exception{
-         changeStage("PurchaseMakeBillUI",user,type,null,null);
+	public void find(){
+
+		ArrayList<SalesVO> list = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+
+	}
+
+	@FXML
+	public void makeSalesBill() throws Exception{
+         changeStage("SalesMakeBillUI",user,type,null,null);
 	}
 
 	public void initData(UserVO user,BillType type) {
 		this.user = user;
 		this.type = type;
+		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
+				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
+				FindSalesType.TOTAL.value));
 	}
 
 	@Override
@@ -93,21 +136,27 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 
 	public void manageInit(){
 		tableID.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("id"));
+                new PropertyValueFactory<SalesVO,String>("id"));
 		tableType.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("typeString"));
+                new PropertyValueFactory<SalesVO,String>("typeString"));
 		tableMember.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("supplier"));
+                new PropertyValueFactory<SalesVO,String>("retailer"));
 		tableWarehouse.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("warehouseString"));
-		tableSum.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,Double>("sum"));
+                new PropertyValueFactory<SalesVO,String>("warehouseString"));
+		tableBefore.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,Double>("beforePrice"));
+		tableAllowance.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,Double>("allowance"));
+		tableVoucher.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,Double>("voucher"));
+		tableAfter.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,Double>("afterPrice"));
 		tableOperator.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("operator"));
+                new PropertyValueFactory<SalesVO,String>("operator"));
 		tableNote.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("note"));
+                new PropertyValueFactory<SalesVO,String>("note"));
 		tableState.setCellValueFactory(
-                new PropertyValueFactory<PurchaseVO,String>("stateString"));
+                new PropertyValueFactory<SalesVO,String>("stateString"));
 		checkInit();
 		submitInit();
 		redoInit();
@@ -117,7 +166,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	public void checkInit(){
 
 		tableList.setCellFactory((col) -> {
-            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+            TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -129,9 +178,9 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         Button delBtn = new Button("查看商品列表");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             commodityList.clear();
-                            commodityList.addAll(clickedItem.getCommodities());
+                            commodityList.addAll(clickedItem.getCommodity());
                             commodity.setItems(commodityList);
 
                         });
@@ -147,7 +196,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	public void submitInit(){
 
 		tableSubmit.setCellFactory((col) -> {
-            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+            TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -160,7 +209,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             service.submit(clickedItem);
                         });
                     }
@@ -176,7 +225,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	public void redoInit(){
 
 		tableRedo.setCellFactory((col) -> {
-            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+            TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -189,9 +238,9 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             try {
-								changeStage("PurchaseMakeBillUI",user,clickedItem.getType(),clickedItem,null);
+								changeStage("SalesMakeBillUI",user,clickedItem.getType(),null,clickedItem);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -210,7 +259,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 
 	public void deleteInit(){
 		tableDelete.setCellFactory((col) -> {
-            TableCell<PurchaseVO, String> cell = new TableCell<PurchaseVO, String>() {
+            TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
 
                 @Override
                 public void updateItem(String item, boolean empty) {
@@ -223,7 +272,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
-                        	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	service.delete(clickedItem);
                             list.remove(clickedItem);
                             table.setItems(list);
