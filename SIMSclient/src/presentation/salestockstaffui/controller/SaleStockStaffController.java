@@ -14,9 +14,11 @@ import presentation.common.StageController;
 import presentation.mainui.MainUI;
 import presentation.salestockstaffui.MakeReceiptUI;
 import presentation.salestockstaffui.MemberManageUI;
+import presentation.salestockstaffui.PromotionCheckUI;
 import presentation.salestockstaffui.PurchaseCheckBillUI;
 import presentation.salestockstaffui.PurchaseMakeBillUI;
 import presentation.salestockstaffui.SaleStockStaffUI;
+import presentation.salestockstaffui.SalesCheckBillUI;
 import presentation.salestockstaffui.SalesMakeBillUI;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.billvo.salesbillvo.SalesVO;
@@ -125,6 +127,8 @@ public class SaleStockStaffController {
    		            case "PurchaseMakeBillUI":new PurchaseMakeBillUI().start(user,type,purchase);break;
    		            case "PurchaseCheckBillUI":new PurchaseCheckBillUI().start(user,type);break;
    		            case "SalesMakeBillUI":new SalesMakeBillUI().start(user,type,sales);break;
+   		            case "SalesCheckBillUI":new SalesCheckBillUI().start(user,type);break;
+   		            case "PromotionCheckUI":new PromotionCheckUI().start(user,type,sales);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

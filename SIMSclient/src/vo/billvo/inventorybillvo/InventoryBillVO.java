@@ -10,8 +10,10 @@ public class InventoryBillVO extends BillVO{
      protected String name;
      protected Integer number;
 
-	public InventoryBillVO(String id,BillType billType, BillState billState,String note) {
+	public InventoryBillVO(String id,String name,Integer number,BillType billType, BillState billState,String note) {
 		super(id,billType, billState,note);
+		this.name = name;
+		this.number = number;
 	}
 
 	public String getName(){

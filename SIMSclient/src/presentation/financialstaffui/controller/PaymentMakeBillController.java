@@ -40,8 +40,6 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	PaymentBillBLService service = new PaymentBillBLService_Stub();
 	ObservableList<EntryVO> list = FXCollections.observableArrayList();
-	UserVO user;
-	PaymentBillVO bill;
 
 	@FXML
 	Label idLabel;
@@ -117,10 +115,10 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void fresh(){
-		if(bill != null){
-        	 accountChoice.setValue(bill.getAccountID());
-             memberChoice.setValue(bill.getCustomerID());
-             receiptArea.setText(bill.getNote());
+		if(pay != null){
+        	 accountChoice.setValue(pay.getAccountID());
+             memberChoice.setValue(pay.getCustomerID());
+             receiptArea.setText(pay.getNote());
         }
          itemField.setText(null);
          noteArea.setText(null);
@@ -134,7 +132,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	public void initData(UserVO user,PaymentBillVO bill) throws Exception {
 		   this.user = user;
-		   this.bill = bill;
+		   this.pay = bill;
 			if(bill == null){
 				UtilityBLService utilityService = new UtilityBLService_Stub();
 				idLabel.setText(utilityService.generateID(BillType.XJFYD));
@@ -159,9 +157,9 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	public void choiceInit(){
 		accountChoice.setItems(FXCollections.observableArrayList(service.getAccountList()));
 		memberChoice.setItems(FXCollections.observableArrayList(service.getCustomerList()));
-		if(bill!=null){
-			accountChoice.setValue(bill.getAccountID());
-			memberChoice.setValue(bill.getCustomerID());
+		if(pay!=null){
+			accountChoice.setValue(pay.getAccountID());
+			memberChoice.setValue(pay.getCustomerID());
 		}
 	}
 

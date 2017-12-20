@@ -33,9 +33,6 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 
 	ReceiptBillBLService service = new ReceiptBillBLService_Stub();
 	ObservableList<AccountListVO> list = FXCollections.observableArrayList();
-	UserVO user;
-	ReceiptBillVO bill;
-
 
 	@FXML
 	Label idLabel;
@@ -95,8 +92,8 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void fresh(){
-		if(bill != null){
-             memberChoice.setValue(bill.getCustomerID());
+		if(rec != null){
+             memberChoice.setValue(rec.getCustomerID());
         }
          accountChoice.setValue(null);
          noteArea.setText(null);
@@ -109,7 +106,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 
 	public void initData(UserVO user,ReceiptBillVO bill) throws Exception {
 		   this.user = user;
-		   this.bill = bill;
+		   this.rec = bill;
 			if(bill == null){
 				UtilityBLService utilityService = new UtilityBLService_Stub();
 				idLabel.setText(utilityService.generateID(BillType.SKD));

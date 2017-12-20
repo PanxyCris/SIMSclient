@@ -29,7 +29,8 @@ public class FinancialStaffController {
 	static String current;
 	static Stack<String> stack;
 	UserVO user;
-
+	PaymentBillVO pay;
+    ReceiptBillVO rec;
 	@FXML
 	protected AnchorPane pane;
 	@FXML
