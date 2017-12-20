@@ -37,7 +37,6 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.billvo.salesbillvo.SalesPriceVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionVO;

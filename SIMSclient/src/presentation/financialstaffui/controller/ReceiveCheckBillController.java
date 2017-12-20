@@ -1,21 +1,26 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import bussiness_stub.PaymentBillBLService_Stub;
 import bussiness_stub.ReceiptBillBLService_Stub;
-import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindReceiptBillType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
@@ -26,6 +31,13 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 	ReceiptBillBLService service = new ReceiptBillBLService_Stub();
 	ObservableList<ReceiptBillVO> list = FXCollections.observableArrayList();
 	ObservableList<AccountListVO> accountVOList = FXCollections.observableArrayList();
+
+	@FXML
+	ChoiceBox<String> findChoice;
+	@FXML
+	TextField findingField;
+
+
 	@FXML
 	TableView<ReceiptBillVO> table;
 	@FXML
@@ -65,6 +77,29 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
          changeStage("ReceiveMakeBillUI",user,null,null);
 	}
 
+	@FXML
+	public void find(){
+
+		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindReceiptBillType.getType(findChoice.getValue()));
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+
+	}
+
+
 
 	public void initData(UserVO user) {
 		this.user = user;
@@ -72,10 +107,12 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		list.addAll(service.find());
+		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
 		listInit();
+		findChoice.setItems(FXCollections.observableArrayList(FindReceiptBillType.ID.value,FindReceiptBillType.MEMBER.value,
+				FindReceiptBillType.ACCOUNT.value,FindReceiptBillType.OPERATOR.value,FindReceiptBillType.TOTAL.value));
 	}
 
 

@@ -12,6 +12,8 @@ import dataenum.MemberLevel;
 import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPromotionType;
+import dataenum.findtype.FindSalesType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +35,7 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
+import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.uservo.UserVO;
@@ -49,6 +52,11 @@ public class PromotionMemberController extends PromotionMakingController{
     ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
     UserVO user;
     PromotionMemberVO currentPromotion;
+
+    @FXML
+    ChoiceBox<String> findChoice;
+    @FXML
+    TextField findingField;
 
 	@FXML
 	TableView<PromotionMemberVO> table;
@@ -95,6 +103,26 @@ public class PromotionMemberController extends PromotionMakingController{
 	ChoiceBox<String> giftChoice;
 	@FXML
 	TextField numberField;
+
+	@FXML
+	public void find(){
+		ArrayList<PromotionMemberVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()),type);
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+	}
 
 	@FXML
 	public void insert(){
@@ -150,6 +178,8 @@ public class PromotionMemberController extends PromotionMakingController{
 		}
 		edit();
 		manageInit();
+		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,
+				FindPromotionType.TIMEINTERVAL.value));
 	}
 
 	public void edit(){

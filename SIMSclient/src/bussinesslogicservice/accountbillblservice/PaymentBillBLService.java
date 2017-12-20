@@ -2,6 +2,7 @@ package bussinesslogicservice.accountbillblservice;
 
 import java.util.ArrayList;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPaymentBillType;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
 public interface PaymentBillBLService {
@@ -10,7 +11,9 @@ public interface PaymentBillBLService {
 
 	public ResultMessage delete(PaymentBillVO paymentBillVO);
 
-	public ArrayList<PaymentBillVO> find();
+	public ArrayList<PaymentBillVO> show();
+
+	public ArrayList<PaymentBillVO> find(String info,FindPaymentBillType type);
 
 	public ArrayList<String> getAccountList();  // Ãû×Ö(ID)
 
@@ -19,5 +22,7 @@ public interface PaymentBillBLService {
 	public ResultMessage judgeLegal(String money);
 
 	public ResultMessage commit(PaymentBillVO paymentBillVO);
+
+
 
 }

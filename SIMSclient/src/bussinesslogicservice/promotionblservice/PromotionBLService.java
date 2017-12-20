@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dataenum.PromotionType;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPromotionType;
 import vo.promotionvo.PromotionVO;
 
 public interface PromotionBLService<P extends PromotionVO> {
@@ -14,6 +15,7 @@ public interface PromotionBLService<P extends PromotionVO> {
 	public ResultMessage update(P vo,PromotionType type);
 	public ArrayList<P> getPromotionList(PromotionType type);
     public String getID();
+    public ArrayList<P> find(String info,FindPromotionType findType,PromotionType type);
 
 
 }

@@ -1,7 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import bussiness_stub.PaymentBillBLService_Stub;
@@ -10,15 +10,21 @@ import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindPaymentBillType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;
@@ -28,6 +34,12 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	PaymentBillBLService service = new PaymentBillBLService_Stub();
 	ObservableList<PaymentBillVO> list = FXCollections.observableArrayList();
 	ObservableList<EntryVO> entryList = FXCollections.observableArrayList();
+
+	@FXML
+	ChoiceBox<String> findChoice;
+	@FXML
+	TextField findingField;
+
 	@FXML
 	TableView<PaymentBillVO> table;
 	@FXML
@@ -67,6 +79,28 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
          changeStage("PaymentMakeBillUI",user,null,null);
 	}
 
+	@FXML
+	public void find(){
+
+		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindPaymentBillType.getType(findChoice.getValue()));
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+
+	}
+
 
 	public void initData(UserVO user) {
 		this.user = user;
@@ -74,10 +108,13 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		list.addAll(service.find());
+		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
 		listInit();
+		findChoice.setItems(FXCollections.observableArrayList(FindPaymentBillType.ID.value,FindPaymentBillType.ACCOUNT.value,
+				FindPaymentBillType.OPERATOR.value,FindPaymentBillType.TOTAL.value));
+
 	}
 
 

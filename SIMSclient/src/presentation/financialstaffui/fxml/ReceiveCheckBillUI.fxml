@@ -146,5 +146,8 @@
 				<TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
 			</columns>
 		</TableView>
+      <Button layoutX="858.0" layoutY="95.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="85.0" text="查  找" />
+      <TextField fx:id="findingField" layoutX="539.0" layoutY="95.0" prefHeight="23.0" prefWidth="319.0" />
+      <ChoiceBox fx:id="findChoice" layoutX="389.0" layoutY="95.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>

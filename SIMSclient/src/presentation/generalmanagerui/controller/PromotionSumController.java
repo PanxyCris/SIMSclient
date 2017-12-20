@@ -10,6 +10,7 @@ import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPromotionType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,7 @@ import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
+import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
 import vo.uservo.UserVO;
 
@@ -46,6 +48,11 @@ public class PromotionSumController extends PromotionMakingController{
     ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
     UserVO user;
     PromotionTotalVO currentPromotion;
+
+    @FXML
+    ChoiceBox<String> findChoice;
+    @FXML
+    TextField findingField;
 
 	@FXML
 	TableView<PromotionTotalVO> table;
@@ -89,6 +96,26 @@ public class PromotionSumController extends PromotionMakingController{
 	ChoiceBox<String> giftChoice;
 	@FXML
 	TextField numberField;
+
+	@FXML
+	public void find(){
+		ArrayList<PromotionTotalVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()),type);
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+	}
 
 
 
@@ -144,6 +171,7 @@ public class PromotionSumController extends PromotionMakingController{
 		}
 		edit();
 		manageInit();
+		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,FindPromotionType.TIMEINTERVAL.value));
 	}
 
 	public void edit(){

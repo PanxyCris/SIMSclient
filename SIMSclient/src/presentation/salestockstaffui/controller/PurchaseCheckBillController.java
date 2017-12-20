@@ -1,7 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import bussiness_stub.PurchaseBLService_Stub;
@@ -9,16 +9,24 @@ import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindPurchaseType;
+import dataenum.findtype.FindSalesType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import presentation.remindui.RemindPrintUI;
 import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
 
@@ -27,6 +35,12 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	PurchaseBLService service = new PurchaseController();
 	ObservableList<PurchaseVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
+
+	@FXML
+	ChoiceBox<String> findChoice;
+	@FXML
+	TextField findingField;
+
 
 	@FXML
 	TableView<PurchaseVO> table;
@@ -77,6 +91,28 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
          changeStage("PurchaseMakeBillUI",user,type,null,null);
 	}
 
+	@FXML
+	public void find(){
+
+		ArrayList<PurchaseVO> list = service.find(findingField.getText(),FindPurchaseType.getType(findChoice.getValue()));
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+
+	}
+
 	public void initData(UserVO user,BillType type) {
 		this.user = user;
 		this.type = type;
@@ -88,6 +124,8 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 		table.setItems(list);
 		manageInit();
 		listInit();
+		findChoice.setItems(FXCollections.observableArrayList(FindPurchaseType.ID.value,FindPurchaseType.MEMBER.value,
+				FindPurchaseType.OPERATOR.value,FindPurchaseType.TOTAL.value));
 	}
 
 

@@ -14,6 +14,7 @@ import dataenum.MemberLevel;
 import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPromotionType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,6 +49,11 @@ public class PromotionSpecialController {
     UserVO user;
     PromotionPricePacksVO currentPromotion;
     PromotionType type = PromotionType.PRICEPACKS;
+
+    @FXML
+    ChoiceBox<String> findChoice;
+    @FXML
+    TextField findingField;
 
 	@FXML
 	TableView<PromotionPricePacksVO> table;
@@ -87,6 +93,26 @@ public class PromotionSpecialController {
 	ChoiceBox<String> commodityChoice;
 	@FXML
 	TextField numberField;
+
+	@FXML
+	public void find(){
+		ArrayList<PromotionPricePacksVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()),type);
+	       if(list==null){
+	    	   Platform.runLater(new Runnable() {
+		    	    public void run() {
+		    	        try {
+		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+		    	    }
+		    	});
+	       }
+	       else{
+	    	   table.getItems().clear();
+	    	   table.getItems().addAll(list);
+	       }
+	}
 
 	@FXML
 	public void insert(){
@@ -139,6 +165,7 @@ public class PromotionSpecialController {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,FindPromotionType.TIMEINTERVAL.value));
 		edit();
 		manageInit();
 	}

@@ -147,5 +147,8 @@
 		<Button layoutX="961.0" layoutY="481.0" mnemonicParsing="false" onAction="#insertGift" prefHeight="23.0" prefWidth="75.0" text="增加赠品" />
       <ChoiceBox fx:id="giftChoice" layoutX="760.0" layoutY="481.0" prefHeight="23.0" prefWidth="127.0" />
       <Label fx:id="idLabel" layoutX="192.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
+      <ChoiceBox fx:id="findChoice" layoutX="450.0" layoutY="83.0" prefWidth="150.0" />
+      <TextField fx:id="findingField" layoutX="600.0" layoutY="83.0" prefHeight="23.0" prefWidth="347.0" />
+      <Button layoutX="946.0" layoutY="83.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="88.0" text="查找" />
 	</children>
 </AnchorPane>

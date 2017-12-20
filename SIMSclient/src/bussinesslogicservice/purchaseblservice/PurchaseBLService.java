@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPurchaseType;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 /**
@@ -26,9 +27,11 @@ public interface PurchaseBLService {
 
 	public ResultMessage isLegal(CommodityItemVO vo);
 
+	public ArrayList<PurchaseVO> find(String info,FindPurchaseType type);
+
 	/**
 	 * œ‘ æµ•æ›
 	 */
 	public ArrayList<PurchaseVO> show();
-	
+
 }
