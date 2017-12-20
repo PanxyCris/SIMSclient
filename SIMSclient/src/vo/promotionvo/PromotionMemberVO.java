@@ -20,9 +20,9 @@ public class PromotionMemberVO extends PromotionVO {
 	private Double voucher;
 	private ArrayList<GiftVO> gifts;
 
-	public PromotionMemberVO(LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
+	public PromotionMemberVO(String id,LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
 			ArrayList<GiftVO> gifts) {
-		super( beginDate, endDate,PromotionType.LEVEL_PROMOTION);
+		super( id,beginDate, endDate,PromotionType.LEVEL_PROMOTION);
 		this.level = level;
 		levelString = level.value;
 		this.allowance = allowance;

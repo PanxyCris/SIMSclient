@@ -72,18 +72,19 @@
 		<ChoiceBox layoutX="192.0" layoutY="83.0" prefWidth="150.0" />
 		<TableView fx:id="table" layoutX="193.0" layoutY="150.0" prefHeight="224.0" prefWidth="486.0">
 			<columns>
+            <TableColumn fx:id="tableID" prefWidth="75.0" text="ID" />
 				<TableColumn fx:id="tableSum" prefWidth="75.0" text="总价达" />
 				<TableColumn fx:id="tableVoucher" prefWidth="75.0" text="代金券" />
-				<TableColumn fx:id="tableStart" prefWidth="130.0" text="起始时间" />
-				<TableColumn fx:id="tableEnd" prefWidth="130.0" text="结束时间" />
+				<TableColumn fx:id="tableStart" prefWidth="100.0" text="起始时间" />
+				<TableColumn fx:id="tableEnd" prefWidth="100.0" text="结束时间" />
             <TableColumn fx:id="tableCheck" prefWidth="100.0" text="查看赠品列表" />
 				<TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
 			</columns>
 		</TableView>
-		<TextField fx:id="sumField" layoutX="193.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" />
-		<TextField fx:id="voucherField" layoutX="268.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" />
-		<DatePicker fx:id="startPicker" layoutX="342.0" layoutY="417.0" prefHeight="23.0" prefWidth="130.0" />
-		<Button layoutX="602.0" layoutY="417.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="75.0" text="增加" />
+		<TextField fx:id="sumField" layoutX="268.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" />
+		<TextField fx:id="voucherField" layoutX="343.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" />
+		<DatePicker fx:id="startPicker" layoutX="417.0" layoutY="417.0" prefHeight="23.0" prefWidth="100.0" />
+		<Button layoutX="615.0" layoutY="417.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="61.0" text="增加" />
 		<Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
@@ -132,7 +133,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-      <DatePicker fx:id="endPicker" layoutX="472.0" layoutY="417.0" prefHeight="23.0" prefWidth="130.0" />
+      <DatePicker fx:id="endPicker" layoutX="515.0" layoutY="417.0" prefHeight="23.0" prefWidth="100.0" />
       <TableView fx:id="giftTable" layoutX="694.0" layoutY="150.0" prefHeight="224.0" prefWidth="270.0">
         <columns>
           <TableColumn fx:id="tableName" prefWidth="120.0" text="赠品名" />
@@ -143,5 +144,6 @@
       <TextField fx:id="numberField" layoutX="814.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" />
       <ChoiceBox fx:id="giftChoice" layoutX="694.0" layoutY="417.0" prefHeight="23.0" prefWidth="120.0" />
       <Button fx:id="insertGift" layoutX="889.0" layoutY="417.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="75.0" text="增加赠品" />
+      <Label fx:id="idLabel" layoutX="193.0" layoutY="417.0" prefHeight="23.0" prefWidth="75.0" style="-fx-background-color: #DDDDDD;" />
 	</children>
 </AnchorPane>

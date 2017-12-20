@@ -18,9 +18,9 @@ public class PromotionTotalVO extends PromotionVO {
 	private Double voucher;
 	private ArrayList<GiftVO> gifts;
 
-	public PromotionTotalVO(LocalDate beginDate,LocalDate endDate, Double total,
+	public PromotionTotalVO(String id,LocalDate beginDate,LocalDate endDate, Double total,
 			Double voucher, ArrayList<GiftVO> gifts) {
-		super(beginDate,endDate,PromotionType.SUM_PROMOTION);
+		super(id,beginDate,endDate,PromotionType.SUM_PROMOTION);
 		this.setVoucher(voucher);
 		this.setGifts(gifts);
 		this.setTotal(total);

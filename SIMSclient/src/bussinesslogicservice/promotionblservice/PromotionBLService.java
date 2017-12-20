@@ -13,7 +13,7 @@ public interface PromotionBLService<P extends PromotionVO> {
 	public void delete(P vo,PromotionType type);
 	public ResultMessage update(P vo,PromotionType type);
 	public ArrayList<P> getPromotionList(PromotionType type);
-
+    public String getID();
 
 
 }

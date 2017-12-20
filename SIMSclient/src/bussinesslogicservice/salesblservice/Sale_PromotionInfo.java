@@ -1,12 +1,16 @@
 package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import po.commodity.CommodityItemPO;
+import vo.billvo.salesbillvo.SalesPriceVO;
+import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionCommodityVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
+import vo.promotionvo.PromotionVO;
 
 /**
 *
@@ -17,16 +21,15 @@ public interface Sale_PromotionInfo {
 
 	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String id, ArrayList<String> commodityIDs, ArrayList<Integer> commodityNumber) throws RemoteException;
 
-	public ArrayList<PromotionMemberVO> findMemberPromotion(String id, String memberID) throws RemoteException;
+	public ArrayList<PromotionMemberVO> findMemberPromotion(String memberID) throws RemoteException;
 
-	public ArrayList<PromotionTotalVO> findTotalPromotion(String id, double beforePrice) throws RemoteException;
+	public ArrayList<PromotionTotalVO> findTotalPromotion(double beforePrice) throws RemoteException;
 
-	public ArrayList<PromotionPricePacksVO> showPricePacks() throws RemoteException;
+	public ArrayList<PromotionPricePacksVO> findPricePacksPromotion(ArrayList<CommodityItemVO> commodityItems) throws RemoteException;
 
 	public PromotionPricePacksVO findPricePacks(String id) throws RemoteException;
 
-	public double getAllowance(String ID) throws RemoteException;
-	public double getVoucher(String ID) throws RemoteException;
+	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList);//根据促销策略，返回代金券和价格折让
 	public ArrayList<CommodityItemPO> getGifts(String ID) throws RemoteException;
 
 

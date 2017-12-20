@@ -9,7 +9,7 @@ import vo.commodityvo.CommodityItemVO;
 
 public class SalesVO extends BillVO {
 	private String retailerID;
-	private String retailer; // 客户姓名
+	private String retailer; // 客户姓名和ID
 	private String saleMan; // 业务员
 	private String operator;
 	private Warehouse warehouse;
@@ -20,11 +20,17 @@ public class SalesVO extends BillVO {
 	private Double afterPrice;
 
 
-	public SalesVO(String id, String retailerID, String retailer, String saleMan, String operator, Warehouse warehouse,
+	public SalesVO(String id, String retailer, String saleMan, String operator, Warehouse warehouse,
 			ArrayList<CommodityItemVO> commodity, Double beforePrice, Double allowance, Double voucher,
 			Double afterPrice, String note, BillState state, BillType type) {
 		super(id,type,state,note);
-		this.setRetailerID(retailerID);
+		String s= "";
+		for(int i=0;i<retailer.length();i++)
+			if(retailer.charAt(i)=='('){
+				s = retailer.substring(i+1, retailer.length()-1);
+				break;
+				}
+		this.setRetailerID(s);
 		this.setRetailer(retailer);
 		this.setSaleMan(saleMan);
 		this.setOperator(operator);

@@ -43,7 +43,6 @@ public class MemberManageController extends SaleStockStaffController implements 
 	    ObservableList<MemberVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> classList = FXCollections.observableArrayList(MemberCategory.RETAILER.value,MemberCategory.SUPPLIER.value,MemberCategory.BOTH.value);
 	    ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
-        UserVO user;
 	    @FXML
 	    protected ChoiceBox<String> findChoice;
 	    @FXML

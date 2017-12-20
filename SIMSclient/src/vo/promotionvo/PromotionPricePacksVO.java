@@ -16,8 +16,8 @@ public class PromotionPricePacksVO extends PromotionVO {
 	private ArrayList<GiftVO> pricePacks;
 	private Double discount;   //特价包优惠前的总价
 
-	public PromotionPricePacksVO(LocalDate beginDate, LocalDate endDate,Double discount, ArrayList<GiftVO> pricePacks) {
-		super(beginDate,endDate,PromotionType.PRICEPACKS);
+	public PromotionPricePacksVO(String id,LocalDate beginDate, LocalDate endDate,Double discount, ArrayList<GiftVO> pricePacks) {
+		super(id,beginDate,endDate,PromotionType.PRICEPACKS);
 		this.pricePacks = pricePacks;
 		this.discount = discount;
 	}

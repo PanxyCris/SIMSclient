@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -49,9 +50,9 @@ public class PromotionSumController extends PromotionMakingController{
 	@FXML
 	TableView<PromotionTotalVO> table;
 	@FXML
-	TableColumn<PromotionTotalVO,Double> tableSum;
+	TableColumn<PromotionTotalVO,String> tableID;
 	@FXML
-	TableColumn<PromotionTotalVO,String> tableGift;
+	TableColumn<PromotionTotalVO,Double> tableSum;
 	@FXML
 	TableColumn<PromotionTotalVO,Double> tableVoucher;
 	@FXML
@@ -73,6 +74,8 @@ public class PromotionSumController extends PromotionMakingController{
 	@FXML
 	TableColumn<GiftVO,String> tableDeleteGift;
 
+	@FXML
+	Label idLabel;
     @FXML
 	TextField sumField;
 	@FXML
@@ -92,7 +95,7 @@ public class PromotionSumController extends PromotionMakingController{
 	@FXML
 	public void insert(){
 		ArrayList<GiftVO> gifts = null;
-		 PromotionTotalVO vo = new PromotionTotalVO(startPicker.getValue(),endPicker.getValue(),
+		 PromotionTotalVO vo = new PromotionTotalVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
 				 Double.parseDouble(sumField.getText()),Double.parseDouble(voucherField.getText()),gifts);
 	        ResultMessage message = service.insert(vo,type);
 	        Platform.runLater(new Runnable() {
@@ -122,6 +125,7 @@ public class PromotionSumController extends PromotionMakingController{
 
 	@FXML
 	public void fresh() throws RemoteException{
+		idLabel.setText(service.getID());
 		list.clear();
 		list.addAll(service.getPromotionList(type));
 		table.setItems(list);
@@ -207,6 +211,8 @@ public class PromotionSumController extends PromotionMakingController{
 
 
 	public void manageInit(){
+		tableID.setCellValueFactory(
+                new PropertyValueFactory<PromotionTotalVO,String>("id"));
 		tableSum.setCellValueFactory(
 	                new PropertyValueFactory<PromotionTotalVO,Double>("total"));
 	    tableStart.setCellValueFactory(

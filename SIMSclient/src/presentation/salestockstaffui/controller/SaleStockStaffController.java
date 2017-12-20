@@ -1,5 +1,6 @@
 package presentation.salestockstaffui.controller;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 
@@ -16,8 +17,10 @@ import presentation.salestockstaffui.MemberManageUI;
 import presentation.salestockstaffui.PurchaseCheckBillUI;
 import presentation.salestockstaffui.PurchaseMakeBillUI;
 import presentation.salestockstaffui.SaleStockStaffUI;
+import presentation.salestockstaffui.SalesMakeBillUI;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.billvo.salesbillvo.SalesVO;
+import vo.promotionvo.PromotionVO;
 import vo.uservo.UserVO;
 
 public class SaleStockStaffController {
@@ -29,6 +32,8 @@ public class SaleStockStaffController {
 	static Stack<String> stack;
 	UserVO user;
 	BillType type;
+	PurchaseVO purchase;
+	SalesVO sale;
 
 	@FXML
 	protected AnchorPane pane;
@@ -38,7 +43,7 @@ public class SaleStockStaffController {
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous,user,null,null,null);
+        startUI(previous,user,type,purchase,sale);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -49,13 +54,13 @@ public class SaleStockStaffController {
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID,user,type,null,null);
+		changeStage(mainID,user,type,purchase,sale);
 
     }
 
 	@FXML
 	public void fresh() throws Exception{
-		startUI(current,user,type,null,null);
+		startUI(current,user,type,purchase,sale);
 	}
 
 
@@ -119,6 +124,7 @@ public class SaleStockStaffController {
    		            case "MakeReceiptUI":new MakeReceiptUI().start(user);break;
    		            case "PurchaseMakeBillUI":new PurchaseMakeBillUI().start(user,type,purchase);break;
    		            case "PurchaseCheckBillUI":new PurchaseCheckBillUI().start(user,type);break;
+   		            case "SalesMakeBillUI":new SalesMakeBillUI().start(user,type,sales);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

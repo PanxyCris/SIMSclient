@@ -1,17 +1,14 @@
 package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
+
 import java.util.*;
 import dataenum.ResultMessage;
-import po.sales.SalesPO;
-import vo.billvo.salesbillvo.SalesInputVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
-
-
 /**
  *
 * @ClassName: SalesBLService
@@ -23,8 +20,7 @@ public interface SalesBLService {
 
 	public String getSaleID();
 	public String getBackSaleID();
-
-	public SalesPO createSale();
+	public ResultMessage isLegal(CommodityItemVO item);
 
 	public void addCommodities(CommodityItemVO item);
 
@@ -40,13 +36,11 @@ public interface SalesBLService {
 
 	public void addMembers(String id);
 
-	public void delte(SalesVO info);
+	public void delete(SalesVO info);
 
-	public SalesVO submit(SalesInputVO Info);
-	public SalesVO save(SalesInputVO Info);
-	public ResultMessage updateDraft(SalesVO vo);
-	public ResultMessage submitDraft(String id);
-	
+	public ResultMessage submit(SalesVO Info);
+	public ResultMessage save(SalesVO Info);
+
 	public ArrayList<String> getMemberIDandName();
 
 }

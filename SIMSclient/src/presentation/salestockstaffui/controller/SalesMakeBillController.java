@@ -1,22 +1,20 @@
 package presentation.salestockstaffui.controller;
 
 import java.rmi.RemoteException;
-
 import java.util.ArrayList;
-import bussiness_stub.CommodityBLService_Stub;
-import bussiness_stub.MemberBLService_Stub;
-import bussiness_stub.PurchaseBLService_Stub;
+
 import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.memberbl.MemberController;
-import bussinesslogic.purchasebl.PurchaseController;
+import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
-import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindCommodityType;
+import dataenum.findtype.FindMemberType;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -39,15 +37,18 @@ import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
-import vo.uservo.UserVO;
-import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.billvo.salesbillvo.SalesPriceVO;
+import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
+import vo.promotionvo.PromotionVO;
+import vo.uservo.UserVO;
 
-public class PurchaseMakeBillController extends MakeReceiptController{
+public class SalesMakeBillController extends MakeReceiptController{
 
 
-	PurchaseBLService service = new PurchaseController();//׮
+	SalesBLService service = new SalesController();//׮
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
+	ObservableList<PromotionVO> promotionlist = FXCollections.observableArrayList();
 
     @FXML
     Label typeLabel;
@@ -57,11 +58,21 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	@FXML
 	ChoiceBox<String> memberChoice;
 	@FXML
+	Label saleManLabel;
+	@FXML
 	ChoiceBox<String> warehouseChoice;
 	@FXML
-	Label sumLabel;
-	@FXML
+	Label beforeLabel;
+    @FXML
 	Label operatorLabel;
+    @FXML
+   	Label voucherLabel;
+    @FXML
+   	Label allowanceLabel;
+    @FXML
+   	TextField allowanceField;
+    @FXML
+   	Label afterLabel;
 
 	@FXML
 	TableView<CommodityItemVO> table;
@@ -114,8 +125,9 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
-	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(sumLabel.getText());
-	    	                     sumLabel.setText(String.valueOf(result));
+	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(beforeLabel.getText());
+	    	                     beforeLabel.setText(String.valueOf(result));
+	    	                     afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
 	    	                    break;
 	    	        default:break;
 	    	        }
@@ -130,8 +142,10 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	public void save(){
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
-         PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
+         SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
+        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+        		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
          service.save(vo);
 	}
 
@@ -139,8 +153,10 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	public void submit(){
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
-         PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
+		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
+       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
          service.submit(vo);
 	}
 
@@ -159,35 +175,49 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void checkBefore() throws Exception{
-         changeStage("PurchaseCheckBillUI",user,type,null,null,null);
+         changeStage("SalesCheckBillUI",user,type,null,null);
 	}
 
-	public void initData(UserVO user,BillType type,PurchaseVO purchase) throws Exception {
-		   this.type = type;
+	@FXML
+	public void checkPromotion() throws Exception{
+         changeStage("PromotionCheckUI",user,type,null,sale);
+	}
+
+
+	public void initData(UserVO user, BillType type, SalesVO sale) throws RemoteException {
+		 this.type = type;
 		   this.user = user;
-		   this.purchase = purchase;
+		   this.sale = sale;
 		   typeLabel.setText(type.value);
 
-			if(purchase == null){
-				if(type == BillType.PURCHASEBILL)
-				    idLabel.setText(service.getPurchaseID());
+			if(sale == null){
+				if(type == BillType.SALESBILL)
+				    idLabel.setText(service.getSaleID());
 				else
-					idLabel.setText(service.getPurChaseBackID());
-			    sumLabel.setText("0");
+					idLabel.setText(service.getBackSaleID());
+			    beforeLabel.setText("0");
+			    afterLabel.setText("0");
+			    allowanceLabel.setText("0");
+			    voucherLabel.setText("0");
 				operatorLabel.setText(user.getName());
 				}
 				else{
-					idLabel.setText(purchase.getId());
-					sumLabel.setText(String.valueOf(purchase.getSum()));
-					list.addAll(purchase.getCommodities());
+					idLabel.setText(sale.getId());
+					beforeLabel.setText(String.valueOf(sale.getBeforePrice()));
+					afterLabel.setText(String.valueOf(sale.getAfterPrice()));
+					allowanceLabel.setText(String.valueOf(sale.getAllowance()));
+					voucherLabel.setText(String.valueOf(sale.getVoucher()));
+					list.addAll(sale.getCommodity());
 					table.setItems(list);
-					operatorLabel.setText(purchase.getOperator());
+					operatorLabel.setText(sale.getOperator());
 
 				}
 				fresh();
 				edit();
 				manageInit();
 	}
+
+
 
 	public void edit(){
 		Callback<TableColumn<CommodityItemVO, String>,
@@ -218,11 +248,12 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	  	                        ).setNumber(tmp);
 	               else{
 	            	   Integer newTmp = newVO.getNumber();
-	            	   double result = Double.parseDouble(sumLabel.getText())-(tmp-newTmp*newVO.getPrice());
+	            	   double result = Double.parseDouble(beforeLabel.getText())-(tmp-newTmp*newVO.getPrice());
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(result);
-	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-tmpTotal+result));
+	            	   beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())-tmpTotal+result));
+	            	   afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
 	               }
         });
 
@@ -244,11 +275,12 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	  	                        ).setPrice(tmp);
 	               else{
 	            	   Integer newTmp = newVO.getNumber();
-	            	   double result = Double.parseDouble(sumLabel.getText())-(tmp-newTmp)*newVO.getNumber();
+	            	   double result = Double.parseDouble(beforeLabel.getText())-(tmp-newTmp)*newVO.getNumber();
 	            	   ((CommodityItemVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setTotal(result);
-	            	   sumLabel.setText(String.valueOf(Double.parseDouble(sumLabel.getText())-tmpTotal+result));
+	            	   beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())-tmpTotal+result));
+	            	   afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
 	               }
         });
 
@@ -307,6 +339,23 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         MemberBLService memberService = new MemberController();//׮
         memberList.addAll(memberService.getIDandName());
         memberChoice.setItems(memberList);
+        memberChoice.getSelectionModel().selectedItemProperty().addListener(
+        		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
+        			MemberBLService memberservice = new MemberController();
+        			String s = "";
+        			for(int i=0;i<newValue.length();i++)
+        				if(newValue.charAt(i)=='(') {
+        					s = newValue.substring(i+1, newValue.length()-1);
+        			        break;
+        				}
+        try {
+			saleManLabel.setText(memberservice.find(s, FindMemberType.ID).get(0).getSaleMan());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        		});
 
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
 
@@ -333,9 +382,9 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         		});
 
 
-        if(purchase!=null){
-        	memberChoice.setValue(purchase.getSupplier());
-        	warehouseChoice.setValue(purchase.getWarehouse().value);
+        if(sale!=null){
+        	memberChoice.setValue(sale.getRetailer());
+        	warehouseChoice.setValue(sale.getWarehouse().value);
         }
 
 	}
@@ -422,8 +471,9 @@ public class PurchaseMakeBillController extends MakeReceiptController{
                             list.remove(clickedItem);
                             table.setItems(list);
                             double tmp = clickedItem.getTotal();
-                            double result = Double.parseDouble(sumLabel.getText())-tmp;
-                            sumLabel.setText(String.valueOf(result));
+                            double result = Double.parseDouble(beforeLabel.getText())-tmp;
+                            beforeLabel.setText(String.valueOf(result));
+                            afterLabel.setText(String.valueOf(result-Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
                         });
                     }
                 }
@@ -432,6 +482,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
             return cell;
         });
 	}
+
 
 
 

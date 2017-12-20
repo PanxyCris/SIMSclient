@@ -27,8 +27,6 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	PurchaseBLService service = new PurchaseController();
 	ObservableList<PurchaseVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
-	UserVO user;
-	BillType type;
 
 	@FXML
 	TableView<PurchaseVO> table;
@@ -76,7 +74,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 
 	@FXML
 	public void makePurchaseBill() throws Exception{
-         changeStage("PurchaseMakeBillUI",user,type,null,null);
+         changeStage("PurchaseMakeBillUI",user,type,null,null,null);
 	}
 
 	public void initData(UserVO user,BillType type) {
@@ -193,7 +191,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             try {
-								changeStage("PurchaseMakeBillUI",user,clickedItem.getType(),clickedItem,null);
+								changeStage("PurchaseMakeBillUI",user,clickedItem.getType(),clickedItem,null,null);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

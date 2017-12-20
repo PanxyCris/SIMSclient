@@ -12,14 +12,22 @@ import vo.ViewObject;
 */
 public class PromotionVO extends ViewObject{
 
+	private String id;
 	private LocalDate beginDate;
 	private LocalDate endDate;
 	private PromotionType type;
+	private String typeString;
 
-	public PromotionVO(LocalDate beginDate,LocalDate endDate,PromotionType type){
+	public PromotionVO(String id,LocalDate beginDate,LocalDate endDate,PromotionType type){
+		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
 		this.setType(type);
+		this.typeString = type.value;
+	}
+
+	public String getId(){
+		return id;
 	}
 
 	public void setBeginDate(LocalDate beginDate){
@@ -44,6 +52,10 @@ public class PromotionVO extends ViewObject{
 
 	public void setType(PromotionType type) {
 		this.type = type;
+	}
+
+	public String getTypeString() {
+		return typeString;
 	}
 
 

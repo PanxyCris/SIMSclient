@@ -16,7 +16,6 @@ import vo.uservo.UserVO;
 public class MakeReceiptController extends SaleStockStaffController implements Initializable {
 
 	public static final Remind remind = Remind.BILL;
-	UserVO user;
 	@FXML
 	ChoiceBox<String> receiptChoice;
 
@@ -26,8 +25,8 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 		switch(type){
 		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
 		case PURCHASEBACKBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
-		case SALESBILL:
-		case SALESBACKBILL:
+		case SALESBILL:changeStage("SakesMakeBillUI",user,type,null,null);break;
+		case SALESBACKBILL:changeStage("SalesMakeBillUI",user,type,null,null);break;
 		default:break;
 		}
 	}

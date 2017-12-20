@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -52,6 +53,8 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	TableView<PromotionMemberVO> table;
 	@FXML
+	TableColumn<PromotionMemberVO,String> tableID;
+	@FXML
 	TableColumn<PromotionMemberVO,String> tableLevel;
 	@FXML
 	TableColumn<PromotionMemberVO,Double> tableAllowance;
@@ -76,6 +79,8 @@ public class PromotionMemberController extends PromotionMakingController{
 	TableColumn<GiftVO,String> tableDeleteGift;
 
 	@FXML
+	Label idLabel;
+	@FXML
 	ChoiceBox<String> levelChoice;
 	@FXML
 	TextField allowanceField;
@@ -94,7 +99,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	@FXML
 	public void insert(){
 		ArrayList<GiftVO> gifts = null;
-		 PromotionMemberVO vo = new PromotionMemberVO(startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
+		 PromotionMemberVO vo = new PromotionMemberVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
 	        ResultMessage message = service.insert(vo,type);
 	        Platform.runLater(new Runnable() {
@@ -124,6 +129,7 @@ public class PromotionMemberController extends PromotionMakingController{
 
 	@FXML
 	public void fresh() throws RemoteException{
+		idLabel.setText(service.getID());
 		list.clear();
 		list.addAll(service.getPromotionList(type));
 		levelChoice.setValue(null);
@@ -223,6 +229,8 @@ public class PromotionMemberController extends PromotionMakingController{
 
 
 	public void manageInit(){
+		tableID.setCellValueFactory(
+                new PropertyValueFactory<PromotionMemberVO,String>("id"));
 		tableLevel.setCellValueFactory(
                 new PropertyValueFactory<PromotionMemberVO,String>("levelString"));
 	    tableStart.setCellValueFactory(

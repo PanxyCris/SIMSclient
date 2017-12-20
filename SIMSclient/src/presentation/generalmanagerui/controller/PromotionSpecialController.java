@@ -21,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,6 +52,8 @@ public class PromotionSpecialController {
 	@FXML
 	TableView<PromotionPricePacksVO> table;
 	@FXML
+	TableColumn<PromotionPricePacksVO,String> tableID;
+	@FXML
 	TableColumn<PromotionPricePacksVO,Double> tableAllowance;
 
 	@FXML
@@ -72,6 +75,8 @@ public class PromotionSpecialController {
 	TableColumn<GiftVO,String> tableDeleteCommodity;
 
 	@FXML
+	Label idLabel;
+	@FXML
 	TextField allowanceField;
 	@FXML
 	DatePicker startPicker;
@@ -87,7 +92,7 @@ public class PromotionSpecialController {
 	public void insert(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts = null;
-		 PromotionPricePacksVO vo = new PromotionPricePacksVO(startPicker.getValue(),endPicker.getValue(),
+		 PromotionPricePacksVO vo = new PromotionPricePacksVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
 				 Double.parseDouble(allowanceField.getText()),gifts);
 	        ResultMessage message = service.insert(vo,type);
 	        Platform.runLater(new Runnable() {
@@ -117,6 +122,7 @@ public class PromotionSpecialController {
 
 	@FXML
 	public void fresh() throws RemoteException{
+		idLabel.setText(service.getID());
 		list.clear();
 		list.addAll(service.getPromotionList(type));
 		table.setItems(list);
@@ -201,6 +207,8 @@ public class PromotionSpecialController {
 
 
 	public void manageInit(){
+		tableID.setCellValueFactory(
+	                new PropertyValueFactory<PromotionPricePacksVO,String>("id"));
 
 	    tableStart.setCellValueFactory(
                 new PropertyValueFactory<PromotionPricePacksVO,LocalDate>("beginDate"));
