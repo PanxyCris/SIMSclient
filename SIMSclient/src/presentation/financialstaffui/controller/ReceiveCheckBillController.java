@@ -45,7 +45,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 	@FXML
 	TableColumn<ReceiptBillVO,String> tableMember;
 	@FXML
-	TableColumn<ReceiptBillVO,String> tableSum;
+	TableColumn<ReceiptBillVO,Double> tableSum;
 	@FXML
 	TableColumn<ReceiptBillVO,String> tableOperator;
 	@FXML
@@ -122,7 +122,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 		tableMember.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("customerID"));
 		tableSum.setCellValueFactory(
-                new PropertyValueFactory<ReceiptBillVO,String>("total"));
+                new PropertyValueFactory<ReceiptBillVO,Double>("total"));
 		tableOperator.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("userID"));
 		tableRemark.setCellValueFactory(

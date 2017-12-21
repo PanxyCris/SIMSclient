@@ -3,11 +3,13 @@ package presentation.generalmanagerui.controller;
 import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillController;
+import bussinesslogic.examinebl.ExamineInventoryBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindBillType;
 import dataenum.findtype.FindInventoryBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -20,7 +22,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
@@ -28,7 +33,7 @@ import vo.uservo.UserVO;
 
 public class ExamineInventoryBillController extends ExamineBillController{
 
-	    ExamineBLService<InventoryBillVO> service = new ExamineBillController();
+	    ExamineBLService<InventoryBillVO> service = new ExamineInventoryBL();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
 		public static final Remind remind = Remind.BILL;
@@ -49,7 +54,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		@FXML
 		TableColumn<InventoryBillVO,String> tableCheck;
 		@FXML
-		TableColumn<InventoryBillVO,Boolean> tablePass;
+		TableColumn<InventoryBillVO,CheckBox> tablePass;
 
 		@FXML
 		TableView<GiftVO> giftTable;
@@ -59,7 +64,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		@FXML
 		public void find(){
-			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindInventoryBillType.getType(findChoice.getValue()));
+			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
@@ -80,24 +85,37 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		@FXML
 		public void fresh(){
-			list.addAll(service.show());
+			list.addAll(service.getCommitedBills());
 			table.setItems(list);
 		}
 
 		@FXML
 		public void success(){
-            ArrayList<InventoryBillVO>
+            ArrayList<InventoryBillVO> choiceList = new ArrayList<>();
+            for(int i=0;i<list.size();i++)
+            	if(list.get(i).getBox().isSelected()){
+            		choiceList.add(list.get(i));
+            		list.remove(i);
+            		}
+            service.passBills(choiceList);
 		}
 
 		@FXML
 		public void fail(){
-
+			ArrayList<InventoryBillVO> choiceList = new ArrayList<>();
+            for(int i=0;i<list.size();i++)
+            	if(list.get(i).getBox().isSelected()){
+            		choiceList.add(list.get(i));
+            		list.remove(i);
+            		}
+            service.notPassBills(choiceList);
 		}
 
 		public void initData(UserVO user,BillType type){
 			this.user = user;
 			this.bill = type;
 			choiceInit();
+			edit();
 			manageInit();
 			fresh();
 		}
@@ -111,10 +129,10 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		public void manageInit(){
 			tableID.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("id"));
-
 			tableType.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("typeString"));
-
+            tablePass.setCellValueFactory(
+	                new PropertyValueFactory<InventoryBillVO,CheckBox>("box"));
 			tableNote.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("note"));
 			tableName.setCellValueFactory(
@@ -122,8 +140,25 @@ public class ExamineInventoryBillController extends ExamineBillController{
 			tableNumber.setCellValueFactory(
 	                new PropertyValueFactory<GiftVO,Integer>("number"));
 			checkInit();
-			passInit();
 		}
+
+		public void edit(){
+		    Callback<TableColumn<GiftVO, Integer>,
+			    TableCell<GiftVO, Integer>> cellFactoryInteger
+			        = (TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
+
+		    tableNumber.setCellFactory(cellFactoryInteger);
+		    tableNumber.setOnEditCommit(
+		            (CellEditEvent<GiftVO, Integer> t) -> {
+		                ((GiftVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setNumber(t.getNewValue());
+
+
+		        });
+
+		}
+
 
 		public void checkInit(){
 
@@ -155,26 +190,6 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		}
 
-		public void passInit(){
-
-			tablePass.setCellFactory((col) -> {
-	            TableCell<InventoryBillVO, Boolean> cell = new TableCell<InventoryBillVO, Boolean>() {
-	            	  @Override
-	                  public void updateItem(Boolean item, boolean empty) {
-	                      super.updateItem(item, empty);
-	                      this.setText(null);
-	                      this.setGraphic(null);
-	                      if (!empty) {
-	                          CheckBox checkBox = new CheckBox();
-	                          this.setGraphic(checkBox);
-	                      }
-	                  }
-
-	              };
-	              return cell;
-	          });
-
-		}
 
 
 

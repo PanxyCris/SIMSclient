@@ -3,6 +3,7 @@ package vo.billvo;
 import dataenum.BillState;
 
 import dataenum.BillType;
+import javafx.scene.control.CheckBox;
 import vo.ViewObject;
 
 public class BillVO extends ViewObject{
@@ -13,6 +14,7 @@ public class BillVO extends ViewObject{
 	protected String typeString;
 	protected BillState state;//µ¥¾Ý×´Ì¬
 	protected String stateString;
+	protected CheckBox box = new CheckBox();
 
 	public BillVO(String id,BillType type,BillState state,String note) {
 		this.id = id;
@@ -55,6 +57,10 @@ public class BillVO extends ViewObject{
 
 	public String getNote(){
 		return note;
+	}
+
+	public CheckBox getBox(){
+		return box;
 	}
 
 
