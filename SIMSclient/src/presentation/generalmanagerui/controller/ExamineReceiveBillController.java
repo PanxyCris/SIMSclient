@@ -1,20 +1,13 @@
 package presentation.generalmanagerui.controller;
 
-import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import bussiness_stub.ReceiptBillBLService_Stub;
 import bussinesslogic.accountbillbl.ReceiptBillController;
-import bussinesslogic.accountbl.AccountController;
 import bussinesslogic.examinebl.ExamineReceiptBL;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
-import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
-import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
@@ -37,10 +30,8 @@ import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
 import presentation.remindui.RemindPrintUI;
-import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
-import vo.membervo.MemberVO;
 import vo.uservo.UserVO;
 
 public class ExamineReceiveBillController extends ExamineBillController{
@@ -128,8 +119,9 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	}
 
 
-	public void initData(UserVO user) throws RemoteException {
+	public void initData(UserVO user,BillType type) throws RemoteException {
 		this.user = user;
+		receiptChoice.setValue(type.value);
 		list.addAll(service.getCommitedBills());
 		table.setItems(list);
 		manageInit();

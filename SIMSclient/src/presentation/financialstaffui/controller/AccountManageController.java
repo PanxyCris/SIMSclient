@@ -134,7 +134,7 @@ public class AccountManageController extends FinancialStaffController implements
                             ).setName(t.getNewValue());
                    AccountVO newVO = ((AccountVO) t.getTableView().getItems().get(
                             t.getTablePosition().getRow()));
-                   if(update(newVO)){
+                   if(!update(newVO)){
                        ((AccountVO)t.getTableView().getItems().get(
                                   t.getTablePosition().getRow())
                                   ).setName(tmp);

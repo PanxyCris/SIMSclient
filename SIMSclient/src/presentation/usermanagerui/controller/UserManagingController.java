@@ -158,7 +158,7 @@ public class UserManagingController extends UserManagerController implements Ini
 	                UserVO newVO = ((UserVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow()));
 	               try {
-					if(update(newVO)){
+					if(!update(newVO)){
 					       ((UserVO)t.getTableView().getItems().get(
 					                t.getTablePosition().getRow())
 					                ).setName(tmp);
