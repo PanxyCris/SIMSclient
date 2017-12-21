@@ -6,83 +6,62 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-	prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="SIMSclient.src.presentation.accountui.AccountManageUI">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.generalmanagerui.controller.ExamineReceiveBillController">
 	<children>
-		<ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../img/管理.jpg" />
 			</image>
 		</ImageView>
-		<Button layoutX="150.0" layoutY="4.0" mnemonicParsing="false"
-			onAction="#returnLast" prefHeight="43.0" prefWidth="47.0"
-			style="-fx-background-color: rgba(0,0,0,0);">
+		<Button layoutX="150.0" layoutY="4.0" mnemonicParsing="false" onAction="#returnLast" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
-				<ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="50.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/返回.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="211.0" layoutY="6.0" mnemonicParsing="false"
-			onAction="#mainPage" prefHeight="44.0" prefWidth="54.0"
-			style="-fx-background-color: rgba(0,0,0,0);">
+		<Button layoutX="211.0" layoutY="6.0" mnemonicParsing="false" onAction="#mainPage" prefHeight="44.0" prefWidth="54.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
-				<ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="40.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/主页.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="327.0" layoutY="9.0" mnemonicParsing="false"
-			onAction="#message" prefHeight="43.0" prefWidth="47.0"
-			style="-fx-background-color: rgba(0,0,0,0);">
+		<Button layoutX="327.0" layoutY="9.0" mnemonicParsing="false" onAction="#message" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
-				<ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="36.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/消息.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="955.0" layoutY="8.0" mnemonicParsing="false"
-			onAction="#logout" prefHeight="43.0" prefWidth="47.0"
-			style="-fx-background-color: rgba(0,0,0,0);">
+		<Button layoutX="955.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="47.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
-				<ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="41.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/注销.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<ImageView fx:id="image" fitHeight="100.0" fitWidth="127.0"
-			layoutX="12.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fx:id="image" fitHeight="100.0" fitWidth="127.0" layoutX="12.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../img/用户.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="60.0" fitWidth="114.0" layoutX="11.0"
-			layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="60.0" fitWidth="114.0" layoutX="11.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@../img/Logo.png" />
 			</image>
 		</ImageView>
-		<Button layoutX="259.0" layoutY="9.0" mnemonicParsing="false"
-			onAction="#fresh" prefHeight="44.0" prefWidth="68.0"
-			style="-fx-background-color: rgba(0,0,0,0);">
+		<Button layoutX="259.0" layoutY="9.0" mnemonicParsing="false" onAction="#fresh" prefHeight="44.0" prefWidth="68.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
-				<ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/刷新.png" />
 					</image>
@@ -90,90 +69,77 @@
 			</graphic>
 		</Button>
 		<ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
-		<Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false"
-			text="选择单据大类查看" />
-		<TableView layoutX="762.0" layoutY="104.0" prefHeight="432.0"
-			prefWidth="228.0">
-			<columns>
-				<TableColumn prefWidth="75.0" text="银行账户" />
-				<TableColumn prefWidth="75.0" text="转账金额" />
-				<TableColumn prefWidth="75.0" text="备注" />
-			</columns>
-		</TableView>
-		<TableView layoutX="192.0" layoutY="104.0" prefHeight="432.0"
-			prefWidth="549.0">
-			<columns>
-				<TableColumn prefWidth="150.0" text="单据编号" />
-				<TableColumn prefWidth="75.0" text="客户" />
-				<TableColumn prefWidth="75.0" text="单据类型" />
-				<TableColumn prefWidth="75.0" text="操作员" />
-				<TableColumn prefWidth="100.0" text="查看转账列表" />
-				<TableColumn prefWidth="75.0" text="审批" />
-			</columns>
-		</TableView>
-		<Button layoutX="342.0" layoutY="544.0" mnemonicParsing="false"
-			prefHeight="44.0" prefWidth="150.0" text="确    定" />
-		<Button layoutX="652.0" layoutY="544.0" mnemonicParsing="false"
-			prefHeight="44.0" prefWidth="136.0" text="取     消" />
-		<Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill"
-			prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);"
-			text="审批单据" textFill="WHITE">
+		<Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
+		<Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
 			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/审批.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutY="331.0" mnemonicParsing="false" onAction="#checkTable"
-			prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);"
-			text="查看表格" textFill="WHITE">
+		<Button layoutY="331.0" mnemonicParsing="false" onAction="#checkTable" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
 			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/表格.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutY="391.0" mnemonicParsing="false" onAction="#makePromotion"
-			prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);"
-			text="制定策略" textFill="WHITE">
+		<Button layoutY="391.0" mnemonicParsing="false" onAction="#makePromotion" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
 			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/策略.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutY="451.0" mnemonicParsing="false" onAction="#checkDiary"
-			prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);"
-			text="查看日志" textFill="WHITE">
+		<Button layoutY="451.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
 			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
-					preserveRatio="true">
+				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../img/日志.png" />
 					</image>
 				</ImageView>
 			</graphic>
 		</Button>
+      <TableView fx:id="table" layoutX="192.0" layoutY="123.0" prefHeight="381.0" prefWidth="525.0" tableMenuButtonVisible="true">
+         <columns>
+            <TableColumn fx:id="tableID" prefWidth="110.0" text="单据编号" />
+            <TableColumn fx:id="tableMember" prefWidth="75.0" text="客户" />
+            <TableColumn fx:id="tableSum" prefWidth="75.0" text="总额" />
+            <TableColumn fx:id="tableOperator" prefWidth="75.0" text="操作员" />
+            <TableColumn fx:id="tableRemark" prefWidth="75.0" text="单据备注" />
+            <TableColumn fx:id="tableCheck" prefWidth="100.0" text="查看转账列表" />
+            <TableColumn fx:id="tablePass" prefWidth="75.0" text="是否通过" />
+         </columns>
+      </TableView>
+      <TableView fx:id="accountList" layoutX="739.0" layoutY="123.0" prefHeight="381.0" prefWidth="251.0">
+         <columns>
+            <TableColumn fx:id="tableAccount" prefWidth="75.0" text="银行账户" />
+            <TableColumn fx:id="tableMoney" prefWidth="75.0" text="转账金额" />
+            <TableColumn fx:id="tableDescription" prefWidth="100.0" text="备注" />
+         </columns>
+      </TableView>
+      <Button layoutX="898.0" layoutY="69.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="85.0" text="查  找" />
+      <TextField fx:id="findingField" layoutX="612.0" layoutY="69.0" prefHeight="23.0" prefWidth="286.0" />
+      <ChoiceBox fx:id="findChoice" layoutX="462.0" layoutY="69.0" prefWidth="150.0" />
+      <Button layoutX="652.0" layoutY="544.0" mnemonicParsing="false" onAction="#fail" prefHeight="44.0" prefWidth="136.0" text="不通过" />
+      <Button layoutX="342.0" layoutY="544.0" mnemonicParsing="false" onAction="#success" prefHeight="44.0" prefWidth="150.0" text="通    过" />
 	</children>
 </AnchorPane>
