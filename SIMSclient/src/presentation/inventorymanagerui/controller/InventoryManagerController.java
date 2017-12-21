@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import presentation.inventorymanagerui.InventoryManagerUI;
 import presentation.mainui.MainUI;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.uservo.UserVO;
 
 public class InventoryManagerController {
@@ -21,6 +22,7 @@ public class InventoryManagerController {
 	static Stack<String> stack;
 	UserVO user;
 	BillType type;
+	InventoryBillVO inv;
 
 	@FXML
 	protected AnchorPane pane;
@@ -30,7 +32,7 @@ public class InventoryManagerController {
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous,user,type);
+        startUI(previous,user,type,inv);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -41,13 +43,13 @@ public class InventoryManagerController {
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID,user,type);
+		changeStage(mainID,user,type,inv);
 
     }
 
 	@FXML
 	public void fresh() throws Exception{
-		startUI(current,user,type);
+		startUI(current,user,type,inv);
 	}
 
 
@@ -73,27 +75,27 @@ public class InventoryManagerController {
 
 	@FXML
 	public void classManage() throws Exception{
-         changeStage("ClassManageUI",user,type);
+         changeStage("ClassManageUI",user,type,inv);
 	}
 
 	@FXML
 	public void commodityManage() throws Exception{
-         changeStage("CommodityManageUI",user,type);
+         changeStage("CommodityManageUI",user,type,inv);
 	}
 
 	@FXML
 	public void inventoryCheck() throws Exception{
-         changeStage("InventoryCheckUI",user,type);
+         changeStage("InventoryCheckUI",user,type,inv);
 	}
 
 	@FXML
 	public void inventoryStock() throws Exception{
-         changeStage("InventoryStockUI",user,type);
+         changeStage("InventoryStockUI",user,type,inv);
 	}
 
 	@FXML
 	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type);
+		 changeStage("MakeReceiptUI",user,type,inv);
 	}
 
 
@@ -106,15 +108,15 @@ public class InventoryManagerController {
 	}
 
 
-	public void changeStage(String currentID,UserVO user,BillType type) throws Exception{
+	public void changeStage(String currentID,UserVO user,BillType type,InventoryBillVO inv) throws Exception{
 
-   	    startUI(currentID,user,type);
+   	    startUI(currentID,user,type,inv);
 	    previous = current;
 	    current = currentID;
 	    stack.push(current);
 	}
 
-	public void startUI(String currentID,UserVO user,BillType type){
+	public void startUI(String currentID,UserVO user,BillType type,InventoryBillVO inv){
 	    Stage stage = (Stage) pane.getScene().getWindow();
 	    stage.close();
 			Platform.runLater(new Runnable() {

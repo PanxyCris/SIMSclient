@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.inventorymanagerui.controller.MakeReceiptController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.inventorymanagerui.controller.CheckReceiptController">
 	<children>
 		<ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
 			<image>
@@ -128,24 +128,27 @@
 				</ImageView>
 			</graphic>
 		</Button>
-      <ChoiceBox fx:id="receiptChoice" layoutX="341.0" layoutY="138.0" prefWidth="150.0" />
-      <Label layoutX="341.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="单据类型" />
-      <Label fx:id="idLabel" layoutX="178.0" layoutY="138.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
-      <ChoiceBox fx:id="nameChoice" layoutX="525.0" layoutY="454.0" prefWidth="150.0" />
-      <TextField fx:id="numberField" layoutX="675.0" layoutY="454.0" prefHeight="23.0" prefWidth="150.0" />
-      <Label layoutX="178.0" layoutY="199.0" prefHeight="15.0" prefWidth="150.0" text="备注" />
-      <TextArea fx:id="noteArea" layoutX="178.0" layoutY="225.0" prefHeight="254.0" prefWidth="321.0" />
-      <Label layoutX="178.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="单据编号" />
-      <Button layoutX="353.0" layoutY="511.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="136.0" text="保    存" />
-      <Button layoutX="611.0" layoutY="511.0" mnemonicParsing="false" onAction="#submit" prefHeight="38.0" prefWidth="127.0" text="提    交" />
-      <TableView fx:id="table" layoutX="525.0" layoutY="100.0" prefHeight="326.0" prefWidth="397.0">
+      <TableView fx:id="table" layoutX="175.0" layoutY="134.0" prefHeight="403.0" prefWidth="539.0">
         <columns>
-          <TableColumn fx:id="tableName" prefWidth="150.0" text="商品名" />
-          <TableColumn fx:id="tableNumber" prefWidth="150.0" text="数量" />
-            <TableColumn fx:id="tableDelete" prefWidth="97.0" text="是否删除" />
+          <TableColumn fx:id="tableID" prefWidth="75.0" text="单据编号" />
+          <TableColumn fx:id="tableType" prefWidth="75.0" text="单据类型" />
+            <TableColumn fx:id="tableNote" prefWidth="75.0" text="备注" />
+            <TableColumn fx:id="tableCheck" prefWidth="100.0" text="查看商品列表" />
+            <TableColumn fx:id="tableState" prefWidth="75.0" text="单据状态" />
+            <TableColumn fx:id="tableSubmit" prefWidth="75.0" text="是否提交" />
+            <TableColumn fx:id="tableRedo" prefWidth="75.0" text="是否重做" />
+            <TableColumn fx:id="tableDelete" prefWidth="75.0" text="是否删除" />
         </columns>
       </TableView>
-      <Button layoutX="825.0" layoutY="454.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="97.0" text="增加" />
-      <Button layoutX="846.0" layoutY="538.0" mnemonicParsing="false" onAction="#checkBefore" prefHeight="38.0" prefWidth="136.0" text="查看过往单据" />
+      <ChoiceBox fx:id="findChoice" layoutX="390.0" layoutY="77.0" prefWidth="150.0" />
+      <TextField fx:id="findingField" layoutX="540.0" layoutY="77.0" prefHeight="23.0" prefWidth="370.0" />
+      <Button layoutX="910.0" layoutY="77.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="68.0" text="查找" />
+      <Button layoutX="175.0" layoutY="67.0" mnemonicParsing="false" onAction="#makeInventoryReceipt" prefHeight="48.0" prefWidth="150.0" text="制作单据" />
+      <TableView fx:id="giftTable" layoutX="725.0" layoutY="134.0" prefHeight="403.0" prefWidth="278.0">
+         <columns>
+            <TableColumn fx:id="tableName" prefWidth="150.0" text="商品名" />
+            <TableColumn fx:id="tableNumber" prefWidth="150.0" text="数量" />
+         </columns>
+      </TableView>
 	</children>
 </AnchorPane>

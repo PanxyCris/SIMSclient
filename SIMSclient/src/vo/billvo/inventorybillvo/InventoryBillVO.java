@@ -1,32 +1,30 @@
 package vo.billvo.inventorybillvo;
 
+import java.util.ArrayList;
+
 import dataenum.BillState;
 
 import dataenum.BillType;
 import vo.billvo.BillVO;
+import vo.commodityvo.GiftVO;
 
 public class InventoryBillVO extends BillVO{
 
-     protected String name;
-     protected Integer number;
+	private ArrayList<GiftVO> gifts;
 
-	public InventoryBillVO(String id,String name,Integer number,BillType billType, BillState billState,String note) {
+	public InventoryBillVO(String id,ArrayList<GiftVO> gifts,BillType billType, BillState billState,String note) {
 		super(id,billType, billState,note);
-		this.name = name;
-		this.number = number;
+		this.setGifts(gifts);
 	}
 
-	public String getName(){
-		return name;
+	public ArrayList<GiftVO> getGifts() {
+		return gifts;
 	}
 
-	public Integer getNumber(){
-		return number;
+	public void setGifts(ArrayList<GiftVO> gifts) {
+		this.gifts = gifts;
 	}
 
-	public void setNumber(Integer number){
-		this.number = number;
-	}
 
 
 }
