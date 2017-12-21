@@ -121,6 +121,7 @@ public class ExamineReceiveBillController extends ExamineBillController{
 
 	public void initData(UserVO user,BillType type) throws RemoteException {
 		this.user = user;
+		this.billType = type;
 		receiptChoice.setValue(type.value);
 		list.addAll(service.getCommitedBills());
 		table.setItems(list);

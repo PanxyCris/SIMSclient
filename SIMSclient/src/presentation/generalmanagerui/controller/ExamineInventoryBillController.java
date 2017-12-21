@@ -113,7 +113,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		public void initData(UserVO user,BillType type){
 			this.user = user;
-			this.bill = type;
+			this.billType = type;
 			choiceInit();
 			edit();
 			manageInit();

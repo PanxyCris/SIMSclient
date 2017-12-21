@@ -25,7 +25,7 @@ public class GeneralManagerController {
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-    BillType bill;
+    BillType billType;
 	UserVO user;
 
 	@FXML
@@ -36,7 +36,7 @@ public class GeneralManagerController {
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous,user,bill);
+        startUI(previous,user,billType);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -47,18 +47,18 @@ public class GeneralManagerController {
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID,user,bill);
+		changeStage(mainID,user,billType);
 
     }
 
 	@FXML
 	public void fresh() throws Exception{
-		startUI(current,user,bill);
+		startUI(current,user,billType);
 	}
 
 	@FXML
 	public void message() throws Exception{
-       changeStage("UserMessageUI",user,bill);
+       changeStage("UserMessageUI",user,billType);
 	}
 
 	@FXML
@@ -78,18 +78,18 @@ public class GeneralManagerController {
 
 	@FXML
 	public void checkBill() throws Exception{
-		changeStage("ExamineBillUI",user,bill);
+		changeStage("ExamineBillUI",user,billType);
 	}
 
 	@FXML
 	public void checkTable() throws Exception{
-		changeStage("FinanceTableUI",user,bill);
+		changeStage("FinanceTableUI",user,billType);
 	}
 
 
 	@FXML
 	public void makePromotion() throws Exception{
-		changeStage("PromotionMakingUI",user,bill);
+		changeStage("PromotionMakingUI",user,billType);
 	}
 
 	@FXML

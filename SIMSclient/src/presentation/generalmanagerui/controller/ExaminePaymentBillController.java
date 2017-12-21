@@ -2,17 +2,10 @@ package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
 import bussinesslogic.accountbillbl.PaymentBillController;
-import bussinesslogic.accountbillbl.ReceiptBillController;
-import bussinesslogic.accountbl.AccountController;
 import bussinesslogic.examinebl.ExaminePaymentBL;
-import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
-import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
-import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
-import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
@@ -35,10 +28,8 @@ import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
 import presentation.remindui.RemindPrintUI;
-import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
-import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
 
 public class ExaminePaymentBillController extends ExamineBillController{
@@ -125,8 +116,9 @@ public class ExaminePaymentBillController extends ExamineBillController{
 	}
 
 
-	public void initData(UserVO user,BillType type) {
+	public void initData(UserVO user,BillType type) throws RemoteException {
 		this.user = user;
+		this.billType = type;
 		receiptChoice.setValue(type.value);
 		list.addAll(service.getCommitedBills());
 		table.setItems(list);
@@ -250,9 +242,7 @@ public class ExaminePaymentBillController extends ExamineBillController{
 		Callback<TableColumn<EntryVO, String>,
             TableCell<EntryVO, String>> cellFactoryItem
                 = (TableColumn<EntryVO, String> p) -> new EditingCell<EntryVO>();
-        Callback<TableColumn<EntryVO, String>,
-            TableCell<EntryVO, String>> cellFactoryAccountChoice
-                = (TableColumn<EntryVO, String> p) -> new EditingCellChoice<EntrytVO>(accountList);
+
 
 
 
@@ -287,30 +277,30 @@ public class ExaminePaymentBillController extends ExamineBillController{
             });
 
 
-        tableNote.setCellFactory(cellFactoryAccount);
+        tableNote.setCellFactory(cellFactoryItem);
         tableNote.setOnEditCommit(
-            (CellEditEvent<AccountListVO, String> t) -> {
+            (CellEditEvent<EntryVO, String> t) -> {
             	 String tmp = t.getOldValue();
-	               ((AccountListVO) t.getTableView().getItems().get(
+	               ((EntryVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNote(t.getNewValue());
-	        AccountListVO accountVO = ((AccountListVO) t.getTableView().getItems().get(
+	               EntryVO accountVO = ((EntryVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        );
-	              accountVOList.set(t.getTablePosition().getRow(),accountVO);
-	              ReceiptBillVO newVO = bill;
-	              ArrayList<AccountListVO> accountListVO = new ArrayList<>();
-	              accountListVO.addAll(accountVOList);
-	              newVO.setAccountListVOs(accountListVO);
+	              entryList.set(t.getTablePosition().getRow(),accountVO);
+	              PaymentBillVO newVO = bill;
+	              ArrayList<EntryVO> accountListVO = new ArrayList<>();
+	              accountListVO.addAll(entryList);
+	              newVO.setEntryListVO(accountListVO);
 	              if(!update(newVO)){
-	            	  ((AccountListVO) t.getTableView().getItems().get(
+	            	  ((EntryVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNote(tmp);
                 }
         });
 	}
 
-    public boolean update(ReceiptBillVO vo){
+    public boolean update(PaymentBillVO vo){
         ResultMessage message = service.updateBill(vo);
         Boolean result = message == ResultMessage.SUCCESS?true:false;
            Platform.runLater(new Runnable() {
