@@ -2,14 +2,17 @@ package presentation.generalmanagerui.controller;
 
 import java.util.Stack;
 
-
+import dataenum.BillType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import presentation.generalmanagerui.ExamineBillUI;
 import presentation.generalmanagerui.PromotionMakingUI;
 import presentation.generalmanagerui.PromotionMemberUI;
+import presentation.generalmanagerui.PromotionSpecialUI;
+import presentation.generalmanagerui.PromotionSumUI;
 import presentation.mainui.MainUI;
 import presentation.usermanagerui.UserManagerUI;
 import presentation.usermanagerui.UserManagingUI;
@@ -22,7 +25,7 @@ public class GeneralManagerController {
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-
+    BillType bill;
 	UserVO user;
 
 	@FXML
@@ -33,7 +36,7 @@ public class GeneralManagerController {
 
 	@FXML
 	public void returnLast() throws Exception{
-        startUI(previous);
+        startUI(previous,user,bill);
         if(!stack.isEmpty()){
         stack.pop();
         current = previous;
@@ -44,18 +47,18 @@ public class GeneralManagerController {
 
 	@FXML
 	public void mainPage() throws Exception{
-		changeStage(mainID);
+		changeStage(mainID,user,bill);
 
     }
 
 	@FXML
 	public void fresh() throws Exception{
-		startUI(current);
+		startUI(current,user,bill);
 	}
 
 	@FXML
 	public void message() throws Exception{
-       changeStage("UserMessageUI");
+       changeStage("UserMessageUI",user,bill);
 	}
 
 	@FXML
@@ -75,18 +78,18 @@ public class GeneralManagerController {
 
 	@FXML
 	public void checkBill() throws Exception{
-		changeStage("ExamineBillUI");
+		changeStage("ExamineBillUI",user,bill);
 	}
 
 	@FXML
 	public void checkTable() throws Exception{
-		changeStage("FinanceTableUI");
+		changeStage("FinanceTableUI",user,bill);
 	}
 
 
 	@FXML
 	public void makePromotion() throws Exception{
-		changeStage("PromotionMakingUI");
+		changeStage("PromotionMakingUI",user,bill);
 	}
 
 	@FXML
@@ -106,15 +109,15 @@ public class GeneralManagerController {
 	}
 
 
-	public void changeStage(String currentID) throws Exception{
+	public void changeStage(String currentID,UserVO user,BillType type) throws Exception{
 
-   	    startUI(currentID);
+   	    startUI(currentID,user,type);
 	    previous = current;
 	    current = currentID;
 	    stack.push(current);
 	}
 
-	public void startUI(String currentID){
+	public void startUI(String currentID,UserVO user,BillType bill){
 	    Stage stage = (Stage) pane.getScene().getWindow();
 	    stage.close();
 			Platform.runLater(new Runnable() {
@@ -124,6 +127,9 @@ public class GeneralManagerController {
    		            case mainID:new UserManagerUI().start(user);break;
    		            case "PromotionMakingUI":new PromotionMakingUI().start(user);break;
    		            case "PromotionMemberUI":new PromotionMemberUI().start(user);break;
+   		            case "PromotionSpecialUI":new PromotionSpecialUI().start(user);break;
+   		            case "PromotionSumUI":new PromotionSumUI().start(user);break;
+   		            case "ExamineBillUI":new ExamineBillUI().start(user);break;
    		         //   case "UserManagingUI":new UserManagingUI().start(user);break;
    		         //   case "UserMessageUI":new UserMessageUI().start();break;
    		           }

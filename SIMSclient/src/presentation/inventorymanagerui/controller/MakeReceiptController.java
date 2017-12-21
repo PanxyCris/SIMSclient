@@ -92,9 +92,11 @@ public class MakeReceiptController extends InventoryManagerController{
 	   noteArea.setText(null);
 	}
 
-	public void initData(UserVO user,InventoryBillVO inv){
+	public void initData(UserVO user,BillType type,InventoryBillVO inv){
 		this.user = user;
 		this.inv = inv;
+		if(type!=null)
+			receiptChoice.setValue(type.value);
 		fresh();
 		if(inv!=null){
 			idLabel.setText(inv.getId());
