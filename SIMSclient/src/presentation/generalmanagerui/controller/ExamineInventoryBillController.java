@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillController;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
-import dataenum.BillState;
+import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -28,7 +28,7 @@ import vo.uservo.UserVO;
 
 public class ExamineInventoryBillController extends ExamineBillController{
 
-	 InventoryBillBLService service = new InventoryBillController();
+	    ExamineBLService<InventoryBillVO> service = new ExamineBillController();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
 		public static final Remind remind = Remind.BILL;
@@ -86,7 +86,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		@FXML
 		public void success(){
-
+            ArrayList<InventoryBillVO>
 		}
 
 		@FXML

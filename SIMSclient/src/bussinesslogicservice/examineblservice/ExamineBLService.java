@@ -19,4 +19,7 @@ public interface ExamineBLService<B extends BillVO> {
 	public ResultMessage passBills(ArrayList<B> vos, BillType type);
 
 	public ResultMessage notPassBills(ArrayList<B> vos, BillType type);
+
+	public ArrayList<B> getCommitedBills();
+
 }

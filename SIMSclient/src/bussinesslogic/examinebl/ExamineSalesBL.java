@@ -12,29 +12,22 @@ import po.sales.SalesPO;
 import rmi.RemoteHelper;
 import vo.ViewObject;
 import vo.billvo.BillVO;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.salesbillvo.SalesVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月17日    
+/**
+*
+* @author Lijie
+* @date 2017年12月17日
 */
-public class ExamineController implements ExamineBLService {
+public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	private SalesDataService sale;
-	
-	public ExamineController() {
+
+	public ExamineSalesBL() {
 		sale = RemoteHelper.getInstance().getSalesDataService();
 	}
 
-	@Override
-	public ResultMessage passBills(ArrayList<BillVO> vos, BillType type) {
-		return null;
-	}
 
-	@Override
-	public ResultMessage notPassBills(ArrayList<BillVO> vos, BillType type) {
-		return null;
-	}
 
 	@Override
 	public ResultMessage updateBill(ViewObject vo, BillType type) {
@@ -56,5 +49,43 @@ public class ExamineController implements ExamineBLService {
 		return null;
 	}
 
-	
+
+
+	@Override
+	public ResultMessage updateBill(SalesVO vo, BillType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ResultMessage passBills(ArrayList<SalesVO> vos, BillType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ResultMessage notPassBills(ArrayList<SalesVO> vos, BillType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ArrayList<SalesVO> getCommitedBills() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+
+
+
 }
