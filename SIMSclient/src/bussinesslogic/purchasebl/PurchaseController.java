@@ -8,6 +8,8 @@ import java.util.Date;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindPurchaseType;
+import dataenum.findtype.FindSalesType;
 import dataservice.purchasedataservice.PurchaseDataService;
 import po.PurchasePO;
 import rmi.RemoteHelper;
@@ -35,42 +37,51 @@ public class PurchaseController implements PurchaseBLService{
 	
 	@Override
 	public String getPurchaseID() {
-//		ArrayList<PurchasePO> list = new ArrayList<>();
-//		ArrayList<Long> IDList = new ArrayList<>();
-//		String id = null;
-//		for (PurchasePO po : list) {
-//			id = po.getId();
-//			String temp[] = id.split("-");
-//			
-//			if (temp[0].equals("JHD")) {
-//				IDList.add(Long.parseLong(temp[1]+temp[2]));
-//			}
-//		}
-//		Collections.sort(IDList);
-//		String day = getDate();
-////		Collections.reverse(IDList);
-//		String num = String.valueOf(IDList.get(IDList.size()-1));
-//		if (day.equals(String.valueOf(num.substring(0, 8)))) {
-//			String index = num.substring(8, num.length());
-//			index = String.valueOf(Integer.parseInt(index)+1);
-//			StringBuilder sb = new StringBuilder(index);
-//			int len = index.length();
-//			for (int i=0; i < 5-len; i++) {
-//				sb.insert(0, "0");
-//			}
-//			id = sb.toString();
-//		}
-//		else {
-//			id = "00001";
-//		}
-//		StringBuilder s = new StringBuilder("JHD-");
-//		return s.append(day).append("-").append(id).toString();
-		return "000001";
+		ArrayList<PurchasePO> list = null;
+		try {
+			list = service.showPurchase();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (PurchasePO po : list) {
+			id = po.getId();
+			String temp[] = id.split("-");
+			
+			if (temp[0].equals("JHD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
+		}
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("JHD-");
+		return s.append(day).append("-").append(id).toString();
 	}
 
 	@Override
 	public String getPurChaseBackID() {
-		ArrayList<PurchasePO> list = new ArrayList<>();
+		ArrayList<PurchasePO> list = null;
+		try {
+			list = service.showPurchase();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
 		for (PurchasePO po : list) {
@@ -158,6 +169,23 @@ public class PurchaseController implements PurchaseBLService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		this.date = sdf.format(new Date());
 		return this.date;
+	}
+
+	@Override
+	public ArrayList<PurchaseVO> find(String info, FindSalesType type) {
+		ArrayList<PurchaseVO> list = new ArrayList<>();
+		ArrayList<PurchasePO> POList = null;
+		try {
+			POList = service.findPurchase(info, type);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		PurchaseVO vo = null;
+		for (PurchasePO po : POList) {
+			vo = PurchaseTransition.POtoVO(po);
+			list.add(vo);
+		}
+		return list;
 	}
 	
 }

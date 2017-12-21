@@ -94,7 +94,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
 	@FXML
 	public void find(){
 
-		ArrayList<PurchaseVO> list = service.find(findingField.getText(),FindPurchaseType.getType(findChoice.getValue()));
+		ArrayList<PurchaseVO> list = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
