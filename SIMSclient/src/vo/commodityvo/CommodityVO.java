@@ -6,30 +6,30 @@ public class CommodityVO {
 		private String name;
 		private String model; //商品型号
 		private ClassificationVO classification;
+		private String classificationString;
 		private Integer number; //商品数量
 		private Double purPrice; //进价
 		private Double retailedPrice; //零售价
 		private Double recentPurPrice; //最新进价
 		private Double recentRetailedPrice; //最新零售价
 		private Integer warmingValue; //警戒值
+		private Integer line;//行号
 
 		public CommodityVO(String id,String name,String model,ClassificationVO classification,
-				int number,double purPrice, double retailedPrice, double recentPurPrice, double recentRetailedPrice,int warmingValue){
+				int number,double purPrice, double retailedPrice,int warmingValue){
 			this.id = id;
 			this.name = name;
 			this.model = model;
 			this.classification = classification;
+			this.classificationString = classification.getName();
 			this.number = number;
 			this.purPrice = purPrice;
-			this.recentPurPrice  = recentPurPrice;
+			this.recentPurPrice  = purPrice;
 			this.retailedPrice = retailedPrice;
-			this.recentRetailedPrice = recentRetailedPrice;
+			this.recentRetailedPrice = retailedPrice;
 			this.warmingValue = warmingValue;
 		}
 
-		public void setID(String id){
-			this.id = id;
-		}
 
 		public String getID(){
 			return id;
@@ -39,13 +39,14 @@ public class CommodityVO {
 			this.name = name;
 		}
 
+
 		public String getName(){
 			return name;
 		}
 
-	    public void setModel(String model){
-	    	this.model = model;
-	    }
+		public void setModel(String model){
+			this.model = model;
+		}
 
 		public String getModel(){
 			return model;
@@ -67,16 +68,9 @@ public class CommodityVO {
 			return number;
 		}
 
-	    public void setPurPrice(double purPrice){
-	    	this.purPrice = purPrice;
-	    }
 
 		public double getPurPrice(){
 			return purPrice;
-		}
-
-		public void setRetailedPrice(double retailedPrice){
-			this.retailedPrice = retailedPrice;
 		}
 
 		public double getRetailedPrice(){
@@ -108,6 +102,18 @@ public class CommodityVO {
 		}
 
 
+		public String getClassificationString() {
+			return classificationString;
+		}
 
+
+		public Integer getLine() {
+			return line;
+		}
+
+
+		public void setLine(Integer line) {
+			this.line = line;
+		}
 
 }
