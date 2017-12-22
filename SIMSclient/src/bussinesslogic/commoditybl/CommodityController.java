@@ -68,7 +68,7 @@ public class CommodityController implements CommodityBLService{
 	}
 
 	@Override
-	public void delelte(CommodityVO vo) {
+	public void delete(CommodityVO vo)  throws Exception{
 		try {
 			service.deleteCommodity(vo.getID());
 		} catch (RemoteException e) {
@@ -108,6 +108,7 @@ public class CommodityController implements CommodityBLService{
 
 	@Override
 	public void stock() {
+		
 	}
 
 	@Override
@@ -141,5 +142,10 @@ public class CommodityController implements CommodityBLService{
 		return result;
 	}
 
-		
+	@Override
+	public ArrayList<String> getAllChildrenClass() throws Exception {
+		return null;
+	}
+
+	
 }

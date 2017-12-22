@@ -313,7 +313,11 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         ObservableList<String> commodityList = FXCollections.observableArrayList();
         CommodityBLService commodityService = new CommodityController();//׮
 
-    	commodityList.addAll(commodityService.getIDandName());
+    	try {
+			commodityList.addAll(commodityService.getIDandName());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(
@@ -327,8 +331,12 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         			        break;
         				}
         			commodityIDLabel.setText(s);
-        			for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
-        			modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
+        			try {
+						for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
+						modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
         			modelChoice.setItems(modelList);
         		});
 

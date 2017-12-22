@@ -22,6 +22,10 @@ import po.commodity.CommodityPO;
 
 public class CommodityData {
 
+	public void stock() {
+		
+	}
+	
 	public ResultMessage insert(CommodityPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {

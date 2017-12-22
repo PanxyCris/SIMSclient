@@ -35,8 +35,8 @@ public class PurchaseData {
 		ArrayList<CommodityItemPO> l = new ArrayList<>();
 		l.add(i);
 		l.add(i1);
-		PurchasePO po = new PurchasePO("JHD-20171218-00002", "000002", "王灿灿", Warehouse.WAREHOUSE2, "王灿灿", 
-				l, "记得付钱", 200000, BillType.PURCHASEBILL);
+		PurchasePO po = new PurchasePO("JHTHD-20171218-00002", "000002", "王灿灿", Warehouse.WAREHOUSE2, "王灿灿", 
+				l, "记得付钱", 200000, BillType.PURCHASEBACKBILL);
 		p.insert(po);
 //		ArrayList<PurchasePO> list = p.show();
 //		System.out.println(list.get(0).getCommodities().get(0).getModel());
