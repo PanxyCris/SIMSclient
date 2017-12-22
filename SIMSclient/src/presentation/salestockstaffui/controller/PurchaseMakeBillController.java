@@ -159,7 +159,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void checkBefore() throws Exception{
-         changeStage("PurchaseCheckBillUI",user,type,null,null,null);
+         changeStage("PurchaseCheckBillUI",user,type,null,null);
 	}
 
 	public void initData(UserVO user,BillType type,PurchaseVO purchase) throws Exception {

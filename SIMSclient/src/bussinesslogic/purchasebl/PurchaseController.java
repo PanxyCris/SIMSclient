@@ -30,11 +30,6 @@ public class PurchaseController implements PurchaseBLService{
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 	}
 	
-	public static void main(String[] args) {
-		PurchaseController pc = new PurchaseController();
-		pc.getPurchaseID();
-	}
-	
 	@Override
 	public String getPurchaseID() {
 		ArrayList<PurchasePO> list = null;

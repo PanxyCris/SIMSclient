@@ -336,8 +336,8 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public ResultMessage daleteCommodity(String id) throws RemoteException {
-		return commodity.daleteCommodity(id);
+	public ResultMessage deleteCommodity(String id) throws RemoteException {
+		return commodity.deleteCommodity(id);
 	}
 
 

@@ -21,15 +21,6 @@ import po.UserPO;
 import po.commodity.CommodityPO;
 
 public class CommodityData {
-	
-	public static void main(String[] args) {
-		CommodityData c = new CommodityData();
-		CommodityPO po1 = new CommodityPO("000001", "王灿灿", "脱单大佬", null, 100, 300.0, 400.0, 20);
-		CommodityPO po2 = new CommodityPO("000002", "潘星宇", "单身旺", null, 200, 400.0, 500.0, 50);
-
-		c.insert(po1);
-		c.insert(po2);
-	}
 
 	public ResultMessage insert(CommodityPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接

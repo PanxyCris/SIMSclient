@@ -3,7 +3,6 @@ package po.commodity;
 import java.io.Serializable;
 
 import po.ClassificationPO;
-import po.PersistObject;
 
 public class CommodityPO implements Serializable{
 
@@ -19,14 +18,9 @@ public class CommodityPO implements Serializable{
 	private double recentRetailedPrice; // 最新零售价
 	private int warmingValue; // 警戒值
 
-	/**
-	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
-	 * name @param @param model @param @param classification @param @param
-	 * number @param @param purPrice @param @param retailedPrice @param @param
-	 * warmingValue 设定文件 @return 返回类型 @throws
-	 */
+	
 	public CommodityPO(String id, String name, String model, ClassificationPO classification, int number,
-			double purPrice, double retailedPrice, int warmingValue) {
+			double purPrice, double retailedPrice, double recentPurPrice, double recentRetailedPrice, int warmingValue) {
 		this.id = id;
 		this.name = name;
 		this.model = model;
@@ -35,65 +29,64 @@ public class CommodityPO implements Serializable{
 		this.purPrice = purPrice;
 		this.retailedPrice = retailedPrice;
 		this.warmingValue = warmingValue;
+		this.recentPurPrice = recentPurPrice;
+		this.recentRetailedPrice = recentRetailedPrice;
 	}
 
-	
-	public ClassificationPO getClassification() {
-		return classification;
-	}
 
-	public void setClassification(ClassificationPO classification) {
-		this.classification = classification;
-	}
-	
 	public String getId() {
 		return id;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public String getModel() {
 		return model;
 	}
+
+
+	public ClassificationPO getClassification() {
+		return classification;
+	}
+
 
 	public int getNumber() {
 		return number;
 	}
 
+
 	public double getPurPrice() {
 		return purPrice;
 	}
+
 
 	public double getRetailedPrice() {
 		return retailedPrice;
 	}
 
+
 	public double getRecentPurPrice() {
 		return recentPurPrice;
 	}
+
+
+	public void setClassification(ClassificationPO classification) {
+		this.classification = classification;
+	}
+
 
 	public double getRecentRetailedPrice() {
 		return recentRetailedPrice;
 	}
 
+
 	public int getWarmingValue() {
 		return warmingValue;
 	}
-	
-	
-	public void setRecentPurPrice(double recentPurPrice) {
-		this.recentPurPrice = recentPurPrice;
-	}
 
-	public void setRecentRetailedPrice(double recentRetailedPrice) {
-		this.recentRetailedPrice = recentRetailedPrice;
-	}
-
-	@Override
-	public String toString() {
-		return id + "," + name + "," + model + "," + number + "," + purPrice + "," + retailedPrice + ","
-				+ recentPurPrice + "," + recentRetailedPrice + "," + warmingValue;
-	}
+	
 }

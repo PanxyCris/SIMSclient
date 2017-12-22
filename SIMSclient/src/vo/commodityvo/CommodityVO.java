@@ -14,16 +14,16 @@ public class CommodityVO {
 		private Integer warmingValue; //¾¯½äÖµ
 
 		public CommodityVO(String id,String name,String model,ClassificationVO classification,
-				int number,double purPrice,double retailedPrice,int warmingValue){
+				int number,double purPrice, double retailedPrice, double recentPurPrice, double recentRetailedPrice,int warmingValue){
 			this.id = id;
 			this.name = name;
 			this.model = model;
 			this.classification = classification;
 			this.number = number;
 			this.purPrice = purPrice;
-			this.recentPurPrice  = purPrice;
+			this.recentPurPrice  = recentPurPrice;
 			this.retailedPrice = retailedPrice;
-			this.recentRetailedPrice = retailedPrice;
+			this.recentRetailedPrice = recentRetailedPrice;
 			this.warmingValue = warmingValue;
 		}
 

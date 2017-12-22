@@ -1,5 +1,6 @@
 package bussinesslogic.commoditybl;
 
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,13 @@ import vo.ViewObject;
 import vo.commodityvo.CommodityVO;
 import vo.membervo.MemberVO;
 
+/**
+ * 
+* @ClassName: CommodityController 
+* @author lijie
+* @date 2017年12月16日 
+*
+ */
 public class CommodityController implements CommodityBLService{
 
 	private CommodityDataService service;
@@ -62,7 +70,7 @@ public class CommodityController implements CommodityBLService{
 	@Override
 	public void delelte(CommodityVO vo) {
 		try {
-			service.daleteCommodity(vo.getID());
+			service.deleteCommodity(vo.getID());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -119,16 +127,18 @@ public class CommodityController implements CommodityBLService{
 		return list;
 	}
 
+	/**
+	 * 获取全部的商品ID和名字
+	 * @author lijie
+	 */
 	@Override
 	public ArrayList<String> getIDandName() {
 		ArrayList<CommodityVO> list = show();
 		ArrayList<String> result = new ArrayList<>();
-//		for (CommodityVO vo : list) {
-//			result.add(vo.getName() + "(" + vo.getID() + ")");
-//		}
-		ArrayList<String> a = new ArrayList<>();
-		a.add("李杰(00001)");
-		return a;
+		for (CommodityVO vo : list) {
+			result.add(vo.getName() + "(" + vo.getID() + ")");
+		}
+		return result;
 	}
 
 		
