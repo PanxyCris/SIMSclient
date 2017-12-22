@@ -23,8 +23,6 @@ public interface CommodityBLService{
 
 	public ArrayList<String> getIDandName() throws Exception;
 
-	public ClassificationVO getClass(String name) throws Exception;
-
 	public ArrayList<String> getAllChildrenClass() throws Exception;//返回所有无子节点或者子节点为商品的分类名称，不用带ID
 
 	public void stock() throws Exception;   //库存盘点

@@ -6,20 +6,14 @@ public class ClassificationVO {
 
 	String id;
 	String name;
-	ArrayList<CommodityVO> vo;
+	ArrayList<CommodityVO> vo; //每一个class其要么只有子分类要么只能有子商品
 	ClassificationVO father;
 	ArrayList<ClassificationVO> children;
 
-	public ClassificationVO(String i,String n,ArrayList<CommodityVO> v,ClassificationVO f,ArrayList<ClassificationVO> c){
+	public ClassificationVO(String i,String n,ClassificationVO f){
 		id = i;
 		name = n;
-		vo = v;
 		father = f;
-		children = c;
-	}
-
-	public void setID(String i){
-		id = i;
 	}
 
 	public String getID(){
