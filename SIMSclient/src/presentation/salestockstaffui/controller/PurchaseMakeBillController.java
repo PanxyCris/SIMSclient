@@ -282,7 +282,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	     return result;
 	}
 
-	public void manageInit() throws RemoteException{
+	public void manageInit() throws Exception{
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("id"));
 		tableName.setCellValueFactory(
@@ -302,7 +302,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         deleteInit();
 	}
 
-	public void choiceInit() throws RemoteException{
+	public void choiceInit() throws Exception{
         ObservableList<String> memberList = FXCollections.observableArrayList();
         MemberBLService memberService = new MemberController();//׮
         memberList.addAll(memberService.getIDandName());
@@ -327,8 +327,13 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         			        break;
         				}
         			commodityIDLabel.setText(s);
-        			for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
-        			modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
+        			try {
+						for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
+						modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
         			modelChoice.setItems(modelList);
         		});
 

@@ -130,7 +130,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		@FXML
 		public void find() throws RemoteException{
 			ArrayList<MemberVO> list = service.find(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
-		       if(list==null){
+		       if(list.size()!=0){
 		    	   Platform.runLater(new Runnable() {
 			    	    public void run() {
 			    	        try {

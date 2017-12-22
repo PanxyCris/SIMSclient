@@ -184,7 +184,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	}
 
 
-	public void initData(UserVO user, BillType type, SalesVO sale) throws RemoteException {
+	public void initData(UserVO user, BillType type, SalesVO sale) throws Exception {
 		 this.type = type;
 		   this.user = user;
 		   this.sale = sale;
@@ -314,7 +314,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	     return result;
 	}
 
-	public void manageInit() throws RemoteException{
+	public void manageInit() throws Exception{
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<CommodityItemVO,String>("id"));
 		tableName.setCellValueFactory(
@@ -334,7 +334,7 @@ public class SalesMakeBillController extends MakeReceiptController{
         deleteInit();
 	}
 
-	public void choiceInit() throws RemoteException{
+	public void choiceInit() throws Exception{
         ObservableList<String> memberList = FXCollections.observableArrayList();
         MemberBLService memberService = new MemberController();//׮
         memberList.addAll(memberService.getIDandName());
