@@ -25,6 +25,7 @@ import presentation.common.EditingCellTree;
 import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.commodityvo.ClassificationVO;
+import vo.commodityvo.CommodityVO;
 import vo.uservo.UserVO;
 
 public class ClassManageController extends InventoryManagerController{
@@ -98,6 +99,7 @@ public class ClassManageController extends InventoryManagerController{
 	 */
 	public void addAllChildren(TreeItem<ClassificationVO> item){
 		ArrayList<ClassificationVO> tmpList = item.getValue().getChildren();
+		ArrayList<CommodityVO> commodityList = item.getValue().getCommodityVOArray();
 		  if(tmpList!=null){
 		     ObservableList<TreeItem<ClassificationVO>> list = FXCollections.observableArrayList();
 		     for(int i=0;i<tmpList.size();i++){
@@ -110,6 +112,14 @@ public class ClassManageController extends InventoryManagerController{
 			      addAllChildren(item.getChildren().get(i));
 		     }
 		 }
+		  else if(commodityList!=null){
+			  ObservableList<TreeItem<CommodityVO>> list = FXCollections.observableArrayList();
+			  for(int i=0;i<commodityList.size();i++){
+				    TreeItem<CommodityVO> tmpItem = new TreeItem<>(commodityList.get(i));
+				    list.add(tmpItem);
+			     }
+			  item.getChildren().addAll(list);
+		  }
 	}
 
 

@@ -1,10 +1,7 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
-
-import bussinesslogic.commoditybl.ClassificationBL;
 import bussinesslogic.commoditybl.CommodityController;
-import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -35,7 +32,6 @@ import vo.uservo.UserVO;
 public class CommodityManageController extends InventoryManagerController{
 
 	CommodityBLService service = new CommodityController();
-	ClassificationBLService classService = new ClassificationBL();
 	public static final Remind remind = Remind.COMMODITY;
     ObservableList<CommodityVO> list = FXCollections.observableArrayList();
 	ObservableList<String> classList  = FXCollections.observableArrayList();
@@ -92,7 +88,7 @@ public class CommodityManageController extends InventoryManagerController{
 	@FXML
 	public void insert() throws NumberFormatException, Exception{
 		CommodityVO vo = new CommodityVO(idLabel.getText(),nameField.getText(),modelField.getText(),
-				  classService.getClass(classChoice.getValue()),Integer.parseInt(numberField.getText()),Double.parseDouble(purPriceField.getText()),
+				  classChoice.getValue(),Integer.parseInt(numberField.getText()),Double.parseDouble(purPriceField.getText()),
 				  Double.parseDouble(retailedPriceField.getText()),Integer.parseInt(warmingValueField.getText()));
 	        ResultMessage message = service.insert(vo);
 	        Platform.runLater(new Runnable() {
@@ -219,7 +215,7 @@ public class CommodityManageController extends InventoryManagerController{
 	            	try {
 	                ((CommodityVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
-	                        ).setClassification(classService.getClass(t.getNewValue()));
+	                        ).setClassification(t.getNewValue());
 						service.update((CommodityVO) t.getTableView().getItems().get(
 						        t.getTablePosition().getRow())
 						        );

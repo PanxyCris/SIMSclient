@@ -5,8 +5,7 @@ public class CommodityVO {
 		private String id;   //商品编号
 		private String name;
 		private String model; //商品型号
-		private ClassificationVO classification;
-		private String classificationString;
+		private String classification;
 		private Integer number; //商品数量
 		private Double purPrice; //进价
 		private Double retailedPrice; //零售价
@@ -15,13 +14,12 @@ public class CommodityVO {
 		private Integer warmingValue; //警戒值
 		private Integer line;//行号
 
-		public CommodityVO(String id,String name,String model,ClassificationVO classification,
+		public CommodityVO(String id,String name,String model,String classification,
 				int number,double purPrice, double retailedPrice,int warmingValue){
 			this.id = id;
 			this.name = name;
 			this.model = model;
 			this.classification = classification;
-			this.classificationString = classification.getName();
 			this.number = number;
 			this.purPrice = purPrice;
 			this.recentPurPrice  = purPrice;
@@ -52,11 +50,11 @@ public class CommodityVO {
 			return model;
 		}
 
-		public void setClassification(ClassificationVO classification){
+		public void setClassification(String classification){
 			this.classification = classification;
 		}
 
-		public ClassificationVO getClassification(){
+		public String getClassification(){
 			return classification;
 		}
 
@@ -100,12 +98,6 @@ public class CommodityVO {
 		public int getWarmingValue(){
 			return warmingValue;
 		}
-
-
-		public String getClassificationString() {
-			return classificationString;
-		}
-
 
 		public Integer getLine() {
 			return line;
