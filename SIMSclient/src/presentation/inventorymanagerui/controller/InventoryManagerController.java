@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import presentation.inventorymanagerui.CheckReceiptUI;
+import presentation.inventorymanagerui.ClassManageUI;
 import presentation.inventorymanagerui.CommodityManageUI;
 import presentation.inventorymanagerui.InventoryManagerUI;
 import presentation.inventorymanagerui.InventoryStockUI;
@@ -132,6 +133,7 @@ public class InventoryManagerController {
    		            case "CheckReceiptUI":new CheckReceiptUI().start(user,type);break;
    		            case "CommodityManageUI":new CommodityManageUI().start(user);break;
    		            case "InventoryStockUI":new InventoryStockUI().start(user);break;
+   		            case "ClassManageUI":new ClassManageUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

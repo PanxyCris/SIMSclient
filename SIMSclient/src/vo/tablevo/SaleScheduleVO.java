@@ -1,59 +1,56 @@
 package vo.tablevo;
 
-public class SaleScheduleVO {
-	//筛选条件
-	String date;//时间,精确到天
-	String tradeName;//商品名
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
+import java.time.LocalDate;
+import dataenum.Warehouse;
 
-	public String getDate() {
+public class SaleScheduleVO {
+
+	private LocalDate date;//时间
+	private String name;//商品名
+	private String customer;//客户
+	private String clerkID;//业务员
+	private Warehouse warehouse;
+	private String warehouseString;//仓库
+
+	public SaleScheduleVO(LocalDate d,String name,String cu,String cl,Warehouse w){
+		this.date = d;
+		this.name = name;
+		customer = cu;
+		clerkID = cl;
+		warehouse =w;
+		warehouseString = w.value;
+	}
+
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getTradeName() {
-		return tradeName;
-	}
-
-	public void setTradeName(String tradeName) {
-		this.tradeName = tradeName;
-	}
 
 	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public int getClerkID() {
+	public String getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(int clerkID) {
-		this.clerkID = clerkID;
+
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
 
-	public String getRepertory() {
-		return repertory;
+
+	public String getWarehouseString() {
+		return warehouseString;
 	}
 
-	public void setRepertory(String repertory) {
-		this.repertory = repertory;
+	public String getName() {
+		return name;
 	}
 
-	public SaleScheduleVO(String d,String t,String cu,int cl,String r){
-		date=d;
-		tradeName=t;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 }
