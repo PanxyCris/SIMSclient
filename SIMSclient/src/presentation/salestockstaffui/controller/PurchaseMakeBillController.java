@@ -118,11 +118,6 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
     }
 
-	@FXML
-	public void fresh() throws Exception{
-		startUI(current,user,type,purchase,sale);
-	}
-
     @FXML
 	public void memberManage() throws Exception{
          changeStage("MemberManageUI",user,type,null,null);
