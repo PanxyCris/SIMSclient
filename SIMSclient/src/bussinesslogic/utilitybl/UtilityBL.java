@@ -37,7 +37,7 @@ public class UtilityBL implements UtilityBLService{
 		
 		String now=simpleDateFormat.format(date);
 		
-		String num=Integer.toString(number+1);
+		String num=Integer.toString(1);
 		int numLength=num.length();
 		for (int i = 0; i < BILLIDNUMBERLENGTH-numLength; i++) {
 			num="0"+num;

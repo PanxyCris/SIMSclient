@@ -14,10 +14,10 @@ public class AccountBookPO extends PersistObject {
 	private ArrayList<MemberPO> memberPOs;//客户列表
 	private ArrayList<AccountPO> accountPOs;//账户列表
 
-	public AccountBookPO(String id,String data, String clerkID,ArrayList<CommodityPO> commodityPOs,ArrayList<MemberPO> memberPOs
+	public AccountBookPO(String id,String date, String clerkID,ArrayList<CommodityPO> commodityPOs,ArrayList<MemberPO> memberPOs
 			,ArrayList<AccountPO> accountPOs) {
 		super(id);
-		this.date=data;
+		this.date=date;
 		this.clerkID=clerkID;
 		this.commodityPOs=commodityPOs;
 		this.memberPOs=memberPOs;
