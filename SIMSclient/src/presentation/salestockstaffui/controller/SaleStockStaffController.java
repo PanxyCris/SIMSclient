@@ -65,6 +65,15 @@ public class SaleStockStaffController {
 		startUI(current,user,type,purchase,sale);
 	}
 
+    @FXML
+	public void memberManage() throws Exception{
+         changeStage("MemberManageUI",user,type,null,null);
+	}
+
+	@FXML
+	public void makeReceipt() throws Exception{
+		 changeStage("MakeReceiptUI",user,type,null,null);
+	}
 
 	@FXML
 	public void message() throws Exception{
@@ -86,15 +95,7 @@ public class SaleStockStaffController {
 	    stage.close();
 	}
 
-	@FXML
-	public void memberManage() throws Exception{
-         changeStage("MemberManageUI",user,type,null,null);
-	}
 
-	@FXML
-	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type,null,null);
-	}
 
 
 	public void initData(UserVO user) throws Exception {

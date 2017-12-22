@@ -103,6 +103,33 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 
 		@FXML
+		public void returnLast() throws Exception{
+	        startUI(previous,user,type,purchase,sale);
+	        if(!stack.isEmpty()){
+	        stack.pop();
+	        current = previous;
+	        }
+	        if(stack.size()>1)
+	            previous = stack.lastElement();
+		}
+
+		@FXML
+		public void mainPage() throws Exception{
+			changeStage(mainID,user,type,purchase,sale);
+
+	    }
+
+	    @FXML
+		public void memberManage() throws Exception{
+	         changeStage("MemberManageUI",user,type,null,null);
+		}
+
+		@FXML
+		public void makeReceipt() throws Exception{
+			 changeStage("MakeReceiptUI",user,type,null,null);
+		}
+
+		@FXML
 		public void insert() throws RemoteException{
 			 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
 					 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),

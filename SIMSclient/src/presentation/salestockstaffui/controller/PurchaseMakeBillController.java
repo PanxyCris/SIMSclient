@@ -102,6 +102,39 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 
 	@FXML
+	public void returnLast() throws Exception{
+        startUI(previous,user,type,purchase,sale);
+        if(!stack.isEmpty()){
+        stack.pop();
+        current = previous;
+        }
+        if(stack.size()>1)
+            previous = stack.lastElement();
+	}
+
+	@FXML
+	public void mainPage() throws Exception{
+		changeStage(mainID,user,type,purchase,sale);
+
+    }
+
+	@FXML
+	public void fresh() throws Exception{
+		startUI(current,user,type,purchase,sale);
+	}
+
+    @FXML
+	public void memberManage() throws Exception{
+         changeStage("MemberManageUI",user,type,null,null);
+	}
+
+	@FXML
+	public void makeReceipt() throws Exception{
+		 changeStage("MakeReceiptUI",user,type,null,null);
+	}
+
+
+	@FXML
 	public void insert(){
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
