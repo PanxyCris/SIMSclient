@@ -44,8 +44,11 @@ public class CommodityTransiton {
 		ClassificationVO classification = classify.POtoVO(po.getClassification());
 		double recentRetailedPrice = po.getRecentRetailedPrice();
 		double recentPurPrice = po.getRecentPurPrice();
+		
 		CommodityVO vo = new CommodityVO(id, name, model, classification, number, purPrice, retailedPrice,
-				recentPurPrice, recentRetailedPrice, warmingValue);
+				 warmingValue);
+		vo.setRecentPurPrice(recentPurPrice);
+		vo.setRecentRetailedPrice(recentRetailedPrice);
 		return vo;
 	}
 }
