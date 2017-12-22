@@ -12,15 +12,7 @@ import dataenum.ResultMessage;
 import dataservice.salesdataservice.SalesDataService;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
-import vo.PromotionVO;
-import vo.commodity.CommodityItemVO;
-import vo.commodity.CommodityVO;
-import vo.member.MemberVO;
-import vo.promotion.PromotionMemberVO;
-import vo.promotion.PromotionPricePacksVO;
-import vo.promotion.PromotionTotalVO;
-import vo.sale.SalesInputVO;
-import vo.sale.SalesVO;
+import vo.billvo.salesbillvo.SalesVO;
 
 /*
  * 负责实现销售界面所需要的服务
