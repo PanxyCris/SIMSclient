@@ -130,8 +130,6 @@
 		</Button>
       <Label layoutX="181.0" layoutY="69.0" prefHeight="15.0" prefWidth="114.0" text="输入时间段" />
       <DatePicker fx:id="startPicker" layoutX="181.0" layoutY="84.0" />
-      <ChoiceBox fx:id="startHour" layoutX="387.0" layoutY="84.0" prefHeight="23.0" prefWidth="68.0" />
-      <ChoiceBox fx:id="startMinute" layoutX="464.0" layoutY="84.0" prefHeight="23.0" prefWidth="68.0" />
       <Label layoutX="455.0" layoutY="84.0" text="：">
          <font>
             <Font size="18.0" />
@@ -142,8 +140,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="endMinute" layoutX="845.0" layoutY="84.0" prefHeight="23.0" prefWidth="68.0" />
-      <ChoiceBox fx:id="endHour" layoutX="768.0" layoutY="84.0" prefHeight="23.0" prefWidth="68.0" />
       <DatePicker fx:id="endPicker" layoutX="562.0" layoutY="84.0" />
       <Label layoutX="542.0" layoutY="81.0" text="-">
          <font>
@@ -163,5 +159,9 @@
       <Label layoutX="406.0" layoutY="530.0" text="数量合计" />
       <Label fx:id="sumLabel" layoutX="460.0" layoutY="531.0" prefHeight="29.0" prefWidth="203.0" style="-fx-background-color: #DDDDDD;" />
       <Button layoutX="928.0" layoutY="84.0" mnemonicParsing="false" onAction="#confirm" prefHeight="23.0" prefWidth="68.0" text="确认" />
+      <TextField fx:id="startHour" layoutX="380.0" layoutY="84.0" prefHeight="23.0" prefWidth="74.0" />
+      <TextField fx:id="startMinute" layoutX="464.0" layoutY="84.0" prefHeight="23.0" prefWidth="74.0" />
+      <TextField fx:id="endMinute" layoutX="845.0" layoutY="84.0" prefHeight="23.0" prefWidth="74.0" />
+      <TextField fx:id="endHour" layoutX="762.0" layoutY="84.0" prefHeight="23.0" prefWidth="74.0" />
 	</children>
 </AnchorPane>
