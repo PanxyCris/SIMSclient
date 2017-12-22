@@ -39,13 +39,13 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			choiceInit();
-		} catch (RemoteException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void choiceInit() throws RemoteException{
+	public void choiceInit() throws Exception{
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.PURCHASEBILL.value,BillType.PURCHASEBACKBILL.value,
 				BillType.SALESBILL.value,BillType.SALESBACKBILL.value));
 	}
