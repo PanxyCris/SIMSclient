@@ -52,7 +52,7 @@ public class MemberInfo implements Sale_MemberInfo, Member_AccountInfo{
 	}
 
 	@Override
-	public String getId(String id) {
+	public String getId(String name) {
 		return null;
 	}
 

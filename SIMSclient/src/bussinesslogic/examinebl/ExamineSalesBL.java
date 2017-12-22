@@ -27,30 +27,6 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 		sale = RemoteHelper.getInstance().getSalesDataService();
 	}
 
-
-
-	@Override
-	public ResultMessage updateBill(ViewObject vo, BillType type) {
-		switch (type) {
-		case SALESBILL:
-			SalesVO salevo = (SalesVO) vo;
-			SalesPO po = SalesTransition.VOtoPO(salevo);
-			try {
-				sale.updateSale(po);
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-			break;
-		case SALESBACKBILL:
-			break;
-		default:
-			break;
-		}
-		return null;
-	}
-
-
-
 	@Override
 	public ResultMessage updateBill(SalesVO vo, BillType type) {
 		// TODO Auto-generated method stub

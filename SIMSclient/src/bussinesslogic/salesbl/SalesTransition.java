@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bussinesslogic.common.CommodityItemTran;
+import bussinesslogic.memberbl.MemberInfo;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
 import po.commodity.CommodityItemPO;
 import po.sales.SalesPO;
-import vo.commodity.CommodityItemVO;
-import vo.sale.SalesVO;
+import vo.billvo.salesbillvo.SalesVO;
+import vo.commodityvo.CommodityItemVO;
 
 
 /**
@@ -18,21 +19,23 @@ import vo.sale.SalesVO;
  */
 public class SalesTransition {
 
+	private static MemberInfo mi;
 	public static SalesPO VOtoPO(SalesVO vo) {
-		String id = vo.getId();
-		String retailerId = vo.retailerID;
-		String retailer = vo.retailer; // 销售商客户
-		String saleMan = vo.saleMan; // 业务员
-		String operator = vo.operator; // 操作员
-		Warehouse warehouse = vo.warehouse;
-		ArrayList<CommodityItemPO> commodity = CommodityItemTran.VOtoPO(vo.commodity);
-		double beforePrice = vo.beforePrice;
-		double allowance = vo.allowance; // 折让
-		double voucher = vo.voucher; // 使用代金券金额
-		double afterPrice = vo.afterPrice;
-		String remark = vo.remark; // 备注
-		BillType type = vo.type;
-		BillState state = vo.state;
+		mi = new MemberInfo();
+		String id = vo.getId();            
+		String retailer = vo.getRetailer(); // 销售商客户
+		String retailerId = mi.getId(retailer);
+		String saleMan = vo.getSaleMan(); // 业务员
+		String operator = vo.getOperator(); // 操作员
+		Warehouse warehouse = vo.getWarehouse();
+		ArrayList<CommodityItemPO> commodity = CommodityItemTran.VOtoPO(vo.getCommodity());
+		double beforePrice = vo.getBeforePrice();
+		double allowance = vo.getAllowance(); // 折让
+		double voucher = vo.getVoucher(); // 使用代金券金额
+		double afterPrice = vo.getAfterPrice();
+		String remark = vo.getNote(); // 备注
+		BillType type = vo.getType();
+		BillState state = vo.getState();
 		return new SalesPO(id, retailerId, retailer, saleMan, operator, warehouse, commodity, beforePrice,
 				allowance, voucher, afterPrice, remark, type, state);
 	}
@@ -52,7 +55,6 @@ public class SalesTransition {
 		String remark = po.getRemark(); // 备注
 		BillType type = po.getType();
 		BillState state = po.getState();
-		return new SalesVO(id, retailerId, retailer, salesMan, 
-				operator, warehouse, commodity, beforePrice, allowance, voucher, afterPrice, remark, state, type);
+		return null;
 	}
 }

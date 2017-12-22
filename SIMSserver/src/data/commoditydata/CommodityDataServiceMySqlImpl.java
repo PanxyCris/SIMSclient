@@ -27,7 +27,7 @@ public class CommodityDataServiceMySqlImpl implements CommodityDataService{
 	}
 
 	@Override
-	public ResultMessage daleteCommodity(String id) throws RemoteException {
+	public ResultMessage deleteCommodity(String id) throws RemoteException {
 		return commodity.delete(id);
 	}
 
