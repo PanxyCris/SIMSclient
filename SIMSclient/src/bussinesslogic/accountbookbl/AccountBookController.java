@@ -1,8 +1,10 @@
 package bussinesslogic.accountbookbl;
 
+import java.util.ArrayList;
+
 import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import dataenum.ResultMessage;
-import vo.AccountBookVO;
+import vo.accountbookvo.AccountBookVO;
 
 public class AccountBookController implements AccountBookBLService {
 	AccountBookBL accountBookBL = new AccountBookBL();
@@ -18,8 +20,8 @@ public class AccountBookController implements AccountBookBLService {
 	}
 
 	@Override
-	public AccountBookVO find() {
-		return accountBookBL.find();
+	public ArrayList<AccountBookVO> show() {
+		return accountBookBL.show();
 	}
 
 }

@@ -1,7 +1,7 @@
 package bussinesslogic.accountbl;
 
 import po.AccountPO;
-import vo.AccountVO;
+import vo.accountvo.AccountVO;
 
 public class AccountTransition {
 		
@@ -17,7 +17,7 @@ public class AccountTransition {
 	public AccountVO POtoVO(AccountPO accountPO){
 		String id=accountPO.getId();
 		String name=accountPO.getName();
-		String money=Double.toString(accountPO.getMoney());
+		Double money=accountPO.getMoney();
 		
 		AccountVO accountVO=new AccountVO(id, name, money);
 		return accountVO;

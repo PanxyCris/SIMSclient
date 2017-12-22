@@ -7,14 +7,16 @@ import vo.commodityvo.CommodityVO;
 import vo.membervo.MemberVO;
 
 public class AccountBookVO {
+	private String id;
 	private String date;
 	private String clerkID;//操作员ID
 	private ArrayList<CommodityVO> commodityVOs;//商品列表
 	private ArrayList<MemberVO> memberVOs;//客户列表
 	private ArrayList<AccountVO> accountVOs;//账户列表
 
-	public AccountBookVO(String data, String clerkID,ArrayList<CommodityVO> commodityVOs,ArrayList<MemberVO> memberVOs
+	public AccountBookVO(String id,String data, String clerkID,ArrayList<CommodityVO> commodityVOs,ArrayList<MemberVO> memberVOs
 			,ArrayList<AccountVO> accountVOs) {
+		this.id=id;
 		this.date=data;
 		this.clerkID=clerkID;
 		this.commodityVOs=commodityVOs;
@@ -60,6 +62,14 @@ public class AccountBookVO {
 
 	public void setAccountVOs(ArrayList<AccountVO> accountVOs) {
 		this.accountVOs = accountVOs;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

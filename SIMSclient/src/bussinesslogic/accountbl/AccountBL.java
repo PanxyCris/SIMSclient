@@ -3,18 +3,18 @@ package bussinesslogic.accountbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import bussinesslogic.memberbl.MemberInfo;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
-import vo.AccountVO;
-import vo.FinancialBill.AccountListVO;
-import vo.FinancialBill.FinancialDocVO;
-import vo.FinancialBill.PaymentBillVO;
-import vo.FinancialBill.ReceiptBillVO;
+import vo.accountvo.AccountVO;
+import vo.billvo.financialbillvo.AccountListVO;
+import vo.billvo.financialbillvo.FinancialDocVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.billvo.financialbillvo.ReceiptBillVO;
+
 
 /**
  * 
@@ -94,7 +94,7 @@ public class AccountBL implements AccountBLService {
 	public ResultMessage judgeLegal(AccountVO accountVO) {
 		String id = accountVO.getId();
 		String name = accountVO.getName();
-		String money = accountVO.getMoney();
+		Double money = accountVO.getMoney();
 		// idµÄ×Ö·û±ØÐëÎª0~9
 		for (int i = 0; i < id.length(); i++) {
 			if (!('0' <= id.charAt(i) && id.charAt(i) <= '9')) {
@@ -123,7 +123,7 @@ public class AccountBL implements AccountBLService {
 	@Override
 	public ArrayList<AccountVO> find(String message, FindAccountType findType) {
 
-		accountVO = new AccountVO("", "", "");
+		accountVO = new AccountVO("", "", 0.0);
 
 		ArrayList<AccountVO> accountVOs = new ArrayList<>();
 		ArrayList<AccountPO> accountPOs = new ArrayList<>();
@@ -148,7 +148,7 @@ public class AccountBL implements AccountBLService {
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
 
-		accountVO = new AccountVO("", "", "");
+		accountVO = new AccountVO("", "", 0.0);
 
 		ArrayList<AccountPO> accountPOs = new ArrayList<>();
 		ArrayList<AccountVO> accountVOs = new ArrayList<>();
