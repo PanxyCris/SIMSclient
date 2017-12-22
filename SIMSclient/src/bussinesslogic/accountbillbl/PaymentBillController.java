@@ -1,8 +1,11 @@
 package bussinesslogic.accountbillbl;
 
+import java.util.ArrayList;
+
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import dataenum.ResultMessage;
-import vo.FinancialBill.PaymentBillVO;
+import dataenum.findtype.FindAccountBillType;
+import vo.billvo.financialbillvo.PaymentBillVO;
 
 public class PaymentBillController implements PaymentBillBLService{
 	
@@ -19,17 +22,22 @@ public class PaymentBillController implements PaymentBillBLService{
 	}
 
 	@Override
-	public PaymentBillVO find() {
-		return paymentBillBL.find();
+	public ArrayList<PaymentBillVO> show() {
+		return paymentBillBL.show();
 	}
 
 	@Override
-	public ResultMessage getAccountList() {
+	public ArrayList<PaymentBillVO> find(String info, FindAccountBillType type) {
+		return paymentBillBL.find(info, type);
+	}
+
+	@Override
+	public ArrayList<String> getAccountList() {
 		return paymentBillBL.getAccountList();
 	}
 
 	@Override
-	public ResultMessage getCustomerList() {
+	public ArrayList<String> getCustomerList() {
 		return paymentBillBL.getCustomerList();
 	}
 
@@ -42,6 +50,8 @@ public class PaymentBillController implements PaymentBillBLService{
 	public ResultMessage commit(PaymentBillVO paymentBillVO) {
 		return paymentBillBL.commit(paymentBillVO);
 	}
+
+
 	
 	
 }

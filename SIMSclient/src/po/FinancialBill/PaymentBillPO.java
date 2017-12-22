@@ -7,12 +7,12 @@ import dataenum.BillType;
 
 public class PaymentBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
-	private String total;//总额
+	private double total;//总额
 	private String accountID;
 	private ArrayList<EntryPO> entryListPO;//条目清单
 
 	public PaymentBillPO (String docID,String userID,String customerID,String accountID,ArrayList<EntryPO> entryListPO,
-			String total,BillType billType,BillState billState){
+			Double total,BillType billType,BillState billState){
 		super(docID,userID,customerID,billType,billState);
 		entryListPO=new ArrayList<EntryPO>();
 		this.accountID = accountID;
@@ -27,11 +27,11 @@ public class PaymentBillPO extends FinancialDocPO {
 		this.accountID = accountID;
 	}
 
-	public String getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 

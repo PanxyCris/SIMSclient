@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import po.FinancialBill.EntryPO;
 import po.FinancialBill.PaymentBillPO;
-import vo.FinancialBill.EntryVO;
-import vo.FinancialBill.PaymentBillVO;
+import vo.billvo.financialbillvo.EntryVO;
+import vo.billvo.financialbillvo.PaymentBillVO;
+
 
 public class PaymentBillTransition {
 	
@@ -14,10 +15,10 @@ public class PaymentBillTransition {
 	
 	public PaymentBillVO POtoVO(PaymentBillPO paymentBillPO){
 		
-		entryVO=new EntryVO("", "", "");
+		entryVO=new EntryVO("",0.0, "");
 		PaymentBillVO paymentBillVO;
 		
-		String total=paymentBillPO.getTotal();
+		double total=paymentBillPO.getTotal();
 		String accountID=paymentBillPO.getAccountID();
 		ArrayList<EntryPO> entryPOs=paymentBillPO.getEntryListPO();
 		ArrayList<EntryVO> entryVOs=new ArrayList<>();
@@ -29,17 +30,17 @@ public class PaymentBillTransition {
 		}
 		
 		paymentBillVO=new PaymentBillVO(paymentBillPO.getDocID(), paymentBillPO.getUserID(),paymentBillPO.getCustomerID(), 
-				accountID, entryVOs, total, paymentBillPO.getBillType(), paymentBillPO.getBillState());
+				accountID, entryVOs, total, paymentBillPO.getBillType(), paymentBillPO.getBillState(),paymentBillPO.getNote());
 		
 		return paymentBillVO;
 	}
 	
 	public PaymentBillPO VOtoPO(PaymentBillVO paymentBillVO){
 		
-		entryPO=new EntryPO("","", "");
+		entryPO=new EntryPO("",0.0, "");
 		PaymentBillPO paymentBillPO;
 		
-		String total =paymentBillVO.getTotal();
+		double total =paymentBillVO.getTotal();
 		String accountID=paymentBillVO.getAccountID();
 		ArrayList<EntryVO> entryVOs=paymentBillVO.getEntryListVO();
 		ArrayList<EntryPO> entryPOs=new ArrayList<>();
@@ -50,8 +51,8 @@ public class PaymentBillTransition {
 			entryPOs.add(entryPO);
 		}
 		
-		paymentBillPO=new PaymentBillPO(paymentBillVO.getDocID(), paymentBillVO.getUserID(), paymentBillVO.getCustomerID(), 
-				accountID, entryPOs, total, paymentBillVO.getBillType(), paymentBillVO.getBillState());
+		paymentBillPO=new PaymentBillPO(paymentBillVO.getId(), paymentBillVO.getUserID(), paymentBillVO.getCustomerID(), 
+				accountID, entryPOs, total, paymentBillVO.getType(), paymentBillVO.getState());
 		
 		return paymentBillPO;
 	}

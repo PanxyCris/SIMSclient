@@ -9,10 +9,10 @@ public class ReceiptBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<AccountListPO> accountListPOs;//转账列表
 	
-	private String total;//总额
+	private double total;//总额
 
 	public ReceiptBillPO(String docID, String userID,String customerID,BillType billType,BillState billState
-			,ArrayList<AccountListPO> accountListPOs,String total) {
+			,ArrayList<AccountListPO> accountListPOs,Double total) {
 		super(docID,userID,customerID,billType,billState);
 		this.total=total;
 		accountListPOs=new ArrayList<AccountListPO>();
@@ -26,18 +26,16 @@ public class ReceiptBillPO extends FinancialDocPO {
 		this.accountListPOs = accountListPOs;
 	}
 
-	public String getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(String total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}	
-	
-	
 	
 }

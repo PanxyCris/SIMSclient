@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import po.FinancialBill.AccountListPO;
 import po.FinancialBill.ReceiptBillPO;
-import vo.FinancialBill.AccountListVO;
-import vo.FinancialBill.ReceiptBillVO;
+import vo.billvo.financialbillvo.AccountListVO;
+import vo.billvo.financialbillvo.ReceiptBillVO;
 
 public class ReceiptBillTransition {
 	
@@ -14,9 +14,9 @@ public class ReceiptBillTransition {
 	
 	public ReceiptBillPO VOtoPO(ReceiptBillVO receiptBillVO){
 		
-		accountListPO = new AccountListPO("", "", "");
+		accountListPO = new AccountListPO("", 0.0, "");
 		
-		String total=receiptBillVO.getTotal();
+		double total=receiptBillVO.getTotal();
 		ArrayList<AccountListVO> accountListVOs=receiptBillVO.getAccountListVOs();
 		ArrayList<AccountListPO> accountListPOs=new ArrayList<>();
 		for (int i = 0; i < accountListVOs.size(); i++) {
@@ -26,17 +26,17 @@ public class ReceiptBillTransition {
 			accountListPOs.add(accountListPO);
 		}
 		
-		ReceiptBillPO receiptBillPO=new ReceiptBillPO(receiptBillVO.getDocID(), receiptBillVO.getUserID(),
-				receiptBillVO.getCustomerID(), receiptBillVO.getBillType(), receiptBillVO.getBillState(), accountListPOs, total);
+		ReceiptBillPO receiptBillPO=new ReceiptBillPO(receiptBillVO.getId(), receiptBillVO.getUserID(),
+				receiptBillVO.getCustomerID(), receiptBillVO.getType(), receiptBillVO.getState(), accountListPOs, total);
 		
 		return receiptBillPO;
 	}
 	
 	public ReceiptBillVO POtoVO(ReceiptBillPO receiptBillPO){
 		
-		accountListVO = new AccountListVO("", "", "");
+		accountListVO = new AccountListVO("", 0.0, "");
 		
-		String total=receiptBillPO.getTotal();
+		Double total=receiptBillPO.getTotal();
 		ArrayList<AccountListPO> accountListPOs=receiptBillPO.getAccountListPOs();
 		ArrayList<AccountListVO> accountListVOs=new ArrayList<>();
 		for (int i = 0; i < accountListPOs.size(); i++) {
@@ -47,7 +47,7 @@ public class ReceiptBillTransition {
 		}
 		
 		ReceiptBillVO receiptBillVO=new ReceiptBillVO(receiptBillPO.getDocID(), receiptBillPO.getUserID(),
-				receiptBillPO.getCustomerID(), receiptBillPO.getBillType(), receiptBillPO.getBillState(), accountListVOs, total);
+				receiptBillPO.getCustomerID(), receiptBillPO.getBillType(), receiptBillPO.getBillState(), accountListVOs, total,receiptBillPO.getNote());
 		
 		return receiptBillVO;
 		

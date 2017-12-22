@@ -5,10 +5,10 @@ public class EntryPO {
 	
 	// 条目清单
 		protected String entryName;// 条目名
-		protected String transferAmount;// 金额
+		protected double transferAmount;// 金额
 		protected String note;// 备注
 		
-		public EntryPO(String entryName,String transferAmount,String note) {
+		public EntryPO(String entryName,double transferAmount,String note) {
 			this.transferAmount=transferAmount;
 			this.entryName=entryName;
 			this.note=note;
@@ -21,12 +21,12 @@ public class EntryPO {
 		public void setEntryName(String entryName) {
 			this.entryName = entryName;
 		}
-
-		public String getTransferAmount() {
+		
+		public double getTransferAmount() {
 			return transferAmount;
 		}
 
-		public void setTransferAmount(String transferAmount) {
+		public void setTransferAmount(double transferAmount) {
 			this.transferAmount = transferAmount;
 		}
 

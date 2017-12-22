@@ -12,6 +12,15 @@ public class FinancialDocPO extends BillPO implements Serializable {
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
 	protected String customerID;//客户ID
+	protected String note;
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
 
 	public FinancialDocPO(String docID,String userID,String customerID,
 			BillType billType,BillState billState){

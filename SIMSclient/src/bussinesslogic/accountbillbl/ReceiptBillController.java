@@ -1,8 +1,11 @@
 package bussinesslogic.accountbillbl;
 
+import java.util.ArrayList;
+
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.ResultMessage;
-import vo.FinancialBill.ReceiptBillVO;
+import dataenum.findtype.FindAccountBillType;
+import vo.billvo.financialbillvo.ReceiptBillVO;
 
 public class ReceiptBillController implements ReceiptBillBLService{
 
@@ -19,29 +22,30 @@ public class ReceiptBillController implements ReceiptBillBLService{
 	}
 
 	@Override
-	public ReceiptBillVO find() {
-		return receiptBillBL.find();
+	public ArrayList<ReceiptBillVO> show() {
+		return receiptBillBL.show();
 	}
 
 	@Override
-	public ResultMessage getAccountList() {
+	public ArrayList<ReceiptBillVO> find(String info, FindAccountBillType type) {
+		return receiptBillBL.find(info, type);
+	}
+
+	@Override
+	public ArrayList<String> getAccountList() {
 		return receiptBillBL.getAccountList();
 	}
 
 	@Override
-	public ResultMessage getCustomerList() {
+	public ArrayList<String> getCustomerList() {
 		return receiptBillBL.getCustomerList();
-	}
-
-	@Override
-	public ResultMessage judgeLegal(String money) {
-		return receiptBillBL.judgeLegal(money);
 	}
 
 	@Override
 	public ResultMessage commit(ReceiptBillVO receiptBillVO) {
 		return receiptBillBL.commit(receiptBillVO);
 	}
+
 	
 	
 }
