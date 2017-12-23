@@ -12,5 +12,7 @@ public interface AccountBookBLService {
 	public ResultMessage delete(AccountBookVO accountBookVO);//É¾³ý
 
 	public ArrayList<AccountBookVO> show();
+	
+	public AccountBookVO choseByYear(int date);
 
 }

@@ -59,4 +59,17 @@ public class AccountBookBL implements AccountBookBLService{
 		return accountBookVOs;
 	}
 
+	@Override
+	public AccountBookVO choseByYear(int date) {
+		String d=Integer.toString(date);
+		ArrayList<AccountBookVO> accountBookVOs=show();
+		for (int i = 0; i < accountBookVOs.size(); i++) {
+			if(d.equals(accountBookVOs.get(i).getDate())){
+				accountBookVO=accountBookVOs.get(i);
+				break;
+			}
+		}
+		return accountBookVO;
+	}
+
 }
