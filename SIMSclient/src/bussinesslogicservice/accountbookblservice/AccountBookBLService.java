@@ -9,8 +9,6 @@ public interface AccountBookBLService {
 
 	public ResultMessage newBuild(AccountBookVO accountBookVO);//ÐÂ½¨
 
-	public ResultMessage delete(AccountBookVO accountBookVO);//É¾³ý
-
 	public ArrayList<AccountBookVO> show();
 	
 	public AccountBookVO choseByYear(int date);

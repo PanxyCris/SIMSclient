@@ -6,17 +6,15 @@ import po.AccountPO;
 import po.commodity.CommodityPO;
 import po.MemberPO;
 
-public class AccountBookPO extends PersistObject {
-	private static final long serialVersionUID = 1L;
+public class AccountBookPO {
 	private String date;
 	private String clerkID;//操作员ID
 	private ArrayList<CommodityPO> commodityPOs;//商品列表
 	private ArrayList<MemberPO> memberPOs;//客户列表
 	private ArrayList<AccountPO> accountPOs;//账户列表
 
-	public AccountBookPO(String id,String date, String clerkID,ArrayList<CommodityPO> commodityPOs,ArrayList<MemberPO> memberPOs
+	public AccountBookPO(String date, String clerkID,ArrayList<CommodityPO> commodityPOs,ArrayList<MemberPO> memberPOs
 			,ArrayList<AccountPO> accountPOs) {
-		super(id);
 		this.date=date;
 		this.clerkID=clerkID;
 		this.commodityPOs=commodityPOs;
@@ -63,10 +61,5 @@ public class AccountBookPO extends PersistObject {
 	public void setAccountPOs(ArrayList<AccountPO> accountPOs) {
 		this.accountPOs = accountPOs;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 
 }

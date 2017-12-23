@@ -19,23 +19,17 @@ public class AccountBookBL implements AccountBookBLService{
 	
 	@Override
 	public ResultMessage newBuild(AccountBookVO accountBookVO) {
+		String date=accountBookVO.getDate();
+		ArrayList<AccountBookVO> accountBookVOs=show();
+		for (int i = 0; i < accountBookVOs.size(); i++) {
+			if(date.equals(accountBookVOs.get(i).getDate())){
+				return ResultMessage.FAIL;
+			}
+		}
 		accountBookPO=accountBookTransition.VOtoPO(accountBookVO);
 		
 		try {
 			return accountBookDataService.insertAccountBook(accountBookPO);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		return ResultMessage.FAIL;
-	}
-
-	@Override
-	public ResultMessage delete(AccountBookVO accountBookVO) {
-		String id=accountBookVO.getId();
-		
-		try {
-			return accountBookDataService.deleteAccountBook(id);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
