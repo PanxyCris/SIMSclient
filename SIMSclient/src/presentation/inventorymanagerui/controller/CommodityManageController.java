@@ -1,7 +1,7 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -31,7 +31,7 @@ import vo.uservo.UserVO;
 
 public class CommodityManageController extends InventoryManagerController{
 
-	CommodityBLService service = new CommodityController();
+	CommodityBLService service = new CommodityBL();
 	public static final Remind remind = Remind.COMMODITY;
     ObservableList<CommodityVO> list = FXCollections.observableArrayList();
 	ObservableList<String> classList  = FXCollections.observableArrayList();

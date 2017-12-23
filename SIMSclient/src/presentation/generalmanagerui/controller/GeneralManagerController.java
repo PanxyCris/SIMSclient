@@ -2,21 +2,24 @@ package presentation.generalmanagerui.controller;
 
 import java.util.Stack;
 
+import bussinesslogic.utilitybl.UtilityBL;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.generalmanagerui.ExamineBillUI;
+import presentation.generalmanagerui.GeneralManagerUI;
 import presentation.generalmanagerui.PromotionMakingUI;
 import presentation.generalmanagerui.PromotionMemberUI;
 import presentation.generalmanagerui.PromotionSpecialUI;
 import presentation.generalmanagerui.PromotionSumUI;
 import presentation.mainui.MainUI;
-import presentation.usermanagerui.UserManagerUI;
-import presentation.usermanagerui.UserManagingUI;
-import presentation.usermanagerui.UserMessageUI;
+import presentation.generalmanagerui.UserMessageUI;
 import vo.uservo.UserVO;
 
 public class GeneralManagerController {
@@ -105,6 +108,16 @@ public class GeneralManagerController {
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
+        UtilityBLService utilityService = new UtilityBL();
+        if(utilityService.hasMessage(user)){
+        	Circle circle = new Circle();
+        	circle.setCenterX(0);
+        	circle.setCenterY(0);
+        	circle.setLayoutX(377);
+        	circle.setLayoutY(16);
+        	circle.setRadius(7);
+        	circle.setFill(Paint.valueOf("#ff1f1f"));
+        }
      //   image = user.getImage();
 	}
 
@@ -124,14 +137,13 @@ public class GeneralManagerController {
             public void run() {
                 try {
                    switch(currentID){
-   		            case mainID:new UserManagerUI().start(user);break;
+   		            case mainID:new GeneralManagerUI().start(user);break;
    		            case "PromotionMakingUI":new PromotionMakingUI().start(user);break;
    		            case "PromotionMemberUI":new PromotionMemberUI().start(user);break;
    		            case "PromotionSpecialUI":new PromotionSpecialUI().start(user);break;
    		            case "PromotionSumUI":new PromotionSumUI().start(user);break;
    		            case "ExamineBillUI":new ExamineBillUI().start(user);break;
-   		         //   case "UserManagingUI":new UserManagingUI().start(user);break;
-   		         //   case "UserMessageUI":new UserMessageUI().start();break;
+   		            case "UserMessageUI":new UserMessageUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

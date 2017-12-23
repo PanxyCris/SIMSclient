@@ -1,59 +1,72 @@
 package vo.tablevo;
 
-public class SaleScheduleVO {
-	//筛选条件
-	String date;//时间,精确到天
-	String tradeName;//商品名
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
+import java.time.LocalDate;
+import dataenum.Warehouse;
 
-	public String getDate() {
+public class SaleScheduleVO {
+
+	private LocalDate date;//时间
+	private String name;//商品名
+	private String model;//型号
+	private Integer number;//数量
+	private Double price;//单价
+	private Double sum;
+
+	public SaleScheduleVO(LocalDate d,String name,String m,int n,double p){
+		this.date = d;
+		this.name = name;
+		model = m;
+		number = n;
+		price = p;
+		sum = n*p;
+	}
+
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+
+
+
+	public String getName() {
+		return name;
 	}
 
-	public String getTradeName() {
-		return tradeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setTradeName(String tradeName) {
-		this.tradeName = tradeName;
+	public String getModel() {
+		return model;
 	}
 
-	public String getCustomer() {
-		return customer;
+	public void setModel(String model) {
+		this.model = model;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public Integer getNumber() {
+		return number;
 	}
 
-	public int getClerkID() {
-		return clerkID;
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 
-	public void setClerkID(int clerkID) {
-		this.clerkID = clerkID;
+	public Double getPrice() {
+		return price;
 	}
 
-	public String getRepertory() {
-		return repertory;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
-	public void setRepertory(String repertory) {
-		this.repertory = repertory;
+	public Double getSum() {
+		return sum;
 	}
 
-	public SaleScheduleVO(String d,String t,String cu,int cl,String r){
-		date=d;
-		tradeName=t;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
+	public void setSum(Double sum) {
+		this.sum = sum;
 	}
+
 
 }

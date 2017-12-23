@@ -1,33 +1,21 @@
 package presentation.usermanagerui;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.usermanagerui.controller.UserMessageController;
+import vo.uservo.UserVO;
 
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+public class UserMessageUI{
 
-public class UserMessageUI extends UserManagerUI implements Initializable{
-
-	@FXML
-	TableView<String> messageTable;
-	@FXML
-	TableColumn<String,String> messageList;
-
-	public void start() throws Exception {
-
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		messageTable.setItems(FXCollections.observableArrayList("chocolate", "salmon", "gold", "coral", "darkorchid",
-	            "darkgoldenrod", "lightsalmon", "black", "rosybrown", "blue",
-	            "blueviolet", "brown"));
-		System.out.println();
+	public void start(UserVO user) throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/UserMessageUI.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setScene( new Scene((Pane) loader.load()));
+        UserMessageController controller = loader.<UserMessageController>getController();
+        controller.initData(user);
+        primaryStage.show();
 	}
 
 

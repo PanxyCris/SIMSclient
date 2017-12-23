@@ -2,10 +2,14 @@ package presentation.financialstaffui.controller;
 
 import java.util.Stack;
 
+import bussinesslogic.utilitybl.UtilityBL;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.financialstaffui.AccountManageUI;
 import presentation.financialstaffui.FinancialStaffUI;
@@ -15,6 +19,7 @@ import presentation.financialstaffui.PaymentCheckBillUI;
 import presentation.financialstaffui.PaymentMakeBillUI;
 import presentation.financialstaffui.ReceiveCheckBillUI;
 import presentation.financialstaffui.ReceiveMakeBillUI;
+import presentation.financialstaffui.UserMessageUI;
 import presentation.financialstaffui.ViewTableUI;
 import presentation.mainui.MainUI;
 import vo.billvo.financialbillvo.PaymentBillVO;
@@ -62,7 +67,7 @@ public class FinancialStaffController {
 
 	@FXML
 	public void message() throws Exception{
-
+		changeStage("UserMessageUI",user,null,null);
 	}
 
 	@FXML
@@ -102,6 +107,16 @@ public class FinancialStaffController {
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
+        UtilityBLService utilityService = new UtilityBL();
+        if(utilityService.hasMessage(user)){
+        	Circle circle = new Circle();
+        	circle.setCenterX(0);
+        	circle.setCenterY(0);
+        	circle.setLayoutX(377);
+        	circle.setLayoutY(16);
+        	circle.setRadius(7);
+        	circle.setFill(Paint.valueOf("#ff1f1f"));
+        }
      //   image = user.getImage();
 	}
 
@@ -122,14 +137,15 @@ public class FinancialStaffController {
                 try {
                    switch(currentID){
    		            case mainID:new FinancialStaffUI().start(user);break;
+   		            case "UserMessageUI":new UserMessageUI().start(user);break;
    		            case "AccountManageUI":new AccountManageUI().start(user);break;
    		            case "MakeReceiptUI":new MakeReceiptUI().start(user);break;
    		            case "PaymentMakeBillUI":new PaymentMakeBillUI().start(user,bill1);break;
    		            case "PaymentCheckBillUI":new PaymentCheckBillUI().start(user);break;
    		            case "ReceiveMakeBillUI":new ReceiveMakeBillUI().start(user,bill2);break;
    		            case "ReceiveCheckBillUI":new ReceiveCheckBillUI().start(user);break;
-   		         //   case "ViewTableUI":new ViewTableUI().start(user,type);break;
-   		        //    case "InitAccountUI":new InitAccountUI().start(user,type);break;
+   		            case "ViewTableUI":new ViewTableUI().start(user);break;
+   		           case "InitAccountUI":new InitAccountUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

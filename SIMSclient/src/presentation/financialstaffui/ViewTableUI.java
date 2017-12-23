@@ -1,40 +1,21 @@
 package presentation.financialstaffui;
 
-import java.net.URL;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import presentation.financialstaffui.controller.ViewTableController;
+import vo.uservo.UserVO;
 
-import java.util.ResourceBundle;
+public class ViewTableUI{
 
-import dataenum.TableType;
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-
-public class ViewTableUI extends FinancialStaffUI implements Initializable{
-
-	@FXML
-	ChoiceBox<String> tableChoice;
-
-	@FXML
-	public void chooseTable(){
-        TableType type = TableType.getType(tableChoice.getValue());
-
-        switch(type){
-        case BUSINESS_HISTORY_SCHEDULE:
-        case SALE_SCHEDULE:
-        case STATEMENT_OF_OPERATION:
-        default:break;
-        }
-	}
-
-	public void start() throws Exception {
-		   changeStage("ViewTableUI","ViewTableUI.fxml");
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		tableChoice.setItems(FXCollections.observableArrayList(TableType.BUSINESS_HISTORY_SCHEDULE.value,TableType.SALE_SCHEDULE.value,TableType.STATEMENT_OF_OPERATION.value));
-
+	public void start(UserVO user) throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ViewTableUI.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setScene( new Scene((Pane) loader.load()));
+        ViewTableController controller = loader.<ViewTableController>getController();
+        controller.initData(user);
+        primaryStage.show();
 	}
 
 }

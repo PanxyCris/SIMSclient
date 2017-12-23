@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class UserManagingUI extends UserManagerUI{
+public class UserManagingUI{
 
 	public void start(UserVO user) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/UserManagingUI.fxml"));

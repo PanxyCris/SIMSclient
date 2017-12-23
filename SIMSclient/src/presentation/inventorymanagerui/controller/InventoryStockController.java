@@ -1,6 +1,6 @@
 package presentation.inventorymanagerui.controller;
 
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +13,7 @@ import vo.uservo.UserVO;
 
 public class InventoryStockController extends InventoryManagerController{
 
-	CommodityBLService service = new CommodityController();
+	CommodityBLService service = new CommodityBL();
     ObservableList<CommodityVO> list = FXCollections.observableArrayList();
 
 	@FXML

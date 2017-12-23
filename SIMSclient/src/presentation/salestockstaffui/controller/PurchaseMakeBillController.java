@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.MemberBLService_Stub;
 import bussiness_stub.PurchaseBLService_Stub;
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -326,7 +326,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
 
         ObservableList<String> commodityList = FXCollections.observableArrayList();
-        CommodityBLService commodityService = new CommodityController();//׮
+        CommodityBLService commodityService = new CommodityBL();//׮
 
     	commodityList.addAll(commodityService.getIDandName());
 

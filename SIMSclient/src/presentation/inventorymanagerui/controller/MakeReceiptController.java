@@ -2,7 +2,7 @@ package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
 import bussinesslogic.billbl.inventory.InventoryBillController;
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.BillState;
@@ -114,7 +114,7 @@ public class MakeReceiptController extends InventoryManagerController{
 	public void choiceInit(){
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.INVENTORYGIFTBILL.value,BillType.INVENTORYLOSSBILL.value,
 				BillType.INVENTORYREVENUEBILL.value,BillType.INVENTORYWARNINGBILL.value));
-		CommodityBLService commodityService = new CommodityController();
+		CommodityBLService commodityService = new CommodityBL();
 		nameChoice.setItems(FXCollections.observableArrayList(commodityService.getIDandName()));
 	}
 

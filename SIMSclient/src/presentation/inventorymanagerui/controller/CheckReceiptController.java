@@ -3,7 +3,7 @@ package presentation.inventorymanagerui.controller;
 import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillController;
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.BillState;

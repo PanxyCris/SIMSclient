@@ -1,60 +1,66 @@
 package vo.tablevo;
 
+import java.time.LocalDate;
+
+import dataenum.BillType;
+import dataenum.Warehouse;
+import javafx.scene.control.CheckBox;
 
 public class BusinessHistoryScheduleVO {
 	//筛选条件
-	String date;//时间
-	String billType;
-	String customer;//客户
-	int clerkID;//业务员
-	String repertory;//仓库
+	private LocalDate date;//时间
+	private BillType type;
+	private String typeString;
+	private String customer;//客户
+	private String clerkID;//业务员
+	private Warehouse warehouse;
+	private String warehouseString;//仓库
+	private CheckBox box;
 
-	public BusinessHistoryScheduleVO(String d,String b,String cu,int cl,String r){
-		date=d;
-		billType=b;
-		customer=cu;
-		clerkID=cl;
-		repertory=r;
+	public BusinessHistoryScheduleVO(LocalDate d,BillType b,String cu,String cl,Warehouse w){
+		this.date = d;
+		this.type = b;
+		typeString = b.value;
+		customer = cu;
+		clerkID = cl;
+		warehouse =w;
+		warehouseString = w.value;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public BillType getType() {
+		return type;
 	}
 
-	public String getBillType() {
-		return billType;
+	public String getTypeString() {
+		return typeString;
 	}
 
-	public void setBillType(String billType) {
-		this.billType = billType;
-	}
 
 	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public int getClerkID() {
+	public String getClerkID() {
 		return clerkID;
 	}
 
-	public void setClerkID(int clerkID) {
-		this.clerkID = clerkID;
+
+	public Warehouse getWarehouse() {
+		return warehouse;
 	}
 
-	public String getRepertory() {
-		return repertory;
+
+	public String getWarehouseString() {
+		return warehouseString;
 	}
 
-	public void setRepertory(String repertory) {
-		this.repertory = repertory;
+	public CheckBox getBox() {
+		return box;
 	}
+
 
 }

@@ -1,8 +1,9 @@
 package bussinesslogicservice.accountbillblservice;
 
 import java.util.ArrayList;
+
 import dataenum.ResultMessage;
-import dataenum.findtype.FindAccountBillType;
+import dataenum.findtype.FindPaymentBillType;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
 public interface PaymentBillBLService {
@@ -13,7 +14,7 @@ public interface PaymentBillBLService {
 
 	public ArrayList<PaymentBillVO> show();
 
-	public ArrayList<PaymentBillVO> find(String info,FindAccountBillType type);
+	public ArrayList<PaymentBillVO> find(String info,FindPaymentBillType type);
 
 	public ArrayList<String> getAccountList();  // Ãû×Ö(ID)
 
