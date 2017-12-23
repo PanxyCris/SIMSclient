@@ -37,7 +37,12 @@ public class UtilityBL implements UtilityBLService{
 		
 		String now=simpleDateFormat.format(date);
 		
-		String num=Integer.toString(1);
+		
+		
+		String num=Integer.toString(1);//how to get current bills number?
+		
+		
+		
 		int numLength=num.length();
 		for (int i = 0; i < BILLIDNUMBERLENGTH-numLength; i++) {
 			num="0"+num;
