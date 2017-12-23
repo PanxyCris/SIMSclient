@@ -17,7 +17,11 @@ public class SalesMakeBillUI {
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
         SalesMakeBillController controller = loader.<SalesMakeBillController>getController();
-        controller.initData(user,type,sales);
+        try {
+			controller.initData(user,type,sales);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         primaryStage.show();
 
 	}
