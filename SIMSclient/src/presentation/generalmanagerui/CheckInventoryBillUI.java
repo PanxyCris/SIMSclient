@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 import presentation.generalmanagerui.controller.ExamineInventoryBillController;
 import vo.uservo.UserVO;
 
-public class ExamineInventoryBillUI{
+public class CheckInventoryBillUI{
 
 	public void start(UserVO user,BillType type) throws Exception{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ExamineInventoryBillUI.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CheckInventoryBillUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
-        ExamineInventoryBillController controller = loader.<ExamineInventoryBillController>getController();
+        CheckInventoryBillController controller = loader.<CheckInventoryBillController>getController();
         controller.initData(user,type);
         primaryStage.show();
 	}

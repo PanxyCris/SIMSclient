@@ -1,17 +1,23 @@
 package bussinesslogicservice.checktableblservice;
 
-import vo.ViewObject;
-import vo.billvo.financialbillvo.FinancialDocVO;
-import vo.tablevo.BusinessHistoryScheduleVO;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-public interface BusinessHistoryScheduleBLService {
+import dataenum.findtype.FindSaleScheduleType;
+import vo.billvo.BillVO;
 
-	public FinancialDocVO viewReport(BusinessHistoryScheduleVO businessHistoryScheduleVO);
+public interface BusinessHistoryScheduleBLService<B extends BillVO> {
 
-	public void exportReport();
+    public ArrayList<B> show();
 
-	public void writeOff();//红冲
+    public ArrayList<B> siftTime(LocalDate start,LocalDate end);
 
-	public void writeOffAndCopy(ViewObject billVO);//红冲并复制
+    public ArrayList<B> sift(String info,FindSaleScheduleType type);//里面的商品名除外
+
+	public void exportReport(ArrayList<B> table);
+
+	public void writeOff(ArrayList<B> table);//红冲
+
+	public void writeOffAndCopy(ArrayList<B> table);//红冲并复制
 
 }
