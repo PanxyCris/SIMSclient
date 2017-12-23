@@ -7,18 +7,18 @@ public class SaleScheduleVO {
 
 	private LocalDate date;//时间
 	private String name;//商品名
-	private String customer;//客户
-	private String clerkID;//业务员
-	private Warehouse warehouse;
-	private String warehouseString;//仓库
+	private String model;//型号
+	private Integer number;//数量
+	private Double price;//单价
+	private Double sum;
 
-	public SaleScheduleVO(LocalDate d,String name,String cu,String cl,Warehouse w){
+	public SaleScheduleVO(LocalDate d,String name,String m,int n,double p){
 		this.date = d;
 		this.name = name;
-		customer = cu;
-		clerkID = cl;
-		warehouse =w;
-		warehouseString = w.value;
+		model = m;
+		number = n;
+		price = p;
+		sum = n*p;
 	}
 
 	public LocalDate getDate() {
@@ -26,23 +26,7 @@ public class SaleScheduleVO {
 	}
 
 
-	public String getCustomer() {
-		return customer;
-	}
 
-	public String getClerkID() {
-		return clerkID;
-	}
-
-
-	public Warehouse getWarehouse() {
-		return warehouse;
-	}
-
-
-	public String getWarehouseString() {
-		return warehouseString;
-	}
 
 	public String getName() {
 		return name;
@@ -50,6 +34,38 @@ public class SaleScheduleVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Double getSum() {
+		return sum;
+	}
+
+	public void setSum(Double sum) {
+		this.sum = sum;
 	}
 
 

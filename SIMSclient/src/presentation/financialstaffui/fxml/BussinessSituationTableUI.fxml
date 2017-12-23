@@ -116,38 +116,54 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<TableView layoutX="193.0" layoutY="157.0" prefHeight="350.0" prefWidth="411.0">
+		<TableView fx:id="receive" layoutX="193.0" layoutY="157.0" prefHeight="317.0" prefWidth="411.0">
 			<columns>
-				<TableColumn prefWidth="150.0" text="时间" />
-				<TableColumn prefWidth="75.0" text="收入类型" />
-				<TableColumn prefWidth="100.0" text="折让" />
-				<TableColumn prefWidth="100.0" text="总收入" />
+				<TableColumn fx:id="receiveTime" prefWidth="150.0" text="时间" />
+				<TableColumn fx:id="receiveType" prefWidth="75.0" text="收入类型" />
+				<TableColumn fx:id="receiveAllowance" prefWidth="85.0" text="折让" />
+				<TableColumn fx:id="receiveSum" prefWidth="100.0" text="数额" />
 			</columns>
 		</TableView>
-		<DatePicker layoutX="193.0" layoutY="112.0" />
-		<Button layoutX="191.0" layoutY="57.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="136.0" text="导   出">
+		<DatePicker fx:id="startPicker" layoutX="193.0" layoutY="112.0" prefHeight="23.0" prefWidth="320.0" />
+		<Button layoutX="191.0" layoutY="57.0" mnemonicParsing="false" onAction="#printout" prefHeight="44.0" prefWidth="136.0" text="导   出">
 			<font>
 				<Font size="19.0" />
 			</font>
 		</Button>
-		<DatePicker layoutX="379.0" layoutY="112.0" />
-		<Button layoutX="871.0" layoutY="112.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
-		<TextField layoutX="710.0" layoutY="112.0" />
-		<ChoiceBox layoutX="596.0" layoutY="112.0" prefHeight="23.0" prefWidth="114.0" />
+		<DatePicker fx:id="endPicker" layoutX="525.0" layoutY="112.0" prefHeight="23.0" prefWidth="320.0" />
 		<Button layoutX="888.0" layoutY="68.0" mnemonicParsing="false" onAction="#chooseTable" prefHeight="23.0" prefWidth="68.0" text="查   看" />
 		<ChoiceBox fx:id="tableChoice" layoutX="774.0" layoutY="68.0" prefHeight="23.0" prefWidth="114.0" />
-		<TableView layoutX="630.0" layoutY="157.0" prefHeight="350.0" prefWidth="326.0">
+		<TableView fx:id="pay" layoutX="630.0" layoutY="157.0" prefHeight="317.0" prefWidth="326.0">
 			<columns>
-				<TableColumn prefWidth="150.0" text="时间" />
-				<TableColumn prefWidth="75.0" text="支出类型" />
-				<TableColumn prefWidth="100.0" text="总支出" />
+				<TableColumn fx:id="payTime" prefWidth="150.0" text="时间" />
+				<TableColumn fx:id="payType" prefWidth="75.0" text="支出类型" />
+				<TableColumn fx:id="paySum" prefWidth="100.0" text="数额" />
 			</columns>
 		</TableView>
-		<Label layoutX="196.0" layoutY="528.0" prefHeight="34.0" prefWidth="192.0" text="利润：">
+		<Label layoutX="452.0" layoutY="547.0" prefHeight="34.0" prefWidth="192.0" text="利润：">
 			<font>
 				<Font size="29.0" />
 			</font>
 		</Label>
-      <Label layoutX="271.0" layoutY="528.0" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: #DDDDDD;" />
+      <Label fx:id="profit" layoutX="540.0" layoutY="547.0" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: #DDDDDD;" />
+      <Button layoutX="870.0" layoutY="112.0" mnemonicParsing="false" onAction="#siftTime" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
+      <Label fx:id="revenue" layoutX="353.0" layoutY="485.0" prefHeight="38.0" prefWidth="100.0" style="-fx-background-color: #DDDDDD;" />
+      <Label layoutX="191.0" layoutY="485.0" prefHeight="34.0" prefWidth="192.0" text="折让总收入：">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="expenditure" layoutX="741.0" layoutY="485.0" prefHeight="38.0" prefWidth="214.0" style="-fx-background-color: #DDDDDD;" />
+      <Label layoutX="630.0" layoutY="485.0" prefHeight="34.0" prefWidth="192.0" text="总支出：">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="461.0" layoutY="485.0" prefHeight="34.0" prefWidth="192.0" text="折让：">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="allowance" layoutX="536.0" layoutY="485.0" prefHeight="38.0" prefWidth="68.0" style="-fx-background-color: #DDDDDD;" />
 	</children>
 </AnchorPane>
