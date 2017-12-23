@@ -1,10 +1,11 @@
-package presentation.usermanagerui;
+package presentation.financialstaffui;
 
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.usermanagerui.controller.UserMessageController;
+import presentation.financialstaffui.controller.UserMessageController;
 import vo.uservo.UserVO;
 
 public class UserMessageUI{

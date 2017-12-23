@@ -2,9 +2,11 @@ package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
 
+
 import java.util.*;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
+import po.sales.SalesPO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionMemberVO;
@@ -30,5 +32,21 @@ public interface SalesBLService {
 	public ArrayList<String> getMemberIDandName();
 	public ArrayList<SalesVO> show();
 	public ArrayList<SalesVO> find(String info,FindSalesType type);
+
+	public SalesPO createSale();
+
+	public void addCommodities(CommodityItemVO item);
+
+	public ArrayList<PromotionPricePacksVO> showPricePacks();
+
+	public void addPricePacks(String id);
+
+	public ArrayList<PromotionTotalVO> FindTotalPromotion();
+
+	public ArrayList<PromotionMemberVO> FindMemberPromotion();
+
+	public double setPromotion(String id);
+
+	public void addMembers(String id);
 
 }

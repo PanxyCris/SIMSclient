@@ -15,7 +15,7 @@ public class FinanceTableController extends GeneralManagerController{
 	ChoiceBox<String> tableChoice;
 
 	@FXML
-	public void check() throws Exception{
+	public void chooseTable() throws Exception{
 		TableType type = TableType.getType(tableChoice.getValue());
 		switch(type){
 		case BUSINESS_HISTORY_SCHEDULE:

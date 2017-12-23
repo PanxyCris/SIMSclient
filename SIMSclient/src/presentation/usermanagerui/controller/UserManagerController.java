@@ -2,10 +2,14 @@ package presentation.usermanagerui.controller;
 
 import java.util.Stack;
 
+import bussinesslogic.utilitybl.UtilityBL;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.mainui.MainUI;
 import presentation.usermanagerui.UserManagerUI;
@@ -83,6 +87,16 @@ public class UserManagerController{
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
+        UtilityBLService utilityService = new UtilityBL();
+        if(utilityService.hasMessage(user)){
+        	Circle circle = new Circle();
+        	circle.setCenterX(0);
+        	circle.setCenterY(0);
+        	circle.setLayoutX(377);
+        	circle.setLayoutY(16);
+        	circle.setRadius(7);
+        	circle.setFill(Paint.valueOf("#ff1f1f"));
+        }
      //   image = user.getImage();
 	}
 
@@ -104,7 +118,7 @@ public class UserManagerController{
                    switch(currentID){
    		            case mainID:new UserManagerUI().start(user);break;
    		            case "UserManagingUI":new UserManagingUI().start(user);break;
-   		            case "UserMessageUI":new UserMessageUI().start();break;
+   		            case "UserMessageUI":new UserMessageUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

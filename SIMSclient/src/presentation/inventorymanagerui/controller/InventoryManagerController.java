@@ -2,11 +2,15 @@ package presentation.inventorymanagerui.controller;
 
 import java.util.Stack;
 
+import bussinesslogic.utilitybl.UtilityBL;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.inventorymanagerui.CheckReceiptUI;
 import presentation.inventorymanagerui.ClassManageUI;
@@ -14,6 +18,7 @@ import presentation.inventorymanagerui.CommodityManageUI;
 import presentation.inventorymanagerui.InventoryManagerUI;
 import presentation.inventorymanagerui.InventoryStockUI;
 import presentation.inventorymanagerui.MakeReceiptUI;
+import presentation.inventorymanagerui.UserMessageUI;
 import presentation.mainui.MainUI;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.uservo.UserVO;
@@ -60,7 +65,7 @@ public class InventoryManagerController {
 
 	@FXML
 	public void message() throws Exception{
-
+		changeStage("UserMessageUI",user,type,inv);
 	}
 
 	@FXML
@@ -109,6 +114,16 @@ public class InventoryManagerController {
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
+        UtilityBLService utilityService = new UtilityBL();
+        if(utilityService.hasMessage(user)){
+        	Circle circle = new Circle();
+        	circle.setCenterX(0);
+        	circle.setCenterY(0);
+        	circle.setLayoutX(377);
+        	circle.setLayoutY(16);
+        	circle.setRadius(7);
+        	circle.setFill(Paint.valueOf("#ff1f1f"));
+        }
      //   image = user.getImage();
 	}
 
@@ -134,6 +149,7 @@ public class InventoryManagerController {
    		            case "CommodityManageUI":new CommodityManageUI().start(user);break;
    		            case "InventoryStockUI":new InventoryStockUI().start(user);break;
    		            case "ClassManageUI":new ClassManageUI().start(user);break;
+   		            case "UserMessageUI":new UserMessageUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

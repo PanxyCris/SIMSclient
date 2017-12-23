@@ -116,31 +116,9 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<TableView fx:id="table" layoutX="193.0" layoutY="157.0" prefHeight="321.0" prefWidth="799.0">
-			<columns>
-				<TableColumn fx:id="tableTime" prefWidth="225.0" text="时间" />
-				<TableColumn fx:id="tableID" prefWidth="100.0" text="单据编号" />
-				<TableColumn fx:id="tableType" prefWidth="100.0" text="单据类型" />
-				<TableColumn fx:id="tableMember" prefWidth="75.0" text="客户" />
-				<TableColumn fx:id="tableSaleMan" prefWidth="75.0" text="业务员" />
-				<TableColumn fx:id="tableWareohouse" prefWidth="75.0" text="仓库" />
-				<TableColumn fx:id="tableNote" prefWidth="75.0" text="备注" />
-				<TableColumn fx:id="tableRed" prefWidth="75.0" text="是否红冲" />
-			</columns>
-		</TableView>
-		<DatePicker fx:id="startPicker" layoutX="193.0" layoutY="112.0" />
-		<Button layoutX="191.0" layoutY="57.0" mnemonicParsing="false" onAction="#print" prefHeight="44.0" prefWidth="136.0" text="导   出">
-			<font>
-				<Font size="19.0" />
-			</font>
-		</Button>
-		<DatePicker fx:id="endPicker" layoutX="379.0" layoutY="112.0" />
-		<Button layoutX="871.0" layoutY="112.0" mnemonicParsing="false" onAction="#sift" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
-		<TextField fx:id="siftField" layoutX="710.0" layoutY="112.0" />
-		<ChoiceBox fx:id="siftChoice" layoutX="596.0" layoutY="112.0" prefHeight="23.0" prefWidth="114.0" />
 		<Button layoutX="888.0" layoutY="68.0" mnemonicParsing="false" onAction="#chooseTable" prefHeight="23.0" prefWidth="68.0" text="查   看" />
 		<ChoiceBox fx:id="tableChoice" layoutX="774.0" layoutY="68.0" prefHeight="23.0" prefWidth="114.0" />
-		<Button layoutX="353.0" layoutY="499.0" mnemonicParsing="false" onAction="#write" prefHeight="44.0" prefWidth="161.0" text="红    冲" />
-		<Button layoutX="638.0" layoutY="499.0" mnemonicParsing="false" onAction="#writeOff" prefHeight="44.0" prefWidth="161.0" text="红冲并复制" />
+      <ChoiceBox fx:id="receiptChoice" layoutX="190.0" layoutY="100.0" prefHeight="23.0" prefWidth="170.0" />
+      <Button layoutX="360.0" layoutY="100.0" mnemonicParsing="false" onAction="#chooseReceipt" prefHeight="23.0" prefWidth="161.0" text="选择需要查看的的单据" />
 	</children>
 </AnchorPane>

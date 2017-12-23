@@ -9,10 +9,15 @@ import java.util.Date;
 import bussinesslogicservice.salesblservice.SalesBLService;
 import bussinesslogicservice.salesblservice.SalesShowService;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindSalesType;
 import dataservice.salesdataservice.SalesDataService;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
 import vo.billvo.salesbillvo.SalesVO;
+import vo.commodityvo.CommodityItemVO;
+import vo.promotionvo.PromotionMemberVO;
+import vo.promotionvo.PromotionPricePacksVO;
+import vo.promotionvo.PromotionTotalVO;
 
 /*
  * 负责实现销售界面所需要的服务
@@ -23,7 +28,7 @@ public class SalesController implements SalesBLService, SalesShowService{
 	private SaleShow saleshow;
 	private SalesDataService service;
 	private String date;
-	
+
 	public SalesController() {
 		sale = new Sales();
 		saleshow = new SaleShow();
@@ -38,12 +43,12 @@ public class SalesController implements SalesBLService, SalesShowService{
 		for (SalesPO po: list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("XSD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
-		
+
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
@@ -73,12 +78,12 @@ public class SalesController implements SalesBLService, SalesShowService{
 		for (SalesPO po: list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("XSD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
-		
+
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
@@ -319,7 +324,7 @@ public class SalesController implements SalesBLService, SalesShowService{
 	}
 
 	@Override
-	public void delte(SalesVO info) {
+	public void delete(SalesVO info) {
 	}
 
 	public String getDate() {
@@ -327,5 +332,6 @@ public class SalesController implements SalesBLService, SalesShowService{
 		this.date = sdf.format(new Date());
 		return this.date;
 	}
-	
+
+
 }

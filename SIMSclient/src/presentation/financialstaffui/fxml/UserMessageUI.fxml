@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.usermanagerui.controller.UserMessageController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.financialstaffui.controller.UserMessageController">
 	<children>
 		<ImageView fitHeight="600.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
 			<image>
@@ -60,18 +60,6 @@
 				<Image url="@../img/Logo.png" />
 			</image>
 		</ImageView>
-		<Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#manage" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="用户管理" textFill="WHITE">
-			<font>
-				<Font name="syht Italic" size="16.0" />
-			</font>
-			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../img/客户.png" />
-					</image>
-				</ImageView>
-			</graphic>
-		</Button>
 		<Button layoutX="259.0" layoutY="9.0" mnemonicParsing="false" onAction="#fresh" prefHeight="44.0" prefWidth="68.0" style="-fx-background-color: rgba(0,0,0,0);">
 			<graphic>
 				<ImageView fitHeight="150.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -87,5 +75,53 @@
             <TableColumn fx:id="messageList1" prefWidth="477.0" text="信息列表" />
 			</columns>
 		</TableView>
+      <Button layoutX="5.0" layoutY="430.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="期初建账" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/建账.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="4.0" layoutY="373.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/表格.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="4.0" layoutY="313.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制作单据" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/盘点.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="11.0" layoutY="253.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="账户管理" textFill="WHITE">
+         <font>
+            <Font name="syht Italic" size="16.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/账户.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
 	</children>
 </AnchorPane>
