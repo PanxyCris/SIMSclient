@@ -233,6 +233,11 @@ public class PurchaseCheckBillController extends SaleStockStaffController implem
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             service.submit(clickedItem);
+                            try {
+								fresh();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
                         });
                     }
                   }

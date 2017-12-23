@@ -16,7 +16,6 @@ import vo.commodityvo.CommodityVO;
 public class CommodityTransiton {
 
 	public CommodityPO VOtoPO(CommodityVO vo) {
-		ClassificationTran classify = new ClassificationTran();
 		String id = vo.getID();
 		String name = vo.getName();
 		String model = vo.getModel();
@@ -24,7 +23,7 @@ public class CommodityTransiton {
 		double purPrice = vo.getPurPrice();
 		double retailedPrice = vo.getRetailedPrice();
 		int warmingValue = vo.getWarmingValue();
-		ClassificationPO classification = classify.VOtoPO(vo.getClassification());
+		String classification = vo.getClassification();
 		double recentRetailedPrice = vo.getRecentRetailedPrice();
 		double recentPurPrice = vo.getRecentPurPrice();
 		CommodityPO po = new CommodityPO(id, name, model, classification, number, purPrice, retailedPrice,
@@ -33,7 +32,6 @@ public class CommodityTransiton {
 	}
 	
 	public CommodityVO POtoVO(CommodityPO po) {
-		ClassificationTran classify = new ClassificationTran();
 		String id = po.getId();
 		String name = po.getName();
 		String model = po.getModel();
@@ -41,7 +39,7 @@ public class CommodityTransiton {
 		double purPrice = po.getPurPrice();
 		double retailedPrice = po.getRetailedPrice();
 		int warmingValue = po.getWarmingValue();
-		ClassificationVO classification = classify.POtoVO(po.getClassification());
+		String classification = po.getClassification();
 		double recentRetailedPrice = po.getRecentRetailedPrice();
 		double recentPurPrice = po.getRecentPurPrice();
 		

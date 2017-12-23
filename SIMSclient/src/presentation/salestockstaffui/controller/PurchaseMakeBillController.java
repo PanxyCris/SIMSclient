@@ -133,25 +133,10 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	public void insert(){
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
-	        ResultMessage message = service.isLegal(vo);
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:list.add(vo);table.setItems(list);
+	        list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(sumLabel.getText());
 	    	                     sumLabel.setText(String.valueOf(result));
-	    	                    break;
-	    	        default:break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
+	
 	}
 
 	@FXML
@@ -161,6 +146,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
          service.save(vo);
+         fresh();
 	}
 
 	@FXML
@@ -170,6 +156,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
          service.submit(vo);
+         fresh();
 	}
 
 	@FXML
@@ -201,7 +188,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 				    idLabel.setText(service.getPurchaseID());
 				else
 					idLabel.setText(service.getPurChaseBackID());
-			    sumLabel.setText("0");
+			    sumLabel.setText("0.0");
 				operatorLabel.setText(user.getName());
 				}
 				else{
