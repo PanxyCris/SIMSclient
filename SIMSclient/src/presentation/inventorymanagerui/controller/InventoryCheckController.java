@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +21,7 @@ import vo.uservo.UserVO;
 
 public class InventoryCheckController extends InventoryManagerController{
 
-	CommodityBLService service = new CommodityController();
+	CommodityBLService service = new CommodityBL();
 	ObservableList<CommodityCheckVO> list = FXCollections.observableArrayList();
 	@FXML
 	DatePicker startPicker;

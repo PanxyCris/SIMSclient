@@ -3,7 +3,7 @@ package presentation.salestockstaffui.controller;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -388,7 +388,7 @@ public class SalesMakeBillController extends MakeReceiptController{
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
 
         ObservableList<String> commodityList = FXCollections.observableArrayList();
-        CommodityBLService commodityService = new CommodityController();//׮
+        CommodityBLService commodityService = new CommodityBL();//׮
 
     	commodityList.addAll(commodityService.getIDandName());
 
