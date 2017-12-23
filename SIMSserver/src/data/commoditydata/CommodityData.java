@@ -22,6 +22,14 @@ import po.commodity.CommodityPO;
 
 public class CommodityData {
 
+	public static void main(String[] args) {
+		CommodityData cd = new CommodityData();
+		CommodityPO po = new CommodityPO("000004", "≈À–«”Ó", "µ•…ÌÕÙ", null, 200, 25000,
+				29999, 24000, 28888, 20);
+		cd.insert(po);
+		System.out.println();
+	}
+	
 	public void stock() {
 		
 	}

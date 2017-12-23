@@ -6,6 +6,7 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
+import dataenum.findtype.FindSalesType;
 import po.PurchasePO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
@@ -27,7 +28,7 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 		CommodityItemVO commodity = new CommodityItemVO("001","°×³ãµÆ","L",89,45.00,"cnjwdfcj");
 		commodities.add(commodity);
 		PurchaseVO purchase1 = new PurchaseVO("0001","Àî½Ü",Warehouse.WAREHOUSE1,"Panxy",commodities,
-				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.FAIL);
+				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.COMMITED);
 		list.add(purchase1);
 		return list;
 	}
@@ -64,6 +65,13 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 	public void delete(PurchaseVO info) {
 		// TODO Auto-generated method stub
 
+	}
+
+
+
+	@Override
+	public ArrayList<PurchaseVO> find(String info, FindSalesType type) {
+		return null;
 	}
 
 
