@@ -29,24 +29,14 @@ public interface SalesBLService {
 	public ResultMessage submit(SalesVO Info);
 	public ResultMessage save(SalesVO Info);
 
-	public ArrayList<String> getMemberIDandName();
 	public ArrayList<SalesVO> show();
 	public ArrayList<SalesVO> find(String info,FindSalesType type);
 
-	public SalesPO createSale();
-
-	public void addCommodities(CommodityItemVO item);
 
 	public ArrayList<PromotionPricePacksVO> showPricePacks();
-
-	public void addPricePacks(String id);
 
 	public ArrayList<PromotionTotalVO> FindTotalPromotion();
 
 	public ArrayList<PromotionMemberVO> FindMemberPromotion();
-
-	public double setPromotion(String id);
-
-	public void addMembers(String id);
 
 }

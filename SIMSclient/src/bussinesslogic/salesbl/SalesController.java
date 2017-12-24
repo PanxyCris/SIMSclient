@@ -7,10 +7,10 @@ import java.util.Collections;
 import java.util.Date;
 
 import bussinesslogicservice.salesblservice.SalesBLService;
-import bussinesslogicservice.salesblservice.SalesShowService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
 import dataservice.salesdataservice.SalesDataService;
+import po.PurchasePO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
 import vo.billvo.salesbillvo.SalesVO;
@@ -22,33 +22,33 @@ import vo.promotionvo.PromotionTotalVO;
 /*
  * 负责实现销售界面所需要的服务
  */
-public class SalesController implements SalesBLService, SalesShowService{
+public class SalesController implements SalesBLService{
 
-	private Sales sale;
-	private SaleShow saleshow;
 	private SalesDataService service;
 	private String date;
-
+	
 	public SalesController() {
-		sale = new Sales();
-		saleshow = new SaleShow();
 		service = RemoteHelper.getInstance().getSalesDataService();
 	}
 
 	@Override
 	public String getSaleID() {
-		ArrayList<SalesPO> list = new ArrayList<>();
+		ArrayList<SalesPO> list = null;
+		try {
+			list = service.showSale();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
-		for (SalesPO po: list) {
+		for (SalesPO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-
+			
 			if (temp[0].equals("XSD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
-
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
@@ -68,22 +68,27 @@ public class SalesController implements SalesBLService, SalesShowService{
 		}
 		StringBuilder s = new StringBuilder("XSD-");
 		return s.append(day).append("-").append(id).toString();
+
 	}
 
 	@Override
 	public String getBackSaleID() {
-		ArrayList<SalesPO> list = new ArrayList<>();
+		ArrayList<SalesPO> list = null;
+		try {
+			list = service.showSale();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
-		for (SalesPO po: list) {
+		for (SalesPO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-
-			if (temp[0].equals("XSD")) {
+			
+			if (temp[0].equals("XSTHD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
-
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
@@ -101,230 +106,58 @@ public class SalesController implements SalesBLService, SalesShowService{
 		else {
 			id = "00001";
 		}
-		StringBuilder s = new StringBuilder("XSD-");
+		StringBuilder s = new StringBuilder("XSTHD-");
 		return s.append(day).append("-").append(id).toString();
 
 	}
 
 	@Override
-	public SalesPO createSale() {
-		try {
-			return sale.createSale();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public void addCommodities(CommodityItemVO item) {
-		try {
-			sale.addCommodities(item);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public ArrayList<PromotionPricePacksVO> showPricePacks() {
-		try {
-			return sale.showPricePacks();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public void addPricePacks(String id) {
-		try {
-			sale.addPricePacks(id);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public ArrayList<PromotionTotalVO> FindTotalPromotion() {
-		try {
-			return sale.FindTotalPromotion();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<PromotionMemberVO> FindMemberPromotion() {
-		try {
-			return sale.FindMemberPromotion();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public double setPromotion(String id) {
-		try {
-			return sale.setPromotion(id);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
-	public void addMembers(String id) {
-		try {
-			sale.addMembers(id);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public SalesVO submit(SalesInputVO Info) {
-		try {
-			return sale.save(Info);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public SalesVO save(SalesInputVO Info) {
-		try {
-			return sale.save(Info);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ResultMessage updateDraft(SalesVO vo) {
-		try {
-			return sale.updateDraft(vo);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ResultMessage submitDraft(String id) {
-		try {
-			return sale.submitDraft(id);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSale() {
-		try {
-			return saleshow.showAllSaleBill();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleBack() {
-		try {
-			return saleshow.showAllSaleBackBill();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleCommited() {
-		try {
-			return saleshow.showSaleCommited();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleBackCommited() {
-		try {
-			return saleshow.showSaleBackCommited();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleSuccess() {
-		try {
-			return saleshow.showSaleSuccess();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleBackSuccess() {
-		try {
-			return saleshow.showSaleBackSuccess();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleFail() {
-		try {
-			return saleshow.showSaleFail();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleBackFail() {
-		try {
-			return saleshow.showSaleBackFail();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleDraft() {
-		try {
-			return saleshow.showSaleDraft();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public ArrayList<SalesVO> showSaleBackDraft() {
-		try {
-			return saleshow.showSaleBackDraft();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+	public ResultMessage isLegal(CommodityItemVO item) {
 		return null;
 	}
 
 	@Override
 	public void delete(SalesVO info) {
+		try {
+			service.deleteSale(info.getId());
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public ResultMessage submit(SalesVO Info) {
+		return null;
+	}
+
+	@Override
+	public ResultMessage save(SalesVO Info) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> show() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<SalesVO> find(String info, FindSalesType type) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<PromotionPricePacksVO> showPricePacks() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<PromotionTotalVO> FindTotalPromotion() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<PromotionMemberVO> FindMemberPromotion() {
+		return null;
 	}
 
 	public String getDate() {
@@ -332,6 +165,5 @@ public class SalesController implements SalesBLService, SalesShowService{
 		this.date = sdf.format(new Date());
 		return this.date;
 	}
-
 
 }

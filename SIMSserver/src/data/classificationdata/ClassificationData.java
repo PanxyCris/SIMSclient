@@ -29,7 +29,7 @@ public class ClassificationData {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
 			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from classification where id = " + po.getID());
+			ResultSet rs = ps0.executeQuery("select count(*) from classification where id = " + po.getId());
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -38,7 +38,7 @@ public class ClassificationData {
 					
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getID());
+					ps.setString(1, po.getId());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
@@ -80,7 +80,7 @@ public class ClassificationData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getID());
+			ps.setString(2, po.getId());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();
@@ -108,7 +108,7 @@ public class ClassificationData {
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
                     ClassificationPO po = (ClassificationPO)in.readObject();                   //读出对象  
                     
-                    list.add(po);  
+                    if (keyword.equals(po.getName())) list.add(po);
                 }  
 			}
 			rs.close();

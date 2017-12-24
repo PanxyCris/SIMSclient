@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import po.commodity.CommodityItemPO;
 import vo.billvo.salesbillvo.SalesPriceVO;
 import vo.commodityvo.CommodityItemVO;
-import vo.promotionvo.PromotionCommodityVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
@@ -18,8 +17,6 @@ import vo.promotionvo.PromotionVO;
 * @date 2017Äê12ÔÂ11ÈÕ
 */
 public interface Sale_PromotionInfo {
-
-	public ArrayList<PromotionCommodityVO> findFitPromotionCommodity(String id, ArrayList<String> commodityIDs, ArrayList<Integer> commodityNumber) throws RemoteException;
 
 	public ArrayList<PromotionMemberVO> findMemberPromotion(String memberID) throws RemoteException;
 

@@ -29,6 +29,11 @@ import po.commodity.CommodityItemPO;
 
 public class PurchaseData {
 
+	private Connection conn;
+	public PurchaseData() {
+		conn = DBManager.getConnection();
+	}
+	
 	public static void main(String[] args) {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
@@ -43,7 +48,6 @@ public class PurchaseData {
 	
 	public ResultMessage insert(PurchasePO po) {
 		
-		Connection conn = DBManager.getConnection();
 		try {
 //			Statement ps0 = conn.createStatement();
 //			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
@@ -59,7 +63,6 @@ public class PurchaseData {
 					ps.executeUpdate();
 					conn.commit();
 					ps.close();
-					conn.close();
 					return ResultMessage.SUCCESS;
 //				}
 //				else {
@@ -74,14 +77,12 @@ public class PurchaseData {
 	}
 
 	public ResultMessage delete(String id) {
-		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from purchase where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.execute();
 			ps.close();
-			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +91,6 @@ public class PurchaseData {
 	}
 
 	public ResultMessage update(PurchasePO po) {
-		Connection conn = DBManager.getConnection();
 		String sql = "" + "update purchase set object = ? where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -98,7 +98,6 @@ public class PurchaseData {
 			ps.setString(2, po.getId());
 			ps.executeUpdate();
 			ps.close();
-			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -108,7 +107,6 @@ public class PurchaseData {
 
 	public ArrayList<PurchasePO> find(String keyword, FindSalesType type) {
 		ArrayList<PurchasePO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
 		String sql = "" + "select object from purchase";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -151,7 +149,6 @@ public class PurchaseData {
 			}
 
 			ps.close();
-			conn.close();
 
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -162,7 +159,6 @@ public class PurchaseData {
 
 	public ArrayList<PurchasePO> show() {
 		ArrayList<PurchasePO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
 		String sql = "select object from purchase";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -182,7 +178,6 @@ public class PurchaseData {
 			}
 			rs.close();
 			ps.close();
-			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
