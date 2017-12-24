@@ -92,7 +92,7 @@ public class MakeReceiptController extends InventoryManagerController{
 	   noteArea.setText(null);
 	}
 
-	public void initData(UserVO user,BillType type,InventoryBillVO inv){
+	public void initData(UserVO user,BillType type,InventoryBillVO inv) throws Exception{
 		this.user = user;
 		this.inv = inv;
 		if(type!=null)
@@ -111,7 +111,7 @@ public class MakeReceiptController extends InventoryManagerController{
 
 	}
 
-	public void choiceInit(){
+	public void choiceInit() throws Exception{
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.INVENTORYGIFTBILL.value,BillType.INVENTORYLOSSBILL.value,
 				BillType.INVENTORYREVENUEBILL.value,BillType.INVENTORYWARNINGBILL.value));
 		CommodityBLService commodityService = new CommodityBL();

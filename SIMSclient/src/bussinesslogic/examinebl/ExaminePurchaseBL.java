@@ -5,24 +5,27 @@ import java.util.ArrayList;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindBillType;
 import vo.billvo.purchasebillvo.PurchaseVO;
 
 public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 
+
+
 	@Override
-	public ResultMessage updateBill(PurchaseVO vo, BillType type) {
+	public ResultMessage updateBill(PurchaseVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage passBills(ArrayList<PurchaseVO> vos, BillType type) {
+	public ResultMessage passBills(ArrayList<PurchaseVO> vos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ResultMessage notPassBills(ArrayList<PurchaseVO> vos, BillType type) {
+	public ResultMessage notPassBills(ArrayList<PurchaseVO> vos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,5 +35,12 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<PurchaseVO> find(String info, FindBillType type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

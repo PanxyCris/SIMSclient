@@ -1,7 +1,6 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
-import bussiness_stub.ClassificationBLService_Stub;
 import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.Remind;
@@ -170,20 +169,16 @@ public class ClassManageController extends InventoryManagerController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                   for(int i=0;i<this.getTreeTableView().getTreeItem)
                     if (!empty) {
                         Button delBtn = new Button("É¾³ý");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	ClassificationVPO clickedUser = this.getTreeTableView().getTreeItem(this.getIndex()).getValue();
                             try {
+                            	if(clickedUser.getB()==true){
 								service.delete(clickedUser);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                            try {
 								fresh();
+								}
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
