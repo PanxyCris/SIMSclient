@@ -9,15 +9,15 @@ public class ClassificationVPO implements Serializable{
 	private String id;
 	private String name;
 	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
-	private ClassificationVPO fatherName;
-	private ArrayList<ClassificationVPO> childrenName;
+	private ClassificationVPO father;
+	private ArrayList<ClassificationVPO> children;
 
 	public ClassificationVPO(String id, String n,Boolean b,ClassificationVPO f,ArrayList<ClassificationVPO> c){
 		this.id = id;
 		this.name = n;
 		this.b = b;
-		this.fatherName = f;
-		this.childrenName = c;
+		this.father= f;
+		this.children = c;
 	}
 
 	public void setName(String n){
@@ -44,20 +44,20 @@ public class ClassificationVPO implements Serializable{
 		this.b = b;
 	}
 
-	public ClassificationVPO getFatherName() {
-		return fatherName;
+	public ClassificationVPO getFather() {
+		return father;
 	}
 
-	public void setFatherName(ClassificationVPO fatherName) {
-		this.fatherName = fatherName;
+	public void setFather(ClassificationVPO father) {
+		this.father = father;
 	}
 
-	public ArrayList<ClassificationVPO> getChildrenName() {
-		return childrenName;
+	public ArrayList<ClassificationVPO> getChildren() {
+		return children;
 	}
 
-	public void setChildrenName(ArrayList<ClassificationVPO> childrenName) {
-		this.childrenName = childrenName;
+	public void setChildren(ArrayList<ClassificationVPO> children) {
+		this.children = children;
 	}
 
 	public static long getSerialversionuid() {
