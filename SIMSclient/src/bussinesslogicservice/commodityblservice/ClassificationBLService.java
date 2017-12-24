@@ -10,13 +10,11 @@ public interface ClassificationBLService {
 	
 	public String getID();
 	
-	public ResultMessage insert(ClassificationVPO vo);
+	public ResultMessage insert(ClassificationVPO vpo);
 	
-	public void delete(ClassificationVPO vo);
+	public void delete(ClassificationVPO vpo);
 	
-	public ResultMessage update(ClassificationVPO vo);
-	
-	public ArrayList<ClassificationVPO> show();
+	public ResultMessage update(ClassificationVPO vpo);
 	
 	public ArrayList<String> showName();
 	

@@ -2,7 +2,6 @@ package dataservice.classificationdataservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import po.ClassificationVPO;
@@ -15,8 +14,8 @@ public interface ClassificationDataService extends Remote {
 
 	public ResultMessage deleteClassification(String id) throws RemoteException;
 
-	public ArrayList<ClassificationVPO> showClassification() throws RemoteException;
+	public ClassificationVPO getRoot() throws RemoteException;
 
-	public ArrayList<ClassificationVPO> findClassification(String keyword) throws RemoteException;
+	public ClassificationVPO findClassification(String keyword) throws RemoteException;
 	
 }
