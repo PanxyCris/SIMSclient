@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import data.DBManager;
 import dataenum.ResultMessage;
-import po.ClassificationPO;
+import po.ClassificationVPO;
 import po.UserPO;
 
 /**     
@@ -25,7 +25,7 @@ import po.UserPO;
 */
 public class ClassificationData {
 
-	public ResultMessage insert(ClassificationPO po) {
+	public ResultMessage insert(ClassificationVPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
 			Statement ps0 = conn.createStatement();
@@ -74,7 +74,7 @@ public class ClassificationData {
 		}
 	}
 	
-	public ResultMessage update(ClassificationPO po) {
+	public ResultMessage update(ClassificationVPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update classification set object = ? where id = ?";
 		try {
@@ -91,8 +91,8 @@ public class ClassificationData {
 		}
 	}
 	
-	public ArrayList<ClassificationPO> find(String keyword) {
-		ArrayList<ClassificationPO> list = new ArrayList<>();
+	public ArrayList<ClassificationVPO> find(String keyword) {
+		ArrayList<ClassificationVPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from classification";
 		try {
@@ -106,7 +106,7 @@ public class ClassificationData {
                 
                 while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    ClassificationPO po = (ClassificationPO)in.readObject();                   //读出对象  
+                    ClassificationVPO po = (ClassificationVPO)in.readObject();                   //读出对象  
                     
                     if (keyword.equals(po.getName())) list.add(po);
                 }  
@@ -121,8 +121,8 @@ public class ClassificationData {
 		
 	}
 	
-	public ArrayList<ClassificationPO> show() {
-		ArrayList<ClassificationPO> list = new ArrayList<>();
+	public ArrayList<ClassificationVPO> show() {
+		ArrayList<ClassificationVPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from classification";
 		try {
@@ -136,7 +136,7 @@ public class ClassificationData {
                 
                 while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    ClassificationPO po = (ClassificationPO)in.readObject();                   //读出对象  
+                    ClassificationVPO po = (ClassificationVPO)in.readObject();                   //读出对象  
                       
                     list.add(po);  
                 }  

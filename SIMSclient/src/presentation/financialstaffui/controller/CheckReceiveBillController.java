@@ -1,4 +1,4 @@
-package presentation.generalmanagerui.controller;
+package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
+import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
@@ -70,6 +71,8 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 	TableColumn<ReceiptBillVO,String> tableRemark;
 	@FXML
 	TableColumn<ReceiptBillVO,String> tableCheck;
+	@FXML
+	TableColumn<ReceiptBillVO,CheckBox> tableRed;
 
 
 	@FXML
@@ -80,6 +83,27 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 	TableColumn<AccountListVO,String> tableMoney;
 	@FXML
 	TableColumn<AccountListVO,String> tableDescription;
+
+	@FXML
+	public void red(){
+		ArrayList<ReceiptBillVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOff(result);
+		list.removeAll(result);
+	}
+
+	@FXML
+	public void redCopy(){
+		ArrayList<ReceiptBillVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOffAndCopy(result);
+		list.removeAll(result);
+	}
+
 
 	@FXML
 	public void printout(){
@@ -141,6 +165,8 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
                 new PropertyValueFactory<ReceiptBillVO,String>("userID"));
 		tableRemark.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("note"));
+		tableRed.setCellValueFactory(
+                new PropertyValueFactory<ReceiptBillVO,CheckBox>("red"));
 		checkInit();
 	}
 

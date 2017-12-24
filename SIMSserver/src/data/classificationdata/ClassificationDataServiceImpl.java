@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
-import po.ClassificationPO;
+import po.ClassificationVPO;
 
 /**     
 *  
@@ -21,12 +21,12 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 	}
 
 	@Override
-	public ResultMessage insertClassification(ClassificationPO po) throws RemoteException {
+	public ResultMessage insertClassification(ClassificationVPO po) throws RemoteException {
 		return classfication.insert(po);
 	}
 
 	@Override
-	public ResultMessage updateClassification(ClassificationPO po) throws RemoteException {
+	public ResultMessage updateClassification(ClassificationVPO po) throws RemoteException {
 		return classfication.update(po);
 	}
 
@@ -36,12 +36,12 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 	}
 
 	@Override
-	public ArrayList<ClassificationPO> showClassification() throws RemoteException {
+	public ArrayList<ClassificationVPO> showClassification() throws RemoteException {
 		return classfication.show();
 	}
 
 	@Override
-	public ArrayList<ClassificationPO> findClassification(String keyword) throws RemoteException {
+	public ArrayList<ClassificationVPO> findClassification(String keyword) throws RemoteException {
 		return classfication.find(keyword);
 	}
 

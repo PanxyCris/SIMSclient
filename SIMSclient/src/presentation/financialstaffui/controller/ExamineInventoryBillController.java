@@ -1,4 +1,4 @@
-package presentation.generalmanagerui.controller;
+package presentation.financialstaffui.controller;
 
 import java.util.ArrayList;
 
@@ -26,6 +26,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellInteger;
+import presentation.generalmanagerui.controller.ExamineBillController;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;

@@ -2,7 +2,7 @@ package po.commodity;
 
 import java.io.Serializable;
 
-import po.ClassificationPO;
+import po.ClassificationVPO;
 
 public class CommodityPO implements Serializable{
 

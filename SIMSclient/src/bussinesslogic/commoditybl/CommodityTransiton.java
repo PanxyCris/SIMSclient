@@ -8,7 +8,7 @@ package bussinesslogic.commoditybl;
 import java.util.ArrayList;
 
 import bussinesslogic.classificationbl.ClassificationTran;
-import po.ClassificationPO;
+import po.ClassificationVPO;
 import po.commodity.CommodityPO;
 import vo.commodityvo.ClassificationVO;
 import vo.commodityvo.CommodityVO;

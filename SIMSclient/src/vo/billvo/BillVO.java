@@ -15,6 +15,7 @@ public class BillVO extends ViewObject{
 	protected BillState state;//µ¥¾Ý×´Ì¬
 	protected String stateString;
 	protected CheckBox box = new CheckBox();
+	protected CheckBox red = new CheckBox();
 
 	public BillVO(String id,BillType type,BillState state,String note) {
 		this.id = id;
@@ -61,6 +62,10 @@ public class BillVO extends ViewObject{
 
 	public CheckBox getBox(){
 		return box;
+	}
+
+	public CheckBox getRed(){
+		return red;
 	}
 
 
