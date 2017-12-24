@@ -27,7 +27,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	public ExaminePurchaseBL() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 		userService = RemoteHelper.getInstance().getUserDataService();
-	//	messageService = RemoteHelper.getInstance().getUserDataService();
+		messageService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
@@ -39,8 +39,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	@Override
 	public ResultMessage passBills(ArrayList<PurchaseVO> vos) throws RemoteException {
 
-		for(int i=0;i<vos.size();i++){
-			PurchaseVO vo = vos.get(i);
+		for(PurchaseVO vo : vos){
 			vo.setState(BillState.SUCCESS);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
@@ -56,8 +55,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	@Override
 	public ResultMessage notPassBills(ArrayList<PurchaseVO> vos) throws RemoteException {
 		// TODO Auto-generated method stub
-		for(int i=0;i<vos.size();i++){
-			PurchaseVO vo = vos.get(i);
+		for(PurchaseVO vo : vos){
 			vo.setState(BillState.FAIL);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",

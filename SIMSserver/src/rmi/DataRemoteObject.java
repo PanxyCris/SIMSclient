@@ -9,6 +9,7 @@ import data.accountdata.AccountDataServiceMySqlImpl;
 import data.classificationdata.ClassificationDataServiceImpl;
 import data.commoditydata.CommodityDataServiceMySqlImpl;
 import data.memberdata.MemberDataServiceImpl;
+import data.messagedata.MessageDataServiceImpl;
 import data.paymentbilldata.PaymentBillDataServiceImpl;
 import data.promotiondata.PromotionDataServiceImpl;
 import data.purchasedata.PurchaseDataServiceImpl;
@@ -31,6 +32,7 @@ import dataservice.accountdataservice.AccountDataService;
 import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
+import dataservice.messagedataservice.MessageDataService;
 import dataservice.promotiondataservice.PromotionDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
@@ -46,6 +48,7 @@ import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
 import po.commodity.CommodityPO;
+import po.messagepo.MessagePO;
 
 
 /**
@@ -62,9 +65,9 @@ import po.commodity.CommodityPO;
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService, 
-    PromotionDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService, 
-    ClassificationDataService, PaymentBillDataService, ReceiptBillDataService {
+public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService,
+    PromotionDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
+    ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService{
 
 	private static final long serialVersionUID = 4029039744279087114L;
 
@@ -79,6 +82,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	private ClassificationDataService classification;
 	private PaymentBillDataService paymentbill;
 	private ReceiptBillDataService receiprbill;
+	private MessageDataService messageData;
 
 	public DataRemoteObject() throws RemoteException {
 
@@ -93,6 +97,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		classification = new ClassificationDataServiceImpl();
 		paymentbill = new PaymentBillDataServiceImpl();
 		receiprbill = new ReceiptDataServiceImpl();
+		messageData = new MessageDataServiceImpl();
 	}
 
 
@@ -190,7 +195,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	public ArrayList<SalesPO> showSale() throws RemoteException {
 		return sale.showSale();
 	}
-	
+
 	@Override
 	public String getSaleID() throws RemoteException {
 		return sale.getSaleID();
@@ -230,7 +235,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	public ArrayList<PromotionPO> showPromotion() throws RemoteException {
 		return promotion.showPromotion();
 	}
-	
+
 
 
 	@Override
@@ -439,6 +444,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	@Override
 	public ArrayList<ReceiptBillPO> showReceiptBill() throws RemoteException {
 		return receiprbill.showReceiptBill();
+	}
+
+
+	@Override
+	public ResultMessage save(MessagePO message) {
+		// TODO Auto-generated method stub
+		return messageData.save(message);
 	}
 
 }
