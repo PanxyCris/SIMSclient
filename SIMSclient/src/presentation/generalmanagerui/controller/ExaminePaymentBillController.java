@@ -8,8 +8,8 @@ import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountBillType;
 import dataenum.findtype.FindBillType;
-import dataenum.findtype.FindPaymentBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -125,8 +125,9 @@ public class ExaminePaymentBillController extends ExamineBillController{
 		edit();
 		manageInit();
 		listInit();
-		findChoice.setItems(FXCollections.observableArrayList(FindPaymentBillType.ID.value,FindPaymentBillType.ACCOUNT.value,
-				FindPaymentBillType.OPERATOR.value,FindPaymentBillType.TOTAL.value));
+		findChoice.setItems(FXCollections.observableArrayList(FindAccountBillType.BILLID.value,FindAccountBillType.CUSTOMER.value,
+				FindAccountBillType.OPERATOR.value));
+
 	}
 
 	public void manageInit(){

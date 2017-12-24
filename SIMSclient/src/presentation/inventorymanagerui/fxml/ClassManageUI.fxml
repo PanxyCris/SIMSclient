@@ -132,7 +132,8 @@
 			<columns>
 				<TreeTableColumn fx:id="treeName" prefWidth="400.0" text="分类名" />
 				<TreeTableColumn fx:id="treeID" prefWidth="150.0" text="ID" />
-				<TreeTableColumn fx:id="treeDelete" prefWidth="226.0" text="是否删除" />
+            <TreeTableColumn fx:id="treeType" prefWidth="126.0" text="属性" />
+				<TreeTableColumn fx:id="treeDelete" prefWidth="100.0" text="是否删除" />
 			</columns>
 		</TreeTableView>
 		<Label fx:id="idLabel" layoutX="611.0" layoutY="510.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />

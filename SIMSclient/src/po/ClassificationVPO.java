@@ -63,5 +63,9 @@ public class ClassificationVPO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public String getType(){
+		return b==true?"分类":"商品";
+	}
+
 }

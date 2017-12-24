@@ -3,17 +3,11 @@ package presentation.financialstaffui.controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bussiness_stub.PaymentBillBLService_Stub;
-import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
-import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
-import dataenum.findtype.FindAccountType;
-import dataenum.findtype.FindPaymentBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,7 +78,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	@FXML
 	public void find(){
 
-		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindAccountBillType.getFindType(findChoice.getValue()));
+		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindAccountBillType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -114,8 +108,8 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 		table.setItems(list);
 		manageInit();
 		listInit();
-		findChoice.setItems(FXCollections.observableArrayList(FindPaymentBillType.ID.value,FindPaymentBillType.ACCOUNT.value,
-				FindPaymentBillType.OPERATOR.value,FindPaymentBillType.TOTAL.value));
+		findChoice.setItems(FXCollections.observableArrayList(FindAccountBillType.BILLID.value,FindAccountBillType.CUSTOMER.value,
+				FindAccountBillType.OPERATOR.value));
 
 	}
 
