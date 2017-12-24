@@ -1,4 +1,4 @@
-package presentation.generalmanagerui.controller;
+package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
+import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.purchasebillvo.PurchaseVO;
@@ -52,7 +53,6 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 	DatePicker endPicker;
 
 
-
 	@FXML
 	TableView<PurchaseVO> table;
 	@FXML
@@ -71,6 +71,8 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 	TableColumn<PurchaseVO,String> tableNote;
 	@FXML
 	TableColumn<PurchaseVO,String> tableList;
+	@FXML
+	TableColumn<PurchaseVO,CheckBox> tableRed;
 
 	@FXML
 	TableView<CommodityItemVO> commodity;
@@ -88,6 +90,27 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 	TableColumn<CommodityItemVO,Double> commodityMoney;
 	@FXML
 	TableColumn<CommodityItemVO,String> commodityNote;
+
+	@FXML
+	public void red(){
+		ArrayList<PurchaseVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOff(result);
+		list.removeAll(result);
+	}
+
+	@FXML
+	public void redCopy(){
+		ArrayList<PurchaseVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOffAndCopy(result);
+		list.removeAll(result);
+	}
+
 
 	@FXML
 	public void printout(){
@@ -151,6 +174,8 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
                 new PropertyValueFactory<PurchaseVO,String>("operator"));
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<PurchaseVO,String>("note"));
+		tableRed.setCellValueFactory(
+                new PropertyValueFactory<PurchaseVO,CheckBox>("red"));
 		checkInit();
 	}
 

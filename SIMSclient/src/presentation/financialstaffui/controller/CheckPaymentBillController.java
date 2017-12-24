@@ -1,4 +1,4 @@
-package presentation.generalmanagerui.controller;
+package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -18,9 +19,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.uservo.UserVO;
 
 public class CheckPaymentBillController extends BussinessProcessTableController{
@@ -54,6 +57,8 @@ public class CheckPaymentBillController extends BussinessProcessTableController{
 	TableColumn<PaymentBillVO,String> tableRemark;
 	@FXML
 	TableColumn<PaymentBillVO,String> tableCheck;
+	@FXML
+	TableColumn<PaymentBillVO,CheckBox> tableRed;
 
 	@FXML
 	TableView<EntryVO> itemList;
@@ -77,6 +82,26 @@ public class CheckPaymentBillController extends BussinessProcessTableController{
 		ArrayList<PaymentBillVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
 		list.addAll(siftList);
 		table.setItems(list);
+	}
+
+	@FXML
+	public void red(){
+		ArrayList<PaymentBillVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOff(result);
+		list.removeAll(result);
+	}
+
+	@FXML
+	public void redCopy(){
+		ArrayList<PaymentBillVO> result = new ArrayList<>();
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).getRed().isSelected())
+				result.add(list.get(i));
+		service.writeOffAndCopy(result);
+		list.removeAll(result);
 	}
 
 
@@ -124,6 +149,8 @@ public class CheckPaymentBillController extends BussinessProcessTableController{
                 new PropertyValueFactory<PaymentBillVO,String>("userID"));
 		tableRemark.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("note"));
+		tableRed.setCellValueFactory(
+                new PropertyValueFactory<PaymentBillVO,CheckBox>("red"));
 		checkInit();
 	}
 

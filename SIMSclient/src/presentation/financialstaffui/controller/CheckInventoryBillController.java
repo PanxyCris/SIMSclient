@@ -1,4 +1,4 @@
-package presentation.generalmanagerui.controller;
+package presentation.financialstaffui.controller;
 
 import java.util.ArrayList;
 import bussinesslogic.tablebl.BusinessHistoryScheduleInventoryBL;
@@ -9,11 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 import vo.uservo.UserVO;
@@ -40,12 +42,34 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 		TableColumn<InventoryBillVO,String> tableNote;
 		@FXML
 		TableColumn<InventoryBillVO,String> tableCheck;
+		@FXML
+		TableColumn<InventoryBillVO,CheckBox> tableRed;
 
 		@FXML
 		TableView<GiftVO> giftTable;
 		@FXML
 		TableColumn<GiftVO,String> tableName;
 		TableColumn<GiftVO,Integer> tableNumber;
+
+		@FXML
+		public void red(){
+			ArrayList<InventoryBillVO> result = new ArrayList<>();
+			for(int i=0;i<list.size();i++)
+				if(list.get(i).getRed().isSelected())
+					result.add(list.get(i));
+			service.writeOff(result);
+			list.removeAll(result);
+		}
+
+		@FXML
+		public void redCopy(){
+			ArrayList<InventoryBillVO> result = new ArrayList<>();
+			for(int i=0;i<list.size();i++)
+				if(list.get(i).getRed().isSelected())
+					result.add(list.get(i));
+			service.writeOffAndCopy(result);
+			list.removeAll(result);
+		}
 
 		@FXML
 		public void printout(){
@@ -82,6 +106,8 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	                new PropertyValueFactory<InventoryBillVO,String>("typeString"));
 			tableNote.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("note"));
+			tableRed.setCellValueFactory(
+	                new PropertyValueFactory<InventoryBillVO,CheckBox>("red"));
 			tableName.setCellValueFactory(
 	                new PropertyValueFactory<GiftVO,String>("name"));
 			tableNumber.setCellValueFactory(

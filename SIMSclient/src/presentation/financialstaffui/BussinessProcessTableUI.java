@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.financialstaffui.controller.BussinessProcessTableController;
-import presentation.financialstaffui.controller.ViewTableController;
 import vo.uservo.UserVO;
 
 public class BussinessProcessTableUI{

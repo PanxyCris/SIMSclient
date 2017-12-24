@@ -1,7 +1,6 @@
 package presentation.generalmanagerui.controller;
 
 import java.util.Stack;
-
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
@@ -12,7 +11,20 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import presentation.generalmanagerui.BussinessProcessTableUI;
+import presentation.generalmanagerui.BussinessSituationTableUI;
+import presentation.generalmanagerui.CheckInventoryBillUI;
+import presentation.generalmanagerui.CheckPaymentBillUI;
+import presentation.generalmanagerui.CheckPurchaseBillUI;
+import presentation.generalmanagerui.CheckReceiveBillUI;
+import presentation.generalmanagerui.CheckSalesBillUI;
+import presentation.generalmanagerui.SaleDetailTableUI;
 import presentation.generalmanagerui.ExamineBillUI;
+import presentation.generalmanagerui.ExamineInventoryBillUI;
+import presentation.generalmanagerui.ExaminePaymentBillUI;
+import presentation.generalmanagerui.ExaminePurchaseBillUI;
+import presentation.generalmanagerui.ExamineReceiveBillUI;
+import presentation.generalmanagerui.ExamineSalesBillUI;
 import presentation.generalmanagerui.GeneralManagerUI;
 import presentation.generalmanagerui.PromotionMakingUI;
 import presentation.generalmanagerui.PromotionMemberUI;
@@ -28,8 +40,8 @@ public class GeneralManagerController {
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-    BillType billType;
-	UserVO user;
+    protected BillType billType;
+	protected UserVO user;
 
 	@FXML
 	protected AnchorPane pane;
@@ -143,7 +155,20 @@ public class GeneralManagerController {
    		            case "PromotionSpecialUI":new PromotionSpecialUI().start(user);break;
    		            case "PromotionSumUI":new PromotionSumUI().start(user);break;
    		            case "ExamineBillUI":new ExamineBillUI().start(user);break;
+   		            case "ExamineInventoryBillUI":new ExamineInventoryBillUI().start(user);break;
+   		            case "ExaminePaymentBillUI":new ExaminePaymentBillUI().start(user);break;
+   		            case "ExaminePurchaseBillUI":new ExaminePurchaseBillUI().start(user);break;
+   		            case "ExamineReceiveBillUI":new ExamineReceiveBillUI().start(user);break;
+   		            case "ExamineSalesBillUI":new ExamineSalesBillUI().start(user);break;
    		            case "UserMessageUI":new UserMessageUI().start(user);break;
+   		            case "BussinessProcessTableUI":new BussinessProcessTableUI().start(user);break;
+		            case "BussinessSituationTableController":new BussinessSituationTableUI().start(user);break;
+		            case "SaleDetailTableController":new SaleDetailTableUI().start(user);break;
+		            case "CheckInventoryBillUI":new CheckInventoryBillUI().start(user);break;
+		            case "CheckPaymentBillUI":new CheckPaymentBillUI().start(user);break;
+		            case "CheckPurchaseBillUI":new CheckPurchaseBillUI().start(user);break;
+		            case "CheckReceiveBillUI":new CheckReceiveBillUI().start(user);break;
+		            case "CheckSalesBillUI":new CheckSalesBillUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

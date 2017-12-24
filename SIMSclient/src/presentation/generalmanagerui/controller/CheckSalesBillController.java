@@ -3,10 +3,13 @@ package presentation.generalmanagerui.controller;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussinesslogic.examinebl.ExamineSalesBL;
+import bussinesslogic.tablebl.BusinessHistoryScheduleSalesBL;
+import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
+import dataenum.findtype.FindSaleScheduleType;
 import dataenum.findtype.FindSalesType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -25,21 +29,26 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellDouble;
 import presentation.remindui.RemindPrintUI;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
 
-public class ExamineSalesBillController extends ExamineBillController{
+public class CheckSalesBillController extends BussinessProcessTableController{
 
-	ExamineBLService<SalesVO> service = new ExamineSalesBL();
+	BusinessHistoryScheduleBLService<SalesVO> service = new BusinessHistoryScheduleSalesBL();
 	ObservableList<SalesVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
-    SalesVO bill;
 
 	@FXML
 	ChoiceBox<String> findChoice;
 	@FXML
 	TextField findingField;
+
+	@FXML
+	DatePicker startPicker;
+	@FXML
+	DatePicker endPicker;
 
 	@FXML
 	TableView<SalesVO> table;
@@ -67,8 +76,6 @@ public class ExamineSalesBillController extends ExamineBillController{
 	TableColumn<SalesVO,String> tableNote;
 	@FXML
 	TableColumn<SalesVO,String> tableList;
-	@FXML
-	TableColumn<SalesVO,CheckBox> tablePass;
 
 	@FXML
 	TableView<CommodityItemVO> commodity;
@@ -87,10 +94,27 @@ public class ExamineSalesBillController extends ExamineBillController{
 	@FXML
 	TableColumn<CommodityItemVO,String> commodityNote;
 
+
+	@FXML
+	public void printout(){
+		ArrayList<SalesVO> result = new ArrayList<>();
+		result.addAll(list);
+		service.exportReport(result);
+	}
+
+	@FXML
+	public void siftTime(){
+		list.clear();
+		ArrayList<SalesVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
+		list.addAll(siftList);
+		table.setItems(list);
+	}
+
+
 	@FXML
 	public void find(){
 
-		ArrayList<SalesVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
+		ArrayList<SalesVO> list = service.sift(findingField.getText(),FindSaleScheduleType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -109,39 +133,13 @@ public class ExamineSalesBillController extends ExamineBillController{
 
 	}
 
-	@FXML
-	public void success(){
-        ArrayList<SalesVO> choiceList = new ArrayList<>();
-        for(int i=0;i<list.size();i++)
-        	if(list.get(i).getBox().isSelected()){
-        		choiceList.add(list.get(i));
-        		list.remove(i);
-        		}
-        service.passBills(choiceList);
-	}
-
-	@FXML
-	public void fail(){
-		ArrayList<SalesVO> choiceList = new ArrayList<>();
-        for(int i=0;i<list.size();i++)
-        	if(list.get(i).getBox().isSelected()){
-        		choiceList.add(list.get(i));
-        		list.remove(i);
-        		}
-        service.notPassBills(choiceList);
-	}
-
-
-	public void initData(UserVO user,BillType type) throws RemoteException {
+	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
-		this.billType = type;
-		receiptChoice.setValue(type.value);
-		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
-				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
-				FindSalesType.TOTAL.value));
-		list.addAll(service.getCommitedBills());
+		findChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.NAME.value,
+				FindSaleScheduleType.OPERATOR.value,FindSaleScheduleType.MEMBER.value,
+				FindSaleScheduleType.WAREHOUSE.value));
+		list.addAll(service.show());
 		table.setItems(list);
-		edit();
 		manageInit();
 		listInit();
 	}
@@ -167,8 +165,6 @@ public class ExamineSalesBillController extends ExamineBillController{
                 new PropertyValueFactory<SalesVO,String>("operator"));
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,String>("note"));
-		tablePass.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,CheckBox>("box"));
 		checkInit();
 	}
 
@@ -191,7 +187,6 @@ public class ExamineSalesBillController extends ExamineBillController{
                             commodityList.clear();
                             commodityList.addAll(clickedItem.getCommodity());
                             commodity.setItems(commodityList);
-                            bill = clickedItem;
                         });
                     }
                 }
@@ -201,88 +196,6 @@ public class ExamineSalesBillController extends ExamineBillController{
         });
 
 	}
-
-	public void edit() throws RemoteException{
-
-		 Callback<TableColumn<SalesVO, String>,
-         TableCell<SalesVO, String>> cellFactory
-                 = (TableColumn<SalesVO, String> p) -> new EditingCell<SalesVO>();
-
-
-        Callback<TableColumn<SalesVO, Double>,
-            TableCell<SalesVO, Double>> cellFactoryDouble
-                    = (TableColumn<SalesVO, Double> p) -> new EditingCellDouble<SalesVO>();
-
-        tableVoucher.setCellFactory(cellFactoryDouble);
-        tableVoucher.setOnEditCommit(
-             (CellEditEvent<SalesVO, Double> t) -> {
-            	   double tmp = t.getOldValue();
-                   ((SalesVO) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                            ).setVoucher(t.getNewValue());
-                   SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow()));
-                   if(!update(newVO)){
-                       ((SalesVO)t.getTableView().getItems().get(
-                                  t.getTablePosition().getRow())
-                                  ).setVoucher(tmp);
-                   }
-            });
-
-        tableAllowance.setCellFactory(cellFactoryDouble);
-        tableAllowance.setOnEditCommit(
-             (CellEditEvent<SalesVO, Double> t) -> {
-            	   double tmp = t.getOldValue();
-                   ((SalesVO) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                            ).setAllowance(t.getNewValue());
-                   SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow()));
-                   if(!update(newVO)){
-                       ((SalesVO)t.getTableView().getItems().get(
-                                  t.getTablePosition().getRow())
-                                  ).setAllowance(tmp);
-                   }
-            });
-
-        tableNote.setCellFactory(cellFactory);
-        tableNote.setOnEditCommit(
-            (CellEditEvent<SalesVO, String> t) -> {
-            	  String tmp = t.getOldValue();
-                  ((SalesVO) t.getTableView().getItems().get(
-                           t.getTablePosition().getRow())
-                           ).setNote(t.getNewValue());
-                  SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
-                           t.getTablePosition().getRow()));
-                  if(!update(newVO)){
-                      ((SalesVO)t.getTableView().getItems().get(
-                                 t.getTablePosition().getRow())
-                                 ).setNote(tmp);
-                  }
-        });
-
-
-	}
-
-    public boolean update(SalesVO vo){
-        ResultMessage message = service.updateBill(vo);
-        Boolean result = message == ResultMessage.SUCCESS?true:false;
-           Platform.runLater(new Runnable() {
-               public void run() {
-                   try {
-                   switch(message){
-                   case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-                   case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-                   case SUCCESS:break;
-                   default:break;
-                   }
-                   } catch (Exception e) {
-                       e.printStackTrace();
-                   }
-               }
-           });
-        return result;
-   }
 
 
 	public void listInit(){

@@ -11,6 +11,8 @@ import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountBillType;
+import dataenum.findtype.FindAccountType;
 import dataenum.findtype.FindPaymentBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -82,7 +84,7 @@ public class PaymentCheckBillController extends FinancialStaffController impleme
 	@FXML
 	public void find(){
 
-		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindPaymentBillType.getType(findChoice.getValue()));
+		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindAccountBillType.getFindType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {

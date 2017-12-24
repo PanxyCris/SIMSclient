@@ -1,7 +1,6 @@
 package presentation.financialstaffui.controller;
 
 import java.util.Stack;
-
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import javafx.application.Platform;
@@ -12,6 +11,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.financialstaffui.AccountManageUI;
+import presentation.financialstaffui.BussinessProcessTableUI;
+import presentation.financialstaffui.BussinessSituationTableUI;
+import presentation.financialstaffui.CheckInventoryBillUI;
+import presentation.financialstaffui.CheckPaymentBillUI;
+import presentation.financialstaffui.CheckPurchaseBillUI;
+import presentation.financialstaffui.CheckReceiveBillUI;
+import presentation.financialstaffui.CheckSalesBillUI;
 import presentation.financialstaffui.FinancialStaffUI;
 import presentation.financialstaffui.InitAccountUI;
 import presentation.financialstaffui.MakeReceiptUI;
@@ -19,6 +25,7 @@ import presentation.financialstaffui.PaymentCheckBillUI;
 import presentation.financialstaffui.PaymentMakeBillUI;
 import presentation.financialstaffui.ReceiveCheckBillUI;
 import presentation.financialstaffui.ReceiveMakeBillUI;
+import presentation.financialstaffui.SaleDetailTableUI;
 import presentation.financialstaffui.UserMessageUI;
 import presentation.financialstaffui.ViewTableUI;
 import presentation.mainui.MainUI;
@@ -145,7 +152,15 @@ public class FinancialStaffController {
    		            case "ReceiveMakeBillUI":new ReceiveMakeBillUI().start(user,bill2);break;
    		            case "ReceiveCheckBillUI":new ReceiveCheckBillUI().start(user);break;
    		            case "ViewTableUI":new ViewTableUI().start(user);break;
-   		           case "InitAccountUI":new InitAccountUI().start(user);break;
+   		            case "InitAccountUI":new InitAccountUI().start(user);break;
+   		            case "BussinessProcessTableUI":new BussinessProcessTableUI().start(user);break;
+   		            case "BussinessSituationTableController":new BussinessSituationTableUI().start(user);break;
+   		            case "SaleDetailTableController":new SaleDetailTableUI().start(user);break;
+   		            case "CheckInventoryBillUI":new CheckInventoryBillUI().start(user);break;
+   		            case "CheckPaymentBillUI":new CheckPaymentBillUI().start(user);break;
+   		            case "CheckPurchaseBillUI":new CheckPurchaseBillUI().start(user);break;
+   		            case "CheckReceiveBillUI":new CheckReceiveBillUI().start(user);break;
+   		            case "CheckSalesBillUI":new CheckSalesBillUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

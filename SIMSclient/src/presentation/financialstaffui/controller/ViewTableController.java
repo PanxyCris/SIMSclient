@@ -18,9 +18,9 @@ public class ViewTableController extends FinancialStaffController{
 	public void chooseTable() throws Exception{
 		TableType type = TableType.getType(tableChoice.getValue());
 		switch(type){
-		case BUSINESS_HISTORY_SCHEDULE:
-		case SALE_SCHEDULE:
-	    default:
+		case BUSINESS_HISTORY_SCHEDULE:changeStage("BussinessHistoryTableUI",user,null,null);
+		case SALE_SCHEDULE:changeStage("BussinessSituationTableUI",user,null,null);
+	    default:changeStage("SaleDetailTableUI",user,null,null);
 		}
 	}
 

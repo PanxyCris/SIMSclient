@@ -13,12 +13,12 @@ import vo.uservo.UserVO;
 
 public class ExaminePurchaseBillUI{
 
-	public void start(UserVO user,BillType type) throws Exception{
+	public void start(UserVO user) throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ExaminePurchaseBillUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
         ExaminePurchaseBillController controller = loader.<ExaminePurchaseBillController>getController();
-        controller.initData(user,type);
+        controller.initData(user);
         primaryStage.show();
 	}
 

@@ -1,5 +1,8 @@
 package bussinesslogic.tablebl;
 
-public class BusinessHistorySchedulePaymentBL {
+import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import vo.billvo.financialbillvo.PaymentBillVO;
+
+public class BusinessHistorySchedulePaymentBL implements BusinessHistoryScheduleBLService<PaymentBillVO> {
 
 }

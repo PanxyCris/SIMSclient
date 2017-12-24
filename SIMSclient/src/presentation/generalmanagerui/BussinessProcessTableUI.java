@@ -1,19 +1,20 @@
-package presentation.financialstaffui;
+package presentation.generalmanagerui;
 
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.financialstaffui.controller.CheckPurchaseBillController;
+import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import vo.uservo.UserVO;
 
-public class CheckPurchaseBillUI{
+public class BussinessProcessTableUI{
 
 	public void start(UserVO user) throws Exception{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CheckPurchaseBillUI.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/BussinessProcessTableUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
-        CheckPurchaseBillController controller = loader.<CheckPurchaseBillController>getController();
+        BussinessProcessTableController controller = loader.<BussinessProcessTableController>getController();
         controller.initData(user);
         primaryStage.show();
 	}

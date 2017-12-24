@@ -1,24 +1,20 @@
-package presentation.generalmanagerui;
+package presentation.financialstaffui;
 
-import dataenum.BillType;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.generalmanagerui.controller.ExamineBillController;
-import presentation.generalmanagerui.controller.ExamineReceiveBillController;
-import presentation.generalmanagerui.controller.GeneralManagerController;
+import presentation.financialstaffui.controller.CheckReceiveBillController;
 import vo.uservo.UserVO;
 
 public class CheckReceiveBillUI{
 
-	public void start(UserVO user,BillType type) throws Exception{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ExamineReceiveBillUI.fxml"));
+	public void start(UserVO user) throws Exception{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CheckReceiveBillUI.fxml"));
         Stage primaryStage = new Stage();
         primaryStage.setScene( new Scene((Pane) loader.load()));
-        ExamineReceiveBillController controller = loader.<ExamineReceiveBillController>getController();
-        controller.initData(user,type);
+        CheckReceiveBillController controller = loader.<CheckReceiveBillController>getController();
+        controller.initData(user);
         primaryStage.show();
 	}
 
