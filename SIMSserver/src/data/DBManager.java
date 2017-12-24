@@ -13,9 +13,9 @@ import java.sql.Statement;
  */
 public class DBManager {
 
-	private static final String URL = "jdbc:mysql://localhost/mysql?useSSL=true";
+	private static final String URL = "jdbc:mysql://172.28.128.144/mysql?useSSL=true";
 	private static final String NAME = "root";
-	private static final String PASSWORD = "root";
+	private static final String PASSWORD = "lijie160582";
 	private static Connection conn = null;
 	private static final String driver = "com.mysql.jdbc.Driver";
 
