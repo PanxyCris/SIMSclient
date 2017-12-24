@@ -2,7 +2,7 @@ package po.commodity;
 
 import java.io.Serializable;
 
-import po.ClassificationPO;
+import po.ClassificationVPO;
 
 public class CommodityPO implements Serializable{
 
@@ -10,7 +10,7 @@ public class CommodityPO implements Serializable{
 	private String id;
 	private String name;
 	private String model; // 商品型号
-	private ClassificationPO classification;
+	private ClassificationVPO classification;
 	private int number; // 商品数量
 	private double purPrice; // 进价
 	private double retailedPrice; // 零售价
@@ -19,7 +19,7 @@ public class CommodityPO implements Serializable{
 	private int warmingValue; // 警戒值
 
 	
-	public CommodityPO(String id, String name, String model, ClassificationPO classification, int number,
+	public CommodityPO(String id, String name, String model, ClassificationVPO classification, int number,
 			double purPrice, double retailedPrice, double recentPurPrice, double recentRetailedPrice, int warmingValue) {
 		this.id = id;
 		this.name = name;
@@ -49,7 +49,7 @@ public class CommodityPO implements Serializable{
 	}
 
 
-	public ClassificationPO getClassification() {
+	public ClassificationVPO getClassification() {
 		return classification;
 	}
 
@@ -74,7 +74,7 @@ public class CommodityPO implements Serializable{
 	}
 
 
-	public void setClassification(ClassificationPO classification) {
+	public void setClassification(ClassificationVPO classification) {
 		this.classification = classification;
 	}
 

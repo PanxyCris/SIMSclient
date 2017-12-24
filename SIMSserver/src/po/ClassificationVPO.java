@@ -3,16 +3,16 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClassificationPO implements Serializable{
+public class ClassificationVPO implements Serializable{
 
 	private static final long serialVersionUID = -1575927402071619530L;
 	private String id;
 	private String name;
 	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
-	private String fatherName;
-	private ArrayList<String> childrenName;
+	private ClassificationVPO fatherName;
+	private ArrayList<ClassificationVPO> childrenName;
 
-	public ClassificationPO(String id, String n,Boolean b,String f,ArrayList<String> c){
+	public ClassificationVPO(String id, String n,Boolean b,ClassificationVPO f,ArrayList<ClassificationVPO> c){
 		this.id = id;
 		this.name = n;
 		this.b = b;
@@ -44,24 +44,23 @@ public class ClassificationPO implements Serializable{
 		this.b = b;
 	}
 
-	public String getFatherName() {
+	public ClassificationVPO getFatherName() {
 		return fatherName;
 	}
 
-	public void setFatherName(String fatherName) {
+	public void setFatherName(ClassificationVPO fatherName) {
 		this.fatherName = fatherName;
 	}
 
-	public ArrayList<String> getChildrenName() {
+	public ArrayList<ClassificationVPO> getChildrenName() {
 		return childrenName;
 	}
 
-	public void setChildrenName(ArrayList<String> childrenName) {
+	public void setChildrenName(ArrayList<ClassificationVPO> childrenName) {
 		this.childrenName = childrenName;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 }

@@ -37,7 +37,7 @@ import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
 import po.AccountBookPO;
 import po.AccountPO;
-import po.ClassificationPO;
+import po.ClassificationVPO;
 import po.MemberPO;
 import po.PromotionPO;
 import po.PurchasePO;
@@ -354,13 +354,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public ResultMessage insertClassification(ClassificationPO po) throws RemoteException {
+	public ResultMessage insertClassification(ClassificationVPO po) throws RemoteException {
 		return classification.insertClassification(po);
 	}
 
 
 	@Override
-	public ResultMessage updateClassification(ClassificationPO po) throws RemoteException {
+	public ResultMessage updateClassification(ClassificationVPO po) throws RemoteException {
 		return classification.updateClassification(po);
 	}
 
@@ -372,13 +372,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public ArrayList<ClassificationPO> showClassification() throws RemoteException {
+	public ArrayList<ClassificationVPO> showClassification() throws RemoteException {
 		return classification.showClassification();
 	}
 
 
 	@Override
-	public ArrayList<ClassificationPO> findClassification(String keyword) throws RemoteException {
+	public ArrayList<ClassificationVPO> findClassification(String keyword) throws RemoteException {
 		return classification.findClassification(keyword);
 	}
 

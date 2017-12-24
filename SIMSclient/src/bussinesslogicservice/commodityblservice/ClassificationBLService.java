@@ -3,25 +3,25 @@ package bussinesslogicservice.commodityblservice;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
+import po.ClassificationVPO;
 
-import vo.commodityvo.ClassificationVO;
 
 public interface ClassificationBLService {
-
+	
 	public String getID();
-
-	public ResultMessage insert(ClassificationVO vo);
-
-	public void delete(ClassificationVO vo);
-
-	public ResultMessage update(ClassificationVO vo);
-
-	public ArrayList<ClassificationVO> show();
-
-	public ArrayList<String> getAllChildrenClass();//返回所有无子节点或者子节点为分类的分类
-
-	public ClassificationVO getClass(String name);
-
-	public ClassificationVO getRoot();
-
+	
+	public ResultMessage insert(ClassificationVPO vo);
+	
+	public void delete(ClassificationVPO vo);
+	
+	public ResultMessage update(ClassificationVPO vo);
+	
+	public ArrayList<ClassificationVPO> show();
+	
+	public ArrayList<String> showName();
+	
+	public ClassificationVPO getClass(String name);
+	
+	public ClassificationVPO getRoot();
+	
 }
