@@ -8,6 +8,10 @@ import po.commodity.GiftPO;
 
 public class InventoryBillPO extends BillPO{
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String note;
 	private ArrayList<GiftPO> gifts;

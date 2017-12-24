@@ -34,6 +34,8 @@ public class MakeReceiptController extends InventoryManagerController{
 	public static final Remind remind = Remind.BILL;
 	@FXML
 	Label idLabel;
+	@FXML
+	Label operatorLabel;
     @FXML
     ChoiceBox<String> receiptChoice;
 	@FXML
@@ -57,7 +59,7 @@ public class MakeReceiptController extends InventoryManagerController{
 	public void save(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts.addAll(list);
-       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,
+       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,operatorLabel.getText(),
     		   BillType.getType(receiptChoice.getValue()),BillState.DRAFT,noteArea.getText());
        service.save(vo);
 	}
@@ -66,7 +68,7 @@ public class MakeReceiptController extends InventoryManagerController{
 	public void submit(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts.addAll(list);
-       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,
+       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,operatorLabel.getText(),
     		   BillType.getType(receiptChoice.getValue()),BillState.COMMITED,noteArea.getText());
 	       service.submit(vo);
 	}
@@ -95,6 +97,8 @@ public class MakeReceiptController extends InventoryManagerController{
 	public void initData(UserVO user,BillType type,InventoryBillVO inv) throws Exception{
 		this.user = user;
 		this.inv = inv;
+		if(user!=null)
+			operatorLabel.setText(user.getName());
 		if(type!=null)
 			receiptChoice.setValue(type.value);
 		fresh();

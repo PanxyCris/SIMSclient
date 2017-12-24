@@ -78,14 +78,12 @@
          <columns>
             <TableColumn fx:id="tableID" prefWidth="120.0" text="单据编号" />
             <TableColumn fx:id="tableType" prefWidth="75.0" text="单据类型" />
+            <TableColumn fx:id="tableOperator" prefWidth="75.0" text="操作员" />
             <TableColumn fx:id="tableNote" prefWidth="200.0" text="备注" />
             <TableColumn fx:id="tableCheck" prefWidth="100.0" text="查看商品列表" />
             <TableColumn fx:id="tableRed" prefWidth="75.0" text="是否红冲" />
          </columns>
       </TableView>
-      <Button layoutX="924.0" layoutY="69.0" mnemonicParsing="false" onAction="#siftTime" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
-      <DatePicker fx:id="endPicker" layoutX="596.0" layoutY="69.0" prefHeight="23.0" prefWidth="280.0" />
-      <DatePicker fx:id="startPicker" layoutX="327.0" layoutY="69.0" prefHeight="23.0" prefWidth="280.0" />
       <Button layoutX="379.0" layoutY="544.0" mnemonicParsing="false" onAction="#red" prefHeight="44.0" prefWidth="150.0" text="红    冲" />
       <Button layoutX="661.0" layoutY="544.0" mnemonicParsing="false" onAction="#redCopy" prefHeight="44.0" prefWidth="150.0" text="红冲并复制" />
       <Button layoutX="5.0" layoutY="436.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="期初建账" textFill="WHITE">
@@ -136,6 +134,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="181.0" layoutY="69.0" mnemonicParsing="false" onAction="#printout" prefHeight="23.0" prefWidth="85.0" text="导    出" />
+      <ChoiceBox fx:id="findChoice" layoutX="678.0" layoutY="73.0" prefWidth="110.0" />
+      <TextField fx:id="findingField" layoutX="788.0" layoutY="73.0" prefHeight="23.0" prefWidth="136.0" />
+      <Button layoutX="924.0" layoutY="73.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="85.0" text="查  找" />
+      <DatePicker fx:id="startPicker" layoutX="305.0" layoutY="73.0" prefHeight="23.0" prefWidth="120.0" />
+      <DatePicker fx:id="endPicker" layoutX="425.0" layoutY="73.0" prefHeight="23.0" prefWidth="120.0" />
+      <Button layoutX="545.0" layoutY="73.0" mnemonicParsing="false" onAction="#siftTime" prefHeight="23.0" prefWidth="85.0" text="筛     选" />
+      <Button layoutX="181.0" layoutY="73.0" mnemonicParsing="false" onAction="#printout" prefHeight="23.0" prefWidth="85.0" text="导   出" />
 	</children>
 </AnchorPane>
