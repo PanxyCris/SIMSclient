@@ -244,6 +244,12 @@ public class SalesCheckBillController extends SaleStockStaffController implement
                         delBtn.setOnMouseClicked((me) -> {
                         	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             service.submit(clickedItem);
+                            try {
+								fresh();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
                         });
                     }
                   }

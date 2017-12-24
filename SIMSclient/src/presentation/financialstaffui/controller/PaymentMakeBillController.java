@@ -137,7 +137,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 				UtilityBLService utilityService = new UtilityBLService_Stub();
 				idLabel.setText(utilityService.generateID(BillType.XJFYD));
 			    sumLabel.setText("0");
-				operatorLabel.setText(user.getName());
+				operatorLabel.setText(readUser().getName());
 				}
 				else{
 					idLabel.setText(bill.getId());

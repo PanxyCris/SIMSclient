@@ -386,7 +386,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		public void initData(UserVO user) throws Exception {
-			operatorField.setText(user.getName());
+			operatorField.setText(readUser().getName());
 		}
 
 }
