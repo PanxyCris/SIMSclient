@@ -370,15 +370,14 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return classification.deleteClassification(id);
 	}
 
-
 	@Override
-	public ArrayList<ClassificationVPO> showClassification() throws RemoteException {
-		return classification.showClassification();
+	public ClassificationVPO getRoot() throws RemoteException {
+		return classification.getRoot();
 	}
 
 
 	@Override
-	public ArrayList<ClassificationVPO> findClassification(String keyword) throws RemoteException {
+	public ClassificationVPO findClassification(String keyword) throws RemoteException {
 		return classification.findClassification(keyword);
 	}
 
