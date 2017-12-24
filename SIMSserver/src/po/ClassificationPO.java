@@ -3,30 +3,23 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import po.commodity.CommodityPO;
-
-
 public class ClassificationPO implements Serializable{
 
 	private static final long serialVersionUID = -1575927402071619530L;
 	private String id;
 	private String name;
-	private ArrayList<CommodityPO> po;
-	private ClassificationPO father;
-	private ArrayList<ClassificationPO> children;
+	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
+	private String fatherName;
+	private ArrayList<String> childrenName;
 
-	public ClassificationPO(String id, String n,ArrayList<CommodityPO> p,ClassificationPO f,ArrayList<ClassificationPO> c){
+	public ClassificationPO(String id, String n,Boolean b,String f,ArrayList<String> c){
 		this.id = id;
-		name = n;
-		po = p;
-		father = f;
-		children = c;
+		this.name = n;
+		this.b = b;
+		this.fatherName = f;
+		this.childrenName = c;
 	}
 
-	public String getID() {
-		return id;
-	}
-	
 	public void setName(String n){
 		name = n;
 	}
@@ -35,27 +28,39 @@ public class ClassificationPO implements Serializable{
 		return name;
 	}
 
-	public void setCommodityPOArray(ArrayList<CommodityPO> p){
-		po = p;
+	public String getId() {
+		return id;
 	}
 
-	public ArrayList<CommodityPO> getCommodityPOArray(){
-		return po;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public void setFather(ClassificationPO f){
-		father = f;
+	public Boolean getB() {
+		return b;
 	}
 
-	public ClassificationPO getFather(){
-		return father;
+	public void setB(Boolean b) {
+		this.b = b;
 	}
 
-	public void setChildren(ArrayList<ClassificationPO> c){
-		children = c;
+	public String getFatherName() {
+		return fatherName;
 	}
 
-	public ArrayList<ClassificationPO> getChildren(){
-		return children;
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public ArrayList<String> getChildrenName() {
+		return childrenName;
+	}
+
+	public void setChildrenName(ArrayList<String> childrenName) {
+		this.childrenName = childrenName;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

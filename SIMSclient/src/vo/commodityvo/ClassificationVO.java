@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ClassificationVO {
 
-	String id;
-	String name;
-	ArrayList<CommodityVO> vo; //每一个class其要么只有子分类要么只能有子商品
-	ClassificationVO father;
-	ArrayList<ClassificationVO> children;
+	private String id;
+	private String name;
+	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
+	private ClassificationVO father;
+	private ArrayList<ClassificationVO> children;
 
 	public ClassificationVO(String i,String n,ClassificationVO f){
 		id = i;
@@ -28,12 +28,20 @@ public class ClassificationVO {
 		return name;
 	}
 
-	public void setCommodityVOArray(ArrayList<CommodityVO> v){
-		vo = v;
+	public String getId() {
+		return id;
 	}
 
-	public ArrayList<CommodityVO> getCommodityVOArray(){
-		return vo;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Boolean getB() {
+		return b;
+	}
+
+	public void setB(Boolean b) {
+		this.b = b;
 	}
 
 	public void setFather(ClassificationVO f){

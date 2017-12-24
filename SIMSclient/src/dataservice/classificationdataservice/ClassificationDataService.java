@@ -18,4 +18,5 @@ public interface ClassificationDataService extends Remote {
 	public ArrayList<ClassificationPO> showClassification() throws RemoteException;
 
 	public ArrayList<ClassificationPO> findClassification(String keyword) throws RemoteException;
+	
 }
