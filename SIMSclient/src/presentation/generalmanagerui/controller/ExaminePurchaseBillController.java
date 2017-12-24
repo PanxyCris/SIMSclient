@@ -81,7 +81,7 @@ public class ExaminePurchaseBillController extends ExamineBillController{
 
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 
 		ArrayList<PurchaseVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
@@ -103,7 +103,7 @@ public class ExaminePurchaseBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void success(){
+	public void success() throws RemoteException{
         ArrayList<PurchaseVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -114,7 +114,7 @@ public class ExaminePurchaseBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void fail(){
+	public void fail() throws RemoteException{
 		ArrayList<PurchaseVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -203,17 +203,22 @@ public class ExaminePurchaseBillController extends ExamineBillController{
                            ).setNote(t.getNewValue());
                   PurchaseVO newVO = ((PurchaseVO) t.getTableView().getItems().get(
                            t.getTablePosition().getRow()));
-                  if(!update(newVO)){
-                      ((PurchaseVO)t.getTableView().getItems().get(
-                                 t.getTablePosition().getRow())
-                                 ).setNote(tmp);
-                  }
+                  try {
+					if(!update(newVO)){
+					      ((PurchaseVO)t.getTableView().getItems().get(
+					                 t.getTablePosition().getRow())
+					                 ).setNote(tmp);
+					  }
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         });
 
 
 	}
 
-    public boolean update(PurchaseVO vo){
+    public boolean update(PurchaseVO vo) throws RemoteException{
         ResultMessage message = service.updateBill(vo);
         Boolean result = message == ResultMessage.SUCCESS?true:false;
            Platform.runLater(new Runnable() {
