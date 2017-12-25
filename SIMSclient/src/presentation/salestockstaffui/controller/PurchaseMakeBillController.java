@@ -144,7 +144,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	}
 
 	@FXML
-	public void save(){
+	public void save() throws Exception{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
@@ -159,7 +159,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
      }
 
 	@FXML
-	public void submit(){
+	public void submit() throws Exception{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
@@ -171,19 +171,6 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          }
          else
       	   print(message);
-	}
-
-	@FXML
-	public void fresh(){
-
-		 numberField.setText(null);
-         priceField.setText(null);
-         remarkArea.setText(null);
-         if(purchase == null)
-         noteArea.setText(null);
-         else
-        	 noteArea.setText(purchase.getNote());
-
 	}
 
 	@FXML
@@ -213,7 +200,14 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 					operatorLabel.setText(purchase.getOperator());
 
 				}
-				fresh();
+			 numberField.setText(null);
+	         priceField.setText(null);
+	         remarkArea.setText(null);
+	         if(purchase == null)
+	         noteArea.setText(null);
+	         else
+	        	 noteArea.setText(purchase.getNote());
+
 				edit();
 				manageInit();
 	}
