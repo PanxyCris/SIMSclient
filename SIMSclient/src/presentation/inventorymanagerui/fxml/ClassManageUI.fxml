@@ -139,6 +139,6 @@
 		<Label fx:id="idLabel" layoutX="611.0" layoutY="510.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
 		<TextField fx:id="nameField" layoutX="211.0" layoutY="510.0" prefHeight="23.0" prefWidth="400.0" />
 		<Button layoutX="911.0" layoutY="510.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="76.0" text="增加" />
-      <ChoiceBox fx:id="classChoice" layoutX="761.0" layoutY="510.0" prefHeight="23.0" prefWidth="150.0" />
+      <ComboBox fx:id="classChoice" editable="true" layoutX="761.0" layoutY="510.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>

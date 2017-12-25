@@ -139,10 +139,10 @@
 		<Label layoutX="633.0" layoutY="337.0" text="转账金额" />
 		<Label layoutX="432.0" layoutY="373.0" text="备注" />
 		<Button layoutX="788.0" layoutY="369.0" mnemonicParsing="false" onAction="#insert" prefHeight="115.0" prefWidth="79.0" text="增加项目" />
-		<ChoiceBox fx:id="accountChoice" layoutX="474.0" layoutY="333.0" prefWidth="150.0" />
 		<Label fx:id="sumLabel" layoutX="182.0" layoutY="200.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: #DDDDDD;" />
-		<ChoiceBox fx:id="memberChoice" layoutX="181.0" layoutY="142.0" prefWidth="236.0" />
       <Label layoutX="182.0" layoutY="313.0" prefHeight="15.0" prefWidth="79.0" text="单据备注" />
       <TextArea fx:id="receiptArea" layoutX="178.0" layoutY="331.0" prefHeight="152.0" prefWidth="236.0" />
+      <ComboBox fx:id="memberChoice" editable="true" layoutX="182.0" layoutY="144.0" prefHeight="23.0" prefWidth="236.0" />
+      <ComboBox fx:id="accountChoice" editable="true" layoutX="474.0" layoutY="333.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>
