@@ -37,7 +37,7 @@ public class SalesPO implements Serializable {
 
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
 			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, double voucher,
-			double afterPrice, String remark, BillType type) {
+			double afterPrice, String remark, BillType type, BillState state) {
 		this.id = id;
 		this.clientId = clientId;
 		this.clientName = clientName;
@@ -50,7 +50,7 @@ public class SalesPO implements Serializable {
 		this.afterPrice = afterPrice;
 		this.remark = remark;
 		this.commodities = commodities;
-		this.state = BillState.COMMITED;
+		this.state = state;
 		this.type = type;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.date = sdf.format(new Date());

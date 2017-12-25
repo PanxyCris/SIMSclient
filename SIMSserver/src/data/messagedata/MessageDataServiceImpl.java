@@ -8,7 +8,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 
 	@Override
 	public ResultMessage save(MessagePO message) {
-		// TODO Auto-generated method stub
+		String sql = "" + "insert into message";
 		return null;
 	}
 

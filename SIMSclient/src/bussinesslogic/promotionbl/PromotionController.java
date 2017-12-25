@@ -1,18 +1,28 @@
 package bussinesslogic.promotionbl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
+import dataservice.promotiondataservice.PromotionDataService;
+import po.PromotionPO;
+import rmi.RemoteHelper;
 import vo.promotionvo.PromotionVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月24日    
-*/
-public class PromotionController implements PromotionBLService{
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月24日
+ */
+public class PromotionController implements PromotionBLService {
+
+	private PromotionDataService service;
+
+	public PromotionController() {
+		service = RemoteHelper.getInstance().getPromotionDataService();
+	}
 
 	@Override
 	public ResultMessage insert(PromotionVO vo) {

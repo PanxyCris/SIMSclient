@@ -15,5 +15,5 @@ public interface PromotionBLService {
     public String getID();
     public ArrayList<PromotionVO> find(String info,FindPromotionType findType);
 
-
+ 
 }

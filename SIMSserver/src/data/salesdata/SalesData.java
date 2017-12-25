@@ -36,6 +36,20 @@ public class SalesData{
 		conn = DBManager.getConnection();
 	}
 
+	public static void main(String[] args) {
+		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
+		SalesPO po = new SalesPO("XSTHD-20171224", "000001", "≈À–«”Ó", "Õı≤”≤”", "¡ı«’", 
+				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "¥Ûº™¥Û¿˚£¨ÕÌ…œ≥‘º¶", BillType.SALESBACKBILL, BillState.DRAFT);
+		CommodityItemPO e = new CommodityItemPO("000001", "≈À–«”Ó", "µ•…ÌÕÙ", 100, 200, "ÕÙÕÙ");
+		commodities.add(e);
+		SalesData s = new SalesData();
+		//s.insert(po);
+		ArrayList<SalesPO> list = s.show();
+		for (SalesPO p : list) {
+			System.out.println(p.getId() + " " + p.getClientName());
+		}
+	}
+	
 	public ResultMessage insert(SalesPO po) {
 		try {
 			String sql = "" + "insert into sales(id,object) value(?, ?)";
