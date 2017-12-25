@@ -15,8 +15,7 @@ public interface CommodityDataService extends Remote {
 	public ResultMessage updateCommodity(CommodityPO po) throws RemoteException;
 	
 	public ResultMessage deleteCommodity(String id) throws RemoteException;
-	
-	
+
 	public ArrayList<CommodityPO> showCommodity() throws RemoteException;
 
 	public ArrayList<CommodityPO> findCommodity(String keywords, FindCommodityType type) throws RemoteException;

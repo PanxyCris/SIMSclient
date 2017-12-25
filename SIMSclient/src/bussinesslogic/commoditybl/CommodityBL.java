@@ -2,6 +2,7 @@ package bussinesslogic.commoditybl;
 
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -13,6 +14,7 @@ import po.MemberPO;
 import po.commodity.CommodityPO;
 import rmi.RemoteHelper;
 import vo.ViewObject;
+import vo.commodityvo.CommodityCheckVO;
 import vo.commodityvo.CommodityVO;
 import vo.membervo.MemberVO;
 
@@ -147,6 +149,12 @@ public class CommodityBL implements CommodityBLService{
 
 	@Override
 	public ArrayList<String> getAllChildrenClass() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
