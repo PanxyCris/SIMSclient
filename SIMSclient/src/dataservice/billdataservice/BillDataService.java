@@ -23,7 +23,6 @@ public interface BillDataService {
 	
 	public ArrayList<InventoryBillPO> findInventoryBill(String keyword,FindInventoryBillType type)throws RemoteException;
 	
-	public ArrayList<InventoryBillPO> showInventoryBill() throws RemoteException;
-	
-	
+	public ArrayList<InventoryBillPO> showInventoryBill() throws RemoteException;//这个是把全部的库存类单据都拿过来...
+		
 }

@@ -85,7 +85,12 @@ public class InventoryBillBL implements InventoryBillBLService{
 		int count=0;
 		try {
 			ArrayList<InventoryBillPO> inventoryBillPOs=billDataService.showInventoryBill();
-			count=inventoryBillPOs.size()+1;
+			for (int i = 0; i < inventoryBillPOs.size(); i++) {
+				if(type==inventoryBillPOs.get(i).getBillType()){
+					count++;
+				}
+			}
+			count+=1;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
