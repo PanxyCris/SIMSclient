@@ -35,14 +35,15 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 		return classfication.delete(id);
 	}
 
+
 	@Override
-	public ArrayList<ClassificationVPO> showClassification() throws RemoteException {
-		return classfication.show();
+	public ClassificationVPO getRoot() throws RemoteException {
+		return classfication.getRoot();
 	}
 
 	@Override
-	public ArrayList<ClassificationVPO> findClassification(String keyword) throws RemoteException {
-		return classfication.find(keyword);
+	public ClassificationVPO findClassification(String keyword) throws RemoteException {
+		return classfication.findClassification(keyword);
 	}
 
 }

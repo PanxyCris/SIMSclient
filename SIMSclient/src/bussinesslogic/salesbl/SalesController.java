@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import bussinesslogic.purchasebl.PurchaseTransition;
 import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
@@ -13,6 +14,7 @@ import dataservice.salesdataservice.SalesDataService;
 import po.PurchasePO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
+import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionMemberVO;
@@ -127,22 +129,56 @@ public class SalesController implements SalesBLService{
 
 	@Override
 	public ResultMessage submit(SalesVO Info) {
+		try {
+			return service.insertSale(SalesTransition.VOtoPO(Info));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ResultMessage save(SalesVO Info) {
+		try {
+			return service.insertSale(SalesTransition.VOtoPO(Info));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> show() {
-		return null;
+		ArrayList<SalesVO> list = new ArrayList<>();
+		ArrayList<SalesPO> POList = null;
+		try {
+			POList = service.showSale();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		SalesVO vo = null;
+		for (SalesPO po : POList) {
+			vo = SalesTransition.POtoVO(po);
+			list.add(vo);
+		}
+		return list;
 	}
 
 	@Override
 	public ArrayList<SalesVO> find(String info, FindSalesType type) {
-		return null;
+		ArrayList<SalesVO> list = new ArrayList<>();
+		ArrayList<SalesPO> POList = null;
+		try {
+			POList = service.findSale(info, type);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		SalesVO vo = null;
+		for (SalesPO po : POList) {
+			vo = SalesTransition.POtoVO(po);
+			list.add(vo);
+		}
+		return list;
 	}
 
 	@Override

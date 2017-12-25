@@ -12,8 +12,7 @@ import java.sql.Statement;
  * @date 2017Äê12ÔÂ4ÈÕ
  */
 public class DBManager {
-
-	private static final String URL = "jdbc:mysql://172.28.128.144/mysql?useSSL=true";
+	private static final String URL = "jdbc:mysql://172.27.157.158/mysql?useSSL=true";
 	private static final String NAME = "root";
 	private static final String PASSWORD = "lijie160582";
 	private static Connection conn = null;

@@ -24,10 +24,14 @@ import po.UserPO;
 * @date 2017年12月14日    
 */
 public class ClassificationData {
+	
+	private Connection conn;
+	public ClassificationData() {
+		conn = DBManager.getConnection();
+	}
 
 	public ResultMessage insert(ClassificationVPO po) {
-		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
-		try {
+			try {
 			Statement ps0 = conn.createStatement();
 			ResultSet rs = ps0.executeQuery("select count(*) from classification where id = " + po.getId());
 			int count = 0;
@@ -42,8 +46,6 @@ public class ClassificationData {
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
-			        ps.close();
-			        conn.close();
 			        return ResultMessage.SUCCESS;
 				}
 				else {
@@ -59,14 +61,12 @@ public class ClassificationData {
 	}
 	
 	public ResultMessage delete(String id)  {
-		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from calssification where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.execute();
 			ps.close();
-			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -75,7 +75,6 @@ public class ClassificationData {
 	}
 	
 	public ResultMessage update(ClassificationVPO po) {
-		Connection conn = DBManager.getConnection();
 		String sql = "" + "update classification set object = ? where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -83,7 +82,6 @@ public class ClassificationData {
 			ps.setString(2, po.getId());
 			ps.executeUpdate();
 			ps.close();
-			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +91,6 @@ public class ClassificationData {
 	
 	public ArrayList<ClassificationVPO> find(String keyword) {
 		ArrayList<ClassificationVPO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
 		String sql = "select object from classification";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -113,7 +110,6 @@ public class ClassificationData {
 			}
 			rs.close();
 			ps.close();
-			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  
@@ -123,7 +119,6 @@ public class ClassificationData {
 	
 	public ArrayList<ClassificationVPO> show() {
 		ArrayList<ClassificationVPO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
 		String sql = "select object from classification";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -143,11 +138,64 @@ public class ClassificationData {
 			}
 			rs.close();
 			ps.close();
-			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  
 		return list;
+		
+	}
+	
+	public ClassificationVPO getRoot() {
+		String sql = "select object from classification where name = ?";
+		ClassificationVPO po = null;
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(0, "root");
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+                byte[] buff = new byte[(int) inBlob.length()];
+   
+                while(-1!=(bis.read(buff, 0, buff.length)));
+                ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
+                po = (ClassificationVPO)in.readObject();                   //读出对象  
+           
+			}
+		} catch (SQLException | IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return po;
+		
+	}
+	
+	public ClassificationVPO findClassification(String name) {
+		String sql = "select object from classification where name = ?";
+		ClassificationVPO po = null;
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(0, name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+                byte[] buff = new byte[(int) inBlob.length()];
+   
+                while(-1!=(bis.read(buff, 0, buff.length)));
+                ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
+                po = (ClassificationVPO)in.readObject();                   //读出对象  
+           
+			}
+		} catch (SQLException | IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return po;
 		
 	}
 }
