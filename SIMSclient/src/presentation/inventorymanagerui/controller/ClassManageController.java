@@ -76,6 +76,11 @@ public class ClassManageController extends InventoryManagerController{
 
 	}
 
+	public void initInsert(){
+		idLabel.setText(service.getID());
+		classChoice.setValue(null);
+		nameField.setText(null);
+	}
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
@@ -85,10 +90,7 @@ public class ClassManageController extends InventoryManagerController{
         tree.setRoot(root);
 		classList.addAll(service.showName());
 		classChoice.setItems(classList);
-
-		idLabel.setText(service.getID());
-		classChoice.setValue(null);
-		nameField.setText(null);
+		initInsert();
 
 		edit();
 		manageInit();

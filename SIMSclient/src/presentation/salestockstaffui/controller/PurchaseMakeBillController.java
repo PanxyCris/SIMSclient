@@ -149,9 +149,14 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
-         service.save(vo);
-         fresh();
-	}
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
+     }
 
 	@FXML
 	public void submit(){
@@ -159,8 +164,13 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
-         service.submit(vo);
-         fresh();
+         ResultMessage message = service.submit(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.COMMITED);
+             fresh();
+         }
+         else
+      	   print(message);
 	}
 
 	@FXML

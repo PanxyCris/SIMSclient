@@ -12,7 +12,6 @@ import vo.uservo.UserVO;
 
 public class PromotionMakingController extends GeneralManagerController implements Initializable{
 
-	UserVO user;
 	@FXML
 	ChoiceBox<String> promotionChoice;
 
@@ -20,9 +19,9 @@ public class PromotionMakingController extends GeneralManagerController implemen
 	public void choosePromotion() throws Exception{
 		PromotionType type = PromotionType.getType(promotionChoice.getValue());
 		switch(type){
-		case LEVEL_PROMOTION:changeStage("PromotionMemberUI");break;
-		case PRICEPACKS:changeStage("PromotionSpecialUI");break;
-		case SUM_PROMOTION:changeStage("PromotionSumUI");break;
+		case LEVEL_PROMOTION:changeStage("PromotionMemberUI",user,null);break;
+		case PRICEPACKS:changeStage("PromotionSpecialUI",user,null);break;
+		case SUM_PROMOTION:changeStage("PromotionSumUI",user,null);break;
 		default:break;
 		}
 	}

@@ -177,7 +177,13 @@ public class CheckReceiptController extends InventoryManagerController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            service.submit(clickedItem);
+                        	 ResultMessage message = service.submit(clickedItem);
+                             if(message == ResultMessage.SUCCESS){
+                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
+                                 print(ResultMessage.COMMITED);
+                             }
+                             else
+                          	   print(message);
                         });
                     }
                   }

@@ -8,7 +8,10 @@ import java.io.IOException;
 
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
+import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
+import javafx.application.Platform;
+import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 
 public class LoginController {
@@ -42,9 +45,19 @@ public class LoginController {
 				e.printStackTrace();
 			}
 		return null;
+	}
 
 
-
+	public void print(ResultMessage message){
+		Platform.runLater(new Runnable() {
+            public void run() {
+                try {
+                   new RemindPrintUI().start(message);
+               } catch (Exception e) {
+                       e.printStackTrace();
+                    }
+            }
+       });
 	}
 
 }

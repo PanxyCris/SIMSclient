@@ -7,6 +7,7 @@ import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -78,7 +79,13 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
         		            BillType.XJFYD,BillState.DRAFT,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
-         service.save(vo);
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
 	}
 
 	@FXML
@@ -87,7 +94,13 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
         		            BillType.XJFYD,BillState.COMMITED,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
-         service.commit(vo);
+         ResultMessage message = service.commit(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.COMMITED);
+             fresh();
+         }
+         else
+      	   print(message);
 	}
 
 	@FXML

@@ -181,7 +181,13 @@ public class SalesMakeBillController extends MakeReceiptController{
         		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
         		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
-         service.save(vo);
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
 	}
 
 	@FXML
@@ -192,7 +198,13 @@ public class SalesMakeBillController extends MakeReceiptController{
        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
        		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
-         service.submit(vo);
+		ResultMessage message = service.submit(vo);
+	       if(message == ResultMessage.SUCCESS){
+	           print(ResultMessage.COMMITED);
+	           fresh();
+	       }
+	       else
+	    	   print(message);
 	}
 
 	@FXML
