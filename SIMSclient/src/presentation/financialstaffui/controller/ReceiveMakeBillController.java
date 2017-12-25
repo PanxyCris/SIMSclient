@@ -3,6 +3,7 @@ package presentation.financialstaffui.controller;
 import java.util.ArrayList;
 import bussiness_stub.ReceiptBillBLService_Stub;
 import bussiness_stub.UtilityBLService_Stub;
+import bussinesslogic.accountbillbl.ReceiptBillController;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
@@ -32,7 +33,7 @@ import vo.uservo.UserVO;
 public class ReceiveMakeBillController extends MakeReceiptController {
 
 
-	ReceiptBillBLService service = new ReceiptBillBLService_Stub();
+	ReceiptBillBLService service = new ReceiptBillController();
 	ObservableList<AccountListVO> list = FXCollections.observableArrayList();
 
 	@FXML

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import bussiness_stub.ReceiptBillBLService_Stub;
+import bussinesslogic.accountbillbl.ReceiptBillController;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
 import dataenum.ResultMessage;
@@ -30,7 +31,7 @@ import vo.uservo.UserVO;
 
 public class ReceiveCheckBillController extends FinancialStaffController implements Initializable{
 
-	ReceiptBillBLService service = new ReceiptBillBLService_Stub();
+	ReceiptBillBLService service = new ReceiptBillController();
 	ObservableList<ReceiptBillVO> list = FXCollections.observableArrayList();
 	ObservableList<AccountListVO> accountVOList = FXCollections.observableArrayList();
 

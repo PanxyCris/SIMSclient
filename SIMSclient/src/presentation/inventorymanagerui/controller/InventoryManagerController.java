@@ -117,7 +117,7 @@ public class InventoryManagerController extends LoginController{
         this.user = user;
         writeUser(user);
         UtilityBLService utilityService = new UtilityBL();
-        if(utilityService.hasMessage(user)){
+  /*      if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
         	circle.setCenterY(0);
@@ -125,7 +125,7 @@ public class InventoryManagerController extends LoginController{
         	circle.setLayoutY(16);
         	circle.setRadius(7);
         	circle.setFill(Paint.valueOf("#ff1f1f"));
-        }
+        }*/
      //   image = user.getImage();
 	}
 

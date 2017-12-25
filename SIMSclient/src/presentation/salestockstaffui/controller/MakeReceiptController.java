@@ -21,44 +21,12 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 
 
 	@FXML
-	public void returnLast() throws Exception{
-        startUI(previous,user,type,purchase,sale);
-        if(!stack.isEmpty()){
-        stack.pop();
-        current = previous;
-        }
-        if(stack.size()>1)
-            previous = stack.lastElement();
-	}
-
-	@FXML
-	public void mainPage() throws Exception{
-		changeStage(mainID,user,type,purchase,sale);
-
-    }
-
-	@FXML
-	public void fresh() throws Exception{
-		startUI(current,user,type,purchase,sale);
-	}
-
-    @FXML
-	public void memberManage() throws Exception{
-         changeStage("MemberManageUI",user,type,null,null);
-	}
-
-	@FXML
-	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type,null,null);
-	}
-
-	@FXML
 	public void chooseReceipt() throws Exception{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
 		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
 		case PURCHASEBACKBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
-		case SALESBILL:changeStage("SakesMakeBillUI",user,type,null,null);break;
+		case SALESBILL:changeStage("SalesMakeBillUI",user,type,null,null);break;
 		case SALESBACKBILL:changeStage("SalesMakeBillUI",user,type,null,null);break;
 		default:break;
 		}

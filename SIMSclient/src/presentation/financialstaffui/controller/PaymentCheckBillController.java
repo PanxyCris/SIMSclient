@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import bussiness_stub.PaymentBillBLService_Stub;
+import bussinesslogic.accountbillbl.PaymentBillController;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import dataenum.BillState;
 import dataenum.ResultMessage;
@@ -27,7 +28,7 @@ import vo.uservo.UserVO;
 
 public class PaymentCheckBillController extends FinancialStaffController implements Initializable{
 
-	PaymentBillBLService service = new PaymentBillBLService_Stub();
+	PaymentBillBLService service = new PaymentBillController();
 	ObservableList<PaymentBillVO> list = FXCollections.observableArrayList();
 	ObservableList<EntryVO> entryList = FXCollections.observableArrayList();
 

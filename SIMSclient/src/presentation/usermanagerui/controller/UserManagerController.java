@@ -88,7 +88,7 @@ public class UserManagerController{
         stack.push(mainID);
         this.user = user;
         UtilityBLService utilityService = new UtilityBL();
-        if(utilityService.hasMessage(user)){
+      /*  if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
         	circle.setCenterY(0);
@@ -96,7 +96,7 @@ public class UserManagerController{
         	circle.setLayoutY(16);
         	circle.setRadius(7);
         	circle.setFill(Paint.valueOf("#ff1f1f"));
-        }
+        }*/
      //   image = user.getImage();
 	}
 

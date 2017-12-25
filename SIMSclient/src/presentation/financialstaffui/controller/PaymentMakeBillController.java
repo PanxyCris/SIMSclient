@@ -38,7 +38,7 @@ import vo.uservo.UserVO;
 
 public class PaymentMakeBillController extends MakeReceiptController {
 
-	PaymentBillBLService service = new PaymentBillBLService_Stub();
+	PaymentBillBLService service = new PaymentBillController();
 	ObservableList<EntryVO> list = FXCollections.observableArrayList();
 
 	@FXML

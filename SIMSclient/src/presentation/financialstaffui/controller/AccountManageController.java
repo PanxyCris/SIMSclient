@@ -33,7 +33,7 @@ import vo.uservo.UserVO;
 
 public class AccountManageController extends FinancialStaffController implements Initializable{
 
-        AccountBLService service = new AccountBLService_Stub();
+        AccountBLService service = new AccountController();
         public static final Remind remind = Remind.ACCOUNT;
         ObservableList<AccountVO> list = FXCollections.observableArrayList();
         @FXML
@@ -111,6 +111,7 @@ public class AccountManageController extends FinancialStaffController implements
         public void initInsert(){
         	idField.setText(null);
             nameField.setText(null);
+            moneyField.setText(null);
         }
 
         @Override

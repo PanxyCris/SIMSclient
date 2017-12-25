@@ -1,11 +1,7 @@
 package presentation.usermanagerui.controller;
 
-import java.net.URL;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import bussiness_stub.UserBLService_Stub;
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
@@ -17,7 +13,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -34,9 +29,9 @@ import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 
-public class UserManagingController extends UserManagerController implements Initializable{
+public class UserManagingController extends UserManagerController{
 
-	 UserBLService service = new UserController();
+	    UserBLService service = new UserController();
 		public static final Remind remind = Remind.USER;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
@@ -47,17 +42,17 @@ public class UserManagingController extends UserManagerController implements Ini
 	    @FXML
 	    protected TextField idField;
 	    @FXML
-     protected TextField nameField;
+        protected TextField nameField;
 	    @FXML
-     protected TextField passwordField;
+        protected TextField passwordField;
 	    @FXML
 	    protected TextField findingField;
 	    @FXML
-     protected ChoiceBox<String> roleChoice;
+        protected ChoiceBox<String> roleChoice;
 	    @FXML
 	    protected ChoiceBox<String> findChoice;
- 	@FXML
- 	protected Label idLabel;
+ 	    @FXML
+ 	    protected Label idLabel;
 
 
 		@FXML
@@ -113,6 +108,7 @@ public class UserManagingController extends UserManagerController implements Ini
 		       else{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
+		    	   initFind();
 		       }
 		}
 
@@ -127,21 +123,15 @@ public class UserManagingController extends UserManagerController implements Ini
 			addID();
 		}
 
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			list.clear();
-			try {
-				list.addAll(service.getUserList());
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			table.setItems(list);
-			initInsert();
-			initFind();
-			edit();
-			manageInit();
-
+		public void initData(UserVO user) throws Exception {
+			    this.user = user;
+			    list.clear();
+			    list.addAll(service.getUserList());
+				table.setItems(list);
+				initInsert();
+				initFind();
+				edit();
+				manageInit();
 		}
 
 		public void edit(){
@@ -277,10 +267,6 @@ public class UserManagingController extends UserManagerController implements Ini
 	            };
 	            return cell;
 	        });
-		}
-
-		public void initData(UserVO user) throws Exception {
-			  this.user = user;
 		}
 
      public void addID(){
