@@ -2,6 +2,7 @@ package bussinesslogicservice.billblservice.inventory;
 
 import java.util.ArrayList;
 
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
 import vo.billvo.inventorybillvo.InventoryBillVO;
@@ -18,6 +19,6 @@ public interface InventoryBillBLService {
 
 	ResultMessage save(InventoryBillVO vo);
 
-	String getId();
+	String getId(BillType type);
 
 }
