@@ -1,5 +1,8 @@
 package bussinesslogic.billbl.inventory.Gift;
 
-public class GiftBillBL {
+import bussinesslogicservice.billblservice.inventory.InventoryGiftBillBLService;
+
+public class GiftBillBL implements InventoryGiftBillBLService{
+	
 	
 }

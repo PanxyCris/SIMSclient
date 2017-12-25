@@ -1,5 +1,5 @@
 package bussinesslogicservice.billblservice.inventory;
 
-public interface InventoryLossBillBLService{
+public interface InventoryLossBillBLService extends InventoryBillBLService{
 
 }
