@@ -10,7 +10,7 @@ public interface InventoryBillBLService {
 
 	ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type);
 
-	InventoryBillVO show();
+	ArrayList<InventoryBillVO> show();
 
 	ResultMessage submit(InventoryBillVO clickedItem);
 
