@@ -37,6 +37,8 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 		@FXML
 		TableColumn<InventoryBillVO,String> tableType;
 		@FXML
+		TableColumn<InventoryBillVO,String> tableOperator;
+		@FXML
 		TableColumn<InventoryBillVO,String> tableNote;
 		@FXML
 		TableColumn<InventoryBillVO,String> tableCheck;
@@ -80,6 +82,8 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	                new PropertyValueFactory<InventoryBillVO,String>("id"));
 			tableType.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("typeString"));
+			tableOperator.setCellValueFactory(
+	                new PropertyValueFactory<InventoryBillVO,String>("operator"));
 			tableNote.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("note"));
 			tableName.setCellValueFactory(

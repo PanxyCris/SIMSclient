@@ -28,12 +28,13 @@ import presentation.financialstaffui.ReceiveMakeBillUI;
 import presentation.financialstaffui.SaleDetailTableUI;
 import presentation.financialstaffui.UserMessageUI;
 import presentation.financialstaffui.ViewTableUI;
+import presentation.mainui.LoginController;
 import presentation.mainui.MainUI;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
 
-public class FinancialStaffController {
+public class FinancialStaffController extends LoginController{
 
 
 	public static final String mainID = "FinancialStaffUI";

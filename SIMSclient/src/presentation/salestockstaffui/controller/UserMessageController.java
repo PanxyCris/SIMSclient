@@ -26,7 +26,8 @@ public class UserMessageController extends SaleStockStaffController{
 
 	public void initData(UserVO user) {
 		this.user = user;
-        list.addAll(service.getMessage(user));
+		UserVO vo = readUser();
+        list.addAll(service.getMessage(vo));
         messageTable.setItems(list);
         time.setCellValueFactory(
                 new PropertyValueFactory<MessageVO,LocalDateTime>("time"));

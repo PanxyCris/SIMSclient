@@ -15,10 +15,15 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public String getID() {//用于生成新创建的商品分类的id
 		ClassificationVPO root=getRoot();
-		
+		int count=0;
 		return null;
 	}
 
+	@Override
+	public ArrayList<String> showName() {
+		return null;
+	}
+	
 	@Override
 	public ResultMessage insert(ClassificationVPO vpo) {
 		try {
@@ -47,11 +52,6 @@ public class ClassificationBL implements ClassificationBLService {
 			e.printStackTrace();
 		}
 		return ResultMessage.FAIL;
-	}
-
-	@Override
-	public ArrayList<String> showName() {
-		return null;
 	}
 
 	@Override

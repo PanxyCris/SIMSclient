@@ -5,6 +5,7 @@ package bussinesslogicservice.examineblservice;
 * @date 2017年12月17日
 */
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.BillType;
@@ -15,14 +16,14 @@ import vo.billvo.BillVO;
 
 public interface ExamineBLService<B extends BillVO> {
 
-	public ResultMessage updateBill(B vo);
+	public ResultMessage updateBill(B vo) throws RemoteException;
 
-	public ResultMessage passBills(ArrayList<B> vos);
+	public ResultMessage passBills(ArrayList<B> vos) throws RemoteException;
 
-	public ResultMessage notPassBills(ArrayList<B> vos);
+	public ResultMessage notPassBills(ArrayList<B> vos) throws RemoteException;
 
-	public ArrayList<B> getCommitedBills();
+	public ArrayList<B> getCommitedBills() throws RemoteException;
 
-	public ArrayList<B> find(String info,FindBillType type);//已提交的单据
+	public ArrayList<B> find(String info,FindBillType type) throws RemoteException;//已提交的单据
 
 }

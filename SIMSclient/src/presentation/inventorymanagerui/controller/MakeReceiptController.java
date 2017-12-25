@@ -8,11 +8,13 @@ import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Remind;
+import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -34,8 +36,10 @@ public class MakeReceiptController extends InventoryManagerController{
 	public static final Remind remind = Remind.BILL;
 	@FXML
 	Label idLabel;
+	@FXML
+	Label operatorLabel;
     @FXML
-    ChoiceBox<String> receiptChoice;
+    ComboBox<String> receiptChoice;
 	@FXML
 	TextArea noteArea;
 
@@ -57,19 +61,32 @@ public class MakeReceiptController extends InventoryManagerController{
 	public void save(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts.addAll(list);
-       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,
+       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,operatorLabel.getText(),
     		   BillType.getType(receiptChoice.getValue()),BillState.DRAFT,noteArea.getText());
-       service.save(vo);
+       ResultMessage message = service.save(vo);
+       if(message == ResultMessage.SUCCESS){
+           print(ResultMessage.SAVED);
+           fresh();
+           }
+       else
+    	   print(message);
 	}
 
 	@FXML
 	public void submit(){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts.addAll(list);
-       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,
+       InventoryBillVO vo = new InventoryBillVO(idLabel.getText(),gifts,operatorLabel.getText(),
     		   BillType.getType(receiptChoice.getValue()),BillState.COMMITED,noteArea.getText());
-	       service.submit(vo);
+       ResultMessage message = service.submit(vo);
+       if(message == ResultMessage.SUCCESS){
+           print(ResultMessage.COMMITED);
+           fresh();
+       }
+       else
+    	   print(message);
 	}
+
 
 	@FXML
 	public void insert(){
@@ -85,16 +102,19 @@ public class MakeReceiptController extends InventoryManagerController{
 
 	@FXML
 	public void fresh(){
-		idLabel.setText(service.getId());
+	   idLabel.setText(service.getId());
 	   nameChoice.setValue(null);
        numberField.setText(null);
    	   receiptChoice.setValue(null);
 	   noteArea.setText(null);
+	   list.clear();
+	   table.setItems(list);
 	}
 
-	public void initData(UserVO user,BillType type,InventoryBillVO inv){
+	public void initData(UserVO user,BillType type,InventoryBillVO inv) throws Exception{
 		this.user = user;
 		this.inv = inv;
+		operatorLabel.setText(readUser().getName());
 		if(type!=null)
 			receiptChoice.setValue(type.value);
 		fresh();
@@ -111,7 +131,7 @@ public class MakeReceiptController extends InventoryManagerController{
 
 	}
 
-	public void choiceInit(){
+	public void choiceInit() throws Exception{
 		receiptChoice.setItems(FXCollections.observableArrayList(BillType.INVENTORYGIFTBILL.value,BillType.INVENTORYLOSSBILL.value,
 				BillType.INVENTORYREVENUEBILL.value,BillType.INVENTORYWARNINGBILL.value));
 		CommodityBLService commodityService = new CommodityBL();

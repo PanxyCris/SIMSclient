@@ -11,7 +11,6 @@ import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
-import dataenum.findtype.FindReceiptBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,8 +126,6 @@ public class ExamineReceiveBillController extends ExamineBillController{
 		table.setItems(list);
 		manageInit();
 		listInit();
-		findChoice.setItems(FXCollections.observableArrayList(FindReceiptBillType.ID.value,FindReceiptBillType.MEMBER.value,
-				FindReceiptBillType.ACCOUNT.value,FindReceiptBillType.OPERATOR.value,FindReceiptBillType.TOTAL.value));
 	}
 
 

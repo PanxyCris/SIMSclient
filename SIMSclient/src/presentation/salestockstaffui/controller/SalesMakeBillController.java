@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -55,7 +56,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	@FXML
 	Label idLabel;
 	@FXML
-	ChoiceBox<String> memberChoice;
+	ComboBox<String> memberChoice;
 	@FXML
 	Label saleManLabel;
 	@FXML
@@ -95,7 +96,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	@FXML
 	Label commodityIDLabel;
 	@FXML
-	ChoiceBox<String> nameChoice;
+	ComboBox<String> nameChoice;
 	@FXML
 	ChoiceBox<String> modelChoice;
 	@FXML
@@ -154,6 +155,13 @@ public class SalesMakeBillController extends MakeReceiptController{
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(beforeLabel.getText());
 	    	                     beforeLabel.setText(String.valueOf(result));
+	    	                     commodityIDLabel.setText(null);
+	    	               	     nameChoice.setValue(null);
+	    	                     modelChoice.setValue(null);
+	    	                     numberField.setText(null);
+	    	                     priceField.setText(null);
+	    	               	     moneyLabel.setText("0.0");
+	    	                     remarkArea.setText(null);
 	    	                     freshAfter();
 	    	                    break;
 	    	        default:break;
@@ -173,7 +181,13 @@ public class SalesMakeBillController extends MakeReceiptController{
         		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
         		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
-         service.save(vo);
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
 	}
 
 	@FXML
@@ -184,7 +198,13 @@ public class SalesMakeBillController extends MakeReceiptController{
        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
        		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
-         service.submit(vo);
+		ResultMessage message = service.submit(vo);
+	       if(message == ResultMessage.SUCCESS){
+	           print(ResultMessage.COMMITED);
+	           fresh();
+	       }
+	       else
+	    	   print(message);
 	}
 
 	@FXML
@@ -227,7 +247,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 			    afterLabel.setText("0");
 			    allowanceLabel.setText("0");
 			    voucherLabel.setText("0");
-				operatorLabel.setText(user.getName());
+				operatorLabel.setText(readUser().getName());
 				}
 				else{
 					idLabel.setText(sale.getId());

@@ -106,7 +106,7 @@ public class PromotionMemberController extends PromotionMakingController{
 
 	@FXML
 	public void find(){
-		ArrayList<PromotionMemberVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()),type);
+		ArrayList<PromotionMemberVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -121,6 +121,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
+	    	   initFind();
 	       }
 	}
 
@@ -129,7 +130,7 @@ public class PromotionMemberController extends PromotionMakingController{
 		ArrayList<GiftVO> gifts = null;
 		 PromotionMemberVO vo = new PromotionMemberVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
-	        ResultMessage message = service.insert(vo,type);
+	        ResultMessage message = service.insert(vo);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
@@ -137,7 +138,8 @@ public class PromotionMemberController extends PromotionMakingController{
 	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:list.add(vo);table.setItems(list);break;
+	    	        case SUCCESS:list.add(vo);table.setItems(list);
+	    	                     initInsert();break;
 	    	        default:break;
 	    	        }
 					} catch (Exception e) {
@@ -155,27 +157,28 @@ public class PromotionMemberController extends PromotionMakingController{
 	     updateGiftList();
 	}
 
-	@FXML
-	public void fresh() throws RemoteException{
-		idLabel.setText(service.getID());
-		list.clear();
-		list.addAll(service.getPromotionList(type));
+
+	public void initFind(){
+		findingField.setText(null);
+		findChoice.setValue(null);
+	}
+
+	public void initInsert(){
+        idLabel.setText(service.getID());
 		levelChoice.setValue(null);
-		table.setItems(list);
 		allowanceField.setText(null);
 		voucherField.setText(null);
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
 
-
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
-		try {
-			fresh();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		list.clear();
+		list.addAll(service.getPromotionList());
+		table.setItems(list);
+		initInsert();
+		initFind();
 		edit();
 		manageInit();
 		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,
@@ -203,7 +206,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setAllowance(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-	                		,type);
+	                		);
 
 	        });
 
@@ -215,7 +218,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setVoucher(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-	                		,type);
+	                		);
 
 	        });
 
@@ -227,7 +230,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setBeginDate(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-	                		,type);
+	                		);
 
 	        });
 
@@ -239,7 +242,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	                        ).setEndDate(t.getNewValue());
 	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-	                		,type);
+	                		);
 
 	        });
 
@@ -258,7 +261,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	}
 
 
-	public void manageInit(){
+	public void manageInit() throws Exception{
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<PromotionMemberVO,String>("id"));
 		tableLevel.setCellValueFactory(
@@ -332,7 +335,7 @@ public class PromotionMemberController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionMemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser,type);
+                            service.delete(clickedUser);
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -381,7 +384,7 @@ public class PromotionMemberController extends PromotionMakingController{
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(giftList);
     	 promotion.setGifts(gifts);
-    	 service.update(promotion,type);
+    	 service.update(promotion);
     }
 
 }

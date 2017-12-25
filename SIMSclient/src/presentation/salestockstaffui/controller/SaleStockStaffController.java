@@ -14,6 +14,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import presentation.common.StageController;
+import presentation.mainui.LoginController;
 import presentation.mainui.MainUI;
 import presentation.salestockstaffui.MakeReceiptUI;
 import presentation.salestockstaffui.MemberManageUI;
@@ -29,7 +30,7 @@ import vo.billvo.salesbillvo.SalesVO;
 import vo.promotionvo.PromotionVO;
 import vo.uservo.UserVO;
 
-public class SaleStockStaffController {
+public class SaleStockStaffController extends LoginController{
 
 
 	public static final String mainID = "SaleStockStaffUI";
@@ -106,6 +107,7 @@ public class SaleStockStaffController {
         stack = new Stack<>();
         previous = current = mainID;
         stack.push(mainID);
+        writeUser(user);
         this.user = user;
         UtilityBLService utilityService = new UtilityBL();
         if(utilityService.hasMessage(user)){

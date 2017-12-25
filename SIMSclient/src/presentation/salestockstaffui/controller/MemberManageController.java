@@ -101,34 +101,6 @@ public class MemberManageController extends SaleStockStaffController implements 
 		@FXML
 		protected TableColumn<MemberVO,String> tableDelete;
 
-
-		@FXML
-		public void returnLast() throws Exception{
-	        startUI(previous,user,type,purchase,sale);
-	        if(!stack.isEmpty()){
-	        stack.pop();
-	        current = previous;
-	        }
-	        if(stack.size()>1)
-	            previous = stack.lastElement();
-		}
-
-		@FXML
-		public void mainPage() throws Exception{
-			changeStage(mainID,user,type,purchase,sale);
-
-	    }
-
-	    @FXML
-		public void memberManage() throws Exception{
-	         changeStage("MemberManageUI",user,type,null,null);
-		}
-
-		@FXML
-		public void makeReceipt() throws Exception{
-			 changeStage("MakeReceiptUI",user,type,null,null);
-		}
-
 		@FXML
 		public void insert() throws RemoteException{
 			 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
@@ -143,7 +115,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:fresh();break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -171,18 +143,19 @@ public class MemberManageController extends SaleStockStaffController implements 
 		       else{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
+		    	   initFind();
 		       }
 		}
 
-		@FXML
-		public void fresh() throws RemoteException{
+		public void initFind(){
 			findingField.setText(null);
-			list.clear();
-			list.addAll(service.show());
+			findChoice.setValue(null);
+		}
+
+		public void initInsert() throws RemoteException{
 			idLabel.setText(service.getId());
 			classChoice.setValue(null);
 			levelChoice.setValue(null);
-			table.setItems(list);
 			nameField.setText(null);
 			phoneField.setText(null);
 			addressField.setText(null);
@@ -195,11 +168,16 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
+			list.clear();
 			try {
-				fresh();
+				list.addAll(service.show());
+				initInsert();
+				initFind();
 			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			table.setItems(list);
 			edit();
 			manageInit();
 
@@ -386,7 +364,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		public void initData(UserVO user) throws Exception {
-			operatorField.setText(user.getName());
+			operatorField.setText(readUser().getName());
 		}
 
 }

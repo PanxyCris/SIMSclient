@@ -101,7 +101,13 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		entryList.addAll(list);
          PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
         		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT,receiptArea.getText());
-         service.save(vo);
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
 	}
 
 	@FXML
@@ -110,7 +116,13 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		entryList.addAll(list);
 		PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
 		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,receiptArea.getText());
-        service.save(vo);
+		ResultMessage message = service.commit(vo);
+	       if(message == ResultMessage.SUCCESS){
+	           print(ResultMessage.COMMITED);
+	           fresh();
+	       }
+	       else
+	    	   print(message);
 	}
 
 	@FXML
@@ -137,7 +149,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 				UtilityBLService utilityService = new UtilityBLService_Stub();
 				idLabel.setText(utilityService.generateID(BillType.XJFYD));
 			    sumLabel.setText("0");
-				operatorLabel.setText(user.getName());
+				operatorLabel.setText(readUser().getName());
 				}
 				else{
 					idLabel.setText(bill.getId());

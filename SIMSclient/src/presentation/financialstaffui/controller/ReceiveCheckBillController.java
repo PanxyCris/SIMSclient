@@ -2,13 +2,14 @@ package presentation.financialstaffui.controller;
 
 import java.net.URL;
 
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import bussiness_stub.ReceiptBillBLService_Stub;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
 import dataenum.ResultMessage;
-import dataenum.findtype.FindReceiptBillType;
+import dataenum.findtype.FindAccountBillType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,7 +82,7 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 	@FXML
 	public void find(){
 
-		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindReceiptBillType.getType(findChoice.getValue()));
+		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindAccountBillType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -112,8 +113,9 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 		table.setItems(list);
 		manageInit();
 		listInit();
-		findChoice.setItems(FXCollections.observableArrayList(FindReceiptBillType.ID.value,FindReceiptBillType.MEMBER.value,
-				FindReceiptBillType.ACCOUNT.value,FindReceiptBillType.OPERATOR.value,FindReceiptBillType.TOTAL.value));
+		findChoice.setItems(FXCollections.observableArrayList(FindAccountBillType.BILLID.value,FindAccountBillType.CUSTOMER.value,
+				FindAccountBillType.OPERATOR.value));
+
 	}
 
 
@@ -183,7 +185,13 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	ReceiptBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            service.commit(clickedItem);
+                        	ResultMessage message = service.commit(clickedItem);
+                            if(message == ResultMessage.SUCCESS){
+                           	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
+                                print(ResultMessage.COMMITED);
+                            }
+                            else
+                         	   print(message);
                         });
                     }
                   }

@@ -96,7 +96,7 @@ public class PromotionSpecialController {
 
 	@FXML
 	public void find(){
-		ArrayList<PromotionPricePacksVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()),type);
+		ArrayList<PromotionPricePacksVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -111,6 +111,7 @@ public class PromotionSpecialController {
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
+	    	   initFind();
 	       }
 	}
 
@@ -120,7 +121,7 @@ public class PromotionSpecialController {
 		gifts = null;
 		 PromotionPricePacksVO vo = new PromotionPricePacksVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
 				 Double.parseDouble(allowanceField.getText()),gifts);
-	        ResultMessage message = service.insert(vo,type);
+	        ResultMessage message = service.insert(vo);
 	        Platform.runLater(new Runnable() {
 	    	    public void run() {
 	    	        try {
@@ -128,7 +129,7 @@ public class PromotionSpecialController {
 	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:list.add(vo);table.setItems(list);break;
+	    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
 	    	        default:break;
 	    	        }
 					} catch (Exception e) {
@@ -146,25 +147,25 @@ public class PromotionSpecialController {
 	     updateGiftList();
 	}
 
-	@FXML
-	public void fresh() throws RemoteException{
-		idLabel.setText(service.getID());
-		list.clear();
-		list.addAll(service.getPromotionList(type));
-		table.setItems(list);
+	public void initFind(){
+		findingField.setText(null);
+		findChoice.setValue(null);
+	}
+
+	public void initInsert(){
+        idLabel.setText(service.getID());
 		allowanceField.setText(null);
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
 
-
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
-		try {
-			fresh();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		list.clear();
+		list.addAll(service.getPromotionList());
+		table.setItems(list);
+		initInsert();
+		initFind();
 		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,FindPromotionType.TIMEINTERVAL.value));
 		edit();
 		manageInit();
@@ -191,7 +192,7 @@ public class PromotionSpecialController {
 	                        ).setDiscount(t.getNewValue());
 	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        ,type);
+					        );
 
 	        });
 	    tableStart.setCellFactory(dateFactory);
@@ -202,7 +203,7 @@ public class PromotionSpecialController {
 	                        ).setBeginDate(t.getNewValue());
 	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        ,type);
+					        );
 
 	        });
 
@@ -214,7 +215,7 @@ public class PromotionSpecialController {
 	                        ).setEndDate(t.getNewValue());
 	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
 					        t.getTablePosition().getRow())
-					        ,type);
+					        );
 
 	        });
 
@@ -233,7 +234,7 @@ public class PromotionSpecialController {
 	}
 
 
-	public void manageInit(){
+	public void manageInit() throws Exception{
 		tableID.setCellValueFactory(
 	                new PropertyValueFactory<PromotionPricePacksVO,String>("id"));
 
@@ -303,7 +304,7 @@ public class PromotionSpecialController {
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionPricePacksVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser,type);
+                            service.delete(clickedUser);
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -352,7 +353,7 @@ public class PromotionSpecialController {
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(commodityList);
     	 promotion.setPricePacks(gifts);
-    	 service.update(promotion,type);
+    	 service.update(promotion);
     }
 
 }

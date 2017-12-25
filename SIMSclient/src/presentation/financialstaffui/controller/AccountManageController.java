@@ -71,7 +71,7 @@ public class AccountManageController extends FinancialStaffController implements
                         case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
                         case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
                         case EXISTED:new RemindExistUI().start(remind,true);break;
-                        case SUCCESS:fresh();break;
+                        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
                         default:break;
                         }
                         } catch (Exception e) {
@@ -99,22 +99,27 @@ public class AccountManageController extends FinancialStaffController implements
                else{
                    table.getItems().clear();
                    table.getItems().addAll(list);
+                   initFind();
                }
         }
 
-        @FXML
-        public void fresh(){
-            findingField.setText(null);
-            list.clear();
-            list.addAll(service.getAccountList());
-            table.setItems(list);
-            idField.setText(null);
+        public void initFind(){
+        	  findingField.setText(null);
+        	  findChoice.setValue(null);
+        }
+
+        public void initInsert(){
+        	idField.setText(null);
             nameField.setText(null);
         }
 
         @Override
         public void initialize(URL location, ResourceBundle resources) {
-            fresh();
+        	list.clear();
+            list.addAll(service.getAccountList());
+            table.setItems(list);
+            initFind();
+            initInsert();
             edit();
             manageInit();
 

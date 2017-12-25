@@ -98,7 +98,7 @@ public class CommodityManageController extends InventoryManagerController{
 	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-	    	        case SUCCESS:fresh();break;
+	    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
 	    	        default:break;
 	    	        }
 					} catch (Exception e) {
@@ -126,17 +126,18 @@ public class CommodityManageController extends InventoryManagerController{
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
+	    	   initFind();
 	       }
 	}
 
-	@FXML
-	public void fresh() throws Exception{
+	public void initFind(){
 		findingField.setText(null);
-		list.clear();
-		list.addAll(service.show());
+		findChoice.setValue(null);
+	}
+
+	public void initInsert() throws Exception{
 		idLabel.setText(service.getID());
 		classChoice.setValue(null);
-		table.setItems(list);
 		nameField.setText(null);
 		modelField.setText(null);
 		numberField.setText(null);
@@ -145,13 +146,15 @@ public class CommodityManageController extends InventoryManagerController{
 		warmingValueField.setText(null);
 	}
 
-
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
-
 		classList.addAll(service.getAllChildrenClass());
 		classChoice.setItems(classList);
-	    fresh();
+		list.clear();
+		list.addAll(service.show());
+		table.setItems(list);
+		initInsert();
+		initFind();
 		edit();
 		manageInit();
 	}

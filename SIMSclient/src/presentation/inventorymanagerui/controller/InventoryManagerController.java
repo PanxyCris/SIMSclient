@@ -19,11 +19,12 @@ import presentation.inventorymanagerui.InventoryManagerUI;
 import presentation.inventorymanagerui.InventoryStockUI;
 import presentation.inventorymanagerui.MakeReceiptUI;
 import presentation.inventorymanagerui.UserMessageUI;
+import presentation.mainui.LoginController;
 import presentation.mainui.MainUI;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.uservo.UserVO;
 
-public class InventoryManagerController {
+public class InventoryManagerController extends LoginController{
 
 
 	public static final String mainID = "InventoryManagerUI";
@@ -114,6 +115,7 @@ public class InventoryManagerController {
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
+        writeUser(user);
         UtilityBLService utilityService = new UtilityBL();
         if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();

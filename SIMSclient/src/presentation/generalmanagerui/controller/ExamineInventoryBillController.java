@@ -1,10 +1,8 @@
 package presentation.generalmanagerui.controller;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-
-import bussinesslogic.billbl.inventory.InventoryBillController;
 import bussinesslogic.examinebl.ExamineInventoryBL;
-import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
 import dataenum.Remind;
@@ -50,6 +48,8 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		@FXML
 		TableColumn<InventoryBillVO,String> tableType;
 		@FXML
+		TableColumn<InventoryBillVO,String> tableOperator;
+		@FXML
 		TableColumn<InventoryBillVO,String> tableNote;
 		@FXML
 		TableColumn<InventoryBillVO,String> tableCheck;
@@ -63,7 +63,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		TableColumn<GiftVO,Integer> tableNumber;
 
 		@FXML
-		public void find(){
+		public void find() throws RemoteException{
 			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Platform.runLater(new Runnable() {
@@ -84,13 +84,13 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		}
 
 		@FXML
-		public void fresh(){
+		public void fresh() throws RemoteException{
 			list.addAll(service.getCommitedBills());
 			table.setItems(list);
 		}
 
 		@FXML
-		public void success(){
+		public void success() throws RemoteException{
             ArrayList<InventoryBillVO> choiceList = new ArrayList<>();
             for(int i=0;i<list.size();i++)
             	if(list.get(i).getBox().isSelected()){
@@ -101,7 +101,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		}
 
 		@FXML
-		public void fail(){
+		public void fail() throws RemoteException{
 			ArrayList<InventoryBillVO> choiceList = new ArrayList<>();
             for(int i=0;i<list.size();i++)
             	if(list.get(i).getBox().isSelected()){
@@ -111,7 +111,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
             service.notPassBills(choiceList);
 		}
 
-		public void initData(UserVO user,BillType type){
+		public void initData(UserVO user,BillType type) throws RemoteException{
 			this.user = user;
 			this.billType = type;
 			choiceInit();
@@ -131,6 +131,8 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	                new PropertyValueFactory<InventoryBillVO,String>("id"));
 			tableType.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,String>("typeString"));
+			tableOperator.setCellValueFactory(
+	                new PropertyValueFactory<InventoryBillVO,String>("operator"));
             tablePass.setCellValueFactory(
 	                new PropertyValueFactory<InventoryBillVO,CheckBox>("box"));
 			tableNote.setCellValueFactory(

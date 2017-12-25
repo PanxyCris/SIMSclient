@@ -1,11 +1,8 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
-
 import bussinesslogic.billbl.inventory.InventoryBillController;
-import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
-import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Remind;
@@ -17,15 +14,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import presentation.remindui.RemindPrintUI;
-import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 import vo.uservo.UserVO;
@@ -48,6 +42,8 @@ public class CheckReceiptController extends InventoryManagerController{
 	TableColumn<InventoryBillVO,String> tableID;
 	@FXML
 	TableColumn<InventoryBillVO,String> tableType;
+	@FXML
+	TableColumn<InventoryBillVO,String> tableOperator;
 	@FXML
 	TableColumn<InventoryBillVO,String> tableNote;
 	@FXML
@@ -116,15 +112,14 @@ public class CheckReceiptController extends InventoryManagerController{
 	public void manageInit(){
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<InventoryBillVO,String>("id"));
-
 		tableType.setCellValueFactory(
                 new PropertyValueFactory<InventoryBillVO,String>("typeString"));
-
+		tableOperator.setCellValueFactory(
+                new PropertyValueFactory<InventoryBillVO,String>("operator"));
 		tableNote.setCellValueFactory(
                 new PropertyValueFactory<InventoryBillVO,String>("note"));
 		tableState.setCellValueFactory(
                 new PropertyValueFactory<InventoryBillVO,String>("stateString"));
-
 		tableName.setCellValueFactory(
                 new PropertyValueFactory<GiftVO,String>("name"));
 		tableNumber.setCellValueFactory(
@@ -182,7 +177,13 @@ public class CheckReceiptController extends InventoryManagerController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            service.submit(clickedItem);
+                        	 ResultMessage message = service.submit(clickedItem);
+                             if(message == ResultMessage.SUCCESS){
+                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
+                                 print(ResultMessage.COMMITED);
+                             }
+                             else
+                          	   print(message);
                         });
                     }
                   }

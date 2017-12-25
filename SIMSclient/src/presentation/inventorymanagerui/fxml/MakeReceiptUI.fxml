@@ -128,17 +128,16 @@
 				</ImageView>
 			</graphic>
 		</Button>
-      <ChoiceBox fx:id="receiptChoice" layoutX="341.0" layoutY="138.0" prefWidth="150.0" />
-      <Label layoutX="341.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="单据类型" />
-      <Label fx:id="idLabel" layoutX="178.0" layoutY="138.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
-      <ChoiceBox fx:id="nameChoice" layoutX="525.0" layoutY="454.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="receiptChoice" layoutX="178.0" layoutY="138.0" prefWidth="150.0" />
+      <Label layoutX="178.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="单据类型" />
+      <Label fx:id="idLabel" layoutX="178.0" layoutY="89.0" prefHeight="23.0" prefWidth="321.0" style="-fx-background-color: #DDDDDD;" />
       <TextField fx:id="numberField" layoutX="675.0" layoutY="454.0" prefHeight="23.0" prefWidth="150.0" />
       <Label layoutX="178.0" layoutY="199.0" prefHeight="15.0" prefWidth="150.0" text="备注" />
       <TextArea fx:id="noteArea" layoutX="178.0" layoutY="225.0" prefHeight="254.0" prefWidth="321.0" />
-      <Label layoutX="178.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="单据编号" />
+      <Label layoutX="178.0" layoutY="74.0" prefHeight="15.0" prefWidth="150.0" text="单据编号" />
       <Button layoutX="353.0" layoutY="511.0" mnemonicParsing="false" onAction="#save" prefHeight="38.0" prefWidth="136.0" text="保    存" />
       <Button layoutX="611.0" layoutY="511.0" mnemonicParsing="false" onAction="#submit" prefHeight="38.0" prefWidth="127.0" text="提    交" />
-      <TableView fx:id="table" layoutX="525.0" layoutY="100.0" prefHeight="326.0" prefWidth="397.0">
+      <TableView fx:id="table" layoutX="525.0" layoutY="67.0" prefHeight="359.0" prefWidth="397.0">
         <columns>
           <TableColumn fx:id="tableName" prefWidth="150.0" text="商品名" />
           <TableColumn fx:id="tableNumber" prefWidth="150.0" text="数量" />
@@ -147,5 +146,8 @@
       </TableView>
       <Button layoutX="825.0" layoutY="454.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="97.0" text="增加" />
       <Button layoutX="846.0" layoutY="538.0" mnemonicParsing="false" onAction="#checkBefore" prefHeight="38.0" prefWidth="136.0" text="查看过往单据" />
+      <Label layoutX="346.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="操作员" />
+      <Label fx:id="operatorLabel" layoutX="346.0" layoutY="138.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
+      <ComboBox fx:id="nameChoice" layoutX="525.0" layoutY="454.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>

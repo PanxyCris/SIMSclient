@@ -85,7 +85,7 @@ public class UserManagingController extends UserManagerController implements Ini
 		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
 		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
-		    	        case SUCCESS:fresh();break;
+		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
 		    	        default:break;
 		    	        }
 						} catch (Exception e) {
@@ -116,9 +116,19 @@ public class UserManagingController extends UserManagerController implements Ini
 		       }
 		}
 
-		@FXML
-		public void fresh(){
+		public void initFind(){
 			findingField.setText(null);
+			findChoice.setValue(null);
+		}
+
+		public void initInsert(){
+			nameField.setText("admin");
+			passwordField.setText("admin");
+			addID();
+		}
+
+		@Override
+		public void initialize(URL location, ResourceBundle resources) {
 			list.clear();
 			try {
 				list.addAll(service.getUserList());
@@ -127,14 +137,8 @@ public class UserManagingController extends UserManagerController implements Ini
 				e.printStackTrace();
 			}
 			table.setItems(list);
-			nameField.setText("admin");
-			passwordField.setText("admin");
-			addID();
-		}
-
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			fresh();
+			initInsert();
+			initFind();
 			edit();
 			manageInit();
 

@@ -1,11 +1,7 @@
 package presentation.salestockstaffui.controller;
 
 import java.rmi.RemoteException;
-
 import java.util.ArrayList;
-import bussiness_stub.CommodityBLService_Stub;
-import bussiness_stub.MemberBLService_Stub;
-import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.purchasebl.PurchaseController;
@@ -25,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -55,7 +52,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	@FXML
 	Label idLabel;
 	@FXML
-	ChoiceBox<String> memberChoice;
+	ComboBox<String> memberChoice;
 	@FXML
 	ChoiceBox<String> warehouseChoice;
 	@FXML
@@ -85,7 +82,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	@FXML
 	Label commodityIDLabel;
 	@FXML
-	ChoiceBox<String> nameChoice;
+	ComboBox<String> nameChoice;
 	@FXML
 	ChoiceBox<String> modelChoice;
 	@FXML
@@ -136,7 +133,14 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	        list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(sumLabel.getText());
 	    	                     sumLabel.setText(String.valueOf(result));
-	
+	   commodityIDLabel.setText(null);
+	  nameChoice.setValue(null);
+      modelChoice.setValue(null);
+      numberField.setText(null);
+      priceField.setText(null);
+	   moneyLabel.setText("0.0");
+       remarkArea.setText(null);
+
 	}
 
 	@FXML
@@ -145,9 +149,14 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
-         service.save(vo);
-         fresh();
-	}
+         ResultMessage message = service.save(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.SAVED);
+             fresh();
+             }
+         else
+      	   print(message);
+     }
 
 	@FXML
 	public void submit(){
@@ -155,8 +164,13 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
-         service.submit(vo);
-         fresh();
+         ResultMessage message = service.submit(vo);
+         if(message == ResultMessage.SUCCESS){
+             print(ResultMessage.COMMITED);
+             fresh();
+         }
+         else
+      	   print(message);
 	}
 
 	@FXML
@@ -189,7 +203,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 				else
 					idLabel.setText(service.getPurChaseBackID());
 			    sumLabel.setText("0.0");
-				operatorLabel.setText(user.getName());
+				operatorLabel.setText(readUser().getName());
 				}
 				else{
 					idLabel.setText(purchase.getId());
