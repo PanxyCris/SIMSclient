@@ -46,7 +46,7 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
-			ResultMessage result = messageService.save(message);
+			ResultMessage result = messageService.save(message,user);
 			if(result!=ResultMessage.SUCCESS)
 				return result;
 		}
@@ -61,7 +61,7 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
-			ResultMessage result = messageService.save(message);
+			ResultMessage result = messageService.save(message,user);
 			if(result!=ResultMessage.SUCCESS)
 				return result;
 		}

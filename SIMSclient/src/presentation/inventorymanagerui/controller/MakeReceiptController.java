@@ -9,6 +9,8 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindCommodityType;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -102,7 +104,7 @@ public class MakeReceiptController extends InventoryManagerController{
 
 	@FXML
 	public void fresh(){
-	   idLabel.setText(service.getId());
+	   idLabel.setText(null);
 	   nameChoice.setValue(null);
        numberField.setText(null);
    	   receiptChoice.setValue(null);
@@ -136,6 +138,10 @@ public class MakeReceiptController extends InventoryManagerController{
 				BillType.INVENTORYREVENUEBILL.value,BillType.INVENTORYWARNINGBILL.value));
 		CommodityBLService commodityService = new CommodityBL();
 		nameChoice.setItems(FXCollections.observableArrayList(commodityService.getIDandName()));
+		receiptChoice.getSelectionModel().selectedItemProperty().addListener(
+	        		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
+	        			idLabel.setText(service.getId(BillType.getType(newValue)));
+	        		});
 	}
 
 
