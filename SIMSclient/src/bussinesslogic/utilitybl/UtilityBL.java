@@ -4,15 +4,20 @@ import java.util.Date;
 
 import bussinesslogic.userbl.UserController;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
+import dataenum.UserRole;
+import dataenum.findtype.FindUserType;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
+import po.commodity.CommodityPO;
 import po.messagepo.MessagePO;
+import po.messagepo.MessageWarmingPO;
 import rmi.RemoteHelper;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
@@ -23,10 +28,12 @@ public class UtilityBL implements UtilityBLService{
 
 	private static UtilityBL utilityBL = new UtilityBL();
 	private MessageDataService messageService;
+	private UserDataService userService;
 	UserController bl = new UserController();
 
 	public UtilityBL(){
      	messageService = RemoteHelper.getInstance().getMessageDataService();
+     	userService = RemoteHelper.getInstance().getUserDataService();
 	}
 
 	public static UtilityBL getInstance(){
@@ -97,6 +104,16 @@ public class UtilityBL implements UtilityBLService{
 		MessageVO vo = new MessageVO(po.getInfo());
 		vo.setHasRead(po.getHasRead());
 		return vo;
+	}
+
+	@Override
+	public void warningMessage(CommodityPO po) throws RemoteException{
+        if(po.getNumber()<=po.getWarmingValue()){
+      	  MessageWarmingPO message = new MessageWarmingPO(po.getName()+"("+po.getId()+")",po.getNumber(),po.getWarmingValue());
+      	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
+      	  for(UserPO user:inventorymanagers)
+      		  messageService.save(message, user);
+        }
 	}
 
 }

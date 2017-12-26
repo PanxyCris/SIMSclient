@@ -1,8 +1,10 @@
 package bussinesslogicservice.utilityblservice;
 
+import java.rmi.RemoteException;
 import java.util.*;
 
 import dataenum.BillType;
+import po.commodity.CommodityPO;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 
@@ -23,5 +25,11 @@ public interface UtilityBLService {
     * @return
     */
 	public boolean hasMessage(UserVO user);
+	/**
+	 * 当商品减少的时候需判断一下是否达到警戒值
+	 * @param po
+	 * @throws RemoteException
+	 */
+	public void warningMessage(CommodityPO po) throws RemoteException;
 
 }

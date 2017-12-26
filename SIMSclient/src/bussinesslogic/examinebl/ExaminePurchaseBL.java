@@ -3,31 +3,48 @@ package bussinesslogic.examinebl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussinesslogic.purchasebl.PurchaseTransition;
+import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.examineblservice.ExamineBLService;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
+import dataenum.findtype.FindCommodityType;
+import dataenum.findtype.FindMemberType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
+import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.memberdataservice.MemberDataService;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.userdataservice.UserDataService;
+import po.MemberPO;
 import po.PurchasePO;
 import po.UserPO;
+import po.commodity.CommodityPO;
 import po.messagepo.MessageBillPO;
 import rmi.RemoteHelper;
 import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.commodityvo.CommodityItemVO;
 
 public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 
 	private PurchaseDataService service;
 	private MessageDataService messageService;
 	private UserDataService userService;
+	private CommodityDataService commodityService;
+	private MemberDataService memberService;
+	private UtilityBLService utilityService;
+
 
 	public ExaminePurchaseBL() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 		userService = RemoteHelper.getInstance().getUserDataService();
 		messageService = RemoteHelper.getInstance().getMessageDataService();
+		commodityService = RemoteHelper.getInstance().getCommodityDataService();
+		memberService = RemoteHelper.getInstance().getMemeberDataService();
+		utilityService = new UtilityBL();
 	}
 
 	@Override
@@ -40,7 +57,31 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	public ResultMessage passBills(ArrayList<PurchaseVO> vos) throws RemoteException {
 
 		for(PurchaseVO vo : vos){
+			String memberID = "";
+			for(int i=0;i<vo.getSupplier().length();i++)
+				if(vo.getSupplier().charAt(i) == '('){
+					memberID = vo.getSupplier().substring(i+1,vo.getSupplier().length()-1);
+					break;
+				}
+
+			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
+			if(vo.getType() == BillType.PURCHASEBACKBILL)
+                member.setReceivable(member.getReceivable()+vo.getSum());
+			else
+				member.setPayable(member.getPayable()+vo.getSum());
+            for(CommodityItemVO item:vo.getCommodities()){
+            	CommodityPO commodity = commodityService.findCommodity(item.getId(), FindCommodityType.ID).get(0);
+            	if(vo.getType() == BillType.PURCHASEBACKBILL){
+            	    commodity.setNumner(commodity.getNumber()-item.getNumber());
+            	    utilityService.warningMessage(commodity);
+            	}
+            	else
+            		commodity.setNumner(commodity.getNumber()+item.getNumber());
+            	commodityService.updateCommodity(commodity);
+            }
+
 			vo.setState(BillState.SUCCESS);
+			updateBill(vo);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
@@ -57,6 +98,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 		// TODO Auto-generated method stub
 		for(PurchaseVO vo : vos){
 			vo.setState(BillState.FAIL);
+			updateBill(vo);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
