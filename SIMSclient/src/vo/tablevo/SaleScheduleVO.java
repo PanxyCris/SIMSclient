@@ -1,7 +1,6 @@
 package vo.tablevo;
 
 import java.time.LocalDate;
-import dataenum.Warehouse;
 
 public class SaleScheduleVO {
 
@@ -24,9 +23,10 @@ public class SaleScheduleVO {
 	public LocalDate getDate() {
 		return date;
 	}
-
-
-
+	
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
 	public String getName() {
 		return name;
