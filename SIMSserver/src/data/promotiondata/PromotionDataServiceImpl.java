@@ -9,14 +9,14 @@ import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionDataService;
 import po.PromotionPO;
 
-public class PromotionDataServiceImpl implements PromotionDataService{
+public class PromotionDataServiceImpl implements PromotionDataService<PromotionPO>{
 
 	private PromotionData promotion;
-	
+
 	public PromotionDataServiceImpl() {
 		promotion = new PromotionData();
 	}
-	
+
 
 	@Override
 	public ResultMessage insertPromotion(PromotionPO po) throws RemoteException {

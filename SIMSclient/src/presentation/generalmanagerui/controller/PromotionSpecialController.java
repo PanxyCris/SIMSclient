@@ -95,7 +95,7 @@ public class PromotionSpecialController {
 	TextField numberField;
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 		ArrayList<PromotionPricePacksVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
@@ -116,7 +116,7 @@ public class PromotionSpecialController {
 	}
 
 	@FXML
-	public void insert(){
+	public void insert() throws RemoteException{
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts = null;
 		 PromotionPricePacksVO vo = new PromotionPricePacksVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
@@ -152,7 +152,7 @@ public class PromotionSpecialController {
 		findChoice.setValue(null);
 	}
 
-	public void initInsert(){
+	public void initInsert() throws RemoteException{
         idLabel.setText(service.getID());
 		allowanceField.setText(null);
 		startPicker.setValue(null);
@@ -190,9 +190,14 @@ public class PromotionSpecialController {
 	                ((PromotionPricePacksVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setDiscount(t.getNewValue());
-	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-					        );
+	                try {
+						service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+						        );
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 	    tableStart.setCellFactory(dateFactory);
@@ -201,9 +206,14 @@ public class PromotionSpecialController {
 	                ((PromotionPricePacksVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setBeginDate(t.getNewValue());
-	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-					        );
+	                try {
+						service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+						        );
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -213,9 +223,14 @@ public class PromotionSpecialController {
 	                ((PromotionPricePacksVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setEndDate(t.getNewValue());
-	                service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-					        );
+	                try {
+						service.update((PromotionPricePacksVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+						        );
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -304,7 +319,12 @@ public class PromotionSpecialController {
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionPricePacksVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser);
+                            try {
+								service.delete(clickedUser);
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -353,7 +373,12 @@ public class PromotionSpecialController {
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(commodityList);
     	 promotion.setPricePacks(gifts);
-    	 service.update(promotion);
+    	 try {
+			service.update(promotion);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }
