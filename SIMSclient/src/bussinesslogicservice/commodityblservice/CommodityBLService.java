@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import vo.commodityvo.CommodityCheckVO;
+import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
 
 public interface CommodityBLService{
@@ -24,7 +25,7 @@ public interface CommodityBLService{
 
 	public ArrayList<String> getAllChildrenClass() throws Exception;//返回所有无子节点或者子节点为商品的分类名称，不用带ID
 
-	public void stock() throws Exception;   //库存盘点
+	public ArrayList<CommodityStockVO> stock() throws Exception;   //库存盘点
 
 	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate,LocalDateTime endDate);
 }

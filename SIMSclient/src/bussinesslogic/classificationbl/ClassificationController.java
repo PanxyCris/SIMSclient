@@ -31,11 +31,6 @@ public class ClassificationController implements ClassificationBLService{
 	}
 
 	@Override
-	public ArrayList<ClassificationVPO> show() {
-		return classificationBL.show();
-	}
-
-	@Override
 	public ArrayList<String> showName() {
 		return classificationBL.showName();
 	}
