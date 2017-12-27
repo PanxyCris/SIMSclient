@@ -6,7 +6,7 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
 import po.ClassificationVPO;
 
-public class ClassificationConroller implements ClassificationBLService{
+public class ClassificationController implements ClassificationBLService{
 
 	ClassificationBL classificationBL;
 	

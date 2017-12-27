@@ -17,7 +17,7 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 	
 	
 	@Override
-	public void exportReport() {
+	public void exportReport() {//这个是导出为excel的方法
 		
 	}
 

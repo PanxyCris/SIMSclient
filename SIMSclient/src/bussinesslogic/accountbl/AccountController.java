@@ -34,10 +34,10 @@ public class AccountController implements AccountBLService{
 	public ArrayList<AccountVO> getAccountList() {
 		return accountBL.getAccountList();
 	}
-	@Override
-	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
-		return accountBL.enterItem(financialDocVO,billType);
-	}
+//	@Override
+//	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
+//		return accountBL.enterItem(financialDocVO,billType);
+//	}
 	@Override
 	public ResultMessage add(AccountVO accountVO) {
 		return accountBL.add(accountVO);

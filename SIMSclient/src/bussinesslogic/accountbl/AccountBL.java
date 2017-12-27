@@ -176,32 +176,32 @@ public class AccountBL implements AccountBLService {
 	 * 
 	 * 
 	 */
-	@Override
-	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType) {
-		// waiting for coding
-
-		ArrayList<String> accountID = new ArrayList<>();
-		ArrayList<Double> accountMoney = new ArrayList<>();
-		String memberID = "";
-
-		if (billType.equals(billType.SKD)) {
-			ReceiptBillVO receiptBillVO = (ReceiptBillVO) financialDocVO;
-			ArrayList<AccountListVO> accountVOs = receiptBillVO.getAccountListVOs();
-			for (int i = 0; i < accountVOs.size(); i++) {
-				accountID.add(accountVOs.get(i).getAccountID());
-				accountMoney.add(Double.valueOf(accountVOs.get(i).getMoney()));
-			}
-			memberID = receiptBillVO.getCustomerID();
-		}
-		if (billType.equals(billType.XJFYD)) {
-			PaymentBillVO paymentBillVO = (PaymentBillVO) financialDocVO;
-			accountID.add(paymentBillVO.getAccountID());
-			accountMoney.add(Double.valueOf(paymentBillVO.getTotal()));
-			memberID = paymentBillVO.getCustomerID();
-		}
-
-		return ResultMessage.FAIL;
-
-	}
+//	@Override
+//	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType) {
+//		// waiting for coding
+//
+//		ArrayList<String> accountID = new ArrayList<>();
+//		ArrayList<Double> accountMoney = new ArrayList<>();
+//		String memberID = "";
+//
+//		if (billType.equals(billType.SKD)) {
+//			ReceiptBillVO receiptBillVO = (ReceiptBillVO) financialDocVO;
+//			ArrayList<AccountListVO> accountVOs = receiptBillVO.getAccountListVOs();
+//			for (int i = 0; i < accountVOs.size(); i++) {
+//				accountID.add(accountVOs.get(i).getAccountID());
+//				accountMoney.add(Double.valueOf(accountVOs.get(i).getMoney()));
+//			}
+//			memberID = receiptBillVO.getCustomerID();
+//		}
+//		if (billType.equals(billType.XJFYD)) {
+//			PaymentBillVO paymentBillVO = (PaymentBillVO) financialDocVO;
+//			accountID.add(paymentBillVO.getAccountID());
+//			accountMoney.add(Double.valueOf(paymentBillVO.getTotal()));
+//			memberID = paymentBillVO.getCustomerID();
+//		}
+//
+//		return ResultMessage.FAIL;
+//
+//	}
 
 }
