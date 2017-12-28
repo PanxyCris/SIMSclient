@@ -11,7 +11,7 @@ public interface PromotionBLService {
 	public ResultMessage insert(PromotionVO vo);
 	public ResultMessage delete(PromotionVO vo);
 	public ResultMessage update(PromotionVO vo);
-	public ArrayList<PromotionVO> getPromotionList();
+	public ArrayList<PromotionVO> show();
     public String getID();
     public ArrayList<PromotionVO> find(String info,FindPromotionType findType);
 

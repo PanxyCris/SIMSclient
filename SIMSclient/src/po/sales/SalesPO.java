@@ -14,7 +14,7 @@ import po.commodity.CommodityItemPO;
 
 public class SalesPO implements Serializable {
 
-	private static final long serialVersionUID = -2078643903406807067L;
+	private static final long serialVersionUID = 2470445039822316724L;
 	private String id;
 	private String clientId;
 	private String clientName; // ¿Í»§ÐÕÃû

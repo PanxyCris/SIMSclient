@@ -55,6 +55,7 @@ public class SalesTransition {
 		String remark = po.getRemark(); // ±¸×¢
 		BillType type = po.getType();
 		BillState state = po.getState();
-		return null;
+		return new SalesVO(id, retailer, salesMan, operator, warehouse,
+				commodity, beforePrice, allowance, voucher, afterPrice, remark, state, type);
 	}
 }

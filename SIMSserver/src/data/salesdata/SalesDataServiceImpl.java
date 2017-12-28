@@ -14,9 +14,12 @@ public class SalesDataServiceImpl implements SalesDataService{
 	
 	private SalesData sale;
 
+	public SalesDataServiceImpl() {
+		sale = new SalesData();
+	}
+	
 	@Override
 	public ResultMessage insertSale(SalesPO po) throws RemoteException {
-		sale = new SalesData();
 		try {
 			sale.insert(po);
 			return ResultMessage.SUCCESS;

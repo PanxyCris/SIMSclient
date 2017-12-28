@@ -40,7 +40,7 @@ public class PromotionController implements PromotionBLService {
 	}
 
 	@Override
-	public ArrayList<PromotionVO> getPromotionList() {
+	public ArrayList<PromotionVO> show() {
 		return null;
 	}
 

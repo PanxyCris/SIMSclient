@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
+import vo.messagevo.MessageVO;
+import vo.uservo.UserVO;
 
 public class UtilityBL implements UtilityBLService{
 
@@ -51,6 +53,16 @@ public class UtilityBL implements UtilityBLService{
 		id=type+"-"+now+"-"+num;
 
 		return id;
+	}
+
+	@Override
+	public ArrayList<MessageVO> getMessage(UserVO user) {
+		return null;
+	}
+
+	@Override
+	public boolean hasMessage(UserVO user) {
+		return false;
 	}
 
 
