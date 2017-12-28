@@ -136,7 +136,10 @@ public class CommodityManageController extends InventoryManagerController{
 	}
 
 	public void initInsert() throws Exception{
+		if(service.getID()!=null)
 		idLabel.setText(service.getID());
+		else
+			idLabel.setText("000001");
 		classChoice.setValue(null);
 		nameField.setText(null);
 		modelField.setText(null);
@@ -148,8 +151,10 @@ public class CommodityManageController extends InventoryManagerController{
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		if(service.getAllChildrenClass()!=null){
 		classList.addAll(service.getAllChildrenClass());
 		classChoice.setItems(classList);
+		}
 		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);

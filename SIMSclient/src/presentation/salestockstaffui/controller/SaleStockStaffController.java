@@ -2,7 +2,6 @@ package presentation.salestockstaffui.controller;
 
 import java.util.ArrayList;
 import java.util.Stack;
-
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
@@ -13,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import presentation.common.StageController;
 import presentation.mainui.LoginController;
 import presentation.mainui.MainUI;
 import presentation.salestockstaffui.MakeReceiptUI;
@@ -109,7 +107,7 @@ public class SaleStockStaffController extends LoginController{
         stack.push(mainID);
         writeUser(user);
         this.user = user;
-        UtilityBLService utilityService = new UtilityBL();
+    //    UtilityBLService utilityService = new UtilityBL();
      /*   if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
