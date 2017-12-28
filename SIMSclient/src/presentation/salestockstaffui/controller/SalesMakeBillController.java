@@ -40,6 +40,7 @@ import presentation.remindui.RemindExistUI;
 import presentation.remindui.RemindPrintUI;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
+import vo.commodityvo.CommodityVO;
 import vo.promotionvo.PromotionVO;
 import vo.uservo.UserVO;
 
@@ -396,8 +397,9 @@ public class SalesMakeBillController extends MakeReceiptController{
         				}
         			commodityIDLabel.setText(s);
         			try {
-						for(int i=0;i<commodityService.find(s, FindCommodityType.ID).size();i++)
-						modelList.add(commodityService.find(s, FindCommodityType.ID).get(i).getModel());
+        				priceField.setText(String.valueOf(commodityService.find(s, FindCommodityType.ID).get(0).getRecentRetailedPrice()));
+						for(CommodityVO commodity:commodityService.find(s, FindCommodityType.ID))
+						modelList.add(commodity.getModel());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

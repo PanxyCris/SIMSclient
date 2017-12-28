@@ -119,7 +119,7 @@ public class UserData {
 					}
 				}
 				else if (type == FindUserType.USERROLE) {
-					if(keyword.equals(po.getRole())) {
+					if(keyword.equals(po.getRole().value)) {
 						list.add(po);
 					}
 				}

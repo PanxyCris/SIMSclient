@@ -87,7 +87,7 @@ public class UserManagerController{
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
-        UtilityBLService utilityService = new UtilityBL();
+    //    UtilityBLService utilityService = new UtilityBL();
       /*  if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
