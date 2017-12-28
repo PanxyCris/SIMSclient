@@ -27,6 +27,10 @@ public class MessageDataServiceImpl implements MessageDataService{
 		conn = DBManager.getConnection();
 	}
 	
+	public static void main(String[] args) {
+		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
+	}
+	
 	@Override
 	public ResultMessage save(MessagePO message, UserPO user) {
 		String sql = "" + "update message set object = ? where id = ?";

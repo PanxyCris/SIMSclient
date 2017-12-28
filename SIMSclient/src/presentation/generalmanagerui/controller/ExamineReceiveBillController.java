@@ -74,7 +74,7 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	TableColumn<AccountListVO,String> tableDescription;
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 
 		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
@@ -96,7 +96,7 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void success(){
+	public void success() throws RemoteException{
         ArrayList<ReceiptBillVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -107,7 +107,7 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void fail(){
+	public void fail() throws RemoteException{
 		ArrayList<ReceiptBillVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -203,11 +203,15 @@ public class ExamineReceiveBillController extends ExamineBillController{
                             ).setTotal(t.getNewValue());
                    ReceiptBillVO newVO = ((ReceiptBillVO) t.getTableView().getItems().get(
                             t.getTablePosition().getRow()));
-                   if(!update(newVO)){
-                       ((ReceiptBillVO)t.getTableView().getItems().get(
-                                  t.getTablePosition().getRow())
-                                  ).setTotal(tmp);
-                   }
+                   try {
+					if(!update(newVO)){
+					       ((ReceiptBillVO)t.getTableView().getItems().get(
+					                  t.getTablePosition().getRow())
+					                  ).setTotal(tmp);
+					   }
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
             });
 
         tableMember.setCellFactory(cellFactoryChoice);
@@ -219,11 +223,15 @@ public class ExamineReceiveBillController extends ExamineBillController{
                                ).setCustomerID(t.getNewValue());
                       ReceiptBillVO newVO = ((ReceiptBillVO) t.getTableView().getItems().get(
                                t.getTablePosition().getRow()));
-                      if(!update(newVO)){
-                          ((ReceiptBillVO)t.getTableView().getItems().get(
-                                     t.getTablePosition().getRow())
-                                     ).setCustomerID(tmp);
-                      }
+                      try {
+						if(!update(newVO)){
+						      ((ReceiptBillVO)t.getTableView().getItems().get(
+						                 t.getTablePosition().getRow())
+						                 ).setCustomerID(tmp);
+						  }
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
                });
 
 
@@ -236,11 +244,15 @@ public class ExamineReceiveBillController extends ExamineBillController{
                            ).setNote(t.getNewValue());
                   ReceiptBillVO newVO = ((ReceiptBillVO) t.getTableView().getItems().get(
                            t.getTablePosition().getRow()));
-                  if(!update(newVO)){
-                      ((ReceiptBillVO)t.getTableView().getItems().get(
-                                 t.getTablePosition().getRow())
-                                 ).setNote(tmp);
-                  }
+                  try {
+					if(!update(newVO)){
+					      ((ReceiptBillVO)t.getTableView().getItems().get(
+					                 t.getTablePosition().getRow())
+					                 ).setNote(tmp);
+					  }
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
         });
 
         ReceiptBillBLService accountService = new ReceiptBillController();
@@ -269,11 +281,15 @@ public class ExamineReceiveBillController extends ExamineBillController{
     	              ArrayList<AccountListVO> accountListVO = new ArrayList<>();
     	              accountListVO.addAll(accountVOList);
     	              newVO.setAccountListVOs(accountListVO);
-    	              if(!update(newVO)){
-    	            	  ((AccountListVO) t.getTableView().getItems().get(
-      	                        t.getTablePosition().getRow())
-      	                        ).setAccountID(tmp);
-                      }
+    	              try {
+						if(!update(newVO)){
+							  ((AccountListVO) t.getTableView().getItems().get(
+						            t.getTablePosition().getRow())
+						            ).setAccountID(tmp);
+						  }
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
             });
 
 
@@ -292,15 +308,19 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	              ArrayList<AccountListVO> accountListVO = new ArrayList<>();
 	              accountListVO.addAll(accountVOList);
 	              newVO.setAccountListVOs(accountListVO);
-	              if(!update(newVO)){
-	            	  ((AccountListVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setNote(tmp);
-                }
+	              try {
+					if(!update(newVO)){
+						  ((AccountListVO) t.getTableView().getItems().get(
+					            t.getTablePosition().getRow())
+					            ).setNote(tmp);
+					}
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
         });
 	}
 
-    public boolean update(ReceiptBillVO vo){
+    public boolean update(ReceiptBillVO vo) throws RemoteException{
         ResultMessage message = service.updateBill(vo);
         Boolean result = message == ResultMessage.SUCCESS?true:false;
            Platform.runLater(new Runnable() {

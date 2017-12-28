@@ -98,7 +98,7 @@ public class PromotionSumController extends PromotionMakingController{
 	TextField numberField;
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 		ArrayList<PromotionTotalVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
@@ -121,7 +121,7 @@ public class PromotionSumController extends PromotionMakingController{
 
 
 	@FXML
-	public void insert(){
+	public void insert() throws RemoteException{
 		ArrayList<GiftVO> gifts = null;
 		 PromotionTotalVO vo = new PromotionTotalVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
 				 Double.parseDouble(sumField.getText()),Double.parseDouble(voucherField.getText()),gifts);
@@ -145,7 +145,7 @@ public class PromotionSumController extends PromotionMakingController{
 	}
 
 	@FXML
-	public void insertGift(){
+	public void insertGift() throws RemoteException{
 		 GiftVO vo = new GiftVO(giftChoice.getValue(),Integer.parseInt(numberField.getText()));
 	     giftList.add(vo);
 	     giftTable.setItems(giftList);
@@ -158,7 +158,7 @@ public class PromotionSumController extends PromotionMakingController{
 		findChoice.setValue(null);
 	}
 
-	public void initInsert(){
+	public void initInsert() throws RemoteException{
 		idLabel.setText(service.getID());
 		voucherField.setText(null);
 		startPicker.setValue(null);
@@ -197,9 +197,13 @@ public class PromotionSumController extends PromotionMakingController{
 	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setVoucher(t.getNewValue());
-	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionTotalVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -209,9 +213,13 @@ public class PromotionSumController extends PromotionMakingController{
 	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setBeginDate(t.getNewValue());
-	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionTotalVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -221,9 +229,13 @@ public class PromotionSumController extends PromotionMakingController{
 	                ((PromotionTotalVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setEndDate(t.getNewValue());
-	                service.update((PromotionTotalVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionTotalVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -235,7 +247,11 @@ public class PromotionSumController extends PromotionMakingController{
 	                ((GiftVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNumber(t.getNewValue());
-	            updateGiftList();
+	            try {
+					updateGiftList();
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 
 	        });
 
@@ -313,7 +329,11 @@ public class PromotionSumController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionTotalVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser);
+                            try {
+								service.delete(clickedUser);
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -347,7 +367,11 @@ public class PromotionSumController extends PromotionMakingController{
                         	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
                             giftList.remove(clickedUser);
                             giftTable.setItems(giftList);
-                            updateGiftList();
+                            try {
+								updateGiftList();
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
                         });
                     }
                 }
@@ -357,7 +381,7 @@ public class PromotionSumController extends PromotionMakingController{
         });
 	}
 
-    public void updateGiftList(){
+    public void updateGiftList() throws RemoteException{
     	 PromotionTotalVO promotion = currentPromotion;
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(giftList);

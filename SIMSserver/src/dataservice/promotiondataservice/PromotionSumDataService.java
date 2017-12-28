@@ -1,5 +1,6 @@
 package dataservice.promotiondataservice;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -7,7 +8,7 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import po.promotionpo.PromotionTotalPO;
 
-public interface PromotionSumDataService {
+public interface PromotionSumDataService extends Remote{
 
 
 	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException;

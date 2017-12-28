@@ -88,7 +88,7 @@ public class ExamineSalesBillController extends ExamineBillController{
 	TableColumn<CommodityItemVO,String> commodityNote;
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 
 		ArrayList<SalesVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
@@ -110,7 +110,7 @@ public class ExamineSalesBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void success(){
+	public void success() throws RemoteException{
         ArrayList<SalesVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -121,7 +121,7 @@ public class ExamineSalesBillController extends ExamineBillController{
 	}
 
 	@FXML
-	public void fail(){
+	public void fail() throws RemoteException{
 		ArrayList<SalesVO> choiceList = new ArrayList<>();
         for(int i=0;i<list.size();i++)
         	if(list.get(i).getBox().isSelected()){
@@ -222,11 +222,15 @@ public class ExamineSalesBillController extends ExamineBillController{
                             ).setVoucher(t.getNewValue());
                    SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
                             t.getTablePosition().getRow()));
-                   if(!update(newVO)){
-                       ((SalesVO)t.getTableView().getItems().get(
-                                  t.getTablePosition().getRow())
-                                  ).setVoucher(tmp);
-                   }
+                   try {
+					if(!update(newVO)){
+					       ((SalesVO)t.getTableView().getItems().get(
+					                  t.getTablePosition().getRow())
+					                  ).setVoucher(tmp);
+					   }
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
             });
 
         tableAllowance.setCellFactory(cellFactoryDouble);
@@ -238,11 +242,15 @@ public class ExamineSalesBillController extends ExamineBillController{
                             ).setAllowance(t.getNewValue());
                    SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
                             t.getTablePosition().getRow()));
-                   if(!update(newVO)){
-                       ((SalesVO)t.getTableView().getItems().get(
-                                  t.getTablePosition().getRow())
-                                  ).setAllowance(tmp);
-                   }
+                   try {
+					if(!update(newVO)){
+					       ((SalesVO)t.getTableView().getItems().get(
+					                  t.getTablePosition().getRow())
+					                  ).setAllowance(tmp);
+					   }
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
             });
 
         tableNote.setCellFactory(cellFactory);
@@ -254,17 +262,21 @@ public class ExamineSalesBillController extends ExamineBillController{
                            ).setNote(t.getNewValue());
                   SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(
                            t.getTablePosition().getRow()));
-                  if(!update(newVO)){
-                      ((SalesVO)t.getTableView().getItems().get(
-                                 t.getTablePosition().getRow())
-                                 ).setNote(tmp);
-                  }
+                  try {
+					if(!update(newVO)){
+					      ((SalesVO)t.getTableView().getItems().get(
+					                 t.getTablePosition().getRow())
+					                 ).setNote(tmp);
+					  }
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
         });
 
 
 	}
 
-    public boolean update(SalesVO vo){
+    public boolean update(SalesVO vo) throws RemoteException{
         ResultMessage message = service.updateBill(vo);
         Boolean result = message == ResultMessage.SUCCESS?true:false;
            Platform.runLater(new Runnable() {

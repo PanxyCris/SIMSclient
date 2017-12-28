@@ -13,7 +13,6 @@ import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
-import dataenum.findtype.FindReceiptBillType;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
