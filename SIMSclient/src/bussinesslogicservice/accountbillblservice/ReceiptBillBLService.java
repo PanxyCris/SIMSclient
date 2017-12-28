@@ -17,9 +17,9 @@ public interface ReceiptBillBLService {
 
 	public ArrayList<ReceiptBillVO> find(String info,FindAccountBillType type);
 
-	public ArrayList<String> getAccountList();
+	public ArrayList<String> getAccountList();//id+" "+name
 
-	public ArrayList<String> getCustomerList();
+	public ArrayList<String> getCustomerList();//id+" "+name
 
 	public ResultMessage commit(ReceiptBillVO receiptBillVO);
 

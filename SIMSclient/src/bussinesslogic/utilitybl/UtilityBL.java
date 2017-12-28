@@ -1,11 +1,24 @@
 package bussinesslogic.utilitybl;
 
 import java.util.Date;
+
+import bussinesslogic.userbl.UserController;
+
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
+import dataenum.UserRole;
+import dataenum.findtype.FindUserType;
+import dataservice.messagedataservice.MessageDataService;
+import dataservice.userdataservice.UserDataService;
+import po.UserPO;
+import po.commodity.CommodityPO;
+import po.messagepo.MessagePO;
+import po.messagepo.MessageWarmingPO;
+import rmi.RemoteHelper;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 
@@ -14,6 +27,15 @@ public class UtilityBL implements UtilityBLService{
 	private static final int BILLIDNUMBERLENGTH=5;//单据编号中单据数目属性的字符串长度
 
 	private static UtilityBL utilityBL = new UtilityBL();
+	private MessageDataService messageService;
+	private UserDataService userService;
+	UserController bl = new UserController();
+
+	public UtilityBL(){
+     	messageService = RemoteHelper.getInstance().getMessageDataService();
+     	userService = RemoteHelper.getInstance().getUserDataService();
+	}
+
 	public static UtilityBL getInstance(){
 		return utilityBL;
 	}
@@ -57,14 +79,41 @@ public class UtilityBL implements UtilityBLService{
 
 	@Override
 	public ArrayList<MessageVO> getMessage(UserVO user) {
-		return null;
+        UserPO po = bl.voTopo(user);
+		ArrayList<MessageVO> messages = new ArrayList<>();
+		for(MessagePO message:messageService.getMessage(po))
+			messages.add(poTovo(message));
+		return messages;
 	}
 
 	@Override
 	public boolean hasMessage(UserVO user) {
+		for(MessagePO message:messageService.getMessage(bl.voTopo(user)))
+			if(message.getHasRead() == false)
+				return true;
 		return false;
 	}
 
+	public MessagePO voTopo(MessageVO vo){
+		MessagePO po = new MessagePO(vo.getInfo());
+		po.setHasRead(vo.getHasRead());
+		return po;
+	}
 
+	public MessageVO poTovo(MessagePO po){
+		MessageVO vo = new MessageVO(po.getInfo());
+		vo.setHasRead(po.getHasRead());
+		return vo;
+	}
+
+	@Override
+	public void warningMessage(CommodityPO po) throws RemoteException{
+        if(po.getNumber()<=po.getWarmingValue()){
+      	  MessageWarmingPO message = new MessageWarmingPO(po.getName()+"("+po.getId()+")",po.getNumber(),po.getWarmingValue());
+      	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
+      	  for(UserPO user:inventorymanagers)
+      		  messageService.save(message, user);
+        }
+	}
 
 }

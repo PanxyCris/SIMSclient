@@ -7,7 +7,7 @@ public class MessageWarmingPO extends MessagePO{
 	private Integer currentNumber;
 
 
-	public MessageWarmingPO(String name,Integer currentNumber,Integer warmingNumber){
+	public MessageWarmingPO(String name,int currentNumber,int warmingNumber){
 		super(getFormatInfo(name,currentNumber,warmingNumber));
 		this.name = name;
 		this.warmingNumber = warmingNumber;

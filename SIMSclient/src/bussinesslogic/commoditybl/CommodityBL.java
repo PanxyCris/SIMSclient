@@ -15,6 +15,7 @@ import po.commodity.CommodityPO;
 import rmi.RemoteHelper;
 import vo.ViewObject;
 import vo.commodityvo.CommodityCheckVO;
+import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
 import vo.membervo.MemberVO;
 
@@ -110,10 +111,20 @@ public class CommodityBL implements CommodityBLService{
 		return list;
 	}
 
-
+//ccw
 	@Override
-	public void stock() {
-		
+	public ArrayList<CommodityStockVO> stock() {
+		ArrayList<CommodityStockVO> commodityStockVOs=new ArrayList<>();
+		CommodityStockVO commodityStockVO=null;
+		ArrayList<CommodityVO> commodityVOs=show();
+		for (int i = 0; i < commodityStockVOs.size(); i++) {
+			commodityStockVO=new CommodityStockVO(commodityVOs.get(i).getID(), commodityVOs.get(i).getName(),
+					commodityVOs.get(i).getModel(), commodityVOs.get(i).getNumber(),
+					(commodityVOs.get(i).getRecentRetailedPrice()+commodityVOs.get(i).getRetailedPrice())/2,(commodityVOs.get(i).getRecentPurPrice()+commodityVOs.get(i).getPurPrice())/2, 
+					commodityVOs.get(i).getLine());
+			commodityStockVOs.add(commodityStockVO);
+		}
+		return commodityStockVOs;
 	}
 
 	@Override
@@ -154,7 +165,6 @@ public class CommodityBL implements CommodityBLService{
 
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

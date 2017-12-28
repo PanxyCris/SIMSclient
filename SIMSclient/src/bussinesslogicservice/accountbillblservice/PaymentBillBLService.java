@@ -16,9 +16,9 @@ public interface PaymentBillBLService {
 
 	public ArrayList<PaymentBillVO> find(String info,FindAccountBillType type);
 
-	public ArrayList<String> getAccountList();  // Ãû×Ö(ID)
+	public ArrayList<String> getAccountList();  // id+" "+name
 
-	public ArrayList<String> getCustomerList();  // Ãû×Ö(ID)
+	public ArrayList<String> getCustomerList();  // id+" "+name
 
 	public ResultMessage judgeLegal(String money);
 

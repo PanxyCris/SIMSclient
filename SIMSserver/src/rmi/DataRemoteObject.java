@@ -3,7 +3,6 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-
 import data.accountbookdata.AccountBookDataServiceImpl;
 import data.accountdata.AccountDataServiceMySqlImpl;
 import data.classificationdata.ClassificationDataServiceImpl;
@@ -11,7 +10,9 @@ import data.commoditydata.CommodityDataServiceMySqlImpl;
 import data.memberdata.MemberDataServiceImpl;
 import data.messagedata.MessageDataServiceImpl;
 import data.paymentbilldata.PaymentBillDataServiceImpl;
-import data.promotiondata.PromotionDataServiceImpl;
+import data.promotiondata.PromotionMemberDataServiceImpl;
+import data.promotiondata.PromotionSpecialDataServiceImpl;
+import data.promotiondata.PromotionSumDataServiceImpl;
 import data.purchasedata.PurchaseDataServiceImpl;
 import data.receiptbilldata.ReceiptDataServiceImpl;
 import data.salesdata.SalesDataServiceImpl;
@@ -33,7 +34,9 @@ import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.messagedataservice.MessageDataService;
-import dataservice.promotiondataservice.PromotionDataService;
+import dataservice.promotiondataservice.PromotionMemberDataService;
+import dataservice.promotiondataservice.PromotionSpecialDataService;
+import dataservice.promotiondataservice.PromotionSumDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
@@ -41,7 +44,6 @@ import po.AccountBookPO;
 import po.AccountPO;
 import po.ClassificationVPO;
 import po.MemberPO;
-import po.PromotionPO;
 import po.PurchasePO;
 import po.SalesPO;
 import po.UserPO;
@@ -49,6 +51,9 @@ import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
 import po.commodity.CommodityPO;
 import po.messagepo.MessagePO;
+import po.promotionpo.PromotionMemberPO;
+import po.promotionpo.PromotionPricePacksPO;
+import po.promotionpo.PromotionTotalPO;
 
 
 /**
@@ -66,7 +71,7 @@ import po.messagepo.MessagePO;
  *
  */
 public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService,
-    PromotionDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
+    PromotionMemberDataService,PromotionSpecialDataService,PromotionSumDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
     ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService{
 
 	private static final long serialVersionUID = 4029039744279087114L;
@@ -74,7 +79,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	private UserDataService user;
 	private MemberDataService member;
 	private SalesDataService sale;
-	private PromotionDataService promotion;
+	private PromotionMemberDataService promotionMember;
+	private PromotionSpecialDataService promotionSpecial;
+	private PromotionSumDataService promotionSum;
 	private PurchaseDataService purchase;
 	private AccountBookDataService accountbook;
 	private AccountDataService account;
@@ -89,7 +96,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		user = new UserDataServiceImpl();
 		member = new MemberDataServiceImpl();
 		sale = new SalesDataServiceImpl();
-		promotion = new PromotionDataServiceImpl();
+		promotionMember = new PromotionMemberDataServiceImpl();
+		promotionSpecial = new PromotionSpecialDataServiceImpl();
+		promotionSum = new PromotionSumDataServiceImpl();
 		purchase = new PurchaseDataServiceImpl();
 		accountbook = new AccountBookDataServiceImpl();
 		account = new AccountDataServiceMySqlImpl();
@@ -205,37 +214,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	public String getSaleBackID() throws RemoteException {
 		return sale.getSaleBackID();
 	}
-
-
-	@Override
-	public ResultMessage insertPromotion(PromotionPO po) throws RemoteException {
-		return promotion.insertPromotion(po);
-	}
-
-
-	@Override
-	public ResultMessage deletePromotion(String ID) throws RemoteException {
-		return promotion.deletePromotion(ID);
-	}
-
-
-	@Override
-	public ResultMessage updatePromotion(PromotionPO po) throws RemoteException {
-		return promotion.updatePromotion(po);
-	}
-
-
-	@Override
-	public ArrayList<PromotionPO> findPromotion(String keyword, FindPromotionType type) throws RemoteException {
-		return promotion.findPromotion(keyword, type);
-	}
-
-
-	@Override
-	public ArrayList<PromotionPO> showPromotion() throws RemoteException {
-		return promotion.showPromotion();
-	}
-
 
 
 	@Override
@@ -448,9 +426,125 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public ResultMessage save(MessagePO message) {
+	public ResultMessage save(MessagePO message, UserPO user) {
 		// TODO Auto-generated method stub
-		return messageData.save(message);
+		return messageData.save(message, user);
 	}
+
+
+	@Override
+	public ArrayList<MessagePO> getMessage(UserPO user) {
+		// TODO Auto-generated method stub
+		return messageData.getMessage(user);
+	}
+
+
+	@Override
+	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSum.insertPromotion(po);
+	}
+
+
+	@Override
+	public ResultMessage deleteSumPromotion(String ID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSum.deleteSumPromotion(ID);
+	}
+
+
+	@Override
+	public ResultMessage updatePromotion(PromotionTotalPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSum.updatePromotion(po);
+	}
+
+
+	@Override
+	public ResultMessage insertPromotion(PromotionPricePacksPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSpecial.insertPromotion(po);
+	}
+
+
+	@Override
+	public ResultMessage deleteSpecialPromotion(String ID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSpecial.deleteSpecialPromotion(ID);
+	}
+
+
+	@Override
+	public ResultMessage updatePromotion(PromotionPricePacksPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSpecial.updatePromotion(po);
+	}
+
+
+	@Override
+	public ResultMessage insertPromotion(PromotionMemberPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionMember.insertPromotion(po);
+	}
+
+
+	@Override
+	public ResultMessage deleteMemberPromotion(String ID) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionMember.deleteMemberPromotion(ID);
+	}
+
+
+	@Override
+	public ResultMessage updatePromotion(PromotionMemberPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionMember.updatePromotion(po);
+	}
+
+
+	@Override
+	public ArrayList<PromotionTotalPO> findSumPromotion(String keyword, FindPromotionType type) throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSum.findSumPromotion(keyword, type);
+	}
+
+
+	@Override
+	public ArrayList<PromotionTotalPO> showSumPromotion() throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSum.showSumPromotion();
+	}
+
+
+	@Override
+	public ArrayList<PromotionPricePacksPO> findSpecialPromotion(String keyword, FindPromotionType type)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSpecial.findSpecialPromotion(keyword, type);
+	}
+
+
+	@Override
+	public ArrayList<PromotionPricePacksPO> showSpecialPromotion() throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionSpecial.showSpecialPromotion();
+	}
+
+
+	@Override
+	public ArrayList<PromotionMemberPO> findMemberPromotion(String keyword, FindPromotionType type)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionMember.findMemberPromotion(keyword, type);
+	}
+
+
+	@Override
+	public ArrayList<PromotionMemberPO> showMemberPromotion() throws RemoteException {
+		// TODO Auto-generated method stub
+		return promotionMember.showMemberPromotion();
+	}
+
+
 
 }

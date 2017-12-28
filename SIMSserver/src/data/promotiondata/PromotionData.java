@@ -12,20 +12,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import data.DBManager;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
-import po.PromotionPO;
+import po.promotionpo.PromotionPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月6日    
+/**
+*
+* @author Lijie
+* @date 2017年12月6日
 */
-public class PromotionData {
+public class PromotionData<P extends PromotionPO> {
 
-	public ResultMessage insert(PromotionPO po) {
+	public ResultMessage insert(P po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
 			Statement ps0 = conn.createStatement();
@@ -35,7 +34,7 @@ public class PromotionData {
 				count = rs.getInt(1);
 				if (count == 0) {
 					String sql = "" + "insert into promotion(id, object) values (?,?)";
-					
+
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getId());
@@ -50,14 +49,14 @@ public class PromotionData {
 					System.out.println("促销策略ID已存在");
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 	}
-	
+
 	public ResultMessage delete(String id) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from promotion where id = ?";
@@ -73,8 +72,8 @@ public class PromotionData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
-	public ResultMessage update(PromotionPO po) {
+
+	public ResultMessage update(P po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update promotion set object = ? where id = ?";
 		try {
@@ -90,24 +89,24 @@ public class PromotionData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
-	
-	public ArrayList<PromotionPO> find(String keyword, FindPromotionType type) {
-		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
+
+
+	public ArrayList<P> find(String keyword, FindPromotionType type) {
+		ArrayList<P> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from promotion";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff)); 
-                    PromotionPO po = (PromotionPO) in.readObject();
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    P po = (P) in.readObject();
                     switch (type) {
 					case TYPE:
 						if (keyword.equals(po.getType().value)) list.add(po);
@@ -128,26 +127,26 @@ public class PromotionData {
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
 	}
-	
-	public ArrayList<PromotionPO> show() {
-		ArrayList<PromotionPO> list = new ArrayList<PromotionPO>();
+
+	public ArrayList<P> show() {
+		ArrayList<P> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from promotion";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff)); 
-                    PromotionPO po = (PromotionPO) in.readObject();
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    P po = (P) in.readObject();
                     list.add(po);
                 }
 			}
@@ -156,7 +155,7 @@ public class PromotionData {
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
 	}
 }

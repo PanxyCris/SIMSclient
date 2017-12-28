@@ -105,7 +105,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	TextField numberField;
 
 	@FXML
-	public void find(){
+	public void find() throws RemoteException{
 		ArrayList<PromotionMemberVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Platform.runLater(new Runnable() {
@@ -126,7 +126,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	}
 
 	@FXML
-	public void insert(){
+	public void insert() throws RemoteException{
 		ArrayList<GiftVO> gifts = null;
 		 PromotionMemberVO vo = new PromotionMemberVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),MemberLevel.getLevel(levelChoice.getValue()),
 				 Double.parseDouble(allowanceField.getText()), Double.parseDouble(voucherField.getText()),gifts);
@@ -150,7 +150,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	}
 
 	@FXML
-	public void insertGift(){
+	public void insertGift() throws RemoteException{
 		 GiftVO vo = new GiftVO(giftChoice.getValue(),Integer.parseInt(numberField.getText()));
 	     giftList.add(vo);
 	     giftTable.setItems(giftList);
@@ -163,7 +163,7 @@ public class PromotionMemberController extends PromotionMakingController{
 		findChoice.setValue(null);
 	}
 
-	public void initInsert(){
+	public void initInsert() throws RemoteException{
         idLabel.setText(service.getID());
 		levelChoice.setValue(null);
 		allowanceField.setText(null);
@@ -204,9 +204,14 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((PromotionMemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setAllowance(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionMemberVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -216,9 +221,14 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((PromotionMemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setVoucher(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionMemberVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -228,9 +238,14 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((PromotionMemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setBeginDate(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionMemberVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -240,9 +255,14 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((PromotionMemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setEndDate(t.getNewValue());
-	                service.update((PromotionMemberVO) t.getTableView().getItems().get(
-					        t.getTablePosition().getRow())
-	                		);
+	                try {
+						service.update((PromotionMemberVO) t.getTableView().getItems().get(
+						        t.getTablePosition().getRow())
+								);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 	        });
 
@@ -254,7 +274,12 @@ public class PromotionMemberController extends PromotionMakingController{
 	                ((GiftVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setNumber(t.getNewValue());
-	            updateGiftList();
+	            try {
+					updateGiftList();
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 	        });
 
@@ -335,7 +360,12 @@ public class PromotionMemberController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionMemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            service.delete(clickedUser);
+                            try {
+								service.delete(clickedUser);
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
                             list.remove(clickedUser);
                             table.setItems(list);
                         });
@@ -369,7 +399,12 @@ public class PromotionMemberController extends PromotionMakingController{
                         	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
                             giftList.remove(clickedUser);
                             giftTable.setItems(giftList);
-                            updateGiftList();
+                            try {
+								updateGiftList();
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
                         });
                     }
                 }
@@ -379,7 +414,7 @@ public class PromotionMemberController extends PromotionMakingController{
         });
 	}
 
-    public void updateGiftList(){
+    public void updateGiftList() throws RemoteException{
     	 PromotionMemberVO promotion = currentPromotion;
          ArrayList<GiftVO> gifts = new ArrayList<>();
     	 gifts.addAll(giftList);

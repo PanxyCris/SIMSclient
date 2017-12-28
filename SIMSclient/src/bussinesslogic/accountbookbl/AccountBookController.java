@@ -15,13 +15,13 @@ public class AccountBookController implements AccountBookBLService {
 	}
 
 	@Override
-	public ResultMessage delete(AccountBookVO accountBookVO) {
-		return accountBookBL.delete(accountBookVO);
+	public ArrayList<AccountBookVO> show() {
+		return accountBookBL.show();
 	}
 
 	@Override
-	public ArrayList<AccountBookVO> show() {
-		return accountBookBL.show();
+	public AccountBookVO choseByYear(int date) {
+		return accountBookBL.choseByYear(date);
 	}
 
 }

@@ -43,10 +43,10 @@ public class AccountBookTransition {
 				accountPOs.add(accountTransition.VOtoPO(accountVOs.get(i)));
 			}
 		}
-		String id=accountBookVO.getId();
+//		String id=accountBookVO.getId();
 		String date=accountBookVO.getDate();
 		String clerkId=accountBookVO.getClerkID();
-		accountBookPO=new AccountBookPO(id, date, clerkId, commodityPOs, memberPOs, accountPOs);
+		accountBookPO=new AccountBookPO(date, clerkId, commodityPOs, memberPOs, accountPOs);
 		return accountBookPO;
 	}
 
@@ -74,10 +74,9 @@ public class AccountBookTransition {
 				accountVOs.add(accountTransition.POtoVO(accountPOs.get(i)));
 			}
 		}
-		String id=accountBookPO.getID();
 		String date=accountBookPO.getDate();
 		String cleckId=accountBookPO.getClerkID();
-		accountBookVO=new AccountBookVO(id, date, cleckId, commodityVOs, memberVOs, accountVOs);
+		accountBookVO=new AccountBookVO(date, cleckId, commodityVOs, memberVOs, accountVOs);
 		return accountBookVO;
 	}
 }

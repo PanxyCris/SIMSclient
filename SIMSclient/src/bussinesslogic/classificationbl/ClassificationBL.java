@@ -14,14 +14,17 @@ public class ClassificationBL implements ClassificationBLService {
 	
 	@Override
 	public String getID() {//用于生成新创建的商品分类的id
+		idCount=1;
 		ClassificationVPO root=getRoot();
-		int count=0;
-		return null;
+		return Integer.toString(count(root)+1);
 	}
 
 	@Override
 	public ArrayList<String> showName() {
-		return null;
+		nameList=new ArrayList<>();
+		ClassificationVPO root=getRoot();
+		addName(root);
+		return nameList;
 	}
 	
 	@Override
@@ -74,6 +77,28 @@ public class ClassificationBL implements ClassificationBLService {
 		return null;
 	}
 
-
+	static int idCount=0;
+	
+	public int count(ClassificationVPO classificationVPO){
+		if(classificationVPO.getChildren()==null){
+			return 0;
+		}
+		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
+		for (int i = 0; i < childrenVPOs.size(); i++) {
+			count(childrenVPOs.get(i));
+			idCount++;
+		}
+		return idCount;
+	}
+	
+	static ArrayList<String> nameList=null;
+	
+	public void addName(ClassificationVPO classificationVPO){
+		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
+		for (int i = 0; i < childrenVPOs.size(); i++) {
+			count(childrenVPOs.get(i));
+			nameList.add(childrenVPOs.get(i).getName());
+		}
+	}
 
 }

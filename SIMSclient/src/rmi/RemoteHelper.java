@@ -1,12 +1,6 @@
 package rmi;
 
-import java.net.MalformedURLException;
-
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
-
 import dataservice.accountbilldataservice.PaymentBillDataService;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
 import dataservice.accountbookdataservice.AccountBookDataService;
@@ -19,7 +13,9 @@ import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.messagedataservice.MessageDataService;
-import dataservice.promotiondataservice.PromotionDataService;
+import dataservice.promotiondataservice.PromotionMemberDataService;
+import dataservice.promotiondataservice.PromotionSpecialDataService;
+import dataservice.promotiondataservice.PromotionSumDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
@@ -89,8 +85,16 @@ public class RemoteHelper {
 		return (PaymentBillDataService)remote;
 	}
 
-	public PromotionDataService getPromotionDataService(){
-		return (PromotionDataService)remote;
+	public PromotionMemberDataService getMemberPromotionDataService(){
+		return (PromotionMemberDataService)remote;
+	}
+
+	public PromotionSpecialDataService getSpecialPromotionDataService(){
+		return (PromotionSpecialDataService)remote;
+	}
+
+	public PromotionSumDataService getSumPromotionDataService(){
+		return (PromotionSumDataService)remote;
 	}
 
 	public SalesDataService getSalesDataService(){

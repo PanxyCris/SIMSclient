@@ -6,7 +6,7 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
 import po.ClassificationVPO;
 
-public class ClassificationConroller implements ClassificationBLService{
+public class ClassificationController implements ClassificationBLService{
 
 	ClassificationBL classificationBL;
 	
@@ -28,11 +28,6 @@ public class ClassificationConroller implements ClassificationBLService{
 	@Override
 	public ResultMessage update(ClassificationVPO vpo) {
 		return classificationBL.update(vpo);
-	}
-
-	@Override
-	public ArrayList<ClassificationVPO> show() {
-		return classificationBL.show();
 	}
 
 	@Override

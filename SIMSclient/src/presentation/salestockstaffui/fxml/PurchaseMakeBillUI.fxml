@@ -133,7 +133,7 @@
 		<Label layoutX="423.0" layoutY="436.0" text="备注" />
 		<Label fx:id="typeLabel" layoutX="184.0" layoutY="54.0" prefHeight="23.0" prefWidth="150.0" />
 		<TextArea fx:id="remarkArea" layoutX="420.0" layoutY="450.0" prefHeight="76.0" prefWidth="458.0" />
-      <ComboBox fx:id="memberChoice" layoutX="183.0" layoutY="165.0" prefHeight="23.0" prefWidth="210.0" />
-      <ComboBox fx:id="nameChoice" layoutX="641.0" layoutY="347.0" prefHeight="23.0" prefWidth="150.0" />
+      <ComboBox fx:id="memberChoice" editable="true" layoutX="183.0" layoutY="165.0" prefHeight="23.0" prefWidth="210.0" />
+      <ComboBox fx:id="nameChoice" editable="true" layoutX="641.0" layoutY="347.0" prefHeight="23.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>

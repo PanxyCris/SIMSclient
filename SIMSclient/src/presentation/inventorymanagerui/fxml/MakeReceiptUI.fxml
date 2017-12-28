@@ -148,6 +148,6 @@
       <Button layoutX="846.0" layoutY="538.0" mnemonicParsing="false" onAction="#checkBefore" prefHeight="38.0" prefWidth="136.0" text="查看过往单据" />
       <Label layoutX="346.0" layoutY="123.0" prefHeight="15.0" prefWidth="150.0" text="操作员" />
       <Label fx:id="operatorLabel" layoutX="346.0" layoutY="138.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
-      <ComboBox fx:id="nameChoice" layoutX="525.0" layoutY="454.0" prefWidth="150.0" />
+      <ComboBox fx:id="nameChoice" editable="true" layoutX="525.0" layoutY="454.0" prefWidth="150.0" />
 	</children>
 </AnchorPane>

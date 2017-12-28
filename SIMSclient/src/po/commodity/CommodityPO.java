@@ -18,7 +18,7 @@ public class CommodityPO implements Serializable{
 	private double recentRetailedPrice; // 最新零售价
 	private int warmingValue; // 警戒值
 
-	
+
 	public CommodityPO(String id, String name, String model, String classification, int number,
 			double purPrice, double retailedPrice, double recentPurPrice, double recentRetailedPrice, int warmingValue) {
 		this.id = id;
@@ -58,6 +58,10 @@ public class CommodityPO implements Serializable{
 		return number;
 	}
 
+	public void setNumner(int number){
+		this.number = number;
+	}
+
 
 	public double getPurPrice() {
 		return purPrice;
@@ -88,5 +92,9 @@ public class CommodityPO implements Serializable{
 		return warmingValue;
 	}
 
-	
+	public void setWarningValue(int warmingValue){
+		this.warmingValue = warmingValue;
+	}
+
+
 }

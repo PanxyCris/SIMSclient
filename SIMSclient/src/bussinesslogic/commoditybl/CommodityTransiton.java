@@ -5,9 +5,7 @@ package bussinesslogic.commoditybl;
 * @date 2017Äê12ÔÂ18ÈÕ    
 */
 
-import java.util.ArrayList;
 
-import po.ClassificationVPO;
 import po.commodity.CommodityPO;
 import vo.commodityvo.CommodityVO;
 
