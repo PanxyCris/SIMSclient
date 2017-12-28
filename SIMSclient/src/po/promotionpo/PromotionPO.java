@@ -1,5 +1,6 @@
 package po.promotionpo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import dataenum.PromotionType;
 
@@ -8,8 +9,9 @@ import dataenum.PromotionType;
 * @author ≈À–«”Ó
 * @date 2017ƒÍ12‘¬27»’
 */
-public class PromotionPO{
+public class PromotionPO implements Serializable{
 
+	private static final long serialVersionUID = -7961034019548242635L;
 	private String id;
 	private LocalDate beginDate;
 	private LocalDate endDate;

@@ -12,6 +12,11 @@ import dataenum.PromotionType;
 import po.commodity.GiftPO;
 
 public class PromotionMemberPO extends PromotionPO {
+	/** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = 7539070862489685774L;
 	private MemberLevel level;
 	private String levelString;
 	private Double allowance;

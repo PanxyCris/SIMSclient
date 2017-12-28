@@ -12,6 +12,7 @@ import po.commodity.GiftPO;
 public class PromotionTotalPO extends PromotionPO {
 
 
+	private static final long serialVersionUID = -710887490086473194L;
 	private Double total;
 	private Double voucher;
 	private ArrayList<GiftPO> gifts;

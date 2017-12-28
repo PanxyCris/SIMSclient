@@ -11,6 +11,11 @@ import dataenum.PromotionType;
 import po.commodity.GiftPO;
 
 public class PromotionPricePacksPO extends PromotionPO {
+	/** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = 5383295935262148394L;
 	private ArrayList<GiftPO> pricePacks;
 	private Double discount;   //特价包优惠前的总价
 
