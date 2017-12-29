@@ -85,8 +85,8 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 	}
 
 	@Override
-	public void writeOffAndCopy(ArrayList<ReceiptBillVO> table) {
-		
+	public ArrayList<ReceiptBillVO> writeOffAndCopy(ArrayList<ReceiptBillVO> table) {
+		return null;
 	}
 
 	public LocalDate StringtoDate(String id){//id «µ•æ›±‡∫≈

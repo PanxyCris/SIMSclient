@@ -18,6 +18,6 @@ public interface BusinessHistoryScheduleBLService<B extends BillVO> {
 
 	public void writeOff(ArrayList<B> table);//ºì³å
 
-	public void writeOffAndCopy(ArrayList<B> table);//ºì³å²¢¸´ÖÆ
+	public ArrayList<B> writeOffAndCopy(ArrayList<B> table);//ºì³å²¢¸´ÖÆ
 
 }

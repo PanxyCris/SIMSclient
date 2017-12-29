@@ -38,8 +38,8 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 	}
 
 	@Override
-	public void writeOffAndCopy(ArrayList<InventoryBillVO> table) {
-
+	public ArrayList<InventoryBillVO> writeOffAndCopy(ArrayList<InventoryBillVO> table) {
+		return null;
 	}
 
 }

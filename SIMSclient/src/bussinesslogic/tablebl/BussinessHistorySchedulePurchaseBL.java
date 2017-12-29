@@ -40,9 +40,8 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 	}
 
 	@Override
-	public void writeOffAndCopy(ArrayList<PurchaseVO> table) {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<PurchaseVO> writeOffAndCopy(ArrayList<PurchaseVO> table) {
+		return null;
 	}
 
 }

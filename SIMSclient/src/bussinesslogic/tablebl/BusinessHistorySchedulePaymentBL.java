@@ -83,8 +83,9 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	}
 
 	@Override
-	public void writeOffAndCopy(ArrayList<PaymentBillVO> table) {//不能是总经理
+	public ArrayList<PaymentBillVO> writeOffAndCopy(ArrayList<PaymentBillVO> table) {//不能是总经理
 		//这里应该返回arrlist<paymentvo>？
+		return null;
 			
 	}
 
