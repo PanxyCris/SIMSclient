@@ -11,13 +11,11 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 
 	@Override
 	public ArrayList<InventoryBillVO> show() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<InventoryBillVO> siftTime(LocalDate start, LocalDate end) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -31,19 +29,16 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 
 	@Override
 	public void exportReport(ArrayList<InventoryBillVO> table) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void writeOff(ArrayList<InventoryBillVO> table) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void writeOffAndCopy(ArrayList<InventoryBillVO> table) {
-		// TODO Auto-generated method stub
 
 	}
 

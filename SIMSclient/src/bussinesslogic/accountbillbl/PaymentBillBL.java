@@ -127,5 +127,20 @@ public class PaymentBillBL implements PaymentBillBLService{
 		return list;
 	}
 
+	@Override
+	public String getId() {
+		int count=0;
+		try {
+			ArrayList<PaymentBillPO> paymentBillPOs=paymentBillDataService.showPaymentBill();
+			for (int i = paymentBillPOs.size()-1; i > 0; i--) {
+				
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 
 }

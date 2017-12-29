@@ -49,7 +49,7 @@ public class UtilityBL implements UtilityBLService{
 		return false;
 	}
 
-	@Override
+	@Override//这个方法暂时废除不用了
 	public String generateID(BillType billType) {//number为服务器上目前该类型单据的数目
 		String id="";
 

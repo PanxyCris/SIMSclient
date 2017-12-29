@@ -23,6 +23,8 @@ public interface PaymentBillBLService {
 	public ResultMessage judgeLegal(String money);
 
 	public ResultMessage commit(PaymentBillVO paymentBillVO);
+	
+	public String getId();
 
 
 

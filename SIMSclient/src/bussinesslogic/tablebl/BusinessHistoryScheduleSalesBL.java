@@ -11,37 +11,31 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 
 	@Override
 	public ArrayList<SalesVO> show() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> siftTime(LocalDate start, LocalDate end) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> sift(String info, FindSaleScheduleType type) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void exportReport(ArrayList<SalesVO> table) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void writeOff(ArrayList<SalesVO> table) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void writeOffAndCopy(ArrayList<SalesVO> table) {
-		// TODO Auto-generated method stub
 		
 	}
 
