@@ -34,9 +34,9 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 	}
 
 	@Override
-	public void writeOff(ArrayList<PurchaseVO> table) {
+	public ArrayList<PurchaseVO> writeOff(ArrayList<PurchaseVO> table) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

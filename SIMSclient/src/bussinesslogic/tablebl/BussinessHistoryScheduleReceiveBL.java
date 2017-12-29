@@ -72,16 +72,18 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 	}
 
 	@Override
-	public void writeOff(ArrayList<ReceiptBillVO> table) {
+	public ArrayList<ReceiptBillVO> writeOff(ArrayList<ReceiptBillVO> table) {
 		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			rList.add(redRush(table.get(i)));
 		}
 		try {
 			examineBLService.passBills(rList);
+			return rList;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override

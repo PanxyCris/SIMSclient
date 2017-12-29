@@ -30,8 +30,8 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 	}
 
 	@Override
-	public void writeOff(ArrayList<SalesVO> table) {
-		
+	public ArrayList<SalesVO> writeOff(ArrayList<SalesVO> table) {
+		return null;
 	}
 
 	@Override

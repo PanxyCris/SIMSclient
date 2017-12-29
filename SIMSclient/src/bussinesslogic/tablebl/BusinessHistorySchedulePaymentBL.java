@@ -70,16 +70,18 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	}
 
 	@Override
-	public void writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
+	public ArrayList<PaymentBillVO> writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
 		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			pArrayList.add(redRush(table.get(i)));
 		}		
 		try {
 			examineBLService.passBills(pArrayList);
+			return pArrayList;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	@Override
