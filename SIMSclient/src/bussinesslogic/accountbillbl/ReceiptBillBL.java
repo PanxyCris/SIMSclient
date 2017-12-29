@@ -3,6 +3,8 @@ package bussinesslogic.accountbillbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import bussinesslogic.accountbl.AccountController;
+import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
@@ -11,20 +13,28 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
 import po.FinancialBill.ReceiptBillPO;
+import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 
 public class ReceiptBillBL implements ReceiptBillBLService{
 
-	ReceiptBillVO receiptBillVO;
-	ReceiptBillPO receiptBillPO;
+	private ReceiptBillVO receiptBillVO;
+	private ReceiptBillPO receiptBillPO;
 	
-	ReceiptBillTransition receiptBillTransition;
-	ReceiptBillDataService receiptBillDataService;
+	private ReceiptBillTransition receiptBillTransition;
+	private ReceiptBillDataService receiptBillDataService;
 	
-	AccountBLService accountBLService;
-	MemberBLService memberBLService;
+	private AccountBLService accountBLService;
+	private MemberBLService memberBLService;
 
+	public ReceiptBillBL() {
+		receiptBillTransition=new ReceiptBillTransition();
+		receiptBillDataService=RemoteHelper.getInstance().getReceiptDataService();
+		accountBLService=new AccountController();
+		memberBLService=new MemberController();
+	}
+	
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
 		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
@@ -112,6 +122,11 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 			e.printStackTrace();
 		}
 		return ResultMessage.FAIL;
+	}
+
+	@Override
+	public String getId() {
+		return null;
 	}
 
 

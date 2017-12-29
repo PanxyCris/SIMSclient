@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.accountbillbl.ReceiptBillController;
+import bussinesslogic.examinebl.ExamineReceiptBL;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
@@ -16,8 +18,13 @@ import vo.billvo.financialbillvo.ReceiptBillVO;
 
 public class BussinessHistoryScheduleReceiveBL implements BusinessHistoryScheduleBLService<ReceiptBillVO> {
 
-	ExamineBLService<ReceiptBillVO> examineBLService;
-	ReceiptBillBLService receiptBillBLService;
+	private ExamineBLService<ReceiptBillVO> examineBLService;
+	private ReceiptBillBLService receiptBillBLService;
+	
+	public BussinessHistoryScheduleReceiveBL() {
+		examineBLService=new ExamineReceiptBL();
+		receiptBillBLService=new ReceiptBillController();
+	}
 	
 	
 	@Override
@@ -77,6 +84,8 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 		for (int i = 0; i < table.size(); i++) {
 			rList.add(redRush(table.get(i)));
 		}
+		
+	
 		try {
 			examineBLService.passBills(rList);
 			return rList;

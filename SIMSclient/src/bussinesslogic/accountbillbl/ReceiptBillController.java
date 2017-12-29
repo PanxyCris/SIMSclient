@@ -46,6 +46,11 @@ public class ReceiptBillController implements ReceiptBillBLService{
 		return receiptBillBL.commit(receiptBillVO);
 	}
 
+	@Override
+	public String getId() {
+		return receiptBillBL.getId();
+	}
+
 	
 	
 }

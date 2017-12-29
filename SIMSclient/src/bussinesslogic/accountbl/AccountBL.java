@@ -4,16 +4,12 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import bussinesslogicservice.accountblservice.AccountBLService;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
 import po.AccountPO;
+import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
-import vo.billvo.financialbillvo.AccountListVO;
-import vo.billvo.financialbillvo.FinancialDocVO;
-import vo.billvo.financialbillvo.PaymentBillVO;
-import vo.billvo.financialbillvo.ReceiptBillVO;
 
 
 /**
@@ -23,14 +19,18 @@ import vo.billvo.financialbillvo.ReceiptBillVO;
  */
 public class AccountBL implements AccountBLService {
 
-	private static AccountBL accountBL = new AccountBL();
-
+	private static AccountBL accountBL;
+//单件模式
+	public AccountBL() {
+		accountBL = new AccountBL();
+	}
+	
 	public AccountBL getInstance() {
 		return accountBL;
 	}
 
-	AccountDataService accountDataService;
-	AccountTransition accountTransition;
+	AccountDataService accountDataService=RemoteHelper.getInstance().getAccountDataService();
+	AccountTransition accountTransition=new AccountTransition();
 	AccountVO accountVO;
 	AccountPO accountPO;
 

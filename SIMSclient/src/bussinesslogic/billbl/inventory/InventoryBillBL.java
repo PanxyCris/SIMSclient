@@ -10,14 +10,20 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
 import dataservice.billdataservice.BillDataService;
 import po.inventorybillpo.InventoryBillPO;
+import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 
 public class InventoryBillBL implements InventoryBillBLService{
 
-	BillDataService billDataService;
-	InventoryTransition inventoryTransition;
-	InventoryBillPO inventoryBillPO;
-	InventoryBillVO inventoryBillVO;
+	private BillDataService billDataService;
+	private InventoryTransition inventoryTransition;
+	private InventoryBillPO inventoryBillPO;
+	private InventoryBillVO inventoryBillVO;
+	
+	public InventoryBillBL() {
+		billDataService=RemoteHelper.getInstance().getBilldataService();
+		inventoryTransition=new InventoryTransition();
+	}
 	
 	@Override
 	public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type) {
@@ -81,7 +87,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 	}
 
 	@Override
-	public String getId(BillType type) {
+	public String getId(BillType type) {//这里是只给数字的
 		int count=0;
 		try {
 			ArrayList<InventoryBillPO> inventoryBillPOs=billDataService.showInventoryBill();

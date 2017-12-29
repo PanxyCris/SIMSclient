@@ -3,6 +3,8 @@ package bussinesslogic.accountbillbl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import bussinesslogic.accountbl.AccountController;
+import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
@@ -11,21 +13,30 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
 import po.FinancialBill.PaymentBillPO;
+import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
 
 public class PaymentBillBL implements PaymentBillBLService{
 	
-	PaymentBillPO paymentBillPO;
-	PaymentBillVO paymentBillVO;
+	private PaymentBillPO paymentBillPO;
+	private PaymentBillVO paymentBillVO;
 	
-	PaymentBillTransition paymentBillTransition;
-	PaymentBillDataService paymentBillDataService;
+	private PaymentBillTransition paymentBillTransition;
+	private PaymentBillDataService paymentBillDataService;
 	
-	AccountBLService accountBLService;
-	MemberBLService memberBLService;
+	private AccountBLService accountBLService;
+	private MemberBLService memberBLService;
 
+	public PaymentBillBL() {
+		paymentBillTransition=new PaymentBillTransition();
+		paymentBillDataService=RemoteHelper.getInstance().getPaymentDataService();	
+		accountBLService=new AccountController();
+		memberBLService=new MemberController();
+	}
+	
+	
 	@Override
 	public ResultMessage save(PaymentBillVO paymentBillVO) {
 		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);

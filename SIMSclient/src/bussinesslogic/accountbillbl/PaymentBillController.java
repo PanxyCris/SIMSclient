@@ -51,6 +51,11 @@ public class PaymentBillController implements PaymentBillBLService{
 		return paymentBillBL.commit(paymentBillVO);
 	}
 
+	@Override
+	public String getId() {
+		return paymentBillBL.getId();
+	}
+
 
 	
 	

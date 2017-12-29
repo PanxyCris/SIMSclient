@@ -4,6 +4,8 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.accountbillbl.PaymentBillController;
+import bussinesslogic.examinebl.ExaminePaymentBL;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import bussinesslogicservice.examineblservice.ExamineBLService;
@@ -16,8 +18,13 @@ import vo.billvo.financialbillvo.PaymentBillVO;
 
 public class BusinessHistorySchedulePaymentBL implements BusinessHistoryScheduleBLService<PaymentBillVO> {
 
-	ExamineBLService<PaymentBillVO> examineBLService;
-	PaymentBillBLService paymentBillBLService;
+	private ExamineBLService<PaymentBillVO> examineBLService;
+	private PaymentBillBLService paymentBillBLService;
+	
+	public BusinessHistorySchedulePaymentBL() {
+		examineBLService=new ExaminePaymentBL();
+		paymentBillBLService=new PaymentBillController();
+	}
 	
 	@Override
 	public ArrayList<PaymentBillVO> show() {
@@ -69,12 +76,14 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		
 	}
 
-	@Override
+	@Override//红冲生成一样的单据的话是否意味着单据的id也一样？不是的话该怎么存？
 	public ArrayList<PaymentBillVO> writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
 		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			pArrayList.add(redRush(table.get(i)));
-		}		
+		}
+		
+		//在数据库中创建单据的方法在这里
 		try {
 			examineBLService.passBills(pArrayList);
 			return pArrayList;
@@ -86,7 +95,6 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public ArrayList<PaymentBillVO> writeOffAndCopy(ArrayList<PaymentBillVO> table) {//不能是总经理
-		//这里应该返回arrlist<paymentvo>？
 		return null;
 			
 	}

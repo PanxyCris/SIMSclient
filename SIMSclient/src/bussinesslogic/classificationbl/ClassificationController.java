@@ -8,7 +8,7 @@ import po.ClassificationVPO;
 
 public class ClassificationController implements ClassificationBLService{
 
-	ClassificationBL classificationBL;
+	ClassificationBL classificationBL=new ClassificationBL();
 	
 	@Override
 	public String getID() {

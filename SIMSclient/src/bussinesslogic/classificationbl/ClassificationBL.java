@@ -7,10 +7,15 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
 import po.ClassificationVPO;
+import rmi.RemoteHelper;
 
 public class ClassificationBL implements ClassificationBLService {
 
-	ClassificationDataService classificationDataService;
+	private ClassificationDataService classificationDataService;
+	
+	public ClassificationBL() {
+		classificationDataService=RemoteHelper.getInstance().getClassificationDataService();
+	}
 	
 	@Override
 	public String getID() {//用于生成新创建的商品分类的id
