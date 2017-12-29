@@ -1,6 +1,7 @@
 package bussinesslogic.accountbillbl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.accountbl.AccountController;
@@ -12,6 +13,7 @@ import dataenum.BillState;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
+import javafx.util.converter.LocalDateStringConverter;
 import po.FinancialBill.ReceiptBillPO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
@@ -126,8 +128,30 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public String getId() {
-		return null;
+		LocalDate l=null;
+		l=LocalDate.now();
+		int count=0;
+		try {
+			ArrayList<ReceiptBillPO> receiptBillPOs=receiptBillDataService.showReceiptBill();
+			for (int i = 0; i < receiptBillPOs.size(); i++) {
+				if(l==StringtoDate(receiptBillPOs.get(i).getID()))
+					count++;
+			}
+			count+=1;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		return Integer.toString(count);
 	}
-
+	
+	public LocalDate StringtoDate(String id){//idÊÇµ¥¾Ý±àºÅ
+		String s=id.split("-")[1];
+		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());
+		LocalDate l=null;
+		LocalDateStringConverter localDate =new LocalDateStringConverter();
+		l=localDate.fromString(date);
+		return l;
+	}
 
 }

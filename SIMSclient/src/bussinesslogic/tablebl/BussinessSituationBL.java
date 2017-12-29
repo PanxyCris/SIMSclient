@@ -3,28 +3,35 @@ package bussinesslogic.tablebl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import bussinesslogic.billbl.inventory.InventoryBillBL;
 import bussinesslogic.billbl.inventory.InventoryBillController;
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
-import bussinesslogicservice.billblservice.inventory.InventoryGiftBillBLService;
 import bussinesslogicservice.checktableblservice.BussinessSituationBLService;
+import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
+import dataenum.BillType;
 import dataenum.MoneyType;
+import dataenum.findtype.FindCommodityType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.salesbillvo.SalesVO;
+import vo.commodityvo.CommodityVO;
+import vo.commodityvo.GiftVO;
 import vo.tablevo.PaymentTableVO;
 import vo.tablevo.ReceiveTableVO;
 
+//对商品类收入存在疑问
 public class BussinessSituationBL implements BussinessSituationBLService {
 
-	SalesBLService salesBLService;
-	InventoryBillBLService inventoryBillBLService;
+	private SalesBLService salesBLService;
+	private InventoryBillBLService inventoryBillBLService;
+	private CommodityBLService commodityBLService;
 	
 	public BussinessSituationBL() {
 		salesBLService=new SalesController();
 		inventoryBillBLService=new InventoryBillController();
+		commodityBLService=new CommodityBL();
 	}
 	
 	@Override
@@ -42,9 +49,24 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 			Double sum=salesVOs.get(i).getAfterPrice();//销售成本
 			paymentTableVOs.add(new PaymentTableVO(localDate, MoneyType.SALES, sum));
 		}
-		//商品报损
-		ArrayList<InventoryBillVO> inventoryBillVOs1=inventoryBillBLService.
-		
+		//商品报损或赠出
+		ArrayList<InventoryBillVO> inventoryBillVOs=inventoryBillBLService.show();
+		for (int i = 0; i < inventoryBillVOs.size(); i++) {
+			if(inventoryBillVOs.get(i).getType()==BillType.INVENTORYGIFTBILL||inventoryBillVOs.get(i).getType()==BillType.INVENTORYLOSSBILL){
+				LocalDate localDate=StringtoDate(inventoryBillVOs.get(i).getId());
+				double sum=0.0;
+				ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
+				for (int j = 0; j < giftVOs.size(); j++) {
+					try {//这里会多访问一次数据库，可以优化
+						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(i).getName(), FindCommodityType.NAME);
+						sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(i).getNumber();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				paymentTableVOs.add(new PaymentTableVO(localDate, MoneyType.COMMODITY, sum));
+			}
+		}
 		
 		return paymentTableVOs;
 	}
@@ -76,7 +98,26 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				paymentTableVOs.add(new PaymentTableVO(localDate, MoneyType.SALES, sum));
 			}
 		}
-		//商品类支出(报溢报损)
+		//商品报损或赠出
+		ArrayList<InventoryBillVO> inventoryBillVOs=inventoryBillBLService.show();
+		for (int i = 0; i < inventoryBillVOs.size(); i++) {
+			LocalDate localDate=StringtoDate(inventoryBillVOs.get(i).getId());
+			if(localDate.isBefore(end)&&localDate.isAfter(start)){
+				if(inventoryBillVOs.get(i).getType()==BillType.INVENTORYGIFTBILL||inventoryBillVOs.get(i).getType()==BillType.INVENTORYLOSSBILL){
+					double sum=0.0;
+					ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
+					for (int j = 0; j < giftVOs.size(); j++) {
+						try {//这里会多访问一次数据库，可以优化
+							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(i).getName(), FindCommodityType.NAME);
+							sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(i).getNumber();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					paymentTableVOs.add(new PaymentTableVO(localDate, MoneyType.COMMODITY, sum));
+				}
+			}
+		}
 		
 		return paymentTableVOs;
 	}

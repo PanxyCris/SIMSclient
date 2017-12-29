@@ -1,6 +1,7 @@
 package bussinesslogic.accountbillbl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.accountbl.AccountController;
@@ -12,6 +13,7 @@ import dataenum.BillState;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
+import javafx.util.converter.LocalDateStringConverter;
 import po.FinancialBill.PaymentBillPO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
@@ -139,19 +141,31 @@ public class PaymentBillBL implements PaymentBillBLService{
 	}
 
 	@Override
-	public String getId() {
+	public String getId() {//这里返回的只是数字
+		LocalDate l=null;
+		l=LocalDate.now();
 		int count=0;
 		try {
 			ArrayList<PaymentBillPO> paymentBillPOs=paymentBillDataService.showPaymentBill();
-			for (int i = paymentBillPOs.size()-1; i > 0; i--) {
-				
+			for (int i = 0; i < paymentBillPOs.size(); i++) {
+				if(l==StringtoDate(paymentBillPOs.get(i).getID()))
+					count++;
 			}
+			count+=1;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return Integer.toString(count);
 	}
-
+	
+	public LocalDate StringtoDate(String id){//id是单据编号
+		String s=id.split("-")[1];
+		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());
+		LocalDate l=null;
+		LocalDateStringConverter localDate =new LocalDateStringConverter();
+		l=localDate.fromString(date);
+		return l;
+	}
 
 }

@@ -16,6 +16,7 @@ import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
+//∫Ï≥Â“¿æ…¥Ê‘⁄Œ Ã‚
 public class BusinessHistorySchedulePaymentBL implements BusinessHistoryScheduleBLService<PaymentBillVO> {
 
 	private ExamineBLService<PaymentBillVO> examineBLService;
