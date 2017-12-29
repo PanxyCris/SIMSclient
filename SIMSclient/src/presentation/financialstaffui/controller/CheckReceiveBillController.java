@@ -13,7 +13,6 @@ import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
-import dataenum.findtype.FindReceiptBillType;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -38,6 +37,7 @@ import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
+import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.uservo.UserVO;
 
 public class CheckReceiveBillController extends BussinessProcessTableController{
@@ -90,8 +90,8 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOff(result);
-		list.removeAll(result);
+		list.addAll(service.writeOff(result));
+		table.setItems(list);
 	}
 
 	@FXML
@@ -100,8 +100,14 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOffAndCopy(result);
-		list.removeAll(result);
+		ArrayList<ReceiptBillVO> copy = service.writeOffAndCopy(result);
+        list.clear();
+		list.addAll(copy);
+		table.setItems(list);
+		table.setEditable(true);
+		accountVOList.clear();
+		accountList.setItems(accountVOList);
+		accountList.setEditable(true);
 	}
 
 

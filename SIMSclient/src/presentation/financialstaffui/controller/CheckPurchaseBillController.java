@@ -97,8 +97,7 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOff(result);
-		list.removeAll(result);
+		list.addAll(service.writeOff(result));
 	}
 
 	@FXML
@@ -107,8 +106,14 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOffAndCopy(result);
-		list.removeAll(result);
+		ArrayList<PurchaseVO> copy = service.writeOffAndCopy(result);
+        list.clear();
+		list.addAll(copy);
+		table.setItems(list);
+		table.setEditable(true);
+		commodityList.clear();
+		commodity.setItems(commodityList);
+		commodity.setEditable(true);
 	}
 
 

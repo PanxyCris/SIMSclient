@@ -154,6 +154,6 @@
 		<TextField fx:id="retailedPriceField" layoutX="759.0" layoutY="484.0" prefHeight="23.0" prefWidth="75.0" />
 		<TextField fx:id="warmingValueField" layoutX="832.0" layoutY="484.0" prefHeight="23.0" prefWidth="75.0" />
 		<Button layoutX="907.0" layoutY="484.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="107.0" text="增   加" />
-      <TextField fx:id="classField" layoutX="534.0" layoutY="484.0" prefHeight="23.0" prefWidth="75.0" />
+      <ComboBox fx:id="classChoice" editable="true" layoutX="534.0" layoutY="484.0" prefHeight="23.0" prefWidth="75.0" />
 	</children>
 </AnchorPane>

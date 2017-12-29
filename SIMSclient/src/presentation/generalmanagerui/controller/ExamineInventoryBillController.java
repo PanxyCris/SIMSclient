@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellInteger;
 import presentation.remindui.RemindPrintUI;
+import vo.accountvo.AccountVO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 import vo.uservo.UserVO;
@@ -35,6 +36,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
 		public static final Remind remind = Remind.BILL;
+		InventoryBillVO inv;
 
 		@FXML
 		ChoiceBox<String> findChoice;
@@ -155,7 +157,17 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		                ((GiftVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setNumber(t.getNewValue());
-
+                      giftList.set(t.getTablePosition().getRow(),  ((GiftVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ));
+                      ArrayList<GiftVO> tmpGifts = new ArrayList<>();
+                      tmpGifts.addAll(giftList);
+                      inv.setGifts(tmpGifts);
+                      try {
+						service.updateBill(inv);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
 
 		        });
 
@@ -181,7 +193,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	                            giftList.clear();
 	                            giftList.addAll(clickedItem.getGifts());
 	                            giftTable.setItems(giftList);
-
+                                inv = clickedItem;
 	                        });
 	                    }
 	                }
@@ -191,8 +203,5 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	        });
 
 		}
-
-
-
 
 }
