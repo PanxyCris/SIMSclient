@@ -1,16 +1,22 @@
 package bussinesslogic.tablebl;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.examineblservice.ExamineBLService;
+import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
+import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
 public class BusinessHistorySchedulePaymentBL implements BusinessHistoryScheduleBLService<PaymentBillVO> {
 
+	ExamineBLService<PaymentBillVO> examineBLService;
 	PaymentBillBLService paymentBillBLService;
 	
 	@Override
@@ -65,12 +71,21 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public void writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
-		
+		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			pArrayList.add(redRush(table.get(i)));
+		}		
+		try {
+			examineBLService.passBills(pArrayList);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void writeOffAndCopy(ArrayList<PaymentBillVO> table) {//不能是总经理
-		
+		//这里应该返回arrlist<paymentvo>？
+			
 	}
 
 	public LocalDate StringtoDate(String id){//id是单据编号
@@ -80,6 +95,25 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+	
+	public PaymentBillVO redRush(PaymentBillVO paymentBillVO){//红冲数据转化方法
+		String docID=paymentBillVO.getId();
+		String customerID=paymentBillVO.getCustomerID();
+		String userID=paymentBillVO.getUserID();
+		String accountID=paymentBillVO.getAccountID();
+		String note=paymentBillVO.getNote();
+		BillState billState=paymentBillVO.getState();
+		BillType billType=paymentBillVO.getType();
+		//以上是不会变化的单据属性
+		//以下是会将数值取负的单据属性
+		double total=-paymentBillVO.getTotal();
+		ArrayList<EntryVO> eVOs=new ArrayList<>();
+		ArrayList<EntryVO> entryVOs=paymentBillVO.getEntryListVO();
+		for (int i = 0; i < entryVOs.size(); i++) {
+			eVOs.add(new EntryVO(entryVOs.get(i).getEntryName(),-entryVOs.get(i).getTransferAmount(), entryVOs.get(i).getNote()));
+		}
+		return new PaymentBillVO(docID, userID, customerID, accountID, eVOs, total, billType, billState, note);
 	}
 	
 }
