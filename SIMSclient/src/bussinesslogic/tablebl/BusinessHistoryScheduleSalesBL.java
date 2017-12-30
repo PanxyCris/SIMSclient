@@ -1,11 +1,17 @@
 package bussinesslogic.tablebl;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.examinebl.ExamineSalesBL;
 import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.examineblservice.ExamineBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.Warehouse;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.salesbillvo.SalesVO;
@@ -14,9 +20,11 @@ import vo.commodityvo.CommodityItemVO;
 public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBLService<SalesVO> {
 
 	private SalesBLService salesBLService;
+	private ExamineBLService<SalesVO> examineBLService;
 	
 	public BusinessHistoryScheduleSalesBL() {
 		salesBLService=new SalesController();
+		examineBLService=new ExamineSalesBL();
 	}
 	
 	@Override
@@ -83,12 +91,33 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 
 	@Override
 	public ArrayList<SalesVO> writeOff(ArrayList<SalesVO> table) {
+		ArrayList<SalesVO> sList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			SalesVO salesVO=redRush(table.get(i));
+			salesVO.setState(BillState.COMMITED);
+			salesBLService.save(salesVO);
+			sList.add(salesVO);
+		}
+		try {
+			examineBLService.passBills(sList);
+			return sList;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
 	@Override
 	public ArrayList<SalesVO> writeOffAndCopy(ArrayList<SalesVO> table) {
-		return null;
+		ArrayList<SalesVO> sList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			SalesVO salesVO=redRush(table.get(i));
+			salesVO.setState(BillState.COMMITED);
+			salesBLService.save(salesVO);
+			sList.add(salesVO);
+		}		
+		return sList;
 	}
 
 	public LocalDate StringtoDate(String id){//idÊÇµ¥¾Ý±àºÅ
@@ -98,6 +127,29 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+	
+	public SalesVO redRush(SalesVO salesVO){
+		String id=salesBLService.getBackSaleID();
+		String retailer=salesVO.getRetailer();
+		String saleMan=salesVO.getSaleMan();
+		String operator=salesVO.getOperator();
+		String note=salesVO.getNote();
+		BillState billState=salesVO.getState();
+		BillType billType=salesVO.getType();
+		Warehouse warehouse=salesVO.getWarehouse();
+		
+		Double beforePrice=-salesVO.getBeforePrice();
+		Double allowance=-salesVO.getAllowance();
+		Double voucher=-salesVO.getVoucher();
+		Double afterPrice=-salesVO.getAfterPrice();
+		
+		ArrayList<CommodityItemVO> commodity=salesVO.getCommodity();
+		for (int i = 0; i < commodity.size(); i++) {
+			Integer number=commodity.get(i).getNumber();
+			commodity.get(i).setNumber(-number);
+		}
+		return new SalesVO(id, retailer, saleMan, operator, warehouse, commodity, beforePrice, allowance, voucher, afterPrice, note, billState, billType);
 	}
 	
 }

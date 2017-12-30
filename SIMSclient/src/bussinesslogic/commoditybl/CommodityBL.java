@@ -2,6 +2,7 @@ package bussinesslogic.commoditybl;
 
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
+import javafx.util.converter.LocalDateStringConverter;
 import po.ClassificationVPO;
 import po.MemberPO;
 import po.commodity.CommodityPO;
@@ -209,10 +211,25 @@ public class CommodityBL implements CommodityBLService{
 //ccw
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
+		ArrayList<CommodityCheckVO> checkVOs=new ArrayList<>();
 		ArrayList<SalesVO> salesVOs=salesBLService.show();
+		for (int i = 0; i < salesVOs.size(); i++) {
+			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
+//			if(localDate.isAfter(startDate)&&localDate.isBefore(endDate)){
+//				
+//			}
+		}
 		ArrayList<PurchaseVO> purchaseVOs=purchaseBLService.show();
 		return null;
 	}
-
+	
+	public LocalDate StringtoDate(String id){//id «µ•æ›±‡∫≈
+		String s=id.split("-")[1];
+		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());
+		LocalDate l=null;
+		LocalDateStringConverter localDate =new LocalDateStringConverter();
+		l=localDate.fromString(date);
+		return l;
+	}
 	
 }
