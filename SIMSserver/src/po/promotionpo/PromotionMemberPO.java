@@ -5,13 +5,14 @@ package po.promotionpo;
 * @date 2017Äê12ÔÂ27ÈÕ
 */
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.MemberLevel;
 import dataenum.PromotionType;
 import po.commodity.GiftPO;
 
-public class PromotionMemberPO extends PromotionPO {
+public class PromotionMemberPO extends PromotionPO implements Serializable{
 	
 	private static final long serialVersionUID = 7539070862489685774L;
 	private MemberLevel level;

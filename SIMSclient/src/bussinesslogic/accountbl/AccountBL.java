@@ -149,7 +149,7 @@ public class AccountBL implements AccountBLService {
 
 		accountVO = new AccountVO("", "", 0.0);
 
-		ArrayList<AccountPO> accountPOs = new ArrayList<>();
+		ArrayList<AccountPO> accountPOs = null;
 		ArrayList<AccountVO> accountVOs = new ArrayList<>();
 		try {
 			accountPOs = accountDataService.showAccount();
@@ -157,7 +157,7 @@ public class AccountBL implements AccountBLService {
 			e.printStackTrace();
 		}
 		if (!accountPOs.isEmpty()) {
-			for (int i = 0; i < accountVOs.size(); i++) {
+			for (int i = 0; i < accountPOs.size(); i++) {
 				accountVO = accountTransition.POtoVO(accountPOs.get(i));
 				accountVOs.add(accountVO);
 			}

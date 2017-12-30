@@ -30,7 +30,7 @@ public class AccountData {
 	 public static void main(String[] args) throws RemoteException {
 	 AccountData a = new AccountData();
 	 AccountPO po = new AccountPO("000007", "Íõ²Ó²Ó", 4000);
-	 a.insert(po);
+	// a.insert(po);
 	 ArrayList<AccountPO> list = a.show();
 	 for (AccountPO p : list) {
 	 System.out.println(p.getId() + " " + p.getName() + " " + p.getMoney());
