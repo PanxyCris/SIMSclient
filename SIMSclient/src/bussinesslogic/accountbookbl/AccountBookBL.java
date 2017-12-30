@@ -7,16 +7,21 @@ import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import dataenum.ResultMessage;
 import dataservice.accountbookdataservice.AccountBookDataService;
 import po.AccountBookPO;
+import rmi.RemoteHelper;
 import vo.accountbookvo.AccountBookVO;
 
 public class AccountBookBL implements AccountBookBLService{
 
-	AccountBookVO accountBookVO;
-	AccountBookPO accountBookPO;
+	private AccountBookVO accountBookVO;
+	private AccountBookPO accountBookPO;
 	
-	AccountBookTransition accountBookTransition;
-	AccountBookDataService accountBookDataService;
+	private AccountBookTransition accountBookTransition;
+	private AccountBookDataService accountBookDataService;
 	
+	public AccountBookBL() {
+		accountBookTransition=new AccountBookTransition();
+		accountBookDataService=RemoteHelper.getInstance().getSetUpAccountDataService();
+	}
 	@Override
 	public ResultMessage newBuild(AccountBookVO accountBookVO) {
 		String date=accountBookVO.getDate();

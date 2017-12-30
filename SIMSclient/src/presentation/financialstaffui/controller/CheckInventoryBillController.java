@@ -1,5 +1,6 @@
 package presentation.financialstaffui.controller;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussinesslogic.tablebl.BusinessHistoryScheduleInventoryBL;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
@@ -14,7 +15,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import presentation.common.EditingCellInteger;
 import presentation.generalmanagerui.controller.BussinessProcessTableController;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
@@ -26,6 +30,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
 		public static final Remind remind = Remind.BILL;
+		InventoryBillVO inv;
 
 		@FXML
 		DatePicker startPicker;
@@ -59,8 +64,8 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 			for(int i=0;i<list.size();i++)
 				if(list.get(i).getRed().isSelected())
 					result.add(list.get(i));
-			service.writeOff(result);
-			list.removeAll(result);
+			list.addAll(service.writeOff(result));
+             table.setItems(list);
 		}
 
 		@FXML
@@ -69,8 +74,15 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 			for(int i=0;i<list.size();i++)
 				if(list.get(i).getRed().isSelected())
 					result.add(list.get(i));
-			service.writeOffAndCopy(result);
-			list.removeAll(result);
+			ArrayList<InventoryBillVO> copy = service.writeOffAndCopy(result);
+            list.clear();
+			list.addAll(copy);
+			table.setItems(list);
+			table.setEditable(true);
+			giftList.clear();
+			giftTable.setItems(giftList);
+			giftTable.setEditable(true);
+            edit();
 		}
 
 		@FXML
@@ -139,7 +151,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	                            giftList.clear();
 	                            giftList.addAll(clickedItem.getGifts());
 	                            giftTable.setItems(giftList);
-
+                                inv = clickedItem;
 	                        });
 	                    }
 	                }
@@ -150,6 +162,32 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 
 		}
 
+		public void edit(){
+		    Callback<TableColumn<GiftVO, Integer>,
+			    TableCell<GiftVO, Integer>> cellFactoryInteger
+			        = (TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
+
+		    tableNumber.setCellFactory(cellFactoryInteger);
+		    tableNumber.setOnEditCommit(
+		            (CellEditEvent<GiftVO, Integer> t) -> {
+		                ((GiftVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setNumber(t.getNewValue());
+                      giftList.set(t.getTablePosition().getRow(),  ((GiftVO) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ));
+                      ArrayList<GiftVO> tmpGifts = new ArrayList<>();
+                      tmpGifts.addAll(giftList);
+                      inv.setGifts(tmpGifts);
+                      try {
+						service.updateBill(inv);
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+
+		        });
+
+		}
 
 
 

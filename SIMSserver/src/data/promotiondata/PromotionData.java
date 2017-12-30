@@ -11,10 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import data.DBManager;
+import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
+import po.commodity.GiftPO;
+import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPO;
 
 /**
@@ -23,6 +27,19 @@ import po.promotionpo.PromotionPO;
 * @date 2017年12月6日
 */
 public class PromotionData<P extends PromotionPO> {
+	
+	public static void main(String[] args){
+		PromotionData<PromotionMemberPO> data = new PromotionData<>();
+		GiftPO gift1 = new GiftPO("赠品1",2);
+		GiftPO gift2 = new GiftPO("赠品2",3);
+		ArrayList<GiftPO> gifts = new ArrayList<>();
+		gifts.add(gift1);
+		gifts.add(gift2);
+		PromotionMemberPO pro = new PromotionMemberPO("000001",LocalDate.of(2017, 12, 1),LocalDate.now(),
+				MemberLevel.LEVEL1,20.0,20.0,gifts);
+		data.insert(pro);
+		System.out.println(data.show().get(0).getId());
+	}
 
 	public ResultMessage insert(P po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接

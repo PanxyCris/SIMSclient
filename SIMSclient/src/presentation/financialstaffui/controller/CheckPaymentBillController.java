@@ -90,8 +90,8 @@ public class CheckPaymentBillController extends BussinessProcessTableController{
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOff(result);
-		list.removeAll(result);
+		list.addAll(service.writeOff(result));
+
 	}
 
 	@FXML
@@ -100,8 +100,14 @@ public class CheckPaymentBillController extends BussinessProcessTableController{
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		service.writeOffAndCopy(result);
-		list.removeAll(result);
+		ArrayList<PaymentBillVO> copy = service.writeOffAndCopy(result);
+        list.clear();
+		list.addAll(copy);
+		table.setItems(list);
+		table.setEditable(true);
+		entryList.clear();
+		itemList.setItems(entryList);
+        itemList.setEditable(true);
 	}
 
 

@@ -15,7 +15,7 @@ public class ReceiptBillPO extends FinancialDocPO {
 			,ArrayList<AccountListPO> accountListPOs,Double total) {
 		super(docID,userID,customerID,billType,billState);
 		this.total=total;
-		accountListPOs=new ArrayList<AccountListPO>();
+		this.accountListPOs=accountListPOs;;
 	}
 
 	public ArrayList<AccountListPO> getAccountListPOs() {

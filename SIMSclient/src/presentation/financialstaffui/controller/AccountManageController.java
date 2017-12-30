@@ -84,8 +84,8 @@ public class AccountManageController extends FinancialStaffController implements
 
         @FXML
         public void find(){
-            ArrayList<AccountVO> list = service.find(findingField.getText(),FindAccountType.getFindType(findChoice.getValue()));
-               if(list==null){
+            ArrayList<AccountVO> accountList = service.find(findingField.getText(),FindAccountType.getFindType(findChoice.getValue()));
+               if(accountList==null){
                    Platform.runLater(new Runnable() {
                         public void run() {
                             try {
@@ -97,8 +97,9 @@ public class AccountManageController extends FinancialStaffController implements
                     });
                }
                else{
-                   table.getItems().clear();
-                   table.getItems().addAll(list);
+                   list.clear();
+                   list.addAll(accountList);
+                   table.setItems(list);
                    initFind();
                }
         }

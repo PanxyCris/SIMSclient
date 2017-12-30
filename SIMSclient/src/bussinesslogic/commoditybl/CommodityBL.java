@@ -6,14 +6,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import bussinesslogic.classificationbl.ClassificationBL;
+import bussinesslogic.classificationbl.ClassificationController;
+import bussinesslogic.purchasebl.PurchaseController;
+import bussinesslogic.salesbl.SalesController;
+import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
+import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
+import po.ClassificationVPO;
 import po.MemberPO;
 import po.commodity.CommodityPO;
 import rmi.RemoteHelper;
 import vo.ViewObject;
+import vo.billvo.purchasebillvo.PurchaseVO;
+import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityCheckVO;
 import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
@@ -33,10 +43,16 @@ public class CommodityBL implements CommodityBLService{
 
 	private CommodityDataService service;
 	private CommodityTransiton transition;
+	private ClassificationBLService classificationBLService;
+	private SalesBLService salesBLService;
+	private PurchaseBLService purchaseBLService;
 	
 	public CommodityBL() {
 		service = RemoteHelper.getInstance().getCommodityDataService();
 		transition = new CommodityTransiton();
+		classificationBLService=new ClassificationController();
+		salesBLService=new SalesController();
+		purchaseBLService=new PurchaseController();
 	}
 	
 	@Override
@@ -158,13 +174,43 @@ public class CommodityBL implements CommodityBLService{
 		return result;
 	}
 
+//ccw
+	static ArrayList<String> nameList=null;
+
+	public void addName(ClassificationVPO classificationVPO){
+		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
+		if(childrenVPOs!=null){
+			for (int i = 0; i < childrenVPOs.size(); i++) {
+					if(childrenVPOs.get(i).getB()==true){
+						addName(childrenVPOs.get(i));
+					}
+					else{
+						nameList.add(classificationVPO.getName());
+						break;
+					}
+				}
+			}
+		else{
+			if(classificationVPO.getB()==true){
+				nameList.add(classificationVPO.getName());
+			}
+		}
+	}
+	
+//ccw
 	@Override
 	public ArrayList<String> getAllChildrenClass() throws Exception {
-		return null;
+		nameList=new ArrayList<>();
+		ClassificationVPO root=classificationBLService.getRoot();
+		addName(root);
+		return nameList;
 	}
 
+//ccw
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
+		ArrayList<SalesVO> salesVOs=salesBLService.show();
+		ArrayList<PurchaseVO> purchaseVOs=purchaseBLService.show();
 		return null;
 	}
 

@@ -22,5 +22,7 @@ public interface ReceiptBillBLService {
 	public ArrayList<String> getCustomerList();//id+" "+name
 
 	public ResultMessage commit(ReceiptBillVO receiptBillVO);
+	
+	public String getId();
 
 }

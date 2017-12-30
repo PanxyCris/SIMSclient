@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -47,7 +48,7 @@ public class CommodityManageController extends InventoryManagerController{
     @FXML
     protected TextField modelField;
     @FXML
-    protected ChoiceBox<String> classChoice;
+    protected ComboBox<String> classChoice;
     @FXML
     protected TextField numberField;
     @FXML

@@ -3,6 +3,7 @@ package bussinesslogic.tablebl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.findtype.FindSaleScheduleType;
@@ -13,8 +14,11 @@ import vo.tablevo.SaleScheduleVO;
 
 public class SaleScheduleBL implements SaleScheduleBLService {
 
-	SalesBLService salesBLService;
+	private SalesBLService salesBLService;
 	
+	public SaleScheduleBL() {
+		salesBLService=new SalesController();
+	}
 	
 	@Override
 	public void exportReport() {//这个是导出为excel的方法

@@ -12,7 +12,7 @@ public class ExamineBillController extends GeneralManagerController {
 
 	public static final Remind remind = Remind.BILL;
 	@FXML
-	ChoiceBox<String> receiptChoice;
+	protected ChoiceBox<String> receiptChoice;
 
 	@FXML
 	public void chooseReceipt() throws Exception{
@@ -20,7 +20,7 @@ public class ExamineBillController extends GeneralManagerController {
 		switch(type){
 		case PURCHASEBILL:changeStage("ExaminePurchaseBillUI",user,type);break;
 		case INVENTORYBILL:changeStage("ExamineInventoryBillUI",user,type);break;
-		case SALESBILL:changeStage("ExamineSakesBillUI",user,type);break;
+		case SALESBILL:changeStage("ExamineSalesBillUI",user,type);break;
 		case SKD:changeStage("ExaminePaymentBillUI",user,type);break;
 		case XJFYD:changeStage("ExamineReceiveBillUI",user,type);break;
 		default:break;

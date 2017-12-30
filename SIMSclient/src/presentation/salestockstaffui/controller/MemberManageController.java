@@ -153,7 +153,10 @@ public class MemberManageController extends SaleStockStaffController implements 
 		}
 
 		public void initInsert() throws RemoteException{
+			if(service.getId()!=null)
 			idLabel.setText(service.getId());
+			else
+				idLabel.setText("000001");
 			classChoice.setValue(null);
 			levelChoice.setValue(null);
 			nameField.setText(null);

@@ -124,10 +124,10 @@ public class ExaminePurchaseBillController extends ExamineBillController{
         service.notPassBills(choiceList);
 	}
 
-	public void initData(UserVO user,BillType type) throws RemoteException {
+	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
-		this.billType = type;
-		receiptChoice.setValue(type.value);
+	//	choiceInit();
+	//	receiptChoice.setValue(BillType.PURCHASEBILL.value);
 	    list.addAll(service.getCommitedBills());
 		table.setItems(list);
 		edit();
