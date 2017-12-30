@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
+import bussinesslogic.promotionbl.PromotionMemberBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
@@ -43,7 +44,7 @@ import vo.uservo.UserVO;
 
 public class PromotionMemberController extends PromotionMakingController{
 
-	PromotionBLService<PromotionMemberVO> service = new PromotionMemberBLService_Stub();
+	PromotionBLService<PromotionMemberVO> service = new PromotionMemberBL();
 	public static final Remind remind = Remind.PROMOTION;
 	PromotionType type = PromotionType.LEVEL_PROMOTION;
     ObservableList<PromotionMemberVO> list = FXCollections.observableArrayList();
@@ -164,7 +165,10 @@ public class PromotionMemberController extends PromotionMakingController{
 	}
 
 	public void initInsert() throws RemoteException{
+		if(service.getID()!=null)
         idLabel.setText(service.getID());
+		else
+			idLabel.setText(null);
 		levelChoice.setValue(null);
 		allowanceField.setText(null);
 		voucherField.setText(null);

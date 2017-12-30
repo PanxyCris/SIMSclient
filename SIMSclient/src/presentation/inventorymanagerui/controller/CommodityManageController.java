@@ -140,7 +140,7 @@ public class CommodityManageController extends InventoryManagerController{
 		idLabel.setText(service.getID());
 		else
 			idLabel.setText("000001");
-		classChoice.setValue(null);
+//		classChoice.setValue(null);
 		nameField.setText(null);
 		modelField.setText(null);
 		numberField.setText(null);

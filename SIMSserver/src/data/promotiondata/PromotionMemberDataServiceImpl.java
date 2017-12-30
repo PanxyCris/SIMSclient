@@ -11,6 +11,10 @@ import po.promotionpo.PromotionMemberPO;
 public class PromotionMemberDataServiceImpl implements PromotionMemberDataService{
 
 	private PromotionData<PromotionMemberPO> promotion;
+	
+	public static void main(String[] args) {
+		
+	}
 
 	public PromotionMemberDataServiceImpl() {
 		promotion = new PromotionData<>();

@@ -131,6 +131,7 @@ public class PromotionData<P extends PromotionPO> {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<P> show() {
 		ArrayList<P> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();

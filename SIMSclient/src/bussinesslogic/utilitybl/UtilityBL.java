@@ -81,16 +81,24 @@ public class UtilityBL implements UtilityBLService{
 	public ArrayList<MessageVO> getMessage(UserVO user) {
         UserPO po = bl.voTopo(user);
 		ArrayList<MessageVO> messages = new ArrayList<>();
-		for(MessagePO message:messageService.getMessage(po))
-			messages.add(poTovo(message));
+		try {
+			for(MessagePO message:messageService.getMessage(po))
+				messages.add(poTovo(message));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return messages;
 	}
 
 	@Override
 	public boolean hasMessage(UserVO user) {
-		for(MessagePO message:messageService.getMessage(bl.voTopo(user)))
-			if(message.getHasRead() == false)
-				return true;
+		try {
+			for(MessagePO message:messageService.getMessage(bl.voTopo(user)))
+				if(message.getHasRead() == false)
+					return true;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
