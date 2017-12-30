@@ -1,6 +1,8 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
+
+import bussiness_stub.ClassificationBLService_Stub;
 import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.Remind;

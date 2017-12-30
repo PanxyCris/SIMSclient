@@ -12,11 +12,11 @@ import rmi.RemoteHelper;
 public class ClassificationBL implements ClassificationBLService {
 
 	private ClassificationDataService classificationDataService;
-	
+
 	public ClassificationBL() {
 		classificationDataService=RemoteHelper.getInstance().getClassificationDataService();
 	}
-	
+
 	@Override
 	public String getID() {//用于生成新创建的商品分类的id
 		idCount=1;
@@ -31,7 +31,7 @@ public class ClassificationBL implements ClassificationBLService {
 		addName(root);
 		return nameList;
 	}
-	
+
 	@Override
 	public ResultMessage insert(ClassificationVPO vpo) {
 		try {
@@ -83,7 +83,7 @@ public class ClassificationBL implements ClassificationBLService {
 	}
 
 	static int idCount=0;
-	
+
 	public int count(ClassificationVPO classificationVPO){
 		if(classificationVPO.getChildren()==null){
 			return 0;
@@ -95,14 +95,18 @@ public class ClassificationBL implements ClassificationBLService {
 		}
 		return idCount;
 	}
-	
+
 	static ArrayList<String> nameList=null;
-	
+
 	public void addName(ClassificationVPO classificationVPO){
 		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
+		if(childrenVPOs!=null){
 		for (int i = 0; i < childrenVPOs.size(); i++) {
-			addName(childrenVPOs.get(i));
+
 			nameList.add(childrenVPOs.get(i).getName());
+			addName(childrenVPOs.get(i));
+
+		}
 		}
 	}
 
