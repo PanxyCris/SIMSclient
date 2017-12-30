@@ -43,7 +43,6 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 				out.add(receiptBillVOs.get(i));
 			}
 		}
-		
 		return out;
 	}
 	
@@ -82,10 +81,13 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 	public ArrayList<ReceiptBillVO> writeOff(ArrayList<ReceiptBillVO> table) {
 		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
-			rList.add(redRush(table.get(i)));
+			ReceiptBillVO receiptBillVO=redRush(table.get(i));
+			receiptBillVO.setState(BillState.COMMITED);
+			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
+			rList.add(receiptBillVO);
 		}
 		
-	
+		
 		try {
 			examineBLService.passBills(rList);
 			return rList;
@@ -110,13 +112,14 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 	}
 	
 	public ReceiptBillVO redRush(ReceiptBillVO receiptBillVO){
-		String docID=receiptBillVO.getId();
 		String customerID=receiptBillVO.getCustomerID();
 		String userID=receiptBillVO.getUserID();
 		String note=receiptBillVO.getNote();
 		BillState billState=receiptBillVO.getState();
 		BillType billType=receiptBillVO.getType();
 		//以上是不会变化的单据属性
+		//单据的id要另外存取
+		String docID=receiptBillBLService.getId();
 		//以下是会将数值取负的单据属性
 		double total=-receiptBillVO.getTotal();
 		ArrayList<AccountListVO> aVOs=new ArrayList<>();

@@ -42,13 +42,26 @@ public class PaymentBillBL implements PaymentBillBLService{
 	@Override
 	public ResultMessage save(PaymentBillVO paymentBillVO) {
 		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
-		
+		ArrayList<PaymentBillPO> paymentBillPOs=null;
 		try {
-			return paymentBillDataService.insertPaymentBill(paymentBillPO);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+			paymentBillPOs=paymentBillDataService.findPaymentBill(paymentBillVO.getId(), FindAccountBillType.BILLID);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
 		}
-		
+		if(paymentBillPOs.isEmpty()){//找不到，新建
+			try {
+				return paymentBillDataService.insertPaymentBill(paymentBillPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+		else{//找到，修改
+			try {
+				return paymentBillDataService.updatePaymentBill(paymentBillPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
 		return ResultMessage.FAIL;
 	}
 
@@ -141,7 +154,7 @@ public class PaymentBillBL implements PaymentBillBLService{
 	}
 
 	@Override
-	public String getId() {//这里返回的只是数字
+	public String getId() {
 		LocalDate l=null;
 		l=LocalDate.now();
 		int count=0;

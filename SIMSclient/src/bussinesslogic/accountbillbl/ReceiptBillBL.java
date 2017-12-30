@@ -40,13 +40,26 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
 		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
-		
+		ArrayList<ReceiptBillPO> receiptBillPOs=null;
 		try {
-			return receiptBillDataService.insertReceiptBill(receiptBillPO);
-		} catch (RemoteException e) {
-			e.printStackTrace();
+			receiptBillPOs=receiptBillDataService.findReceiptBill(receiptBillVO.getId(), FindAccountBillType.BILLID);
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
 		}
-		
+		if(receiptBillPOs.isEmpty()){
+			try {
+				return receiptBillDataService.insertReceiptBill(receiptBillPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+		else{
+			try {
+				return receiptBillDataService.updateReceiptBill(receiptBillPO);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
 		return ResultMessage.FAIL;
 	}
 
