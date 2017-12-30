@@ -10,6 +10,7 @@ import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
@@ -155,7 +156,15 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 			e.printStackTrace();
 		}
 		
-		return Integer.toString(count);
+		String number=Integer.toString(count);
+		while (5>number.length()) {
+			number="0"+number;
+		}
+		String[] date=l.toString().split("-");
+		String id="";
+		id=BillType.SKD.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
+		
+		return id;
 	}
 	
 	public LocalDate StringtoDate(String id){//id «µ•æ›±‡∫≈
