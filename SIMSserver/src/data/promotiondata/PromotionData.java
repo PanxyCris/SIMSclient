@@ -149,8 +149,8 @@ public class PromotionData<P extends PromotionPO> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<P> show() {
-		ArrayList<P> list = new ArrayList<>();
+	public ArrayList<PromotionPO> show() {
+		ArrayList<PromotionPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
 		String sql = "select object from promotion";
 		try {

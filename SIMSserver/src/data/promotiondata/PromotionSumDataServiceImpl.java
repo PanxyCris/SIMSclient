@@ -1,6 +1,7 @@
 package data.promotiondata;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
@@ -16,6 +17,14 @@ public class PromotionSumDataServiceImpl implements PromotionSumDataService {
 		promotion = new PromotionData<>();
 	}
 
+//	public static void main(String[] args) throws RemoteException {
+//		LocalDate beginDate = LocalDate.of(2016, 12, 31);
+//		LocalDate endDate = LocalDate.of(2017, 12, 31);
+//		PromotionTotalPO po = new PromotionTotalPO("0001", beginDate, endDate, 100.0, 200.0, null);
+//		PromotionSumDataServiceImpl p = new PromotionSumDataServiceImpl();
+//		p.insertPromotion(po);
+//		System.out.println(p.showSumPromotion().get(0).getId());
+//	}
 
 	@Override
 	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException {

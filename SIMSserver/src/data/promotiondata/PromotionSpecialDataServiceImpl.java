@@ -1,10 +1,17 @@
 package data.promotiondata;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import javax.xml.transform.Result;
+
+import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
+import po.commodity.GiftPO;
+import po.promotionpo.PromotionPO;
 import po.promotionpo.PromotionPricePacksPO;
 
 public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataService {
@@ -15,6 +22,15 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 		promotion = new PromotionData<>();
 	}
 
+	public static void main(String[] args) throws RemoteException {
+		PromotionSpecialDataServiceImpl p = new PromotionSpecialDataServiceImpl();
+		LocalDate beginDate = LocalDate.of(2016, 12, 31);
+		LocalDate endDate = LocalDate.of(2017, 12, 31);
+		PromotionPricePacksPO po = new PromotionPricePacksPO("1111", beginDate, endDate, 100.0, null);
+		p.insertPromotion(po);
+		System.out.println(p.showSpecialPromotion().get(0).getId());
+	}
+	
 	@Override
 	public ResultMessage insertPromotion(PromotionPricePacksPO po) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -42,8 +58,12 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 
 	@Override
 	public ArrayList<PromotionPricePacksPO> showSpecialPromotion() throws RemoteException {
-		// TODO Auto-generated method stub
-		return promotion.show();
+		ArrayList<PromotionPricePacksPO> result = new ArrayList<>();
+		ArrayList<PromotionPO> list = promotion.show();
+		for (PromotionPO po : list) {
+			if (po.getType() == PromotionType.PRICEPACKS) result.add((PromotionPricePacksPO) po);
+		}
+		return result;
 	}
 
 

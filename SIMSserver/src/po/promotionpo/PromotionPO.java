@@ -11,12 +11,12 @@ import dataenum.PromotionType;
 */
 public class PromotionPO implements Serializable{
 
-	private static final long serialVersionUID = -7961034019548242635L;
-	private String id;
-	private LocalDate beginDate;
-	private LocalDate endDate;
-	private PromotionType type;
-	private String typeString;
+	protected static final long serialVersionUID = -7961034019548242635L;
+	protected String id;
+	protected LocalDate beginDate;
+	protected LocalDate endDate;
+	protected PromotionType type;
+	protected String typeString;
 
 	public PromotionPO(String id,LocalDate beginDate,LocalDate endDate,PromotionType type){
 		this.id = id;

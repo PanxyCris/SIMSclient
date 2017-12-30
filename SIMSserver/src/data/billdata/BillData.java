@@ -33,20 +33,7 @@ public class BillData implements BillDataService {
 		conn = DBManager.getConnection();
 	}
 	
-	@Override
-	public Date getDate() {
-		return null;
-	}
-
-	@Override
-	public BillType getType() {
-		return null;
-	}
-
-	@Override
-	public BillState getState() {
-		return null;
-	}
+	
 
 	@Override
 	public ResultMessage insertInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
