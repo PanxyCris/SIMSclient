@@ -19,21 +19,15 @@ import vo.accountvo.AccountVO;
  */
 public class AccountBL implements AccountBLService {
 
-	private static AccountBL accountBL;
-//单件模式
-	public AccountBL() {
-		accountBL = new AccountBL();
-	}
-	
-	public AccountBL getInstance() {
-		return accountBL;
-	}
-
-	AccountDataService accountDataService=RemoteHelper.getInstance().getAccountDataService();
-	AccountTransition accountTransition=new AccountTransition();
+	AccountDataService accountDataService;
+	AccountTransition accountTransition;
 	AccountVO accountVO;
 	AccountPO accountPO;
-
+    
+	public AccountBL() {
+		accountDataService=RemoteHelper.getInstance().getAccountDataService();
+		accountTransition=new AccountTransition();
+	}
 
 	@Override
 	public ResultMessage add(AccountVO accountVO) {
@@ -80,7 +74,12 @@ public class AccountBL implements AccountBLService {
 
 	@Override
 	public void delete(AccountVO accountVO) {
-
+		String id=accountVO.getId();
+		try {
+			accountDataService.deleteAccount(id);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

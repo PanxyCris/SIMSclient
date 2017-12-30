@@ -120,9 +120,16 @@ public class InventoryBillBL implements InventoryBillBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		String id="";
+		//格式化
+		String number=Integer.toString(count);
+		while(5>number.length()){
+			number="0"+number;
+		}
+		String[] date=l.toString().split("-");
 		
-		
-		return Integer.toString(count);
+		id=type.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
+		return id;
 	}
 	
 	public LocalDate StringtoDate(String id){//id是单据编号

@@ -21,7 +21,11 @@ public class ClassificationBL implements ClassificationBLService {
 	public String getID() {//用于生成新创建的商品分类的id
 		idCount=1;
 		ClassificationVPO root=getRoot();
-		return Integer.toString(count(root)+1);
+		String id=Integer.toString(count(root)+1);
+		while(4>id.length()){
+			id="0"+id;
+		}
+		return id;
 	}
 
 	@Override
@@ -106,7 +110,7 @@ public class ClassificationBL implements ClassificationBLService {
 			nameList.add(childrenVPOs.get(i).getName());
 			addName(childrenVPOs.get(i));
 
-		}
+			}
 		}
 	}
 
