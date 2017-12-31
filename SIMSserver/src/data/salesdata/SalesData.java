@@ -52,8 +52,9 @@ public class SalesData{
 	
 	public ResultMessage insert(SalesPO po) {
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
+			PreparedStatement ps0 = conn.prepareStatement("select count(*) from purchase where id = ?");
+			ps0.setString(1, po.getId());
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -69,7 +70,7 @@ public class SalesData{
 					return ResultMessage.SUCCESS;
 				}
 				else {
-					System.out.println("该销售单已存在");
+					System.out.println("该进货单已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
