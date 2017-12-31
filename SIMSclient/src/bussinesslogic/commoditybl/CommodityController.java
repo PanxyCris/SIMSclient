@@ -12,7 +12,7 @@ import vo.commodityvo.CommodityVO;
 
 public class CommodityController implements CommodityBLService{
 
-	CommodityBL commodityBL;
+	CommodityBL commodityBL=new CommodityBL();
 	
 	@Override
 	public String getID() throws Exception {
