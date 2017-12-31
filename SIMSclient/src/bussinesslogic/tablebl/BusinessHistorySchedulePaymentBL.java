@@ -81,10 +81,11 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	public ArrayList<PaymentBillVO> writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
 		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
-			pArrayList.add(redRush(table.get(i)));
+			PaymentBillVO paymentBillVO=redRush(table.get(i));
+			paymentBillVO.setState(BillState.COMMITED);
+			paymentBillBLService.save(paymentBillVO);
+			pArrayList.add(paymentBillVO);
 		}
-		
-		//在数据库中创建单据的方法在这里
 		try {
 			examineBLService.passBills(pArrayList);
 			return pArrayList;
@@ -96,8 +97,14 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public ArrayList<PaymentBillVO> writeOffAndCopy(ArrayList<PaymentBillVO> table) {//不能是总经理
-		return null;
-			
+		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			PaymentBillVO paymentBillVO=redRush(table.get(i));
+			paymentBillVO.setState(BillState.COMMITED);
+			paymentBillBLService.save(paymentBillVO);
+			pArrayList.add(paymentBillVO);
+		}
+		return pArrayList;
 	}
 
 	public LocalDate StringtoDate(String id){//id是单据编号
@@ -110,7 +117,6 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	}
 	
 	public PaymentBillVO redRush(PaymentBillVO paymentBillVO){//红冲数据转化方法
-		String docID=paymentBillVO.getId();
 		String customerID=paymentBillVO.getCustomerID();
 		String userID=paymentBillVO.getUserID();
 		String accountID=paymentBillVO.getAccountID();
@@ -118,6 +124,8 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		BillState billState=paymentBillVO.getState();
 		BillType billType=paymentBillVO.getType();
 		//以上是不会变化的单据属性
+		//单据的id要另外存取
+		String docID=paymentBillBLService.getId();
 		//以下是会将数值取负的单据属性
 		double total=-paymentBillVO.getTotal();
 		ArrayList<EntryVO> eVOs=new ArrayList<>();

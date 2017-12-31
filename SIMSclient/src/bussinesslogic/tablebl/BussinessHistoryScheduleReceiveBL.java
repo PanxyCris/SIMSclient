@@ -86,8 +86,6 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
 			rList.add(receiptBillVO);
 		}
-		
-		
 		try {
 			examineBLService.passBills(rList);
 			return rList;
@@ -99,7 +97,14 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 
 	@Override
 	public ArrayList<ReceiptBillVO> writeOffAndCopy(ArrayList<ReceiptBillVO> table) {
-		return null;
+		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			ReceiptBillVO receiptBillVO=redRush(table.get(i));
+			receiptBillVO.setState(BillState.COMMITED);
+			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
+			rList.add(receiptBillVO);
+		}
+		return rList;
 	}
 
 	public LocalDate StringtoDate(String id){//id是单据编号

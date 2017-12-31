@@ -1,11 +1,17 @@
 package bussinesslogic.tablebl;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.examinebl.ExaminePurchaseBL;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.examineblservice.ExamineBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import dataenum.BillState;
+import dataenum.BillType;
+import dataenum.Warehouse;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.purchasebillvo.PurchaseVO;
@@ -14,9 +20,11 @@ import vo.commodityvo.CommodityItemVO;
 public class BussinessHistorySchedulePurchaseBL implements BusinessHistoryScheduleBLService<PurchaseVO> {
 
 	private PurchaseBLService purchaseBLService;
+	private ExamineBLService<PurchaseVO> examineBLService;
 	
 	public BussinessHistorySchedulePurchaseBL() {
 		purchaseBLService=new PurchaseController();
+		examineBLService=new ExaminePurchaseBL();
 	}
 	
 	@Override
@@ -83,12 +91,32 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 
 	@Override
 	public ArrayList<PurchaseVO> writeOff(ArrayList<PurchaseVO> table) {
+		ArrayList<PurchaseVO> pList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			PurchaseVO purchaseVO=redRush(table.get(i));
+			purchaseVO.setState(BillState.COMMITED);
+			purchaseBLService.save(purchaseVO);
+			pList.add(purchaseVO);
+		}
+		try {
+			examineBLService.passBills(pList);
+			return pList;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<PurchaseVO> writeOffAndCopy(ArrayList<PurchaseVO> table) {
-		return null;
+		ArrayList<PurchaseVO> pList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			PurchaseVO purchaseVO=redRush(table.get(i));
+			purchaseVO.setState(BillState.COMMITED);
+			purchaseBLService.save(purchaseVO);
+			pList.add(purchaseVO);
+		}
+		return pList;
 	}
 
 	public LocalDate StringtoDate(String id){//id是单据编号
@@ -98,6 +126,23 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+	
+	public PurchaseVO redRush(PurchaseVO purchaseVO){
+		String supplier=purchaseVO.getSupplier();
+		Warehouse warehouse=purchaseVO.getWarehouse();
+		String operator=purchaseVO.getOperator();
+		String note=purchaseVO.getNote();
+		BillState billState=purchaseVO.getState();
+		BillType billType=purchaseVO.getType();
+		Double sum=-purchaseVO.getSum();
+		String id=purchaseBLService.getPurChaseBackID();//这个不是我写的getId()方法
+		ArrayList<CommodityItemVO> commodities=purchaseVO.getCommodities();
+		for (int i = 0; i < commodities.size(); i++) {
+			Integer number=commodities.get(i).getNumber();
+			commodities.get(i).setNumber(-number);
+		}
+		return new PurchaseVO(id, supplier, warehouse, operator, commodities, note, sum, billType, billState);
 	}
 	
 }

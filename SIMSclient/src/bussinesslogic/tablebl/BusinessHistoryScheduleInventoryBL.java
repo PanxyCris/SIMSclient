@@ -1,22 +1,29 @@
 package bussinesslogic.tablebl;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillController;
+import bussinesslogic.examinebl.ExamineInventoryBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.examineblservice.ExamineBLService;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.inventorybillvo.InventoryBillVO;
+import vo.commodityvo.GiftVO;
 
 public class BusinessHistoryScheduleInventoryBL implements BusinessHistoryScheduleBLService<InventoryBillVO> {
 
 	private InventoryBillBLService inventoryBillBLService;
+	private ExamineBLService<InventoryBillVO> examineBLService;
 	
 	public BusinessHistoryScheduleInventoryBL() {
 		inventoryBillBLService=new InventoryBillController();
+		examineBLService=new ExamineInventoryBL();
 	}
 	
 	@Override
@@ -59,12 +66,32 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 
 	@Override
 	public ArrayList<InventoryBillVO> writeOff(ArrayList<InventoryBillVO> table) {
+		ArrayList<InventoryBillVO> iList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			InventoryBillVO inventoryBillVO=redRush(table.get(i));
+			inventoryBillVO.setState(BillState.COMMITED);
+			inventoryBillBLService.save(inventoryBillVO);
+			iList.add(inventoryBillVO);
+		}
+		try {
+			examineBLService.passBills(iList);
+			return iList;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<InventoryBillVO> writeOffAndCopy(ArrayList<InventoryBillVO> table) {
-		return null;
+		ArrayList<InventoryBillVO> iList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			InventoryBillVO inventoryBillVO=redRush(table.get(i));
+			inventoryBillVO.setState(BillState.COMMITED);
+			inventoryBillBLService.save(inventoryBillVO);
+			iList.add(inventoryBillVO);
+		}
+		return iList;
 	}
 
 	public LocalDate StringtoDate(String id){//idÊÇµ¥¾Ý±àºÅ
@@ -74,6 +101,20 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+	
+	public InventoryBillVO redRush(InventoryBillVO inventoryBillVO){
+		String operator=inventoryBillVO.getOperator();
+		BillState billState=inventoryBillVO.getState();
+		BillType billType=inventoryBillVO.getType();
+		String note=inventoryBillVO.getNote();
+		String id=inventoryBillBLService.getId(billType);
+		ArrayList<GiftVO> gifts=inventoryBillVO.getGifts();
+		for (int i = 0; i < gifts.size(); i++) {
+			int number=gifts.get(i).getNumber();
+			gifts.get(i).setNumber(-number);
+		}
+		return new InventoryBillVO(id, gifts, operator, billType, billState, note);
 	}
 	
 }

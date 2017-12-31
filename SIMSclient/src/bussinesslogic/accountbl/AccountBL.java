@@ -13,7 +13,7 @@ import vo.accountvo.AccountVO;
 
 
 /**
- * 
+ *
  * @author 王灿灿
  * @version 2017-12-10
  */
@@ -23,7 +23,7 @@ public class AccountBL implements AccountBLService {
 	AccountTransition accountTransition;
 	AccountVO accountVO;
 	AccountPO accountPO;
-    
+
 	public AccountBL() {
 		accountDataService=RemoteHelper.getInstance().getAccountDataService();
 		accountTransition=new AccountTransition();
@@ -84,10 +84,10 @@ public class AccountBL implements AccountBLService {
 
 	/**
 	 * 判断输入的account是否合法
-	 * 
+	 *
 	 * @author 王灿灿
 	 * @param accountVO 为传入的已修改的account对象
-	 * 
+	 *
 	 */
 	@Override
 	public ResultMessage judgeLegal(AccountVO accountVO) {
@@ -117,7 +117,7 @@ public class AccountBL implements AccountBLService {
 	/**
 	 * @author 王灿灿
 	 * @param message为检索内容
-	 * 
+	 *
 	 */
 	@Override
 	public ArrayList<AccountVO> find(String message, FindAccountType findType) {
@@ -132,17 +132,18 @@ public class AccountBL implements AccountBLService {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < accountPOs.size(); i++) {
-			accountVO = accountTransition.POtoVO(accountPO);
+			accountVO = accountTransition.POtoVO(accountPOs.get(i));
 			accountVOs.add(accountVO);
 		}
 
 		return accountVOs;
 	}
 
+
 	/**
-	 * 
+	 *
 	 * @author 王灿灿 得到当前服务器上银行账户的数据
-	 * 
+	 *
 	 */
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
@@ -166,14 +167,14 @@ public class AccountBL implements AccountBLService {
 	}
 
 	/**
-	 * 
+	 *
 	 * 单据入账，修改银行账户金额并修改客户的应收应付数据
-	 * 
+	 *
 	 * @author 王灿灿
 	 * @param financialDocVO
 	 *            是收款单付款单的父类对象，拥有银行账户名列表、转账金额列表等属性
-	 * 
-	 * 
+	 *
+	 *
 	 */
 //	@Override
 //	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType) {
