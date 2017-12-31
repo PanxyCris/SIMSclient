@@ -132,7 +132,7 @@ public class AccountBL implements AccountBLService {
 			e.printStackTrace();
 		}
 		for (int i = 0; i < accountPOs.size(); i++) {
-			accountVO = accountTransition.POtoVO(accountPO);
+			accountVO = accountTransition.POtoVO(accountPOs.get(i));
 			accountVOs.add(accountVO);
 		}
 
