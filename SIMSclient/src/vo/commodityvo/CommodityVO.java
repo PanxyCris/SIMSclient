@@ -6,13 +6,13 @@ public class CommodityVO {
 		private String name;
 		private String model; //商品型号
 		private String classification;
-		private int number; //商品数量
-		private double purPrice; //进价
-		private double retailedPrice; //零售价
-		private double recentPurPrice; //最新进价
-		private double recentRetailedPrice; //最新零售价
-		private int warmingValue; //警戒值
-		private int line;//行号
+		private Integer number; //商品数量
+		private Double purPrice; //进价
+		private Double retailedPrice; //零售价
+		private Double recentPurPrice; //最新进价
+		private Double recentRetailedPrice; //最新零售价
+		private Integer warmingValue; //警戒值
+		private Integer line;//行号
 
 		public CommodityVO(String id,String name,String model,String classification,
 				int number,double purPrice, double retailedPrice,int warmingValue){
@@ -28,11 +28,11 @@ public class CommodityVO {
 			this.warmingValue = warmingValue;
 		}
 
-		public String getId() {
+		public String getID() {
 			return id;
 		}
 
-		public void setId(String id) {
+		public void setID(String id) {
 			this.id = id;
 		}
 

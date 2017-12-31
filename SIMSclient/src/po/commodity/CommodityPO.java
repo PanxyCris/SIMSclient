@@ -9,12 +9,12 @@ public class CommodityPO implements Serializable{
 	private String name;
 	private String model; // 商品型号
 	private String classification;
-	private int number; // 商品数量
-	private double purPrice; // 进价
-	private double retailedPrice; // 零售价
-	private double recentPurPrice; // 最新进价
-	private double recentRetailedPrice; // 最新零售价
-	private int warmingValue; // 警戒值
+	private Integer number; // 商品数量
+	private Double purPrice; // 进价
+	private Double retailedPrice; // 零售价
+	private Double recentPurPrice; // 最新进价
+	private Double recentRetailedPrice; // 最新零售价
+	private Integer warmingValue; // 警戒值
 
 
 	public CommodityPO(String id, String name, String model, String classification, int number,
@@ -32,7 +32,57 @@ public class CommodityPO implements Serializable{
 	}
 
 
-	public String getId() {
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public void setID(String id) {
+		this.id = id;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+
+	public void setPurPrice(Double purPrice) {
+		this.purPrice = purPrice;
+	}
+
+
+	public void setRetailedPrice(Double retailedPrice) {
+		this.retailedPrice = retailedPrice;
+	}
+
+
+	public void setRecentPurPrice(Double recentPurPrice) {
+		this.recentPurPrice = recentPurPrice;
+	}
+
+
+	public void setRecentRetailedPrice(Double recentRetailedPrice) {
+		this.recentRetailedPrice = recentRetailedPrice;
+	}
+
+
+	public void setWarmingValue(Integer warmingValue) {
+		this.warmingValue = warmingValue;
+	}
+
+
+	public String getID() {
 		return id;
 	}
 
