@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import po.PurchasePO;
-import po.SalesPO;
 
 /**     
 *  
