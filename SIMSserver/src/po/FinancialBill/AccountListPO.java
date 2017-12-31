@@ -1,7 +1,13 @@
 package po.FinancialBill;
 
-public class AccountListPO {
+import java.io.Serializable;
+
+public class AccountListPO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String accountName;//银行账户名
 	protected String money;//转账金额
 	protected String note;//备注

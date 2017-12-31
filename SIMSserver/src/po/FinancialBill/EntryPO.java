@@ -1,9 +1,14 @@
 package po.FinancialBill;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class EntryPO {
+public class EntryPO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// 条目清单
 	protected String entryName;// 条目名
 	protected String transferAmount;// 金额
