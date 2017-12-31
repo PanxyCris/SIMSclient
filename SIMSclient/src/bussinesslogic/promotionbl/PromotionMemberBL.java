@@ -72,8 +72,12 @@ public class PromotionMemberBL implements PromotionBLService<PromotionMemberVO> 
 
 	public PromotionMemberPO voTopo(PromotionMemberVO vo){
 		ArrayList<GiftPO> gifts = new ArrayList<>();
+	if(vo.getGifts()!=null){
 		for(GiftVO gift:vo.getGifts())
 			gifts.add(new GiftPO(gift.getName(),gift.getNumber()));
+		}
+	else
+		gifts = null;
 		PromotionMemberPO po = new PromotionMemberPO(vo.getId(),vo.getBeginDate(),vo.getEndDate(),vo.getLevel(),
 				vo.getAllowance(),vo.getVoucher(),gifts);
 		return po;
@@ -81,8 +85,12 @@ public class PromotionMemberBL implements PromotionBLService<PromotionMemberVO> 
 
 	public PromotionMemberVO poTovo(PromotionMemberPO po){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
+		if(po.getGifts()!=null){
 		for(GiftPO gift:po.getGifts())
 			gifts.add(new GiftVO(gift.getName(),gift.getNumber()));
+		}
+		else
+			gifts = null;
 		PromotionMemberVO vo = new PromotionMemberVO(po.getId(),po.getBeginDate(),po.getEndDate(),po.getLevel(),
 				po.getAllowance(),po.getVoucher(),gifts);
 		return vo;

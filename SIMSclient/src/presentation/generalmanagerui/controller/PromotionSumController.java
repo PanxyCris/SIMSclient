@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionTotalBLService_Stub;
+import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.promotionbl.PromotionSumBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.PromotionType;
@@ -40,7 +42,7 @@ import vo.uservo.UserVO;
 
 public class PromotionSumController extends PromotionMakingController{
 
-	PromotionBLService<PromotionTotalVO> service = new PromotionTotalBLService_Stub();
+	PromotionBLService<PromotionTotalVO> service = new PromotionSumBL();
 	public static final Remind remind = Remind.PROMOTION;
 	PromotionType type = PromotionType.SUM_PROMOTION;
     ObservableList<PromotionTotalVO> list = FXCollections.observableArrayList();
@@ -277,7 +279,7 @@ public class PromotionSumController extends PromotionMakingController{
 	    checkInit();
         deleteInit();
         deleteGiftInit();
-        CommodityBLService commodityservice = new CommodityBLService_Stub();
+        CommodityBLService commodityservice = new CommodityController();
         giftChoiceList.addAll(commodityservice.getIDandName());
         giftChoice.setItems(giftChoiceList);
 
@@ -301,6 +303,7 @@ public class PromotionSumController extends PromotionMakingController{
                         	PromotionTotalVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	currentPromotion = clickedItem;
                             giftList.clear();
+                            if(clickedItem.getGifts()!=null)
                             giftList.addAll(clickedItem.getGifts());
                             giftTable.setItems(giftList);
 

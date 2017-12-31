@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionSpecialBLService_Stub;
+import bussinesslogic.commoditybl.CommodityController;
+import bussinesslogic.promotionbl.PromotionSpecialBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
@@ -40,8 +42,8 @@ import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 
-public class PromotionSpecialController {
-	PromotionBLService<PromotionPricePacksVO> service = new PromotionSpecialBLService_Stub();
+public class PromotionSpecialController extends PromotionMakingController{
+	PromotionBLService<PromotionPricePacksVO> service = new PromotionSpecialBL();
 	public static final Remind remind = Remind.PROMOTION;
     ObservableList<PromotionPricePacksVO> list = FXCollections.observableArrayList();
     ObservableList<GiftVO> commodityList = FXCollections.observableArrayList();
@@ -267,7 +269,7 @@ public class PromotionSpecialController {
 	    checkInit();
         deleteInit();
         deleteGiftInit();
-        CommodityBLService commodityservice = new CommodityBLService_Stub();
+        CommodityBLService commodityservice = new CommodityController();
         commodityChoiceList.addAll(commodityservice.getIDandName());
         commodityChoice.setItems(commodityChoiceList);
 
@@ -291,6 +293,7 @@ public class PromotionSpecialController {
                         	PromotionPricePacksVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	currentPromotion = clickedItem;
                             commodityList.clear();
+                            if(clickedItem.getPricePacks()!=null)
                             commodityList.addAll(clickedItem.getPricePacks());
                             commodityTable.setItems(commodityList);
 

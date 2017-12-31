@@ -73,8 +73,12 @@ public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
 
 	public PromotionTotalPO voTopo(PromotionTotalVO vo){
 		ArrayList<GiftPO> gifts = new ArrayList<>();
+		if(vo.getGifts()!=null){
 		for(GiftVO gift:vo.getGifts())
 			gifts.add(new GiftPO(gift.getName(),gift.getNumber()));
+		}
+		else
+			gifts = null;
 		PromotionTotalPO po = new PromotionTotalPO(vo.getId(),vo.getBeginDate(),vo.getEndDate(),
 				vo.getTotal(),vo.getVoucher(),gifts);
 		return po;
@@ -82,8 +86,12 @@ public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
 
 	public PromotionTotalVO poTovo(PromotionTotalPO po){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
+		if(po.getGifts()!=null){
 		for(GiftPO gift:po.getGifts())
 			gifts.add(new GiftVO(gift.getName(),gift.getNumber()));
+		}
+		else
+			gifts = null;
 		PromotionTotalVO vo = new PromotionTotalVO(po.getId(),po.getBeginDate(),po.getEndDate(),
 				po.getTotal(),po.getVoucher(),gifts);
 		return vo;

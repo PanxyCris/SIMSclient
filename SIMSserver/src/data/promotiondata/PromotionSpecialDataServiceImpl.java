@@ -31,7 +31,7 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 		gifts.add(g);
 		PromotionPricePacksPO po = new PromotionPricePacksPO("100013", beginDate, endDate, 100.0, gifts);
 		p.insertPromotion(po);
-		System.out.println(p.showSpecialPromotion().get(1).getId());
+		System.out.println(p.showSpecialPromotion().get(0).getId());
 	}
 	
 	@Override
