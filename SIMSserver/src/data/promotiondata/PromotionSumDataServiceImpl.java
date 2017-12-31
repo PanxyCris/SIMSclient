@@ -30,7 +30,7 @@ public class PromotionSumDataServiceImpl implements PromotionSumDataService {
 		PromotionTotalPO po = new PromotionTotalPO("100001", beginDate, endDate, 100.0, 200.0, gifts);
 		PromotionSumDataServiceImpl p = new PromotionSumDataServiceImpl();
 		p.insertPromotion(po);
-		System.out.println(p.showSumPromotion().get(1).getId());
+		System.out.println(p.showSumPromotion().get(0).getId());
 	}
 
 	@Override

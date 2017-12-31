@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import bussiness_stub.CommodityBLService_Stub;
 import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
+import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.promotionbl.PromotionMemberBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
@@ -311,7 +312,7 @@ public class PromotionMemberController extends PromotionMakingController{
 	    checkInit();
         deleteInit();
         deleteGiftInit();
-        CommodityBLService commodityservice = new CommodityBLService_Stub();
+        CommodityBLService commodityservice = new CommodityController();
         giftChoiceList.addAll(commodityservice.getIDandName());
         giftChoice.setItems(giftChoiceList);
         levelChoice.setItems(levelList);
@@ -336,9 +337,9 @@ public class PromotionMemberController extends PromotionMakingController{
                         	PromotionMemberVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	currentPromotion = clickedItem;
                             giftList.clear();
+                            if(clickedItem.getGifts()!=null)
                             giftList.addAll(clickedItem.getGifts());
                             giftTable.setItems(giftList);
-
                         });
                     }
                 }

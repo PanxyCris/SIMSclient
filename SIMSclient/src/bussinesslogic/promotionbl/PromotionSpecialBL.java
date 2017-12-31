@@ -72,8 +72,12 @@ public class PromotionSpecialBL implements PromotionBLService<PromotionPricePack
 
 	public PromotionPricePacksPO voTopo(PromotionPricePacksVO vo){
 		ArrayList<GiftPO> gifts = new ArrayList<>();
+		if(vo.getPricePacks()!=null){
 		for(GiftVO gift:vo.getPricePacks())
 			gifts.add(new GiftPO(gift.getName(),gift.getNumber()));
+		}
+		else
+			gifts = null;
 		PromotionPricePacksPO po = new PromotionPricePacksPO(vo.getId(),vo.getBeginDate(),vo.getEndDate(),
 				vo.getDiscount(),gifts);
 		return po;
@@ -81,8 +85,12 @@ public class PromotionSpecialBL implements PromotionBLService<PromotionPricePack
 
 	public PromotionPricePacksVO poTovo(PromotionPricePacksPO po){
 		ArrayList<GiftVO> gifts = new ArrayList<>();
+		if(po.getPricePacks()!=null){
 		for(GiftPO gift:po.getPricePacks())
 			gifts.add(new GiftVO(gift.getName(),gift.getNumber()));
+		}
+		else
+			gifts = null;
 		PromotionPricePacksVO vo = new PromotionPricePacksVO(po.getId(),po.getBeginDate(),po.getEndDate(),
 				po.getDiscount(),gifts);
 		return vo;
