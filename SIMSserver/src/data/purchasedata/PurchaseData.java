@@ -38,7 +38,7 @@ public class PurchaseData {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
-		PurchasePO po = new PurchasePO("00", "00", "000", Warehouse.WAREHOUSE1, 
+		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1, 
 				"11", list, "2", 100, BillType.PURCHASEBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
 		p.insert(po);
@@ -49,8 +49,9 @@ public class PurchaseData {
 	public ResultMessage insert(PurchasePO po) {
 		
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
+			PreparedStatement ps0 = conn.prepareStatement("select count(*) from purchase where id = ?");
+			ps0.setString(1, po.getId());
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
