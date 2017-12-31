@@ -7,9 +7,11 @@ import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -18,15 +20,15 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import po.ClassificationVPO;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.commodityvo.CommodityVO;
 import vo.uservo.UserVO;
 
@@ -96,11 +98,11 @@ public class CommodityManageController extends InventoryManagerController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+	    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该商品已存在");
+                                existed.showAndWait();break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-	    	        default:break;
+	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                    error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -114,15 +116,8 @@ public class CommodityManageController extends InventoryManagerController{
 	public void find() throws Exception{
 		ArrayList<CommodityVO> list = service.find(findingField.getText(),FindCommodityType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
@@ -310,13 +305,17 @@ public class CommodityManageController extends InventoryManagerController{
 
 	public void manageInit(){
 		tableID.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("ID"));
+			    (TableColumn.CellDataFeatures<CommodityVO, String> param) ->
+			    new ReadOnlyStringWrapper(param.getValue().getID())
+			);
         tableName.setCellValueFactory(
                 new PropertyValueFactory<CommodityVO,String>("name"));
         tableModel.setCellValueFactory(
                 new PropertyValueFactory<CommodityVO,String>("model"));
         tableClass.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("classficationString"));
+			    (TableColumn.CellDataFeatures<CommodityVO, String> param) ->
+			    new ReadOnlyStringWrapper(param.getValue().getClassification())
+			);
         tableNumber.setCellValueFactory(
                 new PropertyValueFactory<CommodityVO,Integer>("number"));
         tableWarmingValue.setCellValueFactory(

@@ -19,6 +19,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -34,8 +35,6 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
@@ -293,10 +292,9 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case SUCCESS:break;
-	    	        default:break;
+	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                    error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();

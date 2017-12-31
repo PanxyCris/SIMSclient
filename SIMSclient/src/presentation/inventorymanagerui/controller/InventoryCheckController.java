@@ -26,15 +26,7 @@ public class InventoryCheckController extends InventoryManagerController{
 	@FXML
 	DatePicker startPicker;
 	@FXML
-	TextField startHour;
-	@FXML
-	TextField startMinute;
-	@FXML
 	DatePicker endPicker;
-	@FXML
-	TextField endHour;
-	@FXML
-	TextField endMinute;
 
 	@FXML
 	TableView<CommodityCheckVO> table;
@@ -56,10 +48,8 @@ public class InventoryCheckController extends InventoryManagerController{
 
 	@FXML
 	public void confirm(){
-		LocalTime startTime = LocalTime.of(Integer.parseInt(startHour.getText()), Integer.parseInt(startMinute.getText()));
-		LocalDateTime start = LocalDateTime.of(startPicker.getValue(),startTime);
-		LocalTime endTime = LocalTime.of(Integer.parseInt(endHour.getText()), Integer.parseInt(endMinute.getText()));
-		LocalDateTime end = LocalDateTime.of(endPicker.getValue(),endTime);
+		LocalDate start = startPicker.getValue();
+		LocalDate end = endPicker.getValue();
          ArrayList<CommodityCheckVO> commodityList = service.check(start, end);
          list.addAll(commodityList);
          table.setItems(list);
@@ -68,10 +58,6 @@ public class InventoryCheckController extends InventoryManagerController{
 	public void initData(UserVO user) {
 		this.user = user;
 		manageInit();
-		startHour.setText("00");
-		startMinute.setText("00");
-		endHour.setText("00");
-		endMinute.setText("00");
 	}
 
 	public void manageInit(){

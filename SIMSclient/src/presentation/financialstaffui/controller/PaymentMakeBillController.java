@@ -17,6 +17,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -31,8 +32,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.financialstaffui.PaymentCheckBillUI;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;
@@ -81,13 +80,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
 	    	                     sumLabel.setText(String.valueOf(result));break;
-	    	        default:break;
+	    	        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+	                            error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();

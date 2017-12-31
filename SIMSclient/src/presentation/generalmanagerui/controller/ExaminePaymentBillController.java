@@ -1,6 +1,7 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 import bussinesslogic.accountbillbl.PaymentBillController;
 import bussinesslogic.examinebl.ExaminePaymentBL;
@@ -14,6 +15,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -27,7 +29,6 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;
@@ -76,15 +77,8 @@ public class ExaminePaymentBillController extends ExamineBillController{
 
 		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
@@ -328,10 +322,9 @@ public class ExaminePaymentBillController extends ExamineBillController{
                public void run() {
                    try {
                    switch(message){
-                   case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-                   case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
                    case SUCCESS:break;
-                   default:break;
+                   default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                   error.showAndWait();;break;
                    }
                    } catch (Exception e) {
                        e.printStackTrace();

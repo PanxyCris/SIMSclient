@@ -23,7 +23,6 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	    BusinessHistoryScheduleBLService<InventoryBillVO> service = new BusinessHistoryScheduleInventoryBL();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-		public static final Remind remind = Remind.BILL;
 
 		@FXML
 		DatePicker startPicker;

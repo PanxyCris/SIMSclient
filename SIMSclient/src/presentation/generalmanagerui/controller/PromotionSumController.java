@@ -3,8 +3,7 @@ package presentation.generalmanagerui.controller;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import bussiness_stub.CommodityBLService_Stub;
-import bussiness_stub.promotion_stub.PromotionTotalBLService_Stub;
+
 import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.promotionbl.PromotionSumBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -17,25 +16,22 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellDate;
 import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.commodityvo.GiftVO;
-import vo.promotionvo.PromotionMemberVO;
-import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
 import vo.uservo.UserVO;
 
@@ -103,15 +99,8 @@ public class PromotionSumController extends PromotionMakingController{
 	public void find() throws RemoteException{
 		ArrayList<PromotionTotalVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
@@ -132,12 +121,12 @@ public class PromotionSumController extends PromotionMakingController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+	    	        case EXISTED: Alert existed = new Alert(Alert.AlertType.WARNING,"该策略已存在");
+	                              existed.showAndWait();break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
 	    	                    initInsert();break;
-	    	        default:break;
+	    	        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+	                error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();

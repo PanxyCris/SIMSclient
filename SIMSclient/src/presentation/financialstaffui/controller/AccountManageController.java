@@ -1,11 +1,9 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import bussiness_stub.AccountBLService_Stub;
 import bussinesslogic.accountbl.AccountController;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import dataenum.Remind;
@@ -16,18 +14,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.accountvo.AccountVO;
 import vo.uservo.UserVO;
 
@@ -68,11 +65,11 @@ public class AccountManageController extends FinancialStaffController implements
                     public void run() {
                         try {
                         switch(message){
-                        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-                        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-                        case EXISTED:new RemindExistUI().start(remind,true);break;
+                        case EXISTED: Alert existed = new Alert(Alert.AlertType.WARNING,"该账户已存在");
+                                      existed.showAndWait();break;
                         case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-                        default:break;
+                        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                        error.showAndWait();break;
                         }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -86,15 +83,8 @@ public class AccountManageController extends FinancialStaffController implements
         public void find(){
             ArrayList<AccountVO> accountList = service.find(findingField.getText(),FindAccountType.getFindType(findChoice.getValue()));
                if(accountList==null){
-                   Platform.runLater(new Runnable() {
-                        public void run() {
-                            try {
-                                new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
+            	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+                   error.showAndWait();
                }
                else{
                    list.clear();
@@ -159,10 +149,9 @@ public class AccountManageController extends FinancialStaffController implements
                     public void run() {
                         try {
                         switch(message){
-                        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-                        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
                         case SUCCESS:break;
-                        default:break;
+                        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                                       error.showAndWait();break;
                         }
                         } catch (Exception e) {
                             e.printStackTrace();

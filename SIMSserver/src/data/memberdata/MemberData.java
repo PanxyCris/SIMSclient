@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
+import dataenum.MemberCategory;
+import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
 import po.MemberPO;
@@ -24,6 +26,13 @@ import po.MemberPO;
  * @date 2017年12月7日
  */
 public class MemberData {
+	
+	public static void main(String[] args){
+		MemberData d = new MemberData();
+		MemberPO p = new MemberPO("000001",MemberCategory.RETAILER,MemberLevel.LEVEL1,"李杰","138888888","南京大学",
+				"210046","79@qq.com",5000.0,"李杰");
+		d.insert(p);
+	}
 
 	public ResultMessage insert(MemberPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接

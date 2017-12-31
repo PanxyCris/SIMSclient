@@ -22,8 +22,8 @@ public class LoginController {
 	public boolean writeUser(UserVO user) {
 	 if(user!=null){
 		try {
-			BufferedWriter fw = new BufferedWriter(new FileWriter("Login.txt"));
-		
+			BufferedWriter fw = new BufferedWriter(new FileWriter("presentation/mainui/Login.txt"));
+
 			fw.write(user.getID());
 			fw.close();
 			return true;
@@ -37,11 +37,11 @@ public class LoginController {
 
 	public UserVO readUser() {
 		// TODO Auto-generated method stub
-	     File path=new File("Login.txt");
+	     File path=new File("presentation/mainui/Login.txt");
 	     try {
 	    	 FileReader fileReader = new FileReader(path);
 				BufferedReader reader = new BufferedReader(fileReader);
-				String line = reader.readLine();			
+				String line = reader.readLine();
 				reader.close();
 				return userservice.find(line, FindUserType.ID).get(0);
 			} catch (IOException e) {

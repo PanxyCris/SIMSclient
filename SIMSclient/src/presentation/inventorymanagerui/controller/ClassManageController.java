@@ -1,7 +1,6 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
-
 import bussiness_stub.ClassificationBLService_Stub;
 import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
@@ -12,6 +11,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -25,8 +25,6 @@ import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.util.Callback;
 import po.ClassificationVPO;
 import presentation.common.EditingCellTree;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 
 public class ClassManageController extends InventoryManagerController{
@@ -65,11 +63,11 @@ public class ClassManageController extends InventoryManagerController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+	    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该分类已存在");
+                                    existed.showAndWait();break;
 	    	        case SUCCESS:fresh();break;
-	    	        default:break;
+	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                    error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();

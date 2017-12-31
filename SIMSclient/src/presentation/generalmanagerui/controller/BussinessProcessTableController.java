@@ -11,8 +11,6 @@ import vo.uservo.UserVO;
 
 public class BussinessProcessTableController extends FinanceTableController{
 
-
-	public static final Remind remind = Remind.BILL;
 	@FXML
 	ChoiceBox<String> receiptChoice;
 

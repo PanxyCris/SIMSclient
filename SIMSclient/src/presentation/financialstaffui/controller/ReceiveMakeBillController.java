@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import bussiness_stub.ReceiptBillBLService_Stub;
 import bussiness_stub.UtilityBLService_Stub;
 import bussinesslogic.accountbillbl.ReceiptBillController;
+import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
@@ -123,7 +124,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		   this.user = user;
 		   this.rec = bill;
 			if(bill == null){
-				UtilityBLService utilityService = new UtilityBLService_Stub();
+				UtilityBLService utilityService = new UtilityBL();
 				idLabel.setText(utilityService.generateID(BillType.SKD));
 			    sumLabel.setText("0");
 				operatorLabel.setText(readUser().getName());

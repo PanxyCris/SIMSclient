@@ -1,11 +1,9 @@
 package presentation.salestockstaffui.controller;
 
 import java.net.URL;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bussiness_stub.MemberBLService_Stub;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.memberblservice.MemberBLService;
@@ -19,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -31,8 +30,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 import vo.membervo.MemberVO;
 
@@ -112,11 +109,11 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+		    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该客户已存在");
+		    	                     existed.showAndWait();break;
 		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                        error.showAndWait();break;
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -129,16 +126,9 @@ public class MemberManageController extends SaleStockStaffController implements 
 		@FXML
 		public void find() throws RemoteException{
 			ArrayList<MemberVO> list = service.find(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
-		       if(list.size()!=0){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		       if(list.size()==0){
+		    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+                   error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();

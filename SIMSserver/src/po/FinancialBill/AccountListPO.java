@@ -3,34 +3,34 @@ package po.FinancialBill;
 import java.io.Serializable;
 
 public class AccountListPO implements Serializable{
-	
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	protected String accountName;//银行账户名
-	protected String money;//转账金额
+	protected String accountID;//银行账户ID
+	protected Double money;//转账金额
 	protected String note;//备注
-	
-	public AccountListPO(String accountName,String money,String note){
-		this.accountName=accountName;
+
+	public AccountListPO(String accountID,Double money,String note){
+		this.accountID=accountID;
 		this.money=money;
-		this.note=note; 
+		this.note=note;
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getAccountID() {
+		return accountID;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+	public void setAccountID(String accountID) {
+		this.accountID = accountID;
 	}
 
-	public String getMoney() {
+	public Double getMoney() {
 		return money;
 	}
 
-	public void setMoney(String money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 
@@ -41,5 +41,5 @@ public class AccountListPO implements Serializable{
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
+
 }

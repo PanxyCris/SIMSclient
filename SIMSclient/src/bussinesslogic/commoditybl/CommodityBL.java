@@ -67,6 +67,7 @@ public class CommodityBL implements CommodityBLService{
 		}
 		ArrayList<Integer> IDList = new ArrayList<>();
 		for (CommodityPO po : list) {
+			System.out.println(po.getID());
 			IDList.add(Integer.parseInt(po.getID()));
 		}
 		Collections.sort(IDList);

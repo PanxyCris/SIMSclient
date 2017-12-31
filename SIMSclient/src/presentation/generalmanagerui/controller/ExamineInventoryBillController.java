@@ -9,23 +9,21 @@ import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
 import dataenum.findtype.FindInventoryBillType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindPrintUI;
-import vo.accountvo.AccountVO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 import vo.uservo.UserVO;
@@ -68,15 +66,8 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		public void find() throws RemoteException{
 			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 		       if(list==null){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+	               error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();

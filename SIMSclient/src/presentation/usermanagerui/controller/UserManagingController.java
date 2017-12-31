@@ -2,10 +2,8 @@ package presentation.usermanagerui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import bussiness_stub.UserBLService_Stub;
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
@@ -13,6 +11,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -25,14 +24,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 
 public class UserManagingController extends UserManagerController{
 
 	    UserBLService service = new UserController();
-		public static final Remind remind = Remind.USER;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
              UserRole.FINANCIAL_MANAGER.value,
@@ -77,11 +73,11 @@ public class UserManagingController extends UserManagerController{
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+		    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该用户已存在");
+		    	                    existed.showAndWait();
 		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+	                            error.showAndWait();
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -95,15 +91,8 @@ public class UserManagingController extends UserManagerController{
 		public void find() throws RemoteException{
 			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.getType(findChoice.getValue()));
 		       if(list==null){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		    	   Alert error = new Alert(Alert.AlertType.ERROR,ResultMessage.NOTFOUND.value);
+                   error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();
@@ -210,10 +199,9 @@ public class UserManagingController extends UserManagerController{
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case SUCCESS:break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                                error.showAndWait();break;
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();

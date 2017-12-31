@@ -35,7 +35,6 @@ public class MakeReceiptController extends InventoryManagerController{
 
     InventoryBillBLService service = new InventoryBillController();
     ObservableList<GiftVO> list = FXCollections.observableArrayList();
-	public static final Remind remind = Remind.BILL;
 	@FXML
 	Label idLabel;
 	@FXML

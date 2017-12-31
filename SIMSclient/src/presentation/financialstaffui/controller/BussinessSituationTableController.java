@@ -4,26 +4,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.BussinessSituationBL;
-import bussinesslogic.tablebl.SaleScheduleBL;
 import bussinesslogicservice.checktableblservice.BussinessSituationBLService;
-import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import dataenum.ResultMessage;
-import dataenum.findtype.FindSaleScheduleType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.remindui.RemindPrintUI;
 import vo.tablevo.PaymentTableVO;
 import vo.tablevo.ReceiveTableVO;
-import vo.tablevo.SaleScheduleVO;
 import vo.uservo.UserVO;
 
 public class BussinessSituationTableController extends ViewTableController{
@@ -83,15 +76,8 @@ public class BussinessSituationTableController extends ViewTableController{
 		ArrayList<PaymentTableVO> paylist = service.siftPay(startPicker.getValue(),endPicker.getValue());
 		ArrayList<ReceiveTableVO> receivelist = service.siftReceive(startPicker.getValue(),endPicker.getValue());
 	       if(paylist==null||receivelist==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	payList.clear();

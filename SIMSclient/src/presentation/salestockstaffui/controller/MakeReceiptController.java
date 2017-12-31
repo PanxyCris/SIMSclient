@@ -15,7 +15,6 @@ import vo.uservo.UserVO;
 
 public class MakeReceiptController extends SaleStockStaffController implements Initializable {
 
-	public static final Remind remind = Remind.BILL;
 	@FXML
 	ChoiceBox<String> receiptChoice;
 

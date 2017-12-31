@@ -1,21 +1,19 @@
 package presentation.financialstaffui.controller;
 
 import java.net.URL;
-
-
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import bussiness_stub.ReceiptBillBLService_Stub;
+
 import bussinesslogic.accountbillbl.ReceiptBillController;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
@@ -23,7 +21,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
@@ -85,15 +82,8 @@ public class ReceiveCheckBillController extends FinancialStaffController impleme
 
 		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindAccountBillType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
