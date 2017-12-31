@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
 import dataservice.salesdataservice.SalesDataService;
-import po.SalesPO;
+import po.sales.SalesPO;
 
 public class SalesDataServiceImpl implements SalesDataService{
-	
+
 	private SalesData sale;
 
 	public SalesDataServiceImpl() {
 		sale = new SalesData();
 	}
-	
+
 	@Override
 	public ResultMessage insertSale(SalesPO po) throws RemoteException {
 		try {
@@ -68,6 +68,6 @@ public class SalesDataServiceImpl implements SalesDataService{
 	public String getSaleBackID() throws RemoteException {
 		return null;
 	}
-	
-} 
+
+}
 

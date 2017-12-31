@@ -1,4 +1,4 @@
-package po;
+package po.sales;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -12,7 +12,7 @@ import po.commodity.CommodityItemPO;
 
 
 public class SalesPO implements Serializable {
-	
+
 	private static final long serialVersionUID = 2470445039822316724L;
 	private String id;
 	private String clientId;
@@ -30,9 +30,9 @@ public class SalesPO implements Serializable {
 	private BillType type;
 	private String date;
 
-	
+
 	public SalesPO() {
-		
+
 	}
 
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
@@ -55,11 +55,11 @@ public class SalesPO implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.date = sdf.format(new Date());
 	}
-	
+
 	public String getDate() {
 		return this.date;
 	}
-	
+
 	public String getId() {
 		return id;
 	}

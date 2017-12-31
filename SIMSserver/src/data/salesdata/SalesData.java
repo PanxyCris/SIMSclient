@@ -21,16 +21,16 @@ import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
 import po.PurchasePO;
-import po.SalesPO;
+import po.sales.SalesPO;
 import po.commodity.CommodityItemPO;
 
 /**
- * 
+ *
  * @author Lijie
  * @date 2017年12月5日
  */
 public class SalesData{
-	
+
 	private Connection conn;
 	public SalesData() {
 		conn = DBManager.getConnection();
@@ -38,7 +38,7 @@ public class SalesData{
 
 	public static void main(String[] args) {
 		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
-		SalesPO po = new SalesPO("XSTHD-20171224", "000001", "潘星宇", "王灿灿", "刘钦", 
+		SalesPO po = new SalesPO("XSTHD-20171231", "000001", "潘星宇", "王灿灿", "刘钦",
 				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "大吉大利，晚上吃鸡", BillType.SALESBACKBILL, BillState.DRAFT);
 		CommodityItemPO e = new CommodityItemPO("000001", "潘星宇", "单身汪", 100, 200, "汪汪");
 		commodities.add(e);
@@ -49,17 +49,17 @@ public class SalesData{
 			System.out.println(p.getId() + " " + p.getClientName());
 		}
 	}
-	
+
 	public ResultMessage insert(SalesPO po) {
 		try {
-			PreparedStatement ps0 = conn.prepareStatement("select count(*) from purchase where id = ?");
+			PreparedStatement ps0 = conn.prepareStatement("select count(*) from sales where id = ?");
 			ps0.setString(1, po.getId());
 			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
 				if (count == 0) {
-					String sql = "" + "insert into purchase(id,object) value(?, ?)";
+					String sql = "" + "insert into sales(id,object) value(?, ?)";
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getId());
@@ -70,7 +70,7 @@ public class SalesData{
 					return ResultMessage.SUCCESS;
 				}
 				else {
-					System.out.println("该进货单已存在");
+					System.out.println("该销售已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
@@ -80,7 +80,7 @@ public class SalesData{
 		return ResultMessage.FAIL;
 
 	}
-	
+
 	public ResultMessage delete(String id) {
 		String sql = "" + "delete from sales where id = ?";
 		try {

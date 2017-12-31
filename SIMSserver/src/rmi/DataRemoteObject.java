@@ -45,7 +45,7 @@ import po.AccountPO;
 import po.ClassificationVPO;
 import po.MemberPO;
 import po.PurchasePO;
-import po.SalesPO;
+import po.sales.SalesPO;
 import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
