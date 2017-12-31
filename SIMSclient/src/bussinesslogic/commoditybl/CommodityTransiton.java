@@ -28,7 +28,7 @@ public class CommodityTransiton {
 	}
 	
 	public CommodityVO POtoVO(CommodityPO po) {
-		String id = po.getId();
+		String id = po.getID();
 		String name = po.getName();
 		String model = po.getModel();
 		int number = po.getNumber();

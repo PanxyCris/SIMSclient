@@ -67,7 +67,7 @@ public class CommodityBL implements CommodityBLService{
 		}
 		ArrayList<Integer> IDList = new ArrayList<>();
 		for (CommodityPO po : list) {
-			IDList.add(Integer.parseInt(po.getId()));
+			IDList.add(Integer.parseInt(po.getID()));
 		}
 		Collections.sort(IDList);
 //		Collections.reverse(IDList);
@@ -93,7 +93,7 @@ public class CommodityBL implements CommodityBLService{
 	@Override
 	public void delete(CommodityVO vo)  throws Exception{
 		try {
-			service.deleteCommodity(vo.getID());
+			service.deleteCommodity(vo.getId());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -135,7 +135,7 @@ public class CommodityBL implements CommodityBLService{
 		CommodityStockVO commodityStockVO=null;
 		ArrayList<CommodityVO> commodityVOs=show();
 		for (int i = 0; i < commodityStockVOs.size(); i++) {
-			commodityStockVO=new CommodityStockVO(commodityVOs.get(i).getID(), commodityVOs.get(i).getName(),
+			commodityStockVO=new CommodityStockVO(commodityVOs.get(i).getId(), commodityVOs.get(i).getName(),
 					commodityVOs.get(i).getModel(), commodityVOs.get(i).getNumber(),
 					(commodityVOs.get(i).getRecentRetailedPrice()+commodityVOs.get(i).getRetailedPrice())/2,(commodityVOs.get(i).getRecentPurPrice()+commodityVOs.get(i).getPurPrice())/2, 
 					commodityVOs.get(i).getLine());
@@ -170,7 +170,7 @@ public class CommodityBL implements CommodityBLService{
 		ArrayList<CommodityVO> list = show();
 		ArrayList<String> result = new ArrayList<>();
 		for (CommodityVO vo : list) {
-			result.add(vo.getName() + "(" + vo.getID() + ")");
+			result.add(vo.getName() + "(" + vo.getId() + ")");
 		}
 		return result;
 	}

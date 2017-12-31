@@ -32,7 +32,7 @@ public class CommodityPO implements Serializable{
 	}
 
 
-	public String getId() {
+	public String getID() {
 		return id;
 	}
 

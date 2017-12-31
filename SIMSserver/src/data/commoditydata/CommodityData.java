@@ -38,7 +38,7 @@ public class CommodityData {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
 			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from commodity where id = " + po.getId());
+			ResultSet rs = ps0.executeQuery("select count(*) from commodity where id = " + po.getID());
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -47,7 +47,7 @@ public class CommodityData {
 					
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getId());
+					ps.setString(1, po.getID());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
@@ -89,7 +89,7 @@ public class CommodityData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getId());
+			ps.setString(2, po.getID());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();
@@ -119,7 +119,7 @@ public class CommodityData {
                       
                     switch (type) {
 					case ID:
-						if (keyword.equals(po.getId())) list.add(po);
+						if (keyword.equals(po.getID())) list.add(po);
 						break;
 					case NAME: if(keyword.equals(po.getName())) list.add(po);
 
