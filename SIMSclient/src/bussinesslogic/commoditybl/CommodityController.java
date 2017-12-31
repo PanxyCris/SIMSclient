@@ -1,6 +1,6 @@
 package bussinesslogic.commoditybl;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -60,8 +60,8 @@ public class CommodityController implements CommodityBLService{
 	}
 
 	@Override
-	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
-		return commodityBL.check(startDate, endDate);
+	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
+		return commodityBL.check(start, end);
 	}
 
 }
