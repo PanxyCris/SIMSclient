@@ -12,7 +12,7 @@ import vo.commodityvo.CommodityVO;
 public class CommodityTransiton {
 
 	public CommodityPO VOtoPO(CommodityVO vo) {
-		String id = vo.getId();
+		String id = vo.getID();
 		String name = vo.getName();
 		String model = vo.getModel();
 		int number = vo.getNumber();
@@ -28,7 +28,7 @@ public class CommodityTransiton {
 	}
 	
 	public CommodityVO POtoVO(CommodityPO po) {
-		String id = po.getId();
+		String id = po.getID();
 		String name = po.getName();
 		String model = po.getModel();
 		int number = po.getNumber();
