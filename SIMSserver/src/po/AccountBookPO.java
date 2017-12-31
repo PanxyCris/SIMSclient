@@ -9,8 +9,6 @@ public class AccountBookPO extends PersistObject {
 		clerkID = c;
 	}
 
-	
-
 	public String getClerkID() {
 		return this.clerkID;
 	}
