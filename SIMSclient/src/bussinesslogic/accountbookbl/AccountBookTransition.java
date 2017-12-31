@@ -16,9 +16,9 @@ import vo.membervo.MemberVO;
 
 public class AccountBookTransition {
 	
-	AccountTransition accountTransition;
-	MemberTransition memberTransition;
-	CommodityTransiton commodityTransiton;
+	AccountTransition accountTransition=new AccountTransition();
+	MemberTransition memberTransition=new MemberTransition();
+	CommodityTransiton commodityTransiton=new CommodityTransiton();
 	
 	public AccountBookPO VOtoPO(AccountBookVO accountBookVO) {
 		AccountBookPO accountBookPO = null;

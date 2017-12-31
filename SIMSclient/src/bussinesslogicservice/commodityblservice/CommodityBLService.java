@@ -1,5 +1,5 @@
 package bussinesslogicservice.commodityblservice;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
@@ -27,5 +27,5 @@ public interface CommodityBLService{
 
 	public ArrayList<CommodityStockVO> stock() throws Exception;   //ø‚¥Ê≈Ãµ„
 
-	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate,LocalDateTime endDate);
+	public ArrayList<CommodityCheckVO> check(LocalDate start,LocalDate end);
 }

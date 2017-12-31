@@ -3,7 +3,6 @@ package bussinesslogic.commoditybl;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -210,14 +209,14 @@ public class CommodityBL implements CommodityBLService{
 
 //ccw
 	@Override
-	public ArrayList<CommodityCheckVO> check(LocalDateTime startDate, LocalDateTime endDate) {
+	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
 		ArrayList<CommodityCheckVO> checkVOs=new ArrayList<>();
 		ArrayList<SalesVO> salesVOs=salesBLService.show();
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
-//			if(localDate.isAfter(startDate)&&localDate.isBefore(endDate)){
-//				
-//			}
+			if(localDate.isAfter(start)&&localDate.isBefore(end)){
+				
+			}
 		}
 		ArrayList<PurchaseVO> purchaseVOs=purchaseBLService.show();
 		return null;
