@@ -28,6 +28,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class MainUI extends Application{
 
@@ -54,7 +55,7 @@ public class MainUI extends Application{
 		    Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
-	        primaryStage.setTitle("µÇÂ¼½çÃæ");
+	        primaryStage.initStyle(StageStyle.TRANSPARENT);
 	        primaryStage.show();
 	}
 
