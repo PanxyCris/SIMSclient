@@ -26,9 +26,12 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 		PromotionSpecialDataServiceImpl p = new PromotionSpecialDataServiceImpl();
 		LocalDate beginDate = LocalDate.of(2016, 12, 31);
 		LocalDate endDate = LocalDate.of(2017, 12, 31);
-		PromotionPricePacksPO po = new PromotionPricePacksPO("1111", beginDate, endDate, 100.0, null);
+		ArrayList<GiftPO> gifts = new ArrayList<>();
+		GiftPO g = new GiftPO("100010", 100);
+		gifts.add(g);
+		PromotionPricePacksPO po = new PromotionPricePacksPO("100013", beginDate, endDate, 100.0, gifts);
 		p.insertPromotion(po);
-		System.out.println(p.showSpecialPromotion().get(0).getId());
+		System.out.println(p.showSpecialPromotion().get(1).getId());
 	}
 	
 	@Override

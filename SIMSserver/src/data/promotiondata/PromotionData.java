@@ -64,6 +64,7 @@ public class PromotionData<P extends PromotionPO> {
 				}
 				else {
 					System.out.println("促销策略ID已存在");
+					return ResultMessage.EXISTED;
 				}
 			}
 

@@ -1,7 +1,10 @@
 package po.commodity;
 
-public class GiftPO {
+import java.io.Serializable;
 
+public class GiftPO implements Serializable{
+
+	private static final long serialVersionUID = -4425342273211989528L;
 	private String name;
 	private Integer number;
 
