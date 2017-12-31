@@ -43,7 +43,7 @@ public class SalesData{
 		CommodityItemPO e = new CommodityItemPO("000001", "ÅËĞÇÓî", "µ¥ÉíÍô", 100, 200, "ÍôÍô");
 		commodities.add(e);
 		SalesData s = new SalesData();
-		//s.insert(po);
+		s.insert(po);
 		ArrayList<SalesPO> list = s.show();
 		for (SalesPO p : list) {
 			System.out.println(p.getId() + " " + p.getClientName());
