@@ -48,6 +48,7 @@ public class ReceiptBillData {
 				}
 				else {
 					System.out.println("该收款单已存在");
+					return ResultMessage.EXISTED;
 				}
 			}
 			

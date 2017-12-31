@@ -48,6 +48,7 @@ public class PaymentBillData {
 				}
 				else {
 					System.out.println("客户ID已存在");
+					return ResultMessage.EXISTED;
 				}
 			}
 			

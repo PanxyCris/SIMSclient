@@ -49,12 +49,12 @@ public class PurchaseData {
 	public ResultMessage insert(PurchasePO po) {
 		
 		try {
-//			Statement ps0 = conn.createStatement();
-//			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
-//			int count = 0;
-//			if (rs.next()) {
-//				count = rs.getInt(1);
-//				if (count == 0) {
+			Statement ps0 = conn.createStatement();
+			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
+			int count = 0;
+			if (rs.next()) {
+				count = rs.getInt(1);
+				if (count == 0) {
 					String sql = "" + "insert into purchase(id,object) value(?, ?)";
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
@@ -64,11 +64,12 @@ public class PurchaseData {
 					conn.commit();
 					ps.close();
 					return ResultMessage.SUCCESS;
-//				}
-//				else {
-//					System.out.println("该进货单已存在");
-//				}
-//			}
+				}
+				else {
+					System.out.println("该进货单已存在");
+					return ResultMessage.EXISTED;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

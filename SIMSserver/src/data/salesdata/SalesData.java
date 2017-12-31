@@ -52,19 +52,32 @@ public class SalesData{
 	
 	public ResultMessage insert(SalesPO po) {
 		try {
-			String sql = "" + "insert into sales(id,object) value(?, ?)";
-			conn.setAutoCommit(false);
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, po.getId());
-			ps.setObject(2, po);
-			ps.executeUpdate();
-			conn.commit();
-			return ResultMessage.SUCCESS;
-		}catch (SQLException e) {
+			Statement ps0 = conn.createStatement();
+			ResultSet rs = ps0.executeQuery("select count(*) from purchase where id = " + po.getId());
+			int count = 0;
+			if (rs.next()) {
+				count = rs.getInt(1);
+				if (count == 0) {
+					String sql = "" + "insert into purchase(id,object) value(?, ?)";
+					conn.setAutoCommit(false);
+					PreparedStatement ps = conn.prepareStatement(sql);
+					ps.setString(1, po.getId());
+					ps.setObject(2, po);
+					ps.executeUpdate();
+					conn.commit();
+					ps.close();
+					return ResultMessage.SUCCESS;
+				}
+				else {
+					System.out.println("该销售单已存在");
+					return ResultMessage.EXISTED;
+				}
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return ResultMessage.FAIL;
-		
+
 	}
 	
 	public ResultMessage delete(String id) {

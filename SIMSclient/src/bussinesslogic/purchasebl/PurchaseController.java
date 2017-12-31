@@ -120,7 +120,12 @@ public class PurchaseController implements PurchaseBLService{
 	@Override
 	public ResultMessage submit(PurchaseVO Info) {
 		try {
-			return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
+			PurchasePO po = PurchaseTransition.VOtoPO(Info);
+			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
+				return service.updatePurchase(po);
+			}
+			else 
+				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -130,7 +135,12 @@ public class PurchaseController implements PurchaseBLService{
 	@Override
 	public ResultMessage save(PurchaseVO Info) {
 		try {
-			return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
+			PurchasePO po = PurchaseTransition.VOtoPO(Info);
+			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
+				return service.updatePurchase(po);
+			}
+			else 
+				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

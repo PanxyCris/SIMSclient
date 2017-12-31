@@ -155,7 +155,11 @@ public class SalesController implements SalesBLService{
 	@Override
 	public ResultMessage submit(SalesVO Info) {
 		try {
-			return service.insertSale(SalesTransition.VOtoPO(Info));
+			SalesPO po = SalesTransition.VOtoPO(Info);
+			if (service.insertSale(po) == ResultMessage.EXISTED) {
+				return service.updateSale(po);
+			}
+			else return service.insertSale(SalesTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -165,7 +169,11 @@ public class SalesController implements SalesBLService{
 	@Override
 	public ResultMessage save(SalesVO Info) {
 		try {
-			return service.insertSale(SalesTransition.VOtoPO(Info));
+			SalesPO po = SalesTransition.VOtoPO(Info);
+			if (service.insertSale(po) == ResultMessage.EXISTED) {
+				return service.updateSale(po);
+			}
+			else return service.insertSale(SalesTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
