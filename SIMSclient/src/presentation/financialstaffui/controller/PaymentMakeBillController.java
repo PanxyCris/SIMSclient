@@ -1,13 +1,8 @@
 package presentation.financialstaffui.controller;
 
-import java.net.URL;
-
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import bussiness_stub.PaymentBillBLService_Stub;
-import bussiness_stub.UtilityBLService_Stub;
 import bussinesslogic.accountbillbl.PaymentBillController;
+import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
@@ -19,19 +14,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
-import presentation.financialstaffui.PaymentCheckBillUI;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;
@@ -74,6 +67,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	@FXML
 	public void insert(){
+		if(itemField.getText()==null||moneyField.getText()==null||noteArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+			warning.showAndWait();
+		}
+		else{
 		 EntryVO vo = new EntryVO(itemField.getText(), Double.parseDouble(moneyField.getText()), noteArea.getText());
 	        ResultMessage message = service.judgeLegal(moneyField.getText());
 	        Platform.runLater(new Runnable() {
@@ -91,6 +89,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 					}
 	    	    }
 	    	});
+	     }
 	}
 
 	@FXML
@@ -101,11 +100,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
         		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT,receiptArea.getText());
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
-             print(ResultMessage.SAVED);
+             printInfo(ResultMessage.SAVED);
              fresh();
              }
          else
-      	   print(message);
+      	   printWrong(message);
 	}
 
 	@FXML
@@ -116,11 +115,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,receiptArea.getText());
 		ResultMessage message = service.commit(vo);
 	       if(message == ResultMessage.SUCCESS){
-	           print(ResultMessage.COMMITED);
+	           printInfo(ResultMessage.COMMITED);
 	           fresh();
 	       }
 	       else
-	    	   print(message);
+	    	   printWrong(message);
 	}
 
 	@FXML
@@ -144,7 +143,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		   this.user = user;
 		   this.pay = bill;
 			if(bill == null){
-				UtilityBLService utilityService = new UtilityBLService_Stub();
+				UtilityBLService utilityService = new UtilityBL();
 				idLabel.setText(utilityService.generateID(BillType.XJFYD));
 			    sumLabel.setText("0");
 				operatorLabel.setText(readUser().getName());

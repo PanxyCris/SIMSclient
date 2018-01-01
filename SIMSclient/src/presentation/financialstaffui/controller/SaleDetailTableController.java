@@ -59,7 +59,10 @@ public class SaleDetailTableController extends ViewTableController{
 
 	@FXML
 	public void sift(){
-
+		if(siftField.getText()==null||siftChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<SaleScheduleVO> list = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
 	       if(list==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -69,12 +72,15 @@ public class SaleDetailTableController extends ViewTableController{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 	@FXML
 	public void siftTime(){
-
+		if(startPicker.getValue()==null||endPicker.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<SaleScheduleVO> list = service.siftTime(startPicker.getValue(),endPicker.getValue());
 	       if(list==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -84,7 +90,7 @@ public class SaleDetailTableController extends ViewTableController{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 

@@ -71,7 +71,11 @@ public class BussinessSituationTableController extends FinanceTableController{
 
 	@FXML
 	public void siftTime(){
-
+        if(startPicker.getValue()==null||endPicker.getValue()==null){
+        	Alert warning = new Alert(Alert.AlertType.WARNING,"«Î ‰»Î ±º‰");
+        	warning.showAndWait();
+        }
+        else{
 		ArrayList<PaymentTableVO> paylist = service.siftPay(startPicker.getValue(),endPicker.getValue());
 		ArrayList<ReceiveTableVO> receivelist = service.siftReceive(startPicker.getValue(),endPicker.getValue());
 	       if(paylist==null||receivelist==null){
@@ -87,6 +91,7 @@ public class BussinessSituationTableController extends FinanceTableController{
 	   		receive.setItems(receiveList);
 	   		updateSum();
 	       }
+	   }
 
 	}
 

@@ -6,6 +6,7 @@ import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -115,6 +116,10 @@ public class InitAccountController extends FinancialStaffController {
 
 	@FXML
 	public void init(){
+		if(yearChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"«Î—°‘ÒƒÍ∑›");
+			warning.showAndWait();
+		}
 		ArrayList<CommodityVO> commoditylist = new ArrayList<>();
 		ArrayList<MemberVO> memberlist = new ArrayList<>();
 		ArrayList<AccountVO> accountlist = new ArrayList<>();

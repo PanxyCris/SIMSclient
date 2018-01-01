@@ -75,7 +75,10 @@ public class ExamineReceiveBillController extends ExamineBillController{
 
 	@FXML
 	public void find() throws RemoteException{
-
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -85,7 +88,7 @@ public class ExamineReceiveBillController extends ExamineBillController{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 	@FXML

@@ -72,7 +72,10 @@ public class BussinessSituationTableController extends ViewTableController{
 
 	@FXML
 	public void siftTime(){
-
+		if(startPicker.getValue()==null||endPicker.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<PaymentTableVO> paylist = service.siftPay(startPicker.getValue(),endPicker.getValue());
 		ArrayList<ReceiveTableVO> receivelist = service.siftReceive(startPicker.getValue(),endPicker.getValue());
 	       if(paylist==null||receivelist==null){
@@ -88,7 +91,7 @@ public class BussinessSituationTableController extends ViewTableController{
 	   		receive.setItems(receiveList);
 	   		updateSum();
 	       }
-
+		}
 	}
 
 

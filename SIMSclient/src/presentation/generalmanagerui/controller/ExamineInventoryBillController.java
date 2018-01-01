@@ -33,7 +33,6 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	    ExamineBLService<InventoryBillVO> service = new ExamineInventoryBL();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-		public static final Remind remind = Remind.BILL;
 		InventoryBillVO inv;
 
 		@FXML
@@ -64,6 +63,10 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		@FXML
 		public void find() throws RemoteException{
+			if(findingField.getText()==null||findChoice.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+				warning.showAndWait();
+			}else{
 			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 		       if(list==null){
 		    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -73,7 +76,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
 		       }
-
+			}
 		}
 
 		@FXML

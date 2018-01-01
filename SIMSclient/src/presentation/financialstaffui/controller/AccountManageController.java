@@ -1,21 +1,20 @@
 package presentation.financialstaffui.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.Optional;
 
 import bussinesslogic.accountbl.AccountController;
 import bussinesslogicservice.accountblservice.AccountBLService;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -28,10 +27,9 @@ import presentation.common.EditingCell;
 import vo.accountvo.AccountVO;
 import vo.uservo.UserVO;
 
-public class AccountManageController extends FinancialStaffController implements Initializable{
+public class AccountManageController extends FinancialStaffController{
 
         AccountBLService service = new AccountController();
-        public static final Remind remind = Remind.ACCOUNT;
         ObservableList<AccountVO> list = FXCollections.observableArrayList();
         @FXML
         protected TextField idField;
@@ -59,6 +57,11 @@ public class AccountManageController extends FinancialStaffController implements
 
         @FXML
         public void insert(){
+        	if(idField.getText()==null||nameField.getText()==null||moneyField.getText()==null){
+        		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+        		warning.showAndWait();
+        	}
+        	else{
              AccountVO vo = new AccountVO(idField.getText(), nameField.getText(), Double.parseDouble(moneyField.getText()));
                 ResultMessage message = service.add(vo);
                 Platform.runLater(new Runnable() {
@@ -76,11 +79,16 @@ public class AccountManageController extends FinancialStaffController implements
                         }
                     }
                 });
+            }
         }
 
 
         @FXML
         public void find(){
+        	if(findingField.getText()==null||findChoice.getValue()==null){
+    			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+    			warning.showAndWait();
+    		}else{
             ArrayList<AccountVO> accountList = service.find(findingField.getText(),FindAccountType.getFindType(findChoice.getValue()));
                if(accountList==null){
             	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -92,6 +100,7 @@ public class AccountManageController extends FinancialStaffController implements
                    table.setItems(list);
                    initFind();
                }
+    		}
         }
 
         public void initFind(){
@@ -105,18 +114,16 @@ public class AccountManageController extends FinancialStaffController implements
             moneyField.setText(null);
         }
 
-        @Override
-        public void initialize(URL location, ResourceBundle resources) {
-        	list.clear();
+        public void initData(UserVO user) throws Exception {
+            this.user = user;
+            list.clear();
             list.addAll(service.getAccountList());
             table.setItems(list);
             initFind();
             initInsert();
             edit();
             manageInit();
-
-        }
-
+     }
         public void edit(){
             Callback<TableColumn<AccountVO, String>,
                 TableCell<AccountVO, String>> cellFactory
@@ -187,9 +194,18 @@ public class AccountManageController extends FinancialStaffController implements
                             this.setGraphic(delBtn);
                             delBtn.setOnMouseClicked((me) -> {
                                 AccountVO clickedAccount = this.getTableView().getItems().get(this.getIndex());
-                                service.delete(clickedAccount);
-                                list.remove(clickedAccount);
-                                table.setItems(list);
+                                try {
+	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedAccount);
+	                            		  list.remove(clickedAccount);
+	      	                              table.setItems(list);
+	                            	}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
                             });
                         }
                     }
@@ -198,10 +214,5 @@ public class AccountManageController extends FinancialStaffController implements
                 return cell;
             });
         }
-
-        public void initData(UserVO user) throws Exception {
-               this.user = user;
-        }
-
 
 }
