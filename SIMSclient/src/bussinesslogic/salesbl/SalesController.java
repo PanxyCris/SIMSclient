@@ -78,6 +78,9 @@ public class SalesController implements SalesBLService{
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
+		if (IDList.isEmpty()) {
+			return "XSD-" + date + "-00001";
+		}
 		String num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
@@ -119,6 +122,9 @@ public class SalesController implements SalesBLService{
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
+		if (IDList.isEmpty()) {
+			return "XSTHD-" + date + "-00001";
+		}
 		String num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
