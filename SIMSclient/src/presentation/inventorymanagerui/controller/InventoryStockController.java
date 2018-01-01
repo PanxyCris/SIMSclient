@@ -1,6 +1,6 @@
 package presentation.inventorymanagerui.controller;
 
-import bussinesslogic.commoditybl.CommodityBL;
+import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,39 +8,31 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import vo.commodityvo.CommodityVO;
+import vo.commodityvo.CommodityStockVO;
 import vo.uservo.UserVO;
 
 public class InventoryStockController extends InventoryManagerController{
 
-	CommodityBLService service = new CommodityBL();
-    ObservableList<CommodityVO> list = FXCollections.observableArrayList();
+	CommodityBLService service = new CommodityController();
+    ObservableList<CommodityStockVO> list = FXCollections.observableArrayList();
 
 	@FXML
-	protected TableView<CommodityVO> table;
+	protected TableView<CommodityStockVO> table;
 	@FXML
-	protected TableColumn<CommodityVO,Integer> tableLine;
+	protected TableColumn<CommodityStockVO,Integer> tableLine;
 	@FXML
-	protected TableColumn<CommodityVO,String> tableID;
+	protected TableColumn<CommodityStockVO,String> tableID;
 	@FXML
-	protected TableColumn<CommodityVO,String> tableName;
+	protected TableColumn<CommodityStockVO,String> tableName;
 	@FXML
-	protected TableColumn<CommodityVO,String> tableModel;
-	@FXML
-	protected TableColumn<CommodityVO,String> tableClass;
+	protected TableColumn<CommodityStockVO,String> tableModel;
 
 	@FXML
-	protected TableColumn<CommodityVO,Integer> tableNumber;
+	protected TableColumn<CommodityStockVO,Integer> tableNumber;
 	@FXML
-	protected TableColumn<CommodityVO,Double> tablePurPrice;
+	protected TableColumn<CommodityStockVO,Double> tablePurPrice;
 	@FXML
-	protected TableColumn<CommodityVO,Double> tableRetailedPrice;
-	@FXML
-	protected TableColumn<CommodityVO,Integer> tableWarmingValue;
-	@FXML
-	protected TableColumn<CommodityVO,Double> tableRecPurPrice;
-	@FXML
-	protected TableColumn<CommodityVO,Double> tableRecRetailedPrice;
+	protected TableColumn<CommodityStockVO,Double> tableRetailedPrice;
 
     @FXML
     public void stock() throws Exception{
@@ -52,7 +44,7 @@ public class InventoryStockController extends InventoryManagerController{
 	@FXML
 	public void fresh() throws Exception{
 		list.clear();
-		list.addAll(service.show());
+		list.addAll(service.stock());
 		table.setItems(list);
 	}
 
@@ -65,29 +57,19 @@ public class InventoryStockController extends InventoryManagerController{
 
 	public void manageInit(){
 		tableLine.setCellValueFactory(
-	                new PropertyValueFactory<CommodityVO,Integer>("line"));
+	                new PropertyValueFactory<CommodityStockVO,Integer>("line"));
 		tableID.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("ID"));
+                new PropertyValueFactory<CommodityStockVO,String>("id"));
         tableName.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("name"));
+                new PropertyValueFactory<CommodityStockVO,String>("name"));
         tableModel.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("model"));
-        tableClass.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,String>("classficationString"));
+                new PropertyValueFactory<CommodityStockVO,String>("model"));
         tableNumber.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Integer>("number"));
-        tableWarmingValue.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Integer>("warmingValue"));
+                new PropertyValueFactory<CommodityStockVO,Integer>("number"));
         tablePurPrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Double>("purPrice"));
+                new PropertyValueFactory<CommodityStockVO,Double>("avgRetailedPrice"));
         tableRetailedPrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Double>("retailedPrice"));
-        tableRecPurPrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Double>("recentPurPrice"));
-        tableRecRetailedPrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityVO,Double>("recentRetailedPrice"));
-
-
+                new PropertyValueFactory<CommodityStockVO,Double>("avgPurPrice"));
 	}
 
 }

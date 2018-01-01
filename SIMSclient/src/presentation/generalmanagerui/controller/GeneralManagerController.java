@@ -25,6 +25,7 @@ import presentation.generalmanagerui.ExaminePaymentBillUI;
 import presentation.generalmanagerui.ExaminePurchaseBillUI;
 import presentation.generalmanagerui.ExamineReceiveBillUI;
 import presentation.generalmanagerui.ExamineSalesBillUI;
+import presentation.generalmanagerui.FinanceTableUI;
 import presentation.generalmanagerui.GeneralManagerUI;
 import presentation.generalmanagerui.PromotionMakingUI;
 import presentation.generalmanagerui.PromotionMemberUI;
@@ -162,13 +163,14 @@ public class GeneralManagerController {
    		            case "ExamineSalesBillUI":new ExamineSalesBillUI().start(user);break;
    		            case "UserMessageUI":new UserMessageUI().start(user);break;
    		            case "BussinessProcessTableUI":new BussinessProcessTableUI().start(user);break;
-		            case "BussinessSituationTableController":new BussinessSituationTableUI().start(user);break;
-		            case "SaleDetailTableController":new SaleDetailTableUI().start(user);break;
+		            case "BussinessSituationTableUI":new BussinessSituationTableUI().start(user);break;
+		            case "SaleDetailTableUI":new SaleDetailTableUI().start(user);break;
 		            case "CheckInventoryBillUI":new CheckInventoryBillUI().start(user);break;
 		            case "CheckPaymentBillUI":new CheckPaymentBillUI().start(user);break;
 		            case "CheckPurchaseBillUI":new CheckPurchaseBillUI().start(user);break;
 		            case "CheckReceiveBillUI":new CheckReceiveBillUI().start(user);break;
 		            case "CheckSalesBillUI":new CheckSalesBillUI().start(user);break;
+		            case "FinanceTableUI":new FinanceTableUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

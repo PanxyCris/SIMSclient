@@ -1,6 +1,9 @@
 package presentation.inventorymanagerui.controller;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.Remind;
@@ -13,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
@@ -90,6 +95,13 @@ public class CommodityManageController extends InventoryManagerController{
 
 	@FXML
 	public void insert() throws NumberFormatException, Exception{
+		if(nameField.getText()==null||modelField.getText()==null||classChoice.getValue()==null||
+				numberField.getText()==null||purPriceField.getText()==null||retailedPriceField.getText()==null||
+				warmingValueField.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		CommodityVO vo = new CommodityVO(idLabel.getText(),nameField.getText(),modelField.getText(),
 				  classChoice.getValue(),Integer.parseInt(numberField.getText()),Double.parseDouble(purPriceField.getText()),
 				  Double.parseDouble(retailedPriceField.getText()),Integer.parseInt(warmingValueField.getText()));
@@ -109,11 +121,17 @@ public class CommodityManageController extends InventoryManagerController{
 					}
 	    	    }
 	    	});
+	    }
 	}
 
 
 	@FXML
 	public void find() throws Exception{
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityVO> list = service.find(findingField.getText(),FindCommodityType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -124,6 +142,7 @@ public class CommodityManageController extends InventoryManagerController{
 	    	   table.getItems().addAll(list);
 	    	   initFind();
 	       }
+		}
 	}
 
 	public void initFind(){
@@ -136,7 +155,7 @@ public class CommodityManageController extends InventoryManagerController{
 		idLabel.setText(service.getID());
 		else
 			idLabel.setText("000001");
-//		classChoice.setValue(null);
+		classChoice.setValue(null);
 		nameField.setText(null);
 		modelField.setText(null);
 		numberField.setText(null);
@@ -351,14 +370,18 @@ public class CommodityManageController extends InventoryManagerController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	CommodityVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            try {
-								service.delete(clickedUser);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                            list.remove(clickedUser);
-                            table.setItems(list);
+                        	 try {
+	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedUser);
+	                            		  list.remove(clickedUser);
+	      	                              table.setItems(list);
+	                            	}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
                         });
                     }
                 }

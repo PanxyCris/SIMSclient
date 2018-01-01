@@ -1,19 +1,13 @@
 package presentation.salestockstaffui.controller;
 
-import java.net.URL;
-
-import java.rmi.RemoteException;
-import java.util.ResourceBundle;
-
 import dataenum.BillType;
-import dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
 
-public class MakeReceiptController extends SaleStockStaffController implements Initializable {
+public class MakeReceiptController extends SaleStockStaffController{
 
 	@FXML
 	ChoiceBox<String> receiptChoice;
@@ -21,6 +15,11 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 
 	@FXML
 	public void chooseReceipt() throws Exception{
+		if(receiptChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请选择你要填写的单据");
+			warning.showAndWait();
+		}
+		else{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
 		case PURCHASEBILL:changeStage("PurchaseMakeBillUI",user,type,null,null);break;
@@ -29,20 +28,17 @@ public class MakeReceiptController extends SaleStockStaffController implements I
 		case SALESBACKBILL:changeStage("SalesMakeBillUI",user,type,null,null);break;
 		default:break;
 		}
+		}
 	}
 
 	public void initData(UserVO user) throws Exception {
            this.user = user;
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			choiceInit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+           try {
+   			choiceInit();
+   		} catch (Exception e) {
+   			// TODO Auto-generated catch block
+   			e.printStackTrace();
+   		}
 	}
 
 	public void choiceInit() throws Exception{

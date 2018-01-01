@@ -112,6 +112,11 @@ public class SalesMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void insert(){
+		if(nameChoice.getValue()==null||modelChoice.getValue()==null||numberField.getText()==null||priceField.getText()==null||remarkArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
 	        ResultMessage message = service.isLegal(vo);
@@ -139,10 +144,16 @@ public class SalesMakeBillController extends MakeReceiptController{
 					}
 	    	    }
 	    	});
+	   }
 	}
 
 	@FXML
 	public void save(){
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
@@ -151,15 +162,21 @@ public class SalesMakeBillController extends MakeReceiptController{
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
-             print(ResultMessage.SAVED);
+             printInfo(ResultMessage.SAVED);
              fresh();
              }
          else
-      	   print(message);
+      	   printWrong(message);
+		}
 	}
 
 	@FXML
 	public void submit(){
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
@@ -168,11 +185,12 @@ public class SalesMakeBillController extends MakeReceiptController{
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
 		ResultMessage message = service.submit(vo);
 	       if(message == ResultMessage.SUCCESS){
-	           print(ResultMessage.COMMITED);
+	           printInfo(ResultMessage.COMMITED);
 	           fresh();
 	       }
 	       else
-	    	   print(message);
+	    	   printWrong(message);
+	   }
 	}
 
 	@FXML

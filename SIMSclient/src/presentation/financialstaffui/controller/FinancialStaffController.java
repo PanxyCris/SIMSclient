@@ -155,8 +155,8 @@ public class FinancialStaffController extends LoginController{
    		            case "ViewTableUI":new ViewTableUI().start(user);break;
    		            case "InitAccountUI":new InitAccountUI().start(user);break;
    		            case "BussinessProcessTableUI":new BussinessProcessTableUI().start(user);break;
-   		            case "BussinessSituationTableController":new BussinessSituationTableUI().start(user);break;
-   		            case "SaleDetailTableController":new SaleDetailTableUI().start(user);break;
+   		            case "BussinessSituationTableUI":new BussinessSituationTableUI().start(user);break;
+   		            case "SaleDetailTableUI":new SaleDetailTableUI().start(user);break;
    		            case "CheckInventoryBillUI":new CheckInventoryBillUI().start(user);break;
    		            case "CheckPaymentBillUI":new CheckPaymentBillUI().start(user);break;
    		            case "CheckPurchaseBillUI":new CheckPurchaseBillUI().start(user);break;

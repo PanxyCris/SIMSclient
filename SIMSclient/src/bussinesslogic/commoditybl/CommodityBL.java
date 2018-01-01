@@ -135,11 +135,11 @@ public class CommodityBL implements CommodityBLService{
 		ArrayList<CommodityStockVO> commodityStockVOs=new ArrayList<>();
 		CommodityStockVO commodityStockVO=null;
 		ArrayList<CommodityVO> commodityVOs=show();
-		for (int i = 0; i < commodityStockVOs.size(); i++) {
+		for (int i = 0; i < commodityVOs.size(); i++) {
 			commodityStockVO=new CommodityStockVO(commodityVOs.get(i).getID(), commodityVOs.get(i).getName(),
 					commodityVOs.get(i).getModel(), commodityVOs.get(i).getNumber(),
 					(commodityVOs.get(i).getRecentRetailedPrice()+commodityVOs.get(i).getRetailedPrice())/2,(commodityVOs.get(i).getRecentPurPrice()+commodityVOs.get(i).getPurPrice())/2, 
-					commodityVOs.get(i).getLine());
+					i+1);
 			commodityStockVOs.add(commodityStockVO);
 		}
 		return commodityStockVOs;

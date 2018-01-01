@@ -9,8 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
 
 public class ExamineBillController extends GeneralManagerController {
-
-	public static final Remind remind = Remind.BILL;
+	
 	@FXML
 	protected ChoiceBox<String> receiptChoice;
 
@@ -28,7 +27,8 @@ public class ExamineBillController extends GeneralManagerController {
 	}
 
 	public void initData(UserVO user) throws Exception {
-      //     this.user = user;
+           this.user = user;
+           choiceInit();
 	}
 
 

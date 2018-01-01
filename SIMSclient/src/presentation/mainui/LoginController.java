@@ -6,13 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
-import javafx.application.Platform;
-import presentation.remindui.RemindPrintUI;
+import javafx.scene.control.Alert;
 import vo.uservo.UserVO;
 
 public class LoginController {
@@ -22,7 +20,7 @@ public class LoginController {
 	public boolean writeUser(UserVO user) {
 	 if(user!=null){
 		try {
-			BufferedWriter fw = new BufferedWriter(new FileWriter("presentation/mainui/Login.txt"));
+			BufferedWriter fw = new BufferedWriter(new FileWriter("Login.txt"));
 
 			fw.write(user.getID());
 			fw.close();
@@ -37,7 +35,7 @@ public class LoginController {
 
 	public UserVO readUser() {
 		// TODO Auto-generated method stub
-	     File path=new File("presentation/mainui/Login.txt");
+	     File path=new File("Login.txt");
 	     try {
 	    	 FileReader fileReader = new FileReader(path);
 				BufferedReader reader = new BufferedReader(fileReader);
@@ -52,16 +50,14 @@ public class LoginController {
 	}
 
 
-	public void print(ResultMessage message){
-		Platform.runLater(new Runnable() {
-            public void run() {
-                try {
-                   new RemindPrintUI().start(message);
-               } catch (Exception e) {
-                       e.printStackTrace();
-                    }
-            }
-       });
+	public void printInfo(ResultMessage message){
+		Alert error = new Alert(Alert.AlertType.INFORMATION,message.value);
+		error.showAndWait();
+	}
+
+	public void printWrong(ResultMessage message){
+		Alert error = new Alert(Alert.AlertType.WARNING,message.value);
+		error.showAndWait();
 	}
 
 }

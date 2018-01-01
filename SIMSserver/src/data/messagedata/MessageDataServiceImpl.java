@@ -26,11 +26,12 @@ public class MessageDataServiceImpl implements MessageDataService{
 	public MessageDataServiceImpl() {
 		conn = DBManager.getConnection();
 	}
-	
+
 	public static void main(String[] args) {
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
+		MessageDataServiceImpl data = new MessageDataServiceImpl();
 	}
-	
+
 	@Override
 	public ResultMessage save(MessagePO message, UserPO user) {
 		String sql = "" + "update message set object = ? where id = ?";
@@ -55,26 +56,26 @@ public class MessageDataServiceImpl implements MessageDataService{
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    MessagePO po = (MessagePO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    MessagePO po = (MessagePO)in.readObject();                   //读出对象
+
+                    list.add(po);
+                }
 			}
 			rs.close();
 			ps.close();
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-		
+
 	}
 
 }

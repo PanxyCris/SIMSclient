@@ -2,11 +2,11 @@ package presentation.generalmanagerui.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import bussinesslogic.tablebl.SaleScheduleBL;
 import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

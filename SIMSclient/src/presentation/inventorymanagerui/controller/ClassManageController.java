@@ -1,6 +1,8 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 import bussiness_stub.ClassificationBLService_Stub;
 import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
@@ -13,7 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,6 +23,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.util.Callback;
 import po.ClassificationVPO;
@@ -56,6 +59,11 @@ public class ClassManageController extends InventoryManagerController{
 
 	@FXML
 	public void insert(){
+		if(nameField.getText()==null||classChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ClassificationVPO vo = new ClassificationVPO(idLabel.getText(),nameField.getText(),true,
 				  service.getClass(classChoice.getValue()),null);
 	        ResultMessage message = service.insert(vo);
@@ -74,7 +82,7 @@ public class ClassManageController extends InventoryManagerController{
 					}
 	    	    }
 	    	});
-
+	    }
 	}
 
 	public void initInsert(){
@@ -156,7 +164,7 @@ public class ClassManageController extends InventoryManagerController{
 			);
 	    treeType.setCellValueFactory(
 			    (TreeTableColumn.CellDataFeatures<ClassificationVPO, String> param) ->
-			    new ReadOnlyStringWrapper(param.getValue().getValue().getName())
+			    new ReadOnlyStringWrapper(param.getValue().getValue().getType())
 			);
 
         deleteInit();
@@ -179,9 +187,18 @@ public class ClassManageController extends InventoryManagerController{
                         	ClassificationVPO clickedUser = this.getTreeTableView().getTreeItem(this.getIndex()).getValue();
                             try {
                             	if(clickedUser.getB()==true){
-								service.delete(clickedUser);
-								fresh();
+                            		Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedUser);
+	                            		fresh();
+	                            	}
 								}
+                            	else{
+                            		Alert warning = new Alert(Alert.AlertType.WARNING,"请在商品管理界面进行操作");
+                            		warning.showAndWait();
+                            	}
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

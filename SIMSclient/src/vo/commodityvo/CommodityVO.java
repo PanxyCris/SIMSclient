@@ -116,5 +116,5 @@ public class CommodityVO {
 			this.line = line;
 		}
 
-		
+
 }

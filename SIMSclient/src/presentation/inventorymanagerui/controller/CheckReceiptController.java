@@ -1,19 +1,21 @@
 package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 import bussinesslogic.billbl.inventory.InventoryBillController;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -29,7 +31,6 @@ public class CheckReceiptController extends InventoryManagerController{
     InventoryBillBLService service = new InventoryBillController();
     ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
     ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-	public static final Remind remind = Remind.BILL;
 
 	@FXML
 	ChoiceBox<String> findChoice;
@@ -70,6 +71,11 @@ public class CheckReceiptController extends InventoryManagerController{
 
 	@FXML
 	public void find(){
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindInventoryBillType.getType(findChoice.getValue()));
 	       if(list==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
@@ -79,7 +85,7 @@ public class CheckReceiptController extends InventoryManagerController{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+        }
 	}
 
 	@FXML
@@ -173,10 +179,10 @@ public class CheckReceiptController extends InventoryManagerController{
                         	 ResultMessage message = service.submit(clickedItem);
                              if(message == ResultMessage.SUCCESS){
                             	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
-                                 print(ResultMessage.COMMITED);
+                                 printInfo(ResultMessage.COMMITED);
                              }
                              else
-                          	   print(message);
+                          	   printWrong(message);
                         });
                     }
                   }
@@ -239,10 +245,14 @@ public class CheckReceiptController extends InventoryManagerController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                        	service.delete(clickedItem);
-                            list.remove(clickedItem);
-                            table.setItems(list);
-
+                        	Alert alert = new Alert(AlertType.CONFIRMATION);
+                        	alert.setContentText("确认删除？");
+                        	Optional<ButtonType> result = alert.showAndWait();
+                        	if (result.get() == ButtonType.OK){
+                        		service.delete(clickedItem);
+                        		  list.remove(clickedItem);
+  	                              table.setItems(list);
+                        	}
                         });
                     }
                 }
