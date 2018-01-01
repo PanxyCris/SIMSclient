@@ -42,7 +42,8 @@ public class PurchaseData {
 				"11", list, "2", 100, BillType.PURCHASEBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
 		p.insert(po);
-//		p.delete("00");
+		System.out.println(p.show().get(0).getId());
+		//p.delete("00");
 	
 	}
 	

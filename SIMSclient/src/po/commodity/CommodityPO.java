@@ -32,8 +32,6 @@ public class CommodityPO implements Serializable{
 	}
 
 
-<<<<<<< HEAD
-=======
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -84,7 +82,6 @@ public class CommodityPO implements Serializable{
 	}
 
 
->>>>>>> 7ce9cc5a5d927499eb262b0abe6f199024538a0c
 	public String getID() {
 		return id;
 	}

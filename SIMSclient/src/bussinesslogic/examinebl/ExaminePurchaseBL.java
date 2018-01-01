@@ -70,7 +70,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 			else
 				member.setPayable(member.getPayable()+vo.getSum());
             for(CommodityItemVO item:vo.getCommodities()){
-            	CommodityPO commodity = commodityService.findCommodity(item.getId(), FindCommodityType.ID).get(0);
+            	CommodityPO commodity = commodityService.findCommodity(item.getName(), FindCommodityType.NAME).get(0);
             	if(vo.getType() == BillType.PURCHASEBACKBILL){
             	    commodity.setNumner(commodity.getNumber()-item.getNumber());
             	    utilityService.warningMessage(commodity);

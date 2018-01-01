@@ -25,11 +25,11 @@ public class PurchaseController implements PurchaseBLService{
 
 	private PurchaseDataService service;
 	private String date;
-	
+
 	public PurchaseController() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 	}
-	
+
 	@Override
 	public String getPurchaseID() {
 		ArrayList<PurchasePO> list = null;
@@ -43,7 +43,7 @@ public class PurchaseController implements PurchaseBLService{
 		for (PurchasePO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("JHD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
@@ -51,7 +51,11 @@ public class PurchaseController implements PurchaseBLService{
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
-		String num = String.valueOf(IDList.get(IDList.size()-1));
+		String num = null;
+		if(IDList.size()==0)
+			num = getDate()+"00000";
+		else
+		    num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
 			index = String.valueOf(Integer.parseInt(index)+1);
@@ -82,7 +86,7 @@ public class PurchaseController implements PurchaseBLService{
 		for (PurchasePO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("JHTHD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
@@ -124,7 +128,7 @@ public class PurchaseController implements PurchaseBLService{
 			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
 				return service.updatePurchase(po);
 			}
-			else 
+			else
 				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -139,7 +143,7 @@ public class PurchaseController implements PurchaseBLService{
 			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
 				return service.updatePurchase(po);
 			}
-			else 
+			else
 				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -153,7 +157,7 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	@Override
-	public ArrayList<PurchaseVO> show() {		
+	public ArrayList<PurchaseVO> show() {
 		ArrayList<PurchaseVO> list = new ArrayList<>();
 		ArrayList<PurchasePO> POList = null;
 		try {
@@ -168,8 +172,8 @@ public class PurchaseController implements PurchaseBLService{
 		}
 		return list;
 	}
-	
-	
+
+
 	public String getDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		this.date = sdf.format(new Date());
@@ -192,5 +196,5 @@ public class PurchaseController implements PurchaseBLService{
 		}
 		return list;
 	}
-	
+
 }

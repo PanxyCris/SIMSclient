@@ -140,7 +140,7 @@
 		<Label layoutX="361.0" layoutY="267.0" text="进货销售人员折让" />
 		<TextField fx:id="allowanceField" layoutX="361.0" layoutY="284.0" />
 		<Label layoutX="367.0" layoutY="332.0" text="折让后总额" />
-		<Label fx:id="afterLabel" layoutX="361.0" layoutY="347.0" prefHeight="23.0" prefWidth="165.0" style="-fx-background-color: #DDDDDD;" />
+		<Label fx:id="afterLabel" layoutX="361.0" layoutY="347.0" prefHeight="23.0" prefWidth="161.0" style="-fx-background-color: #DDDDDD;" />
 		<Label fx:id="allowanceLabel" layoutX="361.0" layoutY="229.0" prefHeight="23.0" prefWidth="165.0" style="-fx-background-color: #DDDDDD;" />
 		<Label layoutX="361.0" layoutY="214.0" text="销售策略折让" />
 		<Button layoutX="179.0" layoutY="550.0" mnemonicParsing="false" onAction="#checkPromotion" prefHeight="35.0" prefWidth="121.0" text="查看销售策略" />
