@@ -5,22 +5,28 @@ import dataenum.Remind;
 import dataenum.TableType;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
 
 public class FinanceTableController extends GeneralManagerController{
 
-	public static final Remind remind = Remind.TABLE;
 	@FXML
 	ChoiceBox<String> tableChoice;
 
 	@FXML
 	public void chooseTable() throws Exception{
+		if(tableChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请选择你要查看的表格");
+			warning.showAndWait();
+		}
+		else{
 		TableType type = TableType.getType(tableChoice.getValue());
 		switch(type){
 		case BUSINESS_HISTORY_SCHEDULE:changeStage("BussinessHistoryTableUI",user,null);
 		case SALE_SCHEDULE:changeStage("BussinessSituationTableUI",user,null);
 	    default:changeStage("SaleDetailTableUI",user,null);
+		}
 		}
 	}
 

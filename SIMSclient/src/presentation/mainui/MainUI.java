@@ -22,6 +22,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -54,8 +56,10 @@ public class MainUI extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		    Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
 	        Scene scene = new Scene(root);
+	        scene.getStylesheets().add( 
+	        		getClass().getResource("button.css") 
+	        		.toExternalForm()); 
 	        primaryStage.setScene(scene);
-	        primaryStage.initStyle(StageStyle.TRANSPARENT);
 	        primaryStage.show();
 	}
 
@@ -90,16 +94,8 @@ public class MainUI extends Application{
 		     else{
 		    	username.setText(null);
 		    	password.setText(null);
-		    	Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-							new RemindUI().start(new Stage());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
-
+		    	Alert error = new Alert(Alert.AlertType.ERROR,"用户名或者密码错误");
+		    	error.showAndWait();
 		    }
 
 	}

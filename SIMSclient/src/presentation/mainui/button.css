@@ -1,0 +1,11 @@
+.button, .button:visited {
+	-fx-background: #222 url(overlay.png) repeat-x;
+	-fx-display: inline-block;
+	-fx-padding: 5px 10px 6px;
+	-fx-color: #fff;
+	-fx-text-decoration: none;
+	-fx-moz-border-radius: 6px;
+	-fx-webkit-border-radius: 6px;
+	-fx-position: relative;
+	-fx-cursor: pointer
+}

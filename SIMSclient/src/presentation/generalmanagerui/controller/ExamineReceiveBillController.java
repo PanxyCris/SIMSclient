@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -28,7 +29,6 @@ import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
@@ -75,24 +75,20 @@ public class ExamineReceiveBillController extends ExamineBillController{
 
 	@FXML
 	public void find() throws RemoteException{
-
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<ReceiptBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 	@FXML
@@ -327,10 +323,9 @@ public class ExamineReceiveBillController extends ExamineBillController{
                public void run() {
                    try {
                    switch(message){
-                   case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-                   case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
                    case SUCCESS:break;
-                   default:break;
+                   default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                   error.showAndWait();break;
                    }
                    } catch (Exception e) {
                        e.printStackTrace();

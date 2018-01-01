@@ -9,23 +9,21 @@ import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
 import dataenum.findtype.FindInventoryBillType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindPrintUI;
-import vo.accountvo.AccountVO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 import vo.uservo.UserVO;
@@ -35,7 +33,6 @@ public class ExamineInventoryBillController extends ExamineBillController{
 	    ExamineBLService<InventoryBillVO> service = new ExamineInventoryBL();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-		public static final Remind remind = Remind.BILL;
 		InventoryBillVO inv;
 
 		@FXML
@@ -66,23 +63,20 @@ public class ExamineInventoryBillController extends ExamineBillController{
 
 		@FXML
 		public void find() throws RemoteException{
+			if(findingField.getText()==null||findChoice.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+				warning.showAndWait();
+			}else{
 			ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
 		       if(list==null){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+	               error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
 		       }
-
+			}
 		}
 
 		@FXML

@@ -5,18 +5,22 @@ import dataenum.BillType;
 import dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
 
 public class BussinessProcessTableController extends ViewTableController{
 
-
-	public static final Remind remind = Remind.BILL;
 	@FXML
 	ChoiceBox<String> receiptChoice;
 
 	@FXML
 	public void chooseReceipt() throws Exception{
+		if(receiptChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请选择你要查看的单据");
+			warning.showAndWait();
+		}
+		else{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
 		case PURCHASEBILL:changeStage("ExaminePurchaseBillUI",user,null,null);break;
@@ -25,6 +29,7 @@ public class BussinessProcessTableController extends ViewTableController{
 		case SKD:changeStage("ExaminePaymentBillUI",user,null,null);break;
 		case XJFYD:changeStage("ExamineReceiveBillUI",user,null,null);break;
 		default:break;
+		}
 		}
 	}
 

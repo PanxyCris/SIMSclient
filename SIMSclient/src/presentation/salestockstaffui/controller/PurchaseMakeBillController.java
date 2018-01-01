@@ -1,6 +1,5 @@
 package presentation.salestockstaffui.controller;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.memberbl.MemberController;
@@ -19,27 +18,26 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
-import vo.uservo.UserVO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.commodityvo.CommodityVO;
+import vo.uservo.UserVO;
 
 public class PurchaseMakeBillController extends MakeReceiptController{
 
@@ -100,35 +98,13 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 
 	@FXML
-	public void returnLast() throws Exception{
-        startUI(previous,user,type,purchase,sale);
-        if(!stack.isEmpty()){
-        stack.pop();
-        current = previous;
-        }
-        if(stack.size()>1)
-            previous = stack.lastElement();
-	}
-
-	@FXML
-	public void mainPage() throws Exception{
-		changeStage(mainID,user,type,purchase,sale);
-
-    }
-
-    @FXML
-	public void memberManage() throws Exception{
-         changeStage("MemberManageUI",user,type,null,null);
-	}
-
-	@FXML
-	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type,null,null);
-	}
-
-
-	@FXML
 	public void insert(){
+		if(nameChoice.getValue()==null||modelChoice.getValue()==null||numberField.getText()==null||
+				priceField.getText()==null||remarkArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
 	        list.add(vo);table.setItems(list);
@@ -141,37 +117,49 @@ public class PurchaseMakeBillController extends MakeReceiptController{
       priceField.setText(null);
 	   moneyLabel.setText("0.0");
        remarkArea.setText(null);
-
+      }
 	}
 
 	@FXML
 	public void save() throws Exception{
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||list==null||noteArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
-             print(ResultMessage.SAVED);
+             printInfo(ResultMessage.SAVED);
              fresh();
              }
          else
-      	   print(message);
+      	   printWrong(message);
+       }
      }
 
 	@FXML
 	public void submit() throws Exception{
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||list==null||noteArea.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
          ResultMessage message = service.submit(vo);
          if(message == ResultMessage.SUCCESS){
-             print(ResultMessage.COMMITED);
+             printInfo(ResultMessage.COMMITED);
              fresh();
          }
          else
-      	   print(message);
+      	   printWrong(message);
+       }
 	}
 
 	@FXML
@@ -293,10 +281,9 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 	    	        case SUCCESS:break;
-	    	        default:break;
+	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                    error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();

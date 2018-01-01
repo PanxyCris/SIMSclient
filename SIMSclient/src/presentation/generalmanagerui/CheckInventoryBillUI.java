@@ -1,14 +1,10 @@
 package presentation.generalmanagerui;
 
-import java.io.IOException;
-
-import dataenum.BillType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.generalmanagerui.controller.CheckInventoryBillController;
-import presentation.generalmanagerui.controller.ExamineInventoryBillController;
 import vo.uservo.UserVO;
 
 public class CheckInventoryBillUI{

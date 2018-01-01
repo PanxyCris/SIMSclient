@@ -130,17 +130,13 @@
 		</Button>
 		<TableView fx:id="table" layoutX="184.0" layoutY="134.0" prefHeight="405.0" prefWidth="827.0">
 			<columns>
-            <TableColumn fx:id="tableLine" prefWidth="50.0" text="行号" />
+            <TableColumn fx:id="tableLine" prefWidth="100.0" text="行号" />
 				<TableColumn fx:id="tableID" prefWidth="150.0" text="编号" />
-				<TableColumn fx:id="tableName" prefWidth="100.0" text="名称" />
-				<TableColumn fx:id="tableModel" prefWidth="100.0" text="型号" />
-            <TableColumn fx:id="tableClass" prefWidth="75.0" text="分类" />
-				<TableColumn fx:id="tableNumber" prefWidth="75.0" text="库存数量" />
-				<TableColumn fx:id="tablePurPrice" prefWidth="75.0" text="进价" />
-				<TableColumn fx:id="tableRetailedPrice" prefWidth="75.0" text="零售价" />
-				<TableColumn fx:id="tableWarmingValue" prefWidth="75.0" text="警戒值" />
-				<TableColumn fx:id="tableRecPurPrice" prefWidth="75.0" text="最近进价" />
-				<TableColumn fx:id="tableRecRetailedPrice" prefWidth="75.0" text="最近邻售价" />
+				<TableColumn fx:id="tableName" prefWidth="150.0" text="名称" />
+				<TableColumn fx:id="tableModel" prefWidth="120.0" text="型号" />
+				<TableColumn fx:id="tableNumber" prefWidth="100.0" text="库存数量" />
+				<TableColumn fx:id="tablePurPrice" prefWidth="100.0" text="均进价" />
+				<TableColumn fx:id="tableRetailedPrice" prefWidth="110.0" text="均零售价" />
 			</columns>
 		</TableView>
       <Button layoutX="184.0" layoutY="57.0" mnemonicParsing="false" onAction="#stock" prefHeight="60.0" prefWidth="199.0" text="导     出">

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import presentation.inventorymanagerui.CheckReceiptUI;
 import presentation.inventorymanagerui.ClassManageUI;
 import presentation.inventorymanagerui.CommodityManageUI;
+import presentation.inventorymanagerui.InventoryCheckUI;
 import presentation.inventorymanagerui.InventoryManagerUI;
 import presentation.inventorymanagerui.InventoryStockUI;
 import presentation.inventorymanagerui.MakeReceiptUI;
@@ -152,6 +153,7 @@ public class InventoryManagerController extends LoginController{
    		            case "InventoryStockUI":new InventoryStockUI().start(user);break;
    		            case "ClassManageUI":new ClassManageUI().start(user);break;
    		            case "UserMessageUI":new UserMessageUI().start(user);break;
+   		            case "InventoryCheckUI":new InventoryCheckUI().start(user);break;
    		           }
                } catch (Exception e) {
                        e.printStackTrace();

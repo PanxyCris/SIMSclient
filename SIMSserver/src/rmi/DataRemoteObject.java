@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import data.accountbookdata.AccountBookDataServiceImpl;
 import data.accountdata.AccountDataServiceMySqlImpl;
+import data.billdata.BillDataServiceImpl;
 import data.classificationdata.ClassificationDataServiceImpl;
 import data.commoditydata.CommodityDataServiceMySqlImpl;
 import data.memberdata.MemberDataServiceImpl;
@@ -22,6 +23,7 @@ import dataenum.findtype.FindAccountBillType;
 import dataenum.findtype.FindAccountBookType;
 import dataenum.findtype.FindAccountType;
 import dataenum.findtype.FindCommodityType;
+import dataenum.findtype.FindInventoryBillType;
 import dataenum.findtype.FindMemberType;
 import dataenum.findtype.FindPromotionType;
 import dataenum.findtype.FindSalesType;
@@ -30,6 +32,7 @@ import dataservice.accountbilldataservice.PaymentBillDataService;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
 import dataservice.accountbookdataservice.AccountBookDataService;
 import dataservice.accountdataservice.AccountDataService;
+import dataservice.billdataservice.BillDataService;
 import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
@@ -50,6 +53,7 @@ import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
 import po.commodity.CommodityPO;
+import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessagePO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPricePacksPO;
@@ -72,7 +76,7 @@ import po.promotionpo.PromotionTotalPO;
  */
 public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService,
     PromotionMemberDataService,PromotionSpecialDataService,PromotionSumDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
-    ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService{
+    ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService,BillDataService{
 
 	private static final long serialVersionUID = 4029039744279087114L;
 
@@ -90,6 +94,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	private PaymentBillDataService paymentbill;
 	private ReceiptBillDataService receiprbill;
 	private MessageDataService messageData;
+	private BillDataService inventoryBill;
 
 	public DataRemoteObject() throws RemoteException {
 
@@ -107,6 +112,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		paymentbill = new PaymentBillDataServiceImpl();
 		receiprbill = new ReceiptDataServiceImpl();
 		messageData = new MessageDataServiceImpl();
+		inventoryBill = new BillDataServiceImpl();
 	}
 
 
@@ -543,6 +549,42 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 	public ArrayList<PromotionMemberPO> showMemberPromotion() throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionMember.showMemberPromotion();
+	}
+
+
+	@Override
+	public ResultMessage insertInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return inventoryBill.insertInventoryBill(inventoryBillPO);
+	}
+
+
+	@Override
+	public ResultMessage deleteInventoryBill(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return inventoryBill.deleteInventoryBill(id);
+	}
+
+
+	@Override
+	public ResultMessage updateInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return inventoryBill.updateInventoryBill(inventoryBillPO);
+	}
+
+
+	@Override
+	public ArrayList<InventoryBillPO> findInventoryBill(String keyword, FindInventoryBillType type)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return inventoryBill.findInventoryBill(keyword, type);
+	}
+
+
+	@Override
+	public ArrayList<InventoryBillPO> showInventoryBill() throws RemoteException {
+		// TODO Auto-generated method stub
+		return inventoryBill.showInventoryBill();
 	}
 
 

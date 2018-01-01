@@ -5,17 +5,21 @@ import dataenum.BillType;
 import dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
 
 public class ExamineBillController extends GeneralManagerController {
 
-	public static final Remind remind = Remind.BILL;
 	@FXML
 	protected ChoiceBox<String> receiptChoice;
 
 	@FXML
 	public void chooseReceipt() throws Exception{
+		if(receiptChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请选择你要审批的单据");
+			warning.showAndWait();
+		}
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
 		case PURCHASEBILL:changeStage("ExaminePurchaseBillUI",user,type);break;
@@ -28,7 +32,8 @@ public class ExamineBillController extends GeneralManagerController {
 	}
 
 	public void initData(UserVO user) throws Exception {
-      //     this.user = user;
+           this.user = user;
+           choiceInit();
 	}
 
 

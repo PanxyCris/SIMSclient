@@ -2,21 +2,21 @@ package presentation.generalmanagerui.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import bussinesslogic.tablebl.SaleScheduleBL;
 import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.remindui.RemindPrintUI;
 import vo.tablevo.SaleScheduleVO;
 import vo.uservo.UserVO;
 
@@ -59,46 +59,38 @@ public class SaleDetailTableController extends FinanceTableController{
 
 	@FXML
 	public void sift(){
-
+		if(siftField.getText()==null||siftChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<SaleScheduleVO> list = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 	@FXML
 	public void siftTime(){
-
+		if(startPicker.getValue()==null||endPicker.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请输入时间");
+			warning.showAndWait();
+		}else{
 		ArrayList<SaleScheduleVO> list = service.siftTime(startPicker.getValue(),endPicker.getValue());
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 

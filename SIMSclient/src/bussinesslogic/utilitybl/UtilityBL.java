@@ -82,7 +82,11 @@ public class UtilityBL implements UtilityBLService{
         UserPO po = bl.voTopo(user);
 		ArrayList<MessageVO> messages = new ArrayList<>();
 		try {
-			for(MessagePO message:messageService.getMessage(po))
+			ArrayList<MessagePO> messagesData = messageService.getMessage(po);
+			if(messagesData==null)
+				return null;
+			else
+			for(MessagePO message:messagesData)
 				messages.add(poTovo(message));
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -93,7 +97,9 @@ public class UtilityBL implements UtilityBLService{
 	@Override
 	public boolean hasMessage(UserVO user) {
 		try {
-			for(MessagePO message:messageService.getMessage(bl.voTopo(user)))
+			ArrayList<MessagePO> messages = messageService.getMessage(bl.voTopo(user));
+			if(messages!=null)
+			for(MessagePO message:messages)
 				if(message.getHasRead() == false)
 					return true;
 		} catch (RemoteException e) {
@@ -117,7 +123,7 @@ public class UtilityBL implements UtilityBLService{
 	@Override
 	public void warningMessage(CommodityPO po) throws RemoteException{
         if(po.getNumber()<=po.getWarmingValue()){
-      	  MessageWarmingPO message = new MessageWarmingPO(po.getName()+"("+po.getId()+")",po.getNumber(),po.getWarmingValue());
+      	  MessageWarmingPO message = new MessageWarmingPO(po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
       	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
       	  for(UserPO user:inventorymanagers)
       		  messageService.save(message, user);

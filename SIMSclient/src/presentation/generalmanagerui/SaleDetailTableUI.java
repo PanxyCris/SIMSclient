@@ -4,9 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.financialstaffui.controller.ReceiveMakeBillController;
-import presentation.financialstaffui.controller.SaleDetailTableController;
-import vo.billvo.financialbillvo.ReceiptBillVO;
+import presentation.generalmanagerui.controller.SaleDetailTableController;
 import vo.uservo.UserVO;
 
 public class SaleDetailTableUI {

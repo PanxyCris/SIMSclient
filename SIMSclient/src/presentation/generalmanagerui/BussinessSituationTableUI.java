@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.financialstaffui.controller.BussinessSituationTableController;
+import presentation.generalmanagerui.controller.BussinessSituationTableController;
 import vo.uservo.UserVO;
 
 public class BussinessSituationTableUI {

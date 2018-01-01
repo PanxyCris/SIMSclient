@@ -1,18 +1,14 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
-import bussiness_stub.CommodityBLService_Stub;
-import bussiness_stub.promotion_stub.PromotionMemberBLService_Stub;
-import bussiness_stub.promotion_stub.PromotionSpecialBLService_Stub;
 import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.promotionbl.PromotionSpecialBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
-import dataenum.MemberLevel;
 import dataenum.PromotionType;
 import dataenum.Remind;
 import dataenum.ResultMessage;
@@ -21,26 +17,26 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCellDate;
 import presentation.common.EditingCellDouble;
 import presentation.common.EditingCellInteger;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
-import vo.uservo.UserVO;
 import vo.commodityvo.GiftVO;
-import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
+import vo.uservo.UserVO;
 
 public class PromotionSpecialController extends PromotionMakingController{
 	PromotionBLService<PromotionPricePacksVO> service = new PromotionSpecialBL();
@@ -98,27 +94,30 @@ public class PromotionSpecialController extends PromotionMakingController{
 
 	@FXML
 	public void find() throws RemoteException{
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<PromotionPricePacksVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	    	   initFind();
 	       }
+		}
 	}
 
 	@FXML
 	public void insert() throws RemoteException{
+		if(startPicker.getValue()==null||endPicker.getValue()==null||allowanceField.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<GiftVO> gifts = new ArrayList<>();
 		gifts = null;
 		 PromotionPricePacksVO vo = new PromotionPricePacksVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
@@ -128,25 +127,36 @@ public class PromotionSpecialController extends PromotionMakingController{
 	    	    public void run() {
 	    	        try {
 	    	        switch(message){
-	    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-	    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-	    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+	    	        case EXISTED: Alert existed = new Alert(Alert.AlertType.WARNING,"该策略已存在");
+	                              existed.showAndWait();break;
 	    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-	    	        default:break;
+	    	        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+	                         error.showAndWait();break;
 	    	        }
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 	    	    }
 	    	});
+	      }
 	}
 
 	@FXML
 	public void insertGift(){
+		if(commodityChoice.getValue()==null||numberField.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+			warning.showAndWait();
+		}
+		else if(currentPromotion==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请点击查看赠品列表选择需要赠品的策略");
+			warning.showAndWait();
+		}
+		else{
 		 GiftVO vo = new GiftVO(commodityChoice.getValue(),Integer.parseInt(numberField.getText()));
 	     commodityList.add(vo);
 	     commodityTable.setItems(commodityList);
 	     updateGiftList();
+	    }
 	}
 
 	public void initFind(){
@@ -322,14 +332,18 @@ public class PromotionSpecialController extends PromotionMakingController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PromotionPricePacksVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            try {
-								service.delete(clickedUser);
-							} catch (RemoteException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-                            list.remove(clickedUser);
-                            table.setItems(list);
+                        	 try {
+	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedUser);
+	                            		  list.remove(clickedUser);
+	      	                              table.setItems(list);
+	                            	}
+								} catch (RemoteException e) {
+									e.printStackTrace();
+								}
                         });
                     }
                 }

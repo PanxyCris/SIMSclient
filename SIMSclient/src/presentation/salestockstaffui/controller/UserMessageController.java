@@ -1,6 +1,8 @@
 package presentation.salestockstaffui.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import javafx.collections.FXCollections;
@@ -26,8 +28,9 @@ public class UserMessageController extends SaleStockStaffController{
 
 	public void initData(UserVO user) {
 		this.user = user;
-		UserVO vo = readUser();
-        list.addAll(service.getMessage(vo));
+		ArrayList<MessageVO> messages = service.getMessage(user);
+		if(messages!=null)
+        list.addAll(messages);
         messageTable.setItems(list);
         time.setCellValueFactory(
                 new PropertyValueFactory<MessageVO,LocalDateTime>("time"));

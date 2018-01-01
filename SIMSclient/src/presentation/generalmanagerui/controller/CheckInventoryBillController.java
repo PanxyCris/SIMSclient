@@ -8,6 +8,7 @@ import dataenum.Remind;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
@@ -23,7 +24,6 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	    BusinessHistoryScheduleBLService<InventoryBillVO> service = new BusinessHistoryScheduleInventoryBL();
 	    ObservableList<InventoryBillVO> list = FXCollections.observableArrayList();
 	    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-		public static final Remind remind = Remind.BILL;
 
 		@FXML
 		DatePicker startPicker;
@@ -58,10 +58,16 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 
 		@FXML
 		public void siftTime(){
+			if(startPicker.getValue()==null||endPicker.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"«Î ‰»Î ±º‰");
+				warning.showAndWait();
+			}
+			else{
 			list.clear();
 			ArrayList<InventoryBillVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
 			list.addAll(siftList);
 			table.setItems(list);
+			}
 		}
 
 		@FXML

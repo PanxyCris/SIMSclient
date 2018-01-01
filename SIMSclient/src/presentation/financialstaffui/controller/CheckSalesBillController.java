@@ -2,14 +2,15 @@ package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import bussinesslogic.tablebl.BusinessHistoryScheduleSalesBL;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -20,8 +21,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import presentation.generalmanagerui.controller.BussinessProcessTableController;
-import presentation.remindui.RemindPrintUI;
-import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
@@ -124,33 +123,34 @@ public class CheckSalesBillController extends BussinessProcessTableController{
 
 	@FXML
 	public void siftTime(){
+		if(startPicker.getValue()==null||endPicker.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请输入时间");
+			warning.showAndWait();
+		}else{
 		list.clear();
 		ArrayList<SalesVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
 		list.addAll(siftList);
 		table.setItems(list);
+		}
 	}
 
 
 	@FXML
 	public void find(){
-
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}else{
 		ArrayList<SalesVO> list = service.sift(findingField.getText(),FindSaleScheduleType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
-
+		}
 	}
 
 	public void initData(UserVO user) throws RemoteException {

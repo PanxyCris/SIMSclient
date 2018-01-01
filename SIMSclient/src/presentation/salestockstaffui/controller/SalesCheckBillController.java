@@ -1,33 +1,31 @@
 package presentation.salestockstaffui.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
+import java.util.Optional;
 import bussinesslogic.salesbl.SalesController;
 import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.remindui.RemindPrintUI;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
 
-public class SalesCheckBillController extends SaleStockStaffController implements Initializable {
+public class SalesCheckBillController extends SaleStockStaffController{
 
 	SalesBLService service = new SalesController();
 	ObservableList<SalesVO> list = FXCollections.observableArrayList();
@@ -92,23 +90,21 @@ public class SalesCheckBillController extends SaleStockStaffController implement
 
 	@FXML
 	public void find(){
-
+		if(findingField.getText()==null||findChoice.getValue()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<SalesVO> list = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
 	       if(list==null){
-	    	   Platform.runLater(new Runnable() {
-		    	    public void run() {
-		    	        try {
-		    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		    	    }
-		    	});
+	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+               error.showAndWait();
 	       }
 	       else{
 	    	   table.getItems().clear();
 	    	   table.getItems().addAll(list);
 	       }
+	    }
 
 	}
 
@@ -123,10 +119,6 @@ public class SalesCheckBillController extends SaleStockStaffController implement
 		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
 				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
 				FindSalesType.TOTAL.value));
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
@@ -213,10 +205,10 @@ public class SalesCheckBillController extends SaleStockStaffController implement
                         	ResultMessage message = service.submit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
-                                print(ResultMessage.COMMITED);
+                                printInfo(ResultMessage.COMMITED);
                             }
                             else
-                         	   print(message);
+                         	   printWrong(message);
                         });
                     }
                   }
@@ -280,7 +272,14 @@ public class SalesCheckBillController extends SaleStockStaffController implement
                         delBtn.setOnMouseClicked((me) -> {
                         	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	service.delete(clickedItem);
-                            list.remove(clickedItem);
+                            list.remove(clickedItem);Alert alert = new Alert(AlertType.CONFIRMATION);
+                        	alert.setContentText("确认删除？");
+                        	Optional<ButtonType> result = alert.showAndWait();
+                        	if (result.get() == ButtonType.OK){
+                        		service.delete(clickedItem);
+                        		  list.remove(clickedItem);
+  	                              table.setItems(list);
+                        	}
                             table.setItems(list);
 
                         });

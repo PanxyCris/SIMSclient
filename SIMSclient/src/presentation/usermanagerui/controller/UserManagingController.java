@@ -2,10 +2,10 @@ package presentation.usermanagerui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import bussiness_stub.UserBLService_Stub;
+import java.util.Optional;
+
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
@@ -13,7 +13,10 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -25,14 +28,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
+/**
+ * 用户管理操作界面控制器
+ * @author 潘星宇
+ *
+ */
 
 public class UserManagingController extends UserManagerController{
 
 	    UserBLService service = new UserController();
-		public static final Remind remind = Remind.USER;
 	    ObservableList<UserVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> roleList = FXCollections.observableArrayList(UserRole.GENERAL_MANAGER.value,
              UserRole.FINANCIAL_MANAGER.value,
@@ -71,45 +76,50 @@ public class UserManagingController extends UserManagerController{
 
 		@FXML
 		public void insert() throws RemoteException{
+			if(idLabel.getText()==null||nameField.getText()==null||passwordField.getText()==null||roleChoice.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+				warning.showAndWait();
+			}
+			else{
 			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), null);
 		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+		    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该用户已存在");
+		    	                    existed.showAndWait();
 		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+	                            error.showAndWait();
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 		    	    }
 		    	});
+		     }
 		}
 
 
 		@FXML
 		public void find() throws RemoteException{
+			if(findingField.getText()==null||findChoice.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+				warning.showAndWait();
+			}
+			else{
 			ArrayList<UserVO> list = service.find(findingField.getText(),FindUserType.getType(findChoice.getValue()));
 		       if(list==null){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		    	   Alert error = new Alert(Alert.AlertType.ERROR,ResultMessage.NOTFOUND.value);
+                   error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
 		    	   initFind();
 		       }
+		   }
 		}
 
 		public void initFind(){
@@ -167,6 +177,11 @@ public class UserManagingController extends UserManagerController{
 	        tablePassword.setCellFactory(cellFactory);
 	        tablePassword.setOnEditCommit(
 	            (CellEditEvent<UserVO, String> t) -> {
+	            	if(t.getNewValue()==null){
+	            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好你所需要修改的信息");
+	            		warning.showAndWait();
+	            	}
+	            	else{
 	            	String tmp = t.getOldValue();
 		               ((UserVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
@@ -182,6 +197,7 @@ public class UserManagingController extends UserManagerController{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+		           }
 	        });
 
 	        tableRole.setCellFactory(choiceFactory);
@@ -210,10 +226,9 @@ public class UserManagingController extends UserManagerController{
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
 		    	        case SUCCESS:break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                                error.showAndWait();break;
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -253,13 +268,18 @@ public class UserManagingController extends UserManagerController{
 	                        delBtn.setOnMouseClicked((me) -> {
 	                            UserVO clickedUser = this.getTableView().getItems().get(this.getIndex());
 	                            try {
-									service.delete(clickedUser);
+	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedUser);
+	                            		  list.remove(clickedUser);
+	      	                              table.setItems(list);
+	                            	}
 								} catch (RemoteException e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-	                            list.remove(clickedUser);
-	                            table.setItems(list);
+
 	                        });
 	                    }
 	                }

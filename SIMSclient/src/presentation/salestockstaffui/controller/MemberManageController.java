@@ -1,45 +1,46 @@
 package presentation.salestockstaffui.controller;
 
-import java.net.URL;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
+import java.util.Optional;
 import bussiness_stub.MemberBLService_Stub;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import presentation.remindui.RemindExistUI;
-import presentation.remindui.RemindPrintUI;
 import vo.uservo.UserVO;
 import vo.membervo.MemberVO;
 
-public class MemberManageController extends SaleStockStaffController implements Initializable {
+/**
+ * 用于客户管理的界面的控制器
+ * @author 潘星宇
+ *
+ */
+
+public class MemberManageController extends SaleStockStaffController{
 
        MemberBLService service = new MemberController();
-		public static final Remind remind = Remind.MEMBER;
 	    ObservableList<MemberVO> list = FXCollections.observableArrayList();
 	    ObservableList<String> classList = FXCollections.observableArrayList(MemberCategory.RETAILER.value,MemberCategory.SUPPLIER.value,MemberCategory.BOTH.value);
 	    ObservableList<String> levelList = FXCollections.observableArrayList(MemberLevel.LEVEL1.value,MemberLevel.LEVEL2.value,MemberLevel.LEVEL3.value,MemberLevel.LEVEL4.value,MemberLevel.LEVEL5.value);
@@ -103,6 +104,14 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 		@FXML
 		public void insert() throws RemoteException{
+		if(idLabel.getText()==null||classChoice.getValue()==null||levelChoice.getValue()==null||
+				nameField.getText()==null||phoneField.getText()==null||addressField.getText()==null||
+				zipcodeField.getText()==null||emailField.getText()==null||amountField.getText()==null||
+				receiveField.getText()==null||payField.getText()==null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 			 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
 					 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),
 					 emailField.getText(),amountField.getText(),receiveField.getText(),payField.getText(),
@@ -112,39 +121,39 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    	    public void run() {
 		    	        try {
 		    	        switch(message){
-		    	        case ILLEGALINPUTNAME:new RemindPrintUI().start(message);break;
-		    	        case ILLEAGLINPUTDATA:new RemindPrintUI().start(message);break;
-		    	        case EXISTED:new RemindExistUI().start(remind,true);break;
+		    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该客户已存在");
+		    	                     existed.showAndWait();break;
 		    	        case SUCCESS:list.add(vo);table.setItems(list);initInsert();break;
-		    	        default:break;
+		    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
+                        error.showAndWait();break;
 		    	        }
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 		    	    }
 		    	});
+		    }
 		}
 
 
 		@FXML
 		public void find() throws RemoteException{
+			if(findingField.getText()==null||findChoice.getValue()==null){
+				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+				warning.showAndWait();
+			}
+			else{
 			ArrayList<MemberVO> list = service.find(findingField.getText(),FindMemberType.getMemberType(findChoice.getValue()));
-		       if(list.size()!=0){
-		    	   Platform.runLater(new Runnable() {
-			    	    public void run() {
-			    	        try {
-			    	        	new RemindPrintUI().start(ResultMessage.ILLEAGLINPUTDATA);
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-			    	    }
-			    	});
+		       if(list.size()==0){
+		    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
+                   error.showAndWait();
 		       }
 		       else{
 		    	   table.getItems().clear();
 		    	   table.getItems().addAll(list);
 		    	   initFind();
 		       }
+		    }
 		}
 
 		public void initFind(){
@@ -169,23 +178,6 @@ public class MemberManageController extends SaleStockStaffController implements 
 			payField.setText(null);
 		}
 
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			list.clear();
-			try {
-				list.addAll(service.show());
-				initInsert();
-				initFind();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			table.setItems(list);
-			edit();
-			manageInit();
-
-		}
-
 		public void edit(){
 			Callback<TableColumn<MemberVO, String>,
 		        TableCell<MemberVO, String>> cellFactory
@@ -198,6 +190,11 @@ public class MemberManageController extends SaleStockStaffController implements 
 		    tablePhone.setCellFactory(cellFactory);
 		    tablePhone.setOnEditCommit(
 		            (CellEditEvent<MemberVO, String> t) -> {
+		            	if(t.getNewValue()==null){
+		            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+		            		warning.showAndWait();
+		            	}
+		            	else{
 		                ((MemberVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setCellNumber(t.getNewValue());
@@ -209,12 +206,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		                }
 
 		        });
 
 		    tableAddress.setCellFactory(cellFactory);
 		    tableAddress.setOnEditCommit(
 		            (CellEditEvent<MemberVO, String> t) -> {
+		            	if(t.getNewValue()==null){
+		            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+		            		warning.showAndWait();
+		            	}
+		            	else{
 		                ((MemberVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setAddress(t.getNewValue());
@@ -226,12 +229,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		                }
 
 		        });
 
 		    tableZipcode.setCellFactory(cellFactory);
 		    tableZipcode.setOnEditCommit(
 		            (CellEditEvent<MemberVO, String> t) -> {
+		            	if(t.getNewValue()==null){
+		            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+		            		warning.showAndWait();
+		            	}
+		            	else{
 		                ((MemberVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setPost(t.getNewValue());
@@ -243,12 +252,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		                }
 
 		        });
 
 		    tableEmail.setCellFactory(cellFactory);
 		    tableEmail.setOnEditCommit(
 		            (CellEditEvent<MemberVO, String> t) -> {
+		            	if(t.getNewValue()==null){
+		            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+		            		warning.showAndWait();
+		            	}
+		            	else{
 		                ((MemberVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setEmail(t.getNewValue());
@@ -260,12 +275,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		                }
 
 		        });
 
 		    tableOperator.setCellFactory(cellFactory);
 		    tableOperator.setOnEditCommit(
 		            (CellEditEvent<MemberVO, String> t) -> {
+		            	if(t.getNewValue()==null){
+		            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+		            		warning.showAndWait();
+		            	}
+		            	else{
 		                ((MemberVO) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setSaleMan(t.getNewValue());
@@ -277,12 +298,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		                }
 
 		        });
 
 	        tableLevel.setCellFactory(choiceFactory);
 	        tableLevel.setOnEditCommit(
 	            (CellEditEvent<MemberVO, String> t) -> {
+	            	if(t.getNewValue()==null){
+	            		Alert warning = new Alert(Alert.AlertType.WARNING,"请填写你所需要修改的信息");
+	            		warning.showAndWait();
+	            	}
+	            	else{
 	                ((MemberVO) t.getTableView().getItems().get(
 	                        t.getTablePosition().getRow())
 	                        ).setLevel(t.getNewValue());
@@ -294,6 +321,7 @@ public class MemberManageController extends SaleStockStaffController implements 
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+	                }
 
 	        });
 
@@ -351,12 +379,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 	                        delBtn.setOnMouseClicked((me) -> {
 	                        	MemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
 	                            try {
-									service.delete(clickedUser.getID());
+	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
+	                            	alert.setContentText("确认删除？");
+	                            	Optional<ButtonType> result = alert.showAndWait();
+	                            	if (result.get() == ButtonType.OK){
+	                            		service.delete(clickedUser.getID());
+	                            		  list.remove(clickedUser);
+	      	                              table.setItems(list);
+	                            	}
 								} catch (RemoteException e) {
 									e.printStackTrace();
 								}
-	                            list.remove(clickedUser);
-	                            table.setItems(list);
+
 	                        });
 	                    }
 	                }
@@ -368,6 +402,18 @@ public class MemberManageController extends SaleStockStaffController implements 
 
 		public void initData(UserVO user) throws Exception {
 			operatorField.setText(readUser().getName());
+			list.clear();
+			try {
+				list.addAll(service.show());
+				initInsert();
+				initFind();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			table.setItems(list);
+			edit();
+			manageInit();
 		}
 
 }
