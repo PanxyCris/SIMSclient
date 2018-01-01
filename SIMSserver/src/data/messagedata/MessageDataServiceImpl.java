@@ -70,7 +70,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 			}
 			rs.close();
 			ps.close();
-			conn.close();
+			//conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
