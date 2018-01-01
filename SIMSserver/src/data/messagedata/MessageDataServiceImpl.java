@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.rmi.RemoteException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 import javax.sound.midi.MetaMessage;
 
 import data.DBManager;
+import data.userdata.UserDataServiceImpl;
 import dataenum.ResultMessage;
 import dataservice.messagedataservice.MessageDataService;
+import dataservice.userdataservice.UserDataService;
 import po.UserPO;
 import po.messagepo.MessagePO;
 
@@ -30,6 +33,16 @@ public class MessageDataServiceImpl implements MessageDataService{
 	public static void main(String[] args) {
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
+		UserDataService userService;
+		try {
+			userService = new UserDataServiceImpl();
+			data.save(new MessagePO(info), userService.showUser().get(0));
+			System.out.println(data.getMessage(userService.showUser().get(0)).get(0).getInfo());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override

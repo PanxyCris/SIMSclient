@@ -61,7 +61,7 @@
 				<Image url="@../img/Logo.png" />
 			</image>
 		</ImageView>
-		<Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="账户管理" textFill="WHITE">
+		<Button layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#accountManage" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="账户管理" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
@@ -82,7 +82,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="7.0" layoutY="320.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制作单据" textFill="WHITE">
+		<Button layoutX="7.0" layoutY="320.0" mnemonicParsing="false" onAction="#makeReceipt" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制作单据" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
@@ -94,7 +94,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="7.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
+		<Button layoutX="7.0" layoutY="380.0" mnemonicParsing="false" onAction="#viewTable" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看表格" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
@@ -106,7 +106,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutX="8.0" layoutY="437.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="期初建账" textFill="WHITE">
+		<Button layoutX="8.0" layoutY="437.0" mnemonicParsing="false" onAction="#initAccount" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="期初建账" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
 			</font>
