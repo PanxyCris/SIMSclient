@@ -44,10 +44,10 @@ public class SalesData{
 		commodities.add(e);
 		SalesData s = new SalesData();
 		s.insert(po);
-		ArrayList<SalesPO> list = s.show();
-		for (SalesPO p : list) {
-			System.out.println(p.getId() + " " + p.getClientName());
-		}
+//		ArrayList<SalesPO> list = s.show();
+//		for (SalesPO p : list) {
+//			System.out.println(p.getId() + " " + p.getClientName());
+//		}
 	}
 
 	public ResultMessage insert(SalesPO po) {
