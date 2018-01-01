@@ -39,11 +39,11 @@ public class PurchaseData {
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
 		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1, 
-				"11", list, "2", 100, BillType.PURCHASEBILL, BillState.COMMITED);
+				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
 		p.insert(po);
 		System.out.println(p.show().get(0).getId());
-		//p.delete("00");
+		//p.delete(po.getId());
 	
 	}
 	

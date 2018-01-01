@@ -94,7 +94,11 @@ public class PurchaseController implements PurchaseBLService{
 		Collections.sort(IDList);
 		String day = getDate();
 //		Collections.reverse(IDList);
-		String num = String.valueOf(IDList.get(IDList.size()-1));
+		String num = null;
+		if(IDList.size()==0)
+			num = getDate()+"00000";
+		else
+		    num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
 			index = String.valueOf(Integer.parseInt(index)+1);
