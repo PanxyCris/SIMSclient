@@ -29,11 +29,11 @@ import po.inventorybillpo.InventoryBillPO;
 public class BillData implements BillDataService {
 
 	private Connection conn;
-	
+
 	public BillData() {
 		conn = DBManager.getConnection();
 	}
-	
+
 	public static void main(String[] args){
 		BillData data = new BillData();
 		GiftPO gift1 = new GiftPO("鬼吹灯",20);
@@ -42,13 +42,13 @@ public class BillData implements BillDataService {
 		InventoryBillPO bill = new InventoryBillPO("KCBYD-20180102-00001",list,"王灿灿",BillType.INVENTORYREVENUEBILL
 				,BillState.COMMITED,"cbidoc");
 		try {
-			data.insertInventoryBill(bill);
+		//	data.deleteInventoryBill("KCZSD-20180102-00000");
 			System.out.println(data.showInventoryBill().get(0).getId());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BillData implements BillDataService {
 				count = rs.getInt(1);
 				if (count == 0) {
 					String sql = "" + "insert into inventorybill(id, object) values (?,?)";
-					
+
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, inventoryBillPO.getId());
@@ -79,11 +79,11 @@ public class BillData implements BillDataService {
 					return ResultMessage.EXISTED;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 
 	}
@@ -130,37 +130,37 @@ public class BillData implements BillDataService {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    InventoryBillPO po = (InventoryBillPO)in.readObject();                   //读出对象  
-                      
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    InventoryBillPO po = (InventoryBillPO)in.readObject();                   //读出对象
+
                     if (type == FindInventoryBillType.ID) {
-                    	if (keyword.equals(po.getId())) list.add(po); 
+                    	if (keyword.equals(po.getId())) list.add(po);
                     }
                     else if (type == FindInventoryBillType.NAME) {
-                    	if (keyword.equals(po.getID())) list.add(po); 
+                    	if (keyword.equals(po.getID())) list.add(po);
                     }
                     else if (type == FindInventoryBillType.STATE) {
-                    	if (keyword.equals(po.getBillState().value)) list.add(po); 
+                    	if (keyword.equals(po.getBillState().value)) list.add(po);
                     }
                     else if (type == FindInventoryBillType.TYPE) {
-                    	if (keyword.equals(po.getBillType().value)) list.add(po); 
-                    } 
-                }  
+                    	if (keyword.equals(po.getBillType().value)) list.add(po);
+                    }
+                }
 			}
 			rs.close();
 			ps.close();
 //			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-	
+
 	}
 
 	@Override
@@ -172,26 +172,26 @@ public class BillData implements BillDataService {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    InventoryBillPO po = (InventoryBillPO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    InventoryBillPO po = (InventoryBillPO)in.readObject();                   //读出对象
+
+                    list.add(po);
+                }
 			}
 			rs.close();
 			ps.close();
 //			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-		
+
 	}
 
 }
