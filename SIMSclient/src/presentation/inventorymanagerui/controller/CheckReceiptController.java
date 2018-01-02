@@ -89,18 +89,13 @@ public class CheckReceiptController extends InventoryManagerController{
         }
 	}
 
-	@FXML
-	public void fresh(){
-		list.addAll(service.show());
-		table.setItems(list);
-	}
-
 	public void initData(UserVO user,BillType type){
 		this.user = user;
 		this.type = type;
 		choiceInit();
 		manageInit();
-		fresh();
+		list.addAll(service.show());
+		table.setItems(list);
 	}
 
 	public void choiceInit(){
@@ -170,9 +165,7 @@ public class CheckReceiptController extends InventoryManagerController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-              for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&clickedState == BillState.DRAFT) {
+                    if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT) {
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -186,7 +179,6 @@ public class CheckReceiptController extends InventoryManagerController{
                           	   printWrong(message);
                         });
                     }
-                  }
                 }
 
             };
@@ -205,9 +197,8 @@ public class CheckReceiptController extends InventoryManagerController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
+                    		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -220,8 +211,6 @@ public class CheckReceiptController extends InventoryManagerController{
                         });
                     }
                     }
-                }
-
             };
             return cell;
         });
@@ -239,9 +228,8 @@ public class CheckReceiptController extends InventoryManagerController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
+                    		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -256,7 +244,6 @@ public class CheckReceiptController extends InventoryManagerController{
                         	}
                         });
                     }
-                }
               }
             };
             return cell;

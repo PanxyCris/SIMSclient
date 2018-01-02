@@ -27,14 +27,14 @@ public class ClassificationData {
 
 
 	public static void main(String[] args){
-		
+
 		ArrayList<ClassificationVPO> children = new ArrayList<>();
 		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
 	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
 		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
 		children1.add(c11);
 		children1.add(c12);
-		
+
 		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
 		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
 		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
@@ -42,7 +42,7 @@ public class ClassificationData {
 		children.add(c2);
 		children.add(c3);
 		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,children);
-		
+
 		ClassificationData d = new ClassificationData();
 		System.out.println(root.getChildren().get(0).getName());
 	//	d.insert(root);
@@ -62,9 +62,26 @@ public class ClassificationData {
 	}
 
 	public ResultMessage insert(ClassificationVPO po) {
+
+		if(po.getFather().getChildren()==null){
+			ArrayList<ClassificationVPO> children = new ArrayList<>();
+			children.add(po);
+			ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
+			update(father);
+
+		}
+		else{
+			ArrayList<ClassificationVPO> children = po.getFather().getChildren();
+			children.add(po);
+			ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
+			update(father);
+		}
 			try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from classification where id = " + po.getId());
+			String sql0 = "select count(*) from classification where id = ?";
+			PreparedStatement ps0 = conn.prepareStatement(sql0);
+			ps0.setString(1, po.getName());
+//			Statement ps0 = conn.createStatement();
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -81,6 +98,7 @@ public class ClassificationData {
 				}
 				else {
 					System.out.println("¿Í»§IDÒÑ´æÔÚ");
+					return ResultMessage.EXISTED;
 				}
 			}
 
@@ -188,12 +206,12 @@ public class ClassificationData {
 	}
 
 	public ClassificationVPO findClassification(String name) {
-		String sql = "select object from classification where name = ?";
+		String sql = "select object from classification where id = ?";
 		ClassificationVPO po = null;
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(0, name);
+			ps.setString(1, name);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Blob inBlob = (Blob) rs.getBlob("object");   //»ñÈ¡blob¶ÔÏó

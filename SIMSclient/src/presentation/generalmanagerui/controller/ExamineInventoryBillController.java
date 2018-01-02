@@ -59,6 +59,7 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		TableView<GiftVO> giftTable;
 		@FXML
 		TableColumn<GiftVO,String> tableName;
+		@FXML
 		TableColumn<GiftVO,Integer> tableNumber;
 
 		@FXML
@@ -80,12 +81,6 @@ public class ExamineInventoryBillController extends ExamineBillController{
 		}
 
 		@FXML
-		public void fresh() throws RemoteException{
-			list.addAll(service.getCommitedBills());
-			table.setItems(list);
-		}
-
-		@FXML
 		public void success() throws RemoteException{
             ArrayList<InventoryBillVO> choiceList = new ArrayList<>();
             for(int i=0;i<list.size();i++)
@@ -93,7 +88,15 @@ public class ExamineInventoryBillController extends ExamineBillController{
             		choiceList.add(list.get(i));
             		list.remove(i);
             		}
-            service.passBills(choiceList);
+            ResultMessage message = service.passBills(choiceList);
+            if(message == ResultMessage.SUCCESS){
+            	Alert info = new Alert(Alert.AlertType.INFORMATION,"已审批");
+            	info.showAndWait();
+            }
+            else{
+            	Alert warning = new Alert(Alert.AlertType.WARNING,message.value);
+            	warning.showAndWait();
+            }
 		}
 
 		@FXML
@@ -104,16 +107,24 @@ public class ExamineInventoryBillController extends ExamineBillController{
             		choiceList.add(list.get(i));
             		list.remove(i);
             		}
-            service.notPassBills(choiceList);
+            ResultMessage message = service.notPassBills(choiceList);
+            if(message == ResultMessage.SUCCESS){
+            	Alert info = new Alert(Alert.AlertType.INFORMATION,"已审批");
+            	info.showAndWait();
+            }
+            else{
+            	Alert warning = new Alert(Alert.AlertType.WARNING,message.value);
+            	warning.showAndWait();
+            }
 		}
 
-		public void initData(UserVO user,BillType type) throws RemoteException{
+		public void initData(UserVO user) throws RemoteException{
 			this.user = user;
-			this.billType = type;
 			choiceInit();
 			edit();
 			manageInit();
-			fresh();
+			list.addAll(service.getCommitedBills());
+			table.setItems(list);
 		}
 
 		public void choiceInit(){

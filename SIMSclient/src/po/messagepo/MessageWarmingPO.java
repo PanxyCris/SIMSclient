@@ -2,6 +2,10 @@ package po.messagepo;
 
 public class MessageWarmingPO extends MessagePO{
 
+	/**
+	 *
+	 */
+
 	private String  name;  //商品名(商品ID)
 	private Integer warmingNumber;
 	private Integer currentNumber;

@@ -137,12 +137,12 @@
 				<TableColumn fx:id="tableDeleteGift" prefWidth="75.0" text="是否删除" />
 			</columns>
 		</TableView>
-		<ChoiceBox fx:id="levelChoice" layoutX="255.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
-		<TextField fx:id="allowanceField" layoutX="330.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
-		<TextField fx:id="voucherField" layoutX="405.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
-		<DatePicker fx:id="startPicker" layoutX="480.0" layoutY="481.0" prefHeight="23.0" prefWidth="100.0" />
-		<DatePicker fx:id="endPicker" layoutX="580.0" layoutY="481.0" prefHeight="23.0" prefWidth="100.0" />
-		<Button layoutX="680.0" layoutY="481.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="75.0" text="增   加" />
+		<ChoiceBox fx:id="levelChoice" layoutX="267.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
+		<TextField fx:id="allowanceField" layoutX="342.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
+		<TextField fx:id="voucherField" layoutX="417.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
+		<DatePicker fx:id="startPicker" layoutX="492.0" layoutY="481.0" prefHeight="23.0" prefWidth="100.0" />
+		<DatePicker fx:id="endPicker" layoutX="592.0" layoutY="481.0" prefHeight="23.0" prefWidth="100.0" />
+		<Button layoutX="692.0" layoutY="481.0" mnemonicParsing="false" onAction="#insert" prefHeight="23.0" prefWidth="61.0" text="增   加" />
 		<TextField fx:id="numberField" layoutX="886.0" layoutY="481.0" prefHeight="23.0" prefWidth="75.0" />
 		<Button layoutX="961.0" layoutY="481.0" mnemonicParsing="false" onAction="#insertGift" prefHeight="23.0" prefWidth="75.0" text="增加赠品" />
       <ChoiceBox fx:id="giftChoice" layoutX="760.0" layoutY="481.0" prefHeight="23.0" prefWidth="127.0" />

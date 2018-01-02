@@ -128,10 +128,8 @@ public class ExamineSalesBillController extends ExamineBillController{
 	}
 
 
-	public void initData(UserVO user,BillType type) throws RemoteException {
+	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
-		this.billType = type;
-		receiptChoice.setValue(type.value);
 		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
 				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
 				FindSalesType.TOTAL.value));

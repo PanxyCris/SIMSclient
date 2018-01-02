@@ -211,4 +211,5 @@ public class ClassManageController extends InventoryManagerController{
             return cell;
         });
 	}
+
 }
