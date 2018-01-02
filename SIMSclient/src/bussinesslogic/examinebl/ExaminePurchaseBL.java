@@ -60,17 +60,25 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 			String memberID = "";
 			for(int i=0;i<vo.getSupplier().length();i++)
 				if(vo.getSupplier().charAt(i) == '('){
-					memberID = vo.getSupplier().substring(i+1,vo.getSupplier().length()-1);
+					memberID = vo.getSupplier().substring(i+1,i+7);
+					System.out.println(memberID);
 					break;
 				}
-
+			System.out.println(vo.getOperator());
 			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
 			if(vo.getType() == BillType.PURCHASEBACKBILL)
                 member.setReceivable(member.getReceivable()+vo.getSum());
 			else
 				member.setPayable(member.getPayable()+vo.getSum());
             for(CommodityItemVO item:vo.getCommodities()){
-            	CommodityPO commodity = commodityService.findCommodity(item.getName(), FindCommodityType.NAME).get(0);
+            	String commodityName = "";
+            	for(int i=0;i<item.getName().length();i++)
+            		if(item.getName().charAt(i)=='('){
+            			commodityName = item.getName().substring(0,i);
+            			break;
+            		}
+            	
+            	CommodityPO commodity = commodityService.findCommodity(commodityName, FindCommodityType.NAME).get(0);
             	if(vo.getType() == BillType.PURCHASEBACKBILL){
             	    commodity.setNumner(commodity.getNumber()-item.getNumber());
             	    utilityService.warningMessage(commodity);
@@ -82,6 +90,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
+			
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);

@@ -18,6 +18,7 @@ import javax.sound.midi.MetaMessage;
 import data.DBManager;
 import data.userdata.UserDataServiceImpl;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindUserType;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
@@ -36,13 +37,13 @@ public class MessageDataServiceImpl implements MessageDataService{
 		UserDataService userService;
 		try {
 			userService = new UserDataServiceImpl();
-			data.save(new MessagePO(info), userService.showUser().get(0));
-			System.out.println(data.getMessage(userService.showUser().get(0)).get(0).getInfo());
+//			data.save(new MessagePO(info), userService.showUser().get(0));
+			System.out.println(data.getMessage(userService.findUser("¿ÓΩ‹", FindUserType.NAME).get(0)).get(0).getInfo());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override

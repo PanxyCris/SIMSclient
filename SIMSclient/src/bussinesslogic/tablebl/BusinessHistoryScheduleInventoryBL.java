@@ -11,6 +11,7 @@ import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLServic
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.inventorybillvo.InventoryBillVO;
@@ -115,6 +116,12 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 			gifts.get(i).setNumber(-number);
 		}
 		return new InventoryBillVO(id, gifts, operator, billType, billState, note);
+	}
+
+	@Override
+	public ResultMessage updateBill(ArrayList<InventoryBillVO> table) {
+		
+		return ResultMessage.FAIL;
 	}
 	
 }

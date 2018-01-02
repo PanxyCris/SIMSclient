@@ -153,6 +153,7 @@ public class PromotionCheckController extends SaleStockStaffController{
 		ObservableList<PromotionMemberVO> memberTable = FXCollections.observableArrayList();
 		ObservableList<PromotionPricePacksVO> specialTable = FXCollections.observableArrayList();
 		ObservableList<PromotionTotalVO> sumTable = FXCollections.observableArrayList();
+//		System.out.println(sale.getRetailerID());
 		memberTable.addAll(service.findMemberPromotion(sale.getRetailerID()));
 		specialTable.addAll(service.findPricePacksPromotion(sale.getCommodity()));
 		sumTable.addAll(service.findTotalPromotion(sale.getBeforePrice()));

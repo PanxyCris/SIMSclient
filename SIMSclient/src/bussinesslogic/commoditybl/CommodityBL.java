@@ -6,10 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import bussinesslogic.billbl.inventory.InventoryBillController;
 import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogic.classificationbl.ClassificationController;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogic.salesbl.SalesController;
+import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
@@ -41,7 +43,7 @@ import vo.membervo.MemberVO;
 
 
 public class CommodityBL implements CommodityBLService{
-
+	
 	private CommodityDataService service;
 	private CommodityTransiton transition;
 	private ClassificationBLService classificationBLService;
@@ -83,6 +85,9 @@ public class CommodityBL implements CommodityBLService{
 
 	@Override
 	public ResultMessage insert(CommodityVO vo) {
+		String fatherClassification=vo.getClassification();
+		ClassificationVPO classificationVPO=new ClassificationVPO(vo.getID(), vo.getName(), false, classificationBLService.getClass(fatherClassification), null);
+		classificationBLService.insert(classificationVPO);
 		try {
 			return service.insertCommodity(transition.VOtoPO(vo));
 		} catch (RemoteException e) {
@@ -207,7 +212,7 @@ public class CommodityBL implements CommodityBLService{
 		addName(root);
 		return nameList;
 	}
-
+	
 //ccw
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {

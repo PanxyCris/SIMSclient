@@ -75,10 +75,8 @@ public class PaymentBillData {
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) {
 		ArrayList<PaymentBillPO> list = new ArrayList<>();
-		PaymentBillPO po = null;
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "select object from userrole";
 		try {
@@ -95,7 +93,7 @@ public class PaymentBillData {
 				while (-1 != (input.read(buff, 0, buff.length)));
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
-				po = (PaymentBillPO) in.readObject();
+				 PaymentBillPO po = (PaymentBillPO) in.readObject();
 				
 				
 				

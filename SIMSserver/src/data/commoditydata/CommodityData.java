@@ -24,9 +24,9 @@ public class CommodityData {
 
 	public static void main(String[] args) {
 		CommodityData cd = new CommodityData();
-		CommodityPO po = new CommodityPO("000006", "ÅËÐÇÓî", "µ¥ÉíÍô", "vfs", 200, 25000,
-				29999, 24000, 28888, 20);
-	//	cd.insert(po);
+		CommodityPO po = new CommodityPO("000001", "ºÚÒ¹×·Ð×µÆ", "L", "vfs", 200, 25,
+				29, 24, 28, 2000);
+		cd.insert(po);
 		System.out.println(cd.show().get(0).getID());
 	}
 
