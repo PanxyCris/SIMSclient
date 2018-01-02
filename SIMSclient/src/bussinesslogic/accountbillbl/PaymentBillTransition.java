@@ -29,7 +29,7 @@ public class PaymentBillTransition {
 			entryVOs.add(entryVO);
 		}
 		
-		paymentBillVO=new PaymentBillVO(paymentBillPO.getDocID(), paymentBillPO.getUserID(),paymentBillPO.getCustomerID(), 
+		paymentBillVO=new PaymentBillVO(paymentBillPO.getDocID(), paymentBillPO.getUserID(),paymentBillPO.getCustomer(), 
 				accountID, entryVOs, total, paymentBillPO.getBillType(), paymentBillPO.getBillState(),paymentBillPO.getNote());
 		
 		return paymentBillVO;
@@ -51,7 +51,7 @@ public class PaymentBillTransition {
 			entryPOs.add(entryPO);
 		}
 		
-		paymentBillPO=new PaymentBillPO(paymentBillVO.getId(), paymentBillVO.getUserID(), paymentBillVO.getCustomerID(), 
+		paymentBillPO=new PaymentBillPO(paymentBillVO.getId(), paymentBillVO.getUserID(), paymentBillVO.getCustomer(), 
 				accountID, entryPOs, total, paymentBillVO.getType(), paymentBillVO.getState());
 		
 		return paymentBillPO;

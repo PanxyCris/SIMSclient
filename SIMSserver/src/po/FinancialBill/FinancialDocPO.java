@@ -9,14 +9,15 @@ public class FinancialDocPO extends BillPO {
 	private static final long serialVersionUID = 1L;
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
+	protected String customer;
 	protected String customerID;//客户ID
 
-	public FinancialDocPO(String docID,String userID,String customerID,
+	public FinancialDocPO(String docID,String userID,String customer,
 			BillType billType,BillState billState){
 		super(billType, billState);
 		this.docID=docID;
 		this.userID=userID;
-		this.customerID=customerID;
+		this.customer=customer;
 		this.billType=billType;
 		this.billState=billState;
 
@@ -44,6 +45,14 @@ public class FinancialDocPO extends BillPO {
 
 	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 	

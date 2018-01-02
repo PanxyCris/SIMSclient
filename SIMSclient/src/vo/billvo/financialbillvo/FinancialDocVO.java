@@ -16,13 +16,14 @@ import vo.billvo.BillVO;
 @SuppressWarnings("serial")
 public class FinancialDocVO extends BillVO implements Serializable {
 	protected String userID;//当前登录用户的ID
+	protected String customer;
 	protected String customerID;//客户ID
 
-	public FinancialDocVO(String docID,String userID,String customerID,
+	public FinancialDocVO(String docID,String userID,String customer,
 			BillType type,BillState state,String note){
 		super(docID,type, state,note);
 		this.userID=userID;
-		this.customerID=customerID;
+		this.customer=customer;
 
 	}
 
@@ -34,7 +35,6 @@ public class FinancialDocVO extends BillVO implements Serializable {
 		this.userID = userID;
 	}
 
-
 	public String getCustomerID() {
 		return customerID;
 	}
@@ -43,5 +43,12 @@ public class FinancialDocVO extends BillVO implements Serializable {
 		this.customerID = customerID;
 	}
 
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
 
 }

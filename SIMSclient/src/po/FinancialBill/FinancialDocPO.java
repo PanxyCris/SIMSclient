@@ -11,7 +11,8 @@ public class FinancialDocPO extends BillPO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
-	protected String customerID;//客户ID
+	protected String customerID;
+	protected String customer;//name(ID)(供货商||销售商||(供货商&&销售商))
 	protected String note;
 
 	public String getNote() {
@@ -22,12 +23,12 @@ public class FinancialDocPO extends BillPO implements Serializable {
 		this.note = note;
 	}
 
-	public FinancialDocPO(String docID,String userID,String customerID,
+	public FinancialDocPO(String docID,String userID,String customer,
 			BillType billType,BillState billState){
 		super(billType, billState);
 		this.docID=docID;
 		this.userID=userID;
-		this.customerID=customerID;
+		this.customer=customer;
 		this.billType=billType;
 		this.billState=billState;
 
@@ -49,6 +50,14 @@ public class FinancialDocPO extends BillPO implements Serializable {
 		this.userID = userID;
 	}
 
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
 	public String getCustomerID() {
 		return customerID;
 	}
@@ -56,7 +65,5 @@ public class FinancialDocPO extends BillPO implements Serializable {
 	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
-
-	
-	
+		
 }
