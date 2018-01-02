@@ -49,6 +49,23 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		}
 		if(receiptBillPOs.isEmpty()){
 			try {
+				try {
+					String customerID="";
+					String customer=receiptBillVO.getCustomer();
+					for (int i = 0; i < customer.length(); i++) {
+						if('('==customer.charAt(i)){
+							for (int j = i+1; j < customer.length(); j++) {
+								if(')'!=customer.charAt(j)){
+									customerID+=customer.charAt(j);
+								}
+								else{
+									break;
+								}
+							}
+							break;
+						}
+					}
+					receiptBillVO.setCustomerID(customerID);
 				return receiptBillDataService.insertReceiptBill(receiptBillPO);
 			} catch (RemoteException e) {
 				e.printStackTrace();
