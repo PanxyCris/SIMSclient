@@ -6,9 +6,6 @@ import dataservice.accountbilldataservice.ReceiptBillDataService;
 import dataservice.accountbookdataservice.AccountBookDataService;
 import dataservice.accountdataservice.AccountDataService;
 import dataservice.billdataservice.BillDataService;
-import dataservice.checktabledataservice.BusinessHistoryScheduleDataService;
-import dataservice.checktabledataservice.SaleScheduleDataService;
-import dataservice.checktabledataservice.StatementOfOperationDataService;
 import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
@@ -53,17 +50,7 @@ public class RemoteHelper {
 		return (BillDataService)remote;
 	}
 
-	public BusinessHistoryScheduleDataService getbusinessHistoryScheduleDataService(){
-		return (BusinessHistoryScheduleDataService)remote;
-	}
 
-	public SaleScheduleDataService getsaleScheduleDataService(){
-		return (SaleScheduleDataService)remote;
-	}
-
-	public StatementOfOperationDataService getstatementOfOperationDataService(){
-		return (StatementOfOperationDataService)remote;
-	}
 
 	public ClassificationDataService getClassificationDataService(){
 		return (ClassificationDataService)remote;

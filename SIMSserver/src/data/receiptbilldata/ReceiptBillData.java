@@ -24,12 +24,18 @@ import po.FinancialBill.ReceiptBillPO;
 * @date 2017年12月14日    
 */
 public class ReceiptBillData {
+	private Connection conn;
+	
+	public ReceiptBillData() {
+		conn = DBManager.getConnection();
+	}
 
 	public ResultMessage insert(ReceiptBillPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from receiptbill where id = " + po.getID());
+			PreparedStatement ps0 = conn.prepareStatement("select count(*) from receiptbill where id = ?");
+			ps0.setString(1, po.getDocID());
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -43,7 +49,7 @@ public class ReceiptBillData {
 			        ps.executeUpdate();
 			        conn.commit();
 			        ps.close();
-			        conn.close();
+			        //conn.close();
 			        return ResultMessage.SUCCESS;
 				}
 				else {
@@ -67,7 +73,7 @@ public class ReceiptBillData {
 			ps.setString(1, id);
 			ps.execute();
 			ps.close();
-			conn.close();
+			//conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,7 +84,7 @@ public class ReceiptBillData {
 	public ArrayList<ReceiptBillPO> find(String keyword, FindAccountBillType type) {
 		ArrayList<ReceiptBillPO> list = new ArrayList<>();
 		ReceiptBillPO po = null;
-		Connection conn = DBManager.getConnection();
+//		Connection conn = DBManager.getConnection();
 		String sql = "" + "select object from receiptbill";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -96,7 +102,26 @@ public class ReceiptBillData {
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				po = (ReceiptBillPO) in.readObject();
 				
-				list.add(po);
+				switch (type) {
+				case BILLID:
+					if (keyword.equals(po.getDocID())) {
+						list.add(po);
+					}
+					break;
+				case CUSTOMER:
+					if (keyword.equals(po.getCustomerID())) {
+						list.add(po);
+					}
+					break;
+				case OPERATOR:
+					if (keyword.equals(po.getUserID())) {
+						list.add(po);
+					}
+					break;
+				default:
+					break;
+				}
+				
 				
 			}
 					
@@ -107,7 +132,7 @@ public class ReceiptBillData {
 	}
 	
 	public ResultMessage update(ReceiptBillPO po) {
-		Connection conn = DBManager.getConnection();
+//		Connection conn = DBManager.getConnection();
 		String sql = "" + "update receiptbill set object = ? where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -115,7 +140,7 @@ public class ReceiptBillData {
 			ps.setString(2, po.getID());
 			ps.executeUpdate();
 			ps.close();
-			conn.close();
+//			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,7 +150,7 @@ public class ReceiptBillData {
 	
 	public ArrayList<ReceiptBillPO> show() {
 		ArrayList<ReceiptBillPO> list = new ArrayList<>();
-		Connection conn = DBManager.getConnection();
+//		Connection conn = DBManager.getConnection();
 		String sql = "select object from receiptbill";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -145,7 +170,7 @@ public class ReceiptBillData {
 			}
 			rs.close();
 			ps.close();
-			conn.close();
+//			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}  

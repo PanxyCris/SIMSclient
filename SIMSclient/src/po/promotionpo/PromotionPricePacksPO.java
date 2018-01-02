@@ -17,7 +17,7 @@ public class PromotionPricePacksPO extends PromotionPO {
 	*/
 	private static final long serialVersionUID = 5383295935262148394L;
 	private ArrayList<GiftPO> pricePacks;
-	private Double discount;   //特价包优惠前的总价
+	private Double discount; 
 
 	public PromotionPricePacksPO(String id,LocalDate beginDate, LocalDate endDate,Double discount, ArrayList<GiftPO> pricePacks) {
 		super(id,beginDate,endDate,PromotionType.PRICEPACKS);
