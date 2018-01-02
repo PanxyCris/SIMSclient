@@ -16,6 +16,7 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -218,6 +219,8 @@ public class CommodityBL implements CommodityBLService{
 	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
 		ArrayList<CommodityCheckVO> checkVOs=new ArrayList<>();
 		ArrayList<SalesVO> salesVOs=salesBLService.show();
+		//赠送单、销售单、销售退货单、进货单、进货退货单
+		BillType type=BillType.SALESBILL;
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
 			if(localDate.isAfter(start)&&localDate.isBefore(end)){

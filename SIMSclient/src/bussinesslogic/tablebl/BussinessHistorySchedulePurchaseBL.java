@@ -11,6 +11,7 @@ import bussinesslogicservice.examineblservice.ExamineBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
@@ -143,6 +144,24 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 			commodities.get(i).setNumber(-number);
 		}
 		return new PurchaseVO(id, supplier, warehouse, operator, commodities, note, sum, billType, billState);
+	}
+
+	@Override
+	public ResultMessage updateBill(ArrayList<PurchaseVO> table) {
+		ArrayList<PurchaseVO> pList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			PurchaseVO purchaseVO=table.get(i);
+			purchaseVO.setState(BillState.COMMITED);
+			purchaseBLService.save(purchaseVO);
+			pList.add(purchaseVO);
+		}
+		try {
+			examineBLService.passBills(pList);
+			return ResultMessage.SUCCESS;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
 	}
 	
 }

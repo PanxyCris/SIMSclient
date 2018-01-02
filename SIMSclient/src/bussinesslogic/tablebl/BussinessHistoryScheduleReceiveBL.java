@@ -11,6 +11,7 @@ import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLServic
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillState;
 import dataenum.BillType;
+import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
 import vo.billvo.financialbillvo.AccountListVO;
@@ -133,6 +134,25 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 			aVOs.add(new AccountListVO(accountListVOs.get(i).getAccountID(), -accountListVOs.get(i).getMoney(), accountListVOs.get(i).getNote()));
 		}
 		return new ReceiptBillVO(docID, userID, customerID, billType, billState, aVOs, total, note);
+	}
+
+
+	@Override
+	public ResultMessage updateBill(ArrayList<ReceiptBillVO> table) {
+		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
+		for (int i = 0; i < table.size(); i++) {
+			ReceiptBillVO receiptBillVO=table.get(i);
+			receiptBillVO.setState(BillState.COMMITED);
+			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
+			rList.add(receiptBillVO);
+		}
+		try {
+			examineBLService.passBills(rList);
+			return ResultMessage.SUCCESS;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
 	}
 	
 }

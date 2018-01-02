@@ -51,6 +51,22 @@ public class PaymentBillBL implements PaymentBillBLService{
 		}
 		if(paymentBillPOs.isEmpty()){//找不到，新建
 			try {
+				String customerID="";
+				String customer=paymentBillVO.getCustomer();
+				for (int i = 0; i < customer.length(); i++) {
+					if('('==customer.charAt(i)){
+						for (int j = i+1; j < customer.length(); j++) {
+							if(')'!=customer.charAt(j)){
+								customerID+=customer.charAt(j);
+							}
+							else{
+								break;
+							}
+						}
+						break;
+					}
+				}
+				paymentBillPO.setCustomerID(customerID);
 				return paymentBillDataService.insertPaymentBill(paymentBillPO);
 			} catch (RemoteException e) {
 				e.printStackTrace();

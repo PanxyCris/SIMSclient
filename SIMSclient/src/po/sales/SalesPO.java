@@ -8,7 +8,6 @@ import java.util.Date;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
-import po.PersistObject;
 import po.commodity.CommodityItemPO;
 
 
