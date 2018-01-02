@@ -2,6 +2,7 @@ package presentation.inventorymanagerui.controller;
 
 import java.util.ArrayList;
 
+import bussiness_stub.InventoryBillBLService_Stub;
 import bussinesslogic.billbl.inventory.InventoryBillController;
 import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
@@ -49,6 +50,7 @@ public class MakeReceiptController extends InventoryManagerController{
 	TableView<GiftVO> table;
 	@FXML
 	TableColumn<GiftVO,String> tableName;
+	@FXML
 	TableColumn<GiftVO,Integer> tableNumber;
 	@FXML
 	TableColumn<GiftVO,String> tableDelete;

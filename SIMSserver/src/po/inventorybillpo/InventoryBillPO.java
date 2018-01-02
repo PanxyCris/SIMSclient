@@ -1,12 +1,13 @@
 package po.inventorybillpo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import dataenum.BillState;
 import dataenum.BillType;
 import po.BillPO;
 import po.commodity.GiftPO;
 
-public class InventoryBillPO extends BillPO{
+public class InventoryBillPO extends BillPO implements Serializable{
 
 	/**
 	 *

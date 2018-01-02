@@ -3,6 +3,7 @@ package presentation.salestockstaffui.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
@@ -216,9 +217,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-              for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&clickedState == BillState.DRAFT) {
+                    if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT) {
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -226,13 +225,20 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                         	ResultMessage message = service.submit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
+
                                 printInfo(ResultMessage.COMMITED);
+                                try {
+									fresh();
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
                             }
                             else
                          	   printWrong(message);
                         });
                     }
-                  }
+
                 }
 
             };
@@ -251,10 +257,11 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
-                        Button delBtn = new Button("重做");
+                   if(!empty&&(this.getTableView().getItems().get(this.getIndex()).getState()==BillState.FAIL||
+                		   this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT)){
+
+                    Button delBtn = new Button("重做");
+
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -265,7 +272,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 							}
                         });
                     }
-                    }
+
                 }
 
             };
@@ -285,9 +292,8 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState()==BillState.FAIL||
+                 		   this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -302,7 +308,6 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 							}
 
                         });
-                    }
                 }
               }
             };

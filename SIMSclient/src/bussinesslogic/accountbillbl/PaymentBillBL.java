@@ -162,7 +162,7 @@ public class PaymentBillBL implements PaymentBillBLService{
 		try {
 			ArrayList<PaymentBillPO> paymentBillPOs=paymentBillDataService.showPaymentBill();
 			for (int i = 0; i < paymentBillPOs.size(); i++) {
-				if(l==StringtoDate(paymentBillPOs.get(i).getID()))
+				if(l==StringtoDate(paymentBillPOs.get(i).getDocID()))
 					count++;
 			}
 			count+=1;

@@ -29,7 +29,10 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 		commodities.add(commodity);
 		PurchaseVO purchase1 = new PurchaseVO("0001","¿ÓΩ‹",Warehouse.WAREHOUSE1,"Panxy",commodities,
 				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.COMMITED);
+		PurchaseVO puchase2 = new PurchaseVO("0001","¿ÓΩ‹",Warehouse.WAREHOUSE1,"Panxy",commodities,
+				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.DRAFT);
 		list.add(purchase1);
+		list.add(puchase2);
 		return list;
 	}
 

@@ -104,7 +104,7 @@ public class ClassificationBL implements ClassificationBLService {
 
 	public void addName(ClassificationVPO classificationVPO){
 		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
-		if(childrenVPOs!=null){
+		if(childrenVPOs!=null||classificationVPO.getB()==false){
 		for (int i = 0; i < childrenVPOs.size(); i++) {
 
 			nameList.add(childrenVPOs.get(i).getName());

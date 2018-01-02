@@ -67,6 +67,10 @@ public class SalesController implements SalesBLService{
 		}
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
+		String day = getDate();
+		if (list==null) {
+			return "XSD-" + getDate() + "-00001";
+		}
 		for (SalesPO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
@@ -75,12 +79,11 @@ public class SalesController implements SalesBLService{
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
+			
 		Collections.sort(IDList);
-		String day = getDate();
+		
 //		Collections.reverse(IDList);
-		if (IDList.isEmpty()) {
-			return "XSD-" + date + "-00001";
-		}
+		
 		String num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
