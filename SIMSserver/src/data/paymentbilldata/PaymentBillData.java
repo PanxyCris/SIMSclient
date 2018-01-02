@@ -28,8 +28,9 @@ public class PaymentBillData {
 	public ResultMessage insert(PaymentBillPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from paymentbill where id = " + po.getID());
+			PreparedStatement ps0 = conn.prepareStatement("select count(*) from paymentbill where id = ?");
+			ps0.setString(1, po.getDocID());
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -93,9 +94,26 @@ public class PaymentBillData {
 				while (-1 != (input.read(buff, 0, buff.length)));
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
-				 PaymentBillPO po = (PaymentBillPO) in.readObject();
-				
-				
+				PaymentBillPO po = (PaymentBillPO) in.readObject();
+				switch (type) {
+				case BILLID:
+					if (keyword.equals(po.getDocID())) {
+						list.add(po);
+					}
+					break;
+				case CUSTOMER:
+					if (keyword.equals(po.getCustomerID())) {
+						list.add(po);
+					}
+					break;
+				case OPERATOR:
+					if (keyword.equals(po.getUserID())) {
+						list.add(po);
+					}
+					break;
+				default:
+					break;
+				}
 				
 			}
 					
