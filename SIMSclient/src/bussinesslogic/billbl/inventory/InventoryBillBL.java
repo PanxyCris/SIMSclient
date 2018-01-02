@@ -105,11 +105,16 @@ public class InventoryBillBL implements InventoryBillBLService{
 
 	@Override
 	public String getId(BillType type) {
+		
 		LocalDate l=null;
 		l=LocalDate.now();
 		int count=0;
+		String[] date=l.toString().split("-");
 		try {
 			ArrayList<InventoryBillPO> inventoryBillPOs=billDataService.showInventoryBill();
+			if(inventoryBillPOs==null){
+				return type.prefix+"-"+date[0]+date[1]+date[2]+"-00001";
+			}
 			for (int i = 0; i < inventoryBillPOs.size(); i++) {
 				LocalDate localDate=StringtoDate(inventoryBillPOs.get(i).getId());
 				if(type==inventoryBillPOs.get(i).getBillType()&&localDate==l){
@@ -126,7 +131,6 @@ public class InventoryBillBL implements InventoryBillBLService{
 		while(5>number.length()){
 			number="0"+number;
 		}
-		String[] date=l.toString().split("-");
 		
 		id=type.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
 		return id;

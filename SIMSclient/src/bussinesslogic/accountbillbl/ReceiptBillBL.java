@@ -148,7 +148,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		try {
 			ArrayList<ReceiptBillPO> receiptBillPOs=receiptBillDataService.showReceiptBill();
 			for (int i = 0; i < receiptBillPOs.size(); i++) {
-				if(l==StringtoDate(receiptBillPOs.get(i).getID()))
+				if(l==StringtoDate(receiptBillPOs.get(i).getDocID()))
 					count++;
 			}
 			count+=1;
