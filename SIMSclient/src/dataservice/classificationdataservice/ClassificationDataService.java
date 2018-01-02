@@ -18,4 +18,5 @@ public interface ClassificationDataService extends Remote {
 
 	public ClassificationVPO findClassification(String name) throws RemoteException;
 	
+	
 }
