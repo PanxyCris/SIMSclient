@@ -136,8 +136,8 @@ public class PurchaseMakeBillController extends MakeReceiptController{
              printInfo(ResultMessage.SAVED);
              fresh();
              }
-         else
-      	   printWrong(message);
+//         else
+//      	   printWrong(message);
        }
      }
 

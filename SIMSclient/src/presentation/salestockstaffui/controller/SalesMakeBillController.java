@@ -119,12 +119,8 @@ public class SalesMakeBillController extends MakeReceiptController{
 		else{
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
-	        ResultMessage message = service.isLegal(vo);
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case SUCCESS:list.add(vo);table.setItems(list);
+	       
+	    	       list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(beforeLabel.getText());
 	    	                     beforeLabel.setText(String.valueOf(result));
 	    	                     commodityIDLabel.setText(null);
@@ -135,15 +131,6 @@ public class SalesMakeBillController extends MakeReceiptController{
 	    	               	     moneyLabel.setText("0.0");
 	    	                     remarkArea.setText(null);
 	    	                     freshAfter();
-	    	                    break;
-	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
-                    error.showAndWait();break;
-	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
 	   }
 	}
 
@@ -214,7 +201,13 @@ public class SalesMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void checkPromotion() throws Exception{
-         changeStage("PromotionCheckUI",user,type,null,sale);
+		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
+		commodityList.addAll(list);
+		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
+	       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+	       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+	       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),null,null);
+         changeStage("PromotionCheckUI",user,type,null,vo);
 	}
 
 
@@ -378,7 +371,7 @@ public class SalesMakeBillController extends MakeReceiptController{
         			String s = "";
         			for(int i=0;i<newValue.length();i++)
         				if(newValue.charAt(i)=='(') {
-        					s = newValue.substring(i+1, newValue.length()-1);
+        					s = newValue.substring(i+1, i+7);
         			        break;
         				}
         try {

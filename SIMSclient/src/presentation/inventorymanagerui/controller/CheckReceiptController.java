@@ -62,6 +62,7 @@ public class CheckReceiptController extends InventoryManagerController{
 	TableView<GiftVO> giftTable;
 	@FXML
 	TableColumn<GiftVO,String> tableName;
+	@FXML
 	TableColumn<GiftVO,Integer> tableNumber;
 
 	@FXML

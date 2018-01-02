@@ -22,6 +22,7 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
 import dataservice.billdataservice.BillDataService;
 import po.UserPO;
+import po.commodity.GiftPO;
 import po.inventorybillpo.InventoryBillPO;
 
 
@@ -33,13 +34,31 @@ public class BillData implements BillDataService {
 		conn = DBManager.getConnection();
 	}
 	
-	
+	public static void main(String[] args){
+		BillData data = new BillData();
+		GiftPO gift1 = new GiftPO("¹í´µµÆ",20);
+		ArrayList<GiftPO> list = new ArrayList<>();
+		list.add(gift1);
+		InventoryBillPO bill = new InventoryBillPO("KCBYD-20180102-00001",list,"Íõ²Ó²Ó",BillType.INVENTORYREVENUEBILL
+				,BillState.COMMITED,"cbidoc");
+		try {
+			data.insertInventoryBill(bill);
+			System.out.println(data.showInventoryBill().get(0).getId());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public ResultMessage insertInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from inventorybill where id = " + inventoryBillPO.getId());
+			String sql0 = "select count(*) from inventorybill where id = ?";
+			PreparedStatement ps0 = conn.prepareStatement(sql0);
+			ps0.setString(1, inventoryBillPO.getId());
+//			Statement ps0 = conn./createStatement();
+			ResultSet rs = ps0.executeQuery();
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
@@ -53,7 +72,7 @@ public class BillData implements BillDataService {
 			        ps.executeUpdate();
 			        conn.commit();
 			        ps.close();
-			        conn.close();
+//			        conn.close();
 			        return ResultMessage.SUCCESS;
 				}
 				else {

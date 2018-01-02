@@ -82,7 +82,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 		inventoryBillPO=inventoryTransition.VOtoPO(vo);
 		ArrayList<InventoryBillPO> inventoryBillPOs=null;
 		try {
-			inventoryBillPOs=billDataService.findInventoryBill(inventoryBillVO.getId(), FindInventoryBillType.ID);
+			inventoryBillPOs=billDataService.findInventoryBill(inventoryBillPO.getId(), FindInventoryBillType.ID);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
