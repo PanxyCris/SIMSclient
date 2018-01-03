@@ -24,10 +24,10 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	private ReceiptBillVO receiptBillVO;
 	private ReceiptBillPO receiptBillPO;
-	
+
 	private ReceiptBillTransition receiptBillTransition;
 	private ReceiptBillDataService receiptBillDataService;
-	
+
 	private AccountBLService accountBLService;
 	private MemberBLService memberBLService;
 
@@ -37,7 +37,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		accountBLService=new AccountController();
 		memberBLService=new MemberController();
 	}
-	
+
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
 		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
@@ -48,7 +48,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 			e1.printStackTrace();
 		}
 		if(receiptBillPOs.isEmpty()){
-			try {
+
 				try {
 					String customerID="";
 					String customer=receiptBillVO.getCustomer();
@@ -70,6 +70,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
+
 		}
 		else{
 			try {
@@ -172,7 +173,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		String number=Integer.toString(count);
 		while (5>number.length()) {
 			number="0"+number;
@@ -180,10 +181,10 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		String[] date=l.toString().split("-");
 		String id="";
 		id=BillType.SKD.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
-		
+
 		return id;
 	}
-	
+
 	public LocalDate StringtoDate(String id){//id «µ•æ›±‡∫≈
 		String s=id.split("-")[1];
 		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());

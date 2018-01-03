@@ -22,16 +22,16 @@ import vo.promotionvo.PromotionVO;
 */
 public interface Sale_PromotionInfo {
 
-	public ArrayList<PromotionMemberVO> findMemberPromotion(MemberLevel level) throws RemoteException;
+	public ArrayList<PromotionMemberVO> findMemberPromotion(String memberID) throws RemoteException;
 
 	public ArrayList<PromotionTotalVO> findTotalPromotion(double beforePrice) throws RemoteException;
 
-	public ArrayList<PromotionPricePacksVO> findPricePacksPromotion(ArrayList<GiftVO> commodity) throws RemoteException;
+	public ArrayList<PromotionPricePacksVO> findPricePacksPromotion(ArrayList<CommodityItemVO> commodity) throws RemoteException;
 
 	//public PromotionPricePacksVO findPricePacks(String id) throws RemoteException;
 
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList);//根据促销策略，返回代金券和价格折让
-	
+
 	//public ArrayList<CommodityItemPO> getGifts(String ID) throws RemoteException;
 
 

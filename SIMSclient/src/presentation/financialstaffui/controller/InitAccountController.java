@@ -105,12 +105,14 @@ public class InitAccountController extends FinancialStaffController {
 		memberList.clear();
 		accountList.clear();
          AccountBookVO book = service.choseByYear(yearChoice.getValue());
+         if(book!=null){
          commodityList.addAll(book.getCommodityVOs());
          memberList.addAll(book.getMemeberVOs());
          accountList.addAll(book.getAccountVOs());
          commodity.setItems(commodityList);
          member.setItems(memberList);
          account.setItems(accountList);
+         }
 
 	}
 

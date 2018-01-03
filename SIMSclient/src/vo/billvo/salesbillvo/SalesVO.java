@@ -28,7 +28,7 @@ public class SalesVO extends BillVO {
 		String s= "";
 		for(int i=0;i<retailer.length();i++)
 			if(retailer.charAt(i)=='('){
-				s = retailer.substring(i+1, retailer.length()-1);
+				s = retailer.substring(i+1, i+7);
 				break;
 				}
 		this.setRetailerID(s);
