@@ -19,13 +19,12 @@ public class ClassificationBL implements ClassificationBLService {
 
 	@Override
 	public String getID() {//用于生成新创建的商品分类的id
-		idCount=1;
-		ClassificationVPO root=getRoot();
-		String id=Integer.toString(count(root)+1);
-		while(4>id.length()){
-			id="0"+id;
+		try {
+			return classificationDataService.getId();
+		} catch (RemoteException e) {
+			e.printStackTrace();
 		}
-		return id;
+		return null;
 	}
 
 	@Override
@@ -104,10 +103,9 @@ public class ClassificationBL implements ClassificationBLService {
 
 	public void addName(ClassificationVPO classificationVPO){
 		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
+		nameList.add(classificationVPO.getName());
 		if(childrenVPOs!=null||classificationVPO.getB()==false){
 		for (int i = 0; i < childrenVPOs.size(); i++) {
-			nameList.add(classificationVPO.getName());
-			nameList.add(childrenVPOs.get(i).getName());
 			addName(childrenVPOs.get(i));
 			}
 		}

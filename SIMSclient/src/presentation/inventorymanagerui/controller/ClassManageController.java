@@ -58,18 +58,17 @@ public class ClassManageController extends InventoryManagerController{
 
 
 	@FXML
-	public void insert(){
+	public void insert() throws Exception{
 		if(nameField.getText()==null||classChoice.getValue()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
 		}
 		else{
+			System.out.println(service.getClass(classChoice.getValue()).getName());
 		ClassificationVPO vo = new ClassificationVPO(idLabel.getText(),nameField.getText(),true,
 				  service.getClass(classChoice.getValue()),null);
 	        ResultMessage message = service.insert(vo);
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
+
 	    	        switch(message){
 	    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该分类已存在");
                                     existed.showAndWait();break;
@@ -77,12 +76,8 @@ public class ClassManageController extends InventoryManagerController{
 	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
                     error.showAndWait();break;
 	    	        }
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    	    }
-	    	});
-	    }
+		}
+
 	}
 
 	public void initInsert(){

@@ -91,7 +91,12 @@ public class ReceiveMakeBillController extends MakeReceiptController {
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
-             fresh();
+             try {
+				fresh();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
              }
          else
       	   printWrong(message);
@@ -106,19 +111,15 @@ public class ReceiveMakeBillController extends MakeReceiptController {
          ResultMessage message = service.commit(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.COMMITED);
-             fresh();
+             try {
+				fresh();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
          }
          else
       	   printWrong(message);
-	}
-
-	@FXML
-	public void fresh(){
-		if(rec != null){
-             memberChoice.setValue(rec.getCustomerID());
-        }
-         accountChoice.setValue(null);
-         noteArea.setText(null);
 	}
 
 	@FXML
@@ -144,7 +145,11 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 
 				}
 			    choiceInit();
-				fresh();
+				if(rec != null){
+		             memberChoice.setValue(rec.getCustomerID());
+		        }
+		         accountChoice.setValue(null);
+		         noteArea.setText(null);
 
 				edit();
 				manageInit();

@@ -27,33 +27,25 @@ public class ClassificationData {
 
 
 	public static void main(String[] args){
-
-		ArrayList<ClassificationVPO> children = new ArrayList<>();
-		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
-	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
-		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
-		children1.add(c11);
-		children1.add(c12);
-
-		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
-		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
-		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
-	    children.add(c1);
-		children.add(c2);
-		children.add(c3);
-		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,children);
+//
+//		ArrayList<ClassificationVPO> children = new ArrayList<>();
+//		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
+//	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
+//		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
+//		children1.add(c11);
+//		children1.add(c12);
+//
+//		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
+//		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
+//		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
+//	    children.add(c1);
+//		children.add(c2);
+//		children.add(c3);
+		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
 		ClassificationData d = new ClassificationData();
-		System.out.println(root.getChildren().get(0).getName());
-	//	d.insert(root);
-		//d.delete("000001");
-		//d.insert(c);
-		//ArrayList<ClassificationVPO> list = d.show();
-		ClassificationVPO v = d.getRoot();
-	     System.out.println(v.getChildren().get(1).getName());
-//		for(ClassificationVPO p : list) {
-//			System.out.println(p.getId() + " " + p.getName());
-//		}
+	//    d.insert(root);
+	//	System.out.println(d.show().get(1).getId());
 	}
 
 	private Connection conn;
@@ -63,19 +55,16 @@ public class ClassificationData {
 
 	public ResultMessage insert(ClassificationVPO po) {
 
-		if(po.getFather().getChildren()==null){
-			ArrayList<ClassificationVPO> children = new ArrayList<>();
-			children.add(po);
-			ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
-			update(father);
+		ArrayList<ClassificationVPO> children;
+		System.out.println(po.getFather().getName());
+		if(po.getFather().getChildren()==null)
+			children = new ArrayList<>();
+		else
+			children = po.getFather().getChildren();
+		children.add(po);
+		ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
+		update(father);
 
-		}
-		else{
-			ArrayList<ClassificationVPO> children = po.getFather().getChildren();
-			children.add(po);
-			ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
-			update(father);
-		}
 			try {
 			String sql0 = "select count(*) from classification where id = ?";
 			PreparedStatement ps0 = conn.prepareStatement(sql0);

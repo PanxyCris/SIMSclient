@@ -372,6 +372,13 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
+	public String getId() throws RemoteException {
+		// TODO Auto-generated method stub
+		return classification.getId();
+	}
+
+
+	@Override
 	public ResultMessage insertPaymentBill(PaymentBillPO po) throws RemoteException {
 		return paymentbill.insertPaymentBill(po);
 	}
@@ -586,6 +593,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		// TODO Auto-generated method stub
 		return inventoryBill.showInventoryBill();
 	}
+
 
 
 

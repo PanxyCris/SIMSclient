@@ -7,15 +7,15 @@ import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
 import po.ClassificationVPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
+/**
+*
+* @author Lijie
+* @date 2017年12月14日
 */
 public class ClassificationDataServiceImpl implements ClassificationDataService{
-	
+
 	private ClassificationData classfication;
-	
+
 	public ClassificationDataServiceImpl() {
 		classfication = new ClassificationData();
 	}
@@ -44,6 +44,21 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 	@Override
 	public ClassificationVPO findClassification(String keyword) throws RemoteException {
 		return classfication.findClassification(keyword);
+	}
+
+	@Override
+	public String getId() throws RemoteException {
+		if(classfication.show()!=null){
+		String oldId = classfication.show().get(classfication.show().size()-1).getId();
+		int count = Integer.parseInt(oldId);
+		count++;
+		String newId = String.valueOf(count);
+		while(newId.length()<oldId.length())
+			newId = "0"+newId;
+		return newId;
+		}
+		else
+		return "0001";
 	}
 
 }
