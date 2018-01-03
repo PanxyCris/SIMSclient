@@ -119,7 +119,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		else{
 		 CommodityItemVO vo = new CommodityItemVO(commodityIDLabel.getText(),nameChoice.getValue(),modelChoice.getValue(),
 				 Integer.parseInt(numberField.getText()),Double.parseDouble(priceField.getText()), remarkArea.getText());
-	       
+
 	    	       list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(beforeLabel.getText());
 	    	                     beforeLabel.setText(String.valueOf(result));
@@ -135,8 +135,9 @@ public class SalesMakeBillController extends MakeReceiptController{
 	}
 
 	@FXML
-	public void save(){
-		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null){
+	public void save() throws Exception{
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null||
+				list == null||allowanceField.getText()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
 		}
@@ -158,8 +159,9 @@ public class SalesMakeBillController extends MakeReceiptController{
 	}
 
 	@FXML
-	public void submit(){
-		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null){
+	public void submit() throws Exception{
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null||
+				list == null||allowanceField.getText()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
 		}
@@ -181,26 +183,18 @@ public class SalesMakeBillController extends MakeReceiptController{
 	}
 
 	@FXML
-	public void fresh(){
-
-		 numberField.setText(null);
-         priceField.setText(null);
-         remarkArea.setText(null);
-         allowanceField.setText(null);
-         if(purchase == null)
-         noteArea.setText(null);
-         else
-        	 noteArea.setText(purchase.getNote());
-
-	}
-
-	@FXML
 	public void checkBefore() throws Exception{
          changeStage("SalesCheckBillUI",user,type,null,null);
 	}
 
 	@FXML
 	public void checkPromotion() throws Exception{
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null||
+				list == null){
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
+			warning.showAndWait();
+		}
+		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
@@ -208,6 +202,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
 	       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),null,null);
          changeStage("PromotionCheckUI",user,type,null,vo);
+		}
 	}
 
 
@@ -225,6 +220,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 			    beforeLabel.setText("0");
 			    afterLabel.setText("0");
 			    allowanceLabel.setText("0");
+			    allowanceField.setText("0");
 			    voucherLabel.setText("0");
 				operatorLabel.setText(readUser().getName());
 				}
@@ -233,13 +229,22 @@ public class SalesMakeBillController extends MakeReceiptController{
 					beforeLabel.setText(String.valueOf(sale.getBeforePrice()));
 					afterLabel.setText(String.valueOf(sale.getAfterPrice()));
 					allowanceLabel.setText(String.valueOf(sale.getAllowance()));
+					allowanceField.setText("0");
 					voucherLabel.setText(String.valueOf(sale.getVoucher()));
 					list.addAll(sale.getCommodity());
 					table.setItems(list);
 					operatorLabel.setText(sale.getOperator());
 
 				}
-				fresh();
+
+			 numberField.setText(null);
+	         priceField.setText(null);
+	         remarkArea.setText(null);
+	         allowanceField.setText(null);
+	         if(purchase == null)
+	         noteArea.setText(null);
+	         else
+	        	 noteArea.setText(purchase.getNote());
 				edit();
 				manageInit();
 	}
@@ -536,6 +541,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 	public void freshAfter(){
 		double tmp = 0;
 		boolean allowanceLegal = true;
+		if(allowanceField.getText()!=null){
     	for(int i=0;i<allowanceField.getText().length();i++)
     		if((allowanceField.getText().charAt(i)<='9'&&allowanceField.getText().charAt(i)>='0')||allowanceField.getText().charAt(i)=='.')
     			continue;
@@ -548,6 +554,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		double before = Double.parseDouble(beforeLabel.getText());
 		 afterLabel.setText(String.valueOf(before-tmp-
 				 Double.parseDouble(voucherLabel.getText())-Double.parseDouble(allowanceLabel.getText())));
+		 }
 	}
 
 

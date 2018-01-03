@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussiness_stub.Sale_PromotionInfo_Stub;
+import bussinesslogic.salesbl.info.Sale_Promotion;
 import bussinesslogicservice.salesblservice.Sale_PromotionInfo;
 import dataenum.BillType;
 import dataenum.PromotionType;
@@ -27,7 +28,7 @@ import vo.uservo.UserVO;
 
 public class PromotionCheckController extends SaleStockStaffController{
 
-	Sale_PromotionInfo service = new Sale_PromotionInfo_Stub();
+	Sale_PromotionInfo service = new Sale_Promotion();
 	PromotionMemberVO currentMember;
 	PromotionPricePacksVO currentSpecial;
 	PromotionTotalVO currentSum;
@@ -153,7 +154,6 @@ public class PromotionCheckController extends SaleStockStaffController{
 		ObservableList<PromotionMemberVO> memberTable = FXCollections.observableArrayList();
 		ObservableList<PromotionPricePacksVO> specialTable = FXCollections.observableArrayList();
 		ObservableList<PromotionTotalVO> sumTable = FXCollections.observableArrayList();
-//		System.out.println(sale.getRetailerID());
 		memberTable.addAll(service.findMemberPromotion(sale.getRetailerID()));
 		specialTable.addAll(service.findPricePacksPromotion(sale.getCommodity()));
 		sumTable.addAll(service.findTotalPromotion(sale.getBeforePrice()));

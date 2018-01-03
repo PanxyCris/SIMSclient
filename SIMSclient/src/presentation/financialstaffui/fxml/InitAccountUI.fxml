@@ -126,7 +126,7 @@
 				<TableColumn fx:id="commodityPurPrice" prefWidth="75.0" text="进价" />
 				<TableColumn fx:id="commodityRetailedPrice" prefWidth="75.0" text="售价" />
 				<TableColumn fx:id="commodityRecPurPrice" prefWidth="75.0" text="最新进价" />
-				<TableColumn fx:id="commodityRetailedPrice" prefWidth="75.0" text="最新售价" />
+				<TableColumn fx:id="commodityRecRetailedPrice" prefWidth="75.0" text="最新售价" />
 			</columns>
 		</TableView>
 		<TableView fx:id="member" layoutX="201.0" layoutY="246.0" prefHeight="109.0" prefWidth="755.0">
