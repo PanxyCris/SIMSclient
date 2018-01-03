@@ -27,25 +27,25 @@ public class ClassificationData {
 
 
 	public static void main(String[] args){
-//
-//		ArrayList<ClassificationVPO> children = new ArrayList<>();
-//		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
-//	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
-//		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
-//		children1.add(c11);
-//		children1.add(c12);
-//
-//		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
-//		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
-//		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
-//	    children.add(c1);
-//		children.add(c2);
-//		children.add(c3);
+
+		ArrayList<ClassificationVPO> children = new ArrayList<>();
+		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
+	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
+		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
+		children1.add(c11);
+		children1.add(c12);
+
+		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
+		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
+		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
+	    children.add(c1);
+		children.add(c2);
+		children.add(c3);
 		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
 		ClassificationData d = new ClassificationData();
-		
-	//    d.insert(root);
+		System.out.println(d.find("µÆ").get(0).getName());
+	    d.insert(root);
 		System.out.println(d.show().get(0).getName());
 	}
 
@@ -67,7 +67,7 @@ public class ClassificationData {
 		update(father);
 
 			try {
-			String sql0 = "select count(*) from classification where id = ?";
+			String sql0 = "select count(*) from classification where name = ?";
 			PreparedStatement ps0 = conn.prepareStatement(sql0);
 			ps0.setString(1, po.getName());
 //			Statement ps0 = conn.createStatement();
@@ -76,7 +76,7 @@ public class ClassificationData {
 			if (rs.next()) {
 				count = rs.getInt(1);
 				if (count == 0) {
-					String sql = "" + "insert into classification(id, object) values (?,?)";
+					String sql = "" + "insert into classification(name, object) values (?,?)";
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
@@ -99,11 +99,11 @@ public class ClassificationData {
 		return ResultMessage.FAIL;
 	}
 
-	public ResultMessage delete(String id)  {
-		String sql = "" + "delete from classification where id = ?";
+	public ResultMessage delete(String name)  {
+		String sql = "" + "delete from classification where name = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setString(1, name);
 			ps.execute();
 			ps.close();
 			return ResultMessage.SUCCESS;
@@ -114,11 +114,11 @@ public class ClassificationData {
 	}
 
 	public ResultMessage update(ClassificationVPO po) {
-		String sql = "" + "update classification set object = ? where id = ?";
+		String sql = "" + "update classification set object = ? where name = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getId());
+			ps.setString(2, po.getName());
 			ps.executeUpdate();
 			ps.close();
 			return ResultMessage.SUCCESS;
@@ -196,7 +196,7 @@ public class ClassificationData {
 	}
 
 	public ClassificationVPO findClassification(String name) {
-		String sql = "select object from classification where id = ?";
+		String sql = "select object from classification where name = ?";
 		ClassificationVPO po = null;
 		PreparedStatement ps;
 		try {
