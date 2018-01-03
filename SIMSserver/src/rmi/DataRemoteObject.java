@@ -78,7 +78,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
     PromotionMemberDataService,PromotionSpecialDataService,PromotionSumDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
     ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService,BillDataService{
 
-	private static final long serialVersionUID = 4029039744279087114L;
+	private static final long serialVersionUID = 1L;
 
 	private UserDataService user;
 	private MemberDataService member;
