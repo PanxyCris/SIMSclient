@@ -5,6 +5,7 @@ public class MessageWarmingPO extends MessagePO{
 	/**
 	 *
 	 */
+	private static final long serialVersionUID = -3749787341425253367L;
 
 	private String  name;  //商品名(商品ID)
 	private Integer warmingNumber;

@@ -5,7 +5,12 @@ import dataenum.ResultMessage;
 
 public class MessageBillPO extends MessagePO{
 
-	     private String name; //格式 名字(ID)
+	     /** 
+	* <p>Title: </p> 
+	* <p>Description: </p> 
+	*/
+	private static final long serialVersionUID = -930864991300439700L;
+		private String name; //格式 名字(ID)
 	     private String id;   //单据编号
 	     private BillType type;
 	     private ResultMessage result;  //只有成功或者失败
