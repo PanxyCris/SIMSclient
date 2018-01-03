@@ -138,14 +138,12 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	}
 
 	@Override
-	public ResultMessage updateBill(ArrayList<PaymentBillVO> table) {
-		ArrayList<PaymentBillVO> pList=new ArrayList<>();
-		for (int i = 0; i < table.size(); i++) {
-			PaymentBillVO paymentBillVO=table.get(i);
+	public ResultMessage updateBill(PaymentBillVO table) {
+			ArrayList<PaymentBillVO> pList=new ArrayList<>();
+			PaymentBillVO paymentBillVO=table;
 			paymentBillVO.setState(BillState.COMMITED);
 			paymentBillBLService.save(paymentBillVO);
 			pList.add(paymentBillVO);
-		}
 		try {
 			examineBLService.passBills(pList);
 			return ResultMessage.SUCCESS;
