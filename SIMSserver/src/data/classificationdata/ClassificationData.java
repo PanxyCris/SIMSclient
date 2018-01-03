@@ -44,9 +44,7 @@ public class ClassificationData {
 		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null);
 
 		ClassificationData d = new ClassificationData();
-		
-	//    d.insert(root);
-		System.out.println(d.findClassification("灯").getId());
+	    d.insert(root);
 	}
 
 	private Connection conn;
@@ -57,7 +55,6 @@ public class ClassificationData {
 	public ResultMessage insert(ClassificationVPO po) {
 
 		ArrayList<ClassificationVPO> children;
-		System.out.println(po.getFather().getName());
 		if(po.getFather().getChildren()==null)
 			children = new ArrayList<>();
 		else
@@ -80,14 +77,14 @@ public class ClassificationData {
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getName());
+					ps.setString(1, po.getId());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
 			        return ResultMessage.SUCCESS;
 				}
 				else {
-					System.out.println("分类已存在");
+					System.out.println("客户ID已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
