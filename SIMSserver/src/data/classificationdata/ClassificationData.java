@@ -79,14 +79,14 @@ public class ClassificationData {
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getId());
+					ps.setString(1, po.getName());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
 			        return ResultMessage.SUCCESS;
 				}
 				else {
-					System.out.println("客户ID已存在");
+					System.out.println("分类已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
