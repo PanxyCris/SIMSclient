@@ -5,7 +5,7 @@ import dataenum.ResultMessage;
 
 public class MessageBillPO extends MessagePO{
 
-	private static final long serialVersionUID = -930864991300439700L;
+	private static final long serialVersionUID = 1L;
 	
 	     private String name; //格式 名字(ID)
 	     private String id;   //单据编号

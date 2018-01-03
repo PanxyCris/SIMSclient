@@ -6,7 +6,7 @@ public class MessageWarmingPO extends MessagePO{
 	* <p>Title: </p> 
 	* <p>Description: </p> 
 	*/
-	private static final long serialVersionUID = -3749787341425253367L;
+	private static final long serialVersionUID = 1L;
 	/**
 	 *
 	 */

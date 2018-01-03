@@ -9,7 +9,7 @@ public class MessageBillPO extends MessagePO{
 	* <p>Title: </p> 
 	* <p>Description: </p> 
 	*/
-	private static final long serialVersionUID = -930864991300439700L;
+	private static final long serialVersionUID = 1L;
 		private String name; //格式 名字(ID)
 	     private String id;   //单据编号
 	     private BillType type;
