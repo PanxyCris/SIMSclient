@@ -154,14 +154,12 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 	}
 
 	@Override
-	public ResultMessage updateBill(ArrayList<SalesVO> table) {
-		ArrayList<SalesVO> sList=new ArrayList<>();
-		for (int i = 0; i < table.size(); i++) {
-			SalesVO salesVO=table.get(i);
+	public ResultMessage updateBill(SalesVO table) {
+			ArrayList<SalesVO> sList=new ArrayList<>();
+			SalesVO salesVO=table;
 			salesVO.setState(BillState.COMMITED);
 			salesBLService.save(salesVO);
 			sList.add(salesVO);
-		}
 		try {
 			examineBLService.passBills(sList);
 			return ResultMessage.SUCCESS;

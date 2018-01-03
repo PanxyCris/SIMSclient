@@ -138,14 +138,12 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 
 
 	@Override
-	public ResultMessage updateBill(ArrayList<ReceiptBillVO> table) {
-		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
-		for (int i = 0; i < table.size(); i++) {
-			ReceiptBillVO receiptBillVO=table.get(i);
+	public ResultMessage updateBill(ReceiptBillVO table) {
+			ArrayList<ReceiptBillVO> rList=new ArrayList<>();
+			ReceiptBillVO receiptBillVO=table;
 			receiptBillVO.setState(BillState.COMMITED);
 			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
 			rList.add(receiptBillVO);
-		}
 		try {
 			examineBLService.passBills(rList);
 			return ResultMessage.SUCCESS;

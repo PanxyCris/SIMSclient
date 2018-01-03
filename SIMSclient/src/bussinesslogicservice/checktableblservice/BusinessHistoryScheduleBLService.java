@@ -21,6 +21,6 @@ public interface BusinessHistoryScheduleBLService<B extends BillVO> {
 
 	public ArrayList<B> writeOffAndCopy(ArrayList<B> table);//红冲并复制
 	
-	public ResultMessage updateBill(ArrayList<B> table);//将红冲并复制的单据入账
+	public ResultMessage updateBill(B table);//将红冲并复制的单据入账
 
 }

@@ -119,14 +119,11 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 	}
 
 	@Override
-	public ResultMessage updateBill(ArrayList<InventoryBillVO> table) {
-		ArrayList<InventoryBillVO> iList=new ArrayList<>();
-		for (int i = 0; i < table.size(); i++) {
-			InventoryBillVO inventoryBillVO=table.get(i);
+	public ResultMessage updateBill(InventoryBillVO table) {
+			ArrayList<InventoryBillVO> iList=new ArrayList<>();
+			InventoryBillVO inventoryBillVO=table;
 			inventoryBillVO.setState(BillState.COMMITED);
 			inventoryBillBLService.save(inventoryBillVO);
-			iList.add(inventoryBillVO);
-		}
 		try {
 			examineBLService.passBills(iList);
 			return ResultMessage.SUCCESS;
