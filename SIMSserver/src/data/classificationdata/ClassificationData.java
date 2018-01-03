@@ -44,8 +44,9 @@ public class ClassificationData {
 		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
 		ClassificationData d = new ClassificationData();
+		
 	//    d.insert(root);
-	//	System.out.println(d.show().get(1).getId());
+		System.out.println(d.show().get(0).getName());
 	}
 
 	private Connection conn;
