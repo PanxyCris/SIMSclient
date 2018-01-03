@@ -2,7 +2,9 @@ package bussinesslogic.salesbl.info;
 
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import bussiness_stub.promotion_stub.PromotionTotalBLService_Stub;
 import bussinesslogic.memberbl.MemberController;
@@ -30,11 +32,11 @@ import vo.promotionvo.PromotionTotalVO;
 import vo.promotionvo.PromotionVO;
 
 /**
-*
-* @author Lijie
-* @date 2018年1月2日
-*/
-public class Sale_Promotion implements Sale_PromotionInfo{
+ *
+ * @author Lijie
+ * @date 2018年1月2日
+ */
+public class Sale_Promotion implements Sale_PromotionInfo {
 
 	private PromotionMemberDataService member;
 	private PromotionSpecialDataService special;
@@ -43,20 +45,22 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 	private PromotionSumBL sumbl;
 	private PromotionSpecialBL specialbl;
 	private MemberController memberController;
+	private int date;
 
 	public Sale_Promotion() {
 		member = RemoteHelper.getInstance().getMemberPromotionDataService();
 		special = RemoteHelper.getInstance().getSpecialPromotionDataService();
 		sum = RemoteHelper.getInstance().getSumPromotionDataService();
 		memberbl = new PromotionMemberBL();
-		sumbl  = new PromotionSumBL();
+		sumbl = new PromotionSumBL();
 		specialbl = new PromotionSpecialBL();
 		memberController = new MemberController();
+		date = Integer.valueOf(getDate());
 	}
 
 	@Override
 	public ArrayList<PromotionMemberVO> findMemberPromotion(String memberID) throws RemoteException {
-	    MemberLevel level = memberController.find(memberID, FindMemberType.ID).get(0).getLevel();
+		MemberLevel level = memberController.find(memberID, FindMemberType.ID).get(0).getLevel();
 		ArrayList<PromotionMemberPO> list = member.showMemberPromotion();
 		ArrayList<PromotionMemberVO> result = new ArrayList<>();
 		if (list == null) {
@@ -64,10 +68,17 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 			return null;
 		}
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		int beginDate = 0;
+		int endDate = 0;
 		for (PromotionMemberPO po : list) {
-			if (po.getLevel().num >= level.num) {
-				result.add(memberbl.poTovo(po));
-			}
+			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
+			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			if (beginDate <= date && date <= endDate)
+				if (po.getLevel().num >= level.num) {
+					result.add(memberbl.poTovo(po));
+				}
+
 		}
 
 		return result;
@@ -82,10 +93,16 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 			return null;
 		}
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		int beginDate = 0;
+		int endDate = 0;
 		for (PromotionTotalPO po : list) {
-			if (po.getTotal() >= beforePrice) {
-				result.add(sumbl.poTovo(po));
-			}
+			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
+			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			if (beginDate <= date && date <= endDate)
+				if (po.getTotal() >= beforePrice) {
+					result.add(sumbl.poTovo(po));
+				}
 		}
 		return result;
 	}
@@ -100,17 +117,27 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 			return null;
 		}
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		int beginDate = 0;
+		int endDate = 0;
+
 		for (PromotionPricePacksPO po : list) {
-			ArrayList<GiftVO> gifts = poTOvo(po.getPricePacks());
-			boolean flag = true;
-			for (GiftVO g : gifts) {
-				if (commodity.indexOf(g) == -1) {  //商品不存在
-					flag = false;
-					break;
+			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
+			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			if (beginDate <= date && date <= endDate) {
+
+				ArrayList<GiftVO> gifts = poTOvo(po.getPricePacks());
+				boolean flag = true;
+				for (GiftVO g : gifts) {
+					if (commodity.indexOf(g) == -1) { // 商品不存在
+						flag = false;
+						break;
+					}
 				}
-			}
-			if (flag) {
-				result.add(specialbl.poTovo(po));
+				if (flag) {
+
+					result.add(specialbl.poTovo(po));
+				}
 			}
 		}
 		return result;
@@ -118,9 +145,22 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 
 	@Override
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList) {
+		ArrayList<PromotionVO> list = new ArrayList<>();   //符合条件日期的促销策略
+ 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+ 		int beginDate = 0;
+ 		int endDate = 0;
+ 		for (PromotionVO vo : promotionList) {
+ 			beginDate = Integer.valueOf(sdf.format(vo.getBeginDate()));
+ 			endDate = Integer.valueOf(sdf.format(vo.getEndDate()));
+ 			if (beginDate <= date && date <= endDate) {
+ 				list.add(vo);
+ 			}
+	
+ 		}
+ 		
 		double voucher = 0, allowance = 0;
 		double max = 0;
-		for (PromotionVO vo : promotionList) {
+		for (PromotionVO vo : list) {
 			switch (vo.getType()) {
 			case LEVEL_PROMOTION:
 				PromotionMemberVO m = (PromotionMemberVO) vo;
@@ -133,7 +173,7 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 
 			case PRICEPACKS:
 				PromotionPricePacksVO p = (PromotionPricePacksVO) vo;
-				if (p.getDiscount()  > max) {
+				if (p.getDiscount() > max) {
 					max = p.getDiscount();
 					voucher = 0;
 					allowance = p.getDiscount();
@@ -164,6 +204,12 @@ public class Sale_Promotion implements Sale_PromotionInfo{
 			result.add(vo);
 		}
 		return result;
+	}
+
+	public String getDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.format(new Date());
+
 	}
 
 }
