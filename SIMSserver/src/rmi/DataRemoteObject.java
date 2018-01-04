@@ -359,6 +359,16 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return classification.deleteClassification(id);
 	}
 
+
+	@Override
+	public ArrayList<ClassificationVPO> show() throws RemoteException {
+		// TODO Auto-generated method stub
+		return classification.show();
+	}
+
+
+
+
 	@Override
 	public ClassificationVPO getRoot() throws RemoteException {
 		return classification.getRoot();
@@ -593,7 +603,6 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		// TODO Auto-generated method stub
 		return inventoryBill.showInventoryBill();
 	}
-
 
 
 

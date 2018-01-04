@@ -186,7 +186,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
                       inv.setGifts(tmpGifts);
                       try {
 						service.updateBill(inv);
-					} catch (RemoteException e) {
+					} catch (Exception e) {
 						e.printStackTrace();
 					}
 

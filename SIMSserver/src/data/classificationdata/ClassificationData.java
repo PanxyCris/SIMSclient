@@ -28,6 +28,7 @@ public class ClassificationData {
 
 	public static void main(String[] args){
 
+		ClassificationData d = new ClassificationData();
 		ArrayList<ClassificationVPO> children = new ArrayList<>();
 		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
 	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
@@ -35,18 +36,16 @@ public class ClassificationData {
 		children1.add(c11);
 		children1.add(c12);
 
-		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,null,children1);
-		ClassificationVPO c2 = new ClassificationVPO("0003","ÕÕÃ÷µÆ",true,null,null);
+	//	ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,d.find("µÆ").get(0),null);
+//		ClassificationVPO c2 = new ClassificationVPO("0004","»ÆµÆ",true,d.find("°×³ãµÆ").get(0),null);
 		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
-	    children.add(c1);
-		children.add(c2);
-		children.add(c3);
-		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
+	//    children.add(c1);
+//		children.add(c2);
+//		children.add(c3);
+		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
-		ClassificationData d = new ClassificationData();
-		System.out.println(d.find("µÆ").get(0).getName());
-	    d.insert(root);
-		System.out.println(d.show().get(0).getName());
+		d.insert(root);
+//		System.out.println(d.find("»ÆµÆ").get(0).getId());
 	}
 
 	private Connection conn;
@@ -55,16 +54,6 @@ public class ClassificationData {
 	}
 
 	public ResultMessage insert(ClassificationVPO po) {
-
-		ArrayList<ClassificationVPO> children;
-		System.out.println(po.getFather().getName());
-		if(po.getFather().getChildren()==null)
-			children = new ArrayList<>();
-		else
-			children = po.getFather().getChildren();
-		children.add(po);
-		ClassificationVPO father = new ClassificationVPO(po.getId(), po.getName(), po.getB(), po.getFather(), children);
-		update(father);
 
 			try {
 			String sql0 = "select count(*) from classification where name = ?";

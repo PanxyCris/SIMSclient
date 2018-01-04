@@ -61,4 +61,10 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 		return "0001";
 	}
 
+	@Override
+	public ArrayList<ClassificationVPO> show() throws RemoteException {
+		// TODO Auto-generated method stub
+		return classfication.show();
+	}
+
 }
