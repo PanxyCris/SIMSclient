@@ -119,6 +119,7 @@ public class SalesCheckBillController extends SaleStockStaffController{
 		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
 				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
 				FindSalesType.TOTAL.value));
+		if(service.show()!=null)
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();

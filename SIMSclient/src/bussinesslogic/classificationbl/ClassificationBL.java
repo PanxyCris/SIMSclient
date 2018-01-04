@@ -48,7 +48,7 @@ public class ClassificationBL implements ClassificationBLService {
 
 	@Override
 	public void delete(ClassificationVPO vpo) {
-		String id=vpo.getId();
+		String id=vpo.getName();
 		try {
 			classificationDataService.deleteClassification(id);
 		} catch (RemoteException e) {

@@ -48,7 +48,6 @@ public class SalesMakeBillController extends MakeReceiptController{
 	SalesBLService service = new SalesController();//桩
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
 	ObservableList<PromotionVO> promotionlist = FXCollections.observableArrayList();
-
     @FXML
     Label typeLabel;
 
@@ -189,7 +188,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void checkPromotion() throws Exception{
-		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null||
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||
 				list == null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
@@ -493,7 +492,12 @@ public class SalesMakeBillController extends MakeReceiptController{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	boolean allowanceLegal = true;
-
+                if(newValue==null){
+                    afterLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())
+                    		-Double.parseDouble(allowanceLabel.getText())-Double.parseDouble(voucherLabel.getText())
+                            ));
+                }
+                else{
             	for(int i=0;i<allowanceField.getText().length();i++)
             		if((allowanceField.getText().charAt(i)<='9'&&allowanceField.getText().charAt(i)>='0')||allowanceField.getText().charAt(i)=='.')
             			continue;
@@ -501,8 +505,12 @@ public class SalesMakeBillController extends MakeReceiptController{
             			allowanceLegal = false;
             			break;
             		}
-            	if(allowanceLegal)
-                afterLabel.setText(String.valueOf(Double.parseDouble(afterLabel.getText())-Double.parseDouble(allowanceField.getText())));
+            	if(allowanceLegal){
+                afterLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())
+                		-Double.parseDouble(allowanceLabel.getText())-Double.parseDouble(voucherLabel.getText())
+                         -Double.parseDouble(allowanceField.getText())));
+            	}
+            	}
             }
 
         });

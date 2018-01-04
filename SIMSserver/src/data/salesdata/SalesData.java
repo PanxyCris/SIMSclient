@@ -38,15 +38,17 @@ public class SalesData{
 
 	public static void main(String[] args) {
 		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
-		SalesPO po = new SalesPO("XSD-20180101-00001", "000001", "ÅËÐÇÓî", "Íõ²Ó²Ó", "ÁõÇÕ",
-				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "´ó¼ª´óÀû£¬ÍíÉÏ³Ô¼¦", BillType.SALESBACKBILL, BillState.DRAFT);
+		
 		CommodityItemPO e = new CommodityItemPO("000001", "ÅËÐÇÓî", "µ¥ÉíÍô", 100, 200, "ÍôÍô");
 		commodities.add(e);
+		SalesPO po = new SalesPO("XSD-20180101-00001", "000002", "Íõ²Ó²Ó(000002)(ÏúÊÛÉÌ)", "Íõ²Ó²Ó", "ÁõÇÕ",
+				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "´ó¼ª´óÀû£¬ÍíÉÏ³Ô¼¦", BillType.SALESBILL, BillState.DRAFT);
 		SalesData s = new SalesData();
-		s.insert(po);
+		
 //		ArrayList<SalesPO> list = s.show();
 //		for (SalesPO p : list) {
-//			System.out.println(p.getId() + " " + p.getClientName());
+//		s.insert(po);
+		System.out.println(s.show().get(0).getAllowance());
 //		}
 	}
 
