@@ -12,7 +12,7 @@ public enum BillType {
 	SALESBACKBILL("销售退货单", "XSTHD"),
 	PURCHASEBACKBILL("进货退货单", "JHTHD"),
 	SKD("收款单", "SKD"),
-	XJFYD("付款单", "FKD");
+	XJFYD("付款单", "XJFYD");
 
 	public final String value;
 	public final String prefix;

@@ -86,8 +86,7 @@ public class CommodityBL implements CommodityBLService{
 
 	@Override
 	public ResultMessage insert(CommodityVO vo) {
-		String fatherClassification=vo.getClassification();
-		ClassificationVPO classificationVPO=new ClassificationVPO(vo.getID(), vo.getName(), false, classificationBLService.getClass(fatherClassification), null);
+		ClassificationVPO classificationVPO=new ClassificationVPO(vo.getID(), vo.getName(), false,vo.getClassification(), null);
 		classificationBLService.insert(classificationVPO);
 		try {
 			return service.insertCommodity(transition.VOtoPO(vo));

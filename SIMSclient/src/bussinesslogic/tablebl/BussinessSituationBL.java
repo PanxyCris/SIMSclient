@@ -1,5 +1,6 @@
 package bussinesslogic.tablebl;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -20,6 +21,12 @@ import vo.commodityvo.CommodityVO;
 import vo.commodityvo.GiftVO;
 import vo.tablevo.PaymentTableVO;
 import vo.tablevo.ReceiveTableVO;
+  
+
+import jxl.Workbook;  
+import jxl.write.Label;  
+import jxl.write.WritableSheet;  
+import jxl.write.WritableWorkbook;
 
 //对商品类收入存在疑问
 public class BussinessSituationBL implements BussinessSituationBLService {
@@ -36,8 +43,81 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 	
 	@Override
 	public void exportReport(ArrayList<PaymentTableVO> pay, ArrayList<ReceiveTableVO> receive) {//这个是导出为excel的方法
-		
-	}
+		WritableWorkbook wwb = null;  
+	 	String fileName="C:/Users/user/Desktop/BussinessSituation.xlsx";
+        try {  
+            // 创建一个可写入的工作簿（WorkBook）对象,  
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
+            wwb = Workbook.createWorkbook(new File(fileName));  
+              
+            // 创建一个可写入的工作表   
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+            WritableSheet pSheet = wwb.createSheet("PaymentTableVO", 0);
+            WritableSheet rSheet = wwb.createSheet("ReceiptTableVO", 1);
+            
+            int pSheetL=pay.size();
+            int rSheetL=receive.size();
+           
+            Label ini = new Label(0,0,"Date");  
+            pSheet.addCell(ini);
+            ini=new Label(0, 1, "Type");//initialize payment
+            pSheet.addCell(ini);
+            ini=new Label(0, 2, "Sum");
+            pSheet.addCell(ini);
+            
+            ini = new Label(0,0,"Date");  
+            rSheet.addCell(ini);
+            ini=new Label(0, 1, "Type");//initialize receipt;
+            rSheet.addCell(ini);
+            ini=new Label(0, 2, "Allowance");
+            rSheet.addCell(ini);
+            ini=new Label(0, 3, "Sum");
+            rSheet.addCell(ini);
+          
+            for(int i=1;i<pSheetL+1;i++){  
+                for(int j=0;j<3;j++){
+                	if(j==0){
+                		Label labelC = new Label(j,i,String.valueOf(pay.get(i).getDate()));  
+                        pSheet.addCell(labelC); 
+                	}
+                	else if(j==1){
+                		Label labelC = new Label(j,i,pay.get(i).getTypeString());  
+                        pSheet.addCell(labelC); 
+                	}
+                	else{
+                		Label labelC = new Label(j,i,Double.toString(pay.get(i).getSum()));  
+                        pSheet.addCell(labelC); 
+                	}
+                }  
+            }  
+            
+            for(int i=1;i<rSheetL+1;i++){  
+                for(int j=0;j<4;j++){
+                	if(j==0){
+                		 Label labelC = new Label(j,i,String.valueOf(receive.get(i).getDate()));  
+                         rSheet.addCell(labelC);  
+                	}
+                	else if(j==1){
+                		 Label labelC = new Label(j,i,receive.get(i).getTypeString());  
+                         rSheet.addCell(labelC); 
+                	}
+                	else if(j==2){
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i).getAllowance()));  
+                         rSheet.addCell(labelC); 
+                	}
+                	else{
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i).getSum()));  
+                         rSheet.addCell(labelC); 
+                	}
+                }  
+            }  
+            wwb.write();// 从内从中写入文件中  
+            wwb.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        System.out.println("生成第一个Excel文件"+fileName+"成功");  
+	}	
 
 	@Override
 	public ArrayList<PaymentTableVO> showPay() {//支出类
