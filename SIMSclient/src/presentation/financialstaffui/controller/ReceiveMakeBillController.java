@@ -79,6 +79,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
         list.add(vo);table.setItems(list);
 	   double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
 	   sumLabel.setText(String.valueOf(result));
+	   initInsert();
        }
 	}
 
@@ -127,6 +128,12 @@ public class ReceiveMakeBillController extends MakeReceiptController {
           changeStage("ReceiveCheckBillUI",user,null,null);
 	}
 
+	public void initInsert(){
+		 accountChoice.setValue(null);
+		 moneyField.setText(null);
+         noteArea.setText(null);
+	}
+
 	public void initData(UserVO user,ReceiptBillVO bill) throws Exception {
 		   this.user = user;
 		   this.rec = bill;
@@ -148,9 +155,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 				if(rec != null){
 		             memberChoice.setValue(rec.getCustomerID());
 		        }
-		         accountChoice.setValue(null);
-		         noteArea.setText(null);
-
+		        initInsert();
 				edit();
 				manageInit();
 	}

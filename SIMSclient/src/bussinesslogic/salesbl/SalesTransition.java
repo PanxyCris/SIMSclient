@@ -1,10 +1,7 @@
 package bussinesslogic.salesbl;
 
 import java.util.ArrayList;
-import java.util.Date;
-
 import bussinesslogic.common.CommodityItemTran;
-import bussinesslogic.memberbl.MemberInfo;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
@@ -19,12 +16,10 @@ import vo.commodityvo.CommodityItemVO;
  */
 public class SalesTransition {
 
-	private static MemberInfo mi;
 	public static SalesPO VOtoPO(SalesVO vo) {
-		mi = new MemberInfo();
-		String id = vo.getId();            
+		String id = vo.getId();
 		String retailer = vo.getRetailer(); // 销售商客户
-		String retailerId = mi.getId(retailer);
+		String retailerId = vo.getRetailerID();
 		String saleMan = vo.getSaleMan(); // 业务员
 		String operator = vo.getOperator(); // 操作员
 		Warehouse warehouse = vo.getWarehouse();
@@ -42,7 +37,6 @@ public class SalesTransition {
 
 	public static SalesVO POtoVO(SalesPO po) {
 		String id = po.getId();
-		String retailerId = po.getClientId();
 		String retailer = po.getClientName();
 		String salesMan = po.getSaleMan();
 		String operator = po.getOperator();

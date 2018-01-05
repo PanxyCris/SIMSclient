@@ -3,6 +3,9 @@ package bussinesslogic.salesbl.info;
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -72,8 +75,8 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 		int beginDate = 0;
 		int endDate = 0;
 		for (PromotionMemberPO po : list) {
-			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
-			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			beginDate = Integer.valueOf(sdf.format(localDateToDate(po.getBeginDate())));
+			endDate = Integer.valueOf(sdf.format(localDateToDate(po.getEndDate())));
 			if (beginDate <= date && date <= endDate)
 				if (po.getLevel().num >= level.num) {
 					result.add(memberbl.poTovo(po));
@@ -97,8 +100,8 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 		int beginDate = 0;
 		int endDate = 0;
 		for (PromotionTotalPO po : list) {
-			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
-			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			beginDate = Integer.valueOf(sdf.format(localDateToDate(po.getBeginDate())));
+			endDate = Integer.valueOf(sdf.format(localDateToDate(po.getEndDate())));
 			if (beginDate <= date && date <= endDate)
 				if (po.getTotal() >= beforePrice) {
 					result.add(sumbl.poTovo(po));
@@ -122,8 +125,8 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 		int endDate = 0;
 
 		for (PromotionPricePacksPO po : list) {
-			beginDate = Integer.valueOf(sdf.format(po.getBeginDate()));
-			endDate = Integer.valueOf(sdf.format(po.getEndDate()));
+			beginDate = Integer.valueOf(sdf.format(localDateToDate(po.getBeginDate())));
+			endDate = Integer.valueOf(sdf.format(localDateToDate(po.getEndDate())));
 			if (beginDate <= date && date <= endDate) {
 
 				ArrayList<GiftVO> gifts = poTOvo(po.getPricePacks());
@@ -150,14 +153,14 @@ public class Sale_Promotion implements Sale_PromotionInfo {
  		int beginDate = 0;
  		int endDate = 0;
  		for (PromotionVO vo : promotionList) {
- 			beginDate = Integer.valueOf(sdf.format(vo.getBeginDate()));
- 			endDate = Integer.valueOf(sdf.format(vo.getEndDate()));
+ 			beginDate = Integer.valueOf(sdf.format(localDateToDate(vo.getBeginDate())));
+			endDate = Integer.valueOf(sdf.format(localDateToDate(vo.getEndDate())));
  			if (beginDate <= date && date <= endDate) {
  				list.add(vo);
  			}
-	
+
  		}
- 		
+
 		double voucher = 0, allowance = 0;
 		double max = 0;
 		for (PromotionVO vo : list) {
@@ -210,6 +213,13 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.format(new Date());
 
+	}
+
+	public Date localDateToDate(LocalDate localDate){
+		 ZoneId zoneId = ZoneId.systemDefault();
+	     ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
+	     Date date = Date.from(zdt.toInstant());
+         return date;
 	}
 
 }

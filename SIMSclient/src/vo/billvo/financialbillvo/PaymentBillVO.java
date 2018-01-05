@@ -18,9 +18,9 @@ public class PaymentBillVO extends FinancialDocVO {
 	private String accountID;
 	private ArrayList<EntryVO> entryListVO;//条目清单
 
-	public PaymentBillVO (String docID,String userID,String customerID,String accountID,ArrayList<EntryVO> entryListVO,
+	public PaymentBillVO (String docID,String userID,String customer,String accountID,ArrayList<EntryVO> entryListVO,
 			Double total,BillType billType,BillState billState,String note){
-		super(docID,userID,customerID,billType,billState,note);
+		super(docID,userID,customer,billType,billState,note);
 		this.entryListVO = entryListVO;
 		this.accountID = accountID;
 		this.total=total;

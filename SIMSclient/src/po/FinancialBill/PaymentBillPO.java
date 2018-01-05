@@ -11,9 +11,9 @@ public class PaymentBillPO extends FinancialDocPO {
 	private String accountID;
 	private ArrayList<EntryPO> entryListPO;//条目清单
 
-	public PaymentBillPO (String docID,String userID,String customerID,String accountID,ArrayList<EntryPO> entryListPO,
-			Double total,BillType billType,BillState billState){
-		super(docID,userID,customerID,billType,billState);
+	public PaymentBillPO (String docID,String userID,String customer,String accountID,ArrayList<EntryPO> entryListPO,
+			Double total,BillType billType,BillState billState,String note){
+		super(docID,userID,customer,billType,billState,note);
 		this.entryListPO=entryListPO;
 		this.accountID = accountID;
 		this.total=total;

@@ -1,8 +1,8 @@
 package data.purchasedata;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月8日    
+/**
+*
+* @author Lijie
+* @date 2017年12月8日
 */
 
 import java.io.BufferedInputStream;
@@ -33,22 +33,22 @@ public class PurchaseData {
 	public PurchaseData() {
 		conn = DBManager.getConnection();
 	}
-	
+
 	public static void main(String[] args) {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
-		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "潘星宇", Warehouse.WAREHOUSE1, 
+		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "潘星宇", Warehouse.WAREHOUSE1,
 				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
 		p.insert(po);
 		System.out.println(p.show().get(0).getId());
 		//p.delete(po.getId());
-	
+
 	}
-	
+
 	public ResultMessage insert(PurchasePO po) {
-		
+
 		try {
 			PreparedStatement ps0 = conn.prepareStatement("select count(*) from purchase where id = ?");
 			ps0.setString(1, po.getId());
@@ -68,6 +68,7 @@ public class PurchaseData {
 					return ResultMessage.SUCCESS;
 				}
 				else {
+					update(po);
 					System.out.println("该进货单已存在");
 					return ResultMessage.EXISTED;
 				}

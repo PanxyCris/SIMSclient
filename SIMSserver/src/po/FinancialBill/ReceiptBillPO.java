@@ -11,9 +11,9 @@ public class ReceiptBillPO extends FinancialDocPO {
 
 	private double total;//×Ü¶î
 
-	public ReceiptBillPO(String docID, String userID,String customerID,BillType billType,BillState billState
-			,ArrayList<AccountListPO> accountListPOs,Double total) {
-		super(docID,userID,customerID,billType,billState);
+	public ReceiptBillPO(String docID, String userID,String customer,BillType billType,BillState billState
+			,ArrayList<AccountListPO> accountListPOs,Double total,String note) {
+		super(docID,userID,customer,billType,billState,note);
 		this.total=total;
 		this.accountListPOs=accountListPOs;;
 	}

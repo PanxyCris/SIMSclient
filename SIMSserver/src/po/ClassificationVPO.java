@@ -9,10 +9,10 @@ public class ClassificationVPO implements Serializable{
 	private String id;
 	private String name;
 	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
-	private ClassificationVPO father;
+	private String father;
 	private ArrayList<ClassificationVPO> children;
 
-	public ClassificationVPO(String id, String n,Boolean b,ClassificationVPO f,ArrayList<ClassificationVPO> c){
+	public ClassificationVPO(String id, String n,Boolean b,String f,ArrayList<ClassificationVPO> c){
 		this.id = id;
 		this.name = n;
 		this.b = b;
@@ -44,11 +44,11 @@ public class ClassificationVPO implements Serializable{
 		this.b = b;
 	}
 
-	public ClassificationVPO getFather() {
+	public String getFather() {
 		return father;
 	}
 
-	public void setFather(ClassificationVPO father) {
+	public void setFather(String father) {
 		this.father = father;
 	}
 

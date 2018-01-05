@@ -43,7 +43,7 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 
 	@Override
 	public ClassificationVPO findClassification(String keyword) throws RemoteException {
-		return classfication.findClassification(keyword);
+		return classfication.find(keyword).get(0);
 	}
 
 	@Override
@@ -59,6 +59,12 @@ public class ClassificationDataServiceImpl implements ClassificationDataService{
 		}
 		else
 		return "0001";
+	}
+
+	@Override
+	public ArrayList<ClassificationVPO> show() throws RemoteException {
+		// TODO Auto-generated method stub
+		return classfication.show();
 	}
 
 }

@@ -1,25 +1,37 @@
 package po.FinancialBill;
 
+import java.io.Serializable;
+
 import dataenum.BillState;
 import dataenum.BillType;
 import po.BillPO;
 
-public class FinancialDocPO extends BillPO {
-	
+public class FinancialDocPO extends BillPO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
-	protected String customer;
-	protected String customerID;//客户ID
+	protected String customerID;
+	protected String customer;//name(ID)(供货商||销售商||(供货商&&销售商))
+	protected String note;
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
 
 	public FinancialDocPO(String docID,String userID,String customer,
-			BillType billType,BillState billState){
+			BillType billType,BillState billState,String note){
 		super(billType, billState);
 		this.docID=docID;
 		this.userID=userID;
 		this.customer=customer;
 		this.billType=billType;
 		this.billState=billState;
+		this.note = note;
 
 	}
 
@@ -39,14 +51,6 @@ public class FinancialDocPO extends BillPO {
 		this.userID = userID;
 	}
 
-	public String getCustomerID() {
-		return customerID;
-	}
-
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
-	}
-
 	public String getCustomer() {
 		return customer;
 	}
@@ -55,7 +59,12 @@ public class FinancialDocPO extends BillPO {
 		this.customer = customer;
 	}
 
-	
-	
+	public String getCustomerID() {
+		return customerID;
+	}
+
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
+	}
 
 }

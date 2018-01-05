@@ -46,7 +46,7 @@ public class SalesController implements SalesBLService{
 	private PromotionSumBL PSumbl;
 	private PromotionMemberBL PSbl;
 	private String date;
-	
+
 	public SalesController() {
 		service = RemoteHelper.getInstance().getSalesDataService();
 		PMService = RemoteHelper.getInstance().getMemberPromotionDataService();
@@ -68,22 +68,25 @@ public class SalesController implements SalesBLService{
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
 		String day = getDate();
-		if (list==null) {
+		if(list == null)
+			return "XSD-" + getDate() + "-00001";
+		if (list.size() == 0) {
 			return "XSD-" + getDate() + "-00001";
 		}
+		else{
 		for (SalesPO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("XSD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
 		}
-			
+
 		Collections.sort(IDList);
-		
+
 //		Collections.reverse(IDList);
-		
+
 		String num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
@@ -100,7 +103,7 @@ public class SalesController implements SalesBLService{
 		}
 		StringBuilder s = new StringBuilder("XSD-");
 		return s.append(day).append("-").append(id).toString();
-
+		}
 //		return "000001";
 	}
 
@@ -117,7 +120,7 @@ public class SalesController implements SalesBLService{
 		for (SalesPO po : list) {
 			id = po.getId();
 			String temp[] = id.split("-");
-			
+
 			if (temp[0].equals("XSTHD")) {
 				IDList.add(Long.parseLong(temp[1]+temp[2]));
 			}
@@ -172,7 +175,7 @@ public class SalesController implements SalesBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ResultMessage.FAIL;
 	}
 
 	@Override
@@ -186,19 +189,19 @@ public class SalesController implements SalesBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return ResultMessage.FAIL;
 	}
 
 	@Override
 	public ArrayList<SalesVO> show() {
 		ArrayList<SalesVO> list = new ArrayList<>();
-		ArrayList<SalesPO> POList = null;
+		ArrayList<SalesPO> POList = new ArrayList<>();
 		try {
 			POList = service.showSale();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		SalesVO vo = null;
 		for (SalesPO po : POList) {
 			vo = SalesTransition.POtoVO(po);

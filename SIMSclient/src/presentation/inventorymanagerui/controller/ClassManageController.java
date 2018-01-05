@@ -66,7 +66,7 @@ public class ClassManageController extends InventoryManagerController{
 		else{
 			System.out.println(service.getClass(classChoice.getValue()).getName());
 		ClassificationVPO vo = new ClassificationVPO(idLabel.getText(),nameField.getText(),true,
-				  service.getClass(classChoice.getValue()),null);
+				  classChoice.getValue(),null);
 	        ResultMessage message = service.insert(vo);
 
 	    	        switch(message){

@@ -41,13 +41,14 @@ public class ClassificationBL implements ClassificationBLService {
 			return classificationDataService.insertClassification(vpo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
+
 		}
 		return ResultMessage.FAIL;
 	}
 
 	@Override
 	public void delete(ClassificationVPO vpo) {
-		String id=vpo.getId();
+		String id=vpo.getName();
 		try {
 			classificationDataService.deleteClassification(id);
 		} catch (RemoteException e) {
@@ -78,25 +79,13 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public ClassificationVPO getRoot() {
 		try {
-			return classificationDataService.getRoot();
+			ClassificationVPO root = classificationDataService.getRoot();
+		    addChildren(root);
+			return root;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	static int idCount=0;
-
-	public int count(ClassificationVPO classificationVPO){
-		if(classificationVPO.getChildren()==null){
-			return 0;
-		}
-		ArrayList<ClassificationVPO> childrenVPOs=classificationVPO.getChildren();
-		for (int i = 0; i < childrenVPOs.size(); i++) {
-			count(childrenVPOs.get(i));
-			idCount++;
-		}
-		return idCount;
 	}
 
 	static ArrayList<String> nameList=null;
@@ -108,6 +97,20 @@ public class ClassificationBL implements ClassificationBLService {
 		for (int i = 0; i < childrenVPOs.size(); i++) {
 			addName(childrenVPOs.get(i));
 			}
+		}
+	}
+
+	public void addChildren(ClassificationVPO vpo) throws RemoteException{
+		ArrayList<ClassificationVPO> children = new ArrayList<>();
+		for(ClassificationVPO po:classificationDataService.show()){
+		  if(po.getFather()!=null)
+			if(po.getFather().equals(vpo.getName()))
+				children.add(po);
+		}
+		if(children!=null){
+		vpo.setChildren(children);
+		for(ClassificationVPO child:vpo.getChildren())
+			addChildren(child);
 		}
 	}
 

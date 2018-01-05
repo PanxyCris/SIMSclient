@@ -48,7 +48,6 @@ public class SalesMakeBillController extends MakeReceiptController{
 	SalesBLService service = new SalesController();//桩
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
 	ObservableList<PromotionVO> promotionlist = FXCollections.observableArrayList();
-
     @FXML
     Label typeLabel;
 
@@ -146,7 +145,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
         		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
-        		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+        		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
@@ -170,7 +169,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
-       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+       		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
 		ResultMessage message = service.submit(vo);
 	       if(message == ResultMessage.SUCCESS){
@@ -189,7 +188,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 
 	@FXML
 	public void checkPromotion() throws Exception{
-		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||noteArea.getText()==null||
+		if(memberChoice.getValue()==null||warehouseChoice.getValue()==null||
 				list == null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
@@ -223,6 +222,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 			    allowanceField.setText("0");
 			    voucherLabel.setText("0");
 				operatorLabel.setText(readUser().getName());
+				noteArea.setText(null);
 				}
 				else{
 					idLabel.setText(sale.getId());
@@ -234,17 +234,15 @@ public class SalesMakeBillController extends MakeReceiptController{
 					list.addAll(sale.getCommodity());
 					table.setItems(list);
 					operatorLabel.setText(sale.getOperator());
+					noteArea.setText(sale.getNote());
 
 				}
 
 			 numberField.setText(null);
 	         priceField.setText(null);
 	         remarkArea.setText(null);
-	         allowanceField.setText(null);
-	         if(purchase == null)
-	         noteArea.setText(null);
-	         else
-	        	 noteArea.setText(purchase.getNote());
+	         allowanceField.setText("0.0");
+
 				edit();
 				manageInit();
 	}
@@ -493,7 +491,12 @@ public class SalesMakeBillController extends MakeReceiptController{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
             	boolean allowanceLegal = true;
-
+                if(newValue==null){
+                    afterLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())
+                    		-Double.parseDouble(allowanceLabel.getText())-Double.parseDouble(voucherLabel.getText())
+                            ));
+                }
+                else{
             	for(int i=0;i<allowanceField.getText().length();i++)
             		if((allowanceField.getText().charAt(i)<='9'&&allowanceField.getText().charAt(i)>='0')||allowanceField.getText().charAt(i)=='.')
             			continue;
@@ -501,8 +504,12 @@ public class SalesMakeBillController extends MakeReceiptController{
             			allowanceLegal = false;
             			break;
             		}
-            	if(allowanceLegal)
-                afterLabel.setText(String.valueOf(Double.parseDouble(afterLabel.getText())-Double.parseDouble(allowanceField.getText())));
+            	if(allowanceLegal){
+                afterLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText())
+                		-Double.parseDouble(allowanceLabel.getText())-Double.parseDouble(voucherLabel.getText())
+                         -Double.parseDouble(allowanceField.getText())));
+            	}
+            	}
             }
 
         });

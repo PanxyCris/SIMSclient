@@ -95,7 +95,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	public ResultMessage notPassBills(ArrayList<SalesVO> vos) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(SalesVO vo:vos){
-			vo.setState(BillState.SUCCESS);
+			vo.setState(BillState.FAIL);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
