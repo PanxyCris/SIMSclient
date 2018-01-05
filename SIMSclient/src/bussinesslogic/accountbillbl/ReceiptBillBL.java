@@ -1,8 +1,11 @@
 package bussinesslogic.accountbillbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import bussinesslogic.accountbl.AccountController;
 import bussinesslogic.memberbl.MemberController;
@@ -15,6 +18,7 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
 import javafx.util.converter.LocalDateStringConverter;
+import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
@@ -30,6 +34,8 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	private AccountBLService accountBLService;
 	private MemberBLService memberBLService;
+	
+	private String date;
 
 	public ReceiptBillBL() {
 		receiptBillTransition=new ReceiptBillTransition();
@@ -160,48 +166,50 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public String getId() {
-		LocalDate l= LocalDate.now();
-		int count=0;
+		ArrayList<ReceiptBillPO> list = null;
 		try {
-			ArrayList<ReceiptBillPO> receiptBillPOs=receiptBillDataService.showReceiptBill();
-			for (int i = 0; i < receiptBillPOs.size(); i++) {
-				if(localDateToString(l).equals(receiptBillPOs.get(i).getDocID().substring(4,12)))
-					count++;
-			}
-			count+=1;
+			list = receiptBillDataService.showReceiptBill();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (ReceiptBillPO po : list) {
+			id = po.getDocID();
+			String temp[] = id.split("-");
 
-		String number=Integer.toString(count);
-		while (5>number.length()) {
-			number="0"+number;
+			if (temp[0].equals("SKD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
 		}
-		String[] date=l.toString().split("-");
-		String id="";
-		id=BillType.SKD.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
-
-		return id;
+		Collections.sort(IDList);
+		String day = getDate();
+		String num = null;
+		if(IDList.size()==0)
+			num = getDate()+"00000";
+		else
+		    num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("SKD-");
+		return s.append(day).append("-").append(id).toString();
 	}
 
-	public LocalDate StringtoDate(String id){//id是单据编号
-		String s=id.split("-")[1];
-		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());
-		LocalDate l=null;
-		LocalDateStringConverter localDate =new LocalDateStringConverter();
-		l=localDate.fromString(date);
-		return l;
-	}
-
-	public String localDateToString(LocalDate date){ //格式为20180101
-		String year = String.valueOf(date.getYear());
-		String month = String.valueOf(date.getMonthValue());
-		if(month.length()<2)
-			month = "0"+month;
-		String day = String.valueOf(date.getDayOfMonth());
-		if(day.length()<2)
-			day = "0"+day;
-		return year+month+day;
+	public String getDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		this.date = sdf.format(new Date());
+		return this.date;
 	}
 
 }

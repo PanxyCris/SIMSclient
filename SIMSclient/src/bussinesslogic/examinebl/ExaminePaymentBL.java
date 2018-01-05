@@ -54,24 +54,22 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 	public ResultMessage passBills(ArrayList<PaymentBillVO> vos) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(PaymentBillVO vo:vos){
-
-			String memberID = "";
-			for(int i=0;i<vo.getCustomerID().length();i++)
-				if(vo.getCustomerID().charAt(i)==' '){
-					memberID = vo.getCustomerID().substring(0,i);
-					break;
-				}
-			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
+			MemberPO member = memberService.findMember(vo.getCustomerID(), FindMemberType.ID).get(0);
             member.setReceivable(member.getReceivable()-vo.getTotal());
             memberService.updateMember(member);
-
-             AccountPO account = accountService.findAccount(vo.getAccountID(), FindAccountType.ID).get(0);
+            String accountID = "";
+        	for(int i=0;i<vo.getAccountID().length();i++)
+        		if(vo.getAccountID().charAt(i)==' '){
+        			accountID = vo.getAccountID().substring(0,i);
+        			break;
+        		}
+             AccountPO account = accountService.findAccount(accountID, FindAccountType.ID).get(0);
              account.setMoney(account.getMoney()+vo.getTotal());
              accountService.updateAccount(account);
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
+			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message,user);
@@ -87,7 +85,7 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 		for(PaymentBillVO vo:vos){
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
+			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message,user);

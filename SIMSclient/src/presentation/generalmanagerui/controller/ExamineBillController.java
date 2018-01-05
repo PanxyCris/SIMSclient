@@ -25,8 +25,8 @@ public class ExamineBillController extends GeneralManagerController {
 		case PURCHASEBILL:changeStage("ExaminePurchaseBillUI",user,type);break;
 		case INVENTORYBILL:changeStage("ExamineInventoryBillUI",user,type);break;
 		case SALESBILL:changeStage("ExamineSalesBillUI",user,type);break;
-		case SKD:changeStage("ExaminePaymentBillUI",user,type);break;
-		case XJFYD:changeStage("ExamineReceiveBillUI",user,type);break;
+		case SKD:changeStage("ExamineReceiveBillUI",user,type);break;
+		case XJFYD:changeStage("ExaminePaymentBillUI",user,type);break;
 		default:break;
 		}
 	}
