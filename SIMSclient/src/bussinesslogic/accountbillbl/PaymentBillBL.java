@@ -1,8 +1,11 @@
 package bussinesslogic.accountbillbl;
 
 import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 
 import bussinesslogic.accountbl.AccountController;
 import bussinesslogic.memberbl.MemberController;
@@ -15,6 +18,7 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
 import javafx.util.converter.LocalDateStringConverter;
+import po.PurchasePO;
 import po.FinancialBill.PaymentBillPO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
@@ -22,24 +26,26 @@ import vo.billvo.financialbillvo.PaymentBillVO;
 
 
 public class PaymentBillBL implements PaymentBillBLService{
-	
+
 	private PaymentBillPO paymentBillPO;
 	private PaymentBillVO paymentBillVO;
-	
+
 	private PaymentBillTransition paymentBillTransition;
 	private PaymentBillDataService paymentBillDataService;
-	
+
 	private AccountBLService accountBLService;
 	private MemberBLService memberBLService;
 
+	private String date;
+
 	public PaymentBillBL() {
 		paymentBillTransition=new PaymentBillTransition();
-		paymentBillDataService=RemoteHelper.getInstance().getPaymentDataService();	
+		paymentBillDataService=RemoteHelper.getInstance().getPaymentDataService();
 		accountBLService=new AccountController();
 		memberBLService=new MemberController();
 	}
-	
-	
+
+
 	@Override
 	public ResultMessage save(PaymentBillVO paymentBillVO) {
 		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
@@ -172,38 +178,52 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	@Override
 	public String getId() {
-		LocalDate l=null;
-		l=LocalDate.now();
-		int count=0;
+		ArrayList<PaymentBillPO> list = null;
 		try {
-			ArrayList<PaymentBillPO> paymentBillPOs=paymentBillDataService.showPaymentBill();
-			for (int i = 0; i < paymentBillPOs.size(); i++) {
-				if(l==StringtoDate(paymentBillPOs.get(i).getDocID()))
-					count++;
-			}
-			count+=1;
+			list = paymentBillDataService.showPaymentBill();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
-		String number=Integer.toString(count);
-		while (5>number.length()) {
-			number="0"+number;
+		ArrayList<Long> IDList = new ArrayList<>();
+		String id = null;
+		for (PaymentBillPO po : list) {
+			id = po.getDocID();
+			String temp[] = id.split("-");
+
+			if (temp[0].equals("XJFYD")) {
+				IDList.add(Long.parseLong(temp[1]+temp[2]));
+			}
 		}
-		String[] date=l.toString().split("-");
-		String id="";
-		id=BillType.XJFYD.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
-		
-		return id;
+		Collections.sort(IDList);
+		String day = getDate();
+//		Collections.reverse(IDList);
+		String num = null;
+		if(IDList.size()==0)
+			num = getDate()+"00000";
+		else
+		    num = String.valueOf(IDList.get(IDList.size()-1));
+		if (day.equals(String.valueOf(num.substring(0, 8)))) {
+			String index = num.substring(8, num.length());
+			index = String.valueOf(Integer.parseInt(index)+1);
+			StringBuilder sb = new StringBuilder(index);
+			int len = index.length();
+			for (int i=0; i < 5-len; i++) {
+				sb.insert(0, "0");
+			}
+			id = sb.toString();
+		}
+		else {
+			id = "00001";
+		}
+		StringBuilder s = new StringBuilder("XJFYD-");
+		return s.append(day).append("-").append(id).toString();
 	}
-	
-	public LocalDate StringtoDate(String id){//idÊÇµ¥¾Ý±àºÅ
-		String s=id.split("-")[1];
-		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());
-		LocalDate l=null;
-		LocalDateStringConverter localDate =new LocalDateStringConverter();
-		l=localDate.fromString(date);
-		return l;
+
+	public String getDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		this.date = sdf.format(new Date());
+		return this.date;
 	}
+
 
 }

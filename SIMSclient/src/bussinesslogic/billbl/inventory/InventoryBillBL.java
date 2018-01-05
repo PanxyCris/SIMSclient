@@ -115,13 +115,14 @@ public class InventoryBillBL implements InventoryBillBLService{
 			if(inventoryBillPOs==null){
 				return type.prefix+"-"+date[0]+date[1]+date[2]+"-00001";
 			}
-			for (int i = 0; i < inventoryBillPOs.size(); i++) {
-				LocalDate localDate=StringtoDate(inventoryBillPOs.get(i).getId());
-				if(type==inventoryBillPOs.get(i).getBillType()&&localDate==l){
-					count++;
+			else{
+				String lastBillId=inventoryBillPOs.get(inventoryBillPOs.size()-1).getId().split("-")[2];
+				while (lastBillId.charAt(0)=='0') {
+					lastBillId=lastBillId.substring(1);
 				}
+				count=Integer.valueOf(lastBillId);
+				count++;
 			}
-			count+=1;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

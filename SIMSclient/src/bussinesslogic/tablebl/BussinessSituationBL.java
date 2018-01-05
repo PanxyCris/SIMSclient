@@ -26,7 +26,7 @@ import vo.tablevo.ReceiveTableVO;
 import jxl.Workbook;  
 import jxl.write.Label;  
 import jxl.write.WritableSheet;  
-import jxl.write.WritableWorkbook;
+import jxl.write.WritableWorkbook; 
 
 //对商品类收入存在疑问
 public class BussinessSituationBL implements BussinessSituationBLService {
@@ -44,7 +44,7 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 	@Override
 	public void exportReport(ArrayList<PaymentTableVO> pay, ArrayList<ReceiveTableVO> receive) {//这个是导出为excel的方法
 		WritableWorkbook wwb = null;  
-	 	String fileName="C:/Users/user/Desktop/BussinessSituation.xlsx";
+	 	String fileName="C:/Users/user/Desktop/BussinessSituationSchedule.xlsx";
         try {  
             // 创建一个可写入的工作簿（WorkBook）对象,  
             //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
@@ -52,26 +52,26 @@ public class BussinessSituationBL implements BussinessSituationBLService {
               
             // 创建一个可写入的工作表   
             // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
-            WritableSheet pSheet = wwb.createSheet("PaymentTableVO", 0);
-            WritableSheet rSheet = wwb.createSheet("ReceiptTableVO", 1);
+            WritableSheet pSheet = wwb.createSheet("PaymentTable", 0);
+            WritableSheet rSheet = wwb.createSheet("ReceiptTable", 1);
             
             int pSheetL=pay.size();
             int rSheetL=receive.size();
            
             Label ini = new Label(0,0,"Date");  
             pSheet.addCell(ini);
-            ini=new Label(0, 1, "Type");//initialize payment
+            ini=new Label(1, 0, "Type");//initialize payment
             pSheet.addCell(ini);
-            ini=new Label(0, 2, "Sum");
+            ini=new Label(2, 0, "Sum");
             pSheet.addCell(ini);
             
             ini = new Label(0,0,"Date");  
             rSheet.addCell(ini);
-            ini=new Label(0, 1, "Type");//initialize receipt;
+            ini=new Label(1, 0, "Type");//initialize receipt;
             rSheet.addCell(ini);
-            ini=new Label(0, 2, "Allowance");
+            ini=new Label(2, 0, "Allowance");
             rSheet.addCell(ini);
-            ini=new Label(0, 3, "Sum");
+            ini=new Label(3, 0, "Sum");
             rSheet.addCell(ini);
           
             for(int i=1;i<pSheetL+1;i++){  
@@ -116,7 +116,7 @@ public class BussinessSituationBL implements BussinessSituationBLService {
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
-        System.out.println("生成第一个Excel文件"+fileName+"成功");  
+        System.out.println("生成Excel文件"+fileName+"成功");  
 	}	
 
 	@Override

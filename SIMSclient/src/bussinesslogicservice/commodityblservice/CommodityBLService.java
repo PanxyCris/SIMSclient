@@ -28,4 +28,6 @@ public interface CommodityBLService{
 	public ArrayList<CommodityStockVO> stock() throws Exception;   //ø‚¥Ê≈Ãµ„
 
 	public ArrayList<CommodityCheckVO> check(LocalDate start,LocalDate end);
+	
+	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs);
 }

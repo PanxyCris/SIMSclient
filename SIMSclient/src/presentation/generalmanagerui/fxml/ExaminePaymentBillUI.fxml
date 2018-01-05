@@ -134,6 +134,7 @@
          <columns>
             <TableColumn fx:id="tableID" prefWidth="110.0" text="单据编号" />
             <TableColumn fx:id="tableAccount" prefWidth="75.0" text="银行账户" />
+            <TableColumn fx:id="tableMember" prefWidth="75.0" text="客户" />
             <TableColumn fx:id="tableSum" prefWidth="75.0" text="总额" />
             <TableColumn fx:id="tableOperator" prefWidth="75.0" text="操作员" />
             <TableColumn fx:id="tableRemark" prefWidth="75.0" text="单据备注" />

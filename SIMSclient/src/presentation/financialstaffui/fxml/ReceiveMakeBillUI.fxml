@@ -134,14 +134,14 @@
 		<Button layoutX="296.0" layoutY="497.0" mnemonicParsing="false" onAction="#save" prefHeight="46.0" prefWidth="136.0" text="保     存" />
 		<Button layoutX="537.0" layoutY="497.0" mnemonicParsing="false" onAction="#submit" prefHeight="46.0" prefWidth="136.0" text="提     交" />
 		<TextField fx:id="moneyField" layoutX="687.0" layoutY="333.0" prefHeight="23.0" prefWidth="169.0" />
-		<TextArea fx:id="noteArea" layoutX="472.0" layoutY="370.0" prefHeight="115.0" prefWidth="307.0" />
+		<TextArea fx:id="receiptArea" layoutX="472.0" layoutY="370.0" prefHeight="115.0" prefWidth="307.0" />
 		<Label layoutX="426.0" layoutY="337.0" text="银行账户" />
 		<Label layoutX="633.0" layoutY="337.0" text="转账金额" />
 		<Label layoutX="432.0" layoutY="373.0" text="备注" />
 		<Button layoutX="788.0" layoutY="369.0" mnemonicParsing="false" onAction="#insert" prefHeight="115.0" prefWidth="79.0" text="增加项目" />
 		<Label fx:id="sumLabel" layoutX="182.0" layoutY="200.0" prefHeight="25.0" prefWidth="236.0" style="-fx-background-color: #DDDDDD;" />
       <Label layoutX="182.0" layoutY="313.0" prefHeight="15.0" prefWidth="79.0" text="单据备注" />
-      <TextArea fx:id="receiptArea" layoutX="178.0" layoutY="331.0" prefHeight="152.0" prefWidth="236.0" />
+      <TextArea fx:id="noteArea" layoutX="178.0" layoutY="331.0" prefHeight="152.0" prefWidth="236.0" />
       <ComboBox fx:id="memberChoice" editable="true" layoutX="182.0" layoutY="144.0" prefHeight="23.0" prefWidth="236.0" />
       <ComboBox fx:id="accountChoice" editable="true" layoutX="474.0" layoutY="333.0" prefWidth="150.0" />
 	</children>

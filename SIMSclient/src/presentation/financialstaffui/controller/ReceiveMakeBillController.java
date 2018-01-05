@@ -48,7 +48,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	@FXML
 	Label operatorLabel;
 	@FXML
-	TextArea receiptArea;
+	TextArea noteArea;
 
 	@FXML
 	TableView<AccountListVO> table;
@@ -66,16 +66,17 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	@FXML
 	TextField moneyField;
 	@FXML
-	TextArea noteArea;
+	TextArea receiptArea;
+
 
 	@FXML
 	public void insert(){
-		if(accountChoice.getValue()==null||moneyField.getText()==null||noteArea.getText()==null){
+		if(accountChoice.getValue()==null||moneyField.getText()==null||receiptArea.getText()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
 			warning.showAndWait();
 		}
 		else{
-	 AccountListVO vo = new  AccountListVO(accountChoice.getValue(), Double.parseDouble(moneyField.getText()), noteArea.getText());
+	 AccountListVO vo = new  AccountListVO(accountChoice.getValue(), Double.parseDouble(moneyField.getText()), receiptArea.getText());
         list.add(vo);table.setItems(list);
 	   double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
 	   sumLabel.setText(String.valueOf(result));
@@ -88,7 +89,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		ArrayList<AccountListVO> accountList = new ArrayList<>();
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            BillType.XJFYD,BillState.DRAFT,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
+        		            BillType.XJFYD,BillState.DRAFT,accountList,Double.parseDouble(sumLabel.getText()),noteArea.getText());
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
@@ -108,7 +109,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		ArrayList<AccountListVO> accountList = new ArrayList<>();
 		accountList.addAll(list);
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            BillType.XJFYD,BillState.COMMITED,accountList,Double.parseDouble(sumLabel.getText()),receiptArea.getText());
+        		            BillType.XJFYD,BillState.COMMITED,accountList,Double.parseDouble(sumLabel.getText()),noteArea.getText());
          ResultMessage message = service.commit(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.COMMITED);
@@ -131,7 +132,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	public void initInsert(){
 		 accountChoice.setValue(null);
 		 moneyField.setText(null);
-         noteArea.setText(null);
+         receiptArea.setText(null);
 	}
 
 	public void initData(UserVO user,ReceiptBillVO bill) throws Exception {
@@ -148,6 +149,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 					list.addAll(bill.getAccountListVOs());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
+					noteArea.setText(bill.getNote());
 
 				}
 			    choiceInit();

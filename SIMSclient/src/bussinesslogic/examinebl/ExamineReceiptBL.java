@@ -55,26 +55,25 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 	public ResultMessage passBills(ArrayList<ReceiptBillVO> vos) throws RemoteException {
 		// TODO Auto-generated method stub
 		for(ReceiptBillVO vo:vos){
-
-			String memberID = "";
-			for(int i=0;i<vo.getCustomerID().length();i++)
-				if(vo.getCustomerID().charAt(i)==' '){
-					memberID = vo.getCustomerID().substring(0,i);
-					break;
-				}
-			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
+			MemberPO member = memberService.findMember(vo.getCustomer(), FindMemberType.ID).get(0);
             member.setPayable(member.getPayable()-vo.getTotal());
             memberService.updateMember(member);
 
             for(AccountListVO accountVO:vo.getAccountListVOs()){
-            	AccountPO account = accountService.findAccount(accountVO.getAccountID(), FindAccountType.ID).get(0);
+            	String accountID = "";
+            	for(int i=0;i<accountVO.getAccountID().length();i++)
+            		if(accountVO.getAccountID().charAt(i)==' '){
+            			accountID = accountVO.getAccountID().substring(0,i);
+            			break;
+            		}
+            	AccountPO account = accountService.findAccount(accountID, FindAccountType.ID).get(0);
             	account.setMoney(account.getMoney()+accountVO.getMoney());
             	accountService.updateAccount(account);
             }
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
+			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message,user);
@@ -90,7 +89,7 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 		for(ReceiptBillVO vo:vos){
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			UserPO user = userService.findUser(vo.getUserID(), FindUserType.ID).get(0);
+			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message,user);

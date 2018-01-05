@@ -120,7 +120,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 		tableID.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,String>("id"));
 		tableMember.setCellValueFactory(
-                new PropertyValueFactory<ReceiptBillVO,String>("customerID"));
+                new PropertyValueFactory<ReceiptBillVO,String>("customer"));
 		tableSum.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,Double>("total"));
 		tableOperator.setCellValueFactory(

@@ -45,7 +45,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	@FXML
 	Label operatorLabel;
 	@FXML
-	TextArea receiptArea;
+	TextArea noteArea;
 
 	@FXML
 	TableView<EntryVO> table;
@@ -63,11 +63,11 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	@FXML
 	TextField moneyField;
 	@FXML
-	TextArea noteArea;
+	TextArea receiptArea;
 
 	@FXML
 	public void insert(){
-		if(itemField.getText()==null||moneyField.getText()==null||noteArea.getText()==null){
+		if(itemField.getText()==null||moneyField.getText()==null||receiptArea.getText()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
 			warning.showAndWait();
 		}
@@ -98,7 +98,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
 		entryList.addAll(list);
          PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-        		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT,receiptArea.getText());
+        		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.DRAFT,noteArea.getText());
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
@@ -118,7 +118,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ArrayList<EntryVO> entryList = new ArrayList<>();
 		entryList.addAll(list);
 		PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
-		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,receiptArea.getText());
+		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,noteArea.getText());
 		ResultMessage message = service.commit(vo);
 	       if(message == ResultMessage.SUCCESS){
 	           printInfo(ResultMessage.COMMITED);
@@ -158,13 +158,12 @@ public class PaymentMakeBillController extends MakeReceiptController {
 					list.addAll(bill.getEntryListVO());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
-
-
+                    noteArea.setText(bill.getNote());
 				}
 			    choiceInit();
 			    if(pay != null){
 		        	 accountChoice.setValue(pay.getAccountID());
-		             receiptArea.setText(pay.getNote());
+		             noteArea.setText(pay.getNote());
 		        }
 			    initInsert();
 				edit();

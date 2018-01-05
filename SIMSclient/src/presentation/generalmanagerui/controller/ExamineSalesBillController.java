@@ -113,7 +113,15 @@ public class ExamineSalesBillController extends ExamineBillController{
         		choiceList.add(list.get(i));
         		list.remove(i);
         		}
-        service.passBills(choiceList);
+        ResultMessage message = service.passBills(choiceList);
+        if(message == ResultMessage.SUCCESS){
+        	Alert info = new Alert(Alert.AlertType.INFORMATION,"已审批");
+        	info.showAndWait();
+        }
+        else{
+        	Alert warning = new Alert(Alert.AlertType.WARNING,message.value);
+        	warning.showAndWait();
+        }
 	}
 
 	@FXML
@@ -124,7 +132,15 @@ public class ExamineSalesBillController extends ExamineBillController{
         		choiceList.add(list.get(i));
         		list.remove(i);
         		}
-        service.notPassBills(choiceList);
+        ResultMessage message = service.notPassBills(choiceList);
+        if(message == ResultMessage.SUCCESS){
+        	Alert info = new Alert(Alert.AlertType.INFORMATION,"已审批");
+        	info.showAndWait();
+        }
+        else{
+        	Alert warning = new Alert(Alert.AlertType.WARNING,message.value);
+        	warning.showAndWait();
+        }
 	}
 
 

@@ -62,7 +62,7 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 
 	@Override
 	public void exportReport(ArrayList<InventoryBillVO> table) {
-
+		
 	}
 
 	@Override

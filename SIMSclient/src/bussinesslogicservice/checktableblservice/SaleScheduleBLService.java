@@ -9,7 +9,7 @@ public interface SaleScheduleBLService {
     /**
      * 导出表格
      */
-	public void exportReport();
+	public void exportReport(ArrayList<SaleScheduleVO> sale);
     /**
      * 展示该全部列表
      * @return
