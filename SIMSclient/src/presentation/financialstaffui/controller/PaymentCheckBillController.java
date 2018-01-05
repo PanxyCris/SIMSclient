@@ -169,10 +169,17 @@ public class PaymentCheckBillController extends FinancialStaffController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.commit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
                                 printInfo(ResultMessage.COMMITED);
+                                try {
+									fresh();
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
                             }
                             else
                          	   printWrong(message);

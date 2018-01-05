@@ -160,13 +160,12 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public String getId() {
-		LocalDate l=null;
-		l=LocalDate.now();
+		LocalDate l= LocalDate.now();
 		int count=0;
 		try {
 			ArrayList<ReceiptBillPO> receiptBillPOs=receiptBillDataService.showReceiptBill();
 			for (int i = 0; i < receiptBillPOs.size(); i++) {
-				if(l==StringtoDate(receiptBillPOs.get(i).getDocID()))
+				if(localDateToString(l).equals(receiptBillPOs.get(i).getDocID().substring(4,12)))
 					count++;
 			}
 			count+=1;
@@ -192,6 +191,17 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+
+	public String localDateToString(LocalDate date){ //¸ñÊ½Îª20180101
+		String year = String.valueOf(date.getYear());
+		String month = String.valueOf(date.getMonthValue());
+		if(month.length()<2)
+			month = "0"+month;
+		String day = String.valueOf(date.getDayOfMonth());
+		if(day.length()<2)
+			day = "0"+day;
+		return year+month+day;
 	}
 
 }

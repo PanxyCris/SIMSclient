@@ -42,8 +42,8 @@ public class ReceiptBillData {
 		accountList.add(account2);
 
 		ReceiptBillPO bill = new ReceiptBillPO("SKD-20180105-00001","Panxy","00001",BillType.SKD,BillState.DRAFT,accountList,9000.00,"ncidan");
-		d.delete(bill.getDocID());
-		System.out.println(d.show().get(0).getDocID());
+		d.delete(d.show().get(0).getDocID());
+		System.out.println(d.show().get(0).getCustomer());
 
 	}
 

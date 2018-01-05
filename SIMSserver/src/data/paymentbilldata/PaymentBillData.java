@@ -14,8 +14,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
+import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
+import po.FinancialBill.EntryPO;
 import po.FinancialBill.PaymentBillPO;
 
 /**
@@ -24,6 +27,18 @@ import po.FinancialBill.PaymentBillPO;
 * @date 2017年12月14日
 */
 public class PaymentBillData {
+
+	public static void main(String[] args){
+		ArrayList<EntryPO> entryList = new ArrayList<>();
+		EntryPO entry1 = new EntryPO("QWERT",20.00,"NCFIDJCN");
+		EntryPO entry2 = new EntryPO("RAT",789.00,"NCJDJC");
+		entryList.add(entry1);
+		entryList.add(entry2);
+		PaymentBillPO bill1 = new PaymentBillPO("XJFKD-20180105-00001","Panxy","00001","00001",entryList,809.00,BillType.XJFYD,BillState.DRAFT,"dsa");
+		PaymentBillData d = new PaymentBillData();
+		d.insert(bill1);
+		System.out.println(d.show().get(0).getDocID());
+	}
 
 	public ResultMessage insert(PaymentBillPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
