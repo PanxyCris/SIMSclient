@@ -24,7 +24,12 @@ public class FinancialDocVO extends BillVO implements Serializable {
 		super(docID,type, state,note);
 		this.userID=userID;
 		this.customer=customer;
-
+        for(int i=0;i<customer.length();i++){
+           if(customer.charAt(i)=='('){
+        	   customerID = customer.substring(i+1, i+7);
+        	   break;
+           }
+        }
 	}
 
 	public String getUserID() {

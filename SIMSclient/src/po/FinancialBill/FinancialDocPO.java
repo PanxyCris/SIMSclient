@@ -7,7 +7,7 @@ import dataenum.BillType;
 import po.BillPO;
 
 public class FinancialDocPO extends BillPO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	protected String docID;//单据编号
 	protected String userID;//当前登录用户的ID
@@ -24,13 +24,14 @@ public class FinancialDocPO extends BillPO implements Serializable {
 	}
 
 	public FinancialDocPO(String docID,String userID,String customer,
-			BillType billType,BillState billState){
+			BillType billType,BillState billState,String note){
 		super(billType, billState);
 		this.docID=docID;
 		this.userID=userID;
 		this.customer=customer;
 		this.billType=billType;
 		this.billState=billState;
+		this.note = note;
 
 	}
 
@@ -65,5 +66,5 @@ public class FinancialDocPO extends BillPO implements Serializable {
 	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
-		
+
 }

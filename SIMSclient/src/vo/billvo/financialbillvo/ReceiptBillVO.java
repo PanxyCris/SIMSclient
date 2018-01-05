@@ -13,9 +13,9 @@ public class ReceiptBillVO extends FinancialDocVO {
 
 	private Double total;//×Ü¶î
 
-	public ReceiptBillVO(String docID, String userID,String customerID,BillType billType,BillState billState
+	public ReceiptBillVO(String docID, String userID,String customer,BillType billType,BillState billState
 			,ArrayList<AccountListVO> accountListVOs,Double total,String note) {
-		super(docID,userID,customerID,billType,billState,note);
+		super(docID,userID,customer,billType,billState,note);
 		this.total=total;
 		this.accountListVOs= accountListVOs;
 	}

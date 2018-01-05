@@ -5,8 +5,8 @@ import java.io.Serializable;
 import dataenum.BillState;
 import dataenum.BillType;
 
-public class BillPO extends PersistObject implements Serializable{
-	
+public class BillPO implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	protected BillType billType;//单据类型
 	protected BillState billState;//单据状态
@@ -31,5 +31,5 @@ public class BillPO extends PersistObject implements Serializable{
 	public void setBillState(BillState billState) {
 		this.billState = billState;
 	}
-	
+
 }

@@ -39,7 +39,7 @@ public class PaymentBillData {
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getID());
+					ps.setString(1, po.getDocID());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
@@ -130,7 +130,7 @@ public class PaymentBillData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getID());
+			ps.setString(2, po.getDocID());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();

@@ -80,7 +80,8 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	    	        switch(message){
 	    	        case SUCCESS:list.add(vo);table.setItems(list);
 	    	                     double result = Double.parseDouble(sumLabel.getText())+Double.parseDouble(moneyField.getText());
-	    	                     sumLabel.setText(String.valueOf(result));break;
+	    	                     sumLabel.setText(String.valueOf(result));
+	    	                     initInsert();break;
 	    	        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
 	                            error.showAndWait();break;
 	    	        }
@@ -122,16 +123,16 @@ public class PaymentMakeBillController extends MakeReceiptController {
 	    	   printWrong(message);
 	}
 
+	public void initInsert(){
+		  itemField.setText(null);
+	      noteArea.setText(null);
+	      receiptArea.setText(null);
+	}
+
 	@FXML
 	public void fresh(){
-		if(pay != null){
-        	 accountChoice.setValue(pay.getAccountID());
-             memberChoice.setValue(pay.getCustomerID());
-             receiptArea.setText(pay.getNote());
-        }
-         itemField.setText(null);
-         noteArea.setText(null);
-         receiptArea.setText(null);
+
+
 	}
 
 	@FXML
@@ -154,11 +155,15 @@ public class PaymentMakeBillController extends MakeReceiptController {
 					list.addAll(bill.getEntryListVO());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
+					
 
 				}
 			    choiceInit();
-				fresh();
-
+			    if(pay != null){
+		        	 accountChoice.setValue(pay.getAccountID());
+		             receiptArea.setText(pay.getNote());
+		        }
+			    initInsert();
 				edit();
 				manageInit();
 	}

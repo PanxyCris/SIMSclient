@@ -14,8 +14,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
+import dataenum.BillState;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
+import po.FinancialBill.AccountListPO;
 import po.FinancialBill.ReceiptBillPO;
 
 /**
@@ -28,6 +31,20 @@ public class ReceiptBillData {
 
 	public ReceiptBillData() {
 		conn = DBManager.getConnection();
+	}
+
+	public static void main(String[] args){
+		ReceiptBillData d = new ReceiptBillData();
+		ArrayList<AccountListPO> accountList = new ArrayList<>();
+		AccountListPO account1 = new AccountListPO("00001",5000.00,"CNJDAN");
+		AccountListPO account2 = new AccountListPO("00002",4000.00,"CADCACDA");
+		accountList.add(account1);
+		accountList.add(account2);
+
+		ReceiptBillPO bill = new ReceiptBillPO("SKD-20180105-00001","Panxy","00001",BillType.SKD,BillState.DRAFT,accountList,9000.00,"ncidan");
+		d.delete(bill.getDocID());
+		System.out.println(d.show().get(0).getDocID());
+
 	}
 
 	public ResultMessage insert(ReceiptBillPO po) {
@@ -44,7 +61,7 @@ public class ReceiptBillData {
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getID());
+					ps.setString(1, po.getDocID());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
@@ -138,7 +155,7 @@ public class ReceiptBillData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getID());
+			ps.setString(2, po.getDocID());
 			ps.executeUpdate();
 			ps.close();
 //			conn.close();

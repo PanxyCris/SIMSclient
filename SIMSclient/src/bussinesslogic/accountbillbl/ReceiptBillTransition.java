@@ -8,14 +8,14 @@ import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 
 public class ReceiptBillTransition {
-	
+
 	AccountListPO accountListPO;
 	AccountListVO accountListVO;
-	
+
 	public ReceiptBillPO VOtoPO(ReceiptBillVO receiptBillVO){
-		
+
 		accountListPO = new AccountListPO("", 0.0, "");
-		
+
 		double total=receiptBillVO.getTotal();
 		ArrayList<AccountListVO> accountListVOs=receiptBillVO.getAccountListVOs();
 		ArrayList<AccountListPO> accountListPOs=new ArrayList<>();
@@ -25,17 +25,18 @@ public class ReceiptBillTransition {
 			accountListPO.setNote(accountListVOs.get(i).getNote());
 			accountListPOs.add(accountListPO);
 		}
-		
+
 		ReceiptBillPO receiptBillPO=new ReceiptBillPO(receiptBillVO.getId(), receiptBillVO.getUserID(),
-				receiptBillVO.getCustomerID(), receiptBillVO.getType(), receiptBillVO.getState(), accountListPOs, total);
-		
+				receiptBillVO.getCustomer(), receiptBillVO.getType(), receiptBillVO.getState(),
+				accountListPOs, total,receiptBillVO.getNote());
+
 		return receiptBillPO;
 	}
-	
+
 	public ReceiptBillVO POtoVO(ReceiptBillPO receiptBillPO){
-		
+
 		accountListVO = new AccountListVO("", 0.0, "");
-		
+
 		Double total=receiptBillPO.getTotal();
 		ArrayList<AccountListPO> accountListPOs=receiptBillPO.getAccountListPOs();
 		ArrayList<AccountListVO> accountListVOs=new ArrayList<>();
@@ -45,11 +46,11 @@ public class ReceiptBillTransition {
 			accountListVO.setNote(accountListPOs.get(i).getNote());
 			accountListVOs.add(accountListVO);
 		}
-		
+
 		ReceiptBillVO receiptBillVO=new ReceiptBillVO(receiptBillPO.getDocID(), receiptBillPO.getUserID(),
-				receiptBillPO.getCustomerID(), receiptBillPO.getBillType(), receiptBillPO.getBillState(), accountListVOs, total,receiptBillPO.getNote());
-		
+				receiptBillPO.getCustomer(), receiptBillPO.getBillType(), receiptBillPO.getBillState(), accountListVOs, total,receiptBillPO.getNote());
+
 		return receiptBillVO;
-		
+
 	}
 }
