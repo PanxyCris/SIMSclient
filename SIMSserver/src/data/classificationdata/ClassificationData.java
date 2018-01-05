@@ -45,8 +45,8 @@ public class ClassificationData {
 
 		ClassificationData d = new ClassificationData();
 		System.out.println(d.find("µÆ").get(0).getName());
-	    d.insert(root);
-		System.out.println(d.show().get(0).getName());
+	    d.delete("µÆ");
+		System.out.println(d.show()==null);
 	}
 
 	private Connection conn;
