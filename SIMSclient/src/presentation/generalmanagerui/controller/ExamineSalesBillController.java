@@ -147,6 +147,8 @@ public class ExamineSalesBillController extends ExamineBillController{
                 new PropertyValueFactory<SalesVO,String>("typeString"));
 		tableMember.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,String>("retailer"));
+		tableSaleMan.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,String>("saleMan"));
 		tableWarehouse.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,String>("warehouseString"));
 		tableBefore.setCellValueFactory(

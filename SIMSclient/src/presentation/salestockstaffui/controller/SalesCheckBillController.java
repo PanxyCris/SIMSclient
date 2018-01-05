@@ -134,6 +134,8 @@ public class SalesCheckBillController extends SaleStockStaffController{
                 new PropertyValueFactory<SalesVO,String>("typeString"));
 		tableMember.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,String>("retailer"));
+		tableSaleMan.setCellValueFactory(
+                new PropertyValueFactory<SalesVO,String>("saleMan"));
 		tableWarehouse.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,String>("warehouseString"));
 		tableBefore.setCellValueFactory(
@@ -201,10 +203,17 @@ public class SalesCheckBillController extends SaleStockStaffController{
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.submit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
-                           	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
+
                                 printInfo(ResultMessage.COMMITED);
+                                try {
+									fresh();
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
                             }
                             else
                          	   printWrong(message);

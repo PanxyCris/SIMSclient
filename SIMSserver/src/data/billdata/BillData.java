@@ -76,6 +76,7 @@ public class BillData implements BillDataService {
 			        return ResultMessage.SUCCESS;
 				}
 				else {
+					updateInventoryBill(inventoryBillPO);
 					return ResultMessage.EXISTED;
 				}
 			}

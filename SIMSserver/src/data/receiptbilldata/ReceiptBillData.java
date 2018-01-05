@@ -18,14 +18,14 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import po.FinancialBill.ReceiptBillPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
+/**
+*
+* @author Lijie
+* @date 2017年12月14日
 */
 public class ReceiptBillData {
 	private Connection conn;
-	
+
 	public ReceiptBillData() {
 		conn = DBManager.getConnection();
 	}
@@ -41,7 +41,7 @@ public class ReceiptBillData {
 				count = rs.getInt(1);
 				if (count == 0) {
 					String sql = "" + "insert into receiptbill(id, object) values (?,?)";
-					
+
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getID());
@@ -53,18 +53,19 @@ public class ReceiptBillData {
 			        return ResultMessage.SUCCESS;
 				}
 				else {
+					update(po);
 					System.out.println("该收款单已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 	}
-	
+
 	public ResultMessage delete(String id)  {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from receiptbill where id = ?";
@@ -80,7 +81,7 @@ public class ReceiptBillData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ArrayList<ReceiptBillPO> find(String keyword, FindAccountBillType type) {
 		ArrayList<ReceiptBillPO> list = new ArrayList<>();
 		ReceiptBillPO po = null;
@@ -101,7 +102,7 @@ public class ReceiptBillData {
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				po = (ReceiptBillPO) in.readObject();
-				
+
 				switch (type) {
 				case BILLID:
 					if (keyword.equals(po.getDocID())) {
@@ -121,16 +122,16 @@ public class ReceiptBillData {
 				default:
 					break;
 				}
-				
-				
+
+
 			}
-					
+
 		}catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
 	}
-	
+
 	public ResultMessage update(ReceiptBillPO po) {
 //		Connection conn = DBManager.getConnection();
 		String sql = "" + "update receiptbill set object = ? where id = ?";
@@ -147,7 +148,7 @@ public class ReceiptBillData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ArrayList<ReceiptBillPO> show() {
 		ArrayList<ReceiptBillPO> list = new ArrayList<>();
 //		Connection conn = DBManager.getConnection();
@@ -156,25 +157,25 @@ public class ReceiptBillData {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    ReceiptBillPO po = (ReceiptBillPO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    ReceiptBillPO po = (ReceiptBillPO)in.readObject();                   //读出对象
+
+                    list.add(po);
+                }
 			}
 			rs.close();
 			ps.close();
 //			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-		
+
 	}
 }

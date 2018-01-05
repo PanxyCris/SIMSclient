@@ -57,16 +57,6 @@ public class SalesController implements SalesBLService{
 		PSbl = new PromotionMemberBL();
 	}
 
-	public static void main(String[] args){
-		SalesDataService service = RemoteHelper.getInstance().getSalesDataService();
-		try {
-			System.out.println(service.showSale().get(0).getId());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	@Override
 	public String getSaleID() {
 		ArrayList<SalesPO> list = null;

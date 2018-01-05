@@ -18,10 +18,10 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import po.FinancialBill.PaymentBillPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
+/**
+*
+* @author Lijie
+* @date 2017年12月14日
 */
 public class PaymentBillData {
 
@@ -36,7 +36,7 @@ public class PaymentBillData {
 				count = rs.getInt(1);
 				if (count == 0) {
 					String sql = "" + "insert into payment(id, object) values (?,?)";
-					
+
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getID());
@@ -48,18 +48,19 @@ public class PaymentBillData {
 			        return ResultMessage.SUCCESS;
 				}
 				else {
+					update(po);
 					System.out.println("客户ID已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 	}
-	
+
 	public ResultMessage delete(String id)  {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from paymentbill where id = ?";
@@ -75,7 +76,7 @@ public class PaymentBillData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) {
 		ArrayList<PaymentBillPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
@@ -114,15 +115,15 @@ public class PaymentBillData {
 				default:
 					break;
 				}
-				
+
 			}
-					
+
 		}catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
 	}
-	
+
 	public ResultMessage update(PaymentBillPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update paymentbill set object = ? where id = ?";
@@ -139,7 +140,7 @@ public class PaymentBillData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ArrayList<PaymentBillPO> show() {
 		ArrayList<PaymentBillPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
@@ -148,25 +149,25 @@ public class PaymentBillData {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
+				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
                 byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    PaymentBillPO po = (PaymentBillPO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+
+                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+                    PaymentBillPO po = (PaymentBillPO)in.readObject();                   //读出对象
+
+                    list.add(po);
+                }
 			}
 			rs.close();
 			ps.close();
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-		
+
 	}
 }

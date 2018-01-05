@@ -20,35 +20,24 @@ public class SalesPO implements Serializable {
 	private String operator; // 操作员
 	private String saleMan; // 业务员
 	private Warehouse warehouse; // 仓库
-	private Double beforePrice; // 折让前价格
-	private Double allowance; // 折让金额
-	private Double voucher; // 代金券金额
-	private Double afterPrice; // 折让后金额
+	private double beforePrice; // 折让前价格
+	private double allowance; // 折让金额
+	private double voucher; // 代金券金额
+	private double afterPrice; // 折让后金额
 	private String remark; // 备注
 	private ArrayList<CommodityItemPO> commodities; // 商品清单
 	private BillState state;
 	private BillType type;
 	private String date;
 
-	/**
-	 * @param id
-	 * @param clientId
-	 * @param clientName
-	 * @param operator
-	 * @param saleMan
-	 * @param warehouse
-	 * @param beforePrice
-	 * @param allowance
-	 * @param voucher
-	 * @param afterPrice
-	 * @param remark
-	 * @param commodities
-	 * @param state
-	 * @param type
-	 */
+
+	public SalesPO() {
+
+	}
+
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
-			ArrayList<CommodityItemPO> commodities, Double beforePrice, Double allowance, Double voucher,
-			Double afterPrice, String remark, BillType type, BillState state) {
+			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, double voucher,
+			double afterPrice, String remark, BillType type, BillState state) {
 		this.id = id;
 		this.clientId = clientId;
 		this.clientName = clientName;
@@ -66,15 +55,14 @@ public class SalesPO implements Serializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.date = sdf.format(new Date());
 	}
-	
+
 	public String getDate() {
 		return this.date;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
-	
 	public void setState(BillState state) {
 		this.state = state;
 	}

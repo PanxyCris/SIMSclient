@@ -37,18 +37,23 @@ public class SalesData{
 	}
 
 	public static void main(String[] args) {
-		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
-		
-		CommodityItemPO e = new CommodityItemPO("000001", "潘星宇", "单身汪", 100, 200, "汪汪");
-		commodities.add(e);
-		SalesPO po = new SalesPO("XSD-20180101-00001", "000002", "王灿灿(000002)(销售商)", "王灿灿", "刘钦",
-				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "大吉大利，晚上吃鸡", BillType.SALESBILL, BillState.DRAFT);
+//		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
+//		
+//		CommodityItemPO e = new CommodityItemPO("000001", "潘星宇", "单身汪", 100, 200, "汪汪");
+//		commodities.add(e);
+//		SalesPO po = new SalesPO("XSD-20180101-00001", "000002", "王灿灿(000002)(销售商)", "王灿灿", "刘钦",
+//				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "大吉大利，晚上吃鸡", BillType.SALESBILL, BillState.DRAFT);
 		SalesData s = new SalesData();
 		
 //		ArrayList<SalesPO> list = s.show();
 //		for (SalesPO p : list) {
-//		s.insert(po);
-		System.out.println(s.show().get(0).getAllowance());
+		
+		SalesPO po = s.show().get(0);
+		SalesPO newPO = new SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"潘星宇",
+				po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),
+				po.getAfterPrice(),po.getRemark(),po.getType(),po.getState());
+		s.update(newPO);
+		System.out.println(s.show().get(0).getOperator());
 //		}
 	}
 
@@ -73,6 +78,7 @@ public class SalesData{
 				}
 				else {
 					System.out.println("该销售已存在");
+					update(po);
 					return ResultMessage.EXISTED;
 				}
 			}

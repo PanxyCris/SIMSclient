@@ -145,7 +145,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
          SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
         		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
-        		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+        		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
@@ -169,7 +169,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		commodityList.addAll(list);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
-       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
+       		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
 		ResultMessage message = service.submit(vo);
 	       if(message == ResultMessage.SUCCESS){
@@ -222,6 +222,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 			    allowanceField.setText("0");
 			    voucherLabel.setText("0");
 				operatorLabel.setText(readUser().getName());
+				noteArea.setText(null);
 				}
 				else{
 					idLabel.setText(sale.getId());
@@ -233,17 +234,15 @@ public class SalesMakeBillController extends MakeReceiptController{
 					list.addAll(sale.getCommodity());
 					table.setItems(list);
 					operatorLabel.setText(sale.getOperator());
+					noteArea.setText(sale.getNote());
 
 				}
 
 			 numberField.setText(null);
 	         priceField.setText(null);
 	         remarkArea.setText(null);
-	         allowanceField.setText(null);
-	         if(purchase == null)
-	         noteArea.setText(null);
-	         else
-	        	 noteArea.setText(purchase.getNote());
+	         allowanceField.setText("0.0");
+
 				edit();
 				manageInit();
 	}
