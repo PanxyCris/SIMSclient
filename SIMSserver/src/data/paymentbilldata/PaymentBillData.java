@@ -50,7 +50,7 @@ public class PaymentBillData {
 			if (rs.next()) {
 				count = rs.getInt(1);
 				if (count == 0) {
-					String sql = "" + "insert into payment(id, object) values (?,?)";
+					String sql = "" + "insert into paymentbill(id, object) values (?,?)";
 
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class PaymentBillData {
 				}
 				else {
 					update(po);
-					System.out.println("客户ID已存在");
+					System.out.println("付款单已存在");
 					return ResultMessage.EXISTED;
 				}
 			}
@@ -95,7 +95,7 @@ public class PaymentBillData {
 	public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) {
 		ArrayList<PaymentBillPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
-		String sql = "" + "select object from userrole";
+		String sql = "" + "select object from paymentbill";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
