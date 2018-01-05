@@ -166,9 +166,7 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-              for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&clickedState == BillState.DRAFT) {
+                    if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT){
                         Button delBtn = new Button("提交");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -190,8 +188,6 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                         });
                     }
                   }
-                }
-
             };
             return cell;
         });
@@ -208,9 +204,8 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                   BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT
+                    		||this.getTableView().getItems().get(this.getIndex()).getState()== BillState.FAIL)) {
                         Button delBtn = new Button("重做");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -223,8 +218,6 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                         });
                     }
                     }
-                }
-
             };
             return cell;
         });
@@ -242,9 +235,8 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    for(int i=0;i< this.getTableView().getItems().size();i++){
-                    BillState clickedState = this.getTableView().getItems().get(i).getState();
-                    if (!empty&&(clickedState == BillState.DRAFT||clickedState == BillState.FAIL)) {
+                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT
+                    		||this.getTableView().getItems().get(this.getIndex()).getState()== BillState.FAIL)) {
                         Button delBtn = new Button("删除");
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
@@ -264,7 +256,6 @@ public class ReceiveCheckBillController extends FinancialStaffController{
 
                         });
                     }
-                }
               }
             };
             return cell;
