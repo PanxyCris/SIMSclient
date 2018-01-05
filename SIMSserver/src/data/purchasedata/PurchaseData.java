@@ -41,8 +41,8 @@ public class PurchaseData {
 		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1,
 				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
-		p.insert(po);
-		System.out.println(p.show().get(0).getId());
+//		p.insert(po);
+		System.out.println(p.show().get(0).getOperator());
 		//p.delete(po.getId());
 
 	}

@@ -53,7 +53,7 @@ public class PurchaseController implements PurchaseBLService{
 //		Collections.reverse(IDList);
 		String num = null;
 		if(IDList.size()==0)
-			num = getDate()+"00000";
+			num = getDate()+"00001";
 		else
 		    num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
@@ -96,7 +96,7 @@ public class PurchaseController implements PurchaseBLService{
 //		Collections.reverse(IDList);
 		String num = null;
 		if(IDList.size()==0)
-			num = getDate()+"00000";
+			num = getDate()+"00001";
 		else
 		    num = String.valueOf(IDList.get(IDList.size()-1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
