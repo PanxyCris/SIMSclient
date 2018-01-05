@@ -21,12 +21,12 @@ public class InventoryBillBL implements InventoryBillBLService{
 	private InventoryTransition inventoryTransition;
 	private InventoryBillPO inventoryBillPO;
 	private InventoryBillVO inventoryBillVO;
-	
+
 	public InventoryBillBL() {
 		billDataService=RemoteHelper.getInstance().getBilldataService();
 		inventoryTransition=new InventoryTransition();
 	}
-	
+
 	@Override
 	public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type) {
 		ArrayList<InventoryBillVO> inventoryBillVOs=new ArrayList<>();
@@ -105,7 +105,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 
 	@Override
 	public String getId(BillType type) {
-		
+
 		LocalDate l=null;
 		l=LocalDate.now();
 		int count=0;
@@ -115,8 +115,12 @@ public class InventoryBillBL implements InventoryBillBLService{
 			if(inventoryBillPOs==null){
 				return type.prefix+"-"+date[0]+date[1]+date[2]+"-00001";
 			}
+			if(inventoryBillPOs.size()==0){
+				return type.prefix+"-"+date[0]+date[1]+date[2]+"-00001";
+			}
 			else{
-				String lastBillId=inventoryBillPOs.get(inventoryBillPOs.size()-1).getId().split("-")[2];
+				String lastBillId=inventoryBillPOs.get(inventoryBillPOs.size()-1).getId();
+				lastBillId=lastBillId.split("-")[2];
 				while (lastBillId.charAt(0)=='0') {
 					lastBillId=lastBillId.substring(1);
 				}
@@ -132,11 +136,11 @@ public class InventoryBillBL implements InventoryBillBLService{
 		while(5>number.length()){
 			number="0"+number;
 		}
-		
+
 		id=type.prefix+"-"+date[0]+date[1]+date[2]+"-"+number;
 		return id;
 	}
-	
+
 	public LocalDate StringtoDate(String id){//id «µ•æ›±‡∫≈
 		String s=id.split("-")[1];
 		String date=s.substring(0,4)+"-"+s.substring(4,6)+"-"+s.substring(6, s.length());

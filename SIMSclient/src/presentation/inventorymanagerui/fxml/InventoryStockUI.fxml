@@ -139,7 +139,7 @@
 				<TableColumn fx:id="tableRetailedPrice" prefWidth="110.0" text="均零售价" />
 			</columns>
 		</TableView>
-      <Button layoutX="184.0" layoutY="57.0" mnemonicParsing="false" onAction="#stock" prefHeight="60.0" prefWidth="199.0" text="导     出">
+      <Button layoutX="184.0" layoutY="57.0" mnemonicParsing="false" onAction="#export" prefHeight="60.0" prefWidth="199.0" text="导     出">
          <font>
             <Font size="20.0" />
          </font>

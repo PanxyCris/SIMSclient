@@ -74,7 +74,12 @@ public class MakeReceiptController extends InventoryManagerController{
        ResultMessage message = service.save(vo);
        if(message == ResultMessage.SUCCESS){
            printInfo(ResultMessage.SAVED);
-           fresh();
+           try {
+			fresh();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
            }
        else
     	   printWrong(message);
@@ -95,7 +100,12 @@ public class MakeReceiptController extends InventoryManagerController{
        ResultMessage message = service.submit(vo);
        if(message == ResultMessage.SUCCESS){
            printInfo(ResultMessage.COMMITED);
-           fresh();
+           try {
+			fresh();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
        }
        else
     	   printWrong(message);
@@ -113,6 +123,7 @@ public class MakeReceiptController extends InventoryManagerController{
 		GiftVO vo = new GiftVO(nameChoice.getValue(),Integer.parseInt(numberField.getText()));
         list.add(vo);
         table.setItems(list);
+        initInsert();
         }
 	}
 
@@ -121,15 +132,9 @@ public class MakeReceiptController extends InventoryManagerController{
 		changeStage("CheckReceiptUI",user,type,null);
 	}
 
-	@FXML
-	public void fresh(){
-	   idLabel.setText(null);
-	   nameChoice.setValue(null);
+	public void initInsert(){
+		 nameChoice.setValue(null);
        numberField.setText(null);
-   	   receiptChoice.setValue(null);
-	   noteArea.setText(null);
-	   list.clear();
-	   table.setItems(list);
 	}
 
 	public void initData(UserVO user,BillType type,InventoryBillVO inv) throws Exception{
@@ -138,7 +143,11 @@ public class MakeReceiptController extends InventoryManagerController{
 		operatorLabel.setText(readUser().getName());
 		if(type!=null)
 			receiptChoice.setValue(type.value);
-		fresh();
+		   idLabel.setText(null);
+	   	   receiptChoice.setValue(null);
+		   noteArea.setText(null);
+		   list.clear();
+		   table.setItems(list);
 		if(inv!=null){
 			idLabel.setText(inv.getId());
 			receiptChoice.setValue(inv.getTypeString());
