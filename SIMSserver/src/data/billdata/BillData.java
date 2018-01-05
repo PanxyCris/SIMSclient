@@ -144,7 +144,7 @@ public class BillData implements BillDataService {
                     	if (keyword.equals(po.getId())) list.add(po);
                     }
                     else if (type == FindInventoryBillType.NAME) {
-                    	if (keyword.equals(po.getID())) list.add(po);
+                    	if (keyword.equals(po.getId())) list.add(po);
                     }
                     else if (type == FindInventoryBillType.STATE) {
                     	if (keyword.equals(po.getBillState().value)) list.add(po);
