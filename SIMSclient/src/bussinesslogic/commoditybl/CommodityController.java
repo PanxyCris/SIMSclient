@@ -64,4 +64,9 @@ public class CommodityController implements CommodityBLService{
 		return commodityBL.check(start, end);
 	}
 
+	@Override
+	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs) {
+		commodityBL.exportReport(commodityStockVOs);
+	}
+
 }

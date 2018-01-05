@@ -1,8 +1,10 @@
 package bussinesslogic.commoditybl;
 
+import java.io.File;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import java.rmi.RemoteException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,19 +21,27 @@ import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
+import dataenum.findtype.FindInventoryBillType;
 import dataservice.commoditydataservice.CommodityDataService;
 import javafx.util.converter.LocalDateStringConverter;
 import po.ClassificationVPO;
 import po.MemberPO;
 import po.commodity.CommodityPO;
 import rmi.RemoteHelper;
-import vo.ViewObject;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityCheckVO;
+import vo.commodityvo.CommodityItemVO;
 import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
+import vo.commodityvo.GiftVO;
 import vo.membervo.MemberVO;
+
+import jxl.Workbook;  
+import jxl.write.Label;  
+import jxl.write.WritableSheet;  
+import jxl.write.WritableWorkbook;
 
 /**
  * 
@@ -50,6 +60,7 @@ public class CommodityBL implements CommodityBLService{
 	private ClassificationBLService classificationBLService;
 	private SalesBLService salesBLService;
 	private PurchaseBLService purchaseBLService;
+	private InventoryBillBLService inventoryBillBLService;
 	
 	public CommodityBL() {
 		service = RemoteHelper.getInstance().getCommodityDataService();
@@ -57,6 +68,7 @@ public class CommodityBL implements CommodityBLService{
 		classificationBLService=new ClassificationController();
 		salesBLService=new SalesController();
 		purchaseBLService=new PurchaseController();
+		inventoryBillBLService=new InventoryBillController();
 	}
 	
 	@Override
@@ -217,17 +229,50 @@ public class CommodityBL implements CommodityBLService{
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
 		ArrayList<CommodityCheckVO> checkVOs=new ArrayList<>();
-		ArrayList<SalesVO> salesVOs=salesBLService.show();
 		//赠送单、销售单、销售退货单、进货单、进货退货单
-		BillType type=BillType.SALESBILL;
-		for (int i = 0; i < salesVOs.size(); i++) {
-			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
-			if(localDate.isAfter(start)&&localDate.isBefore(end)){
-				
+		
+		BillType type=BillType.INVENTORYGIFTBILL;//赠送单
+		ArrayList<InventoryBillVO> gifts=inventoryBillBLService.show();
+		for (int i = 0; i < gifts.size(); i++) {
+			LocalDate localDate=StringtoDate(gifts.get(i).getId());
+			if(gifts.get(i).getType()==type&&localDate.isAfter(start)&&localDate.isBefore(end)){
+				ArrayList<GiftVO> giftVOs=gifts.get(i).getGifts();
+				for (int j = 0; j < giftVOs.size(); j++) {
+					Double money = null;
+					try {
+						ArrayList<CommodityPO> commodityPOs=service.findCommodity(giftVOs.get(i).getName(), FindCommodityType.NAME);
+						money=giftVOs.get(i).getNumber()*commodityPOs.get(0).getRecentPurPrice();
+					} catch (RemoteException e) {
+						e.printStackTrace();
+					}
+					checkVOs.add(new CommodityCheckVO(localDate, type, giftVOs.get(i).getName(), giftVOs.get(i).getNumber(), money));
+				}
 			}
 		}
+		
+		//销售单或销售退货单
+		ArrayList<SalesVO> salesVOs=salesBLService.show();
+		for (int i = 0; i < salesVOs.size(); i++) {
+			type=salesVOs.get(i).getType();
+			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
+			ArrayList<CommodityItemVO> commodityItemVOs=salesVOs.get(i).getCommodity();
+			for (int j = 0; j < commodityItemVOs.size(); j++) {
+				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(i).getName(), commodityItemVOs.get(i).getNumber(), commodityItemVOs.get(i).getTotal()));
+			}
+		}
+		
+		//进货单或进货退货单
 		ArrayList<PurchaseVO> purchaseVOs=purchaseBLService.show();
-		return null;
+		for (int i = 0; i < purchaseVOs.size(); i++) {
+			type=purchaseVOs.get(i).getType();
+			LocalDate localDate=StringtoDate(purchaseVOs.get(i).getId());
+			ArrayList<CommodityItemVO> commodityItemVOs=purchaseVOs.get(i).getCommodities();
+			for (int j = 0; j < commodityItemVOs.size(); j++) {
+				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(i).getName(), commodityItemVOs.get(i).getNumber(), commodityItemVOs.get(i).getTotal()));
+			}
+		}
+		
+		return checkVOs;
 	}
 	
 	public LocalDate StringtoDate(String id){//id是单据编号
@@ -237,6 +282,76 @@ public class CommodityBL implements CommodityBLService{
 		LocalDateStringConverter localDate =new LocalDateStringConverter();
 		l=localDate.fromString(date);
 		return l;
+	}
+
+	@Override
+	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs) {
+		WritableWorkbook wwb = null;  
+	 	String fileName="C:/Users/user/Desktop/CommodityStock.xlsx";
+        try {  
+            // 创建一个可写入的工作簿（WorkBook）对象,  
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
+            wwb = Workbook.createWorkbook(new File(fileName));  
+              
+            // 创建一个可写入的工作表   
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+            WritableSheet cSheet = wwb.createSheet("CommodityStockTable", 0);
+            
+            int cSheetL=commodityStockVOs.size();
+           
+            Label ini = new Label(0,0,"ID");  
+            cSheet.addCell(ini);
+            ini=new Label(1, 0, "Name");//initialize payment
+            cSheet.addCell(ini);
+            ini=new Label(2, 0, "Model");
+            cSheet.addCell(ini);
+            ini=new Label(3, 0, "Number");
+            cSheet.addCell(ini);
+            ini=new Label(4, 0, "AvgRetailedPrice");
+            cSheet.addCell(ini);
+            ini=new Label(5, 0, "AvgPurPrice");
+            cSheet.addCell(ini);
+            ini=new Label(6, 0, "Line");
+            cSheet.addCell(ini);
+            
+            for(int i=1;i<cSheetL+1;i++){  
+                for(int j=0;j<7;j++){
+                	if(j==0){
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getId());  
+                        cSheet.addCell(labelC); 
+                	}
+                	else if(j==1){
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getName());  
+                        cSheet.addCell(labelC); 
+                	}
+                	else if(j==2){
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getModel());  
+                        cSheet.addCell(labelC); 
+                	}
+                	else if(j==3){
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getNumber()));  
+                        cSheet.addCell(labelC); 
+                	}
+                	else if(j==4){
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getAvgRetailedPrice()));  
+                        cSheet.addCell(labelC); 
+                	}
+                	else if(j==5){
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getAvgPurPrice()));  
+                        cSheet.addCell(labelC); 
+                	}
+                	else{
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getLine()));  
+                        cSheet.addCell(labelC); 
+                	}
+                }  
+            }                       
+            wwb.write();// 从内从中写入文件中  
+            wwb.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        System.out.println("生成Excel文件"+fileName+"成功");
 	}
 	
 }
