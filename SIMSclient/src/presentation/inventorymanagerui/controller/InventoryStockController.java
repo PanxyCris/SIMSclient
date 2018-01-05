@@ -1,5 +1,7 @@
 package presentation.inventorymanagerui.controller;
 
+import java.util.ArrayList;
+
 import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import javafx.collections.FXCollections;
@@ -35,8 +37,10 @@ public class InventoryStockController extends InventoryManagerController{
 	protected TableColumn<CommodityStockVO,Double> tableRetailedPrice;
 
     @FXML
-    public void stock() throws Exception{
-    	service.stock();
+    public void export() throws Exception{
+    	ArrayList<CommodityStockVO> result = new ArrayList<>();
+    	result.addAll(list);
+    	service.exportReport(result);
     }
 
 

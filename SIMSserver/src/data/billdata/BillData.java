@@ -39,10 +39,10 @@ public class BillData implements BillDataService {
 		GiftPO gift1 = new GiftPO("¹í´µµÆ",20);
 		ArrayList<GiftPO> list = new ArrayList<>();
 		list.add(gift1);
-		InventoryBillPO bill = new InventoryBillPO("KCBYD-20180102-00001",list,"Íõ²Ó²Ó",BillType.INVENTORYREVENUEBILL
+		InventoryBillPO bill = new InventoryBillPO("KCBYD-20180105-00001",list,"Íõ²Ó²Ó",BillType.INVENTORYREVENUEBILL
 				,BillState.COMMITED,"cbidoc");
 		try {
-		//	data.deleteInventoryBill("KCZSD-20180102-00000");
+		    data.deleteInventoryBill(bill.getId());
 			System.out.println(data.showInventoryBill().get(0).getId());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
