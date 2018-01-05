@@ -138,8 +138,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		   this.user = user;
 		   this.rec = bill;
 			if(bill == null){
-				UtilityBLService utilityService = new UtilityBL();
-				idLabel.setText(utilityService.generateID(BillType.SKD));
+				idLabel.setText(service.getId());
 			    sumLabel.setText("0");
 				operatorLabel.setText(readUser().getName());
 				}

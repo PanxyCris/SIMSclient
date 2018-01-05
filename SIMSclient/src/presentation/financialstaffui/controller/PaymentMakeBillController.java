@@ -102,7 +102,12 @@ public class PaymentMakeBillController extends MakeReceiptController {
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
-             fresh();
+             try {
+				fresh();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
              }
          else
       	   printWrong(message);
@@ -117,7 +122,12 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		ResultMessage message = service.commit(vo);
 	       if(message == ResultMessage.SUCCESS){
 	           printInfo(ResultMessage.COMMITED);
-	           fresh();
+	           try {
+				fresh();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	       }
 	       else
 	    	   printWrong(message);
@@ -125,14 +135,8 @@ public class PaymentMakeBillController extends MakeReceiptController {
 
 	public void initInsert(){
 		  itemField.setText(null);
-	      noteArea.setText(null);
+	      moneyField.setText(null);
 	      receiptArea.setText(null);
-	}
-
-	@FXML
-	public void fresh(){
-
-
 	}
 
 	@FXML
@@ -144,8 +148,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		   this.user = user;
 		   this.pay = bill;
 			if(bill == null){
-				UtilityBLService utilityService = new UtilityBL();
-				idLabel.setText(utilityService.generateID(BillType.XJFYD));
+				idLabel.setText(service.getId());
 			    sumLabel.setText("0");
 				operatorLabel.setText(readUser().getName());
 				}
@@ -155,7 +158,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 					list.addAll(bill.getEntryListVO());
 					table.setItems(list);
 					operatorLabel.setText(bill.getUserID());
-					
+
 
 				}
 			    choiceInit();
