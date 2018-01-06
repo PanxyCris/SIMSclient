@@ -1,7 +1,9 @@
 package presentation.financialstaffui.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import bussinesslogic.accountbookbl.AccountBookBL;
+import bussinesslogic.accountbookbl.AccountBookController;
 import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +21,7 @@ import vo.uservo.UserVO;
 
 public class InitAccountController extends FinancialStaffController {
 
-	AccountBookBLService service = new AccountBookBL();
+	AccountBookBLService service = new AccountBookController();
 	ObservableList<CommodityVO> commodityList = FXCollections.observableArrayList();
 	ObservableList<MemberVO> memberList = FXCollections.observableArrayList();
 	ObservableList<AccountVO> accountList = FXCollections.observableArrayList();
@@ -136,7 +138,7 @@ public class InitAccountController extends FinancialStaffController {
 	public void initData(UserVO user) {
 		this.user = user;
 		ObservableList<Integer> list = FXCollections.observableArrayList();
-		for(int i=2017;i>=2000;i--)
+		for(int i=LocalDate.now().getYear();i>=2000;i--)
 			list.add(i);
 		yearChoice.setItems(list);
 		manageInit();
