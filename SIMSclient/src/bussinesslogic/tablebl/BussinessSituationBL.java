@@ -77,15 +77,15 @@ public class BussinessSituationBL implements BussinessSituationBLService {
             for(int i=1;i<pSheetL+1;i++){  
                 for(int j=0;j<3;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,String.valueOf(pay.get(i).getDate()));  
+                		Label labelC = new Label(j,i,String.valueOf(pay.get(i-1).getDate()));  
                         pSheet.addCell(labelC); 
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,pay.get(i).getTypeString());  
+                		Label labelC = new Label(j,i,pay.get(i-1).getTypeString());  
                         pSheet.addCell(labelC); 
                 	}
                 	else{
-                		Label labelC = new Label(j,i,Double.toString(pay.get(i).getSum()));  
+                		Label labelC = new Label(j,i,Double.toString(pay.get(i-1).getSum()));  
                         pSheet.addCell(labelC); 
                 	}
                 }  
@@ -94,19 +94,19 @@ public class BussinessSituationBL implements BussinessSituationBLService {
             for(int i=1;i<rSheetL+1;i++){  
                 for(int j=0;j<4;j++){
                 	if(j==0){
-                		 Label labelC = new Label(j,i,String.valueOf(receive.get(i).getDate()));  
+                		 Label labelC = new Label(j,i,String.valueOf(receive.get(i-1).getDate()));  
                          rSheet.addCell(labelC);  
                 	}
                 	else if(j==1){
-                		 Label labelC = new Label(j,i,receive.get(i).getTypeString());  
+                		 Label labelC = new Label(j,i,receive.get(i-1).getTypeString());  
                          rSheet.addCell(labelC); 
                 	}
                 	else if(j==2){
-                		 Label labelC = new Label(j,i,Double.toString(receive.get(i).getAllowance()));  
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getAllowance()));  
                          rSheet.addCell(labelC); 
                 	}
                 	else{
-                		 Label labelC = new Label(j,i,Double.toString(receive.get(i).getSum()));  
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getSum()));  
                          rSheet.addCell(labelC); 
                 	}
                 }  
@@ -138,8 +138,8 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 				for (int j = 0; j < giftVOs.size(); j++) {
 					try {//这里会多访问一次数据库，可以优化
-						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(i).getName(), FindCommodityType.NAME);
-						sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(i).getNumber();
+						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName(), FindCommodityType.NAME);
+						sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(j).getNumber();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -188,7 +188,7 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 					ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 					for (int j = 0; j < giftVOs.size(); j++) {
 						try {//这里会多访问一次数据库，可以优化
-							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(i).getName(), FindCommodityType.NAME);
+							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName(), FindCommodityType.NAME);
 							sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(i).getNumber();
 						} catch (Exception e) {
 							e.printStackTrace();
