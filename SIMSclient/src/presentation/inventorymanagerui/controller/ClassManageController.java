@@ -92,6 +92,7 @@ public class ClassManageController extends InventoryManagerController{
 
         addAllChildren(root);
         tree.setRoot(root);
+        classList.clear();
 		classList.addAll(service.showName());
 		classChoice.setItems(classList);
 		initInsert();
@@ -188,7 +189,7 @@ public class ClassManageController extends InventoryManagerController{
 	                            	Optional<ButtonType> result = alert.showAndWait();
 	                            	if (result.get() == ButtonType.OK){
 	                            		service.delete(clickedUser);
-	                            		fresh();
+	                            		initData(user);
 	                            	}
 								}
                             	else{
