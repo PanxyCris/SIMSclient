@@ -109,7 +109,7 @@ public class UtilityBL implements UtilityBLService{
 	}
 
 	public MessagePO voTopo(MessageVO vo){
-		MessagePO po = new MessagePO(vo.getInfo());
+		MessagePO po = new MessagePO(vo.getMessageID(),vo.getInfo());
 		po.setHasRead(vo.getHasRead());
 		return po;
 	}
@@ -129,9 +129,9 @@ public class UtilityBL implements UtilityBLService{
       		  messageService.save(message, user);
         }
 	}
-	
+
 	public String getMessageID(){
-		
+
 	}
 
 }
