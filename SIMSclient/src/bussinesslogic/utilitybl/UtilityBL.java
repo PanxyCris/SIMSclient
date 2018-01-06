@@ -129,5 +129,9 @@ public class UtilityBL implements UtilityBLService{
       		  messageService.save(message, user);
         }
 	}
+	
+	public String getMessageID(){
+		
+	}
 
 }

@@ -1,14 +1,17 @@
-package vo.messagevo;
+package po.messagepo;
 
 import po.UserPO;
 
-public class MessageExamineVO extends MessageVO{
+public class MessageExaminePO extends MessagePO{
 
-
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id; //单据编号
 	private UserPO user; //用户
 
-	public MessageExamineVO(String messageID, String id,UserPO user) {
+	public MessageExaminePO(String messageID, String id,UserPO user) {
 		super(messageID, getFormatInfo(id,user));
 		this.setId(id);
 		this.setUser(user);

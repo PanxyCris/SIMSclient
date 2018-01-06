@@ -463,6 +463,15 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
+	public String getMessageID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return messageData.getMessageID();
+	}
+
+
+
+
+	@Override
 	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSum.insertPromotion(po);
@@ -603,7 +612,5 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		// TODO Auto-generated method stub
 		return inventoryBill.showInventoryBill();
 	}
-
-
 
 }

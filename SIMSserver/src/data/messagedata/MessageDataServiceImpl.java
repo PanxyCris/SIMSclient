@@ -35,15 +35,6 @@ public class MessageDataServiceImpl implements MessageDataService{
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
 		UserDataService userService;
-		try {
-			userService = new UserDataServiceImpl();
-			data.save(new MessagePO(info), userService.showUser().get(0));
-			System.out.println(userService.showUser().get(0).getID());
-			System.out.println(data.getMessage(userService.findUser("000002", FindUserType.ID).get(0)).get(0).getInfo());
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 
@@ -91,6 +82,14 @@ public class MessageDataServiceImpl implements MessageDataService{
 		}
 		return list;
 
+	}
+
+	@Override
+	public String getMessageID() throws RemoteException {
+
+	//	ArrayList<MessagePO> messageList = show();
+
+		return null;
 	}
 
 }

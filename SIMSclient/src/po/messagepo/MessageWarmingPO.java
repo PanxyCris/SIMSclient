@@ -2,9 +2,9 @@ package po.messagepo;
 
 public class MessageWarmingPO extends MessagePO{
 
-	/** 
-	* <p>Title: </p> 
-	* <p>Description: </p> 
+	/**
+	* <p>Title: </p>
+	* <p>Description: </p>
 	*/
 	private static final long serialVersionUID = 1L;
 	/**
@@ -16,8 +16,8 @@ public class MessageWarmingPO extends MessagePO{
 	private Integer currentNumber;
 
 
-	public MessageWarmingPO(String name,int currentNumber,int warmingNumber){
-		super(getFormatInfo(name,currentNumber,warmingNumber));
+	public MessageWarmingPO(String messageID,String name,int currentNumber,int warmingNumber){
+		super(messageID,getFormatInfo(name,currentNumber,warmingNumber));
 		this.name = name;
 		this.warmingNumber = warmingNumber;
 		this.currentNumber = currentNumber;

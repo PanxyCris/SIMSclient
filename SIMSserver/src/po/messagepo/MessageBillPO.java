@@ -5,19 +5,16 @@ import dataenum.ResultMessage;
 
 public class MessageBillPO extends MessagePO{
 
-	     /** 
-	* <p>Title: </p> 
-	* <p>Description: </p> 
-	*/
 	private static final long serialVersionUID = 1L;
-		private String name; //格式 名字(ID)
+
+	     private String name; //格式 名字(ID)
 	     private String id;   //单据编号
 	     private BillType type;
 	     private ResultMessage result;  //只有成功或者失败
 	     private String info; //格式 单据类：时间+"： 您的" + 单据编号 + 单据类型  + "审批" + 成功/失败
 
-	     public MessageBillPO(String name,String id,BillType type,ResultMessage result){
-	    	 super(getFormatInfo(name,id,type,result));
+	     public MessageBillPO(String messageID,String name,String id,BillType type,ResultMessage result){
+	    	 super(messageID,getFormatInfo(name,id,type,result));
 	    	 this.name = name;
 	    	 this.id = id;
 	    	 this.type = type;

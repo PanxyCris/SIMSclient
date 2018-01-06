@@ -6,11 +6,13 @@ import java.time.LocalDateTime;
 public class MessagePO implements Serializable{
 
 	 private static final long serialVersionUID = 1L;
+	 private String messageID;
      private LocalDateTime time;
      private String info; //格式 单据类："： 您的" + 单据编号 + 单据类型  + "审批" + 成功/失败
                           //   警告类: 商品名(编号)+"低于警戒值 当前数量："+当前数量+"警戒数量： "+警戒数量
      private boolean hasRead;
-     public MessagePO(String info){
+     public MessagePO(String messageID,String info){
+    	 this.setMessageID(messageID);
     	 this.time = LocalDateTime.now();
     	 this.info = info;
     	 hasRead = false;
@@ -31,5 +33,13 @@ public class MessagePO implements Serializable{
      public void setHasRead(boolean hasRead){
     	 this.hasRead = hasRead;
      }
+
+	public String getMessageID() {
+		return messageID;
+	}
+
+	public void setMessageID(String messageID) {
+		this.messageID = messageID;
+	}
 
 }

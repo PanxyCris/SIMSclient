@@ -14,4 +14,6 @@ public interface MessageDataService extends Remote {
 
 	public ArrayList<MessagePO> getMessage(UserPO user) throws RemoteException;
 
+	public String getMessageID() throws RemoteException;
+
 }
