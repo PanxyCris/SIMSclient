@@ -18,7 +18,7 @@
 | 王灿灿 | 2017-10-22 | 添加业务逻辑层的分解 |V1.3草稿|
 | 孙嘉杰| 2017-10-22 | 添加用户界面层 |V1.4草稿|
 | 孙嘉杰| 2018-1-2 | 初步修改 |V1.5草稿|
-
+| 王灿灿| 2018-1-6 | 修改完成库存管理人员文档、修改财务account文档 |v1.6草稿|
 
 
 #目录
@@ -585,18 +585,24 @@ JavaFX
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Account.check|语法|public AccountVO check(String message)|
-||前置条件|message符合输入规则|
-||后置条件|返回待查找的账户|
-|Account.newBuild|语法|public AccountVO newBuild()|
-||前置条件|需要建立新的账户|
-||后置条件|增加新的账户|
-|Account.delete|语法|public boolean delete(AccountVO accountVO)|
-||前置条件|需要删除账户|
-||后置条件|删除账户|
-|Account.modify|语法|public boolean modify(String name)|
-||前置条件|name符合输入规则|
-||后置条件|修改账户信息|
+|Account.find|语法|`public ArrayList<AccountVO> find(String message, FindAccountType findType)`|
+||前置条件|关键词message符合输入规则|
+||后置条件|返回符合关键词的账户列表|
+|Account.add|语法|`public ResultMessage add(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若不存在则新增，返回新增验证的结果|
+|Account.delete|语法|`public void delete(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则删除|
+|Account.modify|语法|`public ResultMessage modify(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则更新数据，返回更新验证的结果|
+|Account.judgeLegal|语法|`public ResultMessage judgeLegal(AccountVO accountVO)`|
+||前置条件|需要对账户进行新增修改操作|
+||后置条件|返回判断验证的结果|
+|Account.show|语法|`public ArrayList<AccountVO> getAccountList()`|
+||前置条件|启动一个账户管理回合|
+||后置条件|返回系统中所有的账户的List|
 
 
 <br/>
@@ -604,10 +610,13 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|AccountDataService.check(String message)|根据信息查找单一持久化对象|
-|AccountDataService.newBuild()|新建单一持久化对象|
-|AccountDataService.delete(AccountPO accountPO)|删除单一持久化对象|
-|AccountDataService.modify(String name)|更新单一持久化对象|
+|AccountDataService.find(String keywords, FindAccountType type)|根据keywords查找单一持久化对象|
+|AccountDataService.insert|新建单一持久化对象|
+|AccountDataService.delete|删除单一持久化对象|
+|AccountDataService.update|更新单一持久化对象|
+|AccountDataService.show|返回数据库中所有持久化对象|
+|AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
+<br/>
 
 　**mfdocbl模块的接口规范**
 
