@@ -44,9 +44,9 @@ public class ClassificationData {
 //		children.add(c3);
 		 ClassificationVPO root = new ClassificationVPO("0001","╣ф",true,null,null);
 
-  	d.insert(c2);
+//  	d.insert(c2);
 //		d.insert(c1);
-		d.insert(c3);
+//		d.insert(c3);
 //		d.delete("бл╣ф");
 		System.out.println(d.show().size());
 	}
