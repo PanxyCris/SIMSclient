@@ -9,20 +9,32 @@ import java.util.Date;
 
 import bussinesslogic.accountbl.AccountController;
 import bussinesslogic.memberbl.MemberController;
+import bussinesslogic.userbl.UserController;
+import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
 import bussinesslogicservice.accountblservice.AccountBLService;
 import bussinesslogicservice.memberblservice.MemberBLService;
+import bussinesslogicservice.userblservice.UserBLService;
+import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindAccountBillType;
+import dataenum.findtype.FindUserType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
+import dataservice.messagedataservice.MessageDataService;
+import dataservice.userdataservice.UserDataService;
 import javafx.util.converter.LocalDateStringConverter;
 import po.PurchasePO;
+import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
+import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
+import vo.messagevo.MessageExamineVO;
+import vo.uservo.UserVO;
 
 
 public class PaymentBillBL implements PaymentBillBLService{
@@ -35,6 +47,8 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	private AccountBLService accountBLService;
 	private MemberBLService memberBLService;
+	private UserDataService userDataService;
+	private MessageDataService messageDataService;
 
 	private String date;
 
@@ -43,6 +57,8 @@ public class PaymentBillBL implements PaymentBillBLService{
 		paymentBillDataService=RemoteHelper.getInstance().getPaymentDataService();
 		accountBLService=new AccountController();
 		memberBLService=new MemberController();
+		userDataService = RemoteHelper.getInstance().getUserDataService();
+		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 
@@ -116,7 +132,15 @@ public class PaymentBillBL implements PaymentBillBLService{
 		paymentBillVO.setState(BillState.COMMITED);
 		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
 		try {
-			return paymentBillDataService.updatePaymentBill(paymentBillPO);
+			ResultMessage resultMessage = paymentBillDataService.updatePaymentBill(paymentBillPO);
+			if(resultMessage == ResultMessage.SUCCESS){
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
+				for(UserPO manager:generalManagers){
+				MessageExaminePO message = new MessageExaminePO(manager.getID(),paymentBillVO.getId(),manager);
+				messageDataService.save(message);
+				}
+			}
+			return resultMessage;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

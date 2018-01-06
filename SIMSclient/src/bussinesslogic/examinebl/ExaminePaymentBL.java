@@ -70,9 +70,9 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(user.getID(),user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
-			ResultMessage result = messageService.save(message,user);
+			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
 				return result;
 		}
@@ -86,9 +86,9 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(user.getID(),user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
-			ResultMessage result = messageService.save(message,user);
+			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
 				return result;
 		}

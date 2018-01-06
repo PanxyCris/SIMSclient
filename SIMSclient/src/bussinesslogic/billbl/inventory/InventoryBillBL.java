@@ -8,10 +8,16 @@ import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindInventoryBillType;
+import dataenum.findtype.FindUserType;
 import dataservice.billdataservice.BillDataService;
+import dataservice.messagedataservice.MessageDataService;
+import dataservice.userdataservice.UserDataService;
 import javafx.util.converter.LocalDateStringConverter;
+import po.UserPO;
 import po.inventorybillpo.InventoryBillPO;
+import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 
@@ -22,9 +28,14 @@ public class InventoryBillBL implements InventoryBillBLService{
 	private InventoryBillPO inventoryBillPO;
 	private InventoryBillVO inventoryBillVO;
 
+	private UserDataService userDataService;
+	private MessageDataService messageDataService;
+
 	public InventoryBillBL() {
 		billDataService=RemoteHelper.getInstance().getBilldataService();
 		inventoryTransition=new InventoryTransition();
+		userDataService = RemoteHelper.getInstance().getUserDataService();
+		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
@@ -60,7 +71,20 @@ public class InventoryBillBL implements InventoryBillBLService{
 		clickedItem.setState(BillState.COMMITED);
 		inventoryBillPO=inventoryTransition.VOtoPO(clickedItem);
 		try {
-			return billDataService.updateInventoryBill(inventoryBillPO);
+
+			ResultMessage resultMessage = ResultMessage.FAIL;
+			if(resultMessage == ResultMessage.EXISTED)
+				resultMessage = billDataService.insertInventoryBill(inventoryBillPO);
+			else
+			    resultMessage = billDataService.updateInventoryBill(inventoryBillPO);
+			if(resultMessage == ResultMessage.SUCCESS){
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
+				for(UserPO manager:generalManagers){
+				MessageExaminePO message = new MessageExaminePO(manager.getID(),inventoryBillPO.getId(),manager);
+				messageDataService.save(message);
+				}
+			}
+			return resultMessage;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

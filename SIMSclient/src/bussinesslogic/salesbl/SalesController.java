@@ -14,13 +14,19 @@ import bussinesslogicservice.salesblservice.SalesBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
+import dataenum.findtype.FindUserType;
+import dataservice.messagedataservice.MessageDataService;
 import dataservice.promotiondataservice.PromotionMemberDataService;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
 import dataservice.promotiondataservice.PromotionSumDataService;
 import dataservice.salesdataservice.SalesDataService;
+import dataservice.userdataservice.UserDataService;
 import po.PurchasePO;
+import po.UserPO;
+import po.messagepo.MessageExaminePO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;
@@ -47,6 +53,10 @@ public class SalesController implements SalesBLService{
 	private PromotionMemberBL PSbl;
 	private String date;
 
+	private UserDataService userDataService;
+	private MessageDataService messageDataService;
+
+
 	public SalesController() {
 		service = RemoteHelper.getInstance().getSalesDataService();
 		PMService = RemoteHelper.getInstance().getMemberPromotionDataService();
@@ -55,6 +65,9 @@ public class SalesController implements SalesBLService{
 		PSpbl = new PromotionSpecialBL();
 		PSumbl = new PromotionSumBL();
 		PSbl = new PromotionMemberBL();
+
+		userDataService = RemoteHelper.getInstance().getUserDataService();
+		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
@@ -168,10 +181,15 @@ public class SalesController implements SalesBLService{
 	public ResultMessage submit(SalesVO Info) {
 		try {
 			SalesPO po = SalesTransition.VOtoPO(Info);
-			if (service.insertSale(po) == ResultMessage.EXISTED) {
-				return service.updateSale(po);
+			ResultMessage resultMessage = service.insertSale(po);
+			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
+				for(UserPO manager:generalManagers){
+				MessageExaminePO message = new MessageExaminePO(manager.getID(),po.getId(),manager);
+				messageDataService.save(message);
+				}
 			}
-			else return service.insertSale(SalesTransition.VOtoPO(Info));
+			return resultMessage;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

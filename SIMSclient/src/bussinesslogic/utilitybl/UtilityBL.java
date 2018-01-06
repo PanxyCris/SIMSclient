@@ -115,7 +115,7 @@ public class UtilityBL implements UtilityBLService{
 	}
 
 	public MessageVO poTovo(MessagePO po){
-		MessageVO vo = new MessageVO(po.getInfo());
+		MessageVO vo = new MessageVO(po.getMessageID(),po.getInfo());
 		vo.setHasRead(po.getHasRead());
 		return vo;
 	}
@@ -123,15 +123,13 @@ public class UtilityBL implements UtilityBLService{
 	@Override
 	public void warningMessage(CommodityPO po) throws RemoteException{
         if(po.getNumber()<=po.getWarmingValue()){
-      	  MessageWarmingPO message = new MessageWarmingPO(po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
+      	  MessageWarmingPO message = new MessageWarmingPO(null,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
       	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
-      	  for(UserPO user:inventorymanagers)
-      		  messageService.save(message, user);
+      	  for(UserPO user:inventorymanagers){
+      		  message.setMessageID(user.getID());
+      		  messageService.save(message);
+      		  }
         }
-	}
-
-	public String getMessageID(){
-
 	}
 
 }

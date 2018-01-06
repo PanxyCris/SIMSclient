@@ -15,11 +15,17 @@ import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindAccountBillType;
+import dataenum.findtype.FindUserType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
+import dataservice.messagedataservice.MessageDataService;
+import dataservice.userdataservice.UserDataService;
 import javafx.util.converter.LocalDateStringConverter;
+import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
 import po.FinancialBill.ReceiptBillPO;
+import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
@@ -34,7 +40,10 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	private AccountBLService accountBLService;
 	private MemberBLService memberBLService;
-	
+
+	private UserDataService userDataService;
+	private MessageDataService messageDataService;
+
 	private String date;
 
 	public ReceiptBillBL() {
@@ -42,6 +51,8 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		receiptBillDataService=RemoteHelper.getInstance().getReceiptDataService();
 		accountBLService=new AccountController();
 		memberBLService=new MemberController();
+		userDataService = RemoteHelper.getInstance().getUserDataService();
+		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
@@ -157,7 +168,18 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		receiptBillVO.setState(BillState.COMMITED);
 		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
 		try {
-			return receiptBillDataService.updateReceiptBill(receiptBillPO);
+			ResultMessage resultMessage = ResultMessage.FAIL;
+			if(receiptBillDataService.insertReceiptBill(receiptBillPO) == ResultMessage.EXISTED)
+
+
+			if(resultMessage == ResultMessage.SUCCESS){
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
+				for(UserPO manager:generalManagers){
+				MessageExaminePO message = new MessageExaminePO(manager.getID(),receiptBillPO.getDocID(),manager);
+				messageDataService.save(message);
+				}
+			}
+			return resultMessage;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

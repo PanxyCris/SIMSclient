@@ -449,9 +449,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public ResultMessage save(MessagePO message, UserPO user) throws RemoteException {
+	public ResultMessage save(MessagePO message) throws RemoteException {
 		// TODO Auto-generated method stub
-		return messageData.save(message, user);
+		return messageData.save(message);
 	}
 
 

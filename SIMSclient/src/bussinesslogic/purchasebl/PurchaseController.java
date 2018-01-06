@@ -8,10 +8,16 @@ import java.util.Date;
 
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.ResultMessage;
+import dataenum.UserRole;
 import dataenum.findtype.FindPurchaseType;
 import dataenum.findtype.FindSalesType;
+import dataenum.findtype.FindUserType;
+import dataservice.messagedataservice.MessageDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
+import dataservice.userdataservice.UserDataService;
 import po.PurchasePO;
+import po.UserPO;
+import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
@@ -26,8 +32,13 @@ public class PurchaseController implements PurchaseBLService{
 	private PurchaseDataService service;
 	private String date;
 
+	private UserDataService userDataService;
+	private MessageDataService messageDataService;
+
 	public PurchaseController() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
+		userDataService = RemoteHelper.getInstance().getUserDataService();
+		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
@@ -129,11 +140,19 @@ public class PurchaseController implements PurchaseBLService{
 	public ResultMessage submit(PurchaseVO Info) {
 		try {
 			PurchasePO po = PurchaseTransition.VOtoPO(Info);
-			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
-				return service.updatePurchase(po);
-			}
+			ResultMessage resultMessage = ResultMessage.FAIL;
+			if (service.insertPurchase(po) == ResultMessage.EXISTED)
+				resultMessage = service.updatePurchase(po);
 			else
-				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
+				 resultMessage = service.insertPurchase(po);
+		    if(resultMessage == ResultMessage.SUCCESS){
+					ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
+					for(UserPO manager:generalManagers){
+					MessageExaminePO message = new MessageExaminePO(manager.getID(),po.getId(),manager);
+					messageDataService.save(message);
+				}
+			}
+			return resultMessage;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
