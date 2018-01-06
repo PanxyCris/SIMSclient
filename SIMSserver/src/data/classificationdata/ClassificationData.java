@@ -37,15 +37,18 @@ public class ClassificationData {
 		children1.add(c12);
 
 		ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,"µÆ",null);
-     	ClassificationVPO c2 = new ClassificationVPO("0003","»ÆµÆ",true,"µÆ",null);
-		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
-	//    children.add(c1);
+     	ClassificationVPO c2 = new ClassificationVPO("0006","À¶µÆ",true,"°×µÆ",null);
+		ClassificationVPO c3 = new ClassificationVPO("0005","ÂÌµÆ",true,"°×µÆ",null);
+//	    children.add(c1);
 //		children.add(c2);
 //		children.add(c3);
 		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
 //  	d.insert(c2);
-		System.out.println(d.show().get(2).getName());
+//		d.insert(c1);
+//		d.insert(c3);
+		d.delete("ÂÌµÆ");
+		System.out.println(d.show().size());
 	}
 
 	private Connection conn;
