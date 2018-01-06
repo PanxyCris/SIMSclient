@@ -317,31 +317,31 @@ public class CommodityBL implements CommodityBLService{
             for(int i=1;i<cSheetL+1;i++){
                 for(int j=0;j<7;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getId());
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i-1).getId());
                         cSheet.addCell(labelC);
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getName());
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i-1).getName());
                         cSheet.addCell(labelC);
                 	}
                 	else if(j==2){
-                		Label labelC = new Label(j,i,commodityStockVOs.get(i).getModel());
+                		Label labelC = new Label(j,i,commodityStockVOs.get(i-1).getModel());
                         cSheet.addCell(labelC);
                 	}
                 	else if(j==3){
-                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getNumber()));
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i-1).getNumber()));
                         cSheet.addCell(labelC);
                 	}
                 	else if(j==4){
-                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getAvgRetailedPrice()));
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i-1).getAvgRetailedPrice()));
                         cSheet.addCell(labelC);
                 	}
                 	else if(j==5){
-                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getAvgPurPrice()));
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i-1).getAvgPurPrice()));
                         cSheet.addCell(labelC);
                 	}
                 	else{
-                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i).getLine()));
+                		Label labelC = new Label(j,i,String.valueOf(commodityStockVOs.get(i-1).getLine()));
                         cSheet.addCell(labelC);
                 	}
                 }
