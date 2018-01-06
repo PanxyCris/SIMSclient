@@ -1,4 +1,3 @@
-
 # 企业进销存系统 SIMS(Sales Invoicing Management System)
 
 # 软件体系结构描述文档
@@ -19,7 +18,7 @@
 | 王灿灿 | 2017-10-22 | 添加业务逻辑层的分解 |V1.3草稿|
 | 孙嘉杰| 2017-10-22 | 添加用户界面层 |V1.4草稿|
 | 孙嘉杰| 2018-1-2 | 初步修改 |V1.5草稿|
-
+| 王灿灿| 2018-1-6 | 修改完成库存管理人员文档、修改财务account文档 |v1.6草稿|
 
 
 #目录
@@ -346,14 +345,16 @@ JavaFX
 
   　业务逻辑层模块的职责如表8所示  
 
-| 模块             | 职责                              |
+| 模块            | 职责                              |
 | -------------- | ------------------------------- |
 | accountbl      | 负责实现银行账户界面所需要的服务                |
-| skdbl          | 负责实现制定付款单界面所需要的服务               |
-| xjfydbl        | 负责实现制定收款单所需要的服务                 |
-| setupaccountbl | 负责实现期初建账界面所需要的服务                |
-| checktablebl   | 负责实现查看销售明细表，经营历程表，经营情况表界面所需要的服务 |
+| paymentbillbl  | 负责实现制定付款单界面所需要的服务               |
+| receiptbillbl  | 负责实现制定收款单所需要的服务                |
+| accountbookbl  | 负责实现期初建账界面所需要的服务               |
+| tablebl        | 负责实现查看销售明细表，经营历程表，经营情况表界面所需要的服务 |
 | commoditybl    | 负责实现商品界面所需要的服务                  |
+| classificationbl| 负责实现商品分类管理界面所需要的服务          |
+| inventorybillbl| 负责实现库存类单据界面所需要的服务
 | memberbl       | 负责实现会员界面所需要的服务                  |
 | promotionbl    | 负责实现促销界面所需要的服务                  |
 | salesbl        | 负责实现销售界面所需要的服务                  |
@@ -365,78 +366,75 @@ JavaFX
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**User.getName**|语法|public String getName()|
-||前置条件|用户已经登录|
-||后置条件|返回登录用户的Name|
-|**User.getID**|语法|public int getID()|
-||前置条件|用户已经登录|
-||后置条件|返回用户的ID|
-|**User.getPassword**|语法|public String getPassWord()|
-||前置条件|用户已登录|
-||后置条件|返回用户的password|
-|**User.getRole**|语法|public UserRole getRole()|
-||前置条件|用户已经登录|
-||后置条件|返回用户的角色对象|
+|**User.login**|语法|`public boolean login(String id, String passWord)`|
+||前置条件|password符合输入规则|
+||后置条件|查找是否存在相应的用户，根据输入的password返回登录验证的bool值|
+|**User.getUserList**|语法|`public ArrayList<UserVO> getUserList()`|
+||前置条件|启动一个登录回合|
+||后置条件|返回所有的用户列表|
+|**User.find**|语法|`public ArrayList<UserVO> find(String info,FindUserType properties)`|
+||前置条件|关键词Info输入符合规则|
+||后置条件|返回符合关键词的用户的列表|
+|**User.insert**|语法|`public ResultMessage insert(UserVO vo)`|
+||前置条件|用户信息符合规则|
+||后置条件|查找该用户是否已存在，若不存在则插入，返回插入验证的结果|
+|**User.delete**|语法|`public ResultMessage delete(UserVO vo)`|
+||前置条件|用户信息符合规则|
+||后置条件|查找该用户是否已存在，若存在则删除该用户信息，返回删除验证的结果|
+|**User.update**|语法|`public ResultMessage update(UserVO vo)`|
+||前置条件|用户信息符合规则|
+||后置条件|查找该用户是否已存在，若存在则更新该用户信息，返回更新验证的结果|
 
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
+|Userdataservice.login(String id,String password)|根据id和password进行登录|
 |Userdataservice.insert(User PO)|插入单一持久化对象|
 |Userdataservice.delete(User PO)|删除单一持久化对象|
 |Userdataservice.update(User PO)|更新单一持久化对象|
-|Userdataservice.find(User PO)|查找单一持久化对象|
+|Userdataservice.find(String info,FindUserType type)|根据Info查找多个持久化对象|
+|Userdataservice.show()|返回数据库中所有持久化对象|
+<br/>
 
 　**commoditybl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Commodity.setID|语法|public void setID(int id)|
-||前置条件|ID符合输入规则|
-||后置条件|修改商品ID|
-|Commodity.setName|语法|public void setName(String name)|
-||前置条件|Name符合输入规则|
-||后置条件|修改商品Name|
-|Commodity.setModel|语法|Public void setModel(String model)|
-||前置条件|model符合输入规则|
-||后置条件|修改商品model|
-|Commodity.setClassification|语法|public void setClassification(String class)
-||前置条件|class输入符合规则|
-||后置条件|修改商品class|
-|Commodity.setNumber|语法|public void setNUmber(int number)|
-||前置条件|number输入符合规则|
-||后置条件|修改商品Number|
-|Commodity.setPurPrice|语法|public void PurPrice(double purPrice)|
-||前置条件|PurPrice输入符合规则|
-||后置条件|修改商品PurPrice|
-|Commodity.setRetailedPrice|语法|public void setRetailedPrice(double retailedPrice)|
-||前置条件|RetailedPrice输入符合规则|
-||后置条件|修改商品RetailedPrice|
-|Commodity.setRecentPurPrice|语法|public void setRecentPurPrice(double number)|
-||前置条件|RecentPurPrice输入符合规则|
-||后置条件|修改商品RecentPurPrice|
-|Commodity.setRecentRetailedPrice|语法|public void setRecentRetailedPrice(double number)|
-||前置条件|RecentRetailedPrice输入符合规则|
-||后置条件|修改商品RecentRetailedPrice|
-|Commodity.setWarmingValue|语法|public void setNUmber(int WarmingValue)|
-||前置条件|WarmingValue输入符合规则|
-||后置条件|修改商品WarmingValue|
-|Commodity.giftInventoryReceiptsMaking|语法|public void giftInventoryReceiptsMaking(BillVO vo)|
-||前置条件|启动一个库存赠送回合|
-||后置条件|在一个库存赠送回合中，制定库存赠送单|
-|Commodity.lossAndRevenueInventoryReceiptsMaking|语法|public void lossAndRevenueInventoryReceiptsMaking(BillVO vo)|
-||前置条件|启动一个库存报损报溢回合|
-||后置条件|在一个库存报损报溢回合中，制定库存报损报溢单|
-|Commodity.warningInventoryReceiptsMaking|语法|public void warningInventoryReceiptsMaking(BillVO vo)|
-||前置条件|启动一个库警戒回合|
-||后置条件|在一个库存警戒回合中，制定库存警戒单|
-|Commodity.check|语法|public void check()|
-||前置条件|需要进行库存查看|
-||后置条件|显示库存信息|
-|Commodity.stock|语法|public void stock()|
-||前置条件|需要进行库存盘点|
-||后置条件|显示库存信息|
+|Commodity.getID|语法|`public String getID()`|
+||前置条件|启动一个新增商品的回合|
+||后置条件|返回待新增商品的id|
+|Commodity.insert|语法|`public ResultMessage insert(CommodityVO vo)`
+||前置条件|商品信息符合规则|
+||后置条件|查找是否有该商品，若不存在则插入，返回插入验证的结果|
+|Commodity.delete|语法|`public void delete(CommodityVO vo)`|
+||前置条件|商品信息符合规则|
+||后置条件|查找是否有该商品，若存在则删除|
+|Commodity.update|语法|`public ResultMessage update(CommodityVO vo)`|
+||前置条件|商品信息符合规则|
+||后置条件|查找是否有该商品，若存在则更新商品信息，返回更新验证的结果|
+|Commodity.find|语法|`public ArrayList<CommodityVO> find(String info,FindCommodityType properties)`|
+||前置条件|关键词Info输入符合规则|
+||后置条件|返回符合关键词的商品列表|
+|Commodity.show|语法|`public ArrayList<CommodityVO> show()`|
+||前置条件|启动一个库存查看回合|
+||后置条件|返回所有的商品列表|
+|Commodity.getIDandName|语法|`public ArrayList<String> getIDandName()`|
+||前置条件|需要查找当前系统内的商品|
+||后置条件|返回所有商品的IDandName|
+|Commodity.getAllChildrenClass|语法|`public ArrayList<String> getAllChildrenClass()`|
+||前置条件|需要查找当前系统内的商品|
+||后置条件|返回所有分类下是商品的分类和分类子类为空的分类|
+|Commodity.check|语法|`public ArrayList<CommodityCheckVO> check(LocalDate start,LocalDate end)`|
+||前置条件|启动一个库存查看回合，得到起止日期|
+||后置条件|根据起止日期返回库存查看List|
+|Commodity.stock|语法|`public ArrayList<CommodityStockVO> stock()`|
+||前置条件|启动一个库存盘点回合|
+||后置条件|返回当天的库存快照List|
+|Commodity.exportReport|语法|`public void exportReport(ArrayList<CommodityStockVO>`|
+||前置条件|得到当天的库存快照List|
+||后置条件|导出excel表格|
 
 <br/>
 
@@ -444,10 +442,87 @@ JavaFX
 | --- | --- |
 |服务名|服务|
 |Commodity.insert(CommodityVO vo)|插入单一持久化对象|
-|Commodity.delelte(CommodityVO vo)|删除单一持久化对象|
+|Commodity.delelte(String id)|删除单一持久化对象|
 |Commodity.update(CommodityVO vo)|更新单一持久化对象|
-|Commodity.find(CommodityVO vo)|查找单一持久化对象|
+|Commodity.find(String keywords,FindCommodityType type)|根据keywords查找多个持久化对象|
+|Commodity.show()|返回数据库中所有持久化对象|
+<br/>
 
+　**classificationbl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|Classification.getID|语法|`public String getID()`|
+||前置条件|启动一个新增分类的回合|
+||后置条件|返回待新增分类的ID|
+|Classification.insert|语法|`public ResultMessage insert(ClassificationVPO vpo)`|
+||前置条件|分类信息符合规则|
+||后置条件|查找是否存在该分类，若不存在则插入，返回插入验证的结果|
+|Classification.delete|语法|`public void delete(ClassificationVPO vpo)`|
+||前置条件|分类信息符合规则|
+||后置条件|查找是否有该商品，若存在则删除|
+|Classification.update|语法|`public ResultMessage update(ClassificationVPO vpo)`|
+||前置条件|分类信息符合规则|
+||后置条件|查找是否有该商品，若存在则更新，返回更新验证的结果|
+|Classification.showName|语法|`public ArrayList<String> showName()`|
+||前置条件|需要查找当前系统内所有的分类|
+||后置条件|返回所有分类的name|
+|Classification.getClass|语法|`public ClassificationVPO getClass(String name)`|
+||前置条件|name符合规则|
+||后置条件|返回根据name找到的分类|
+|Classification.getRoot|语法|`public ClassificationVPO getRoot()`|
+||前置条件|启动一个商品分类管理的回合|
+||后置条件|返回商品分类的根节点|
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Classification.insert()|插入单一持久化对象|
+|Classification.update|更新打印持久化对象|
+|Classification.delete|删除单一持久化对象|
+|Classification.getRoot|返回数据库中根节点持久化对象|
+|Classification.find(String name)|根据name查找单一持久化对象|
+|Classification.show|返回数据库中所有持久化对象|
+|Classification.getId|返回待新增分类的Id|
+<br/>
+
+　**Inventorybl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|Inventory.getID|语法|`public String getId(BillType type)`|
+||前置条件|启动一个新增库存类单据的回合|
+||后置条件|返回待新增单据的ID|
+|Inventory.save|语法|`public ResultMessage save(InventoryBillVO vo)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否存在该分类，若不存在则新增，存在则更新，返回保存验证的结果|
+|Inventory.delete|语法|`public void delete(InventoryBillVO clickedItem)`|
+||前置条件|单据符合规则|
+||后置条件|查找是否有该单据，若存在则删除|
+|Inventory.submit|语法|`public ResultMessage submit(InventoryBillVO clickedItem)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否有该单据，若存在则修改单据状态为已提交，返回提交验证的结果|
+|Inventory.show|语法|`public ArrayList<InventoryBillVO> show()`|
+||前置条件|启动一个查看过往单据的回合|
+||后置条件|返回系统中所有的库存类单据的list|
+|Inventory.find|语法|`public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type)`|
+||前置条件|text符合规则|
+||后置条件|返回符合text的库存类单据的列表|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Inventory.insert|插入单一持久化对象|
+|Inventory.update|更新打印持久化对象|
+|Inventory.delete|删除单一持久化对象|
+|Inventory.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|Inventory.show|返回数据库中所有持久化对象|
+<br/>
 
 　**memberbl模块的接口规范**
 
@@ -510,18 +585,24 @@ JavaFX
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Account.check|语法|public AccountVO check(String message)|
-||前置条件|message符合输入规则|
-||后置条件|返回待查找的账户|
-|Account.newBuild|语法|public AccountVO newBuild()|
-||前置条件|需要建立新的账户|
-||后置条件|增加新的账户|
-|Account.delete|语法|public boolean delete(AccountVO accountVO)|
-||前置条件|需要删除账户|
-||后置条件|删除账户|
-|Account.modify|语法|public boolean modify(String name)|
-||前置条件|name符合输入规则|
-||后置条件|修改账户信息|
+|Account.find|语法|`public ArrayList<AccountVO> find(String message, FindAccountType findType)`|
+||前置条件|关键词message符合输入规则|
+||后置条件|返回符合关键词的账户列表|
+|Account.add|语法|`public ResultMessage add(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若不存在则新增，返回新增验证的结果|
+|Account.delete|语法|`public void delete(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则删除|
+|Account.modify|语法|`public ResultMessage modify(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则更新数据，返回更新验证的结果|
+|Account.judgeLegal|语法|`public ResultMessage judgeLegal(AccountVO accountVO)`|
+||前置条件|需要对账户进行新增修改操作|
+||后置条件|返回判断验证的结果|
+|Account.show|语法|`public ArrayList<AccountVO> getAccountList()`|
+||前置条件|启动一个账户管理回合|
+||后置条件|返回系统中所有的账户的List|
 
 
 <br/>
@@ -529,10 +610,13 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|AccountDataService.check(String message)|根据信息查找单一持久化对象|
-|AccountDataService.newBuild()|新建单一持久化对象|
-|AccountDataService.delete(AccountPO accountPO)|删除单一持久化对象|
-|AccountDataService.modify(String name)|更新单一持久化对象|
+|AccountDataService.find(String keywords, FindAccountType type)|根据keywords查找单一持久化对象|
+|AccountDataService.insert|新建单一持久化对象|
+|AccountDataService.delete|删除单一持久化对象|
+|AccountDataService.update|更新单一持久化对象|
+|AccountDataService.show|返回数据库中所有持久化对象|
+|AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
+<br/>
 
 　**mfdocbl模块的接口规范**
 
