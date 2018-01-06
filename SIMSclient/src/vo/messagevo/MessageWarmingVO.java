@@ -7,8 +7,8 @@ public class MessageWarmingVO extends MessageVO{
 	private Integer currentNumber;
 
 
-	public MessageWarmingVO(String name,Integer currentNumber,Integer warmingNumber){
-		super(getFormatInfo(name,currentNumber,warmingNumber));
+	public MessageWarmingVO(String messageID,String name,Integer currentNumber,Integer warmingNumber){
+		super(messageID,getFormatInfo(name,currentNumber,warmingNumber));
 		this.name = name;
 		this.warmingNumber = warmingNumber;
 		this.currentNumber = currentNumber;

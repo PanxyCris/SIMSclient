@@ -65,14 +65,14 @@ public class ClassManageController extends InventoryManagerController{
 		}
 		else{
 			System.out.println(service.getClass(classChoice.getValue()).getName());
-		ClassificationVPO vo = new ClassificationVPO(idLabel.getText(),nameField.getText(),true,
+		    ClassificationVPO vo = new ClassificationVPO(idLabel.getText(),nameField.getText(),true,
 				  classChoice.getValue(),null);
 	        ResultMessage message = service.insert(vo);
 
 	    	        switch(message){
 	    	        case EXISTED:Alert existed = new Alert(Alert.AlertType.WARNING,"该分类已存在");
                                     existed.showAndWait();break;
-	    	        case SUCCESS:fresh();break;
+	    	        case SUCCESS:initData(user);break;
 	    	        default:Alert error = new Alert(Alert.AlertType.ERROR,message.value);
                     error.showAndWait();break;
 	    	        }
@@ -95,15 +95,16 @@ public class ClassManageController extends InventoryManagerController{
 		classList.addAll(service.showName());
 		classChoice.setItems(classList);
 		initInsert();
-
 		edit();
 		manageInit();
+
 	}
 	/**
 	 * 加入所有子节点
 	 * @param item
 	 */
 	public void addAllChildren(TreeItem<ClassificationVPO> item){
+		item.setExpanded(true);
 		ArrayList<ClassificationVPO> tmpList = item.getValue().getChildren();
 		  if(tmpList!=null){
 		     ObservableList<TreeItem<ClassificationVPO>> list = FXCollections.observableArrayList();

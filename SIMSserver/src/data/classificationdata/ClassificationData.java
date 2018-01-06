@@ -44,8 +44,8 @@ public class ClassificationData {
 //		children.add(c3);
 		 ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null);
 
-		d.insert(c2);
-	//	System.out.println(d.show().get(2).getName());
+//  	d.insert(c2);
+		System.out.println(d.show().get(2).getName());
 	}
 
 	private Connection conn;
@@ -56,15 +56,16 @@ public class ClassificationData {
 	public ResultMessage insert(ClassificationVPO po) {
 
 			try {
-			String sql0 = "select count(*) from classification where name = ?";
-			PreparedStatement ps0 = conn.prepareStatement(sql0);
-			ps0.setString(1, po.getName());
-//			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery();
-			int count = 0;
-			if (rs.next()) {
-				count = rs.getInt(1);
-				if (count == 0) {
+//			String sql0 = "select count(*) from classification where name = ?";
+//			PreparedStatement ps0 = conn.prepareStatement(sql0);
+//			ps0.setString(1, po.getName());
+////			Statement ps0 = conn.createStatement();
+//			ResultSet rs = ps0.executeQuery();
+//			int count = 0;
+//			if (rs.next()) {
+//				count = rs.getInt(1);
+//				System.out.println(count);
+//				if (count == 0) {
 					String sql = "" + "insert into classification(name, object) values (?,?)";
 
 					conn.setAutoCommit(false);
@@ -75,12 +76,12 @@ public class ClassificationData {
 			        conn.commit();
 			        ps.close();
 			        return ResultMessage.SUCCESS;
-				}
-				else {
-					System.out.println("分类已存在");
-					return ResultMessage.EXISTED;
-				}
-			}
+//				}
+//				else {
+//					System.out.println("分类已存在");
+//					return ResultMessage.EXISTED;
+//				}
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
