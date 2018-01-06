@@ -175,13 +175,9 @@ public class ReceiveCheckBillController extends FinancialStaffController{
                         	ResultMessage message = service.commit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
-                                printInfo(ResultMessage.COMMITED);
-                                try {
-									fresh();
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+                           	 submitInit();
+                             deleteInit();
+                             redoInit();
                             }
                             else
                          	   printWrong(message);

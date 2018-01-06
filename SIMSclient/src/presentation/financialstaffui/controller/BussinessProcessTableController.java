@@ -23,11 +23,11 @@ public class BussinessProcessTableController extends ViewTableController{
 		else{
 		BillType type = BillType.getType(receiptChoice.getValue());
 		switch(type){
-		case PURCHASEBILL:changeStage("ExaminePurchaseBillUI",user,null,null);break;
-		case INVENTORYBILL:changeStage("ExamineInventoryBillUI",user,null,null);break;
-		case SALESBILL:changeStage("ExamineSakesBillUI",user,null,null);break;
-		case SKD:changeStage("ExaminePaymentBillUI",user,null,null);break;
-		case XJFYD:changeStage("ExamineReceiveBillUI",user,null,null);break;
+		case PURCHASEBILL:changeStage("CheckPurchaseBillUI",user,null,null);break;
+		case INVENTORYBILL:changeStage("CheckInventoryBillUI",user,null,null);break;
+		case SALESBILL:changeStage("CheckSakesBillUI",user,null,null);break;
+		case SKD:changeStage("CheckPaymentBillUI",user,null,null);break;
+		case XJFYD:changeStage("CheckReceiveBillUI",user,null,null);break;
 		default:break;
 		}
 		}

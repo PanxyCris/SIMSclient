@@ -23,8 +23,8 @@ public class ViewTableController extends FinancialStaffController{
 		else{
 		TableType type = TableType.getType(tableChoice.getValue());
 		switch(type){
-		case BUSINESS_HISTORY_SCHEDULE:changeStage("BussinessHistoryTableUI",user,null,null);
-		case SALE_SCHEDULE:changeStage("BussinessSituationTableUI",user,null,null);
+		case BUSINESS_HISTORY_SCHEDULE:changeStage("BussinessProcessTableUI",user,null,null);break;
+		case SALE_SCHEDULE:changeStage("BussinessSituationTableUI",user,null,null);break;
 	    default:changeStage("SaleDetailTableUI",user,null,null);
 		}
 		}
