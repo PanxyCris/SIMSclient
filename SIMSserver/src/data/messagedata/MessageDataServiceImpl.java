@@ -39,12 +39,12 @@ public class MessageDataServiceImpl implements MessageDataService{
 	}
 
 	@Override
-	public ResultMessage save(MessagePO message, UserPO user) {
+	public ResultMessage save(MessagePO message) {
 		String sql = "" + "update message set object = ? where id = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, message);
-			ps.setString(2, user.getID());
+			ps.setString(2, message.getMessageID());
 			ps.executeUpdate();
 			ps.close();
 			return ResultMessage.SUCCESS;
@@ -71,7 +71,9 @@ public class MessageDataServiceImpl implements MessageDataService{
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
                     MessagePO po = (MessagePO)in.readObject();                   //¶Á³ö¶ÔÏó
 
-                    list.add(po);
+                    if (user.getID().equals(po.getMessageID())) {
+                         list.add(po);
+                    }
                 }
 			}
 			rs.close();

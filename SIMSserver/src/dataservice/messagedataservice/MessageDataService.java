@@ -10,7 +10,7 @@ import po.messagepo.MessagePO;
 
 public interface MessageDataService extends Remote {
 
-	public ResultMessage save(MessagePO message,UserPO user) throws RemoteException;
+	public ResultMessage save(MessagePO message) throws RemoteException;
 
 	public ArrayList<MessagePO> getMessage(UserPO user) throws RemoteException;
 
