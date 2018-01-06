@@ -1,6 +1,7 @@
 package test.purchase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,6 +39,6 @@ public class testType {
 //		System.out.println(service.getPurchaseID());
 		
 		
-		assertEquals("JHD-20180105-00001", service.getPurchaseID());
+		assertEquals(l);
 	}
 }
