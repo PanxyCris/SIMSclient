@@ -38,7 +38,8 @@ public class MessageDataServiceImpl implements MessageDataService{
 		try {
 			userService = new UserDataServiceImpl();
 			data.save(new MessagePO(info), userService.showUser().get(0));
-			System.out.println(data.getMessage(userService.findUser("¿ÓΩ‹", FindUserType.NAME).get(0)).get(0).getInfo());
+			System.out.println(userService.showUser().get(0).getID());
+			System.out.println(data.getMessage(userService.findUser("000002", FindUserType.ID).get(0)).get(0).getInfo());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

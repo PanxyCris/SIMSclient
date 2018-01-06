@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.generalmanagerui.controller.BussinessProcessTableController;
+import presentation.financialstaffui.controller.BussinessProcessTableController;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;

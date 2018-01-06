@@ -58,27 +58,27 @@ public class SaleScheduleBL implements SaleScheduleBLService {
             for(int i=1;i<sSheetL+1;i++){  
                 for(int j=0;j<6;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,String.valueOf(sale.get(i).getDate()));  
+                		Label labelC = new Label(j,i,String.valueOf(sale.get(i-1).getDate()));  
                         sSheet.addCell(labelC); 
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,sale.get(i).getName());  
+                		Label labelC = new Label(j,i,sale.get(i-1).getName());  
                         sSheet.addCell(labelC); 
                 	}
                 	else if(j==2){
-                		Label labelC = new Label(j,i,sale.get(i).getModel());  
+                		Label labelC = new Label(j,i,sale.get(i-1).getModel());  
                         sSheet.addCell(labelC); 
                 	}
                 	else if(j==3){
-                		Label labelC = new Label(j,i,String.valueOf(sale.get(i).getNumber()));  
+                		Label labelC = new Label(j,i,String.valueOf(sale.get(i-1).getNumber()));  
                         sSheet.addCell(labelC); 
                 	}
                 	else if(j==4){
-                		Label labelC = new Label(j,i,String.valueOf(sale.get(i).getPrice()));  
+                		Label labelC = new Label(j,i,String.valueOf(sale.get(i-1).getPrice()));  
                         sSheet.addCell(labelC); 
                 	}
                 	else{
-                		Label labelC = new Label(j,i,String.valueOf(sale.get(i).getSum()));  
+                		Label labelC = new Label(j,i,String.valueOf(sale.get(i-1).getSum()));  
                         sSheet.addCell(labelC); 
                 	}
                 }  
@@ -102,10 +102,10 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 				LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
 				ArrayList<CommodityItemVO> commodityItemVOs=salesVOs.get(i).getCommodity();
 				for (int j = 0; j < commodityItemVOs.size(); j++) {
-					String name=commodityItemVOs.get(i).getName();
-					String model=commodityItemVOs.get(i).getModel();
-					Integer number=commodityItemVOs.get(i).getNumber();
-					Double price=commodityItemVOs.get(i).getPrice();
+					String name=commodityItemVOs.get(j).getName();
+					String model=commodityItemVOs.get(j).getModel();
+					Integer number=commodityItemVOs.get(j).getNumber();
+					Double price=commodityItemVOs.get(j).getPrice();
 					saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 					saleScheduleVOs.add(saleScheduleVO);
 				}
@@ -125,10 +125,10 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 				LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
 				ArrayList<CommodityItemVO> commodityItemVOs=salesVOs.get(i).getCommodity();
 				for (int j = 0; j < commodityItemVOs.size(); j++) {
-					String name=commodityItemVOs.get(i).getName();
-					String model=commodityItemVOs.get(i).getModel();
-					Integer number=commodityItemVOs.get(i).getNumber();
-					Double price=commodityItemVOs.get(i).getPrice();
+					String name=commodityItemVOs.get(j).getName();
+					String model=commodityItemVOs.get(j).getModel();
+					Integer number=commodityItemVOs.get(j).getNumber();
+					Double price=commodityItemVOs.get(j).getPrice();
 					saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 					saleScheduleVOs.add(saleScheduleVO);
 				}
@@ -151,10 +151,10 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 				String wareHouse=salesVOs.get(i).getWarehouseString();
 				ArrayList<CommodityItemVO> commodityItemVOs=salesVOs.get(i).getCommodity();
 				for (int j = 0; j < commodityItemVOs.size(); j++) {
-					String name=commodityItemVOs.get(i).getName();
-					String model=commodityItemVOs.get(i).getModel();
-					Integer number=commodityItemVOs.get(i).getNumber();
-					Double price=commodityItemVOs.get(i).getPrice();
+					String name=commodityItemVOs.get(j).getName();
+					String model=commodityItemVOs.get(j).getModel();
+					Integer number=commodityItemVOs.get(j).getNumber();
+					Double price=commodityItemVOs.get(j).getPrice();
 					if(type==FindSaleScheduleType.NAME&&name==info){
 						saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 						saleScheduleVOs.add(saleScheduleVO);

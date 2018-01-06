@@ -206,14 +206,9 @@ public class SalesCheckBillController extends SaleStockStaffController{
                         	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.submit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
-
-                                printInfo(ResultMessage.COMMITED);
-                                try {
-									fresh();
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+                            	 submitInit();
+                                 deleteInit();
+                                 redoInit();
                             }
                             else
                          	   printWrong(message);

@@ -14,10 +14,10 @@ public class AccountBookBL implements AccountBookBLService{
 
 	private AccountBookVO accountBookVO;
 	private AccountBookPO accountBookPO;
-	
+
 	private AccountBookTransition accountBookTransition;
 	private AccountBookDataService accountBookDataService;
-	
+
 	public AccountBookBL() {
 		accountBookTransition=new AccountBookTransition();
 		accountBookDataService=RemoteHelper.getInstance().getSetUpAccountDataService();
@@ -32,19 +32,19 @@ public class AccountBookBL implements AccountBookBLService{
 			}
 		}
 		accountBookPO=accountBookTransition.VOtoPO(accountBookVO);
-		
+
 		try {
 			return accountBookDataService.insertAccountBook(accountBookPO);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 	}
 
 	@Override
 	public ArrayList<AccountBookVO> show() {
-		
+
 		ArrayList<AccountBookVO> accountBookVOs=new ArrayList<>();
 		try {
 			ArrayList<AccountBookPO> accountBookPOs=accountBookDataService.showAccountBook();
@@ -54,7 +54,7 @@ public class AccountBookBL implements AccountBookBLService{
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		return accountBookVOs;
 	}
 

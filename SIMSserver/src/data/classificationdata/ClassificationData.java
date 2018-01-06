@@ -36,16 +36,16 @@ public class ClassificationData {
 		children1.add(c11);
 		children1.add(c12);
 
-	//	ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,d.find("µÆ").get(0),null);
-//		ClassificationVPO c2 = new ClassificationVPO("0004","»ÆµÆ",true,d.find("°×³ãµÆ").get(0),null);
+		ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,"µÆ",null);
+     	ClassificationVPO c2 = new ClassificationVPO("0003","»ÆµÆ",true,"µÆ",null);
 		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
 	//    children.add(c1);
 //		children.add(c2);
 //		children.add(c3);
 		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
-		d.insert(root);
-		System.out.println(d.show().get(0).getName());
+//  	d.insert(c2);
+		System.out.println(d.show().get(2).getName());
 	}
 
 	private Connection conn;
@@ -56,15 +56,16 @@ public class ClassificationData {
 	public ResultMessage insert(ClassificationVPO po) {
 
 			try {
-			String sql0 = "select count(*) from classification where name = ?";
-			PreparedStatement ps0 = conn.prepareStatement(sql0);
-			ps0.setString(1, po.getName());
-//			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery();
-			int count = 0;
-			if (rs.next()) {
-				count = rs.getInt(1);
-				if (count == 0) {
+//			String sql0 = "select count(*) from classification where name = ?";
+//			PreparedStatement ps0 = conn.prepareStatement(sql0);
+//			ps0.setString(1, po.getName());
+////			Statement ps0 = conn.createStatement();
+//			ResultSet rs = ps0.executeQuery();
+//			int count = 0;
+//			if (rs.next()) {
+//				count = rs.getInt(1);
+//				System.out.println(count);
+//				if (count == 0) {
 					String sql = "" + "insert into classification(name, object) values (?,?)";
 
 					conn.setAutoCommit(false);
@@ -73,13 +74,14 @@ public class ClassificationData {
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
+			        ps.close();
 			        return ResultMessage.SUCCESS;
-				}
-				else {
-					System.out.println("·ÖÀàÒÑ´æÔÚ");
-					return ResultMessage.EXISTED;
-				}
-			}
+//				}
+//				else {
+//					System.out.println("·ÖÀàÒÑ´æÔÚ");
+//					return ResultMessage.EXISTED;
+//				}
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

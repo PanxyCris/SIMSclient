@@ -54,7 +54,9 @@ public class SaleDetailTableController extends ViewTableController{
 
 	@FXML
 	public void printout() throws Exception{
-         service.exportReport();
+		ArrayList<SaleScheduleVO> saleList = new ArrayList<>();
+		saleList.addAll(list);
+        service.exportReport(saleList);
 	}
 
 	@FXML

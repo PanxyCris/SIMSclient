@@ -1,5 +1,6 @@
 package bussinesslogic.tablebl;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +16,11 @@ import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 
@@ -30,7 +36,14 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 	
 	@Override
 	public ArrayList<PurchaseVO> show() {
-		return purchaseBLService.show();
+		ArrayList<PurchaseVO> out=new ArrayList<>();
+		ArrayList<PurchaseVO> purchaseVOs=purchaseBLService.show();
+		for (int i = 0; i < purchaseVOs.size(); i++) {
+			if(purchaseVOs.get(i).getState()==BillState.SUCCESS){
+				out.add(purchaseVOs.get(i));
+			}
+		}
+		return out;
 	}
 
 	@Override
@@ -87,7 +100,54 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 
 	@Override
 	public void exportReport(ArrayList<PurchaseVO> table) {
-		
+		WritableWorkbook wwb = null;  
+	 	String fileName="C:/Users/user/Desktop/PurchaseSchedule.xlsx";
+        try {  
+            // 创建一个可写入的工作簿（WorkBook）对象,  
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
+            wwb = Workbook.createWorkbook(new File(fileName));  
+              
+            // 创建一个可写入的工作表   
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+            WritableSheet bSheet = wwb.createSheet("PurchaseTable", 0);
+            
+            int bSheetL=table.size();
+           
+            Label ini = new Label(0,0,"Date");  
+            bSheet.addCell(ini);
+            ini=new Label(1, 0, "Id");//initialize
+            bSheet.addCell(ini);
+            ini=new Label(2, 0, "Type");
+            bSheet.addCell(ini);
+            ini=new Label(3, 0, "Operator");
+            bSheet.addCell(ini);
+            
+            for(int i=1;i<bSheetL+1;i++){  
+                for(int j=0;j<4;j++){
+                	if(j==0){
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));  
+                        bSheet.addCell(labelC); 
+                	}
+                	else if(j==1){
+                		Label labelC = new Label(j,i,table.get(i-1).getId());  
+                        bSheet.addCell(labelC); 
+                	}
+                	else if(j==2){
+                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());  
+                        bSheet.addCell(labelC); 
+                	}
+                	else{
+                		Label labelC = new Label(j,i,table.get(i-1).getOperator());  
+                        bSheet.addCell(labelC); 
+                	}
+                }  
+            }                       
+            wwb.write();// 从内从中写入文件中  
+            wwb.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        System.out.println("生成Excel文件"+fileName+"成功");
 	}
 
 	@Override

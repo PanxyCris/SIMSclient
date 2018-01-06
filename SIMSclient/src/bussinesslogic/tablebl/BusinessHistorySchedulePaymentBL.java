@@ -1,5 +1,6 @@
 package bussinesslogic.tablebl;
 
+import java.io.File;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
@@ -30,7 +35,14 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 	
 	@Override
 	public ArrayList<PaymentBillVO> show() {
-		return paymentBillBLService.show();
+		ArrayList<PaymentBillVO> out=new ArrayList<>();
+		ArrayList<PaymentBillVO> paymentBillVOs=paymentBillBLService.show();
+		for (int i = 0; i < paymentBillVOs.size(); i++) {
+			if(paymentBillVOs.get(i).getState()==BillState.SUCCESS){
+				out.add(paymentBillVOs.get(i));
+			}
+		}
+		return out;
 	}
 
 	@Override
@@ -40,7 +52,7 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		ArrayList<PaymentBillVO> paymentBillVOs=paymentBillBLService.show();
 		for (int i = 0; i < paymentBillVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(paymentBillVOs.get(i).getId());
-			if(localDate.isBefore(end)&&localDate.isAfter(start)){
+			if(localDate.isBefore(end)&&localDate.isAfter(start)&&(paymentBillVOs.get(i).getState()==BillState.SUCCESS)){
 				out.add(paymentBillVOs.get(i));
 			}
 		}
@@ -75,7 +87,60 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public void exportReport(ArrayList<PaymentBillVO> table) {
-		
+		WritableWorkbook wwb = null;  
+	 	String fileName="C:/Users/user/Desktop/PaymentSchedule.xlsx";
+        try {  
+            // 创建一个可写入的工作簿（WorkBook）对象,  
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
+            wwb = Workbook.createWorkbook(new File(fileName));  
+              
+            // 创建一个可写入的工作表   
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+            WritableSheet pSheet = wwb.createSheet("PaymentTable", 0);
+            
+            int bSheetL=table.size();
+           
+            Label ini = new Label(0,0,"Date");  
+            pSheet.addCell(ini);
+            ini=new Label(1, 0, "Id");//initialize
+            pSheet.addCell(ini);
+            ini=new Label(2, 0, "Type");
+            pSheet.addCell(ini);
+            ini=new Label(3, 0, "Operator");
+            pSheet.addCell(ini);
+            ini=new Label(4, 0, "Total");
+            pSheet.addCell(ini);
+            
+            for(int i=1;i<bSheetL+1;i++){  
+                for(int j=0;j<5;j++){
+                	if(j==0){
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));  
+                        pSheet.addCell(labelC); 
+                	}
+                	else if(j==1){
+                		Label labelC = new Label(j,i,table.get(i-1).getId());  
+                        pSheet.addCell(labelC); 
+                	}
+                	else if(j==2){
+                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());  
+                        pSheet.addCell(labelC); 
+                	}
+                	else if(j==3){
+                		Label labelC = new Label(j,i,table.get(i-1).getUserID());  
+                        pSheet.addCell(labelC); 
+                	}
+                	else{
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getTotal()));  
+                        pSheet.addCell(labelC); 
+                	}
+                }  
+            }                       
+            wwb.write();// 从内从中写入文件中  
+            wwb.close();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        System.out.println("生成Excel文件"+fileName+"成功");
 	}
 
 	@Override//红冲生成一样的单据的话是否意味着单据的id也一样？不是的话该怎么存？

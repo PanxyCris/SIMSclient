@@ -130,7 +130,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.DRAFT);
+        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.getType(typeLabel.getText()),BillState.DRAFT);
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
@@ -149,7 +149,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
-        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.PURCHASEBILL,BillState.COMMITED);
+        		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.getType(typeLabel.getText()),BillState.COMMITED);
          ResultMessage message = service.submit(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.COMMITED);

@@ -1,6 +1,7 @@
 package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
+
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.BussinessHistorySchedulePurchaseBL;
@@ -20,7 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.generalmanagerui.controller.BussinessProcessTableController;
+import presentation.financialstaffui.controller.BussinessProcessTableController;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
