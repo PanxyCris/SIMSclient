@@ -146,7 +146,7 @@ public class SalesMakeBillController extends MakeReceiptController{
          SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
         		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
         		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
-        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,type);
+        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,BillType.getType(typeLabel.getText()));
          ResultMessage message = service.save(vo);
          if(message == ResultMessage.SUCCESS){
              printInfo(ResultMessage.SAVED);
@@ -170,7 +170,7 @@ public class SalesMakeBillController extends MakeReceiptController{
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
        		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
-       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,type);
+       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,BillType.getType(typeLabel.getText()));
 		ResultMessage message = service.submit(vo);
 	       if(message == ResultMessage.SUCCESS){
 	           printInfo(ResultMessage.COMMITED);

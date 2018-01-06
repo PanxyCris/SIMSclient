@@ -36,16 +36,16 @@ public class ClassificationData {
 		children1.add(c11);
 		children1.add(c12);
 
-	//	ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,d.find("µÆ").get(0),null);
-//		ClassificationVPO c2 = new ClassificationVPO("0004","»ÆµÆ",true,d.find("°×³ãµÆ").get(0),null);
+		ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,"µÆ",null);
+     	ClassificationVPO c2 = new ClassificationVPO("0003","»ÆµÆ",true,"µÆ",null);
 		ClassificationVPO c3 = new ClassificationVPO("0004","ºÚµÆ",true,null,null);
 	//    children.add(c1);
 //		children.add(c2);
 //		children.add(c3);
 		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
 
-		d.insert(root);
-		System.out.println(d.find("µÆ").get(0).getId());
+		d.insert(c2);
+	//	System.out.println(d.show().get(2).getName());
 	}
 
 	private Connection conn;
@@ -73,6 +73,7 @@ public class ClassificationData {
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
+			        ps.close();
 			        return ResultMessage.SUCCESS;
 				}
 				else {

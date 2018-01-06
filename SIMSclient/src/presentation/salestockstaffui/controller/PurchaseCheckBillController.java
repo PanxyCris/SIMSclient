@@ -222,6 +222,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+                        	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.submit(clickedItem);
                             if(message == ResultMessage.SUCCESS){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
