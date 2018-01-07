@@ -37,17 +37,17 @@ public class MessageDataServiceImpl implements MessageDataService{
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
 		MessageWarmingPO message = new MessageWarmingPO("000003","N JIAACD",400,500);
 		data.save(message);
-		System.out.println(data.getMessage(new UserPO("000004",null,null,null,null)).get(0).getInfo());
+		System.out.println(data.getMessage(new UserPO("000003",null,null,null,null)).size());
 
 	}
 
 	@Override
 	public ResultMessage save(MessagePO message) {
-		String sql = "" + "update message set object = ? where id = ?";
+		String sql = "" + "insert into message(id, object) values (?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setObject(1, message);
-			ps.setString(2, message.getMessageID());
+			ps.setString(1, message.getMessageID());
+			ps.setObject(2, message);
 			ps.executeUpdate();
 			ps.close();
 			return ResultMessage.SUCCESS;
