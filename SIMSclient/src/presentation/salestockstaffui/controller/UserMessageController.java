@@ -1,5 +1,6 @@
 package presentation.salestockstaffui.controller;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -29,6 +30,17 @@ public class UserMessageController extends SaleStockStaffController{
 	public void initData(UserVO user) {
 		this.user = user;
 		ArrayList<MessageVO> messages = service.getMessage(user);
+		for(MessageVO mark:messages){
+			if(!mark.getHasRead()){
+			mark.setHasRead(true);
+			try {
+				service.saveMessage(mark);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
 		if(messages!=null)
         list.addAll(messages);
         messageTable.setItems(list);
@@ -37,5 +49,4 @@ public class UserMessageController extends SaleStockStaffController{
         messageList.setCellValueFactory(
                 new PropertyValueFactory<MessageVO,String>("info"));
 	}
-
 }

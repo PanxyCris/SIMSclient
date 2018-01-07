@@ -1,5 +1,6 @@
 package presentation.inventorymanagerui.controller;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -28,8 +29,18 @@ public class UserMessageController extends InventoryManagerController{
 
 	public void initData(UserVO user) {
 		this.user = user;
-		UserVO vo = readUser();
-		ArrayList<MessageVO> messages = service.getMessage(vo);
+		ArrayList<MessageVO> messages = service.getMessage(user);
+		for(MessageVO mark:messages){
+			if(!mark.getHasRead()){
+			mark.setHasRead(true);
+			try {
+				service.saveMessage(mark);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+		}
 		if(messages!=null)
         list.addAll(messages);
         messageTable.setItems(list);
@@ -38,5 +49,4 @@ public class UserMessageController extends InventoryManagerController{
         messageList.setCellValueFactory(
                 new PropertyValueFactory<MessageVO,String>("info"));
 	}
-
 }

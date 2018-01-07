@@ -82,7 +82,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
             vo.setState(BillState.SUCCESS);
             updateBill(vo);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(user.getID(),user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
@@ -98,7 +98,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(user.getID(),user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.FAIL)

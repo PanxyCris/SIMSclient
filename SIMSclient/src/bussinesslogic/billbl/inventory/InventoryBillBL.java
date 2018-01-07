@@ -77,7 +77,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 		    {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(manager.getID(),inventoryBillPO.getId(),manager);
+				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),false,inventoryBillPO.getId(),manager);
 				messageDataService.save(message);
 				}
 			}
