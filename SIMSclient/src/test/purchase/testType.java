@@ -31,7 +31,7 @@ public class testType {
 	
 	@Before
 	public void init() throws Exception {
-//		vo = new PurchaseVO("JHD-20171218-00002", "Íõ²Ó²Ó", Warehouse.WAREHOUSE2,"Íõ²Ó²Ó", commodities, note, sum, BillType.PURCHASEBILL, BillState.COMMITED);
+		service = new PurchaseController();
 	}
 	
 	@Test
@@ -39,6 +39,6 @@ public class testType {
 //		System.out.println(service.getPurchaseID());
 		
 		
-		assertEquals(l);
+		assertEquals("JHD-20180107-00001", service.getPurchaseID());
 	}
 }
