@@ -109,60 +109,73 @@
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**AccountController.startManage**|语法|public ResultMessage startManage()|
-||前置条件|已创建一个AccountBL对象，并且输入符合规则|
-||后置条件|调用AccountBL领域对象的startManage方法|
-|**AccountController.find**|语法|public AccoutPO find(String message)|
-||前置条件|已创建一个AccountBL对象，并且输入符合规则|
+|**AccountController.find**|语法|`public AccoutPO find(String message,FindAccountType findType)`|
+||前置条件|已创建一个AccountBL对象，并且输入的message符合规则|
 ||后置条件|调用AccountBL领域对象的check方法|
-|**AccountController.newBuild**|语法|public ResultMessage newBuild(AccountVO accountVO)|
+|**AccountController.add**|语法|`public ResultMessage add(AccountVO accountVO)`|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条|调用AccountBL领域对象的newBuild方法|
-|**AccountController.delete**|语法|public ResultMessage delete(AccountVO accountVO)|
+|**AccountController.delete**|语法|`public ResultMessage delete(AccountVO accountVO)`|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的delete方法|
-|**AccountController.modify**|语法|public ResultMessage modify(AccountVO accountVO)|
+|**AccountController.modify**|语法|`public ResultMessage modify(AccountVO accountVO)`|
 ||前置条件|已创建一个AccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的modify方法|　
+|**Account.judgeLegal**|语法|`public ResultMessage judgeLegal(AccountVO accountVO)`|
+||前置条件|已创建一个AccountBL对象|
+||后置条件|调用AccountBL领域对象的judgeLegal方法|
+|**Account.show**|语法|`public ArrayList<AccountVO> getAccountList()`|
+||前置条件|已创建一个AccountBL对象|
+||后置条件|调用AccountBL领域对象的show方法|
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|AccountBL.find(string message)|根据查找内容查找账户|
-|AccountBL.newBuild(AccountVO accountVO)|添加账户|
+|AccountBL.find(string message, FindAccountType findType)|根据查找内容查找账户|
+|AccountBL.add(AccountVO accountVO)|添加账户|
 |AccountBL.delete(AccountVO accountVO)|删除账户|
 |AccountBL.modify(AccountVO accountVO)|修改账户|
+|AccountBL.judgeLegal(AccountVO accountVO)|判断银行账户数据是否合法|
+|AccountBL.show()|得到所有的银行账户信息|
+
 <br/>
-　　　AccountBL的接口规范
+　**Accountbl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**AccountBL.startManage**|语法|public ResultMessage startManage()|
-||前置条件|用户已经登录|
-||后置条件|根据判断结果决定是否允许使用此功能|
-|**AccountBL.find**|语法|public AccoutVO find(String message)|
-||前置条件|已输入正确的搜素关键词|
-||后置条件|返回查找到的账户列表|
-|**AccountBL.newBuild**|语法|public ResultMessage newBuild(AccountVO accountVO)|
-||前置条件|已输入正确的账户格式|
-||后置条件|持久化更新数据并返回消息|
-|**AccountBL.delete**|语法|public ResultMessage delete(AccountVO accountVO)|
-||前置条件|存在选中的待删除的银行账户|
-||后置条件|持久化更新数据并返回消息|
-|**AccountBL.modify**|语法|public ResultMessage modify(AccountVO accountVO)|
-||前置条件|选中一个待修改的银行账户且输入内容正确|
-||后置条件|持久化更新数据并返回消息|
-<br/>　
+|**Account.find**|语法|`public ArrayList<AccountVO> find(String message, FindAccountType findType)`|
+||前置条件|关键词message符合输入规则|
+||后置条件|返回符合关键词的账户列表|
+|**Account.add**|语法|`public ResultMessage add(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若不存在则新增，返回新增验证的结果|
+|**Account.delete**|语法|`public void delete(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则删除|
+|**Account.modify**|语法|`public ResultMessage modify(AccountVO accountVO)`|
+||前置条件|账户信息符合规则|
+||后置条件|查找该账户是否存在，若存在则更新数据，返回更新验证的结果|
+|**Account.judgeLegal**|语法|`public ResultMessage judgeLegal(AccountVO accountVO)`|
+||前置条件|需要对账户进行新增修改操作|
+||后置条件|返回判断验证的结果|
+|**Account.show**|语法|`public ArrayList<AccountVO> getAccountList()`|
+||前置条件|启动一个账户管理回合|
+||后置条件|返回系统中所有的账户的List|
+
+
+<br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|AccountDataService.find(String message)|根据信息查找多个持久化对象|
-|AccountDataService.newBuild(AccountVO accountVO)|新建单一持久化对象|
-|AccountDataService.delete(AccountVO accountVO)|删除单一持久化对象|
-|AccountDataService.modify(AccountVO accountVO)|更新单一持久化对象|
-|DatabaseFactory.getAccountDatabase|得到Account数据库的服务的引用|
+|AccountDataService.find(String keywords, FindAccountType type)|根据keywords查找单一持久化对象|
+|AccountDataService.insert|新建单一持久化对象|
+|AccountDataService.delete|删除单一持久化对象|
+|AccountDataService.update|更新单一持久化对象|
+|AccountDataService.show|返回数据库中所有持久化对象|
+|AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
+<br/>
 
 
 
@@ -188,217 +201,182 @@
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.mfdocblservice.MFDocBLService接口。业务逻辑层和数据层之间添加dataservice.mfdocdataservice.MFDocDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了MFDocController，这样MFDocController将会对账户管理的业务逻辑处理委托给MFDoc对象。
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.paymentbillblservice.PaymentBillBLService接口和businesslogicservice.receiptbillblservice.ReceiptBillBLService。业务逻辑层和数据层之间添加dataservice.paymentbilldataservice.PaymentBillDataService接口和dataservice.receiptbilldataservice.ReceiptBillDataService。为了隔离业务逻辑职责和逻辑控制职责，我们增加了PaymentBillController和ReceiptBillController，这样将会对财务类单据管理的业务逻辑处理委托给PaymentBill和ReceiptBill对象。
 
-　　　　mfdocbl模块的设计如图所示。
+　　　　mfdocbl模块(财务类单据模块)的设计如图所示。
 
 <img src="../img/软件详细设计图/skdbl模块设计图.png">
-现金费用单设计图类似
+paymentbill的设计图类似
 
 　　mfdocbl模块各个类的职责如下所示
 
 |模块|职责|
 | --- | --- |
-|SKDController|负责实现收款单界面所需要的服务|
-|XJFYDController|负责实现现金费用单界面所需要的服务|
-|SKDBL|收款单的领域模型对象|
-|XJFYDBL|现金费用单的领域模型对象|
+|ReceiptBillController|负责实现收款单界面所需要的服务|
+|PaymentBillController|负责实现现金费用单界面所需要的服务|
+|ReceiptBillBL|收款单的领域模型对象|
+|PaymentBillBL|现金费用单的领域模型对象|
 
 　　　　(3)模块内部类的接口规范
 
-　　　　SKDController的接口规范
+　　　　PaymentBillController的接口规范(ReceiptBillController类似)
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SKDController.newBuild**|语法|public ResultMessage newBuild(SKDVO skdVO)|
-||前置条件|已经创建一个SKDBL领域对象|
-||后置条件|调用SKDBL领域对象的newBuild方法|
-|**SKDController.modify**|语法|public ResultMessage modify(SKDVO skdVO)|
-||前置条件|已经创建一个SKDBL领域对象|
-||后置条件|调用SKDBL领域对象的modify方法|
-|**SKDController.delete**|语法|public ResultMessage delete(SKDVO skdVO)|
-||前置条件|已经创建一个SKDBL领域对象|
-||后置条件|调用SKDBL领域对象的delete方法|
-|**SKDController.find**|语法|public SKDVO find(String message)|
-||前置条件|已经创建一个SKDBL领域对象|
-||后置条件|调用SKDBL领域对象的find方法|
-|**SKDController.commit**|语法|public ResultMessage commit(SKDVO skdVO)|
-||前置条件|已经创建一个SKDBL领域对象|
-||后置条件|调用SKDBL领域对象的commit方法|
+|PaymentBillController.getID|语法|`public String getId()`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的getID方法|
+|PaymentBillController.save|语法|`public ResultMessage save(PaymentBillVO paymentBillVO)`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的save方法|
+|PaymentBillController.delete|语法|`public ResultMessage delete(PaymentBillVO paymentBillVO)`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的delete方法|
+|PaymentBillController.commit|语法|`public ResultMessage commit(PaymentBillVO paymentBillVO)`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的commit方法|
+|PaymentBillController.show|语法|`public ArrayList<PaymentBillVO> show()`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的show方法|
+|PaymentBillController.find|语法|`public ArrayList<PaymentBillVO> find(String info,FindAccountBillType type)`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的find方法|
+|PaymentBillController.getAccountList|语法|`public ArrayList<String> getAccountList();`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的getAccountList方法|
+|PaymentBillController.getCustomerList|语法|`public ArrayList<String> getCustomerList()`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的getCustomerList方法|
+|PaymentBillController.judgeLegal|语法|`public ResultMessage judgeLegal(String money)`|
+||前置条件|已经创建一个PaymentBillBL对象|
+||后置条件|调用PaymentBillBL领域对象的judgeLegal方法|
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|SKDBL.find(string message)|根据查找内容查找单据|
-|SKDBL.newBuild(SKDVO skdVO)|添加单据|
-|SKDBL.delete(SKDVO skdVO)|删除单据|
-|SKDBL.modify(SKDVO skdVO)|修改单据|
-|SKDBL.commit(SKDVO skdVO)|提交单据|
+|PaymentBillBL.getID()|得到新建单据的id|
+|PaymentBillBL.find(String info，FindAccountBillType type)|根据查找内容查找单据|
+|PaymentBillBL.save(PaymentBillVO paymentBillVO)|保存单据|
+|PaymentBillBL.delete(PaymentBillVO paymentBillVO)|删除单据|
+|PaymentBillBL.commit(PaymentBillVO paymentBillVO)|提交单据|
+|PaymentBillBL.show()|查看系统中所有付款单单据|
+|PaymentBillBL.getAccountList()|得到系统中银行账户的信息列表|
+|PaymentBillBL.getCustomerList()|得到系统中客户的信息列表|
+|PaymentBillBL.judgeLegal(String money)|判断是否合法|
 <br/>
-　　　　SKDBL的接口规范
+　**PaymentBillbl模块的接口规范(ReceiptBillbl类似)**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SKDBL.newBuild**|语法|public ResultMessage newBuild(SKDVO skdVO)|
-||前置条件|输入正确的收款单单据内容|
-||后置条件|新建一个收款单单据并返回消息|
-|**SKDBL.modify**|语法|public ResultMessage modify(SKDVO skdVO)|
-||前置条件|选中一个收款单单据且输入内容正确|
-||后置条件|持久化更新数据并返回消息|
-|**SKDBL.delete**|语法|public ResultMessage delete(SKDVO skdVO)|
-||前置条件|存在选中的待删除单据|
-||后置条件|删除所选中的单据并返回消息|
-|**SKDBL.find**|语法|public SKDVO find(String message)|
-||前置条件|已输入正确的搜索关键词|
-||后置条件|返回查找到的单据列表|
-|**SKDBL.commit**|语法|public ResultMessage commit(SKDVO skdVO)|
-||前置条件|选中待提交的单据|
-||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
+|PaymentBill.getID|语法|`public String getId()`|
+||前置条件|启动一个新增付款单的回合|
+||后置条件|返回待新增单据的ID|
+|PaymentBill.save|语法|`public ResultMessage save(PaymentBillVO paymentBillVO)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否存在该单据，若不存在则新增，存在则更新，返回保存验证的结果|
+|PaymentBill.delete|语法|`public ResultMessage delete(PaymentBillVO paymentBillVO)`|
+||前置条件|单据符合规则|
+||后置条件|查找是否有该单据，若存在则删除，返回删除验证的结果|
+|PaymentBill.commit|语法|`public ResultMessage commit(PaymentBillVO paymentBillVO)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否有该单据，若存在则修改单据状态为已提交，返回提交验证的结果|
+|PaymentBill.show|语法|`public ArrayList<PaymentBillVO> show()`|
+||前置条件|启动一个查看过往单据的回合|
+||后置条件|返回系统中所有的付款单的list|
+|PaymentBill.find|语法|`public ArrayList<PaymentBillVO> find(String info,FindAccountBillType type)`|
+||前置条件|info符合规则|
+||后置条件|返回符合info的库存类单据的列表|
+|PaymentBill.getAccountList|语法|`public ArrayList<String> getAccountList();`|
+||前置条件|启动一个新建付款单的回合|
+||后置条件|返回系统中银行账户名的列表|
+|PaymentBill.getCustomerList|语法|`public ArrayList<String> getCustomerList()`|
+||前置条件|启动一个新建付款单的回合|
+||后置条件|返回系统中客户名的列表|
+|PaymentBill.judgeLegal|语法|`public ResultMessage judgeLegal(String money)`|
+||前置条件|需要对付款单进行金额的新增修改操作|
+||后置条件|返回判断验证的结果|
+
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|SKDDataService.find(String message)|根据信息查找多个持久化对象|
-|SKDDataService.newBuild()|新建单一持久化对象|
-|SKDDataService.delete(SKDVO skdVO)|删除单一持久化对象|
-|SKDDataService.modify(SKDVO skdVO)|更新单一持久化对象|
-|SKDDataService.commit(SKDVO skdVO)|更新单一持久化对象|
-|DatabaseFactory.getSKDDatabase|得到SKD数据库的服务的引用|
+|PaymentBill.insert|插入单一持久化对象|
+|PaymentBill.update|更新打印持久化对象|
+|PaymentBill.delete|删除单一持久化对象|
+|PaymentBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|PaymentBill.show|返回数据库中所有持久化对象|
 <br/>
-
-　　　　XJFYDController的接口规范
-
-|提供的服务|供接口||
-| --- | --- | --- |
-|**XJFYDController.newBuild**|语法|public ResultMessage newBuild(XJFYDVO xjfydVO)|
-||前置条件|已经创建一个XJFYDBL领域对象|
-||后置条件|调用XJFYDBL领域对象的newBuild方法|
-|**XJFYDController.modify**|语法|public ResultMessage modify(XJFYDVO xjfydVO)|
-||前置条件|已经创建一个XJFYDBL领域对象|
-||后置条件|调用XJFYDBL领域对象的modify方法|
-|**XJFYDController.delete**|语法|public ResultMessage delete(XJFYDVO xjfydVO)|
-||前置条件|已经创建一个XJFYDBL领域对象|
-||后置条件|调用XJFYDBL领域对象的delete方法|
-|**XJFYDController.find**|语法|public XJFYDVO find(String message)|
-||前置条件|已经创建一个XJFYDBL领域对象|
-||后置条件|调用XJFYDBL领域对象的find方法|
-|**XJFYDController.commit**|语法|public ResultMessage commit(XJFYDVO xjfydVO)|
-||前置条件|已经创建一个XJFYDBL领域对象|
-||后置条件|调用XJFYDBL领域对象的commit方法|
-<br/>
-
-|需要的服务|需接口|
-| --- | --- |
-|服务名|服务|
-|XJFYDBL.find(string message)|根据查找内容查找单据|
-|XJFYDBL.newBuild(XJFYDVO xjfydVO)|添加单据|
-|XJFYDBL.delete(XJFYDVO xjfydVO)|删除单据|
-|XJFYDBL.modify(XJFYDVO xjfydVO)|修改单据|
-|XJFYDBL.commit(XJFYDVO xjfydVO)|提交单据|
-<br/>
-　　　　XJFYDBL的接口规范
-
-|提供的服务|供接口||
-| --- | --- | --- |
-|**XJFYDBL.newBuild**|语法|public ResultMessage newBuild(XJFYDVO xjfydVO)|
-||前置条件|输入正确的收款单单据内容|
-||后置条件|新建一个收款单单据并返回消息|
-|**XJFYDBL.modify**|语法|public ResultMessage modify(XJFYDVO xjfydVO)|
-||前置条件|选中一个收款单单据且输入内容正确|
-||后置条件|持久化更新数据并返回消息|
-|**XJFYDBL.delete**|语法|public ResultMessage delete(XJFYDVO xjfydVO)|
-||前置条件|存在选中的待删除单据|
-||后置条件|删除所选中的单据并返回消息|
-|**XJFYDBL.find**|语法|public XJFYDVO find(String message)|
-||前置条件|已输入正确的搜索关键词|
-||后置条件|返回查找到的单据列表|
-|**XJFYDBL.commit**|语法|public ResultMessage commit(XJFYDVO xjfydVO)|
-||前置条件|选中待提交的单据|
-||后置条件|将单据提交至总经理，修改单据状态属性并返回消息|
-<br/>
-
-|需要的服务|需接口|
-| --- | --- |
-|服务名|服务|
-|XJFYDDataService.find(String message)|根据信息查找多个持久化对象|
-|XJFYDDataService.newBuild()|新建单一持久化对象|
-|XJFYDDataService.delete(XJFYDVO xjfydVO)|删除单一持久化对象|
-|XJFYDDataService.modify(XJFYDVO xjfydVO)|更新单一持久化对象|
-|XJFYDDataService.commit(XJFYDVO xjfydVO)|更新单一持久化对象|
-|DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
-<br/>
-
-　　　　**4.1.3　setupaccountbl模块**
+　　　　**4.1.3　accountbookbl模块**
 
 　　　　(1)模块概述
 
-　　　　setupaccountbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
-　　　　SetUpAccountbl模块的职责及接口参见软件体系结构描述文档表。
+　　　　accountbookbl模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　accountbookbl模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。业务逻辑层和数据层之间添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SetUpAccountController，这样SetUpAccountController将会对期初建账的业务逻辑处理委托给SetUpAccount对象。AccountBookPO是作为期初建账后账簿的持久化对象被添加到设计模型中去的。
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountbookblservice.AccountBookService接口。业务逻辑层和数据层之间添加dataservice.accountbookdataservice.AccountBookDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了AccountBookController，这样AccountBookController将会对期初建账的业务逻辑处理委托给AccountBook对象。AccountBookPO是作为期初建账后账簿的持久化对象被添加到设计模型中去的。
 
-　　　　setupaccountbl模块的设计如图所示。
+　　　　accountbookbl模块的设计如图所示。
 
 <img src="../img/软件详细设计图/setupaccount模块设计图.png">
 
-　　setupaccountbl模块各个类的职责如下所示
+　　accountbookbl模块各个类的职责如下所示
 
 |模块|职责|
 | --- | --- |
-|SetUpAccountController|负责实现期初建账界面所需要的服务|
-|SetUpAccountBL|期初建账的领域模型对象|
+|AccountBookController|负责实现期初建账界面所需要的服务|
+|AccountBookBL|期初建账的领域模型对象|
 
 　　　　(3)模块内部类的接口规范
 
-　　　SetUpAccountController的接口规范
+　　　AccountBookController的接口规范
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookVO accountBookVO)|
+|**AccountBookController.newBuild**|语法|`public ResultMessage newBuild(AccountBookVO accountBookVO)`|
 ||前置条件|已创建一个SetUpAccountBL对象，并且输入符合规则|
 ||后置条件|调用AccountBL领域对象的newBuild方法|
-|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookVO accountBookVO)|
-||前置条件|已经创建一个SetUpAccountBL对象|
-||后置条件|调用SetUpAccountBL领域对象的delete方法|
-|**SetUpAccountController.find**|语法|public AccountBookVO find()|
+|**AccountBookController.choseByYear**|语法|`public AccountBookVO choseByYear(int date)`|
 ||前置条件|已经创建一个SetUpAccountBL对象|
 ||后置条件|调用SetUpAccountBL领域对象的find方法|
+|**AccountBookController.show**|语法|`public ArrayList<AccountBookVO> show()`|
+||前置条件|已经创建一个SetUpAccountBL对象|
+||后置条件|调用SetUpAccountBL领域对象的show方法|
 <br/>　
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|SetUpAccountBL.newBuild(AccountBookVO AccountBookVO)|添加账簿|
-|SetUpAccountBL.delete(AccountBookVO accountBookVO)|删除账簿|
-|SetUpAccountBL.find()|查找所有的账簿|
+|AccountBookBL.newBuild(AccountBookVO AccountBookVO)|添加账簿|
+|AccountBookBL.show()|查找所有的账簿|
+|AccountBookBL.choseByYear(int date)|查找特定年份的账簿|
 <br/>
-　　　SetUpAccountBL的接口规范
+　**accountbookbl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|**SetUpAccountController.newBuild**|语法|public ResultMessage newBuild(AccountBookVO accountBookVO)|
-||前置条件|输入正确的期初建账内容|
-||后置条件|新建账簿并返回消息|
-|**SetUpAccountController.delete**|语法|public ResultMessage delete(AccountBookVO accountBookVO)|
-||前置条件|存在所选中的待删除账簿|
-||后置条件|删除账簿并返回消息|
-|**SetUpAccountController.find**|语法|public AccountBookList find()|
-||前置条件|需要查找所有账簿|
-||后置条件|返回所有账簿的列表|
-<br/>　
+|accountbook.show|语法|`public ArrayList<AccountBookVO> show()`|
+||前置条件|查看所有账簿|
+||后置条件|返回系统中的所有账簿|
+|accountbook.newBuild|语法|`public ResultMessage newBuild(AccountBookVO accountBookVO)`|
+||前置条件|启动一个期初建账回合|
+||后置条件|查看是否存在该年账簿，若没有，则新增，返回新增验证信息|
+|accountbook.choseByYear|语法|`public AccountBookVO choseByYear(int date)`|
+||前置条件|查看特定年份账户，date输入符合规则|
+||后置条件|返回date对应的账簿|
+
+<br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|SetUpAccountDataService.find()|查找多个持久化对象|
-|SetUpAccountDataService.newBuild(AccountBookVO accountBookVO)|新建单一持久化对象|
-|SetUpAccountDataService.delete(AccountBookVO accountBookVO)|删除单一持久化对象|
-|DatabaseFactory.getAccountBookDatabase|得到AccountBook数据库的服务的引用|
-
+|commodityblservice.show|得到当前系统内商品的List|
+|accountblservice.show|得到当前系统内银行账户的List|
+|memberblservice.show|得到当前系统内会员信息的List|
+<br/>
 
 
 　　　　(4)业务逻辑层的动态模型
@@ -410,7 +388,6 @@
 <img src="../img/软件详细设计图/setupaccount_delete顺序图.png">
 
 <img src="../img/软件详细设计图/setupaccount_find顺序图.png">
-
 4.1.4 commoditybl 模块<br>
 （1）模块概述<br>
 commoditybl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
