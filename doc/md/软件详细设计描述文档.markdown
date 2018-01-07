@@ -2170,177 +2170,112 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 <br/>
 
 
-4.3.1 commoditydata模块<br>
-（1）模块概述<br>
+　4.3.1 commoditydata模块<br>
+
+　　　　(1)模块概述<br>
+
 commoditydata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
+
 commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
-（2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口和dataservice.commoditydataservice.ClassificationDataService接口。CommodityData是承接商品的各类数据的，而ClassificationData是作为商品的分类而聚合在其中。<br>
+
+　　　　(2)整体结构<br>
+　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口和dataservice.commoditydataservice.ClassificationDataService接口。CommodityData是承接商品的各类数据的，而ClassificationData是作为商品的分类而聚合在其中。<br>
+
 <img src="../img/软件详细设计图/CommodityData.png"><br>
-<center>**CommodityData模块各个类的设计**</center>
-<table><tbody>
-<tr>
-<th>模  块</th>
-<th>职  责</th>
-</tr>
-<tr>
-<th>CommodityData</th>
-<th>商品的模型对象，拥有一个商品各类数据及其方法</th>
-</tr>
-<tr>
-<th>ClassificationData</th>
-<th>商品分类的模型对象，拥有一个商品分类各类数据及其方法</th>
-</tr>
-</table>
+　　
 
-（3）模块内部类的接口规范
-<center>**CommodityData的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "2">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>CommodityData.find(long id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>CommodityData.finds(String field,int value)</th>
-<th>根据字段名和值查找多个持久化对象</th>
-</tr>
-<tr>
-<th>CommodityData.insert(CommodityPO po)</th>
-<th>插入单一持久化对象</th>
-</tr>
-<tr>
-<th>CommodityData.delete(CommodityPO po)</th>
-<th>删除单一持久化对象</th>
-</tr>
-<tr>
-<th>CommodityData.update(CommodityPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-</table>
+|模块|职责|
+| --- | --- |
+|CommodityData|商品的模型对象，拥有一个商品各类数据及其方法|
+|Classification|商品分类的模型对象，拥有一个商品分类各类数据及其方法|
 
-<center>**ClassificationData的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "2">需要的服务（需接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>ClassificationData.insertClass(ClassificationPO po)</th>
-<th>插入单一持久化对象</th>
-</tr>
-<tr>
-<th>ClassificationData.deleteClass(ClassificationPO po)</th>
-<th>删除单一持久化对象</th>
-</tr>
-<tr>
-<th>ClassificationData.updateClass(ClassificationPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-</table>
+　　　　(3)模块内部类的接口规范
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Commodity.insert(CommodityVO vo)|插入单一持久化对象|
+|Commodity.delelte(String id)|删除单一持久化对象|
+|Commodity.update(CommodityVO vo)|更新单一持久化对象|
+|Commodity.find(String keywords,FindCommodityType type)|根据keywords查找多个持久化对象|
+|Commodity.show()|返回数据库中所有持久化对象|
+<br/>
 
-4.3.2 userdata模块<br>
-（1）模块概述<br>
-userdata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
-userdata模块的职责及接口参见软件系统结构描述文档表<br>
-（2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.userdataservice.CommodityDataService接口。UserData是承接用户的各类数据的。<br>
-<center>**UserData模块各个类的设计**</center>
-<table><tbody>
-<tr>
-<th>模  块</th>
-<th>职  责</th>
-</tr>
-<tr>
-<th>UserData</th>
-<th>用户的模型对象，拥有一个用户各类数据及其方法</th>
-</tr>
-</table>
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Classification.insert()|插入单一持久化对象|
+|Classification.update|更新打印持久化对象|
+|Classification.delete|删除单一持久化对象|
+|Classification.getRoot|返回数据库中根节点持久化对象|
+|Classification.find(String name)|根据name查找单一持久化对象|
+|Classification.show|返回数据库中所有持久化对象|
+|Classification.getId|返回待新增分类的Id|
+<br/>
+　　　　4.3.2 userdata模块
 
-（3）模块内部类的接口规范
-<center>**UserData的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "2">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>UserData.find(long id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>UserData.finds(String field,int value)</th>
-<th>根据字段名和值查找多个持久化对象</th>
-</tr>
-<tr>
-<th>UserData.insert(UserPO po)</th>
-<th>插入单一持久化对象</th>
-</tr>
-<tr>
-<th>UserData.delete(UserPO po)</th>
-<th>删除单一持久化对象</th>
-</tr>
-<tr>
-<th>UserData.update(UserPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-</table>
+　　　　(1)模块概述
 
-4.3.3 billdata模块<br>
-（1）模块概述<br>
-billdata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
-billdata模块的职责及接口参见软件系统结构描述文档表<br>
-（2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.billdataservice.BillDataService接口。BillData是承接单据的各类数据的。<br>
-<center>**BillData模块各个类的设计**</center>
-<table><tbody>
-<tr>
-<th>模  块</th>
-<th>职  责</th>
-</tr>
-<tr>
-<th>BillData</th>
-<th>单据的模型对象，拥有一个单据各类数据及其方法</th>
-</tr>
+　　　　userdata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。
 
-</table>
+　　　　userdata模块的职责及接口参见软件系统结构描述文档表
 
-（3）模块内部类的接口规范
-<center>**BillData的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "2">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>BillData.find(long id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>BillData.insert(BillPO po)</th>
-<th>插入单一持久化对象</th>
-</tr>
-<tr>
-<th>BillData.update(BillPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-</table>
->>>>>>> refs/remotes/origin/master
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.userdataservice.CommodityDataService接口。UserData是承接用户的各类数据的。
+
+　　　userdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|UserData|用户的模型对象，拥有用户的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　UserData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|Userdataservice.login(String id,String password)|根据id和password进行登录|
+|Userdataservice.insert(User PO)|插入单一持久化对象|
+|Userdataservice.delete(User PO)|删除单一持久化对象|
+|Userdataservice.update(User PO)|更新单一持久化对象|
+|Userdataservice.find(String info,FindUserType type)|根据Info查找多个持久化对象|
+|Userdataservice.show()|返回数据库中所有持久化对象|
+<br/>
+
+　　　　4.3.3 inventorybilldata模块
+
+　　　　(1)模块概述
+
+　　　　inventorybilldata模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。
+　　　　inventorybilldata模块的职责及接口参见软件系统结构描述文档表
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。业务逻辑层和数据层之间添加dataservice.inventorybilldataservice.InventoryBillDataService接口。InventoryBillData是承接库存类单据的各类数据的。
+
+　inventorybilldata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|InventoryBillData|库存类单据的模型对象，拥有库存类单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　InventoryBillData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|Inventory.insert|插入单一持久化对象|
+|Inventory.update|更新打印持久化对象|
+|Inventory.delete|删除单一持久化对象|
+|Inventory.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|Inventory.show|返回数据库中所有持久化对象|
+<br/>
 
 　　　　4.3.4　accountdata模块
 
@@ -2367,14 +2302,15 @@ billdata模块的职责及接口参见软件系统结构描述文档表<br>
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|AccountData.find(String message)|根据信息查找多个持久化对象|
-|AccountData.newBuild(AccountPO accountPO)|新建单一持久化对象|
-|AccountData.delete(AccountPO accountPO)|删除单一持久化对象|
-|AccountData.modify(AccountPO accountPO)|更新单一持久化对象|
-|DatabaseFactory.getAccountDatabase|得到Account数据库的服务的引用|
+|AccountDataService.find(String keywords, FindAccountType type)|根据keywords查找单一持久化对象|
+|AccountDataService.insert|新建单一持久化对象|
+|AccountDataService.delete|删除单一持久化对象|
+|AccountDataService.update|更新单一持久化对象|
+|AccountDataService.show|返回数据库中所有持久化对象|
+|AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
 <br/>
 
-　　　　4.3.5　mfdocdata模块
+　　　　4.3.5　mfdocdata模块(财务类单据模块)
 
 　　　　(1)模块概述
 
@@ -2383,73 +2319,76 @@ billdata模块的职责及接口参见软件系统结构描述文档表<br>
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.mfdocdataservice.MFDocDataService接口。SKDPO和XJFYDPO分别是作为收款单和现金费用单的持久化对象被添加到设计模型中去的。
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.paymentbilldataservice.PaymentBillDataService接口和dataservice.receiptbilldataservice.ReceiptBillDataService。PaymentBillPO和ReceiptBillPO分别是作为收款单和现金费用单的持久化对象被添加到设计模型中去的。
 
 　　mfdocdata模块各个类的职责如下所示
 <br/>
 
 |模块|职责|
 | --- | --- |
-|SKDData|收款单的模型对象，拥有收款单的各类数据以及方法|
-|XJFYDData|收款单的模型对象，拥有收款单的各类数据以及方法|
+|ReceiptBillData|收款单的模型对象，拥有收款单的各类数据以及方法|
+|PaymentBillData|付款单的模型对象，拥有收款单的各类数据以及方法|
 
 　　　　(3)模块内部类的接口规范
 
-　　　SKDData的接口规范
+　　　ReceiptBillData的接口规范
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|SKDData.find(String message)|根据信息查找多个持久化对象|
-|SKDData.newBuild()|新建单一持久化对象|
-|SKDData.delete(SKDPO skdPO)|删除单一持久化对象|
-|SKDData.modify(SKDPO skdPO)|更新单一持久化对象|
-|SKDData.commit(SKDPO skdPO)|更新单一持久化对象|
-|DatabaseFactory.getSKDDatabase|得到SKD数据库的服务的引用|
+|ReceiptBill.insert|插入单一持久化对象|
+|ReceiptBill.update|更新打印持久化对象|
+|ReceiptBill.delete|删除单一持久化对象|
+|ReceiptBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|ReceiptBill.show|返回数据库中所有持久化对象|
 <br/>
 
-　　　XJFYDData的接口规范
+　　　PaymentBillData的接口规范
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|XJFYDData.find(String message)|根据信息查找多个持久化对象|
-|XJFYDData.newBuild()|新建单一持久化对象|
-|XJFYDData.delete(XJFYDPO xjfydPO)|删除单一持久化对象|
-|XJFYDData.modify(XJFYDPO xjfydPO)|更新单一持久化对象|
-|XJFYDData.commit(XJFYDPO xjfydPO)|更新单一持久化对象|
-|DatabaseFactory.getXJFYDDatabase|得到XJFYD数据库的服务的引用|
+|PaymentBill.insert|插入单一持久化对象|
+|PaymentBill.update|更新打印持久化对象|
+|PaymentBill.delete|删除单一持久化对象|
+|PaymentBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|PaymentBill.show|返回数据库中所有持久化对象|
 <br/>
 
-　　　　4.3.6　setupaccountdata模块
+　　　　4.3.6　accountbookdata模块
 
 　　　　(1)模块概述
 
-　　　　setupaccountdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
-　　　　SetUpAccountdata模块的职责及接口参见软件体系结构描述文档表。
+　　　　accountbookdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　AccountBookdata模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.setupaccountdataservice.SetUpAccountDataService接口。AccountBookPO是作为账户记录的持久化对象被添加到设计模型中去的。
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.accountbookdataservice.AccountBookDataService接口。AccountBookPO是作为账户记录的持久化对象被添加到设计模型中去的。
 
-　　setupaccountdata模块各个类的职责如下所示
+　　accountbookdata模块各个类的职责如下所示
 <br/>
 
 |模块|职责|
 | --- | --- |
-|SetUpAccountData|账簿的模型对象，拥有账簿的各类数据以及方法|
+|AccountBookData|账簿的模型对象，拥有账簿的各类数据以及方法|
 
 　　　　(3)模块内部类的接口规范
 
-　　　SetUpAccountData的接口规范
+　　　AccountBookData的接口规范
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|SetUpAccountData.find()|查找多个持久化对象|
-|SetUpAccountData.newBuild(AccountBookPO accountBookPO)|新建单一持久化对象|
-|SetUpAccountData.delete(AccountBookPO accountBookPO)|删除单一持久化对象|
-|DatabaseFactory.getAccountBookDatabase|得到AccountBook数据库的服务的引用|
+|accountbook.show|语法|`public ArrayList<AccountBookVO> show()`|
+||前置条件|查看所有账簿|
+||后置条件|返回系统中的所有账簿|
+|accountbook.newBuild|语法|`public ResultMessage newBuild(AccountBookVO accountBookVO)`|
+||前置条件|启动一个期初建账回合|
+||后置条件|查看是否存在该年账簿，若没有，则新增，返回新增验证信息|
+|accountbook.choseByYear|语法|`public AccountBookVO choseByYear(int date)`|
+||前置条件|查看特定年份账户，date输入符合规则|
+||后置条件|返回date对应的账簿|
 <br/>
 
 
@@ -2459,3 +2398,4 @@ billdata模块的职责及接口参见软件系统结构描述文档表<br>
 <center>客户端包图</center>
 <img src="../img/服务端开发包.png"><br>
 <center>服务器端端包图</center>
+
