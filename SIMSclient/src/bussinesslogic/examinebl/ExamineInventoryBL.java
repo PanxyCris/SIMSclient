@@ -81,6 +81,7 @@ public class ExamineInventoryBL implements ExamineBLService<InventoryBillVO>{
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
+			System.out.println(message.getInfo());
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
 				return result;

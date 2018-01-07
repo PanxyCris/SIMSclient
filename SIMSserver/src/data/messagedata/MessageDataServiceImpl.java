@@ -37,8 +37,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
 		MessageWarmingPO message = new MessageWarmingPO("1","000003",true,"N JIAACD",400,500);
-		data.save(message);
-		System.out.println(data.getMessage(new UserPO("000003",null,null,null,null)).get(1).getHasRead());
+	System.out.println(data.getMessage(new UserPO("000005",null,null,null,null)).get(0).getInfo());
 
 	}
 
