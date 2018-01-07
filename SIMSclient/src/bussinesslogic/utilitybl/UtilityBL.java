@@ -109,13 +109,13 @@ public class UtilityBL implements UtilityBLService{
 	}
 
 	public MessagePO voTopo(MessageVO vo){
-		MessagePO po = new MessagePO(vo.getMessageID(),vo.getInfo());
+		MessagePO po = new MessagePO(vo.getMessageID(),vo.getUserID(),vo.getInfo(),vo.getHasRead());
 		po.setHasRead(vo.getHasRead());
 		return po;
 	}
 
 	public MessageVO poTovo(MessagePO po){
-		MessageVO vo = new MessageVO(po.getMessageID(),po.getInfo());
+		MessageVO vo = new MessageVO(po.getMessageID(),po.getUserID(),po.getInfo(),po.getHasRead());
 		vo.setHasRead(po.getHasRead());
 		return vo;
 	}
@@ -130,6 +130,12 @@ public class UtilityBL implements UtilityBLService{
       		  messageService.save(message);
       		  }
         }
+	}
+
+	@Override
+	public void saveMessage(MessageVO message) throws RemoteException {
+		messageService.save(voTopo(message));
+
 	}
 
 }

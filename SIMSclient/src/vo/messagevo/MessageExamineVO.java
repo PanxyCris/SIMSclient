@@ -4,12 +4,15 @@ import vo.uservo.UserVO;
 
 public class MessageExamineVO extends MessageVO{
 
-
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id; //单据编号
 	private UserVO user; //用户
 
-	public MessageExamineVO(String messageID, String id,UserVO user) {
-		super(messageID, getFormatInfo(id,user));
+	public MessageExamineVO(String messageID,boolean hasRead,String id,UserVO user) {
+		super(messageID,user.getID(), getFormatInfo(id,user),hasRead);
 		this.setId(id);
 		this.setUser(user);
 

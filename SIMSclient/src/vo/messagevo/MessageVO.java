@@ -1,19 +1,23 @@
 package vo.messagevo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class MessageVO {
+public class MessageVO implements Serializable{
 
+	 private static final long serialVersionUID = 1L;
 	 private String messageID;
+	 private String userID;
      private LocalDateTime time;
      private String info; //格式 单据类："： 您的" + 单据编号 + 单据类型  + "审批" + 成功/失败
                           //   警告类: 商品名(编号)+"低于警戒值 当前数量："+当前数量+"警戒数量： "+警戒数量
      private boolean hasRead;
-     public MessageVO(String id,String info){
-    	 this.setMessageID(id);
+     public MessageVO(String messageID,String userID,String info,boolean hasRead){
+    	 this.setMessageID(messageID);
+    	 this.setUserID(userID);
     	 this.time = LocalDateTime.now();
     	 this.info = info;
-    	 hasRead = false;
+    	 this.hasRead = hasRead;
      }
 
      public LocalDateTime getTime(){
@@ -40,5 +44,12 @@ public class MessageVO {
 		this.messageID = messageID;
 	}
 
+	public String getUserID() {
+		return userID;
+	}
+
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
 
 }

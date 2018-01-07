@@ -48,8 +48,9 @@ public class ClassificationData {
 //		d.insert(c1);
 //		d.insert(c3);
 //		d.delete("ÂÌµÆ");
- //       d.delete(c2.getName());
-		System.out.println(d.show().size());
+ //       d.delete("»ÆµÆ");
+		 d.update(root);
+		System.out.println(d.show().get(0));
 	}
 
 	private Connection conn;

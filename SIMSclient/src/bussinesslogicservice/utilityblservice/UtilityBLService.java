@@ -32,4 +32,6 @@ public interface UtilityBLService {
 	 */
 	public void warningMessage(CommodityPO po) throws RemoteException;
 
+	public void saveMessage(MessageVO message) throws RemoteException;
+
 }

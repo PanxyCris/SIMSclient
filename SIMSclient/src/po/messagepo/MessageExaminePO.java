@@ -11,8 +11,8 @@ public class MessageExaminePO extends MessagePO{
 	private String id; //单据编号
 	private UserPO user; //用户
 
-	public MessageExaminePO(String messageID, String id,UserPO user) {
-		super(messageID, getFormatInfo(id,user));
+	public MessageExaminePO(String messageID,boolean hasRead,String id,UserPO user) {
+		super(messageID,user.getID(), getFormatInfo(id,user),hasRead);
 		this.setId(id);
 		this.setUser(user);
 
