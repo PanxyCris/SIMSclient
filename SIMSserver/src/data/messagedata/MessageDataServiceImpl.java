@@ -36,9 +36,9 @@ public class MessageDataServiceImpl implements MessageDataService{
 	public static void main(String[] args) {
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
-//		MessageWarmingPO message = new MessageWarmingPO("000003","N JIAACD",400,500);
-//		data.save(message);
-//		System.out.println(data.getMessage(new UserPO("000003",null,null,null,null)).size());
+		MessageWarmingPO message = new MessageWarmingPO("1","000003",true,"N JIAACD",400,500);
+		data.save(message);
+		System.out.println(data.getMessage(new UserPO("000003",null,null,null,null)).get(1).getHasRead());
 
 	}
 
@@ -75,7 +75,7 @@ public class MessageDataServiceImpl implements MessageDataService{
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
                     MessagePO po = (MessagePO)in.readObject();                   //读出对象
 
-                    if (user.getID().equals(po.getMessageID())) {
+                    if (user.getID().equals(po.getUserID())) {
                          list.add(po);
                     }
                 }
@@ -107,7 +107,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 //                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
 //                    MessagePO po = (MessagePO)in.readObject();                   //读出对象
 //                }
-                
+
                 int id = rs.getInt("id");
                 list.add(id);
 			}
@@ -117,8 +117,10 @@ public class MessageDataServiceImpl implements MessageDataService{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		Collections.sort(list);
+		if(list.size()==0)
+			return "1";
 		int result = list.get(list.size()-1)+1;
 		return String.valueOf(result);
 	}

@@ -173,7 +173,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
             {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(manager.getID(),receiptBillPO.getDocID(),manager);
+				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),false,receiptBillPO.getDocID(),manager);
 				messageDataService.save(message);
 				}
 			}

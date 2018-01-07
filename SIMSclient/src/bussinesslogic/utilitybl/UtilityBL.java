@@ -123,7 +123,7 @@ public class UtilityBL implements UtilityBLService{
 	@Override
 	public void warningMessage(CommodityPO po) throws RemoteException{
         if(po.getNumber()<=po.getWarmingValue()){
-      	  MessageWarmingPO message = new MessageWarmingPO(null,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
+      	  MessageWarmingPO message = new MessageWarmingPO(messageService.getMessageID(),null,false,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
       	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
       	  for(UserPO user:inventorymanagers){
       		  message.setMessageID(user.getID());

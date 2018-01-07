@@ -185,7 +185,7 @@ public class SalesController implements SalesBLService{
 			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(manager.getID(),po.getId(),manager);
+				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),false,po.getId(),manager);
 				messageDataService.save(message);
 				}
 			}
