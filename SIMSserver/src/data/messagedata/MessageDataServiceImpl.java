@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.sound.midi.MetaMessage;
 
@@ -46,7 +47,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 		String sql = "" + "insert into message(id, object) values (?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(1, message.getMessageID());
+			ps.setInt(1, Integer.valueOf(message.getMessageID()));
 			ps.setObject(2, message);
 			ps.executeUpdate();
 			ps.close();
@@ -91,10 +92,35 @@ public class MessageDataServiceImpl implements MessageDataService{
 
 	@Override
 	public String getMessageID() throws RemoteException {
-
-	//	ArrayList<MessagePO> messageList = show();
-
-		return null;
+		ArrayList<Integer> list = new ArrayList<>();
+		String sql = "select id from message";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+//				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
+//				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
+//                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
+//                byte[] buff = new byte[(int) inBlob.length()];
+//
+//                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
+//                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
+//                    MessagePO po = (MessagePO)in.readObject();                   //读出对象
+//                }
+                
+                int id = rs.getInt("id");
+                list.add(id);
+			}
+			rs.close();
+			ps.close();
+			//conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Collections.sort(list);
+		int result = list.get(list.size()-1)+1;
+		return String.valueOf(result);
 	}
 
 }
