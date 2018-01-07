@@ -620,96 +620,165 @@ JavaFX
 |AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
 <br/>
 
-　**mfdocbl模块的接口规范**
+　**PaymentBillbl模块的接口规范(ReceiptBillbl类似)**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|MFDoc.newBuildSKD|语法|public SKDVO newBuildSKD()|
-||前置条件|启动一个收款回合|
-||后置条件|返回一个收款单对象|
-|MFDoc.newBuildXJFYD|语法|public XJFYDVO newBuildXJFYD()|
-||前置条件|启动一个付款回合|
-||后置条件|返回一个付款单对象|
-|MFDoc.modifySKD|语法|public SKDVO modifySKD()|
-||前置条件|需要修改收款单|
-||后置条件|单据修改|
-|MFDoc.modifyXJFYD|语法|public XJFYDVO modifyXJFYD()|
-||前置条件|需要修改付款单|
-||后置条件|单据修改|
-|MFDoc.recordSKD|语法|public SKDVO recordSKD(BillVO billVO)|
-|前置条件|收款单完成|
-|后置条件|单据入账，更新数据|
-|MFDoc.recordXJFYD|语法|public XJFYDVO recordXJFYD(BillVO billVO)|
-|前置条件|付款单完成|
-|后置条件|单据入账，更新数据|
-|MFDoc.delete|语法|public boolean delete(FinancialDocVO financialDocVO)|
-||前置条件|传入信息符合规则|
-||后置条件|单据删除|
+|PaymentBill.getID|语法|`public String getId()`|
+||前置条件|启动一个新增付款单的回合|
+||后置条件|返回待新增单据的ID|
+|PaymentBill.save|语法|`public ResultMessage save(PaymentBillVO paymentBillVO)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否存在该单据，若不存在则新增，存在则更新，返回保存验证的结果|
+|PaymentBill.delete|语法|`public ResultMessage delete(PaymentBillVO paymentBillVO)`|
+||前置条件|单据符合规则|
+||后置条件|查找是否有该单据，若存在则删除，返回删除验证的结果|
+|PaymentBill.commit|语法|`public ResultMessage commit(PaymentBillVO paymentBillVO)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否有该单据，若存在则修改单据状态为已提交，返回提交验证的结果|
+|PaymentBill.show|语法|`public ArrayList<PaymentBillVO> show()`|
+||前置条件|启动一个查看过往单据的回合|
+||后置条件|返回系统中所有的付款单的list|
+|PaymentBill.find|语法|`public ArrayList<PaymentBillVO> find(String info,FindAccountBillType type)`|
+||前置条件|info符合规则|
+||后置条件|返回符合info的库存类单据的列表|
+|PaymentBill.getAccountList|语法|`public ArrayList<String> getAccountList();`|
+||前置条件|启动一个新建付款单的回合|
+||后置条件|返回系统中银行账户名的列表|
+|PaymentBill.getCustomerList|语法|`public ArrayList<String> getCustomerList()`|
+||前置条件|启动一个新建付款单的回合|
+||后置条件|返回系统中客户名的列表|
+|PaymentBill.judgeLegal|语法|`public ResultMessage judgeLegal(String money)`|
+||前置条件|需要对付款单进行金额的新增修改操作|
+||后置条件|返回判断验证的结果|
 
-　**setupaccountbl模块的接口规范**
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|PaymentBill.insert|插入单一持久化对象|
+|PaymentBill.update|更新打印持久化对象|
+|PaymentBill.delete|删除单一持久化对象|
+|PaymentBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|PaymentBill.show|返回数据库中所有持久化对象|
+<br/>
+
+　**businesshistorybl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|SetUpAccount.newBuild|语法|public void newBuild(AccountBookVO accountBookVO)|
+|businesshistory.show|语法|` public ArrayList<B> show()`|
+||前置条件|启动一个查看经营历程表的回合|
+||后置条件|返回通过审批的对应单据|
+|businesshistory.siftTime|语法|`public ArrayList<B> siftTime(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的单据|
+|businesshistory.sift|语法|`public ArrayList<B> sift(String  info,FindSaleScheduleType type)`|
+||前置条件|info符合输入规则|
+||后置条件|返回符合info的单据列表|
+|businesshistory.exportReport|语法|`public void exportReport(ArrayList<B> table)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+|businesshistory.writeOff|语法|`public ArrayList<B> writeOff(ArrayList<B> table)`|
+||前置条件|启动一个红冲回合|
+||后置条件|进行红冲操作并将单据入账并返回红冲后的单据|
+|businesshistory.writeOffAndCopy|语法|`public ArrayList<B> writeOffAndCopy(ArrayList<B> table)`|
+||前置条件|启动一个红冲并复制回合|
+||后置条件|将单据入账，返回操作后的单据|
+|businesshistory.updateBill|语法|`public ResultMessage updateBill(B table)`|
+||前置条件|启动一个红冲并复制回合|
+||后置条件|进行红冲并复制操作并将单据入账|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|purchaseservice.show|获得系统中的进货单和进货退货单|
+|salesservice.show|获得系统中的销售单和销售退货单|
+|paymentbillservice.show|获得系统中的付款单|
+|receiptbillservice.show|获得系统中的收款单|
+|inventorybillservice.show|获得系统中的库存类单据|
+|examineblservice.passbill|审批单据|
+<br/>
+　**businesssituationbl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|businesssituation.showPay|语法|`public ArrayList<PaymentTableVO> showPay()`|
+||前置条件|启动一个查看经营情况表的回合|
+||后置条件|返回支出类|
+|businesssituation.showReceive|语法|`public ArrayList<ReceiveTableVO> showReceive()`|
+||前置条件|启动一个查看经营情况表的回合|
+||后置条件|返回收入类|
+|businesssituation.siftPay|语法|`public ArrayList<PaymentTableVO> siftPay(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的付款单List|
+|businesssituation.siftReceive|语法|`public ArrayList<ReceiveTableVO> siftReceive(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的收款单List|
+|businesssituation.exportReport|语法|`public void exportReport(ArrayList<PaymentTableVO> pay,ArrayList<ReceiveTableVO> receive)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|paymentbillservice.show|获得系统中的付款单|
+|receiptbillservice.show|获得系统中的收款单|
+<br/>
+　**saleschedulebl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|saleschedule.show|语法|` public ArrayList<SaleScheduleVO> show()`|
+||前置条件|启动一个查看销售明细表的回合|
+||后置条件|返回通过审批的对应单据的销售信息|
+|saleschedule.siftTime|语法|`public ArrayList<SaleScheduleVO> siftTime(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的单据的销售信息|
+|saleschedule.sift|语法|`public ArrayList<SaleScheduleVO> sift(String info,FindSaleScheduleType type)`|
+||前置条件|info符合输入规则|
+||后置条件|返回符合info的单据列表的对应销售信息|
+|saleschedule.exportReport|语法|`public void exportReport(ArrayList<SaleScheduleVO> sale)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|salesservice.show|获得系统中的销售单和销售退货单|
+<br/>
+
+　**accountbookbl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|accountbook.show|语法|`public ArrayList<AccountBookVO> show()`|
+||前置条件|查看所有账簿|
+||后置条件|返回系统中的所有账簿|
+|accountbook.newBuild|语法|`public ResultMessage newBuild(AccountBookVO accountBookVO)`|
 ||前置条件|启动一个期初建账回合|
-||后置条件|新建账簿|
-|SetUpAccount.delete|语法|public void delete(AccountBookVO accountBookVO)|
-||前置条件|已经存在带删除账簿|
-||后置条件|删除账簿|
-
-
-<br/>
-
-|需要的服务|需接口|
-| --- | --- |
-|服务名|服务|
-|SetUpAccountDataService.newBuild(AccountBookVO accountBookVO)  |插入单一持久化引用|
-|SetUpAccountDataService.delete(AccountBookVO accountBookVO)|删除单一持久化引用|
-
-　**businessHistorySchedulebl模块的接口规范**
-
-|提供的服务|供接口||
-| --- | --- | --- |
-|BusinessHistorySchedule.viewReport|语法|public FinancialDocVO viewReport(BusinessHistoryScheduleVO businessHistoryScheduleVO)|
-||前置条件|传入的筛选条件符合输入|
-||后置条件|返回筛选出的单据|
-|BusinessHistorySchedule.exportReport|语法|public void exportReport()|
-||前置条件|单据存在|
-||后置条件|单据导出为excel|
-|BusinessHistorySchedule.writeOff|语法|public void writeOff()|
-||前置条件|单子无效，需要被红冲|
-||后置条件|进行红冲操作并将单子入账|
-|BusinessHistorySchedule.writeOffAndCopy|语法|public void writeOffAndCopy(BillVO billVO)|
-||前置条件|单子无效，需要重新修改入账|
-||后置条件|进行红冲并复制操作并将单子入账|
-
+||后置条件|查看是否存在该年账簿，若没有，则新增，返回新增验证信息|
+|accountbook.choseByYear|语法|`public AccountBookVO choseByYear(int date)`|
+||前置条件|查看特定年份账户，date输入符合规则|
+||后置条件|返回date对应的账簿|
 
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|BusinessHistoryScheduleDataService.insert(BusinessHistorySchedulePO businessHistorySchedulePO)|插入单一持久化对象|
-|BusinessHistoryScheduleDataService.delete(BusinessHistorySchedulePO businessHistorySchedulePO)|删除单一持久化对象|
-
-　**saleSchedulebl模块的接口规范**
-
-|提供的服务|供接口||
-| --- | --- | --- |
-|SaleSchedule.viewReport|语法|public void viewReport(SaleScheduleVO SaleScheduleVO)|
-||前置条件|传入的筛选条件符合输入|
-||后置条件|返回筛选出的单据|
-|SaleSchedule.exportReport|语法|public void exportReport()|
-||前置条件|单据存在|
-||后置条件|单据导出为excel|
-
+|commodityblservice.show|得到当前系统内商品的List|
+|accountblservice.show|得到当前系统内银行账户的List|
+|memberblservice.show|得到当前系统内会员信息的List|
 <br/>
-
-|需要的服务|需接口|
-| --- | --- |
-|服务名|服务|
-|SaleScheduleDataService.insert(SaleSchedulePO saleSchedulePO)|插入单一持久化对象|
-|SaleScheduleDataService.delete(SaleSchedulePO saleSchedulePO)|删除单一持久化对象|
 
 　**statementOfOperationbl模块的接口规范**
 
@@ -1020,7 +1089,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.find</th>
 <th>语法</th>
-<th>public UserPO find(long id) throws RemoteException;</th>
+<th>public ArrayList&lt;UserPO> findUser(String info, FindUserType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1028,17 +1097,17 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的UserPO结果</th>
+<th>按info和type进行查找返回相应的UserPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">UserDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>public ResultMessage insertUser(UserPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的po在库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1048,7 +1117,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>public ResultMessage deleteUser(String ID) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1062,7 +1131,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>public ResultMessage updateUser(UserPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1074,9 +1143,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">UserDataService.init</th>
+<th rowspan="3">UserDataService.show</th>
 <th>语法</th>
-<th>public void init() throws RemoteException;</th>
+<th>public ArrayList&lt;UserPO> showUser() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1084,21 +1153,21 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>初始化持久化数据库</th>
+<th>返回数据库中所有的用户数据po对象</th>
 </tr>
 
 <tr>
-<th rowspan="3">UserDataService.finish</th>
+<th rowspan="3">UserDataService.login</th>
 <th>语法</th>
-<th>public void finish() throws RemoteException;</th>
+<th>public boolean login(String id, String password) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>无</th>
+<th>用户登录</th>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>结束持久化数据库的使用</th>
+<th>返回登录验证信息</th>
 </tr>
 
 <tr>
