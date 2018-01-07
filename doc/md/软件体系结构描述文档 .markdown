@@ -1089,7 +1089,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.find</th>
 <th>语法</th>
-<th>public UserPO find(long id) throws RemoteException;</th>
+<th>public ArrayList&lt;UserPO> findUser(String info, FindUserType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1097,17 +1097,17 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的UserPO结果</th>
+<th>按info和type进行查找返回相应的UserPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">UserDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>public ResultMessage insertUser(UserPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的po在库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1117,7 +1117,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>public ResultMessage deleteUser(String ID) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1131,7 +1131,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>public ResultMessage updateUser(UserPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1143,9 +1143,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">UserDataService.init</th>
+<th rowspan="3">UserDataService.show</th>
 <th>语法</th>
-<th>public void init() throws RemoteException;</th>
+<th>public ArrayList&lt;UserPO> showUser() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1153,21 +1153,21 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>初始化持久化数据库</th>
+<th>返回数据库中所有的用户数据po对象</th>
 </tr>
 
 <tr>
-<th rowspan="3">UserDataService.finish</th>
+<th rowspan="3">UserDataService.login</th>
 <th>语法</th>
-<th>public void finish() throws RemoteException;</th>
+<th>public boolean login(String id, String password) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>无</th>
+<th>用户登录</th>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>结束持久化数据库的使用</th>
+<th>返回登录验证信息</th>
 </tr>
 
 <tr>
