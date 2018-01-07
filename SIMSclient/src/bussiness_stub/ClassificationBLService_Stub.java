@@ -41,7 +41,7 @@ public class ClassificationBLService_Stub implements ClassificationBLService{
 	@Override
 	public ClassificationVPO getRoot() {
 		// TODO Auto-generated method stub
-		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
+		ClassificationVPO root = new ClassificationVPO("0001", "µÆ", false, null, null, null);
 //		ArrayList<ClassificationVPO> children = new ArrayList<>();
 //		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
 //		ClassificationVPO c1 = new ClassificationVPO("0002","°×³ãµÆ",true,root,null);

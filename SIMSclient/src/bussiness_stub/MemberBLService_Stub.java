@@ -68,5 +68,15 @@ public class MemberBLService_Stub implements MemberBLService{
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public ArrayList<String> getIDandName() throws RemoteException {
+		ArrayList<String> list = new ArrayList<>();
+		String s1 = "¿ÓΩ‹(00001)";
+		String s2 = "Õı≤”≤”(00002)";
+		list.add(s1);
+		list.add(s2);
+		return list;
+	}
+
 
 }
