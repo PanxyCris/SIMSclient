@@ -351,7 +351,9 @@ JavaFX
 | paymentbillbl  | 负责实现制定付款单界面所需要的服务               |
 | receiptbillbl  | 负责实现制定收款单所需要的服务                |
 | accountbookbl  | 负责实现期初建账界面所需要的服务               |
-| tablebl        | 负责实现查看销售明细表，经营历程表，经营情况表界面所需要的服务 |
+| businesshistorybl |负责实现查看经营历程表界面所需要的服务      |
+| bisinesssituationbl |负责实现查看经营情况表界面所需要的服务        |
+| saleschedulebl | 负责实现查看销售明细表所需要的服务            |
 | commoditybl    | 负责实现商品界面所需要的服务                  |
 | classificationbl| 负责实现商品分类管理界面所需要的服务          |
 | inventorybillbl| 负责实现库存类单据界面所需要的服务
