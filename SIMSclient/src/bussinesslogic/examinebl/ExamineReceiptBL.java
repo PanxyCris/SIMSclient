@@ -47,15 +47,13 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 
 	@Override
 	public ResultMessage updateBill(ReceiptBillVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updateReceiptBill(tansition.VOtoPO(vo));
 	}
 
 	@Override
 	public ResultMessage passBills(ArrayList<ReceiptBillVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
 		for(ReceiptBillVO vo:vos){
-			MemberPO member = memberService.findMember(vo.getCustomer(), FindMemberType.ID).get(0);
+			MemberPO member = memberService.findMember(vo.getCustomerID(), FindMemberType.ID).get(0);
             member.setPayable(member.getPayable()-vo.getTotal());
             memberService.updateMember(member);
 
@@ -74,8 +72,9 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO>{
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.SUCCESS);;
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),       //生成一个信息
+					false,user.getName()+"("+user.getID()+")",
+					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
 				return result;

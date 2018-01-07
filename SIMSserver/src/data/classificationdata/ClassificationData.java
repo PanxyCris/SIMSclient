@@ -31,26 +31,25 @@ public class ClassificationData {
 		ClassificationData d = new ClassificationData();
 		ArrayList<ClassificationVPO> children = new ArrayList<>();
 		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
-	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
-		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
-		children1.add(c11);
-		children1.add(c12);
-
-		ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,"µÆ",null);
-     	ClassificationVPO c2 = new ClassificationVPO("0006","À¶µÆ",true,"°×µÆ",null);
-		ClassificationVPO c3 = new ClassificationVPO("0005","ÂÌµÆ",true,"°×µÆ",null);
-//	    children.add(c1);
-//		children.add(c2);
-//		children.add(c3);
-		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null);
+//	    ClassificationVPO c11 = new ClassificationVPO("0005","°×°×³ãµÆ",true,null,null);
+//		ClassificationVPO c12 = new ClassificationVPO("0006","ºÚ°×³ãµÆ",true,null,null);
+//		children1.add(c11);
+//		children1.add(c12);
+//
+//		ClassificationVPO c1 = new ClassificationVPO("0002","°×µÆ",true,"µÆ",null);
+//     	ClassificationVPO c2 = new ClassificationVPO("0006","À¶µÆ",true,"°×µÆ",null);
+//		ClassificationVPO c3 = new ClassificationVPO("0005","ÂÌµÆ",true,"°×µÆ",null);
+////	    children.add(c1);
+////		children.add(c2);
+////		children.add(c3);
+		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
 
 //  	d.insert(c2);
 //		d.insert(c1);
 //		d.insert(c3);
-//		d.delete("ÂÌµÆ");
- //       d.delete("»ÆµÆ");
-		 d.update(root);
-		System.out.println(d.show().get(0));
+		d.delete("°×µÆ");
+//		 d.update(root);
+		System.out.println(d.show().size());
 	}
 
 	private Connection conn;
@@ -72,11 +71,11 @@ public class ClassificationData {
 //				System.out.println(count);
 //				if (count == 0) {
 				ClassificationVPO father = find(po.getFather()).get(0);
-				ArrayList<ClassificationVPO> children = new ArrayList<>();
+				ArrayList<String> children = new ArrayList<>();
 				if(father.getChildren()!=null)
-					children = father.getChildren();
-				children.add(po);
-				father.setChildren(children);
+					children = father.getChildrenPointer();
+				children.add(po.getName());
+				father.setChildrenPointer(children);
 				update(father);
 					String sql = "" + "insert into classification(name, object) values (?,?)";
 
@@ -107,9 +106,9 @@ public class ClassificationData {
 		try {
 			ClassificationVPO vpo = find(name).get(0);
 			ClassificationVPO father = find(vpo.getFather()).get(0);
-			ArrayList<ClassificationVPO> children = father.getChildren();
-			children.remove(vpo);
-			father.setChildren(children);
+			ArrayList<String> children = father.getChildrenPointer();
+			children.remove(name);
+			father.setChildrenPointer(children);
 			update(father);
 
 			PreparedStatement ps = conn.prepareStatement(sql);

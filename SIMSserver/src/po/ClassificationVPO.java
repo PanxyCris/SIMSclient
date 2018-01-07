@@ -10,13 +10,15 @@ public class ClassificationVPO implements Serializable{
 	private String name;
 	private Boolean b;//true表示该分类为classification,false表示该分类实际上是商品
 	private String father;
+	private ArrayList<String> childrenPointer;
 	private ArrayList<ClassificationVPO> children;
 
-	public ClassificationVPO(String id, String n,Boolean b,String f,ArrayList<ClassificationVPO> c){
+	public ClassificationVPO(String id, String n,Boolean b,String f,ArrayList<String> childrenPointer,ArrayList<ClassificationVPO> c){
 		this.id = id;
 		this.name = n;
 		this.b = b;
 		this.father= f;
+		this.setChildrenPointer(childrenPointer);
 		this.children = c;
 	}
 
@@ -63,4 +65,17 @@ public class ClassificationVPO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public String getType(){
+		return b==true?"分类":"商品";
+	}
+
+	public ArrayList<String> getChildrenPointer() {
+		return childrenPointer;
+	}
+
+	public void setChildrenPointer(ArrayList<String> childrenPointer) {
+		this.childrenPointer = childrenPointer;
+	}
+
 }

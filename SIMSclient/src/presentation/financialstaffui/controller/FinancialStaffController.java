@@ -124,6 +124,7 @@ public class FinancialStaffController extends LoginController{
         	circle.setLayoutY(16);
         	circle.setRadius(7);
         	circle.setFill(Paint.valueOf("#ff1f1f"));
+        	pane.getChildren().add(circle);
         }
      //   image = user.getImage();
 	}
