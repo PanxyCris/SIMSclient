@@ -488,26 +488,26 @@ JavaFX
 |Classification.getId|返回待新增分类的Id|
 <br/>
 
-　**Inventorybl模块的接口规范**
+　**InventoryBillbl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Inventory.getID|语法|`public String getId(BillType type)`|
+|InventoryBill.getID|语法|`public String getId(BillType type)`|
 ||前置条件|启动一个新增库存类单据的回合|
 ||后置条件|返回待新增单据的ID|
-|Inventory.save|语法|`public ResultMessage save(InventoryBillVO vo)`|
+|InventoryBill.save|语法|`public ResultMessage save(InventoryBillVO vo)`|
 ||前置条件|单据信息符合规则|
-||后置条件|查找是否存在该分类，若不存在则新增，存在则更新，返回保存验证的结果|
-|Inventory.delete|语法|`public void delete(InventoryBillVO clickedItem)`|
+||后置条件|查找是否存在该单据，若不存在则新增，存在则更新，返回保存验证的结果|
+|InventoryBill.delete|语法|`public void delete(InventoryBillVO clickedItem)`|
 ||前置条件|单据符合规则|
 ||后置条件|查找是否有该单据，若存在则删除|
-|Inventory.submit|语法|`public ResultMessage submit(InventoryBillVO clickedItem)`|
+|InventoryBill.submit|语法|`public ResultMessage submit(InventoryBillVO clickedItem)`|
 ||前置条件|单据信息符合规则|
 ||后置条件|查找是否有该单据，若存在则修改单据状态为已提交，返回提交验证的结果|
-|Inventory.show|语法|`public ArrayList<InventoryBillVO> show()`|
+|InventoryBill.show|语法|`public ArrayList<InventoryBillVO> show()`|
 ||前置条件|启动一个查看过往单据的回合|
 ||后置条件|返回系统中所有的库存类单据的list|
-|Inventory.find|语法|`public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type)`|
+|InventoryBill.find|语法|`public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type)`|
 ||前置条件|text符合规则|
 ||后置条件|返回符合text的库存类单据的列表|
 
@@ -517,11 +517,11 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Inventory.insert|插入单一持久化对象|
-|Inventory.update|更新打印持久化对象|
-|Inventory.delete|删除单一持久化对象|
-|Inventory.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|Inventory.show|返回数据库中所有持久化对象|
+|InventoryBill.insert|插入单一持久化对象|
+|InventoryBill.update|更新打印持久化对象|
+|InventoryBill.delete|删除单一持久化对象|
+|InventoryBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|InventoryBill.show|返回数据库中所有持久化对象|
 <br/>
 
 　**memberbl模块的接口规范**
