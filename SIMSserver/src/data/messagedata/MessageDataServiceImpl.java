@@ -44,6 +44,29 @@ public class MessageDataServiceImpl implements MessageDataService{
 
 	@Override
 	public ResultMessage save(MessagePO message) {
+		try {
+		    PreparedStatement ps0 = conn.prepareStatement("select count(*) from message where id = ?");
+		    ps0.setString(1, message.getMessageID());
+			ResultSet rs = ps0.executeQuery();
+			
+			int count = 0;
+			if (rs.next()) {
+				count = rs.getInt(1);
+				if (count == 0) {
+					return insert(message);
+				}
+				
+				else {
+					return update(message);
+				}
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return ResultMessage.FAIL;
+	}
+	
+	public ResultMessage insert(MessagePO message) {
 		String sql = "" + "insert into message(id, object) values (?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -51,6 +74,22 @@ public class MessageDataServiceImpl implements MessageDataService{
 			ps.setObject(2, message);
 			ps.executeUpdate();
 			ps.close();
+			return ResultMessage.SUCCESS;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+	
+	public ResultMessage update(MessagePO message) {
+		String sql = "" + "update message set object = ? where id = ?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setObject(1, message);
+			ps.setString(2, message.getMessageID());
+			ps.executeUpdate();
+			ps.close();
+//			conn.close();
 			return ResultMessage.SUCCESS;
 		} catch (SQLException e) {
 			e.printStackTrace();
