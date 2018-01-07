@@ -52,10 +52,6 @@ public class AccountBLService_Stub implements AccountBLService {
 		return list;
 	}
 
-	@Override
-	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
+	
 
 }

@@ -45,7 +45,7 @@ public class PromotionMemberBLService_Stub implements PromotionBLService<Promoti
 		ArrayList<GiftVO> gifts1 = new ArrayList<>();
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionMemberVO m2 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
+		PromotionMemberVO m2 = new PromotionMemberVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
 	    list.add(m2);
 		return list;
 	}

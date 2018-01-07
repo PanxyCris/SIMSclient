@@ -1,10 +1,13 @@
 package bussiness_stub;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import vo.commodityvo.ClassificationVO;
+import vo.commodityvo.CommodityCheckVO;
+import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
 
 public class CommodityBLService_Stub implements CommodityBLService{
@@ -69,6 +72,39 @@ public class CommodityBLService_Stub implements CommodityBLService{
 	public String getID() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void delete(CommodityVO vo) throws Exception {
+	}
+
+	@Override
+	public ArrayList<CommodityVO> show() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getIDandName() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getAllChildrenClass() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<CommodityStockVO> stock() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
+		return null;
+	}
+
+	@Override
+	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs) {
 	}
 
 }

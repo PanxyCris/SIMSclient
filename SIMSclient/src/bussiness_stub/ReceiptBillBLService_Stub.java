@@ -7,6 +7,7 @@ import dataenum.BillType;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import dataenum.ResultMessage;
+import dataenum.findtype.FindAccountBillType;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 
@@ -25,7 +26,7 @@ public class ReceiptBillBLService_Stub implements ReceiptBillBLService {
 	}
 
 	@Override
-	public ArrayList<ReceiptBillVO> find() {
+	public ArrayList<ReceiptBillVO> find(String info, FindAccountBillType type) {
 		// TODO Auto-generated method stub
 		ArrayList<AccountListVO> accountList = new ArrayList<>();
 		AccountListVO account1 = new AccountListVO("00001",5000.00,"CNJDAN");
@@ -62,7 +63,26 @@ public class ReceiptBillBLService_Stub implements ReceiptBillBLService {
 	@Override
 	public ResultMessage commit(ReceiptBillVO receiptBillVO) {
 		// TODO Auto-generated method stub
-		return null;
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ArrayList<ReceiptBillVO> show() {
+		ArrayList<AccountListVO> accountList = new ArrayList<>();
+		AccountListVO account1 = new AccountListVO("00001",5000.00,"CNJDAN");
+		AccountListVO account2 = new AccountListVO("00002",4000.00,"CADCACDA");
+		accountList.add(account1);
+		accountList.add(account2);
+		ArrayList<ReceiptBillVO> list = new ArrayList<>();
+		ReceiptBillVO bill = new ReceiptBillVO("00001","Panxy","00001",BillType.XJFYD,BillState.DRAFT,accountList,9000.00,"ncidan");
+		list.add(bill);
+		return list;
+	}
+
+
+	@Override
+	public String getId() {
+		return "SKD-20171212-00002";
 	}
 
 
