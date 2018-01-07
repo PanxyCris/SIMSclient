@@ -132,8 +132,8 @@ public class PaymentBillBL implements PaymentBillBLService{
 		paymentBillVO.setState(BillState.COMMITED);
 		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
 		try {
-			ResultMessage resultMessage = paymentBillDataService.updatePaymentBill(paymentBillPO);
-			if(resultMessage == ResultMessage.SUCCESS){
+			ResultMessage resultMessage = paymentBillDataService.insertPaymentBill(paymentBillPO);
+			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
 				MessageExaminePO message = new MessageExaminePO(manager.getID(),paymentBillVO.getId(),manager);

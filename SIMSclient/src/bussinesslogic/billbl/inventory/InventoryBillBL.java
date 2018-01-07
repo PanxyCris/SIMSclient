@@ -72,12 +72,9 @@ public class InventoryBillBL implements InventoryBillBLService{
 		inventoryBillPO=inventoryTransition.VOtoPO(clickedItem);
 		try {
 
-			ResultMessage resultMessage = ResultMessage.FAIL;
-			if(resultMessage == ResultMessage.EXISTED)
-				resultMessage = billDataService.insertInventoryBill(inventoryBillPO);
-			else
-			    resultMessage = billDataService.updateInventoryBill(inventoryBillPO);
-			if(resultMessage == ResultMessage.SUCCESS){
+			ResultMessage resultMessage = billDataService.insertInventoryBill(inventoryBillPO);
+			if(resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)
+		    {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
 				MessageExaminePO message = new MessageExaminePO(manager.getID(),inventoryBillPO.getId(),manager);

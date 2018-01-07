@@ -121,8 +121,8 @@ public class GeneralManagerController {
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
-      //  UtilityBLService utilityService = new UtilityBL();
-     /*   if(utilityService.hasMessage(user)){
+       UtilityBLService utilityService = new UtilityBL();
+       if(utilityService.hasMessage(user)){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
         	circle.setCenterY(0);
@@ -130,7 +130,8 @@ public class GeneralManagerController {
         	circle.setLayoutY(16);
         	circle.setRadius(7);
         	circle.setFill(Paint.valueOf("#ff1f1f"));
-        }*/
+        	pane.getChildren().add(circle);
+        }
      //   image = user.getImage();
 	}
 

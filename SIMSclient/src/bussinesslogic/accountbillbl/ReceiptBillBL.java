@@ -168,11 +168,9 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 		receiptBillVO.setState(BillState.COMMITED);
 		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
 		try {
-			ResultMessage resultMessage = ResultMessage.FAIL;
-			if(receiptBillDataService.insertReceiptBill(receiptBillPO) == ResultMessage.EXISTED)
-
-
-			if(resultMessage == ResultMessage.SUCCESS){
+			ResultMessage resultMessage = receiptBillDataService.insertReceiptBill(receiptBillPO);
+			if(resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)
+            {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
 				MessageExaminePO message = new MessageExaminePO(manager.getID(),receiptBillPO.getDocID(),manager);

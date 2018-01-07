@@ -140,12 +140,9 @@ public class PurchaseController implements PurchaseBLService{
 	public ResultMessage submit(PurchaseVO Info) {
 		try {
 			PurchasePO po = PurchaseTransition.VOtoPO(Info);
-			ResultMessage resultMessage = ResultMessage.FAIL;
-			if (service.insertPurchase(po) == ResultMessage.EXISTED)
-				resultMessage = service.updatePurchase(po);
-			else
-				 resultMessage = service.insertPurchase(po);
-		    if(resultMessage == ResultMessage.SUCCESS){
+			ResultMessage resultMessage = service.insertPurchase(po);
+			if (resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)
+			{
 					ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 					for(UserPO manager:generalManagers){
 					MessageExaminePO message = new MessageExaminePO(manager.getID(),po.getId(),manager);

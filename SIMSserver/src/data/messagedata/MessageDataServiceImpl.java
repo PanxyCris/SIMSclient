@@ -23,6 +23,7 @@ import dataservice.messagedataservice.MessageDataService;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
 import po.messagepo.MessagePO;
+import po.messagepo.MessageWarmingPO;
 
 public class MessageDataServiceImpl implements MessageDataService{
 
@@ -34,7 +35,9 @@ public class MessageDataServiceImpl implements MessageDataService{
 	public static void main(String[] args) {
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
-		UserDataService userService;
+		MessageWarmingPO message = new MessageWarmingPO("000003","N JIAACD",400,500);
+		data.save(message);
+		System.out.println(data.getMessage(new UserPO("000004",null,null,null,null)).get(0).getInfo());
 
 	}
 

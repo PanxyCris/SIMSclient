@@ -56,7 +56,6 @@ public class ClassManageController extends InventoryManagerController{
 	@FXML
 	ComboBox<String> classChoice;
 
-
 	@FXML
 	public void insert() throws Exception{
 		if(nameField.getText()==null||classChoice.getValue()==null){

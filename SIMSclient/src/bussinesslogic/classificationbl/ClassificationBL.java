@@ -80,7 +80,7 @@ public class ClassificationBL implements ClassificationBLService {
 	public ClassificationVPO getRoot() {
 		try {
 			ClassificationVPO root = classificationDataService.getRoot();
-		    addChildren(root);
+//		    addChildren(root);
 			return root;
 		} catch (RemoteException e) {
 			e.printStackTrace();

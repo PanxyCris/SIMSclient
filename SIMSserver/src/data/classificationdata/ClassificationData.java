@@ -48,6 +48,7 @@ public class ClassificationData {
 //		d.insert(c1);
 //		d.insert(c3);
 //		d.delete("бл╣ф");
+ //       d.delete(c2.getName());
 		System.out.println(d.show().size());
 	}
 
@@ -69,6 +70,13 @@ public class ClassificationData {
 //				count = rs.getInt(1);
 //				System.out.println(count);
 //				if (count == 0) {
+				ClassificationVPO father = find(po.getFather()).get(0);
+				ArrayList<ClassificationVPO> children = new ArrayList<>();
+				if(father.getChildren()!=null)
+					children = father.getChildren();
+				children.add(po);
+				father.setChildren(children);
+				update(father);
 					String sql = "" + "insert into classification(name, object) values (?,?)";
 
 					conn.setAutoCommit(false);
@@ -96,6 +104,13 @@ public class ClassificationData {
 	public ResultMessage delete(String name)  {
 		String sql = "" + "delete from classification where name = ?";
 		try {
+			ClassificationVPO vpo = find(name).get(0);
+			ClassificationVPO father = find(vpo.getFather()).get(0);
+			ArrayList<ClassificationVPO> children = father.getChildren();
+			children.remove(vpo);
+			father.setChildren(children);
+			update(father);
+
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.execute();
