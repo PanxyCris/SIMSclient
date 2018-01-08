@@ -46,10 +46,11 @@ public class ClassificationData {
 
 //  	d.insert(c2);
 //		d.insert(c1);
-//		d.insert(c3);
-		d.delete("°×µÆ");
-//		 d.update(root);
+//		d.insert(root);
+        d.insert(root);
 		System.out.println(d.show().size());
+		for(ClassificationVPO vpo:d.show())
+		System.out.println(vpo.getName());
 	}
 
 	private Connection conn;
@@ -59,7 +60,7 @@ public class ClassificationData {
 
 	public ResultMessage insert(ClassificationVPO po) {
 
-			try {
+		try {
 //			String sql0 = "select count(*) from classification where name = ?";
 //			PreparedStatement ps0 = conn.prepareStatement(sql0);
 //			ps0.setString(1, po.getName());
@@ -68,15 +69,7 @@ public class ClassificationData {
 //			int count = 0;
 //			if (rs.next()) {
 //				count = rs.getInt(1);
-//				System.out.println(count);
 //				if (count == 0) {
-				ClassificationVPO father = find(po.getFather()).get(0);
-				ArrayList<String> children = new ArrayList<>();
-				if(father.getChildren()!=null)
-					children = father.getChildrenPointer();
-				children.add(po.getName());
-				father.setChildrenPointer(children);
-				update(father);
 					String sql = "" + "insert into classification(name, object) values (?,?)";
 
 					conn.setAutoCommit(false);
@@ -93,7 +86,7 @@ public class ClassificationData {
 //					return ResultMessage.EXISTED;
 //				}
 //			}
-
+//
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -104,13 +97,6 @@ public class ClassificationData {
 	public ResultMessage delete(String name)  {
 		String sql = "" + "delete from classification where name = ?";
 		try {
-			ClassificationVPO vpo = find(name).get(0);
-			ClassificationVPO father = find(vpo.getFather()).get(0);
-			ArrayList<String> children = father.getChildrenPointer();
-			children.remove(name);
-			father.setChildrenPointer(children);
-			update(father);
-
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.execute();
