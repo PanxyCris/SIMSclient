@@ -15,6 +15,7 @@ import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindMemberType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
+import dataservice.billdataservice.BillDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.messagedataservice.MessageDataService;
@@ -23,6 +24,7 @@ import dataservice.userdataservice.UserDataService;
 import po.MemberPO;
 import po.UserPO;
 import po.commodity.CommodityPO;
+import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessageBillPO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
@@ -41,6 +43,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	private CommodityDataService commodityService;
 	private MemberDataService memberService;
 	private UtilityBLService utilityService;
+	private BillDataService inventoryService;
 
 	public ExamineSalesBL() {
 		service = RemoteHelper.getInstance().getSalesDataService();
@@ -49,6 +52,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 		commodityService = RemoteHelper.getInstance().getCommodityDataService();
 		memberService = RemoteHelper.getInstance().getMemeberDataService();
 		utilityService = new UtilityBL();
+		inventoryService = RemoteHelper.getInstance().getBilldataService();
 	}
 
 	@Override
@@ -78,6 +82,8 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
             		commodity.setNumner(commodity.getNumber()+item.getNumber());
             	commodityService.updateCommodity(commodity);
             }
+
+            InventoryBillPO inventory = new InventoryBillPO();
 
             vo.setState(BillState.SUCCESS);
             updateBill(vo);

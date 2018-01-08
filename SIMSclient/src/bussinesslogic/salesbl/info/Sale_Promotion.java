@@ -163,16 +163,12 @@ public class Sale_Promotion implements Sale_PromotionInfo {
  		}
 
 		double voucher = 0, allowance = 0;
-		double max = 0;
 		for (PromotionVO vo : list) {
 			switch (vo.getType()) {
 			case LEVEL_PROMOTION:
 				PromotionMemberVO m = (PromotionMemberVO) vo;
-				if (m.getAllowance() + m.getVoucher() > max) {
-					max = m.getAllowance() + m.getVoucher();
-					voucher = m.getVoucher();
-					allowance = m.getAllowance();
-				}
+				voucher += m.getVoucher();
+				allowance += m.getAllowance();
 				if(giftList.isEmpty())
 					giftList.addAll(m.getGifts());
 				else{
@@ -191,20 +187,12 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 
 			case PRICEPACKS:
 				PromotionPricePacksVO p = (PromotionPricePacksVO) vo;
-				if (p.getDiscount() > max) {
-					max = p.getDiscount();
-					voucher = 0;
-					allowance = p.getDiscount();
-				}
+				allowance += p.getDiscount();
 				break;
 
 			case SUM_PROMOTION:
 				PromotionTotalVO t = (PromotionTotalVO) vo;
-				if (t.getVoucher() > max) {
-					voucher = t.getVoucher();
-					allowance = 0;
-					max = t.getVoucher();
-				}
+				voucher += t.getVoucher();
 				if(giftList.isEmpty())
 					giftList.addAll(t.getGifts());
 				else{
