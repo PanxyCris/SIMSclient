@@ -605,6 +605,45 @@ JavaFX
 |Sale.find()|寻找所有符合条件的持久化对象|
 
 
+**salebl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|Purchase.getPurchaseID|语法|`public String getPurchaseID()`|
+||前置条件|需要进货单ID|
+||后置条件|返回一个自动生成的进货单ID|
+|Purchase.getPurchaseBackID|语法|`public String getPurchaseBackID()`|
+||前置条件|需要进货退货单ID|
+||后置条件|返回销售退货单ID|
+|Purchase.submit|语法|`public ResultMessage submit(PurchaseVO vo)`|
+||前置条件|启动一个进货（退货）回合|
+||后置条件|创建提交进货(退货)单|
+|Purchase.save|语法|`public ResultMessage save(PurchaseVO vo)`|
+||前置条件|已经创建进货(退货)单|
+||后置条件|保存草稿单据|
+|Purchase.show|语法|`public ArrayList<PurchaseVO> show()`|
+||前置条件|需要获取全部的进货单|
+||后置条件|返回数据库里全部的进货单|
+|Purchase.find|语法|`public ArrayList<PurchaseVO> find(String info,FindSalesType type)`|
+||前置条件|查找全部符合条件的进货单|
+||后置条件|返回数据库里全部符合条件的进货单|
+|Purchase.isLegal|语法|`public ResultMessage isLegal(CommodityItemVO item)`|
+||前置条件|输入商品清单信息|
+||后置条件|返回数据是否合法|
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Purchase.insert()|新增单一持久化对象|
+|Purchase.update|更新打印持久化对象|
+|Purchase.delete|删除单一持久化对象|
+|Purchase.show()|显示全部持久化对象|
+|Purchase.find()|寻找所有符合条件的持久化对象|
+
+
+
 　**Accountbl模块的接口规范**
 
 |提供的服务|供接口||
@@ -835,104 +874,104 @@ JavaFX
 </tr>
        <tr>
        <th>SalesDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>SalesDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>SalesDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于序列化文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>SalesDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 
 <tr>
        <th>UserDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>UserDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于Txt文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>UserDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于序列化文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>UserDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 
 <tr>
        <th>CommodityDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>CommodityDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于Txt文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>CommodityDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于序列化文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>CommodityDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 
 <tr>
        <th>MemberDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>MemberDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于Txt文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>MemberDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于序列化文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>MemberDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 
 <tr>
        <th>AccountDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>AccountDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于Txt文件的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>AccountDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>AccountDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 
 <tr>
        <th>PromotionDataService</th>
-       <th>持久化数据库的接口，提供集体裁人，集体保存、增、删、改、查服务</th>
+       <th>持久化数据库的接口，提供集体载入，集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>PromotionDataServiceTxtFileImpl</th>
-       <th>基于Txt文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>PromotionDataServiceSerilizableFileImpl</th>
-       <th>基于序列化文件的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
  <tr>
        <th>PromotionDataServiceMySqlImpl</th>
-       <th>基于MySql数据库的持久化数据库的接口，提供集体裁人、集体保存、增、删、改、查服务</th>
+       <th>基于MySql数据库的持久化数据库的接口，提供集体载入、集体保存、增、删、改、查服务</th>
 </tr>
 </table>
 
@@ -943,7 +982,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.find</th>
 <th>语法</th>
-<th>public SalesPO find(long id) throws RemoteException;</th>
+<th>`public ArrayList<SalesPO> find(String keyword, FindSalesType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -951,17 +990,31 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的SalesPO结果</th>
+<th>按keyword和查找方式进行查找返回相应的SalesPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">SalesDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<SalesPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的SalesPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">SalesDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>`public ResultMessage insert(SalesPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样id的PO在数据库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -971,7 +1024,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -985,7 +1038,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>`public void update(SalesPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -997,9 +1050,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">SalesDataService.init</th>
+<th rowspan="3">PurchaseDataService.find</th>
 <th>语法</th>
-<th>public void init() throws RemoteException;</th>
+<th>`public ArrayList<PurchasePO> find(String keyword, FindSalesType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1007,13 +1060,13 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>初始化持久化数据库</th>
+<th>按keyword和查找方式进行查找返回相应的PurchasePO结果</th>
 </tr>
 
 <tr>
-<th rowspan="3">SalesDataService.finish</th>
+<th rowspan="3">PurchaseDataService.show</th>
 <th>语法</th>
-<th>public void finish() throws RemoteException;</th>
+<th>`public ArrayList<PurchasePO> show() throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1021,13 +1074,350 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>结束持久化数据库的使用</th>
+<th>返回所有的PurchasePO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">PurchaseDataService.insert</th>
+<th>语法</th>
+<th>`public ResultMessage insert(PurchasePO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>同样ID的po在数据库中不存在</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在数据库中增加一个po记录</th>
+</tr>
+
+<tr>
+<th rowspan="3">PurchaseDataService.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">PurchaseDataService.update</th>
+<th>语法</th>
+<th>`public void update(PurchasePO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>更新一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">PaymentBillDataService.find</th>
+<th>语法</th>
+<th>`public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>按keyword和查找方式进行查找返回相应的PaymentBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">PaymentBillDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<PaymentBillPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的PaymentBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">PaymentBillDataService.insert</th>
+<th>语法</th>
+<th>`public ResultMessage insert(PaymentBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>同样ID的po在数据库中不存在</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在数据库中增加一个po记录</th>
+</tr>
+
+<tr>
+<th rowspan="3">PaymentBillDataService.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">PaymentBillDataService.update</th>
+<th>语法</th>
+<th>`public void update(PaymentBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>更新一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">ReceiptBillDataService.find</th>
+<th>语法</th>
+<th>`public ArrayList<ReceiptBillPO> find(String keyword, FindAccountBillType type) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>按keyword和查找方式进行查找返回相应的ReceiptBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">ReceiptBillDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<ReceiptBillPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的ReceiptBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">ReceiptBillDataService.insert</th>
+<th>语法</th>
+<th>`public ResultMessage insert(ReceiptBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>同样ID的po在数据库中不存在</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在数据库中增加一个po记录</th>
+</tr>
+
+<tr>
+<th rowspan="3">ReceiptBillDataService.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">ReceiptBillDataService.update</th>
+<th>语法</th>
+<th>`public void update(ReceiptBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>更新一个po</th>
+</tr>
+
+
+<tr>
+<th rowspan="3">ClassificationDataService.find</th>
+<th>语法</th>
+<th>`public ArrayList<ClassificationPO> find(String keyword) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>按keyword进行查找返回相应的ClassificationPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">ClassificationDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<ClassificationPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的Classification结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">ClassificationDataService.getRoot</th>
+<th>语法</th>
+<th>`public ClassificationPO getRoot() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回Classification的根结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">ClassificationDataService.insert</th>
+<th>语法</th>
+<th>`public ResultMessage insert(ClassificationPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>同样vo的p在数据库中不存在</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在数据库中增加一个po记录</th>
+</tr>
+
+<tr>
+<th rowspan="3">ClassificationDataService.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">ClassificationDataService.update</th>
+<th>语法</th>
+<th>`public void update(ClassificationPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>更新一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">InventoryBillDataService.find</th>
+<th>语法</th>
+<th>`public ArrayList<ClassificationPO> find(String keyword, FindInventoryBillType type) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>按keyword和查找方式进行查找返回相应的InventoryBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">InventoryBillDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<InventoryBillPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的InventoryBillPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">InventoryBillDataService.insert</th>
+<th>语法</th>
+<th>`public ResultMessage insert(InventoryBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>同样ID的po在数据库中不存在</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>在数据库中增加一个po记录</th>
+</tr>
+
+<tr>
+<th rowspan="3">InventoryBillDataService.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除一个po</th>
+</tr>
+
+<tr>
+<th rowspan="3">InventoryBillDataService.update</th>
+<th>语法</th>
+<th>`public void update(InventoryBillPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>在数据库中存在同样ID的po</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>更新一个po</th>
 </tr>
 
 <tr>
 <th rowspan="3">CommodityDataService.find</th>
 <th>语法</th>
-<th>public CommodityPO find(long id) throws RemoteException;</th>
+<th>`public ArrayList<CommodityPO> find(String keyword, FindCommodityType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1035,17 +1425,31 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的CommodityPO结果</th>
+<th>按keyword和查找方式进行查找返回相应的CommodityPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">CommodityDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<CommodityPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的CommodityPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">CommodityDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>`public ResultMessage insert(CommodityPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的PO在数据库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1055,7 +1459,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1069,7 +1473,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>`public ResultMessage update(long id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1081,37 +1485,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">CommodityDataService.init</th>
-<th>语法</th>
-<th>public void init() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>初始化持久化数据库</th>
-</tr>
-
-<tr>
-<th rowspan="3">CommodityDataService.finish</th>
-<th>语法</th>
-<th>public void finish() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>结束持久化数据库的使用</th>
-</tr>
-
-<tr>
 <th rowspan="3">UserDataService.find</th>
 <th>语法</th>
-<th>public ArrayList&lt;UserPO> findUser(String info, FindUserType type) throws RemoteException;</th>
+<th>`public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteExceptio`n;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1125,7 +1501,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.insert</th>
 <th>语法</th>
-<th>public ResultMessage insertUser(UserPO po) throws RemoteException;</th>
+<th>`public ResultMessage insertUser(UserPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1139,7 +1515,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.delete</th>
 <th>语法</th>
-<th>public ResultMessage deleteUser(String ID) throws RemoteException;</th>
+<th>`public ResultMessage deleteUser(String ID) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1153,7 +1529,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.update</th>
 <th>语法</th>
-<th>public ResultMessage updateUser(UserPO po) throws RemoteException;</th>
+<th>`public ResultMessage updateUser(UserPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1167,7 +1543,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.show</th>
 <th>语法</th>
-<th>public ArrayList&lt;UserPO> showUser() throws RemoteException;</th>
+<th>`public ArrayList<UserPO> showUser() throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1181,7 +1557,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.login</th>
 <th>语法</th>
-<th>public boolean login(String id, String password) throws RemoteException;</th>
+<th>`public boolean login(String id, String password) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1195,7 +1571,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.find</th>
 <th>语法</th>
-<th>public MemberPO find(long id) throws RemoteException;</th>
+<th>`public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1203,17 +1579,17 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的MemberPO结果</th>
+<th>按keyword和查找方式进行查找返回相应的MemberPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">MemberDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>`public ResultMessage insert(SalesPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的p在数据库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1223,7 +1599,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>`public void delete(String id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1237,7 +1613,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>`public ResultMessage update(String id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1249,37 +1625,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">MemberDataService.init</th>
-<th>语法</th>
-<th>public void init() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>初始化持久化数据库</th>
-</tr>
-
-<tr>
-<th rowspan="3">MemberDataService.finish</th>
-<th>语法</th>
-<th>public void finish() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>结束持久化数据库的使用</th>
-</tr>
-
-<tr>
 <th rowspan="3">AccountDataService.find</th>
 <th>语法</th>
-<th>public AccountPO find(long id) throws RemoteException;</th>
+<th>`public ArrayList<AccountPO> find(String keyword, FindAccountType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1287,17 +1635,30 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的AccountPO结果</th>
+<th>按keyword和查找方式进行查找返回相应的AccountPO结果</th>
+</tr>
+
+<th rowspan="3">AccountDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<AccountPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的AccountPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">AccountDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>`public ResultMessage insert(AccountPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的p在数据库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1307,7 +1668,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>`public ResultMessage delete(long id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1321,7 +1682,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>`public ResultMessage update(long id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1333,37 +1694,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">AccountDataService.init</th>
-<th>语法</th>
-<th>public void init() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>初始化持久化数据库</th>
-</tr>
-
-<tr>
-<th rowspan="3">AccountDataService.finish</th>
-<th>语法</th>
-<th>public void finish() throws RemoteException;</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>无</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>结束持久化数据库的使用</th>
-</tr>
-
-<tr>
 <th rowspan="3">PromotionDataService.find</th>
 <th>语法</th>
-<th>public PromotionPO find(long id) throws RemoteException;</th>
+<th>`public ArrayList<PromotionPO> find(String keyword, FinsPromotionType type) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1371,17 +1704,31 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>按ID进行查找返回相应的PromotionPO结果</th>
+<th>按keyword和查找方式进行查找返回相应的PromotionPO结果</th>
+</tr>
+
+<tr>
+<th rowspan="3">PromotionDataService.show</th>
+<th>语法</th>
+<th>`public ArrayList<PromotionPO> show() throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>无</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有的PromotionPO结果</th>
 </tr>
 
 <tr>
 <th rowspan="3">PromotionDataService.insert</th>
 <th>语法</th>
-<th>public void insert(long id) throws RemoteException;</th>
+<th>`public ResultMessage insert(PromotionPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>同样ID的p在Mapper中不存在</th>
+<th>同样ID的po在数据库中不存在</th>
 </tr>
 <tr>
 <th>后置条件</th>
@@ -1391,7 +1738,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.delete</th>
 <th>语法</th>
-<th>public void delete(long id) throws RemoteException;</th>
+<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1405,7 +1752,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.update</th>
 <th>语法</th>
-<th>public void update(long id) throws RemoteException;</th>
+<th>`public ResultMessage update(PromotionPO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1417,9 +1764,9 @@ JavaFX
 </tr>
 
 <tr>
-<th rowspan="3">PromotionDataService.init</th>
+<th rowspan="3">MessageDataService.save</th>
 <th>语法</th>
-<th>public void init() throws RemoteException;</th>
+<th>`public ResultMessage save(MessagePO po) throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1427,13 +1774,27 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>初始化持久化数据库</th>
+<th>保存一个po</th>
 </tr>
 
 <tr>
-<th rowspan="3">PromotionDataService.finish</th>
+<th rowspan="3">MessageDataService.getMessage</th>
 <th>语法</th>
-<th>public void finish() throws RemoteException;</th>
+<th>`public ArrayList<MessagePO> getMessage(UserPO po) throws RemoteException`;</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>数据库中有数据</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有该用户的单据审批信息</th>
+</tr>
+
+<tr>
+<th rowspan="3">MessageDataService.getMessageID</th>
+<th>语法</th>
+<th>`public String getMessageID() throws RemoteException`;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1441,7 +1802,7 @@ JavaFX
 </tr>
 <tr>
 <th>后置条件</th>
-<th>结束持久化数据库的使用</th>
+<th>获取自动生成的递增ID</th>
 </tr>
 
 </table>
@@ -1458,6 +1819,7 @@ JavaFX
   * PaymentBillPO与ReceiptBillPO 包括时间、状态，单据编号（SKD-yyyyMMdd-xxxxx），客户（同时包含供应商和销售商），操作员（当前登录用户），转账列表，总额汇总。转账列表中的一项包含：银行账户，转账金额，备注
   * CommodityPO 包括编号、名称、型号、库存数量、进价、零售价、最近进价、最近零售价
   * PurchasePO 保存进货时候数据的类，包括时间、状态、单据编号（格式为：JHD-yyyyMMdd-xxxxx，后五位每天从1开始编号，所以一天最多可以生成99999条单子），供应商，仓库，操作员，入库商品列表，备注，总额合计。其中入库商品列表包含的信息有：商品编号，名称（从商品选择界面进行选择），型号，数量（手动输入），单价（默认为商品信息中的进价），金额，备注（手动输入）。没有下划线的部分是自动计算并填充进去的
+  * PromotionPO 保存促销的开始时间和结束时间等
 
   **6.2 Txt持久化格式**
 
@@ -1467,7 +1829,7 @@ JavaFX
 
   **6.3 数据库表**
 
-  数据库表包括User表、Commodity表、Member表、Sales表、Bills表等。
+  数据库表包括User表、Commodity表、Member表、Sales表、Purchase表、Bills表、Account表等。
 
   **6.4 文件格式**
 
