@@ -122,6 +122,7 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 		for (int i = 0; i < salesVOs.size(); i++) {
 			if(BillType.SALESBILL==salesVOs.get(i).getType()){
 				LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
+				if((localDate.isEqual(start)||localDate.isAfter(start))&&(localDate.isEqual(end)||localDate.isBefore(end))){
 				ArrayList<CommodityItemVO> commodityItemVOs=salesVOs.get(i).getCommodity();
 				for (int j = 0; j < commodityItemVOs.size(); j++) {
 					String name=commodityItemVOs.get(j).getName();
@@ -130,6 +131,7 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 					Double price=commodityItemVOs.get(j).getPrice();
 					saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 					saleScheduleVOs.add(saleScheduleVO);
+				}
 				}
 			}
 		}
