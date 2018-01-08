@@ -74,28 +74,26 @@ public class CommodityBL implements CommodityBLService {
 	}
 
 	@Override
-	public String getID() {
-		ArrayList<CommodityPO> list = null;
+	public String getID(String name) {
 		try {
-			list = service.showCommodity();
-
+			ClassificationVPO father = classificationDataService.findClassification(name);
+			if(father.getChildrenPointer()==null||father.getChildrenPointer().isEmpty())
+				return name+"-"+"0001";
+			else{
+				String last = father.getChildrenPointer().get(father.getChildrenPointer().size()-1);
+				String nameID = last.substring(last.length()-4);
+			    int willAdd = Integer.parseInt(nameID);
+			    willAdd++;
+			    String newID = String.valueOf(willAdd);
+			    while(newID.length()<nameID.length())
+			    	newID = "0"+newID;
+			    return name+"-"+newID;
+			}
 		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ArrayList<Integer> IDList = new ArrayList<>();
-		for (CommodityPO po : list) {
-			System.out.println(po.getID());
-			IDList.add(Integer.parseInt(po.getID()));
-		}
-		Collections.sort(IDList);
-		// Collections.reverse(IDList);
-		String id = String.valueOf(IDList.get(IDList.size() - 1) + 1);
-		StringBuilder sb = new StringBuilder(id);
-		int len = id.length();
-		for (int i = 0; i < 6 - len; i++) {
-			sb.insert(0, "0");
-		}
-		return sb.toString();
+		return null;
 	}
 
 	@Override

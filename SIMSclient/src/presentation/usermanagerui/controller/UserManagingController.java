@@ -56,9 +56,6 @@ public class UserManagingController extends UserManagerController{
         protected ChoiceBox<String> roleChoice;
 	    @FXML
 	    protected ChoiceBox<String> findChoice;
- 	    @FXML
- 	    protected Label idLabel;
-
 
 		@FXML
 		protected TableView<UserVO> table;
@@ -76,12 +73,12 @@ public class UserManagingController extends UserManagerController{
 
 		@FXML
 		public void insert() throws RemoteException{
-			if(idLabel.getText()==null||nameField.getText()==null||passwordField.getText()==null||roleChoice.getValue()==null){
+			if(idField.getText()==null||nameField.getText()==null||passwordField.getText()==null||roleChoice.getValue()==null){
 				Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 				warning.showAndWait();
 			}
 			else{
-			 UserVO vo = new UserVO(idLabel.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), null);
+			 UserVO vo = new UserVO(idField.getText(), nameField.getText(), passwordField.getText(),UserRole.getRole(roleChoice.getValue()), null);
 		        ResultMessage message = service.insert(vo);
 		        Platform.runLater(new Runnable() {
 		    	    public void run() {
@@ -130,7 +127,6 @@ public class UserManagingController extends UserManagerController{
 		public void initInsert(){
 			nameField.setText("admin");
 			passwordField.setText("admin");
-			addID();
 		}
 
 		public void initData(UserVO user) throws Exception {
@@ -288,15 +284,6 @@ public class UserManagingController extends UserManagerController{
 	            return cell;
 	        });
 		}
-
-     public void addID(){
-     	if(!list.isEmpty()){
-		       String initID = addOne(list.get(list.size()-1).getID());
-	           idLabel.setText(initID);
-	        }else{
-	           idLabel.setText("0000001");
-	        }
-     }
 
 		/**
 		 * 自动生成新id

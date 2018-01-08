@@ -1,6 +1,5 @@
 package presentation.inventorymanagerui.controller;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -11,10 +10,12 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
@@ -22,14 +23,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-import po.ClassificationVPO;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
 import presentation.common.EditingCellDouble;
@@ -132,14 +130,15 @@ public class CommodityManageController extends InventoryManagerController{
 			warning.showAndWait();
 		}
 		else{
-		ArrayList<CommodityVO> list = service.find(findingField.getText(),FindCommodityType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<CommodityVO> commoditylist = service.find(findingField.getText(),FindCommodityType.getType(findChoice.getValue()));
+	       if(commoditylist==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(commoditylist);
+	    	   table.setItems(list);
 	    	   initFind();
 	       }
 		}
@@ -151,10 +150,6 @@ public class CommodityManageController extends InventoryManagerController{
 	}
 
 	public void initInsert() throws Exception{
-		if(service.getID()!=null)
-		idLabel.setText(service.getID());
-		else
-			idLabel.setText("000001");
 		classChoice.setValue(null);
 		nameField.setText(null);
 		modelField.setText(null);
@@ -177,9 +172,20 @@ public class CommodityManageController extends InventoryManagerController{
 		initFind();
 		edit();
 		manageInit();
+		choiceInit();
 	}
 
+	public void choiceInit() throws Exception{
 
+		classChoice.getSelectionModel().selectedItemProperty().addListener(
+        		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
+        			try {
+						idLabel.setText(service.getID(newValue));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+        		});
+	}
 
 	public void edit(){
 		Callback<TableColumn<CommodityVO, String>,

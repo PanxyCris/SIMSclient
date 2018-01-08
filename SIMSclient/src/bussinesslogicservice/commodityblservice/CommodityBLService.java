@@ -9,7 +9,7 @@ import vo.commodityvo.CommodityVO;
 
 public interface CommodityBLService{
 
-	public String getID() throws Exception;
+	public String getID(String name) throws Exception;
 
 	public ResultMessage insert(CommodityVO vo) throws Exception;
 

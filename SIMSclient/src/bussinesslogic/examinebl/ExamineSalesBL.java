@@ -3,6 +3,8 @@ package bussinesslogic.examinebl;
 import java.rmi.RemoteException;
 
 import java.util.ArrayList;
+
+import bussinesslogic.billbl.inventory.InventoryBillBL;
 import bussinesslogic.salesbl.SalesTransition;
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.examineblservice.ExamineBLService;
@@ -28,6 +30,7 @@ import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessageBillPO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
+import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 
@@ -43,7 +46,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	private CommodityDataService commodityService;
 	private MemberDataService memberService;
 	private UtilityBLService utilityService;
-	private BillDataService inventoryService;
+	private InventoryBillBL inventoryBL;
 
 	public ExamineSalesBL() {
 		service = RemoteHelper.getInstance().getSalesDataService();
@@ -52,7 +55,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 		commodityService = RemoteHelper.getInstance().getCommodityDataService();
 		memberService = RemoteHelper.getInstance().getMemeberDataService();
 		utilityService = new UtilityBL();
-		inventoryService = RemoteHelper.getInstance().getBilldataService();
+		inventoryBL = new InventoryBillBL();
 	}
 
 	@Override
@@ -83,7 +86,9 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
             	commodityService.updateCommodity(commodity);
             }
 
-            InventoryBillPO inventory = new InventoryBillPO();
+            InventoryBillVO inventory = new InventoryBillVO(inventoryBL.getId(BillType.INVENTORYGIFTBILL),vo.getGifts(),
+            		vo.getOperator(),BillType.INVENTORYGIFTBILL,BillState.COMMITED,vo.getId()+"的赠品提交");
+            inventoryBL.submit(inventory);
 
             vo.setState(BillState.SUCCESS);
             updateBill(vo);
