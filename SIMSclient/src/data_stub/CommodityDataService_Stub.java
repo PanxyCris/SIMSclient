@@ -1,36 +1,38 @@
 package data_stub;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
-import po.PersistObject;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindCommodityType;
+import dataservice.commoditydataservice.CommodityDataService;
 import po.commodity.CommodityPO;
 
-public class CommodityDataService_Stub {
-	public void insert(CommodityPO po) throws RemoteException{
-		System.out.println("Insert Success.");
+public class CommodityDataService_Stub implements CommodityDataService{
+
+	@Override
+	public ResultMessage insertCommodity(CommodityPO po) throws RemoteException {
+		return null;
 	}
-	public void delete(CommodityPO po)throws RemoteException{
-		System.out.println("Delete Success.");
+
+	@Override
+	public ResultMessage updateCommodity(CommodityPO po) throws RemoteException {
+		return null;
 	}
-	public void update(CommodityPO po)throws RemoteException{
-		System.out.println("Update Success.");
+
+	@Override
+	public ResultMessage deleteCommodity(String id) throws RemoteException {
+		return null;
 	}
-	public void find(CommodityPO po)throws RemoteException{
-		System.out.println("Find Success.");
+
+	@Override
+	public ArrayList<CommodityPO> showCommodity() throws RemoteException {
+		return null;
 	}
-	public void init()throws RemoteException{
-		System.out.println("Init Success.");
+
+	@Override
+	public ArrayList<CommodityPO> findCommodity(String keywords, FindCommodityType type) throws RemoteException {
+		return null;
 	}
-	public void finish()throws RemoteException{
-		System.out.println("Finish Success.");
-	}
-	public void giftInventoryReceiptsMaking(PersistObject po){
-		System.out.println("Making Success.");
-	}
-	public void lossAndRevenueInventoryReceiptsMaking(PersistObject po){
-		System.out.println("Making Success.");
-	}
-	public void warningInventoryReceiptsMaking(PersistObject po){
-		System.out.println("Making Success.");
-	}
+
 }
