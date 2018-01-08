@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
+import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
+import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindPurchaseType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
+import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.userdataservice.UserDataService;
@@ -34,11 +38,13 @@ public class PurchaseController implements PurchaseBLService{
 
 	private UserDataService userDataService;
 	private MessageDataService messageDataService;
+	private CommodityDataService commodityDataService;
 
 	public PurchaseController() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
 		userDataService = RemoteHelper.getInstance().getUserDataService();
 		messageDataService = RemoteHelper.getInstance().getMessageDataService();
+		commodityDataService = RemoteHelper.getInstance().getCommodityDataService();
 	}
 
 	@Override
@@ -139,6 +145,14 @@ public class PurchaseController implements PurchaseBLService{
 	@Override
 	public ResultMessage submit(PurchaseVO Info) {
 		try {
+			if(Info.getType() == BillType.PURCHASEBACKBILL){
+				for(CommodityItemVO commodity:Info.getCommodities()){
+					if(commodityDataService.findCommodity(commodity.getName().substring(0,commodity.getName().length()-8),
+							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
+						return ResultMessage.LOWNUMBER;
+				}
+			}
+
 			PurchasePO po = PurchaseTransition.VOtoPO(Info);
 			ResultMessage resultMessage = service.insertPurchase(po);
 			if (resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)

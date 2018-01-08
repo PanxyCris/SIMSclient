@@ -73,7 +73,7 @@
 				<TableColumn fx:id="tableTime" prefWidth="270.0" text="时间" />
 				<TableColumn fx:id="tableName" prefWidth="100.0" text="商品名" />
 				<TableColumn fx:id="tableModel" prefWidth="100.0" text="型号" />
-				<TableColumn fx:id="tabeNumber" prefWidth="100.0" text="数量" />
+				<TableColumn fx:id="tableNumber" prefWidth="100.0" text="数量" />
 				<TableColumn fx:id="tablePrice" prefWidth="100.0" text="单价" />
 				<TableColumn fx:id="tableSum" prefWidth="100.0" text="总额" />
 			</columns>

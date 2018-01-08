@@ -4,14 +4,17 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
+import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindInventoryBillType;
 import dataenum.findtype.FindUserType;
 import dataservice.billdataservice.BillDataService;
+import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.userdataservice.UserDataService;
 import javafx.util.converter.LocalDateStringConverter;
@@ -20,6 +23,8 @@ import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
+import vo.commodityvo.CommodityItemVO;
+import vo.commodityvo.GiftVO;
 
 public class InventoryBillBL implements InventoryBillBLService{
 
@@ -31,11 +36,14 @@ public class InventoryBillBL implements InventoryBillBLService{
 	private UserDataService userDataService;
 	private MessageDataService messageDataService;
 
+	private CommodityDataService commodityDataService;
+
 	public InventoryBillBL() {
 		billDataService=RemoteHelper.getInstance().getBilldataService();
 		inventoryTransition=new InventoryTransition();
 		userDataService = RemoteHelper.getInstance().getUserDataService();
 		messageDataService = RemoteHelper.getInstance().getMessageDataService();
+		commodityDataService = RemoteHelper.getInstance().getCommodityDataService();
 	}
 
 	@Override
@@ -68,6 +76,18 @@ public class InventoryBillBL implements InventoryBillBLService{
 
 	@Override
 	public ResultMessage submit(InventoryBillVO clickedItem) {
+		if(clickedItem.getType() == BillType.INVENTORYLOSSBILL||clickedItem.getType() == BillType.INVENTORYGIFTBILL){
+			for(GiftVO commodity:clickedItem.getGifts()){
+				try {
+					if(commodityDataService.findCommodity(commodity.getName().substring(0,commodity.getName().length()-8),
+							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
+						return ResultMessage.LOWNUMBER;
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 		clickedItem.setState(BillState.COMMITED);
 		inventoryBillPO=inventoryTransition.VOtoPO(clickedItem);
 		try {

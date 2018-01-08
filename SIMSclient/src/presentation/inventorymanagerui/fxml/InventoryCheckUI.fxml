@@ -134,11 +134,10 @@
       <TableView fx:id="table" layoutX="181.0" layoutY="150.0" prefHeight="357.0" prefWidth="820.0">
         <columns>
           <TableColumn fx:id="tableDate" prefWidth="200.0" text="日期" />
-          <TableColumn fx:id="tableTime" prefWidth="120.0" text="时间" />
-            <TableColumn fx:id="tableType" prefWidth="100.0" text="类型" />
-            <TableColumn fx:id="tableName" prefWidth="200.0" text="商品名" />
-            <TableColumn fx:id="tableNumber" prefWidth="100.0" text="数量" />
-            <TableColumn fx:id="tableMoney" prefWidth="100.0" text="金额" />
+            <TableColumn fx:id="tableType" prefWidth="150.0" text="类型" />
+            <TableColumn fx:id="tableName" prefWidth="210.0" text="商品名" />
+            <TableColumn fx:id="tableNumber" prefWidth="130.0" text="数量" />
+            <TableColumn fx:id="tableMoney" prefWidth="130.0" text="金额" />
         </columns>
       </TableView>
       <Label layoutX="406.0" layoutY="530.0" text="数量合计" />

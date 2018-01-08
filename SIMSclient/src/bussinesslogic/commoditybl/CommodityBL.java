@@ -18,6 +18,7 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
+import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
@@ -111,8 +112,41 @@ public class CommodityBL implements CommodityBLService {
 	}
 
 	@Override
-	public void delete(CommodityVO vo) throws Exception {
+	public ResultMessage delete(CommodityVO vo) throws Exception {
 		try {
+			//在销售、进货以及库存类单据中查找，如果有商品则无法删除
+			ArrayList<SalesVO> sales = salesBLService.show();
+			for(SalesVO sale:sales){
+				if(sale.getState()!=BillState.SUCCESS){
+					for(CommodityItemVO commodity:sale.getCommodity()){
+						String name = commodity.getName().substring(0,commodity.getName().length()-8);
+						if(name.equals(vo.getName()))
+							return ResultMessage.COULDNOTDELETE;
+					}
+				}
+			}
+			ArrayList<PurchaseVO> purchases = purchaseBLService.show();
+			for(PurchaseVO purchase:purchases){
+				if(purchase.getState()!=BillState.SUCCESS){
+					for(CommodityItemVO commodity:purchase.getCommodities()){
+						String name = commodity.getName().substring(0,commodity.getName().length()-8);
+						if(name.equals(vo.getName()))
+							return ResultMessage.COULDNOTDELETE;
+					}
+				}
+			}
+			ArrayList<InventoryBillVO> inventories = inventoryBillBLService.show();
+			for(InventoryBillVO inventory:inventories){
+				if(inventory.getState()!=BillState.SUCCESS){
+					for(GiftVO commodity:inventory.getGifts()){
+						String name = commodity.getName().substring(0,commodity.getName().length()-8);
+						if(name.equals(vo.getName()))
+							return ResultMessage.COULDNOTDELETE;
+					}
+				}
+			}
+
+
 			ClassificationVPO classificationVPO = new ClassificationVPO(vo.getID(), vo.getName(), false,
 					vo.getClassification(), null, null);
 			classificationBLService.delete(classificationVPO);
@@ -120,6 +154,7 @@ public class CommodityBL implements CommodityBLService {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
@@ -237,14 +272,14 @@ public class CommodityBL implements CommodityBLService {
 				for (int j = 0; j < giftVOs.size(); j++) {
 					Double money = null;
 					try {
-						ArrayList<CommodityPO> commodityPOs = service.findCommodity(giftVOs.get(i).getName(),
+						ArrayList<CommodityPO> commodityPOs = service.findCommodity(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8),
 								FindCommodityType.NAME);
-						money = giftVOs.get(i).getNumber() * commodityPOs.get(0).getRecentPurPrice();
+						money = giftVOs.get(j).getNumber() * commodityPOs.get(0).getRecentPurPrice();
 					} catch (RemoteException e) {
 						e.printStackTrace();
 					}
-					checkVOs.add(new CommodityCheckVO(localDate, type, giftVOs.get(i).getName(),
-							giftVOs.get(i).getNumber(), money));
+					checkVOs.add(new CommodityCheckVO(localDate, type, giftVOs.get(j).getName(),
+							giftVOs.get(j).getNumber(), money));
 				}
 			}
 		}
@@ -255,9 +290,11 @@ public class CommodityBL implements CommodityBLService {
 			type = salesVOs.get(i).getType();
 			LocalDate localDate = StringtoDate(salesVOs.get(i).getId());
 			ArrayList<CommodityItemVO> commodityItemVOs = salesVOs.get(i).getCommodity();
+			if (salesVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)){
 			for (int j = 0; j < commodityItemVOs.size(); j++) {
-				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(i).getName(),
-						commodityItemVOs.get(i).getNumber(), commodityItemVOs.get(i).getTotal()));
+				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
+						commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
+			}
 			}
 		}
 
@@ -267,9 +304,11 @@ public class CommodityBL implements CommodityBLService {
 			type = purchaseVOs.get(i).getType();
 			LocalDate localDate = StringtoDate(purchaseVOs.get(i).getId());
 			ArrayList<CommodityItemVO> commodityItemVOs = purchaseVOs.get(i).getCommodities();
+			if (purchaseVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)){
 			for (int j = 0; j < commodityItemVOs.size(); j++) {
-				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(i).getName(),
-						commodityItemVOs.get(i).getNumber(), commodityItemVOs.get(i).getTotal()));
+				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
+						commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
+			}
 			}
 		}
 

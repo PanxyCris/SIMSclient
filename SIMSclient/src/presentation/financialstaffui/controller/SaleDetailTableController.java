@@ -65,14 +65,15 @@ public class SaleDetailTableController extends ViewTableController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<SaleScheduleVO> list = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
-	       if(list==null){
+		ArrayList<SaleScheduleVO> salesList = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(salesList);
+	    	   table.setItems(list);
 	       }
 		}
 	}
@@ -83,14 +84,16 @@ public class SaleDetailTableController extends ViewTableController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<SaleScheduleVO> list = service.siftTime(startPicker.getValue(),endPicker.getValue());
-	       if(list==null){
+		ArrayList<SaleScheduleVO> salesList = service.siftTime(startPicker.getValue(),endPicker.getValue());
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(salesList);
+	    	   table.setItems(list);
+
 	       }
 		}
 	}
@@ -99,6 +102,7 @@ public class SaleDetailTableController extends ViewTableController{
 
 	public void initData(UserVO user) {
 		this.user = user;
+		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();

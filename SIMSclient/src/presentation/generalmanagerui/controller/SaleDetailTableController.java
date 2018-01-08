@@ -54,8 +54,11 @@ public class SaleDetailTableController extends FinanceTableController{
 
 	@FXML
 	public void printout() throws Exception{
-         service.exportReport();
+		ArrayList<SaleScheduleVO> resultList = new ArrayList<>();
+		resultList.addAll(list);
+         service.exportReport(resultList);
 	}
+
 
 	@FXML
 	public void sift(){
@@ -63,14 +66,15 @@ public class SaleDetailTableController extends FinanceTableController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<SaleScheduleVO> list = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
-	       if(list==null){
+		ArrayList<SaleScheduleVO> salesList = service.sift(siftField.getText(),FindSaleScheduleType.getType(siftChoice.getValue()));
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(salesList);
+	    	   table.setItems(list);
 	       }
 		}
 	}
@@ -78,17 +82,19 @@ public class SaleDetailTableController extends FinanceTableController{
 	@FXML
 	public void siftTime(){
 		if(startPicker.getValue()==null||endPicker.getValue()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请输入时间");
+			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<SaleScheduleVO> list = service.siftTime(startPicker.getValue(),endPicker.getValue());
-	       if(list==null){
+		ArrayList<SaleScheduleVO> salesList = service.siftTime(startPicker.getValue(),endPicker.getValue());
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(salesList);
+	    	   table.setItems(list);
+
 	       }
 		}
 	}

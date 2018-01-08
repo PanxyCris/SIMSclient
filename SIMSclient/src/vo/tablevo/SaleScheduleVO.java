@@ -11,11 +11,11 @@ public class SaleScheduleVO {
 	private Double price;//µ¥¼Û
 	private Double sum;
 
-	public SaleScheduleVO(LocalDate d,String name,String m,int n,double p){
+	public SaleScheduleVO(LocalDate d,String name,String m,Integer n,double p){
 		this.date = d;
 		this.name = name;
 		model = m;
-		number = n;
+		this.number = n;
 		price = p;
 		sum = n*p;
 	}
@@ -23,7 +23,7 @@ public class SaleScheduleVO {
 	public LocalDate getDate() {
 		return date;
 	}
-	
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
