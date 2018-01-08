@@ -1,9 +1,13 @@
 package data_stub;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
-import vo.member.MemberVO;
+import dataenum.findtype.FindMemberType;
+import dataservice.memberdataservice.MemberDataService;
+import po.MemberPO;
+import vo.membervo.MemberVO;
 
 /**  
 * 类说明   
@@ -11,44 +15,33 @@ import vo.member.MemberVO;
 * @author ****  
 * @date 2017年10月22日    
 */
-public class MemberDataService_Stub {
+public class MemberDataService_Stub implements MemberDataService {
+
+	@Override
+	public ArrayList<MemberPO> findMember(String keyword, FindMemberType type) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage insertMember(MemberPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage deleteMember(String ID) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ResultMessage updateMember(MemberPO po) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public ArrayList<MemberPO> showMember() throws RemoteException {
+		return null;
+	}
 
 	
-	public String getID() {
-		System.out.println("getID Succeed!\n");
-		return null;
-	}
-
-	public ArrayList<MemberVO> show() {
-		System.out.println("Show Succeed!\n");
-		return null;
-	}
-
-	public ArrayList<MemberVO> fuzzySearch(String keyword) {
-		System.out.println("fuzzySearch Succeed!\n");
-		return null;
-	}
-
-	public MemberVO exactSearch(String ID) {
-		System.out.println("exactSearch Succeed!\n");
-		return null;
-	}
-
 	
-	public ResultMessage add() {
-		System.out.println("ADD Succeed!\n");
-		return null;
-	}
-
-
-	public ResultMessage update() {
-		System.out.println("UPDATE Succeed!\n");
-		return null;
-	}
-
-	public ResultMessage delete() {
-		System.out.println("DELETE Succeed!\n");
-		return null;
-	}
-
 }

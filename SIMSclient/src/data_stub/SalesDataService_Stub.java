@@ -1,13 +1,12 @@
 package data_stub;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import bussinesslogic.commoditybl.CommodityItem;
-import vo.PromotionVO;
-import vo.commodity.CommodityVO;
-import vo.member.MemberVO;
-import vo.sale.SalesInputVO;
-import vo.sale.SalesVO;
+import dataenum.ResultMessage;
+import dataenum.findtype.FindSalesType;
+import dataservice.salesdataservice.SalesDataService;
+import po.sales.SalesPO;
 
 /**  
 * 类说明   
@@ -15,55 +14,47 @@ import vo.sale.SalesVO;
 * @author ****  
 * @date 2017年10月22日    
 */
-public class SalesDataService_Stub {
+public class SalesDataService_Stub implements SalesDataService{
 
-	
-	public String getSaleID() {
-		System.out.println("getSaleID Succeed!\n");
+	@Override
+	public ArrayList<SalesPO> findSale(String info, FindSalesType type) throws RemoteException {
 		return null;
 	}
 
-	
-	public String getBackID() {
-		System.out.println("getBackID Succeed!\n");
+
+	@Override
+	public ResultMessage insertSale(SalesPO po) throws RemoteException {
 		return null;
 	}
 
-	
-	public CommodityVO getCommodityByID(int ID) {
-		System.out.println("getCommodityByID Succeed!\n");
+
+	@Override
+	public ResultMessage deleteSale(String ID) throws RemoteException {
 		return null;
 	}
 
-	
-	public void addCommodities(CommodityItem item) {
-		System.out.println("addCommodities Succeed!\n");
-		
-	}
 
-	public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID) {
-		System.out.println("getCommodityPromotionListByID Succeed!\n");
+	@Override
+	public ResultMessage updateSale(SalesPO po) throws RemoteException {
 		return null;
 	}
 
-	public MemberVO getMember() {
-		System.out.println("getMember Succeed!\n");
+
+	@Override
+	public ArrayList<SalesPO> showSale() throws RemoteException {
 		return null;
 	}
 
-	public SalesVO submit(SalesInputVO Info) {
-		System.out.println("Submit Succeed!\n");
+
+	@Override
+	public String getSaleBackID() throws RemoteException {
 		return null;
 	}
 
-	public SalesVO save(SalesInputVO Info) {
-		System.out.println("Save Succeed!\n");
-		return null;
-	}
 
-	public void endSales() {
-		System.out.println("End Succeed!\n");
-		
+	@Override
+	public String getSaleID() throws RemoteException {
+		return null;
 	}
 
 
