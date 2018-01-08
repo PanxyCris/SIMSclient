@@ -24,7 +24,7 @@ public class CommodityData {
 
 	public static void main(String[] args) {
 		CommodityData cd = new CommodityData();
-		CommodityPO po = new CommodityPO("000001", "黑夜追凶灯", "L", "vfs", 200, 25,
+		CommodityPO po = new CommodityPO("黑灯-0001", "黑夜追凶灯", "L", "黑灯", 200, 25,
 				29, 24, 28, 2000);
 		cd.insert(po);
 		System.out.println(cd.show().get(0).getID());
@@ -37,12 +37,12 @@ public class CommodityData {
 	public ResultMessage insert(CommodityPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from commodity where id = " + po.getID());
-			int count = 0;
-			if (rs.next()) {
-				count = rs.getInt(1);
-				if (count == 0) {
+//			Statement ps0 = conn.createStatement();
+//			ResultSet rs = ps0.executeQuery("select count(*) from commodity where id = " + po.getID());
+//			int count = 0;
+//			if (rs.next()) {
+//				count = rs.getInt(1);
+//				if (count == 0) {
 					String sql = "" + "insert into commodity(id, object) values (?,?)";
 
 					conn.setAutoCommit(false);
@@ -54,11 +54,11 @@ public class CommodityData {
 			        ps.close();
 			        conn.close();
 			        return ResultMessage.SUCCESS;
-				}
-				else {
-					System.out.println("商品ID已存在");
-				}
-			}
+//				}
+//				else {
+//					System.out.println("商品ID已存在");
+//				}
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

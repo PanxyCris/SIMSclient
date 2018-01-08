@@ -47,7 +47,10 @@ public class ClassificationData {
 //  	d.insert(c2);
 //		d.insert(c1);
 //		d.insert(root);
-        d.insert(root);
+		 ClassificationVPO last = d.show().get(5);
+		 last.setChildrenPointer(null);
+	//	 d.update(last);
+    //    d.delete(d.show().get(d.show().size()-1).getName());
 		System.out.println(d.show().size());
 		for(ClassificationVPO vpo:d.show())
 		System.out.println(vpo.getName());
@@ -148,7 +151,13 @@ public class ClassificationData {
 			e.printStackTrace();
 		}
 		return list;
-
+//
+//		ArrayList<ClassificationVPO> list = show();
+//		ArrayList<ClassificationVPO> result = new ArrayList<>();
+//		for (ClassificationVPO vo :list) {
+//			if (keyword.equals(vo.getName())) result.add(vo);
+//		}
+//		return result;
 	}
 
 	public ArrayList<ClassificationVPO> show() {

@@ -14,8 +14,9 @@ public class ClassificationBL implements ClassificationBLService {
 	private ClassificationDataService classificationDataService;
 
 	public ClassificationBL() {
-		classificationDataService=RemoteHelper.getInstance().getClassificationDataService();
+		classificationDataService = RemoteHelper.getInstance().getClassificationDataService();
 	}
+
 	/**
 	 * 用于生成新创建的商品分类的id
 	 */
@@ -35,13 +36,15 @@ public class ClassificationBL implements ClassificationBLService {
 		ArrayList<String> names = new ArrayList<>();
 		try {
 			ArrayList<ClassificationVPO> all = classificationDataService.show();
-			for(ClassificationVPO vpo:all){
-				if(vpo.getChildrenPointer()==null)
-					names.add(vpo.getName());
-				else if(vpo.getChildrenPointer().isEmpty())
-					names.add(vpo.getName());
-				else if(getClass(vpo.getChildrenPointer().get(0)).getB())
-					names.add(vpo.getName());
+			for (ClassificationVPO vpo : all) {
+				if (vpo.getB()) {
+					if (vpo.getChildrenPointer() == null)
+						names.add(vpo.getName());
+					else if (vpo.getChildrenPointer().isEmpty())
+						names.add(vpo.getName());
+					else if (getClass(vpo.getChildrenPointer().get(0)).getB())
+						names.add(vpo.getName());
+				}
 			}
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -52,10 +55,10 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public ResultMessage insert(ClassificationVPO vpo) {
 		try {
-			//先更新vpo父节点的子节点指针
+			// 先更新vpo父节点的子节点指针
 			ClassificationVPO father = getClass(vpo.getFather());
 			ArrayList<String> children = new ArrayList<>();
-			if(father.getChildrenPointer()!=null&&father.getChildrenPointer().size()!=0)
+			if (father.getChildrenPointer() != null && father.getChildrenPointer().size() != 0)
 				children = father.getChildrenPointer();
 			children.add(vpo.getName());
 			father.setChildrenPointer(children);
@@ -70,8 +73,8 @@ public class ClassificationBL implements ClassificationBLService {
 
 	@Override
 	public void delete(ClassificationVPO vpo) {
-		String id=vpo.getName();
-		//先更新vpo父节点的子节点指针
+		String id = vpo.getName();
+		// 先更新vpo父节点的子节点指针
 		ClassificationVPO father = getClass(vpo.getFather());
 		ArrayList<String> children = father.getChildrenPointer();
 		children.remove(vpo.getName());
@@ -87,6 +90,17 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public ResultMessage update(ClassificationVPO vpo) {
 		try {
+			ClassificationVPO father = getClass(vpo.getFather());
+			for(int i = 0;i<father.getChildrenPointer().size();i++){
+				String id = classificationDataService.findClassification(father.getChildrenPointer().get(i)).getId();
+				if(id.equals(vpo.getId())){
+					ArrayList<String> children = father.getChildrenPointer();
+					children.set(i, vpo.getName());
+					father.setChildrenPointer(children);
+					classificationDataService.updateClassification(father);
+					break;
+				}
+			}
 			return classificationDataService.updateClassification(vpo);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -108,7 +122,7 @@ public class ClassificationBL implements ClassificationBLService {
 	public ClassificationVPO getRoot() {
 		try {
 			ClassificationVPO root = classificationDataService.getRoot();
-		    addChildren(root);
+			addChildren(root);
 			return root;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -118,21 +132,23 @@ public class ClassificationBL implements ClassificationBLService {
 
 	/**
 	 * 运行时生成树形结构
-	 * @param vpo 节点
+	 *
+	 * @param vpo
+	 *            节点
 	 * @throws RemoteException
 	 */
 
-	public void addChildren(ClassificationVPO vpo) throws RemoteException{
+	public void addChildren(ClassificationVPO vpo) throws RemoteException {
 		ArrayList<ClassificationVPO> children = new ArrayList<>();
 		ArrayList<ClassificationVPO> vpos = classificationDataService.show();
-		for(ClassificationVPO po: vpos){
-			if(po.getFather()!=null&&po.getFather().equals(vpo.getName()))
+		for (ClassificationVPO po : vpos) {
+			if (po.getFather() != null && po.getFather().equals(vpo.getName()))
 				children.add(po);
 		}
-		if(children!=null){
-		vpo.setChildren(children);
-		for(ClassificationVPO child:vpo.getChildren())
-			addChildren(child);
+		if (children != null) {
+			vpo.setChildren(children);
+			for (ClassificationVPO child : vpo.getChildren())
+				addChildren(child);
 		}
 	}
 

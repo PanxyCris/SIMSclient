@@ -77,17 +77,18 @@ public class CommodityBL implements CommodityBLService {
 	public String getID(String name) {
 		try {
 			ClassificationVPO father = classificationDataService.findClassification(name);
-			if(father.getChildrenPointer()==null||father.getChildrenPointer().isEmpty())
-				return name+"-"+"0001";
-			else{
-				String last = father.getChildrenPointer().get(father.getChildrenPointer().size()-1);
-				String nameID = last.substring(last.length()-4);
-			    int willAdd = Integer.parseInt(nameID);
-			    willAdd++;
-			    String newID = String.valueOf(willAdd);
-			    while(newID.length()<nameID.length())
-			    	newID = "0"+newID;
-			    return name+"-"+newID;
+			if (father.getChildrenPointer() == null || father.getChildrenPointer().isEmpty())
+				return name + "-" + "0001";
+			else {
+				String lastName = father.getChildrenPointer().get(father.getChildrenPointer().size() - 1);
+				String last = service.findCommodity(lastName, FindCommodityType.NAME).get(0).getID();
+				String nameID = last.substring(last.length() - 4);
+				int willAdd = Integer.parseInt(nameID);
+				willAdd++;
+				String newID = String.valueOf(willAdd);
+				while (newID.length() < nameID.length())
+					newID = "0" + newID;
+				return name + "-" + newID;
 			}
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -112,38 +113,37 @@ public class CommodityBL implements CommodityBLService {
 	@Override
 	public ResultMessage delete(CommodityVO vo) throws Exception {
 		try {
-			//在销售、进货以及库存类单据中查找，如果有商品则无法删除
+			// 在销售、进货以及库存类单据中查找，如果有商品则无法删除
 			ArrayList<SalesVO> sales = salesBLService.show();
-			for(SalesVO sale:sales){
-				if(sale.getState()!=BillState.SUCCESS){
-					for(CommodityItemVO commodity:sale.getCommodity()){
-						String name = commodity.getName().substring(0,commodity.getName().length()-8);
-						if(name.equals(vo.getName()))
+			for (SalesVO sale : sales) {
+				if (sale.getState() != BillState.SUCCESS) {
+					for (CommodityItemVO commodity : sale.getCommodity()) {
+						String name = commodity.getName().substring(0, commodity.getName().length() - 8);
+						if (name.equals(vo.getName()))
 							return ResultMessage.COULDNOTDELETE;
 					}
 				}
 			}
 			ArrayList<PurchaseVO> purchases = purchaseBLService.show();
-			for(PurchaseVO purchase:purchases){
-				if(purchase.getState()!=BillState.SUCCESS){
-					for(CommodityItemVO commodity:purchase.getCommodities()){
-						String name = commodity.getName().substring(0,commodity.getName().length()-8);
-						if(name.equals(vo.getName()))
+			for (PurchaseVO purchase : purchases) {
+				if (purchase.getState() != BillState.SUCCESS) {
+					for (CommodityItemVO commodity : purchase.getCommodities()) {
+						String name = commodity.getName().substring(0, commodity.getName().length() - 8);
+						if (name.equals(vo.getName()))
 							return ResultMessage.COULDNOTDELETE;
 					}
 				}
 			}
 			ArrayList<InventoryBillVO> inventories = inventoryBillBLService.show();
-			for(InventoryBillVO inventory:inventories){
-				if(inventory.getState()!=BillState.SUCCESS){
-					for(GiftVO commodity:inventory.getGifts()){
-						String name = commodity.getName().substring(0,commodity.getName().length()-8);
-						if(name.equals(vo.getName()))
+			for (InventoryBillVO inventory : inventories) {
+				if (inventory.getState() != BillState.SUCCESS) {
+					for (GiftVO commodity : inventory.getGifts()) {
+						String name = commodity.getName().substring(0, commodity.getName().length() - 8);
+						if (name.equals(vo.getName()))
 							return ResultMessage.COULDNOTDELETE;
 					}
 				}
 			}
-
 
 			ClassificationVPO classificationVPO = new ClassificationVPO(vo.getID(), vo.getName(), false,
 					vo.getClassification(), null, null);
@@ -234,23 +234,23 @@ public class CommodityBL implements CommodityBLService {
 		return result;
 	}
 
-    /**
-     * 返回所有分类下为商品或者该分类为空分类的分类
-     */
+	/**
+	 * 返回所有分类下为商品或者该分类为空分类的分类
+	 */
 	@Override
 	public ArrayList<String> getAllChildrenClass() throws Exception {
 		ArrayList<ClassificationVPO> vpos = classificationDataService.show();
-		System.out.println(vpos.size());
 		ArrayList<String> childrenList = new ArrayList<>();
-		for(ClassificationVPO vpo: vpos){
-			if(vpo.getChildrenPointer()==null)
-				childrenList.add(vpo.getName());
-			else{
-               String childrenName = vpo.getChildrenPointer().get(0);
-               System.out.println(childrenName);
-               if(!classificationDataService.findClassification(childrenName).getB())
-            	   childrenList.add(vpo.getName());
-                }
+		for (ClassificationVPO vpo : vpos) {
+			if (vpo.getB()) {
+				if (vpo.getChildrenPointer() == null)
+					childrenList.add(vpo.getName());
+				else {
+					String childrenName = vpo.getChildrenPointer().get(0);
+					if (!classificationDataService.findClassification(childrenName).getB())
+						childrenList.add(vpo.getName());
+				}
+			}
 		}
 		return childrenList;
 	}
@@ -270,7 +270,8 @@ public class CommodityBL implements CommodityBLService {
 				for (int j = 0; j < giftVOs.size(); j++) {
 					Double money = null;
 					try {
-						ArrayList<CommodityPO> commodityPOs = service.findCommodity(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8),
+						ArrayList<CommodityPO> commodityPOs = service.findCommodity(
+								giftVOs.get(j).getName().substring(0, giftVOs.get(j).getName().length() - 8),
 								FindCommodityType.NAME);
 						money = giftVOs.get(j).getNumber() * commodityPOs.get(0).getRecentPurPrice();
 					} catch (RemoteException e) {
@@ -288,11 +289,11 @@ public class CommodityBL implements CommodityBLService {
 			type = salesVOs.get(i).getType();
 			LocalDate localDate = StringtoDate(salesVOs.get(i).getId());
 			ArrayList<CommodityItemVO> commodityItemVOs = salesVOs.get(i).getCommodity();
-			if (salesVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)){
-			for (int j = 0; j < commodityItemVOs.size(); j++) {
-				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
-						commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
-			}
+			if (salesVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)) {
+				for (int j = 0; j < commodityItemVOs.size(); j++) {
+					checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
+							commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
+				}
 			}
 		}
 
@@ -302,11 +303,11 @@ public class CommodityBL implements CommodityBLService {
 			type = purchaseVOs.get(i).getType();
 			LocalDate localDate = StringtoDate(purchaseVOs.get(i).getId());
 			ArrayList<CommodityItemVO> commodityItemVOs = purchaseVOs.get(i).getCommodities();
-			if (purchaseVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)){
-			for (int j = 0; j < commodityItemVOs.size(); j++) {
-				checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
-						commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
-			}
+			if (purchaseVOs.get(i).getType() == type && localDate.isAfter(start) && localDate.isBefore(end)) {
+				for (int j = 0; j < commodityItemVOs.size(); j++) {
+					checkVOs.add(new CommodityCheckVO(localDate, type, commodityItemVOs.get(j).getName(),
+							commodityItemVOs.get(j).getNumber(), commodityItemVOs.get(j).getTotal()));
+				}
 			}
 		}
 
