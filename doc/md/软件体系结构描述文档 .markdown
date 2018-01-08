@@ -19,27 +19,28 @@
 | 孙嘉杰| 2017-10-22 | 添加用户界面层 |V1.4草稿|
 | 孙嘉杰| 2018-1-2 | 初步修改 |V1.5草稿|
 | 王灿灿| 2018-1-6 | 修改完成库存管理人员文档、修改财务account文档 |v1.6草稿|
+| 李杰 | 2018-01-08 | 修改进货销售人员文档 | v1.7草稿 |
 
 
-#目录
+# 目录
 
-##1.引言
+## 1.引言
 
-   **1.1. 编制目的**
-   **1.2. 词汇表**
+   **1.1. 编制目的**　　
+   **1.2. 词汇表**　　
    **1.3. 参考资料**
 
-##2.产品描述
+## 2.产品描述
 
-##3.逻辑视角
+## 3.逻辑视角
 
-##4.组合视角
+## 4.组合视角
 
   **4.1.开发包图**
   **4.2.运行时进程**
   **4.3.物理部署**
 
-##5.接口视角
+## 5.接口视角
 
   **5.1.模块的职责**
   **5.2.用户界面层的分解**
@@ -55,7 +56,7 @@
    * 5.4.1.数据层模块的职责
    * 5.4.2.数据层模块的接口规范
 
-##6.信息视角
+## 6.信息视角
 
   **6.1.数据持久化对象**
   **6.2.Txt持久化格式**
@@ -88,8 +89,8 @@
   <img src="../img/体系结构设计模型.png">
 
 
-#4.组合视角
-##4.1开发包图
+# 4.组合视角
+## 4.1开发包图
 <table><tbody>
      <tr>
      <td>开发（物理）包</td>
@@ -371,9 +372,6 @@ JavaFX
 |**User.login**|语法|`public boolean login(String id, String passWord)`|
 ||前置条件|password符合输入规则|
 ||后置条件|查找是否存在相应的用户，根据输入的password返回登录验证的bool值|
-|**User.getUserList**|语法|`public ArrayList<UserVO> getUserList()`|
-||前置条件|启动一个登录回合|
-||后置条件|返回所有的用户列表|
 |**User.find**|语法|`public ArrayList<UserVO> find(String info,FindUserType properties)`|
 ||前置条件|关键词Info输入符合规则|
 ||后置条件|返回符合关键词的用户的列表|
@@ -530,58 +528,82 @@ JavaFX
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Member.getID|语法|public String getID()|
-|前置条件|ID符合输入规则|
+|Member.getID|语法|`public String getID()`|
+|前置条件|需要获取最新用户ID|
 |后置条件|返回用户ID|
-|Member.show|语法|public ArrayList<MemberVO> show()|
+|Member.show|语法|`public ArrayList<MemberVO> show()`|
 |前置条件|需要get客户列表|
 |后置条件|返回客户列表|
-|Member.fuzzySearch|语法|public ArrayList<MemberVO> fuzzySearch(String keyword)|
+|Member.find|语法|`public ArrayList<MemberVO> find(String keyword, FindMemberType type)`|
 |前置条件|keyWord符合输入条件|
 |后置条件|返回符合条件的客户列表|
-|Member.exactSearch|语法|public MemberVO exactSearch(String ID)|
-|前置条件|ID符合输入规则|
-|后置条件|返回精确用户|
+|Member.insert|语法|`public ResultMessage insert(MemberVO vo)`|
+|前置条件|vo符合条件|
+|后置条件|向数据层插入数据|
+|Member.update|语法|`public ResultMessage update(MemberVO vo)`|
+|前置条件|vo符合条件|
+|后置条件|更新数据层数据|
+|Member.delete|语法|`public ResultMessage delete(String ID)`|
+|前置条件|ID符合条件|
+|后置条件|向数据层插入数据|
 
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Member.ResultMessage add()|新增单一持久化对象|
+|Member.insert()|新增单一持久化对象|
 |Member.update|更新打印持久化对象|
 |Member.delete|删除单一持久化对象|
+|Member.show()|显示全部持久化对象|
+|Member.find()|寻找所有符合条件的持久化对象|
 
 　**salebl模块的接口规范**
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Sale.getSaleID|语法|public String getSaleID()|
+|Sale.getSaleID|语法|`public String getSaleID()`|
 ||前置条件|需要销售单ID|
-||后置条件|返回销售单ID|
-|Sale.getBackID|语法|public String getBackID()|
+||后置条件|返回一个自动生成的销售单ID|
+|Sale.getSaleBackID|语法|`public String getBackID()`|
 ||前置条件|需要销售退货单ID|
 ||后置条件|返回销售退货单ID|
-|Sale.getCommodityByID|语法|public CommodityVO getCommodityByID(int ID)|
-||前置条件|ID符合输入规则|
-||后置条件|返回商品信息|
-|Sale.addCommodities|语法|public void addCommodities(CommodityItemVO item)|
-||前置条件|有商品数量增加|
-||后置条件|增加商品|
-|Sale.getCommodityPromotionListByID|语法|public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID)|
-||前置条件|需要查看促销商品|
-||后置条件|返回促销列表|
-|Sale.submit|语法|public SalesVO submit(SalesAddVO Info)|
+|Sale.submit|语法|`public ResultMessage submit(SalesVO Info)`|
 ||前置条件|启动一个销售（退货）回合|
 ||后置条件|创建提交销售(退货)单|
-|Sale.save|语法|public SalesVO save(SalesAddVO Info)|
+|Sale.save|语法|`public ResultMessage save(SalesVO Info)`|
 ||前置条件|已经创建销售(退货)单|
-||后置条件|保存单据|
-|Sale.endSales|语法|public void endSales()|
-||前置条件|已支付|
-||后置条件|结束此次销售回合，持久化更新涉及的领域独享的数据|
+||后置条件|保存草稿单据|
+|Sale.show|语法|`public ArrayList<SalesVO> show()`|
+||前置条件|需要获取全部的销售单|
+||后置条件|返回数据库里全部的销售单|
+|Sale.find|语法|`public ArrayList<SalesVO> find(String info,FindSalesType type)`|
+||前置条件|查找全部符合条件的销售单|
+||后置条件|返回数据库里全部符合条件的销售单|
+|Sale.isLegal|语法|`public ResultMessage isLegal(CommodityItemVO item)`|
+||前置条件|输入商品清单信息|
+||后置条件|返回数据是否合法|
+|Sale.showPricePacks|语法|`public ArrayList<PromotionPricePacksVO> showPricePacks()`|
+||前置条件|创建销售单时需要获取特价包信息|
+||后置条件|返回数据库里全部特价包|
+|Sale.FindMemberPromotion|语法|`public ArrayList<PromotionMemberVO> FindMemberPromotion()`|
+||前置条件|创建销售单时需要获取等级促销包信息|
+||后置条件|返回数据库里全部等级促销包|
+|Sale.FindTotalPromotion|语法|`public ArrayList<PromotionTotalVO> FindTotalPromotion()`|
+||前置条件|创建销售单时需要获取总价包信息|
+||后置条件|返回数据库里全部总价包|
 
 <br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|Sale.insert()|新增单一持久化对象|
+|Sale.update|更新打印持久化对象|
+|Sale.delete|删除单一持久化对象|
+|Sale.show()|显示全部持久化对象|
+|Sale.find()|寻找所有符合条件的持久化对象|
+
 
 　**Accountbl模块的接口规范**
 

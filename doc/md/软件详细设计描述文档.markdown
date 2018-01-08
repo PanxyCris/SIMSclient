@@ -46,6 +46,7 @@
 | 王灿灿 | 2017-11-14| 添加accountdata模块、mfdocdata模块、setupaccountdata模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 添加accountui模块、mfdocui模块、setupaccountui模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 修改mfdoc模块设计图 | v1.2 |
+| 李杰 | 2018-01-08 | 修改Purchase模块、sale模块、member模块 | v1.4 |
 
 
 >>>>>>> refs/remotes/origin/master
@@ -2398,4 +2399,3 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 <center>客户端包图</center>
 <img src="../img/服务端开发包.png"><br>
 <center>服务器端端包图</center>
-
