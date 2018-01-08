@@ -18,12 +18,13 @@ public class CommodityCheckVO {
 		this.typeString = type.value;
 		this.name = name;
 		this.number = number;
+		this.money = money;
 	}
 
 	public LocalDate getDate() {
 		return date;
 	}
-	
+
 	public BillType getType() {
 		return type;
 	}

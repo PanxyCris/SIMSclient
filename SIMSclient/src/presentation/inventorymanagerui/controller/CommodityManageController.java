@@ -320,7 +320,9 @@ public class CommodityManageController extends InventoryManagerController{
 	        });
 
 	}
-
+    /**
+     * 表格的映射初始化
+     */
 
 	public void manageInit(){
 		tableID.setCellValueFactory(
@@ -375,9 +377,13 @@ public class CommodityManageController extends InventoryManagerController{
 	                            	alert.setContentText("确认删除？");
 	                            	Optional<ButtonType> result = alert.showAndWait();
 	                            	if (result.get() == ButtonType.OK){
-	                            		service.delete(clickedUser);
+	                            		ResultMessage message = service.delete(clickedUser);
+	                            		if(message == ResultMessage.SUCCESS){
 	                            		  list.remove(clickedUser);
 	      	                              table.setItems(list);
+	      	                             }
+	                            		else
+	                            			printWrong(message);
 	                            	}
 								} catch (Exception e) {
 									e.printStackTrace();

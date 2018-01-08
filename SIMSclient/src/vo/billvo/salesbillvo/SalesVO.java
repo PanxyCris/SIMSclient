@@ -6,6 +6,7 @@ import dataenum.BillType;
 import dataenum.Warehouse;
 import vo.billvo.BillVO;
 import vo.commodityvo.CommodityItemVO;
+import vo.commodityvo.GiftVO;
 
 public class SalesVO extends BillVO {
 	private String retailerID;
@@ -15,6 +16,7 @@ public class SalesVO extends BillVO {
 	private Warehouse warehouse;
 	private String warehouseString;
 	private ArrayList<CommodityItemVO> commodity;
+	private ArrayList<GiftVO> gifts; //赠品列表
 	private Double beforePrice; // 折让前价格
 	private Double allowance; // 折让金额
 	private Double voucher; // 代金券金额
@@ -22,7 +24,7 @@ public class SalesVO extends BillVO {
 
 
 	public SalesVO(String id, String retailer, String saleMan, String operator, Warehouse warehouse,
-			ArrayList<CommodityItemVO> commodity, Double beforePrice, Double allowance, Double voucher,
+			ArrayList<CommodityItemVO> commodity,ArrayList<GiftVO> gifts, Double beforePrice, Double allowance, Double voucher,
 			Double afterPrice, String note, BillState state, BillType type) {
 		super(id,type,state,note);
 		String s= "";
@@ -36,6 +38,7 @@ public class SalesVO extends BillVO {
 		this.setSaleMan(saleMan);
 		this.setOperator(operator);
 		this.setWarehouse(warehouse);
+		this.setGifts(gifts);
 		this.warehouseString = warehouse.value;
 		this.setCommodity(commodity);
 		this.setBeforePrice(beforePrice);
@@ -147,6 +150,16 @@ public class SalesVO extends BillVO {
 
 	public String getWarehouseString() {
 		return warehouseString;
+	}
+
+
+	public ArrayList<GiftVO> getGifts() {
+		return gifts;
+	}
+
+
+	public void setGifts(ArrayList<GiftVO> gifts) {
+		this.gifts = gifts;
 	}
 
 }

@@ -6,9 +6,11 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
 import po.commodity.CommodityItemPO;
+import po.commodity.GiftPO;
 import po.sales.SalesPO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
+import vo.commodityvo.GiftVO;
 
 
 /**
@@ -24,6 +26,11 @@ public class SalesTransition {
 		String operator = vo.getOperator(); // 操作员
 		Warehouse warehouse = vo.getWarehouse();
 		ArrayList<CommodityItemPO> commodity = CommodityItemTran.VOtoPO(vo.getCommodity());
+		ArrayList<GiftPO> giftPOs=new ArrayList<>();
+		for(GiftVO giftVO:vo.getGifts()){
+			GiftPO gift = new GiftPO(giftVO.getName(),giftVO.getNumber());
+			giftPOs.add(gift);
+		}
 		double beforePrice = vo.getBeforePrice();
 		double allowance = vo.getAllowance(); // 折让
 		double voucher = vo.getVoucher(); // 使用代金券金额
@@ -31,7 +38,7 @@ public class SalesTransition {
 		String remark = vo.getNote(); // 备注
 		BillType type = vo.getType();
 		BillState state = vo.getState();
-		return new SalesPO(id, retailerId, retailer, saleMan, operator, warehouse, commodity, beforePrice,
+		return new SalesPO(id, retailerId, retailer, saleMan, operator, warehouse, commodity,giftPOs, beforePrice,
 				allowance, voucher, afterPrice, remark, type, state);
 	}
 
@@ -42,6 +49,11 @@ public class SalesTransition {
 		String operator = po.getOperator();
 		Warehouse warehouse = po.getWarehouse();
 		ArrayList<CommodityItemVO> commodity = CommodityItemTran.POtoVO(po.getCommodities());
+		ArrayList<GiftVO> giftVOs=new ArrayList<>();
+		for(GiftPO giftPO:po.getGifts()){
+			GiftVO gift = new GiftVO(giftPO.getName(),giftPO.getNumber());
+			giftVOs.add(gift);
+		}
 		double beforePrice = po.getBeforePrice();
 		double allowance = po.getAllowance(); // 折让
 		double voucher = po.getVoucher(); // 使用代金券金额
@@ -50,6 +62,6 @@ public class SalesTransition {
 		BillType type = po.getType();
 		BillState state = po.getState();
 		return new SalesVO(id, retailer, salesMan, operator, warehouse,
-				commodity, beforePrice, allowance, voucher, afterPrice, remark, state, type);
+				commodity,giftVOs, beforePrice, allowance, voucher, afterPrice, remark, state, type);
 	}
 }

@@ -134,6 +134,7 @@ public class PromotionCheckController extends SaleStockStaffController{
 		sale.setAllowance(vo.getAllowance());
 		sale.setVoucher(vo.getVoucher());
 		sale.setAfterPrice(sale.getBeforePrice()-sale.getAllowance()-sale.getVoucher());
+		sale.setGifts(vo.getGifts());
         changeStage("SalesMakeBillUI",user,type,null,sale);
 	}
 

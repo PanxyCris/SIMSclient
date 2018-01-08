@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
+import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.promotionbl.PromotionMemberBL;
 import bussinesslogic.promotionbl.PromotionSpecialBL;
 import bussinesslogic.promotionbl.PromotionSumBL;
@@ -16,8 +17,10 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.Warehouse;
+import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
+import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.messagedataservice.MessageDataService;
 import dataservice.promotiondataservice.PromotionMemberDataService;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
@@ -56,6 +59,8 @@ public class SalesController implements SalesBLService{
 	private UserDataService userDataService;
 	private MessageDataService messageDataService;
 
+	private CommodityDataService commodityDataService;
+
 
 	public SalesController() {
 		service = RemoteHelper.getInstance().getSalesDataService();
@@ -68,6 +73,9 @@ public class SalesController implements SalesBLService{
 
 		userDataService = RemoteHelper.getInstance().getUserDataService();
 		messageDataService = RemoteHelper.getInstance().getMessageDataService();
+
+		commodityDataService = RemoteHelper.getInstance().getCommodityDataService();
+
 	}
 
 	@Override
@@ -180,6 +188,13 @@ public class SalesController implements SalesBLService{
 	@Override
 	public ResultMessage submit(SalesVO Info) {
 		try {
+			if(Info.getType() == BillType.SALESBILL){
+				for(CommodityItemVO commodity:Info.getCommodity()){
+					if(commodityDataService.findCommodity(commodity.getName().substring(0,commodity.getName().length()-8),
+							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
+						return ResultMessage.LOWNUMBER;
+				}
+			}
 			SalesPO po = SalesTransition.VOtoPO(Info);
 			ResultMessage resultMessage = service.insertSale(po);
 			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){

@@ -24,8 +24,8 @@ public class FinanceTableController extends GeneralManagerController{
 		TableType type = TableType.getType(tableChoice.getValue());
 		switch(type){
 		case BUSINESS_HISTORY_SCHEDULE:changeStage("BussinessProcessTableUI",user,null);break;
-		case SALE_SCHEDULE:changeStage("BussinessSituationTableUI",user,null);break;
-	    default:changeStage("SaleDetailTableUI",user,null);
+		case STATEMENT_OF_OPERATION:changeStage("BussinessSituationTableUI",user,null);break;
+		case SALE_SCHEDULE:changeStage("SaleDetailTableUI",user,null);
 		}
 		}
 	}

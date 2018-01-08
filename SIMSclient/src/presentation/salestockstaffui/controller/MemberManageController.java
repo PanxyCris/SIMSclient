@@ -379,6 +379,11 @@ public class MemberManageController extends SaleStockStaffController{
 	                        delBtn.setOnMouseClicked((me) -> {
 	                        	MemberVO clickedUser = this.getTableView().getItems().get(this.getIndex());
 	                            try {
+	                            	if(Double.parseDouble(clickedUser.getReceivable())!=0||Double.parseDouble(clickedUser.getPayable())!=0){
+	                            		Alert warning = new Alert(AlertType.WARNING,"该客户尚有应收应付，无法删除");
+		                            	warning.showAndWait();
+	                            	}
+	                            	else{
 	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
 	                            	alert.setContentText("确认删除？");
 	                            	Optional<ButtonType> result = alert.showAndWait();
@@ -386,6 +391,7 @@ public class MemberManageController extends SaleStockStaffController{
 	                            		service.delete(clickedUser.getID());
 	                            		  list.remove(clickedUser);
 	      	                              table.setItems(list);
+	                            	}
 	                            	}
 								} catch (RemoteException e) {
 									e.printStackTrace();

@@ -13,7 +13,7 @@ public interface CommodityBLService{
 
 	public ResultMessage insert(CommodityVO vo) throws Exception;
 
-	public void delete(CommodityVO vo) throws Exception;
+	public ResultMessage delete(CommodityVO vo) throws Exception;
 
 	public ResultMessage update(CommodityVO vo) throws Exception;
 
@@ -28,6 +28,6 @@ public interface CommodityBLService{
 	public ArrayList<CommodityStockVO> stock() throws Exception;   //ø‚¥Ê≈Ãµ„
 
 	public ArrayList<CommodityCheckVO> check(LocalDate start,LocalDate end);
-	
+
 	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs);
 }

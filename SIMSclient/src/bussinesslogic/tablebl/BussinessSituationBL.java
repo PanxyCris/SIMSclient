@@ -21,12 +21,12 @@ import vo.commodityvo.CommodityVO;
 import vo.commodityvo.GiftVO;
 import vo.tablevo.PaymentTableVO;
 import vo.tablevo.ReceiveTableVO;
-  
 
-import jxl.Workbook;  
-import jxl.write.Label;  
-import jxl.write.WritableSheet;  
-import jxl.write.WritableWorkbook; 
+
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 //对商品类收入存在疑问
 public class BussinessSituationBL implements BussinessSituationBLService {
@@ -34,38 +34,38 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 	private SalesBLService salesBLService;
 	private InventoryBillBLService inventoryBillBLService;
 	private CommodityBLService commodityBLService;
-	
+
 	public BussinessSituationBL() {
 		salesBLService=new SalesController();
 		inventoryBillBLService=new InventoryBillController();
 		commodityBLService=new CommodityBL();
 	}
-	
+
 	@Override
 	public void exportReport(ArrayList<PaymentTableVO> pay, ArrayList<ReceiveTableVO> receive) {//这个是导出为excel的方法
-		WritableWorkbook wwb = null;  
+		WritableWorkbook wwb = null;
 	 	String fileName="C:/Users/user/Desktop/BussinessSituationSchedule.xlsx";
-        try {  
-            // 创建一个可写入的工作簿（WorkBook）对象,  
-            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
-            wwb = Workbook.createWorkbook(new File(fileName));  
-              
-            // 创建一个可写入的工作表   
-            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+        try {
+            // 创建一个可写入的工作簿（WorkBook）对象,
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法
+            wwb = Workbook.createWorkbook(new File(fileName));
+
+            // 创建一个可写入的工作表
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置
             WritableSheet pSheet = wwb.createSheet("PaymentTable", 0);
             WritableSheet rSheet = wwb.createSheet("ReceiptTable", 1);
-            
+
             int pSheetL=pay.size();
             int rSheetL=receive.size();
-           
-            Label ini = new Label(0,0,"Date");  
+
+            Label ini = new Label(0,0,"Date");
             pSheet.addCell(ini);
             ini=new Label(1, 0, "Type");//initialize payment
             pSheet.addCell(ini);
             ini=new Label(2, 0, "Sum");
             pSheet.addCell(ini);
-            
-            ini = new Label(0,0,"Date");  
+
+            ini = new Label(0,0,"Date");
             rSheet.addCell(ini);
             ini=new Label(1, 0, "Type");//initialize receipt;
             rSheet.addCell(ini);
@@ -73,56 +73,56 @@ public class BussinessSituationBL implements BussinessSituationBLService {
             rSheet.addCell(ini);
             ini=new Label(3, 0, "Sum");
             rSheet.addCell(ini);
-          
-            for(int i=1;i<pSheetL+1;i++){  
+
+            for(int i=1;i<pSheetL+1;i++){
                 for(int j=0;j<3;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,String.valueOf(pay.get(i-1).getDate()));  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,String.valueOf(pay.get(i-1).getDate()));
+                        pSheet.addCell(labelC);
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,pay.get(i-1).getTypeString());  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,pay.get(i-1).getTypeString());
+                        pSheet.addCell(labelC);
                 	}
                 	else{
-                		Label labelC = new Label(j,i,Double.toString(pay.get(i-1).getSum()));  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,Double.toString(pay.get(i-1).getSum()));
+                        pSheet.addCell(labelC);
                 	}
-                }  
-            }  
-            
-            for(int i=1;i<rSheetL+1;i++){  
+                }
+            }
+
+            for(int i=1;i<rSheetL+1;i++){
                 for(int j=0;j<4;j++){
                 	if(j==0){
-                		 Label labelC = new Label(j,i,String.valueOf(receive.get(i-1).getDate()));  
-                         rSheet.addCell(labelC);  
+                		 Label labelC = new Label(j,i,String.valueOf(receive.get(i-1).getDate()));
+                         rSheet.addCell(labelC);
                 	}
                 	else if(j==1){
-                		 Label labelC = new Label(j,i,receive.get(i-1).getTypeString());  
-                         rSheet.addCell(labelC); 
+                		 Label labelC = new Label(j,i,receive.get(i-1).getTypeString());
+                         rSheet.addCell(labelC);
                 	}
                 	else if(j==2){
-                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getAllowance()));  
-                         rSheet.addCell(labelC); 
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getAllowance()));
+                         rSheet.addCell(labelC);
                 	}
                 	else{
-                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getSum()));  
-                         rSheet.addCell(labelC); 
+                		 Label labelC = new Label(j,i,Double.toString(receive.get(i-1).getSum()));
+                         rSheet.addCell(labelC);
                 	}
-                }  
-            }  
-            wwb.write();// 从内从中写入文件中  
-            wwb.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
-        System.out.println("生成Excel文件"+fileName+"成功");  
-	}	
+                }
+            }
+            wwb.write();// 从内从中写入文件中
+            wwb.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("生成Excel文件"+fileName+"成功");
+	}
 
 	@Override
 	public ArrayList<PaymentTableVO> showPay() {//支出类
 		ArrayList<PaymentTableVO> paymentTableVOs=new ArrayList<>();
-		
+
 		ArrayList<SalesVO> salesVOs=salesBLService.show();//销售成本
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
@@ -138,7 +138,7 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 				for (int j = 0; j < giftVOs.size(); j++) {
 					try {//这里会多访问一次数据库，可以优化
-						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName(), FindCommodityType.NAME);
+						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8), FindCommodityType.NAME);
 						sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(j).getNumber();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -147,14 +147,14 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				paymentTableVOs.add(new PaymentTableVO(localDate, MoneyType.COMMODITY, sum));
 			}
 		}
-		
+
 		return paymentTableVOs;
 	}
 
 	@Override
 	public ArrayList<ReceiveTableVO> showReceive() {//收入类
 		ArrayList<ReceiveTableVO> receiveTableVOs=new ArrayList<>();
-		
+
 		ArrayList<SalesVO> salesVOs=salesBLService.show();//销售收入
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
@@ -162,14 +162,14 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 			Double allowance=salesVOs.get(i).getAllowance();//销售折让金额
 			receiveTableVOs.add(new ReceiveTableVO(localDate, MoneyType.SALES, allowance,sum));
 		}
-		
+
 		return receiveTableVOs;
 	}
 
 	@Override
 	public ArrayList<PaymentTableVO> siftPay(LocalDate start, LocalDate end) {
 		ArrayList<PaymentTableVO> paymentTableVOs=new ArrayList<>();
-		
+
 		ArrayList<SalesVO> salesVOs=salesBLService.show();//销售成本
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
@@ -188,8 +188,8 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 					ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 					for (int j = 0; j < giftVOs.size(); j++) {
 						try {//这里会多访问一次数据库，可以优化
-							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName(), FindCommodityType.NAME);
-							sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(i).getNumber();
+							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8), FindCommodityType.NAME);
+							sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(j).getNumber();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -198,14 +198,14 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				}
 			}
 		}
-		
+
 		return paymentTableVOs;
 	}
 
 	@Override
 	public ArrayList<ReceiveTableVO> siftReceive(LocalDate start, LocalDate end) {
 		ArrayList<ReceiveTableVO> receiveTableVOs=new ArrayList<>();
-		
+
 		ArrayList<SalesVO> salesVOs=salesBLService.show();//销售收入
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
@@ -215,7 +215,7 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				receiveTableVOs.add(new ReceiveTableVO(localDate, MoneyType.SALES, allowance,sum));
 			}
 		}
-		
+
 		return receiveTableVOs;
 	}
 
@@ -227,5 +227,5 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 		l=localDate.fromString(date);
 		return l;
 	}
-	
+
 }

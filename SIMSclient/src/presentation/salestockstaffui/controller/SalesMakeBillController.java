@@ -39,6 +39,7 @@ import presentation.common.EditingCellInteger;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.commodityvo.CommodityVO;
+import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionVO;
 import vo.uservo.UserVO;
 
@@ -48,6 +49,8 @@ public class SalesMakeBillController extends MakeReceiptController{
 	SalesBLService service = new SalesController();//׮
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
 	ObservableList<PromotionVO> promotionlist = FXCollections.observableArrayList();
+	ObservableList<GiftVO> giftlist = FXCollections.observableArrayList();
+
     @FXML
     Label typeLabel;
 
@@ -71,6 +74,13 @@ public class SalesMakeBillController extends MakeReceiptController{
    	TextField allowanceField;
     @FXML
    	Label afterLabel;
+
+    @FXML
+    TableView<GiftVO> giftTable;
+    @FXML
+    TableColumn<GiftVO,String> giftName;
+    @FXML
+    TableColumn<GiftVO,Integer> giftNumber;
 
 	@FXML
 	TableView<CommodityItemVO> table;
@@ -143,8 +153,10 @@ public class SalesMakeBillController extends MakeReceiptController{
 		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
+		ArrayList<GiftVO> giftList = new ArrayList<>();
+		giftList.addAll(giftlist);
          SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
-        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+        		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,giftList,Double.parseDouble(beforeLabel.getText()),
         		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
         		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.DRAFT,BillType.getType(typeLabel.getText()));
          ResultMessage message = service.save(vo);
@@ -166,9 +178,11 @@ public class SalesMakeBillController extends MakeReceiptController{
 		}
 		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
+		ArrayList<GiftVO> giftList = new ArrayList<>();
 		commodityList.addAll(list);
+		giftList.addAll(giftlist);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
-       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,giftList,Double.parseDouble(beforeLabel.getText()),
        		 Double.parseDouble(allowanceLabel.getText())+Double.parseDouble(allowanceField.getText()),Double.parseDouble(voucherLabel.getText()),
        		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),BillState.COMMITED,BillType.getType(typeLabel.getText()));
 		ResultMessage message = service.submit(vo);
@@ -196,8 +210,10 @@ public class SalesMakeBillController extends MakeReceiptController{
 		else{
 		ArrayList<CommodityItemVO> commodityList = new ArrayList<>();
 		commodityList.addAll(list);
+		ArrayList<GiftVO> giftList = new ArrayList<>();
+		giftList.addAll(giftlist);
 		SalesVO vo = new SalesVO(idLabel.getText(),memberChoice.getValue(),saleManLabel.getText(),operatorLabel.getText(),
-	       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,Double.parseDouble(beforeLabel.getText()),
+	       		 Warehouse.getWarehouse(warehouseChoice.getValue()),commodityList,giftList,Double.parseDouble(beforeLabel.getText()),
 	       		 Double.parseDouble(allowanceLabel.getText()),Double.parseDouble(voucherLabel.getText()),
 	       		 Double.parseDouble(afterLabel.getText()),noteArea.getText(),null,null);
          changeStage("PromotionCheckUI",user,type,null,vo);
@@ -235,6 +251,9 @@ public class SalesMakeBillController extends MakeReceiptController{
 					table.setItems(list);
 					operatorLabel.setText(sale.getOperator());
 					noteArea.setText(sale.getNote());
+					giftlist.clear();
+					giftlist.addAll(sale.getGifts());
+					giftTable.setItems(giftlist);
 
 				}
 

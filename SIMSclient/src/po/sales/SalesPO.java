@@ -9,6 +9,7 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
 import po.commodity.CommodityItemPO;
+import po.commodity.GiftPO;
 
 
 public class SalesPO implements Serializable {
@@ -26,6 +27,7 @@ public class SalesPO implements Serializable {
 	private double afterPrice; // 折让后金额
 	private String remark; // 备注
 	private ArrayList<CommodityItemPO> commodities; // 商品清单
+	private ArrayList<GiftPO> gifts;//赠品列表
 	private BillState state;
 	private BillType type;
 	private String date;
@@ -36,7 +38,7 @@ public class SalesPO implements Serializable {
 	}
 
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
-			ArrayList<CommodityItemPO> commodities, double beforePrice, double allowance, double voucher,
+			ArrayList<CommodityItemPO> commodities,ArrayList<GiftPO> gifts, double beforePrice, double allowance, double voucher,
 			double afterPrice, String remark, BillType type, BillState state) {
 		this.id = id;
 		this.clientId = clientId;
@@ -50,6 +52,7 @@ public class SalesPO implements Serializable {
 		this.afterPrice = afterPrice;
 		this.remark = remark;
 		this.commodities = commodities;
+		this.setGifts(gifts);
 		this.state = state;
 		this.type = type;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -126,6 +129,14 @@ public class SalesPO implements Serializable {
 				+ this.commodities + ", beforePrice=" + this.beforePrice + ", allowance=" + this.allowance
 				+ ", voucher=" + this.voucher + ", afterPrice=" + this.afterPrice + ", remark=" + this.remark
 				+ ", type=" + this.type + ", state=" + this.state + "]";
+	}
+
+	public ArrayList<GiftPO> getGifts() {
+		return gifts;
+	}
+
+	public void setGifts(ArrayList<GiftPO> gifts) {
+		this.gifts = gifts;
 	}
 
 }

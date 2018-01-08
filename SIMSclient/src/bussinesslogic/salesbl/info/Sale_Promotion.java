@@ -149,6 +149,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 	@Override
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList) {
 		ArrayList<PromotionVO> list = new ArrayList<>();   //符合条件日期的促销策略
+		ArrayList<GiftVO> giftList = new ArrayList<>();
  		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
  		int beginDate = 0;
  		int endDate = 0;
@@ -162,33 +163,49 @@ public class Sale_Promotion implements Sale_PromotionInfo {
  		}
 
 		double voucher = 0, allowance = 0;
-		double max = 0;
 		for (PromotionVO vo : list) {
 			switch (vo.getType()) {
 			case LEVEL_PROMOTION:
 				PromotionMemberVO m = (PromotionMemberVO) vo;
-				if (m.getAllowance() + m.getVoucher() > max) {
-					max = m.getAllowance() + m.getVoucher();
-					voucher = m.getVoucher();
-					allowance = m.getAllowance();
+				voucher += m.getVoucher();
+				allowance += m.getAllowance();
+				if(giftList.isEmpty())
+					giftList.addAll(m.getGifts());
+				else{
+				for(GiftVO gift:m.getGifts()){
+					for(int i=0;i<giftList.size();i++){
+						if(giftList.get(i).getName().equals(gift.getName())){
+							int num = giftList.get(i).getNumber()+gift.getNumber();
+							giftList.set(i, new GiftVO(gift.getName(),num));
+						}
+						else if(i+1==giftList.size())
+							giftList.addAll(m.getGifts());
+					}
+				}
 				}
 				break;
 
 			case PRICEPACKS:
 				PromotionPricePacksVO p = (PromotionPricePacksVO) vo;
-				if (p.getDiscount() > max) {
-					max = p.getDiscount();
-					voucher = 0;
-					allowance = p.getDiscount();
-				}
+				allowance += p.getDiscount();
 				break;
 
 			case SUM_PROMOTION:
 				PromotionTotalVO t = (PromotionTotalVO) vo;
-				if (t.getVoucher() > max) {
-					voucher = t.getVoucher();
-					allowance = 0;
-					max = t.getVoucher();
+				voucher += t.getVoucher();
+				if(giftList.isEmpty())
+					giftList.addAll(t.getGifts());
+				else{
+				for(GiftVO gift:t.getGifts()){
+					for(int i=0;i<giftList.size();i++){
+						if(giftList.get(i).getName().equals(gift.getName())){
+							int num = giftList.get(i).getNumber()+gift.getNumber();
+							giftList.set(i, new GiftVO(gift.getName(),num));
+						}
+						else if(i+1==giftList.size())
+							giftList.addAll(t.getGifts());
+					}
+				}
 				}
 				break;
 			default:
@@ -196,7 +213,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 			}
 		}
 
-		SalesPriceVO result = new SalesPriceVO(voucher, allowance);
+		SalesPriceVO result = new SalesPriceVO(voucher, allowance,giftList);
 		return result;
 	}
 

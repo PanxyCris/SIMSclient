@@ -56,9 +56,9 @@ public class MainUI extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		    Parent root = FXMLLoader.load(getClass().getResource("fxml/Login.fxml"));
 	        Scene scene = new Scene(root);
-	        scene.getStylesheets().add( 
-	        		getClass().getResource("button.css") 
-	        		.toExternalForm()); 
+	        scene.getStylesheets().add(
+	        		getClass().getResource("button.css")
+	        		.toExternalForm());
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	}
@@ -66,7 +66,11 @@ public class MainUI extends Application{
     public void login() throws RemoteException{
 		    String id = username.getText();
 		    String passWord = password.getText();
-
+		    if(id==null||passWord==null){
+		    	Alert alert = new Alert(Alert.AlertType.WARNING,"请输入用户名及密码");
+		    	alert.showAndWait();
+		    }
+		    else{
 		    UserBLService service = new UserController();
 
 		    if(service.login(id,passWord)){
@@ -96,6 +100,7 @@ public class MainUI extends Application{
 		    	password.setText(null);
 		    	Alert error = new Alert(Alert.AlertType.ERROR,"用户名或者密码错误");
 		    	error.showAndWait();
+		    }
 		    }
 
 	}

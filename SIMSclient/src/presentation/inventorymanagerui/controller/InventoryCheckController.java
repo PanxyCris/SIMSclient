@@ -6,7 +6,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import bussinesslogic.commoditybl.CommodityBL;
+import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,13 +17,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import po.ClassificationVPO;
 import vo.commodityvo.CommodityCheckVO;
 import vo.uservo.UserVO;
 
 public class InventoryCheckController extends InventoryManagerController{
 
-	CommodityBLService service = new CommodityBL();
+	CommodityBLService service = new CommodityController();
 	ObservableList<CommodityCheckVO> list = FXCollections.observableArrayList();
 	@FXML
 	DatePicker startPicker;
@@ -32,8 +36,6 @@ public class InventoryCheckController extends InventoryManagerController{
 	TableView<CommodityCheckVO> table;
 	@FXML
 	TableColumn<CommodityCheckVO,LocalDate> tableDate;
-	@FXML
-	TableColumn<CommodityCheckVO,LocalTime> tableTime;
 	@FXML
 	TableColumn<CommodityCheckVO,String> tableType;
 	@FXML
@@ -51,8 +53,14 @@ public class InventoryCheckController extends InventoryManagerController{
 		LocalDate start = startPicker.getValue();
 		LocalDate end = endPicker.getValue();
          ArrayList<CommodityCheckVO> commodityList = service.check(start, end);
+         list.clear();
          list.addAll(commodityList);
          table.setItems(list);
+         int sum = 0;
+         for(CommodityCheckVO commodity:commodityList){
+        	 sum += commodity.getNumber();
+         }
+         sumLabel.setText(String.valueOf(sum));
     }
 
 	public void initData(UserVO user) {
@@ -63,8 +71,6 @@ public class InventoryCheckController extends InventoryManagerController{
 	public void manageInit(){
 		tableDate.setCellValueFactory(
                 new PropertyValueFactory<CommodityCheckVO,LocalDate>("date"));
-		tableTime.setCellValueFactory(
-                new PropertyValueFactory<CommodityCheckVO,LocalTime>("time"));
 	    tableType.setCellValueFactory(
                 new PropertyValueFactory<CommodityCheckVO,String>("typeString"));
         tableName.setCellValueFactory(

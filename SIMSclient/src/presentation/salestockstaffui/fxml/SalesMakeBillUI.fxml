@@ -101,7 +101,7 @@
 		<Label fx:id="beforeLabel" layoutX="181.0" layoutY="347.0" prefHeight="23.0" prefWidth="165.0" style="-fx-background-color: #DDDDDD;" />
 		<Label layoutX="359.0" layoutY="97.0" text="操作员" />
 		<Label fx:id="operatorLabel" layoutX="359.0" layoutY="112.0" prefHeight="23.0" prefWidth="165.0" style="-fx-background-color: #DDDDDD;" />
-		<TableView fx:id="table" layoutX="545.0" layoutY="65.0" prefHeight="252.0" prefWidth="474.0">
+		<TableView fx:id="table" layoutX="545.0" layoutY="86.0" prefHeight="231.0" prefWidth="474.0">
 			<columns>
 				<TableColumn fx:id="tableID" prefWidth="75.0" text="商品编号" />
 				<TableColumn fx:id="tableName" prefWidth="75.0" text="名称" />
@@ -125,7 +125,7 @@
 		<Label layoutX="873.0" layoutY="391.0" text="总额" />
 		<Label fx:id="moneyLabel" layoutX="873.0" layoutY="406.0" prefHeight="23.0" prefWidth="150.0" style="-fx-background-color: #DDDDDD;" />
 		<Label layoutX="185.0" layoutY="388.0" text="单据备注" />
-		<TextArea fx:id="noteArea" layoutX="183.0" layoutY="406.0" prefHeight="122.0" prefWidth="343.0" />
+		<TextArea fx:id="noteArea" layoutX="183.0" layoutY="406.0" prefHeight="122.0" prefWidth="161.0" />
 		<Button layoutX="892.0" layoutY="450.0" mnemonicParsing="false" onAction="#insert" prefHeight="76.0" prefWidth="127.0" text="增加商品" />
 		<Button layoutX="910.0" layoutY="550.0" mnemonicParsing="false" onAction="#checkBefore" prefHeight="35.0" prefWidth="121.0" text="查看过往单据" />
 		<Button layoutX="372.0" layoutY="546.0" mnemonicParsing="false" onAction="#save" prefHeight="44.0" prefWidth="127.0" text="保    存" />
@@ -146,5 +146,12 @@
 		<Button layoutX="179.0" layoutY="550.0" mnemonicParsing="false" onAction="#checkPromotion" prefHeight="35.0" prefWidth="121.0" text="查看销售策略" />
       <ComboBox fx:id="memberChoice" editable="true" layoutX="183.0" layoutY="167.0" prefHeight="23.0" prefWidth="165.0" />
       <ComboBox fx:id="nameChoice" editable="true" layoutX="707.0" layoutY="347.0" prefHeight="23.0" prefWidth="150.0" />
+      <TableView fx:id="giftTable" layoutX="361.0" layoutY="402.0" prefHeight="128.0" prefWidth="150.0">
+        <columns>
+          <TableColumn fx:id="giftName" prefWidth="75.0" text="赠品名" />
+          <TableColumn fx:id="giftNumber" prefWidth="75.0" text="赠品数量" />
+        </columns>
+      </TableView>
+      <Label layoutX="361.0" layoutY="384.0" prefHeight="15.0" prefWidth="60.0" text="赠品列表" />
 	</children>
 </AnchorPane>
