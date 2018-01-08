@@ -156,22 +156,22 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 					String model=commodityItemVOs.get(j).getModel();
 					Integer number=commodityItemVOs.get(j).getNumber();
 					Double price=commodityItemVOs.get(j).getPrice();
-					if(type==FindSaleScheduleType.NAME&&name==info){
+					if(type==FindSaleScheduleType.NAME&&name.equals(info)){
 						saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 						saleScheduleVOs.add(saleScheduleVO);
 						continue;
 					}
-					if(type==FindSaleScheduleType.MEMBER&&member==info){
+					if(type==FindSaleScheduleType.MEMBER&&member.equals(info)){
 						saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 						saleScheduleVOs.add(saleScheduleVO);
 						continue;
 					}
-					if(type==FindSaleScheduleType.OPERATOR&&operator==info){
+					if(type==FindSaleScheduleType.OPERATOR&&operator.equals(info)){
 						saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 						saleScheduleVOs.add(saleScheduleVO);
 						continue;
 					}
-					if(type==FindSaleScheduleType.WAREHOUSE&&wareHouse==info){
+					if(type==FindSaleScheduleType.WAREHOUSE&&wareHouse.equals(info)){
 						saleScheduleVO=new SaleScheduleVO(localDate, name, model, number, price);
 						saleScheduleVOs.add(saleScheduleVO);
 						continue;

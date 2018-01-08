@@ -149,6 +149,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 	@Override
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList) {
 		ArrayList<PromotionVO> list = new ArrayList<>();   //符合条件日期的促销策略
+		ArrayList<GiftVO> giftList = new ArrayList<>();
  		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
  		int beginDate = 0;
  		int endDate = 0;
@@ -172,6 +173,20 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 					voucher = m.getVoucher();
 					allowance = m.getAllowance();
 				}
+				if(giftList.isEmpty())
+					giftList.addAll(m.getGifts());
+				else{
+				for(GiftVO gift:m.getGifts()){
+					for(int i=0;i<giftList.size();i++){
+						if(giftList.get(i).getName().equals(gift.getName())){
+							int num = giftList.get(i).getNumber()+gift.getNumber();
+							giftList.set(i, new GiftVO(gift.getName(),num));
+						}
+						else if(i+1==giftList.size())
+							giftList.addAll(m.getGifts());
+					}
+				}
+				}
 				break;
 
 			case PRICEPACKS:
@@ -190,13 +205,27 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 					allowance = 0;
 					max = t.getVoucher();
 				}
+				if(giftList.isEmpty())
+					giftList.addAll(t.getGifts());
+				else{
+				for(GiftVO gift:t.getGifts()){
+					for(int i=0;i<giftList.size();i++){
+						if(giftList.get(i).getName().equals(gift.getName())){
+							int num = giftList.get(i).getNumber()+gift.getNumber();
+							giftList.set(i, new GiftVO(gift.getName(),num));
+						}
+						else if(i+1==giftList.size())
+							giftList.addAll(t.getGifts());
+					}
+				}
+				}
 				break;
 			default:
 				break;
 			}
 		}
 
-		SalesPriceVO result = new SalesPriceVO(voucher, allowance);
+		SalesPriceVO result = new SalesPriceVO(voucher, allowance,giftList);
 		return result;
 	}
 

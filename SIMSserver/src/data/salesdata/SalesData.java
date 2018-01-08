@@ -38,21 +38,21 @@ public class SalesData{
 
 	public static void main(String[] args) {
 //		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
-//		
+//
 //		CommodityItemPO e = new CommodityItemPO("000001", "≈À–«”Ó", "µ•…ÌÕÙ", 100, 200, "ÕÙÕÙ");
 //		commodities.add(e);
 //		SalesPO po = new SalesPO("XSD-20180101-00001", "000002", "Õı≤”≤”(000002)(œ˙ €…Ã)", "Õı≤”≤”", "¡ı«’",
 //				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "¥Ûº™¥Û¿˚£¨ÕÌ…œ≥‘º¶", BillType.SALESBILL, BillState.DRAFT);
 		SalesData s = new SalesData();
-		
+
 //		ArrayList<SalesPO> list = s.show();
 //		for (SalesPO p : list) {
-		
+
 		SalesPO po = s.show().get(0);
-		SalesPO newPO = new SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"≈À–«”Ó",
-				po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),
-				po.getAfterPrice(),po.getRemark(),po.getType(),po.getState());
-		s.update(newPO);
+//		SalesPO newPO = new SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"≈À–«”Ó",
+//				po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),
+//				po.getAfterPrice(),po.getRemark(),po.getType(),po.getState());
+//		s.update(newPO);
 		System.out.println(s.show().get(0).getOperator());
 //		}
 	}
