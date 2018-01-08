@@ -207,19 +207,19 @@ public class CommodityBL implements CommodityBLService {
 	@Override
 	public ArrayList<String> getAllChildrenClass() throws Exception {
 		ArrayList<ClassificationVPO> vpos = classificationDataService.show();
+		System.out.println(vpos.size());
 		ArrayList<String> childrenList = new ArrayList<>();
 		for(ClassificationVPO vpo: vpos){
 			if(vpo.getChildrenPointer()==null)
 				childrenList.add(vpo.getName());
 			else{
-                for(String childrenName:vpo.getChildrenPointer()){
-                	if(!classificationDataService.findClassification(childrenName).getB())
-                		childrenList.add(childrenName);
+               String childrenName = vpo.getChildrenPointer().get(0);
+               System.out.println(childrenName);
+               if(!classificationDataService.findClassification(childrenName).getB())
+            	   childrenList.add(vpo.getName());
                 }
-
-			}
 		}
-		return null;
+		return childrenList;
 	}
 
 	// ccw
