@@ -94,9 +94,9 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 		for (int i = 0; i < list.size(); i++)
 			if (list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		ArrayList<PaymentBillVO> inventoryList = service.writeOff(result);
-		if (inventoryList != null) {
-			list.addAll(inventoryList);
+		ArrayList<PaymentBillVO> paymentList = service.writeOff(result);
+		if (paymentList != null) {
+			list.addAll(paymentList);
 			table.setItems(list);
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "ÒÑºì³å");
 			alert.showAndWait();

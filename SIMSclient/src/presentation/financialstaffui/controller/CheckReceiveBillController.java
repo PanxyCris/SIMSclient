@@ -20,7 +20,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.financialstaffui.controller.BussinessProcessTableController;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import vo.uservo.UserVO;
@@ -75,8 +74,16 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 		for(int i=0;i<list.size();i++)
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		list.addAll(service.writeOff(result));
-		table.setItems(list);
+		ArrayList<ReceiptBillVO> receiptList = service.writeOff(result);
+		if (receiptList != null) {
+			list.addAll(receiptList);
+			table.setItems(list);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "“—∫Ï≥Â");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "∫Ï≥Â ß∞‹");
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
@@ -86,13 +93,17 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 			if(list.get(i).getRed().isSelected())
 				result.add(list.get(i));
 		ArrayList<ReceiptBillVO> copy = service.writeOffAndCopy(result);
-        list.clear();
-		list.addAll(copy);
-		table.setItems(list);
-		table.setEditable(true);
-		accountVOList.clear();
-		accountList.setItems(accountVOList);
-		accountList.setEditable(true);
+		if (copy != null) {
+			list.clear();
+			list.addAll(copy);
+			table.setItems(list);
+			table.setEditable(true);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "“—∫Ï≥Â£¨«Î±‡º≠µ•æ›–≈œ¢");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "∫Ï≥Â ß∞‹");
+			alert.showAndWait();
+		}
 	}
 
 
@@ -113,6 +124,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 		ArrayList<ReceiptBillVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
 		list.addAll(siftList);
 		table.setItems(list);
+		initTime();
 		}
 	}
 
@@ -122,25 +134,40 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"«ÎÃÓ–¥∫√≤È—Ø–≈œ¢");
 			warning.showAndWait();
 		}else{
-		ArrayList<ReceiptBillVO> list = service.sift(findingField.getText(),FindSaleScheduleType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<ReceiptBillVO> receiptList = service.sift(findingField.getText(),FindSaleScheduleType.getType(findChoice.getValue()));
+	       if(receiptList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
-	       }
+				list.clear();
+				list.addAll(receiptList);
+				table.setItems(list);
+				initFind();
+			}
 		}
-
 	}
+
+	public void initTime(){
+		startPicker.setValue(null);
+		endPicker.setValue(null);
+	}
+
+	public void initFind(){
+		findChoice.setValue(null);
+		findingField.setText(null);
+	}
+
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
+		checkInit();
 		listInit();
+		initFind();
+		initTime();
 		findChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.MEMBER.value,
 				FindSaleScheduleType.OPERATOR.value));
 	}
@@ -160,7 +187,6 @@ public class CheckReceiveBillController extends BussinessProcessTableController{
                 new PropertyValueFactory<ReceiptBillVO,String>("note"));
 		tableRed.setCellValueFactory(
                 new PropertyValueFactory<ReceiptBillVO,CheckBox>("red"));
-		checkInit();
 	}
 
 	public void checkInit(){

@@ -20,12 +20,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import presentation.financialstaffui.controller.BussinessProcessTableController;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
 
-public class CheckSalesBillController extends BussinessProcessTableController{
+public class CheckSalesBillController extends BussinessProcessTableController {
 
 	BusinessHistoryScheduleBLService<SalesVO> service = new BusinessHistoryScheduleSalesBL();
 	ObservableList<SalesVO> list = FXCollections.observableArrayList();
@@ -44,199 +43,212 @@ public class CheckSalesBillController extends BussinessProcessTableController{
 	@FXML
 	TableView<SalesVO> table;
 	@FXML
-	TableColumn<SalesVO,String> tableID;
+	TableColumn<SalesVO, String> tableID;
 	@FXML
-	TableColumn<SalesVO,String> tableType;
+	TableColumn<SalesVO, String> tableType;
 	@FXML
-	TableColumn<SalesVO,String> tableMember;
+	TableColumn<SalesVO, String> tableMember;
 	@FXML
-	TableColumn<SalesVO,String> tableSaleMan;
+	TableColumn<SalesVO, String> tableSaleMan;
 	@FXML
-	TableColumn<SalesVO,String> tableWarehouse;
+	TableColumn<SalesVO, String> tableWarehouse;
 	@FXML
-	TableColumn<SalesVO,Double> tableBefore;
+	TableColumn<SalesVO, Double> tableBefore;
 	@FXML
-	TableColumn<SalesVO,Double> tableVoucher;
+	TableColumn<SalesVO, Double> tableVoucher;
 	@FXML
-	TableColumn<SalesVO,Double> tableAllowance;
+	TableColumn<SalesVO, Double> tableAllowance;
 	@FXML
-	TableColumn<SalesVO,Double> tableAfter;
+	TableColumn<SalesVO, Double> tableAfter;
 	@FXML
-	TableColumn<SalesVO,String> tableOperator;
+	TableColumn<SalesVO, String> tableOperator;
 	@FXML
-	TableColumn<SalesVO,String> tableNote;
+	TableColumn<SalesVO, String> tableNote;
 	@FXML
-	TableColumn<SalesVO,String> tableList;
+	TableColumn<SalesVO, String> tableList;
 	@FXML
-	TableColumn<SalesVO,CheckBox> tableRed;
+	TableColumn<SalesVO, CheckBox> tableRed;
 
 	@FXML
 	TableView<CommodityItemVO> commodity;
 	@FXML
-	TableColumn<CommodityItemVO,String> commodityID;
+	TableColumn<CommodityItemVO, String> commodityID;
 	@FXML
-	TableColumn<CommodityItemVO,String> commodityName;
+	TableColumn<CommodityItemVO, String> commodityName;
 	@FXML
-	TableColumn<CommodityItemVO,String> commodityModel;
+	TableColumn<CommodityItemVO, String> commodityModel;
 	@FXML
-	TableColumn<CommodityItemVO,Integer> commodityNumber;
+	TableColumn<CommodityItemVO, Integer> commodityNumber;
 	@FXML
-	TableColumn<CommodityItemVO,Double> commodityPrice;
+	TableColumn<CommodityItemVO, Double> commodityPrice;
 	@FXML
-	TableColumn<CommodityItemVO,Double> commodityMoney;
+	TableColumn<CommodityItemVO, Double> commodityMoney;
 	@FXML
-	TableColumn<CommodityItemVO,String> commodityNote;
+	TableColumn<CommodityItemVO, String> commodityNote;
 
 	@FXML
-	public void red(){
+	public void red() {
 		ArrayList<SalesVO> result = new ArrayList<>();
-		for(int i=0;i<list.size();i++)
-			if(list.get(i).getRed().isSelected())
+		for (int i = 0; i < list.size(); i++)
+			if (list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		list.addAll(service.writeOff(result));
-		table.setItems(list);
+		ArrayList<SalesVO> saleList = service.writeOff(result);
+		if (saleList != null) {
+			list.addAll(saleList);
+			table.setItems(list);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "红冲失败");
+			alert.showAndWait();
+		}
 	}
 
+	/**
+	 * 红冲并复制
+	 */
+
 	@FXML
-	public void redCopy(){
+	public void redCopy() {
 		ArrayList<SalesVO> result = new ArrayList<>();
-		for(int i=0;i<list.size();i++)
-			if(list.get(i).getRed().isSelected())
+		for (int i = 0; i < list.size(); i++)
+			if (list.get(i).getRed().isSelected())
 				result.add(list.get(i));
 		ArrayList<SalesVO> copy = service.writeOffAndCopy(result);
-        list.clear();
-		list.addAll(copy);
-		table.setItems(list);
-		table.setEditable(true);
-		commodityList.clear();
-		commodity.setItems(commodityList);
-		commodity.setEditable(true);
+		if (copy != null) {
+			list.clear();
+			list.addAll(copy);
+			table.setItems(list);
+			table.setEditable(true);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲，请编辑单据信息");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "红冲失败");
+			alert.showAndWait();
+		}
 	}
 
-
+	/**
+	 * 导出表格
+	 */
 	@FXML
-	public void printout(){
+	public void printout() {
 		ArrayList<SalesVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
 	}
 
 	@FXML
-	public void siftTime(){
-		if(startPicker.getValue()==null||endPicker.getValue()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请输入时间");
+	public void siftTime() {
+		if (startPicker.getValue() == null || endPicker.getValue() == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请输入时间");
 			warning.showAndWait();
-		}else{
-		list.clear();
-		ArrayList<SalesVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
-		list.addAll(siftList);
-		table.setItems(list);
+		} else {
+			list.clear();
+			ArrayList<SalesVO> siftList = service.siftTime(startPicker.getValue(), endPicker.getValue());
+			list.addAll(siftList);
+			table.setItems(list);
+			initTime();
 		}
 	}
 
-
 	@FXML
-	public void find(){
-		if(findingField.getText()==null||findChoice.getValue()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+	public void find() {
+		if (findingField.getText() == null || findChoice.getValue() == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好查询信息");
 			warning.showAndWait();
-		}else{
-		ArrayList<SalesVO> list = service.sift(findingField.getText(),FindSaleScheduleType.getType(findChoice.getValue()));
-	       if(list==null){
-	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
-               error.showAndWait();
-	       }
-	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
-	       }
+		} else {
+			ArrayList<SalesVO> salesList = service.sift(findingField.getText(),
+					FindSaleScheduleType.getType(findChoice.getValue()));
+			if (salesList == null) {
+				Alert error = new Alert(Alert.AlertType.WARNING, ResultMessage.NOTFOUND.value);
+				error.showAndWait();
+			} else {
+				list.clear();
+				list.addAll(salesList);
+				table.setItems(list);
+				initFind();
+			}
 		}
+	}
+
+	public void initTime() {
+		startPicker.setValue(null);
+		endPicker.setValue(null);
+	}
+
+	public void initFind() {
+		findChoice.setValue(null);
+		findingField.setText(null);
 	}
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
-		findChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.NAME.value,
-				FindSaleScheduleType.OPERATOR.value,FindSaleScheduleType.MEMBER.value,
-				FindSaleScheduleType.WAREHOUSE.value));
+		findChoice.setItems(
+				FXCollections.observableArrayList(FindSaleScheduleType.NAME.value, FindSaleScheduleType.OPERATOR.value,
+						FindSaleScheduleType.MEMBER.value, FindSaleScheduleType.WAREHOUSE.value));
+		initTime();
+		initFind();
+		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
+		checkInit();
 		listInit();
 	}
 
-	public void manageInit(){
-		tableID.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("id"));
-		tableType.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("typeString"));
-		tableMember.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("retailer"));
-		tableSaleMan.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("saleMan"));
-		tableWarehouse.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("warehouseString"));
-		tableBefore.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,Double>("beforePrice"));
-		tableAllowance.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,Double>("allowance"));
-		tableVoucher.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,Double>("voucher"));
-		tableAfter.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,Double>("afterPrice"));
-		tableOperator.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("operator"));
-		tableNote.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,String>("note"));
-		tableRed.setCellValueFactory(
-                new PropertyValueFactory<SalesVO,CheckBox>("red"));
-		checkInit();
+	public void manageInit() {
+		tableID.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("id"));
+		tableType.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("typeString"));
+		tableMember.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("retailer"));
+		tableSaleMan.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("saleMan"));
+		tableWarehouse.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("warehouseString"));
+		tableBefore.setCellValueFactory(new PropertyValueFactory<SalesVO, Double>("beforePrice"));
+		tableAllowance.setCellValueFactory(new PropertyValueFactory<SalesVO, Double>("allowance"));
+		tableVoucher.setCellValueFactory(new PropertyValueFactory<SalesVO, Double>("voucher"));
+		tableAfter.setCellValueFactory(new PropertyValueFactory<SalesVO, Double>("afterPrice"));
+		tableOperator.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("operator"));
+		tableNote.setCellValueFactory(new PropertyValueFactory<SalesVO, String>("note"));
+		tableRed.setCellValueFactory(new PropertyValueFactory<SalesVO, CheckBox>("red"));
 	}
 
-	public void checkInit(){
+	public void checkInit() {
 
 		tableList.setCellFactory((col) -> {
-            TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
+			TableCell<SalesVO, String> cell = new TableCell<SalesVO, String>() {
 
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					this.setText(null);
+					this.setGraphic(null);
 
-                    if (!empty) {
-                        Button delBtn = new Button("查看商品列表");
-                        this.setGraphic(delBtn);
-                        delBtn.setOnMouseClicked((me) -> {
-                        	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                            commodityList.clear();
-                            commodityList.addAll(clickedItem.getCommodity());
-                            commodity.setItems(commodityList);
-                        });
-                    }
-                }
+					if (!empty) {
+						Button delBtn = new Button("查看商品列表");
+						this.setGraphic(delBtn);
+						delBtn.setOnMouseClicked((me) -> {
+							SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+							commodityList.clear();
+							commodityList.addAll(clickedItem.getCommodity());
+							commodity.setItems(commodityList);
+						});
+					}
+				}
 
-            };
-            return cell;
-        });
+			};
+			return cell;
+		});
 
 	}
 
-
-	public void listInit(){
-		commodityID.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("id"));
-		commodityName.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("name"));
-		commodityModel.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("model"));
-		commodityNumber.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,Integer>("number"));
-		commodityPrice.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,Double>("price"));
-		commodityMoney.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,Double>("total"));
-		commodityNote.setCellValueFactory(
-                new PropertyValueFactory<CommodityItemVO,String>("remark"));
+	public void listInit() {
+		commodityID.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("id"));
+		commodityName.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("name"));
+		commodityModel.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("model"));
+		commodityNumber.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Integer>("number"));
+		commodityPrice.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("price"));
+		commodityMoney.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("total"));
+		commodityNote.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("remark"));
 	}
 
 }
