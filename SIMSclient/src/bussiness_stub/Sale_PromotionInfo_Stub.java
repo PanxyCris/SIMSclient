@@ -79,7 +79,7 @@ public class Sale_PromotionInfo_Stub implements Sale_PromotionInfo {
 
 	@Override
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList) {
-		return new SalesPriceVO(300.0, 500.0);
+		return new SalesPriceVO(300.0, 500.0, null);
 	}
 
 }

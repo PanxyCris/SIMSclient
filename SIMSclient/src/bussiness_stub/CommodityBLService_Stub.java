@@ -12,7 +12,6 @@ import vo.commodityvo.CommodityVO;
 
 public class CommodityBLService_Stub implements CommodityBLService{
 
-	@Override
 	public String getID() throws Exception {
 		return "00001";
 	}
@@ -23,7 +22,8 @@ public class CommodityBLService_Stub implements CommodityBLService{
 	}
 
 	@Override
-	public void delete(CommodityVO vo) throws Exception {
+	public ResultMessage delete(CommodityVO vo) throws Exception {
+		return ResultMessage.FAIL;
 	}
 
 	@Override
@@ -101,6 +101,11 @@ public class CommodityBLService_Stub implements CommodityBLService{
 
 	@Override
 	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs) {
+	}
+
+	@Override
+	public String getID(String name) throws Exception {
+		return "00001";
 	}
 
 	

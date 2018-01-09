@@ -711,22 +711,20 @@ salesbl模块承担的需求参见需求规格说明文档功能需求及相关�
 salesbl模块的职责及接口参见软件系统结构描述文档表<br>
 
 （2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleBLService接口。业务逻辑层和数据层之间添加dataservice. SaleDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SaleController，这样SaleController会将对销售的逻辑业务处理委托给Sale对象。SalePO是作为销售单的持久化对象被添加到设计模型中去的。<br>
+　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleBLService接口。业务逻辑层和数据层之间添加dataservice. SaleDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了SaleController，这样SaleController会将对销售的逻辑业务处理委托给Sale对象。SalePO是作为销售单的持久化对象被添加到设计模型中去的。<br>
 
 Salebl模块的设计如图所示<br>
 
 <img src="../img/软件详细设计图/Sales模块.png"><br>
 
-salesbl模块各个类的职责<br>
+<center>**Sale模块各个类的设计**</center>
 
 | **模块** | **职责** |
-| ------- | --------- |
-| LoginController | 负责实现对应于登录界面所需要的服务 |
-| SalesController | 负责实现销售管理界面所需要的服务 |
-| Sales | 制定销售单的领域模型对象，拥有销售单的信息 |
-| user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
-| SalesList | 每一个销售单的数据信息 |
-| SaleslineItem | 销售单数据里面的条目 |
+|---------| -----------|
+| SaleController | 负责实现制定销售(退货)界面所需要的服务 |
+| SaleTransition | 负责实现PO与VO的互换 |
+| Sale_Promotion | 负责实现制定销售单时的促销策略的选择 |
+
 
 （3）模块内部类的接口规范<br>
 <center>**SalesController的接口规范**</center>
@@ -737,7 +735,7 @@ salesbl模块各个类的职责<br>
 <tr>
 <th rowspan="3">SalesController.getSalesID</th>
 <th>语法</th>
-<th>public String getSalesID()</th>
+<th>`public String getSalesID()`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -750,85 +748,20 @@ salesbl模块各个类的职责<br>
 <tr>
 <th rowspan="3">SalesController.getSaleBackID</th>
 <th>语法</th>
-<th>public String getSaleBackID()</th>
+<th>`public String getSaleBackID()`</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>已创建一个Sale领域对象，并且输入符合输入规则</th>
+<th>已创建一个Sale领域对象</th>
 </tr>
 <tr>
 <th>后置条件</th>
 <th>调用Sales领域对象的方法</th>
 </tr>
 <tr>
-<th rowspan="3">SalesController.addCommodities</th>
-<th>语法</th>
-<th>public void addCommodities(CommodityItem item)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Sale领域对象，添加商品和数量，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的addCommodities方法</th>
-</tr>
-<tr>
-<th rowspan="3">SalesController.deteleCommodities</th>
-<th>语法</th>
-<th>public void deleteCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Sale领域对象，删除商品，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的deleteCommodities方法</th>
-</tr>
-<tr>
-<th rowspan="3">SalesController.findCommodities</th>
-<th>语法</th>
-<th>public void findCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Sale领域对象，查找商品与其数量，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的findCommodities方法</th>
-</tr>
-<tr>
-<th rowspan="3">SalesController.updateCommodities</th>
-<th>语法</th>
-<th>public void updateCommodities(CommodityItem item)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Sale领域对象，修改商品和数量，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的updateCommodities方法</th>
-</tr>
-<tr>
-<th rowspan="3">SalesController.getTotal</th>
-<th>语法</th>
-<th>public double getTotal()</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Sale领域对象，已计算总额</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的getTotal方法</th>
-</tr>
-<tr>
 <th rowspan="3">SalesController.save</th>
 <th>语法</th>
-<th>public ResultMessage save()</th>
+<th>`public ResultMessage save(SaleVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -836,12 +769,12 @@ salesbl模块各个类的职责<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Sale领域对象的方法</th>
+<th>生成并保存salePO</th>
 </tr>
 <tr>
 <th rowspan="3">SalesController.submit</th>
 <th>语法</th>
-<th>public ResultMessage submit()</th>
+<th>`public ResultMessage submit(SaleVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -849,7 +782,91 @@ salesbl模块各个类的职责<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Sale领域对象的方法</th>
+<th>生成并保存salePO</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.show</th>
+<th>语法</th>
+<th>`public ArrayList<SaleVO> show()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回全部的SaleVO</th>
+</tr>
+<tr>
+<th rowspan="3">SalesController.find</th>
+<th>语法</th>
+<th>`public ArrayList<SaleVO> find(String info, FindSalesType type)`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回全部符合条件的SaleVO</th>
+</tr>
+<th rowspan="3">SalesController.delete</th>
+<th>语法</th>
+<th>`public ResultMessage delete()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>删除数据库里的一个SalePO</th>
+</tr>
+<th rowspan="3">SalesController.isLegal</th>
+<th>语法</th>
+<th>`public ResultMessage isLegal(CommodityItemVO item)`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>判断商品清单的输入是否合法</th>
+</tr>
+<th rowspan="3">SalesController.showPricePacks</th>
+<th>语法</th>
+<th>`public ArrayList<PromotionPricePacksVO> showPricePacks()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回全部符合条件的特价包</th>
+</tr><th rowspan="3">SalesController.FindTotalPromotion()</th>
+<th>语法</th>
+<th>`public ArrayList<PromotionTotalVO> FindTotalPromotion()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回全部符合条件的总价包</th>
+</tr><th rowspan="3">SalesController.FindMemberPromotion</th>
+<th>语法</th>
+<th>`public ArrayList<PromotionMemberVO> FindMemberPromotion()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Sale领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回全部符合条件的等级促销包</th>
 </tr>
 </table>
 
@@ -862,32 +879,35 @@ salesbl模块各个类的职责<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>Sales.getSalesID</th>
-<th>获取销售单的ID</th>
+<th>SalesDataService.insert</th>
+<th>保存销售单单据信息</th>
 </tr>
 <tr>
-<th>Sales.getSaleBackID</th>
-<th>获取销售退货单的ID</th>
+<th>SalesDataService.update</th>
+<th>更新销售单单据信息</th>
 </tr>
 <tr>
-<th>salesDataService.addCommodities(CommodityPO po)</th>
-<th>添加商品</th>
-</tr>
-<tr>
-<th>SalesDataService.deleteCommodities(CommodityPO po)</th>
-<th>删除商品</th>
-</tr>
-<tr>
-<th>SalesDataService.updateCommodities(CommodityPO po)</th>
-<th>修改商品</th>
+<th>SalesDataService.delete</th>
+<th>删除销售单</th>
 </tr>
 <tr>
 <tr>
-<th>Sales.save</th>
-<th>保存草稿</th>
+<th>SalesDataService.show</th>
+<th>获取全部的销售单信息</th>
 </tr>
-<th>Sales.submit</th>
-<th>提交单据</th>
+<tr>
+<th>SalesDataService.find</th>
+<th>获取全部符合条件的销售单信息</th>
+</tr>
+<th>PromotionDataService.show</th>
+<th>三个show方法分别获取三种不同形式的促销包</th>
+</tr>
+<tr>
+<th>PromotionBL.poTOvo</th>
+<th>三个poTOvo方法获取三种不同形式的促销包的PO转换成VO</th>
+</tr>
+<th>SalesTransition.VOtoPO</th>
+<th>将SalePO转换成aleVO</th>
 </tr>
 </table>
 
