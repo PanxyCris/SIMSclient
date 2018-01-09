@@ -77,16 +77,23 @@ public class CheckReceiptController extends InventoryManagerController{
 			warning.showAndWait();
 		}
 		else{
-		ArrayList<InventoryBillVO> list = service.find(findingField.getText(),FindInventoryBillType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<InventoryBillVO> inventoryList = service.find(findingField.getText(),FindInventoryBillType.getType(findChoice.getValue()));
+	       if(inventoryList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(inventoryList);
+	    	   table.setItems(list);
+	    	   initFind();
 	       }
         }
+	}
+
+	public void initFind(){
+		findChoice.setValue(null);
+		findingField.setText(null);
 	}
 
 	public void initData(UserVO user,BillType type){
@@ -94,6 +101,8 @@ public class CheckReceiptController extends InventoryManagerController{
 		this.type = type;
 		choiceInit();
 		manageInit();
+		initFind();
+		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);
 	}
@@ -166,7 +175,7 @@ public class CheckReceiptController extends InventoryManagerController{
                     this.setText(null);
                     this.setGraphic(null);
                     if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT) {
-                        Button delBtn = new Button("提交");
+                        Button delBtn = new Button("提交");//只有草稿状态单据才提供提交按钮
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -202,7 +211,7 @@ public class CheckReceiptController extends InventoryManagerController{
                     this.setGraphic(null);
                     if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
                     		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
-                        Button delBtn = new Button("重做");
+                        Button delBtn = new Button("重做");//只有审批失败和草稿状态单据才提供重写按钮
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -231,9 +240,9 @@ public class CheckReceiptController extends InventoryManagerController{
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                    if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
+					if (!empty && (this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
                     		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
-                        Button delBtn = new Button("删除");
+                        Button delBtn = new Button("删除");//只有审批失败和草稿状态的单据才提供删除按钮
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());

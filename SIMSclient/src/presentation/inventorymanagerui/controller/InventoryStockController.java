@@ -13,6 +13,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import vo.commodityvo.CommodityStockVO;
 import vo.uservo.UserVO;
+/**
+ * 用于库存盘点的界面
+ * @author 潘星宇
+ * 2017-12-18
+ */
 
 public class InventoryStockController extends InventoryManagerController{
 

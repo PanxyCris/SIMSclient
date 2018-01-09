@@ -3,17 +3,15 @@ package presentation.inventorymanagerui.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import bussiness_stub.ClassificationBLService_Stub;
-import bussinesslogic.classificationbl.ClassificationBL;
+import bussinesslogic.classificationbl.ClassificationController;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
-import dataenum.Remind;
 import dataenum.ResultMessage;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -22,9 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
+import javafx.scene.control.TreeTableView;
 import javafx.util.Callback;
 import po.ClassificationVPO;
 import presentation.common.EditingCellTree;
@@ -32,8 +29,7 @@ import vo.uservo.UserVO;
 
 public class ClassManageController extends InventoryManagerController {
 
-	ClassificationBLService service = new ClassificationBL();
-	public static final Remind remind = Remind.CLASSIFICATION;
+	ClassificationBLService service = new ClassificationController();
 	ObservableList<String> classList = FXCollections.observableArrayList();
 
 	@FXML
@@ -58,7 +54,7 @@ public class ClassManageController extends InventoryManagerController {
 
 	@FXML
 	public void insert() throws Exception {
-		if (nameField.getText() == null || classChoice.getValue() == null) {
+		if (nameField.getText() == null || classChoice.getValue() == null) {//空信息判断
 			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有信息");
 			warning.showAndWait();
 		} else {
@@ -82,6 +78,9 @@ public class ClassManageController extends InventoryManagerController {
 		}
 
 	}
+	/**
+	 * 增加分类后的初始化
+	 */
 
 	public void initInsert() {
 		idLabel.setText(service.getID());
@@ -107,7 +106,7 @@ public class ClassManageController extends InventoryManagerController {
 	/**
 	 * 加入所有子节点
 	 *
-	 * @param item
+	 * @param item 子节点
 	 */
 	public void addAllChildren(TreeItem<ClassificationVPO> item) {
 		item.setExpanded(true);
@@ -126,6 +125,9 @@ public class ClassManageController extends InventoryManagerController {
 		}
 
 	}
+	/**
+	 * 节点名称可编辑
+	 */
 
 	public void edit() {
 		Callback<TreeTableColumn<ClassificationVPO, String>, TreeTableCell<ClassificationVPO, String>> cellFactory = (
@@ -138,15 +140,15 @@ public class ClassManageController extends InventoryManagerController {
 				((TreeItem<ClassificationVPO>) t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()))
 						.getValue().setName(t.getNewValue());
 				try {
-					ClassificationVPO vpo = ((TreeItem<ClassificationVPO>) t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()))
-							.getValue();
+					ClassificationVPO vpo = ((TreeItem<ClassificationVPO>) t.getTreeTableView()
+							.getTreeItem(t.getTreeTablePosition().getRow())).getValue();
 					vpo.setName(t.getNewValue());
 					ResultMessage message = service.update(vpo);
-					if(message == ResultMessage.SUCCESS)
+					if (message == ResultMessage.SUCCESS)
 						initData(user);
 					else
 						printWrong(message);
-					
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -183,7 +185,7 @@ public class ClassManageController extends InventoryManagerController {
 					if (!empty && (this.getTreeTableView().getTreeItem(this.getIndex())).getValue().getB()
 							&& (this.getTreeTableView().getTreeItem(this.getIndex())).getValue().getFather() != null
 							&& (this.getTreeTableView().getTreeItem(this.getIndex())).getValue()
-									.getChildrenPointer() == null) {
+									.getChildrenPointer() == null) { //空分类且不为根节点方可提供删除按钮
 						Button delBtn = new Button("删除");
 						this.setGraphic(delBtn);
 						delBtn.setOnMouseClicked((me) -> {
