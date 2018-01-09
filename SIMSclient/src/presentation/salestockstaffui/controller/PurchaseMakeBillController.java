@@ -1,7 +1,8 @@
 package presentation.salestockstaffui.controller;
 
 import java.util.ArrayList;
-import bussinesslogic.commoditybl.CommodityBL;
+
+import bussinesslogic.commoditybl.CommodityController;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
@@ -42,7 +43,9 @@ import vo.uservo.UserVO;
 public class PurchaseMakeBillController extends MakeReceiptController{
 
 
-	PurchaseBLService service = new PurchaseController();//桩
+	PurchaseBLService service = new PurchaseController();
+    MemberBLService memberService = new MemberController();
+    CommodityBLService commodityService = new CommodityController();//桩
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
 
     @FXML
@@ -111,10 +114,10 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	    	                     double result = Double.parseDouble(moneyLabel.getText())+Double.parseDouble(sumLabel.getText());
 	    	                     sumLabel.setText(String.valueOf(result));
 	   commodityIDLabel.setText(null);
-	  nameChoice.setValue(null);
-      modelChoice.setValue(null);
-      numberField.setText(null);
-      priceField.setText(null);
+	   nameChoice.setValue(null);
+       modelChoice.setValue(null);
+       numberField.setText(null);
+       priceField.setText(null);
 	   moneyLabel.setText("0.0");
        remarkArea.setText(null);
       }
@@ -195,8 +198,8 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 	         else
 	        	 noteArea.setText(purchase.getNote());
 
-				edit();
-				manageInit();
+			edit();
+			manageInit();
 	}
 
 	public void edit(){
@@ -310,20 +313,17 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         textFieldInit();
         deleteInit();
 	}
+	/**
+	 * 对选择会员、仓库、商品名称按钮的初始化
+	 */
 
 	public void choiceInit() throws Exception{
         ObservableList<String> memberList = FXCollections.observableArrayList();
-        MemberBLService memberService = new MemberController();//桩
         memberList.addAll(memberService.getIDandName());
         memberChoice.setItems(memberList);
-
         warehouseChoice.setItems(FXCollections.observableArrayList(Warehouse.WAREHOUSE1.value,Warehouse.WAREHOUSE2.value));
-
         ObservableList<String> commodityList = FXCollections.observableArrayList();
-        CommodityBLService commodityService = new CommodityBL();//桩
-
     	commodityList.addAll(commodityService.getIDandName());
-
         nameChoice.setItems(commodityList);
         nameChoice.getSelectionModel().selectedItemProperty().addListener(
         		(ObservableValue<? extends String> cl,String oldValue,String newValue)->{
@@ -342,7 +342,6 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 					for(CommodityVO commodity:commodityService.find(s, FindCommodityType.ID))
 						modelList.add(commodity.getModel());
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
         			modelChoice.setItems(modelList);
@@ -355,12 +354,15 @@ public class PurchaseMakeBillController extends MakeReceiptController{
         }
 
 	}
+	/**
+	 * 对商品数量和价格的文字监控
+	 */
 
 	public void textFieldInit(){
 		numberField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            	boolean numberLegal = true,priceLegal = true;
+            	boolean numberLegal = true,priceLegal = true; //判断输入值是否合法
             	for(int i=0;i<numberField.getText().length();i++)
             		if(numberField.getText().charAt(i)<='9'&&numberField.getText().charAt(i)>='0')
             			continue;
@@ -383,7 +385,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
             	if(!priceLegal||!numberLegal)
             		moneyLabel.setText("0");
             	else
-                moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
+                    moneyLabel.setText(String.valueOf(Integer.parseInt(numberField.getText())*Double.parseDouble(priceField.getText())));
             }
             	}
         });

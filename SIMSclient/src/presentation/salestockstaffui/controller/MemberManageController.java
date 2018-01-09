@@ -3,7 +3,7 @@ package presentation.salestockstaffui.controller;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Optional;
-import bussiness_stub.MemberBLService_Stub;
+
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.MemberCategory;
@@ -15,22 +15,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellChoice;
-import vo.uservo.UserVO;
 import vo.membervo.MemberVO;
+import vo.uservo.UserVO;
 
 /**
  * 用于客户管理的界面的控制器
@@ -101,18 +101,21 @@ public class MemberManageController extends SaleStockStaffController{
 		protected TableColumn<MemberVO,String> tableOperator;
 		@FXML
 		protected TableColumn<MemberVO,String> tableDelete;
-
+        /**
+         * 增加一个会员
+         * @throws RemoteException
+         */
 		@FXML
 		public void insert() throws RemoteException{
-		if(idLabel.getText()==null||classChoice.getValue()==null||levelChoice.getValue()==null||
+		    if(idLabel.getText()==null||classChoice.getValue()==null||levelChoice.getValue()==null||
 				nameField.getText()==null||phoneField.getText()==null||addressField.getText()==null||
 				zipcodeField.getText()==null||emailField.getText()==null||amountField.getText()==null||
 				receiveField.getText()==null||payField.getText()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有信息");
 			warning.showAndWait();
-		}
-		else{
-			 MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
+		    }
+		    else{
+			    MemberVO vo = new MemberVO(idLabel.getText(),MemberCategory.getCategory(classChoice.getValue()),MemberLevel.getLevel(levelChoice.getValue()),
 					 nameField.getText(), phoneField.getText(),addressField.getText(),zipcodeField.getText(),
 					 emailField.getText(),amountField.getText(),receiveField.getText(),payField.getText(),
 					 operatorField.getText());
@@ -163,7 +166,7 @@ public class MemberManageController extends SaleStockStaffController{
 
 		public void initInsert() throws RemoteException{
 			if(service.getId()!=null)
-			idLabel.setText(service.getId());
+			    idLabel.setText(service.getId());
 			else
 				idLabel.setText("000001");
 			classChoice.setValue(null);
@@ -177,6 +180,9 @@ public class MemberManageController extends SaleStockStaffController{
 			receiveField.setText(null);
 			payField.setText(null);
 		}
+		/**
+		 * 可编辑初始化
+		 */
 
 		public void edit(){
 			Callback<TableColumn<MemberVO, String>,

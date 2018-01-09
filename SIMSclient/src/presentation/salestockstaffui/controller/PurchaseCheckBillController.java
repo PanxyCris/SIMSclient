@@ -3,7 +3,6 @@ package presentation.salestockstaffui.controller;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import bussiness_stub.PurchaseBLService_Stub;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
@@ -83,44 +82,6 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 	TableColumn<CommodityItemVO,Double> commodityMoney;
 	@FXML
 	TableColumn<CommodityItemVO,String> commodityNote;
-
-
-	@FXML
-	public void returnLast() throws Exception{
-        startUI(previous,user,type,purchase,sale);
-        if(!stack.isEmpty()){
-        stack.pop();
-        current = previous;
-        }
-        if(stack.size()>1)
-            previous = stack.lastElement();
-	}
-
-	@FXML
-	public void mainPage() throws Exception{
-		changeStage(mainID,user,type,purchase,sale);
-
-    }
-
-	@FXML
-	public void fresh() throws Exception{
-		startUI(current,user,type,purchase,sale);
-	}
-
-    @FXML
-	public void memberManage() throws Exception{
-         changeStage("MemberManageUI",user,type,null,null);
-	}
-
-	@FXML
-	public void makeReceipt() throws Exception{
-		 changeStage("MakeReceiptUI",user,type,null,null);
-	}
-
-	@FXML
-	public void makePurchaseBill() throws Exception{
-         changeStage("PurchaseMakeBillUI",user,type,null,null);
-	}
 
 	@FXML
 	public void find(){
@@ -218,7 +179,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     this.setText(null);
                     this.setGraphic(null);
                     if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT) {
-                        Button delBtn = new Button("提交");
+                        Button delBtn = new Button("提交"); //只有草稿状态单据才能提交
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -253,11 +214,9 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     super.updateItem(item, empty);
                     this.setText(null);
                     this.setGraphic(null);
-                   if(!empty&&(this.getTableView().getItems().get(this.getIndex()).getState()==BillState.FAIL||
+                    if(!empty&&(this.getTableView().getItems().get(this.getIndex()).getState()==BillState.FAIL||
                 		   this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT)){
-
-                    Button delBtn = new Button("重做");
-
+                    Button delBtn = new Button("重做"); //只有审批失败和草稿状态单据才能重做
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -290,7 +249,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                     this.setGraphic(null);
                     if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState()==BillState.FAIL||
                  		   this.getTableView().getItems().get(this.getIndex()).getState()==BillState.DRAFT)) {
-                        Button delBtn = new Button("删除");
+                        Button delBtn = new Button("删除");//只有审批失败和草稿状态单据才能被删除
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());

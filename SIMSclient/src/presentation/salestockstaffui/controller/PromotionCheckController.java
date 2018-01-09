@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import bussiness_stub.Sale_PromotionInfo_Stub;
 import bussinesslogic.salesbl.info.Sale_Promotion;
 import bussinesslogicservice.salesblservice.Sale_PromotionInfo;
 import dataenum.BillType;
@@ -25,13 +24,18 @@ import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
 import vo.promotionvo.PromotionVO;
 import vo.uservo.UserVO;
-
+/**
+ * 用于销售的策略查看界面
+ * @author 潘星宇
+ * 2017-12-10
+ */
 public class PromotionCheckController extends SaleStockStaffController{
 
-	Sale_PromotionInfo service = new Sale_Promotion();
-	PromotionMemberVO currentMember;
-	PromotionPricePacksVO currentSpecial;
-	PromotionTotalVO currentSum;
+	 Sale_PromotionInfo service = new Sale_Promotion();
+	 //当前的促销策略
+	 PromotionMemberVO currentMember;
+	 PromotionPricePacksVO currentSpecial;
+	 PromotionTotalVO currentSum;
 	 ObservableList<GiftVO> memberList = FXCollections.observableArrayList();
 	 ObservableList<GiftVO> specialList = FXCollections.observableArrayList();
 	 ObservableList<GiftVO> sumList = FXCollections.observableArrayList();
@@ -163,6 +167,9 @@ public class PromotionCheckController extends SaleStockStaffController{
 		sum.setItems(sumTable);
 
 	}
+	/**
+	 * 各个表格的初始化
+	 */
 
 	public void manageMemberInit(){
 		memberID.setCellValueFactory(
@@ -189,7 +196,6 @@ public class PromotionCheckController extends SaleStockStaffController{
 	public void manageSpecialInit(){
 		specialID.setCellValueFactory(
                 new PropertyValueFactory<PromotionPricePacksVO,String>("id"));
-
 		specialStart.setCellValueFactory(
             new PropertyValueFactory<PromotionPricePacksVO,LocalDate>("beginDate"));
 		specialEnd.setCellValueFactory(
@@ -345,7 +351,7 @@ public class PromotionCheckController extends SaleStockStaffController{
                         	PromotionMemberVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	for(int i=0;i<choiceList.size();i++)
                         		if(choiceList.get(i).getType() == PromotionType.LEVEL_PROMOTION)
-                        			choiceList.remove(i);
+                        			choiceList.remove(i); //每种策略最多能选一个
                         	choiceList.add(clickedItem);
                         	choice.setItems(choiceList);
                         });
@@ -374,7 +380,7 @@ public class PromotionCheckController extends SaleStockStaffController{
                         	PromotionPricePacksVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	for(int i=0;i<choiceList.size();i++)
                         		if(choiceList.get(i).getType() == PromotionType.PRICEPACKS)
-                        			choiceList.remove(i);
+                        			choiceList.remove(i); //每种策略最多能选一个
                         	choiceList.add(clickedItem);
                         	choice.setItems(choiceList);
                         });
@@ -403,7 +409,7 @@ public class PromotionCheckController extends SaleStockStaffController{
                         	PromotionTotalVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	for(int i=0;i<choiceList.size();i++)
                         		if(choiceList.get(i).getType() == PromotionType.SUM_PROMOTION)
-                        			choiceList.remove(i);
+                        			choiceList.remove(i); //每种策略最多能选一个
                         	choiceList.add(clickedItem);
                         	choice.setItems(choiceList);
                         });
