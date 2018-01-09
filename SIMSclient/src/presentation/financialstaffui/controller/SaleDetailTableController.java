@@ -1,5 +1,6 @@
 package presentation.financialstaffui.controller;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import bussinesslogic.tablebl.SaleScheduleBL;
@@ -105,6 +106,12 @@ public class SaleDetailTableController extends ViewTableController{
 		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);
+		try {
+			tableChoiceInit();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		manageInit();
 		siftChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.NAME.value,FindSaleScheduleType.MEMBER.value,
 				FindSaleScheduleType.OPERATOR.value,FindSaleScheduleType.WAREHOUSE.value));

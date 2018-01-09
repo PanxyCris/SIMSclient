@@ -1,5 +1,6 @@
 package presentation.generalmanagerui.controller;
 
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -103,9 +104,15 @@ public class SaleDetailTableController extends FinanceTableController{
 
 	public void initData(UserVO user) {
 		this.user = user;
+		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
+		try {
+			tableChoiceInit();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		siftChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.NAME.value,FindSaleScheduleType.MEMBER.value,
 				FindSaleScheduleType.OPERATOR.value,FindSaleScheduleType.WAREHOUSE.value));
 	}
