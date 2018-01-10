@@ -88,8 +88,14 @@ public class BussinessSituationTableController extends ViewTableController {
 				pay.setItems(payList);
 				receive.setItems(receiveList);
 				updateSum();
+				initTime();
 			}
 		}
+	}
+
+	public void initTime(){
+		startPicker.setValue(null);
+		endPicker.setValue(null);
 	}
 
 	public void initData(UserVO user) {
@@ -100,6 +106,7 @@ public class BussinessSituationTableController extends ViewTableController {
 		receive.setItems(receiveList);
 		updateSum();
 		manageInit();
+		initTime();
 		try {
 			tableChoiceInit();
 		} catch (RemoteException e) {

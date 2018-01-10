@@ -111,17 +111,5 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutY="445.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
-         <font>
-            <Font name="syht Italic" size="16.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/日志.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
 	</children>
 </AnchorPane>

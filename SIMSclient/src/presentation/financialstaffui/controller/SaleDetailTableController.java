@@ -3,11 +3,11 @@ package presentation.financialstaffui.controller;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import bussinesslogic.tablebl.SaleScheduleBL;
 import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,7 +51,10 @@ public class SaleDetailTableController extends ViewTableController{
 	TableColumn<SaleScheduleVO,Double> tablePrice;
 	@FXML
 	TableColumn<SaleScheduleVO,Double> tableSum;
-
+    /**
+     * 导出表格
+     * @throws Exception
+     */
 
 	@FXML
 	public void printout() throws Exception{
@@ -75,6 +78,7 @@ public class SaleDetailTableController extends ViewTableController{
 	    	   list.clear();
 	    	   list.addAll(salesList);
 	    	   table.setItems(list);
+	    	   initFind();
 	       }
 		}
 	}
@@ -94,11 +98,20 @@ public class SaleDetailTableController extends ViewTableController{
 	    	   list.clear();
 	    	   list.addAll(salesList);
 	    	   table.setItems(list);
-
-	       }
+				initTime();
+			}
 		}
 	}
 
+	public void initTime(){
+		startPicker.setValue(null);
+		endPicker.setValue(null);
+	}
+
+	public void initFind() {
+		siftChoice.setValue(null);
+		siftField.setText(null);
+	}
 
 
 	public void initData(UserVO user) {
@@ -109,10 +122,11 @@ public class SaleDetailTableController extends ViewTableController{
 		try {
 			tableChoiceInit();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		manageInit();
+		initFind();
+		initTime();
 		siftChoice.setItems(FXCollections.observableArrayList(FindSaleScheduleType.NAME.value,FindSaleScheduleType.MEMBER.value,
 				FindSaleScheduleType.OPERATOR.value,FindSaleScheduleType.WAREHOUSE.value));
 	}

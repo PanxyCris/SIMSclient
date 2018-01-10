@@ -13,9 +13,9 @@ public class AccountBookVO {
 	private ArrayList<MemberVO> memberVOs;//客户列表
 	private ArrayList<AccountVO> accountVOs;//账户列表
 
-	public AccountBookVO(String data, String clerkID,ArrayList<CommodityVO> commodityVOs,ArrayList<MemberVO> memberVOs
+	public AccountBookVO(String date, String clerkID,ArrayList<CommodityVO> commodityVOs,ArrayList<MemberVO> memberVOs
 			,ArrayList<AccountVO> accountVOs) {
-		this.date=data;
+		this.date=date;
 		this.clerkID=clerkID;
 		this.commodityVOs=commodityVOs;
 		this.memberVOs=memberVOs;

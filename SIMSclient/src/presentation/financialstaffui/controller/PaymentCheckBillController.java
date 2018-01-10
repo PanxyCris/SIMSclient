@@ -81,16 +81,23 @@ public class PaymentCheckBillController extends FinancialStaffController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<PaymentBillVO> list = service.find(findingField.getText(),FindAccountBillType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<PaymentBillVO> paymentList = service.find(findingField.getText(),FindAccountBillType.getType(findChoice.getValue()));
+	       if(paymentList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(paymentList);
+	    	   table.setItems(list);
+	    	   initFind();
 	       }
 		}
+	}
+
+	public void initFind(){
+		findChoice.setValue(null);
+		findingField.setText(null);
 	}
 
 
@@ -99,7 +106,12 @@ public class PaymentCheckBillController extends FinancialStaffController{
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();
+		checkInit();
+		submitInit();
+		redoInit();
+        deleteInit();
 		listInit();
+		initFind();
 		findChoice.setItems(FXCollections.observableArrayList(FindAccountBillType.BILLID.value,FindAccountBillType.CUSTOMER.value,
 				FindAccountBillType.OPERATOR.value));
 
@@ -118,10 +130,6 @@ public class PaymentCheckBillController extends FinancialStaffController{
                 new PropertyValueFactory<PaymentBillVO,String>("note"));
 		tableState.setCellValueFactory(
                 new PropertyValueFactory<PaymentBillVO,String>("stateString"));
-		checkInit();
-		submitInit();
-		redoInit();
-        deleteInit();
 	}
 
 	public void checkInit(){
@@ -165,7 +173,7 @@ public class PaymentCheckBillController extends FinancialStaffController{
                     this.setText(null);
                     this.setGraphic(null);
                     if (!empty&&this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT) {
-                        Button delBtn = new Button("提交");
+                        Button delBtn = new Button("提交"); //只有草稿状态单据才能提交
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -200,7 +208,7 @@ public class PaymentCheckBillController extends FinancialStaffController{
                     this.setGraphic(null);
                     if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
                     		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
-                        Button delBtn = new Button("重做");
+                        Button delBtn = new Button("重做");  //只有审批失败或者草稿状态单据才能重做
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
@@ -231,7 +239,7 @@ public class PaymentCheckBillController extends FinancialStaffController{
                     this.setGraphic(null);
                     if (!empty&&(this.getTableView().getItems().get(this.getIndex()).getState() == BillState.DRAFT||
                     		this.getTableView().getItems().get(this.getIndex()).getState() == BillState.FAIL)) {
-                        Button delBtn = new Button("删除");
+                        Button delBtn = new Button("删除"); //只有审批失败和草稿状态单据才能重做
                         this.setGraphic(delBtn);
                         delBtn.setOnMouseClicked((me) -> {
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());

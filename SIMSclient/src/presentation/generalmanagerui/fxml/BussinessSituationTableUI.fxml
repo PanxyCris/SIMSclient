@@ -117,18 +117,6 @@
          </font>
       </Label>
       <Label fx:id="allowance" layoutX="536.0" layoutY="485.0" prefHeight="38.0" prefWidth="68.0" style="-fx-background-color: #DDDDDD;" />
-      <Button layoutX="8.0" layoutY="452.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
-         <font>
-            <Font name="syht Italic" size="16.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/日志.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <Button layoutX="8.0" layoutY="392.0" mnemonicParsing="false" onAction="#makePromotion" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="制定策略" textFill="WHITE">
          <font>
             <Font name="syht Italic" size="16.0" />

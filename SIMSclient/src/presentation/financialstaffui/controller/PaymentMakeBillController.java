@@ -1,10 +1,9 @@
 package presentation.financialstaffui.controller;
 
 import java.util.ArrayList;
+
 import bussinesslogic.accountbillbl.PaymentBillController;
-import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.accountbillblservice.PaymentBillBLService;
-import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
@@ -168,6 +167,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 			    initInsert();
 				edit();
 				manageInit();
+		        deleteInit();
 	}
 
 	public void choiceInit(){
@@ -178,8 +178,9 @@ public class PaymentMakeBillController extends MakeReceiptController {
 			memberChoice.setValue(pay.getCustomerID());
 		}
 	}
-
-
+    /**
+     * ø…±‡º≠≥ı ºªØ
+     */
 
 	public void edit(){
 		Callback<TableColumn<EntryVO, String>,
@@ -211,7 +212,6 @@ public class PaymentMakeBillController extends MakeReceiptController {
                 new PropertyValueFactory<EntryVO,Double>("transferAmount"));
         tableDescription.setCellValueFactory(
                 new PropertyValueFactory<EntryVO,String>("note"));
-        deleteInit();
 	}
 
 	public void deleteInit(){

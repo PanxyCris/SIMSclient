@@ -15,39 +15,35 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 
-public class UserMessageController extends GeneralManagerController{
+public class UserMessageController extends GeneralManagerController {
 
 	UtilityBLService service = new UtilityBL();
 	ObservableList<MessageVO> list = FXCollections.observableArrayList();
 	@FXML
 	TableView<MessageVO> messageTable;
 	@FXML
-	TableColumn<MessageVO,LocalDateTime> time;
+	TableColumn<MessageVO, LocalDateTime> time;
 	@FXML
-	TableColumn<MessageVO,String> messageList;
-
+	TableColumn<MessageVO, String> messageList;
 
 	public void initData(UserVO user) {
 		this.user = user;
 		ArrayList<MessageVO> messages = service.getMessage(user);
-		for(MessageVO mark:messages){
-			if(!mark.getHasRead()){
-			mark.setHasRead(true);
-			try {
-				service.saveMessage(mark);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		for (MessageVO mark : messages) {
+			if (!mark.getHasRead()) {
+				mark.setHasRead(true);
+				try {
+					service.saveMessage(mark);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		if(messages!=null)
-        list.addAll(messages);
-        messageTable.setItems(list);
-        time.setCellValueFactory(
-                new PropertyValueFactory<MessageVO,LocalDateTime>("time"));
-        messageList.setCellValueFactory(
-                new PropertyValueFactory<MessageVO,String>("info"));
+		if (messages != null)
+			list.addAll(messages);
+		messageTable.setItems(list);
+		time.setCellValueFactory(new PropertyValueFactory<MessageVO, LocalDateTime>("time"));
+		messageList.setCellValueFactory(new PropertyValueFactory<MessageVO, String>("info"));
 	}
 
 }

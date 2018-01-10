@@ -1,12 +1,9 @@
 package presentation.financialstaffui.controller;
 
 import java.util.ArrayList;
-import bussiness_stub.ReceiptBillBLService_Stub;
-import bussiness_stub.UtilityBLService_Stub;
+
 import bussinesslogic.accountbillbl.ReceiptBillController;
-import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
-import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
@@ -15,15 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
@@ -159,6 +155,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 		        initInsert();
 				edit();
 				manageInit();
+				deleteInit();
 	}
 
 	public void choiceInit(){
@@ -207,7 +204,6 @@ public class ReceiveMakeBillController extends MakeReceiptController {
                 new PropertyValueFactory<AccountListVO,Double>("money"));
         tableDescription.setCellValueFactory(
                 new PropertyValueFactory<AccountListVO,String>("note"));
-        deleteInit();
 	}
 
 	public void deleteInit(){

@@ -87,9 +87,14 @@ public class BussinessSituationTableController extends FinanceTableController {
 				pay.setItems(payList);
 				receive.setItems(receiveList);
 				updateSum();
+				initTime();
 			}
 		}
+	}
 
+	public void initTime(){
+		startPicker.setValue(null);
+		endPicker.setValue(null);
 	}
 
 	public void initData(UserVO user) {
@@ -100,6 +105,7 @@ public class BussinessSituationTableController extends FinanceTableController {
 		receive.setItems(receiveList);
 		updateSum();
 		manageInit();
+		initTime();
 		try {
 			tableChoiceInit();
 		} catch (RemoteException e) {

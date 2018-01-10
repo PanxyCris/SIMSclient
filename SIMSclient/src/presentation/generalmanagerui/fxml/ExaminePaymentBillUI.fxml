@@ -108,29 +108,17 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutY="451.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
-			<font>
-				<Font name="syht Italic" size="16.0" />
-			</font>
-			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../img/日志.png" />
-					</image>
-				</ImageView>
-			</graphic>
-		</Button>
       <ChoiceBox fx:id="findChoice" layoutX="462.0" layoutY="69.0" prefWidth="150.0" />
       <TextField fx:id="findingField" layoutX="612.0" layoutY="69.0" prefHeight="23.0" prefWidth="286.0" />
       <Button layoutX="898.0" layoutY="69.0" mnemonicParsing="false" onAction="#find" prefHeight="23.0" prefWidth="85.0" text="查  找" />
-      <TableView fx:id="itemList" layoutX="739.0" layoutY="123.0" prefHeight="381.0" prefWidth="251.0">
+      <TableView fx:id="itemList" editable="true" layoutX="739.0" layoutY="123.0" prefHeight="381.0" prefWidth="251.0">
          <columns>
             <TableColumn fx:id="tableItem" prefWidth="75.0" text="条目名" />
             <TableColumn fx:id="tableMoney" prefWidth="75.0" text="金额" />
             <TableColumn fx:id="tableNote" prefWidth="100.0" text="备注" />
          </columns>
       </TableView>
-      <TableView fx:id="table" layoutX="192.0" layoutY="123.0" prefHeight="381.0" prefWidth="525.0" tableMenuButtonVisible="true">
+      <TableView fx:id="table" editable="true" layoutX="192.0" layoutY="123.0" prefHeight="381.0" prefWidth="525.0" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="tableID" prefWidth="110.0" text="单据编号" />
             <TableColumn fx:id="tableAccount" prefWidth="75.0" text="银行账户" />

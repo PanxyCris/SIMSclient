@@ -128,6 +128,14 @@ public class FinancialStaffController extends LoginController{
         }
      //   image = user.getImage();
 	}
+	/**
+	 * 切换fxml
+	 * @param currentID 当前fxml
+	 * @param user 当前登录用户
+	 * @param bill1 付款单
+	 * @param bill2 收款单
+	 * @throws Exception
+	 */
 
 
 	public void changeStage(String currentID,UserVO user,PaymentBillVO bill1,ReceiptBillVO bill2) throws Exception{

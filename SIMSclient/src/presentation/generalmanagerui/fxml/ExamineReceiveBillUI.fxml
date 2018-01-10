@@ -68,8 +68,8 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<ChoiceBox layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
-		<Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" text="选择单据大类查看" />
+		<ChoiceBox fx:id="receiptChoice" layoutX="192.0" layoutY="69.0" prefWidth="150.0" />
+		<Button layoutX="342.0" layoutY="69.0" mnemonicParsing="false" onAction="#chooseReceipt" text="选择单据大类查看" />
 		<Button layoutY="271.0" mnemonicParsing="false" onAction="#checkBill" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="审批单据" textFill="WHITE">
 			<font>
 				<Font name="syht Italic" size="16.0" />
@@ -106,19 +106,7 @@
 				</ImageView>
 			</graphic>
 		</Button>
-		<Button layoutY="451.0" mnemonicParsing="false" onAction="#checkDiary" prefHeight="60.0" prefWidth="136.0" style="-fx-background-color: rgba(0,0,0,0);" text="查看日志" textFill="WHITE">
-			<font>
-				<Font name="syht Italic" size="16.0" />
-			</font>
-			<graphic>
-				<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../img/日志.png" />
-					</image>
-				</ImageView>
-			</graphic>
-		</Button>
-      <TableView fx:id="table" layoutX="192.0" layoutY="123.0" prefHeight="381.0" prefWidth="525.0" tableMenuButtonVisible="true">
+      <TableView fx:id="table" editable="true" layoutX="192.0" layoutY="123.0" prefHeight="381.0" prefWidth="525.0" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="tableID" prefWidth="110.0" text="单据编号" />
             <TableColumn fx:id="tableMember" prefWidth="75.0" text="客户" />
@@ -129,7 +117,7 @@
             <TableColumn fx:id="tablePass" prefWidth="75.0" text="是否通过" />
          </columns>
       </TableView>
-      <TableView fx:id="accountList" layoutX="739.0" layoutY="123.0" prefHeight="381.0" prefWidth="251.0">
+      <TableView fx:id="accountList" editable="true" layoutX="739.0" layoutY="123.0" prefHeight="381.0" prefWidth="251.0">
          <columns>
             <TableColumn fx:id="tableAccount" prefWidth="75.0" text="银行账户" />
             <TableColumn fx:id="tableMoney" prefWidth="75.0" text="转账金额" />

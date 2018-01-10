@@ -1,11 +1,18 @@
 package bussinesslogic.accountbookbl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import bussinesslogic.accountbl.AccountBL;
+import bussinesslogic.commoditybl.CommodityBL;
+import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import dataenum.ResultMessage;
 import dataservice.accountbookdataservice.AccountBookDataService;
+import dataservice.accountdataservice.AccountDataService;
+import dataservice.commoditydataservice.CommodityDataService;
+import dataservice.memberdataservice.MemberDataService;
 import po.AccountBookPO;
 import rmi.RemoteHelper;
 import vo.accountbookvo.AccountBookVO;
@@ -18,9 +25,16 @@ public class AccountBookBL implements AccountBookBLService{
 	private AccountBookTransition accountBookTransition;
 	private AccountBookDataService accountBookDataService;
 
+	private MemberController memberService;
+	private CommodityBL commodityService;
+	private AccountBL accountService;
+
 	public AccountBookBL() {
 		accountBookTransition=new AccountBookTransition();
 		accountBookDataService=RemoteHelper.getInstance().getSetUpAccountDataService();
+		memberService = new MemberController();
+		commodityService = new CommodityBL();
+		accountService = new AccountBL();
 	}
 	@Override
 	public ResultMessage newBuild(AccountBookVO accountBookVO) {
@@ -66,6 +80,15 @@ public class AccountBookBL implements AccountBookBLService{
 			if(d.equals(accountBookVOs.get(i).getDate())){
 				accountBookVO=accountBookVOs.get(i);
 				break;
+			}
+		}
+		if(date==LocalDate.now().getYear()&&accountBookVO==null){
+			try {
+				accountBookVO = new AccountBookVO(String.valueOf(date),null,commodityService.show(),
+						memberService.show(),accountService.getAccountList());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return accountBookVO;
