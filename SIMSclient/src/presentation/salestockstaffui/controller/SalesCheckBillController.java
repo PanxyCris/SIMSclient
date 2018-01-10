@@ -214,7 +214,7 @@ public class SalesCheckBillController extends SaleStockStaffController{
                         	SalesVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.submit(clickedItem);
-                            if(message == ResultMessage.SUCCESS){
+                            if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
                             	 submitInit();
                                  deleteInit();
                                  redoInit();

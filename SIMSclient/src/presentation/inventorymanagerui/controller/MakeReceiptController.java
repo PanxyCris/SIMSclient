@@ -70,7 +70,7 @@ public class MakeReceiptController extends InventoryManagerController {
 			InventoryBillVO vo = new InventoryBillVO(idLabel.getText(), gifts, operatorLabel.getText(),
 					BillType.getType(receiptChoice.getValue()), BillState.DRAFT, noteArea.getText());
 			ResultMessage message = service.save(vo);
-			if (message == ResultMessage.SUCCESS) {
+			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.SAVED);
 				try {
 					fresh();
@@ -94,7 +94,7 @@ public class MakeReceiptController extends InventoryManagerController {
 			InventoryBillVO vo = new InventoryBillVO(idLabel.getText(), gifts, operatorLabel.getText(),
 					BillType.getType(receiptChoice.getValue()), BillState.COMMITED, noteArea.getText());
 			ResultMessage message = service.submit(vo);
-			if (message == ResultMessage.SUCCESS) {
+			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.COMMITED);
 				try {
 					fresh();

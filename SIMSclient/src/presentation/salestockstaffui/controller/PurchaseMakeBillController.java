@@ -135,7 +135,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.getType(typeLabel.getText()),BillState.DRAFT);
          ResultMessage message = service.save(vo);
-         if(message == ResultMessage.SUCCESS){
+         if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
              printInfo(ResultMessage.SAVED);
              fresh();
              }
@@ -154,7 +154,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
          PurchaseVO vo = new PurchaseVO(idLabel.getText(),memberChoice.getValue(),Warehouse.getWarehouse(warehouseChoice.getValue()),
         		 operatorLabel.getText(),commodityList,noteArea.getText(),Double.parseDouble(sumLabel.getText()),BillType.getType(typeLabel.getText()),BillState.COMMITED);
          ResultMessage message = service.submit(vo);
-         if(message == ResultMessage.SUCCESS){
+         if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
              printInfo(ResultMessage.COMMITED);
              fresh();
          }

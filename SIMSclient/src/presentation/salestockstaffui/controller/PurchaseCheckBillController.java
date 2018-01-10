@@ -202,7 +202,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
                         	PurchaseVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.submit(clickedItem);
-                            if(message == ResultMessage.SUCCESS){
+                            if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
                                 submitInit();
                                 deleteInit();

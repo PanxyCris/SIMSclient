@@ -165,7 +165,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 					Double.parseDouble(voucherLabel.getText()), Double.parseDouble(afterLabel.getText()),
 					noteArea.getText(), BillState.DRAFT, BillType.getType(typeLabel.getText()));
 			ResultMessage message = service.save(vo);
-			if (message == ResultMessage.SUCCESS) {
+			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.SAVED);
 				fresh();
 			} else
@@ -191,7 +191,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 					Double.parseDouble(voucherLabel.getText()), Double.parseDouble(afterLabel.getText()),
 					noteArea.getText(), BillState.COMMITED, BillType.getType(typeLabel.getText()));
 			ResultMessage message = service.submit(vo);
-			if (message == ResultMessage.SUCCESS) {
+			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.COMMITED);
 				fresh();
 			} else

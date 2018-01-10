@@ -179,7 +179,7 @@ public class PaymentCheckBillController extends FinancialStaffController{
                         	PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                         	clickedItem.setState(BillState.COMMITED);
                         	ResultMessage message = service.commit(clickedItem);
-                            if(message == ResultMessage.SUCCESS){
+                            if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
                            	 this.getTableView().getItems().get(this.getIndex()).setState(BillState.COMMITED);
                            	 submitInit();
                              deleteInit();
