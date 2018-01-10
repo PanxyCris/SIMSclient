@@ -56,6 +56,8 @@ public class SaleDetailTableController extends FinanceTableController {
 		ArrayList<SaleScheduleVO> resultList = new ArrayList<>();
 		resultList.addAll(list);
 		service.exportReport(resultList);
+		Alert info = new Alert(Alert.AlertType.INFORMATION,"ÒÑµ¼³ö");
+		info.showAndWait();
 	}
 
 	@FXML

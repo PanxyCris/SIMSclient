@@ -77,6 +77,8 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 		ArrayList<PaymentBillVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
+		Alert info = new Alert(Alert.AlertType.INFORMATION,"ÒÑµ¼³ö");
+		info.showAndWait();
 	}
 
 	@FXML

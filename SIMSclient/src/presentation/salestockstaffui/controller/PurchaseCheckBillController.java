@@ -84,23 +84,39 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 	TableColumn<CommodityItemVO,String> commodityNote;
 
 	@FXML
+	public void makePurchaseBill(){
+		try {
+			changeStage("PurchaseMakeBillUI",user,type,null,null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
 	public void find(){
 		if(findingField.getText()==null||findChoice.getValue()==null){
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}
 		else{
-		ArrayList<PurchaseVO> list = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<PurchaseVO> purchaseList = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
+	       if(purchaseList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	  list.clear();
+	    	  list.addAll(purchaseList);
+	    	  table.setItems(list);
+	    	  initFind();
 	       }
 	    }
 
+	}
+
+	public void initFind(){
+		findChoice.setValue(null);
+		findingField.setText(null);
 	}
 
 	public void initData(UserVO user,BillType type) {
@@ -110,6 +126,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 		table.setItems(list);
 		manageInit();
 		listInit();
+		initFind();
 		findChoice.setItems(FXCollections.observableArrayList(FindPurchaseType.ID.value,FindPurchaseType.MEMBER.value,
 				FindPurchaseType.OPERATOR.value,FindPurchaseType.TOTAL.value));
 	}

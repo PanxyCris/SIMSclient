@@ -33,6 +33,7 @@ import vo.promotionvo.PromotionVO;
 
 /**
  * 销售过程中的促销策略选择
+ *
  * @author Lijie
  * @date 2018年1月2日
  */
@@ -75,7 +76,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 			beginDate = Integer.valueOf(sdf.format(localDateToDate(po.getBeginDate())));
 			endDate = Integer.valueOf(sdf.format(localDateToDate(po.getEndDate())));
 			if (beginDate <= date && date <= endDate)
-				if (po.getLevel().num >= level.num) {
+				if (po.getLevel().num <= level.num) {
 					result.add(memberbl.poTovo(po));
 				}
 
@@ -100,7 +101,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 			beginDate = Integer.valueOf(sdf.format(localDateToDate(po.getBeginDate())));
 			endDate = Integer.valueOf(sdf.format(localDateToDate(po.getEndDate())));
 			if (beginDate <= date && date <= endDate)
-				if (po.getTotal() >= beforePrice) {
+				if (po.getTotal() <= beforePrice) {
 					result.add(sumbl.poTovo(po));
 				}
 		}
@@ -128,11 +129,24 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 
 				ArrayList<GiftVO> gifts = poTOvo(po.getPricePacks());
 				boolean flag = true;
-				for (GiftVO g : gifts) {
-					if (commodity.indexOf(g) == -1) { // 商品不存在
-						flag = false;
-						break;
-					}
+	OutLoop:	for (int i=0;i<gifts.size();i++) {
+					for(int j=0;j<commodity.size();j++){
+					     if(gifts.get(i).getName().equals(commodity.get(j).getName())){
+					    	 if(gifts.get(i).getNumber()<=commodity.get(j).getNumber()) //策略中该商品数量低于特价包数量
+					    		 break;
+					    	 else{
+					    		 flag = false;
+					    		 break OutLoop;
+					    		 }
+					     }
+					     else if(j==commodity.size()-1){
+					    	 flag = false;
+					    	 break OutLoop;
+					     }
+
+
+
+						}
 				}
 				if (flag) {
 
@@ -145,19 +159,19 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 
 	@Override
 	public SalesPriceVO getPromotionPrice(ArrayList<PromotionVO> promotionList) {
-		ArrayList<PromotionVO> list = new ArrayList<>();   //符合条件日期的促销策略
+		ArrayList<PromotionVO> list = new ArrayList<>(); // 符合条件日期的促销策略
 		ArrayList<GiftVO> giftList = new ArrayList<>();
- 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
- 		int beginDate = 0;
- 		int endDate = 0;
- 		for (PromotionVO vo : promotionList) {
- 			beginDate = Integer.valueOf(sdf.format(localDateToDate(vo.getBeginDate())));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		int beginDate = 0;
+		int endDate = 0;
+		for (PromotionVO vo : promotionList) {
+			beginDate = Integer.valueOf(sdf.format(localDateToDate(vo.getBeginDate())));
 			endDate = Integer.valueOf(sdf.format(localDateToDate(vo.getEndDate())));
- 			if (beginDate <= date && date <= endDate) {
- 				list.add(vo);
- 			}
+			if (beginDate <= date && date <= endDate) {
+				list.add(vo);
+			}
 
- 		}
+		}
 
 		double voucher = 0, allowance = 0;
 		for (PromotionVO vo : list) {
@@ -166,19 +180,18 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 				PromotionMemberVO m = (PromotionMemberVO) vo;
 				voucher += m.getVoucher();
 				allowance += m.getAllowance();
-				if(giftList.isEmpty())
+				if (giftList.isEmpty())
 					giftList.addAll(m.getGifts());
-				else{
-				for(GiftVO gift:m.getGifts()){ //增加赠品
-					for(int i=0;i<giftList.size();i++){
-						if(giftList.get(i).getName().equals(gift.getName())){
-							int num = giftList.get(i).getNumber()+gift.getNumber();
-							giftList.set(i, new GiftVO(gift.getName(),num));
+				else {
+					for (GiftVO gift : m.getGifts()) { // 增加赠品
+						for (int i = 0; i < giftList.size(); i++) {
+							if (giftList.get(i).getName().equals(gift.getName())) {
+								int num = giftList.get(i).getNumber() + gift.getNumber();
+								giftList.set(i, new GiftVO(gift.getName(), num));
+							} else if (i + 1 == giftList.size())
+								giftList.addAll(m.getGifts());
 						}
-						else if(i+1==giftList.size())
-							giftList.addAll(m.getGifts());
 					}
-				}
 				}
 				break;
 
@@ -190,19 +203,18 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 			case SUM_PROMOTION:
 				PromotionTotalVO t = (PromotionTotalVO) vo;
 				voucher += t.getVoucher();
-				if(giftList.isEmpty())
+				if (giftList.isEmpty())
 					giftList.addAll(t.getGifts());
-				else{
-				for(GiftVO gift:t.getGifts()){ //增加赠品
-					for(int i=0;i<giftList.size();i++){
-						if(giftList.get(i).getName().equals(gift.getName())){
-							int num = giftList.get(i).getNumber()+gift.getNumber();
-							giftList.set(i, new GiftVO(gift.getName(),num));
+				else {
+					for (GiftVO gift : t.getGifts()) { // 增加赠品
+						for (int i = 0; i < giftList.size(); i++) {
+							if (giftList.get(i).getName().equals(gift.getName())) {
+								int num = giftList.get(i).getNumber() + gift.getNumber();
+								giftList.set(i, new GiftVO(gift.getName(), num));
+							} else if (i + 1 == giftList.size())
+								giftList.addAll(t.getGifts());
 						}
-						else if(i+1==giftList.size())
-							giftList.addAll(t.getGifts());
 					}
-				}
 				}
 				break;
 			default:
@@ -210,7 +222,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 			}
 		}
 
-		SalesPriceVO result = new SalesPriceVO(voucher, allowance,giftList);
+		SalesPriceVO result = new SalesPriceVO(voucher, allowance, giftList);
 		return result;
 	}
 
@@ -229,11 +241,11 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 
 	}
 
-	public Date localDateToDate(LocalDate localDate){
-		 ZoneId zoneId = ZoneId.systemDefault();
-	     ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
-	     Date date = Date.from(zdt.toInstant());
-         return date;
+	public Date localDateToDate(LocalDate localDate) {
+		ZoneId zoneId = ZoneId.systemDefault();
+		ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
+		Date date = Date.from(zdt.toInstant());
+		return date;
 	}
 
 }

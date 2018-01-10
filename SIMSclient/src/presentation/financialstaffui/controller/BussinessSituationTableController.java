@@ -67,6 +67,8 @@ public class BussinessSituationTableController extends ViewTableController {
 		resultPay.addAll(payList);
 		resultReceive.addAll(receiveList);
 		service.exportReport(resultPay, resultReceive);
+		Alert info = new Alert(Alert.AlertType.INFORMATION,"ÒÑµ¼³ö");
+		info.showAndWait();
 	}
 
 	@FXML

@@ -2,6 +2,7 @@ package bussinesslogic.promotionbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
@@ -52,13 +53,16 @@ public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
 	@Override
 	public String getID() throws RemoteException {
 		ArrayList<PromotionTotalPO> promotionList = service.showSumPromotion();
-		String oldID = promotionList.get(promotionList.size()-1).getId();
-		int tmp = Integer.parseInt(oldID);
-		tmp++;
-		String newID = String.valueOf(tmp);
-		while(newID.length() < oldID.length())
-			newID = "0"+newID;
-		return newID;
+		if (promotionList != null && promotionList.size() != 0) {
+			String oldID = promotionList.get(promotionList.size() - 1).getId();
+			int tmp = Integer.parseInt(oldID);
+			tmp++;
+			String newID = String.valueOf(tmp);
+			while (newID.length() < oldID.length())
+				newID = "0" + newID;
+			return newID;
+		} else
+			return "300001";
 	}
 
 	@Override

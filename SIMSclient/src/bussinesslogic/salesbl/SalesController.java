@@ -177,7 +177,7 @@ public class SalesController implements SalesBLService {
 			if (Info.getType() == BillType.SALESBILL) {
 				for (CommodityItemVO commodity : Info.getCommodity()) {
 					if (commodityDataService
-							.findCommodity(commodity.getName().substring(0, commodity.getName().length() - 8),
+							.findCommodity(getTrueName(commodity.getName()),
 									FindCommodityType.NAME)
 							.get(0).getNumber() < commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
@@ -304,4 +304,19 @@ public class SalesController implements SalesBLService {
 		return this.date;
 	}
 
+	/**
+     * 商品名的过滤
+     * @param name 显示在单据上的商品名
+     * @return 真实的商品名
+     */
+	public String getTrueName(String name){
+		String newName = "";
+		for(int m=0;m<name.length();m++){
+			if(name.charAt(m)=='('){
+				newName = name.substring(0, m);
+			    break;
+			    }
+		}
+		return newName;
+	}
 }

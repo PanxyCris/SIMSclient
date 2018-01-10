@@ -166,6 +166,8 @@ public class PromotionSumController extends PromotionMakingController {
 			giftList.add(vo);
 			giftTable.setItems(giftList);
 			updateGiftList();
+			giftChoice.setValue(null);
+			numberField.setText(null);
 		}
 	}
 
@@ -179,6 +181,7 @@ public class PromotionSumController extends PromotionMakingController {
 		voucherField.setText(null);
 		startPicker.setValue(null);
 		endPicker.setValue(null);
+		sumField.setText(null);
 	}
 
 	public void initData(UserVO user) throws Exception {

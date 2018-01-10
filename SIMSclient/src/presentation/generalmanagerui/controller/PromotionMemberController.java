@@ -174,6 +174,8 @@ public class PromotionMemberController extends PromotionMakingController {
 			giftList.add(vo);
 			giftTable.setItems(giftList);
 			updateGiftList();
+			giftChoice.setValue(null);
+			numberField.setText(null);
 		}
 	}
 

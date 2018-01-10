@@ -95,17 +95,24 @@ public class SalesCheckBillController extends SaleStockStaffController{
 			warning.showAndWait();
 		}
 		else{
-		ArrayList<SalesVO> list = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<SalesVO> salesList = service.find(findingField.getText(),FindSalesType.getType(findChoice.getValue()));
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
+	    	   list.clear();
+	    	   list.addAll(salesList);
+	    	   table.setItems(list);
+	    	   initFind();
 	       }
 	    }
 
+	}
+
+	public void initFind(){
+		findChoice.setValue(null);
+		findingField.setText(null);
 	}
 
 	@FXML
@@ -123,6 +130,7 @@ public class SalesCheckBillController extends SaleStockStaffController{
 		   list.addAll(service.show());
 		   table.setItems(list);
 		}
+		initFind();
 		manageInit();
 		checkInit();
 		submitInit();

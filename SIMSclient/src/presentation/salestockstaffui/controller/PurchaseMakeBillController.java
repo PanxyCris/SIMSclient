@@ -45,7 +45,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 
 	PurchaseBLService service = new PurchaseController();
     MemberBLService memberService = new MemberController();
-    CommodityBLService commodityService = new CommodityController();//׮
+    CommodityBLService commodityService = new CommodityController();
 	ObservableList<CommodityItemVO> list = FXCollections.observableArrayList();
 
     @FXML

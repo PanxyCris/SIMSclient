@@ -87,7 +87,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
         		            BillType.XJFYD,BillState.DRAFT,accountList,Double.parseDouble(sumLabel.getText()),noteArea.getText());
          ResultMessage message = service.save(vo);
-         if(message == ResultMessage.SUCCESS){
+         if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
              printInfo(ResultMessage.SAVED);
              try {
 				fresh();
@@ -107,7 +107,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
          ReceiptBillVO vo = new ReceiptBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
         		            BillType.XJFYD,BillState.COMMITED,accountList,Double.parseDouble(sumLabel.getText()),noteArea.getText());
          ResultMessage message = service.commit(vo);
-         if(message == ResultMessage.SUCCESS){
+         if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
              printInfo(ResultMessage.COMMITED);
              try {
 				fresh();

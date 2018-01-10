@@ -30,7 +30,7 @@ public class SaleScheduleBL implements SaleScheduleBLService {
 	@Override
 	public void exportReport(ArrayList<SaleScheduleVO> sale) {// 这个是导出为excel的方法
 		WritableWorkbook wwb = null;
-		String fileName = "C:/Users/user/Desktop/SaleSchedule.xlsx";
+		String fileName = "C:/Users/asus/Desktop/SaleSchedule.xlsx";
 		try {
 			// 创建一个可写入的工作簿（WorkBook）对象,
 			// 这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法

@@ -144,6 +144,8 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		ArrayList<PurchaseVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
+		Alert info = new Alert(Alert.AlertType.INFORMATION,"ÒÑµ¼³ö");
+		info.showAndWait();
 	}
 
 	@FXML

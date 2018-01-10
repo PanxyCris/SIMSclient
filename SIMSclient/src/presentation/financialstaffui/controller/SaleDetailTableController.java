@@ -61,6 +61,8 @@ public class SaleDetailTableController extends ViewTableController{
 		ArrayList<SaleScheduleVO> saleList = new ArrayList<>();
 		saleList.addAll(list);
         service.exportReport(saleList);
+        Alert info = new Alert(Alert.AlertType.INFORMATION,"ÒÑµ¼³ö");
+		info.showAndWait();
 	}
 
 	@FXML

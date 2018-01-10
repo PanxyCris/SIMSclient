@@ -353,6 +353,9 @@ public class SalesMakeBillController extends MakeReceiptController {
 		tablePrice.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("price"));
 		tableMoney.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("total"));
 		tableNote.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("remark"));
+
+		giftName.setCellValueFactory(new PropertyValueFactory<GiftVO, String>("name"));
+		giftNumber.setCellValueFactory(new PropertyValueFactory<GiftVO, Integer>("number"));
 	}
 
 	public void choiceInit() throws Exception {

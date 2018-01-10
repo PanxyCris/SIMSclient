@@ -162,6 +162,8 @@ public class PromotionSpecialController extends PromotionMakingController {
 			commodityList.add(vo);
 			commodityTable.setItems(commodityList);
 			updateGiftList();
+			commodityChoice.setValue(null);
+			numberField.setText(null);
 		}
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import bussinesslogic.accountbookbl.AccountBookController;
 import bussinesslogicservice.accountbookblservice.AccountBookBLService;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -75,7 +76,9 @@ public class InitAccountController extends FinancialStaffController {
 		// …Ã∆∑
 		commodityName.setCellValueFactory(new PropertyValueFactory<CommodityVO, String>("name"));
 		commodityModel.setCellValueFactory(new PropertyValueFactory<CommodityVO, String>("model"));
-		commodityClass.setCellValueFactory(new PropertyValueFactory<CommodityVO, String>("classficationString"));
+		commodityClass.setCellValueFactory(
+				(TableColumn.CellDataFeatures<CommodityVO, String> param) -> new ReadOnlyStringWrapper(
+						param.getValue().getClassification()));
 		commodityPurPrice.setCellValueFactory(new PropertyValueFactory<CommodityVO, Double>("purPrice"));
 		commodityRetailedPrice.setCellValueFactory(new PropertyValueFactory<CommodityVO, Double>("retailedPrice"));
 		commodityRecPurPrice.setCellValueFactory(new PropertyValueFactory<CommodityVO, Double>("recentPurPrice"));
