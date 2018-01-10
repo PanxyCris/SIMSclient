@@ -402,8 +402,8 @@ JavaFX
 
 |提供的服务|供接口||
 | --- | --- | --- |
-|Commodity.getID|语法|`public String getID()`|
-||前置条件|启动一个新增商品的回合|
+|Commodity.getID|语法|`public String getID(String name)`|
+||前置条件|启动一个新增商品的回合,name符合输入规则|
 ||后置条件|返回待新增商品的id|
 |Commodity.insert|语法|`public ResultMessage insert(CommodityVO vo)`
 ||前置条件|商品信息符合规则|
