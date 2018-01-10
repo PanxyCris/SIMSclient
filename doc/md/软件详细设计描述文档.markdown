@@ -909,114 +909,17 @@ Salebl模块的设计如图所示<br>
 <th>SalesTransition.VOtoPO</th>
 <th>将SalePO转换成aleVO</th>
 </tr>
-</table>
-
-
-<center>**Sales的接口规范**</center>
-<table><tbody>
 <tr>
-<th colspan="3">提供的服务（供接口）</th>
+<th>UseDataService.findUser</th>
+<th>查找用户</th>
 </tr>
 <tr>
-<th rowspan="3">Sales.findCommodities</th>
-<th>语法</th>
-<th>public ResultMessage findCommodities(String id)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个销售回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个销售回合中，查找一个目标商品</th>
-</tr>
-
-<tr>
-<th rowspan="3">Sales.addCommodities</th>
-<th>语法</th>
-<th>public ResultMessage addCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个销售回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个销售回合中，添加一个商品</th>
-</tr>
-<tr>
-<th rowspan="3">Sales.deleteCommodities</th>
-<th>语法</th>
-<th>public ResultMessage deleteCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个销售回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个销售回合中，删除一个商品</th>
-</tr>
-<tr>
-<th rowspan="3">Sales.updeteCommodities</th>
-<th>语法</th>
-<th>public ResultMessage updeteCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个销售回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个销售回合中，修改一个商品的属性，如数量</th>
-</tr>
-<tr>
-<th rowspan="3">Sales.getTotal</th>
-<th>语法</th>
-<th>public ResultMessage getTotal(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已完成一次销售(退货)单的制定</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>返回此销售回合中的总额</th>
+<th>CommodityDataService.findCommodity</th>
+<th>将查找商品</th>
 </tr>
 </table>
 
-<table><tbody>
-<tr>
-<th colspan = "2">需要的服务（需接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>SalesDataService.findCommodities(String id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>SalesDataService.finds(String field,int value)</th>
-<th>根据字段名和值查找多个持久化对象</th>
-</tr>
-<tr>
-<th>SalesDataService.insert(CommodityPO po)</th>
-<th>增加单一持久化对象</th>
-</tr>
-<tr>
-<th>SalesDataService.delete(CommodityPO po)</th>
-<th>删除单一持久化对象</th>
-</tr>
-<tr>
-<th>SalesDataService.update(CommodityPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-<tr>
-<th>DataFactory.getSalesDatabase</th>
-<th>得到Sales数据库的服务的引用</th>
-</tr>
+
 </table>
 
 （4）业务逻辑层的动态模型<br>
@@ -1057,8 +960,7 @@ Memberbl模块的设计如图<br>
 | **模块** | **职责** |
 |---------| -----------|
 | MemberController | 负责实现客户管理界面所需要的服务 |
-| Member | 客户管理的领域模型对象，拥有客户数据的编号、分类、级别、姓名、电话、地址、邮编、电子邮箱、应收额度、应收、应付、默认业务员 |
-| user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
+| MemberTransition | 负责实现MemberPO与VO的转换 |
 
 
 （3）模块内部类的接口规范<br>
@@ -1069,22 +971,22 @@ Memberbl模块的设计如图<br>
 <th colspan="3">提供的服务（供接口）</th>
 </tr>
 <tr>
-<th rowspan="3">Member.findMember</th>
+<th rowspan="3">Member.find</th>
 <th>语法</th>
-<th>public ResultMessage findMember(String keywords, string id)</th>
+<th>`public ResultMessage find(String keyword, FindMemberType type)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
-<th>关键字符合输入条件，id符合输入条件</th>
+<th>关键字符合输入条件</th>
 </tr>
 <tr>
 <th>后置条件</th>
 <th>查询到目标客户</th>
 </tr>
 <tr>
-<th rowspan="3">Member.addMember</th>
+<th rowspan="3">Member.insert</th>
 <th>语法</th>
-<th>public ResultMessage addMember(MemberPO po)</th>
+<th>`public ResultMessage insert(MemberVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1095,9 +997,9 @@ Memberbl模块的设计如图<br>
 <th>成功添加客户，持久化更新客户的数据</th>
 </tr>
 <tr>
-<th rowspan="3">Member.updateMember</th>
+<th rowspan="3">Member.update</th>
 <th>语法</th>
-<th>public ResultMessage upddteMember(MemberPO po)</th>
+<th>`public ResultMessage upddte(MemberVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1108,9 +1010,9 @@ Memberbl模块的设计如图<br>
 <th>客户属性被成功修改，持久化更新客户的数据</th>
 </tr>
 <tr>
-<th rowspan="3">Member.deleteMember</th>
+<th rowspan="3">Member.delete</th>
 <th>语法</th>
-<th>public ResultMessage deleteMember(String name)</th>
+<th>`public ResultMessage delete(String id)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1119,6 +1021,32 @@ Memberbl模块的设计如图<br>
 <tr>
 <th>后置条件</th>
 <th>客户被成功删除，持久化更新客户的数据</th>
+</tr>
+<tr>
+<th rowspan="3">Member.getId</th>
+<th>语法</th>
+<th>`public String getId()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>创建新客户</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>获取自动生成的递增ID</th>
+</tr>
+<tr>
+<th rowspan="3">Member.delete</th>
+<th>语法</th>
+<th>`public ArrayList<String> getIDandName()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>单据创建</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有客户的ID和姓名</th>
 </tr>
 </table>
 <table><tbody>
@@ -1132,24 +1060,24 @@ Memberbl模块的设计如图<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>MemberDataService.findMember(String id)</th>
-<th>根据ID进行查找单一持久化对象</th>
+<th>`MemberDataService.findMember(String keyword, FindMemberType type)`</th>
+<th>根据关键词和寻找方式进行查找所有符合条件的持久化对象</th>
 </tr>
 <tr>
-<th>MemberDataService.addMember(MemberPO po)</th>
+<th>`MemberDataService.insertMember(MemberPO po)`</th>
 <th>添加单一持久化对象</th>
 </tr>
 <tr>
-<th>MemberDataService.deleteMember(MemberPO po)</th>
+<th>`MemberDataService.deleteMember(String ID)`</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>MemberDataService.updateMember(MemberPO po)</th>
+<th>`MemberDataService.updateMember(MemberPO po)`</th>
 <th>更改单一持久化对象</th>
 </tr>
 <tr>
-<th>MemberDataService.getMemberDatebase</th>
-<th>得到Member数据库的服务的引用</th>
+<th>`public ArrayList<MemberPO> showMember()`</th>
+<th>返回全部客户</th>
 </tr>
 </table>
 
@@ -1182,16 +1110,12 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 <img src="../img/软件详细设计图/Purchase模块.png">
 
 
-Purchasebl各个类的职责如图<br>
+<center>**purchase模块各个类的设计**</center>
 
 | **模块** | **职责** |
 | ------- | --------- |
-| LoginController | 负责实现对应于登录界面所需要的服务 |
 | PurchaseController | 负责实现进货管理界面所需要的服务 |
-| Purchase | 制定进货单的领域模型对象，拥有进货单的信息 |
-| user | 系统用户的领域模型对象，拥有用户数据的姓名和密码，可以解决登录问题 |
-| PurchaseList | 每一个进货单的数据信息 |
-| PurchaseLineItem | 进货单数据里面的条目 |
+| PurchaseTransition | 负责实现PurchasePO与VO的互换 |
 
 
 （3）模块内部类的接口规范<br>
@@ -1204,7 +1128,7 @@ Purchasebl各个类的职责如图<br>
 <tr>
 <th rowspan="3">PurchaseController.getPurchaseID</th>
 <th>语法</th>
-<th>public String getPurchaseID()</th>
+<th>`public String getPurchaseID()`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1212,12 +1136,12 @@ Purchasebl各个类的职责如图<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Purchase领域对象的方法</th>
+<th>返回一个自动生成的进货单的ID</th>
 </tr>
 <tr>
 <th rowspan="3">PurchaseController.getPurchaseBackID</th>
 <th>语法</th>
-<th>public String getPurchaseBackID()</th>
+<th>`public String getPurchaseBackID()`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1225,38 +1149,12 @@ Purchasebl各个类的职责如图<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Purchase领域对象的方法</th>
-</tr>
-<tr>
-<th rowspan="3">PurchaseController.addCommodities</th>
-<th>语法</th>
-<th>public ResultMessage addCommodities(CommodityItem item)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Purchase领域对象，添加商品和数量，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Purchase领域对象的addCommodities方法</th>
-</tr>
-<tr>
-<th rowspan="3">PurchaseController.getTotal</th>
-<th>语法</th>
-<th>public double getTotal()</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个Purchase领域对象，已添加商品和数量</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Sale领域对象的getTotal方法</th>
+<th>返回一个自动生成的进货单的ID</th>
 </tr>
 <tr>
 <th rowspan="3">PurchaseController.save</th>
 <th>语法</th>
-<th>public ResultMessage save()</th>
+<th>`public ResultMessage save(PurchaseVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1264,12 +1162,12 @@ Purchasebl各个类的职责如图<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Purchase领域对象的方法</th>
+<th>保存进货单草稿数据</th>
 </tr>
 <tr>
 <th rowspan="3">PurchaseController.submit</th>
 <th>语法</th>
-<th>public ResultMessage submit()</th>
+<th>`public ResultMessage submit(PurchaseVO vo)`</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1277,7 +1175,33 @@ Purchasebl各个类的职责如图<br>
 </tr>
 <tr>
 <th>后置条件</th>
-<th>调用Purchase领域对象的方法</th>
+<th>保存进货单数据</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.find</th>
+<th>语法</th>
+<th>`public ArrayList<PurchaseVO> find(String info, FindSalesType type)`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有符合条件进货单的数据</th>
+</tr>
+<tr>
+<th rowspan="3">PurchaseController.show</th>
+<th>语法</th>
+<th>`public ArrayList<PurchaseVO> show()`</th>
+</tr>
+<tr>
+<th>前置条件</th>
+<th>已创建一个Purchase领域对象</th>
+</tr>
+<tr>
+<th>后置条件</th>
+<th>返回所有符合条件进货单的数据</th>
 </tr>
 </table>
 
@@ -1290,133 +1214,32 @@ Purchasebl各个类的职责如图<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>Sales.getSalesID</th>
-<th>获取进货单的ID</th>
-</tr>
-<tr>
-<th>Sales.getSaleBackID</th>
-<th>获取进货退货单的ID</th>
-</tr>
-<tr>
-<th>salesDataService.addCommodities(CommodityPO po)</th>
-<th>添加商品</th>
-</tr>
-<tr>
-<th>salesDataService.getTotal(CommodityPO po)</th>
-<th>计算总额</th>
-</tr>
-<tr>
-<th>Sales.save</th>
-<th>保存草稿</th>
-</tr>
-<th>Sales.submit</th>
-<th>提交单据</th>
-</tr>
-</table>
-
-<center>**Purchase的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan="3">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th rowspan="3">Purchase.findCommodities</th>
-<th>语法</th>
-<th>public ResultMessage findCommodities(String id)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个制定进货单回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个进货回合中，查找一个目标商品</th>
-</tr>
-<tr>
-<th rowspan="3">Purchase.addCommodities</th>
-<th>语法</th>
-<th>public ResultMessage addCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个进货回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个进货回合中，添加一个商品</th>
-</tr>
-<tr>
-<th rowspan="3">Purchase.deleteCommodities</th>
-<th>语法</th>
-<th>public ResultMessage deleteCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个进货回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个进货回合中，删除一个商品</th>
-</tr>
-<tr>
-<th rowspan="3">Purchase.updeteCommodities</th>
-<th>语法</th>
-<th>public ResultMessage updeteCommodities(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>启动一个进货回合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>在一个进货回合中，修改一个商品的属性，如数量</th>
-</tr>
-<tr>
-<th rowspan="3">Purchase.getTotal</th>
-<th>语法</th>
-<th>public ResultMessage getTotal(CommodityPO po)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已完成一次进货(退货)单的制定</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>返回此进货回合中的总额</th>
-</tr>
-</table>
-
-<table><tbody>
-<tr>
-<th colspan = "2">需要的服务（需接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>PurchaseDataService.findCommodities(String id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>PurchaseDataService.finds(String field,int value)</th>
+<th>`PurchaseDataService.findPurchase(String keyword, FindSalesType type)`</th>
 <th>根据字段名和值查找多个持久化对象</th>
 </tr>
 <tr>
-<th>PurchaseDataService.insert(CommodityPO po)</th>
+<th>`PurchaseDataService.insertPurchase(PurchasePO po)`</th>
 <th>增加单一持久化对象</th>
 </tr>
 <tr>
-<th>PurchaseDataService.delete(CommodityPO po)</th>
+<th>`PurchaseDataService.deletePurchase(String id)`</th>
 <th>删除单一持久化对象</th>
 </tr>
 <tr>
-<th>PurchaseDataService.update(CommodityPO po)</th>
+<th>`PurchaseDataService.updatePurchase(PurcahsePO po)`</th>
 <th>更新单一持久化对象</th>
 </tr>
 <tr>
-<th>DataFactory.getPurchaseDatabase</th>
-<th>得到Purchase数据库的服务的引用</th>
+<th>`PurchaseDataService.show()`</th>
+<th>返回全部持久化对象</th>
+</tr>
+<tr>
+<th>`UseDataService.findUser`</th>
+<th>查找用户</th>
+</tr>
+<tr>
+<th>`CommodityDataService.findCommodity`</th>
+<th>将查找商品</th>
 </tr>
 </table>
 

@@ -16,7 +16,6 @@ import po.PurchasePO;
 */
 public interface PurchaseDataService extends Remote {
 
-	public static final String NAME = "PurchaseData";
 	
 	public ResultMessage insertPurchase(PurchasePO po) throws RemoteException;
 	
