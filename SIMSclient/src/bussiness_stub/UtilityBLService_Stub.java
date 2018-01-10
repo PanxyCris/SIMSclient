@@ -17,7 +17,6 @@ public class UtilityBLService_Stub implements UtilityBLService {
 		return false;
 	}
 
-	@Override
 	public String generateID(BillType billType) {
 		// TODO Auto-generated method stub
 		return "15615156";

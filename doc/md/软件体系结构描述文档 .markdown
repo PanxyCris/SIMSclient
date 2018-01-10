@@ -20,7 +20,7 @@
 | 孙嘉杰| 2018-1-2 | 初步修改 |V1.5草稿|
 | 王灿灿| 2018-1-6 | 修改完成库存管理人员文档、修改财务account文档 |v1.6草稿|
 | 李杰 | 2018-01-08 | 修改进货销售人员文档 | v1.7草稿 |
-
+| 王灿灿| 2018-1-10 | 修改数据层文档格式，修改库存财务人员接口形式，文档完成 |v2.0|
 
 # 目录
 
@@ -848,6 +848,7 @@ JavaFX
 <center>数据层模块的描述</center>
 
 ###<center>5.4.1数据层模块的职责</center>
+
 <table><tbody>
        <tr>
        <th>模块</th>
@@ -963,7 +964,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<SalesPO> find(String keyword, FindSalesType type) throws RemoteException`;</th>
+<th><code>public ArrayList<SalesPO> find(String keyword, FindSalesType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -977,7 +978,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<SalesPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<SalesPO> show() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -991,7 +992,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(SalesPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insert(SalesPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1005,7 +1006,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage delete(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1019,7 +1020,7 @@ JavaFX
 <tr>
 <th rowspan="3">SalesDataService.update</th>
 <th>语法</th>
-<th>`public void update(SalesPO po) throws RemoteException`;</th>
+<th><code>public void update(SalesPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1033,7 +1034,7 @@ JavaFX
 <tr>
 <th rowspan="3">PurchaseDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<PurchasePO> find(String keyword, FindSalesType type) throws RemoteException`;</th>
+<th><code>public ArrayList<PurchasePO> find(String keyword, FindSalesType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1047,7 +1048,7 @@ JavaFX
 <tr>
 <th rowspan="3">PurchaseDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<PurchasePO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<PurchasePO> show() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1061,7 +1062,7 @@ JavaFX
 <tr>
 <th rowspan="3">PurchaseDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(PurchasePO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insert(PurchasePO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1075,7 +1076,7 @@ JavaFX
 <tr>
 <th rowspan="3">PurchaseDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage delete(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1089,7 +1090,7 @@ JavaFX
 <tr>
 <th rowspan="3">PurchaseDataService.update</th>
 <th>语法</th>
-<th>`public void update(PurchasePO po) throws RemoteException`;</th>
+<th><code>public void update(PurchasePO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1103,7 +1104,7 @@ JavaFX
 <tr>
 <th rowspan="3">PaymentBillDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) throws RemoteException`;</th>
+<th><code>public ArrayList<PaymentBillPO> find(String keyword, FindAccountBillType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1117,7 +1118,7 @@ JavaFX
 <tr>
 <th rowspan="3">PaymentBillDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<PaymentBillPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<PaymentBillPO> show() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1131,7 +1132,7 @@ JavaFX
 <tr>
 <th rowspan="3">PaymentBillDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(PaymentBillPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insert(PaymentBillPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1145,7 +1146,7 @@ JavaFX
 <tr>
 <th rowspan="3">PaymentBillDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage delete(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1159,7 +1160,7 @@ JavaFX
 <tr>
 <th rowspan="3">PaymentBillDataService.update</th>
 <th>语法</th>
-<th>`public void update(PaymentBillPO po) throws RemoteException`;</th>
+<th><code>public void update(PaymentBillPO po) throws RemoteException</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1173,7 +1174,7 @@ JavaFX
 <tr>
 <th rowspan="3">ReceiptBillDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<ReceiptBillPO> find(String keyword, FindAccountBillType type) throws RemoteException`;</th>
+<th><code>public ArrayList<ReceiptBillPO> findReceiptBill(String keyword, FindAccountBillType type)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1187,7 +1188,7 @@ JavaFX
 <tr>
 <th rowspan="3">ReceiptBillDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<ReceiptBillPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<ReceiptBillPO> showReceiptBill()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1201,7 +1202,7 @@ JavaFX
 <tr>
 <th rowspan="3">ReceiptBillDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(ReceiptBillPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertReceiptBill(ReceiptBillPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1215,7 +1216,7 @@ JavaFX
 <tr>
 <th rowspan="3">ReceiptBillDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteReceiptBill(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1229,7 +1230,8 @@ JavaFX
 <tr>
 <th rowspan="3">ReceiptBillDataService.update</th>
 <th>语法</th>
-<th>`public void update(ReceiptBillPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage updateReceiptBill(ReceiptBillPO po)
+</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1244,7 +1246,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<ClassificationPO> find(String keyword) throws RemoteException`;</th>
+<th><code>public ClassificationVPO findClassification(String name)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1258,7 +1260,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<ClassificationPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<ClassificationVPO> show()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1272,7 +1274,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.getRoot</th>
 <th>语法</th>
-<th>`public ClassificationPO getRoot() throws RemoteException`;</th>
+<th><code>public ClassificationVPO getRoot()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1286,7 +1288,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(ClassificationPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertClassification(ClassificationVPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1300,7 +1302,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteClassification(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1314,7 +1316,7 @@ JavaFX
 <tr>
 <th rowspan="3">ClassificationDataService.update</th>
 <th>语法</th>
-<th>`public void update(ClassificationPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage updateClassification(ClassificationVPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1328,7 +1330,7 @@ JavaFX
 <tr>
 <th rowspan="3">InventoryBillDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<ClassificationPO> find(String keyword, FindInventoryBillType type) throws RemoteException`;</th>
+<th><code>public ArrayList<InventoryBillPO> findInventoryBill(String keyword,FindInventoryBillType type)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1342,7 +1344,7 @@ JavaFX
 <tr>
 <th rowspan="3">InventoryBillDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<InventoryBillPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<InventoryBillPO> showInventoryBill()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1356,7 +1358,7 @@ JavaFX
 <tr>
 <th rowspan="3">InventoryBillDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(InventoryBillPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertInventoryBill(InventoryBillPO inventoryBillPO)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1370,7 +1372,7 @@ JavaFX
 <tr>
 <th rowspan="3">InventoryBillDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteInventoryBill(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1384,7 +1386,7 @@ JavaFX
 <tr>
 <th rowspan="3">InventoryBillDataService.update</th>
 <th>语法</th>
-<th>`public void update(InventoryBillPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage updateInventoryBill(InventoryBillPO inventoryBillPO)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1398,7 +1400,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<CommodityPO> find(String keyword, FindCommodityType type) throws RemoteException`;</th>
+<th><code>public ArrayList<CommodityPO> findCommodity(String keywords, FindCommodityType type)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1412,7 +1414,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<CommodityPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<CommodityPO> showCommodity()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1426,7 +1428,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(CommodityPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertCommodity(CommodityPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1440,7 +1442,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteCommodity(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1454,7 +1456,7 @@ JavaFX
 <tr>
 <th rowspan="3">CommodityDataService.update</th>
 <th>语法</th>
-<th>`public ResultMessage update(long id) throws RemoteException`;</th>
+<th><code>public ResultMessage updateCommodity(CommodityPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1468,7 +1470,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteExceptio`n;</th>
+<th><code>public ArrayList<UserPO> findUser(String info, FindUserType type)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1482,7 +1484,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insertUser(UserPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertUser(UserPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1496,7 +1498,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage deleteUser(String ID) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteUser(String ID)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1510,7 +1512,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.update</th>
 <th>语法</th>
-<th>`public ResultMessage updateUser(UserPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage updateUser(UserPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1524,7 +1526,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<UserPO> showUser() throws RemoteException`;</th>
+<th><code>public ArrayList<UserPO> showUser()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1538,7 +1540,7 @@ JavaFX
 <tr>
 <th rowspan="3">UserDataService.login</th>
 <th>语法</th>
-<th>`public boolean login(String id, String password) throws RemoteException`;</th>
+<th><code>public boolean login(String id, String password)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1552,7 +1554,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException`;</th>
+<th><code>public ArrayList<MemberPO> find(String keyword, FindMemberType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1566,7 +1568,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(SalesPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insert(SalesPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1580,7 +1582,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.delete</th>
 <th>语法</th>
-<th>`public void delete(String id) throws RemoteException`;</th>
+<th><code>public void delete(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1594,7 +1596,7 @@ JavaFX
 <tr>
 <th rowspan="3">MemberDataService.update</th>
 <th>语法</th>
-<th>`public ResultMessage update(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage update(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1608,7 +1610,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<AccountPO> find(String keyword, FindAccountType type) throws RemoteException`;</th>
+<th><code>public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1621,7 +1623,7 @@ JavaFX
 
 <th rowspan="3">AccountDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<AccountPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<AccountPO> showAccount()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1635,7 +1637,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(AccountPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insertAccount(AccountPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1649,7 +1651,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(long id) throws RemoteException`;</th>
+<th><code>public ResultMessage deleteAccount(String id)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1663,7 +1665,7 @@ JavaFX
 <tr>
 <th rowspan="3">AccountDataService.update</th>
 <th>语法</th>
-<th>`public ResultMessage update(long id) throws RemoteException`;</th>
+<th><code>public ResultMessage updateAccount(AccountPO po)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1677,7 +1679,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.find</th>
 <th>语法</th>
-<th>`public ArrayList<PromotionPO> find(String keyword, FinsPromotionType type) throws RemoteException`;</th>
+<th><code>public ArrayList<PromotionPO> find(String keyword, FinsPromotionType type) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1691,7 +1693,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.show</th>
 <th>语法</th>
-<th>`public ArrayList<PromotionPO> show() throws RemoteException`;</th>
+<th><code>public ArrayList<PromotionPO> show() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1705,7 +1707,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.insert</th>
 <th>语法</th>
-<th>`public ResultMessage insert(PromotionPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage insert(PromotionPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1719,7 +1721,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.delete</th>
 <th>语法</th>
-<th>`public ResultMessage delete(String id) throws RemoteException`;</th>
+<th><code>public ResultMessage delete(String id) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1733,7 +1735,7 @@ JavaFX
 <tr>
 <th rowspan="3">PromotionDataService.update</th>
 <th>语法</th>
-<th>`public ResultMessage update(PromotionPO po) throws RemoteException`;</th>
+<th><code>public ResultMessage update(PromotionPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1747,7 +1749,7 @@ JavaFX
 <tr>
 <th rowspan="3">MessageDataService.save</th>
 <th>语法</th>
-<th>`public ResultMessage save(MessagePO po) throws RemoteException`;</th>
+<th><code>public ResultMessage save(MessagePO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1761,7 +1763,7 @@ JavaFX
 <tr>
 <th rowspan="3">MessageDataService.getMessage</th>
 <th>语法</th>
-<th>`public ArrayList<MessagePO> getMessage(UserPO po) throws RemoteException`;</th>
+<th><code>public ArrayList<MessagePO> getMessage(UserPO po) throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1775,7 +1777,7 @@ JavaFX
 <tr>
 <th rowspan="3">MessageDataService.getMessageID</th>
 <th>语法</th>
-<th>`public String getMessageID() throws RemoteException`;</th>
+<th><code>public String getMessageID() throws RemoteException;</th>
 </tr>
 <tr>
 <th>前置条件</th>
