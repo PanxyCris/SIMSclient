@@ -47,9 +47,23 @@ public class PurchaseVO extends BillVO{
 		return commodities;
 	}
 
+
+	public void setCommodities(ArrayList<CommodityItemVO> commodities) {
+		this.commodities = commodities;
+	}
+
+
+
 	public Double getSum(){
 		return sum;
 	}
+
+	public void setSum(double sum) {
+		this.sum = sum;
+
+	}
+
+
 
 
 }

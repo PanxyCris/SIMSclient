@@ -2,6 +2,7 @@ package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import bussinesslogic.examinebl.ExamineSalesBL;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillType;
@@ -18,13 +19,14 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import presentation.common.EditingCell;
 import presentation.common.EditingCellDouble;
+import presentation.common.EditingCellInteger;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
@@ -93,18 +95,24 @@ public class ExamineSalesBillController extends ExamineBillController{
 			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
 			warning.showAndWait();
 		}else{
-		ArrayList<SalesVO> list = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
-	       if(list==null){
+		ArrayList<SalesVO> salesList = service.find(findingField.getText(),FindBillType.getType(findChoice.getValue()));
+	       if(salesList==null){
 	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
                error.showAndWait();
 	       }
 	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
-	       }
+				list.clear();
+				list.addAll(salesList);
+				table.setItems(list);
+				initFind();
+			}
 		}
 	}
 
+	public void initFind() {
+		findChoice.setValue(null);
+		findingField.setText(null);
+	}
 	@FXML
 	public void success() throws RemoteException{
         ArrayList<SalesVO> choiceList = new ArrayList<>();
@@ -154,7 +162,9 @@ public class ExamineSalesBillController extends ExamineBillController{
 		list.addAll(service.getCommitedBills());
 		table.setItems(list);
 		edit();
+		initFind();
 		manageInit();
+		checkInit();
 		listInit();
 	}
 
@@ -183,7 +193,6 @@ public class ExamineSalesBillController extends ExamineBillController{
                 new PropertyValueFactory<SalesVO,String>("note"));
 		tablePass.setCellValueFactory(
                 new PropertyValueFactory<SalesVO,CheckBox>("box"));
-		checkInit();
 	}
 
 	public void checkInit(){
@@ -215,6 +224,10 @@ public class ExamineSalesBillController extends ExamineBillController{
         });
 
 	}
+	/**
+	 * 可对单据备注、代金券以及折让数额进行修改，已经商品价格数量进行修改
+	 * @throws RemoteException
+	 */
 
 	public void edit() throws RemoteException{
 
@@ -286,6 +299,107 @@ public class ExamineSalesBillController extends ExamineBillController{
 					e.printStackTrace();
 				}
         });
+
+
+        Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
+				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryCommodityDouble = (
+				TableColumn<CommodityItemVO, Double> p) -> new EditingCellDouble<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, String>, TableCell<CommodityItemVO, String>> cellFactoryNote = (
+				TableColumn<CommodityItemVO, String> p) -> new EditingCell<CommodityItemVO>();
+
+		commodityPrice.setCellFactory(cellFactoryCommodityDouble);
+		commodityPrice.setOnEditCommit((CellEditEvent<CommodityItemVO, Double> t) -> {
+			Double tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setPrice(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getNumber());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodity(entryVO);
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue())
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
+			newVO.setAfterPrice(newVO.getBeforePrice()-newVO.getAllowance()-newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPrice(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getNumber());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setBeforePrice(newVO.getBeforePrice());
+							table.getItems().get(i).setAfterPrice(newVO.getAfterPrice());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNumber.setCellFactory(cellFactoryInteger);
+		commodityNumber.setOnEditCommit((CellEditEvent<CommodityItemVO, Integer> t) -> {
+			int tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setNumber(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getPrice());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodity(entryVO);
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue())
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
+			newVO.setAfterPrice(newVO.getBeforePrice()-newVO.getAllowance()-newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumber(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getPrice());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setBeforePrice(newVO.getBeforePrice());
+							table.getItems().get(i).setAfterPrice(newVO.getAfterPrice());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNote.setCellFactory(cellFactoryNote);
+		commodityNote.setOnEditCommit((CellEditEvent<CommodityItemVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> accountListVO = new ArrayList<>();
+			accountListVO.addAll(commodityList);
+			newVO.setCommodity(accountListVO);
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
 
 
 	}
