@@ -47,6 +47,7 @@
 | 王灿灿 | 2017-11-14| 添加accountui模块、mfdocui模块、setupaccountui模块 | v1.2 |
 | 王灿灿 | 2017-11-14| 修改mfdoc模块设计图 | v1.2 |
 | 李杰 | 2018-01-08 | 修改Purchase模块、sale模块、member模块 | v1.4 |
+| 孙嘉杰 | 2018-01-10 | 修改Promotionbl模块 | v1.5 |
 
 
 >>>>>>> refs/remotes/origin/master
@@ -1285,7 +1286,7 @@ Promotionbl各个类的职责如图
 <th colspan="3">提供的服务（供接口）</th>
 </tr>
 <tr>
-<th rowspan="3">Promotion.getPromotion</th>
+<th rowspan="3">Promotion.getPromotionList</th>
 <th>语法</th>
 <th>public ArrayList<PromotionVO> getCommodityPromotionListByID(int commodityID)</th>
 </tr>
