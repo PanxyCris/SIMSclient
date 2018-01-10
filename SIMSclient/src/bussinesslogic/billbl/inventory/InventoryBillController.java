@@ -15,12 +15,7 @@ import vo.billvo.inventorybillvo.InventoryBillVO;
 public class InventoryBillController implements InventoryBillBLService {
 
 	InventoryBillBL inventoryBillBL=new InventoryBillBL();
-	
-//	WarnBillController warnBillController;
-//	RevenueBillController revenueBillController;
-//	LossBillController lossBillController;
-//	GiftBillController giftBillController;
-	
+
 	@Override
 	public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type) {
 		return inventoryBillBL.find(text, type);

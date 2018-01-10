@@ -13,7 +13,7 @@ import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionPricePacksVO;
 
 /**
- *
+ * 特价包促销策略
  * @author 潘星宇
  * @date 2017年12月27日
  */
@@ -32,13 +32,11 @@ public class PromotionSpecialBL implements PromotionBLService<PromotionPricePack
 
 	@Override
 	public ResultMessage delete(PromotionPricePacksVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.deleteSpecialPromotion(vo.getId());
 	}
 
 	@Override
 	public ResultMessage update(PromotionPricePacksVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updatePromotion(voTopo(vo));
 	}
 

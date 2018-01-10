@@ -1,6 +1,5 @@
 package bussinesslogic.salesbl.info;
 
-import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-import bussiness_stub.promotion_stub.PromotionTotalBLService_Stub;
 import bussinesslogic.memberbl.MemberController;
 import bussinesslogic.promotionbl.PromotionMemberBL;
 import bussinesslogic.promotionbl.PromotionSpecialBL;
@@ -20,7 +18,6 @@ import dataenum.findtype.FindMemberType;
 import dataservice.promotiondataservice.PromotionMemberDataService;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
 import dataservice.promotiondataservice.PromotionSumDataService;
-import po.commodity.CommodityItemPO;
 import po.commodity.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPricePacksPO;
@@ -35,7 +32,7 @@ import vo.promotionvo.PromotionTotalVO;
 import vo.promotionvo.PromotionVO;
 
 /**
- *
+ * 销售过程中的
  * @author Lijie
  * @date 2018年1月2日
  */

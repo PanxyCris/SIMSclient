@@ -10,9 +10,6 @@ import bussinesslogic.memberbl.MemberController;
 import bussinesslogicservice.accountbookblservice.AccountBookBLService;
 import dataenum.ResultMessage;
 import dataservice.accountbookdataservice.AccountBookDataService;
-import dataservice.accountdataservice.AccountDataService;
-import dataservice.commoditydataservice.CommodityDataService;
-import dataservice.memberdataservice.MemberDataService;
 import po.AccountBookPO;
 import rmi.RemoteHelper;
 import vo.accountbookvo.AccountBookVO;
@@ -87,7 +84,6 @@ public class AccountBookBL implements AccountBookBLService{
 				accountBookVO = new AccountBookVO(String.valueOf(date),null,commodityService.show(),
 						memberService.show(),accountService.getAccountList());
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

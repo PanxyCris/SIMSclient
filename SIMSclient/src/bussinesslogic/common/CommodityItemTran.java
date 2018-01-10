@@ -1,8 +1,8 @@
 package bussinesslogic.common;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月1日    
+/**
+* 用于purcahse与sale里面的商品项转换
+* @author Lijie
+* @date 2017年12月1日
 */
 
 import java.util.ArrayList;

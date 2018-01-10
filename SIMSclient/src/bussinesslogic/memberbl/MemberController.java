@@ -2,7 +2,6 @@ package bussinesslogic.memberbl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import bussinesslogicservice.memberblservice.MemberBLService;
@@ -13,21 +12,21 @@ import po.MemberPO;
 import rmi.RemoteHelper;
 import vo.membervo.MemberVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月13日    
+/**
+*
+* @author Lijie
+* @date 2017年12月13日
 */
 public class MemberController implements MemberBLService{
 
 	private MemberDataService service;
 	private MemberTransition transition;
-	
+
 	public MemberController() {
 		service = RemoteHelper.getInstance().getMemeberDataService();
 		transition = new MemberTransition();
 	}
-	
+
 	@Override
 	public String getId() throws RemoteException {
 		ArrayList<MemberPO> list = service.showMember();
@@ -36,7 +35,6 @@ public class MemberController implements MemberBLService{
 			IDList.add(Integer.parseInt(po.getId()));
 		}
 		Collections.sort(IDList);
-//		Collections.reverse(IDList);
 		String id = String.valueOf(IDList.get(IDList.size()-1)+1);
 		StringBuilder sb = new StringBuilder(id);
 		int len = id.length();
@@ -48,7 +46,7 @@ public class MemberController implements MemberBLService{
 
 	@Override
 	public ArrayList<MemberVO> show() throws RemoteException {
-		ArrayList<MemberVO> list = new ArrayList<>();	
+		ArrayList<MemberVO> list = new ArrayList<>();
 		ArrayList<MemberPO> poList = service.showMember();
 		MemberVO vo = null;
 		for (MemberPO po : poList) {

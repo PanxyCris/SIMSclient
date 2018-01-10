@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
@@ -23,7 +22,6 @@ import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessageExaminePO;
 import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
-import vo.commodityvo.CommodityItemVO;
 import vo.commodityvo.GiftVO;
 
 public class InventoryBillBL implements InventoryBillBLService{
@@ -31,7 +29,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 	private BillDataService billDataService;
 	private InventoryTransition inventoryTransition;
 	private InventoryBillPO inventoryBillPO;
-	private InventoryBillVO inventoryBillVO;
+
 
 	private UserDataService userDataService;
 	private MessageDataService messageDataService;
@@ -83,7 +81,6 @@ public class InventoryBillBL implements InventoryBillBLService{
 							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
 				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

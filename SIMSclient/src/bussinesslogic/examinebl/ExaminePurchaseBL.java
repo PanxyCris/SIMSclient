@@ -28,7 +28,13 @@ import rmi.RemoteHelper;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 
-public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
+/**
+ * 审批进货单的业务逻辑层
+ *
+ * @author 潘星宇
+ * @date 2017-12-25
+ */
+public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO> {
 
 	private PurchaseDataService service;
 	private MessageDataService messageService;
@@ -36,7 +42,6 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	private CommodityDataService commodityService;
 	private MemberDataService memberService;
 	private UtilityBLService utilityService;
-
 
 	public ExaminePurchaseBL() {
 		service = RemoteHelper.getInstance().getPurchaseDataService();
@@ -49,53 +54,52 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 
 	@Override
 	public ResultMessage updateBill(PurchaseVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updatePurchase(PurchaseTransition.VOtoPO(vo));
 	}
 
 	@Override
 	public ResultMessage passBills(ArrayList<PurchaseVO> vos) throws RemoteException {
 
-		for(PurchaseVO vo : vos){
+		for (PurchaseVO vo : vos) {
+			// 客户应收应付信息的修改
 			String memberID = "";
-			for(int i=0;i<vo.getSupplier().length();i++)
-				if(vo.getSupplier().charAt(i) == '('){
-					memberID = vo.getSupplier().substring(i+1,i+7);
+			for (int i = 0; i < vo.getSupplier().length(); i++)
+				if (vo.getSupplier().charAt(i) == '(') {
+					memberID = vo.getSupplier().substring(i + 1, i + 7);
 					System.out.println(memberID);
 					break;
 				}
-			System.out.println(vo.getOperator());
 			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
-			if(vo.getType() == BillType.PURCHASEBACKBILL)
-                member.setReceivable(member.getReceivable()+vo.getSum());
+			if (vo.getType() == BillType.PURCHASEBACKBILL)
+				member.setReceivable(member.getReceivable() + vo.getSum());
 			else
-				member.setPayable(member.getPayable()+vo.getSum());
-            for(CommodityItemVO item:vo.getCommodities()){
-            	String commodityName = "";
-            	for(int i=0;i<item.getName().length();i++)
-            		if(item.getName().charAt(i)=='('){
-            			commodityName = item.getName().substring(0,i);
-            			break;
-            		}
+				member.setPayable(member.getPayable() + vo.getSum());
+			//商品信息的修改
+			for (CommodityItemVO item : vo.getCommodities()) {
+				String commodityName = "";
+				for (int i = 0; i < item.getName().length(); i++)
+					if (item.getName().charAt(i) == '(') {
+						commodityName = item.getName().substring(0, i);
+						break;
+					}
 
-            	CommodityPO commodity = commodityService.findCommodity(commodityName, FindCommodityType.NAME).get(0);
-            	if(vo.getType() == BillType.PURCHASEBACKBILL){
-            	    commodity.setNumner(commodity.getNumber()-item.getNumber());
-            	    utilityService.warningMessage(commodity);
-            	}
-            	else
-            		commodity.setNumner(commodity.getNumber()+item.getNumber());
-            	commodityService.updateCommodity(commodity);
-            }
+				CommodityPO commodity = commodityService.findCommodity(commodityName, FindCommodityType.NAME).get(0);
+				if (vo.getType() == BillType.PURCHASEBACKBILL) {
+					commodity.setNumner(commodity.getNumber() - item.getNumber());
+					utilityService.warningMessage(commodity);
+				} else
+					commodity.setNumner(commodity.getNumber() + item.getNumber());
+				commodityService.updateCommodity(commodity);
+			}
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-
+            //通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), false,
+					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.SUCCESS)
+			if (result != ResultMessage.SUCCESS)
 				return result;
 		}
 
@@ -104,15 +108,15 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 
 	@Override
 	public ResultMessage notPassBills(ArrayList<PurchaseVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
-		for(PurchaseVO vo : vos){
+		for (PurchaseVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
+			//通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), false,
+					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.SUCCESS)
+			if (result != ResultMessage.SUCCESS)
 				return result;
 		}
 
@@ -123,8 +127,8 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	public ArrayList<PurchaseVO> getCommitedBills() throws RemoteException {
 		ArrayList<PurchaseVO> committed = new ArrayList<>();
 		ArrayList<PurchasePO> purchaseList = service.showPurchase();
-		for(PurchasePO po:purchaseList)
-			if(po.getState()==BillState.COMMITED)
+		for (PurchasePO po : purchaseList)
+			if (po.getState() == BillState.COMMITED)
 				committed.add(PurchaseTransition.POtoVO(po));
 		return committed;
 	}
@@ -133,11 +137,10 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO>{
 	public ArrayList<PurchaseVO> find(String info, FindBillType type) throws RemoteException {
 		ArrayList<PurchaseVO> committed = new ArrayList<>();
 		ArrayList<PurchasePO> purchaseList = service.findPurchase(info, FindSalesType.getType(type.value));
-		for(PurchasePO po:purchaseList)
-			if(po.getState()==BillState.COMMITED)
+		for (PurchasePO po : purchaseList)
+			if (po.getState() == BillState.COMMITED)
 				committed.add(PurchaseTransition.POtoVO(po));
 		return committed;
 	}
-
 
 }

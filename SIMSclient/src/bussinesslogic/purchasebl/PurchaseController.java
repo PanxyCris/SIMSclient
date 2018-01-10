@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindCommodityType;
-import dataenum.findtype.FindPurchaseType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
 import dataservice.commoditydataservice.CommodityDataService;
@@ -27,7 +25,7 @@ import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 
 /**
-*
+* 进出货的业务逻辑层
 * @author Lijie
 * @date 2017年12月1日
 */
@@ -67,7 +65,6 @@ public class PurchaseController implements PurchaseBLService{
 		}
 		Collections.sort(IDList);
 		String day = getDate();
-//		Collections.reverse(IDList);
 		String num = null;
 		if(IDList.size()==0)
 			num = getDate()+"00001";
@@ -110,7 +107,6 @@ public class PurchaseController implements PurchaseBLService{
 		}
 		Collections.sort(IDList);
 		String day = getDate();
-//		Collections.reverse(IDList);
 		String num = null;
 		if(IDList.size()==0)
 			num = getDate()+"00001";

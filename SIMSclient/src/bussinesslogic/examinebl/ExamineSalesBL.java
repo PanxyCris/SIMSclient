@@ -1,7 +1,6 @@
 package bussinesslogic.examinebl;
 
 import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillBL;
@@ -17,7 +16,6 @@ import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindMemberType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
-import dataservice.billdataservice.BillDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import dataservice.memberdataservice.MemberDataService;
 import dataservice.messagedataservice.MessageDataService;
@@ -26,7 +24,6 @@ import dataservice.userdataservice.UserDataService;
 import po.MemberPO;
 import po.UserPO;
 import po.commodity.CommodityPO;
-import po.inventorybillpo.InventoryBillPO;
 import po.messagepo.MessageBillPO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
@@ -35,7 +32,7 @@ import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 
 /**
-*
+* 审批销售类单据业务逻辑层
 * @author 潘星宇
 * @date 2017年12月26日
 */
@@ -60,21 +57,20 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 
 	@Override
 	public ResultMessage updateBill(SalesVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updateSale(SalesTransition.VOtoPO(vo));
 	}
 
 	@Override
 	public ResultMessage passBills(ArrayList<SalesVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
 		for(SalesVO vo:vos){
-
+            //会员应收应付信息的修改
 			String memberID = vo.getRetailerID();
 			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
 			if(vo.getType() == BillType.SALESBILL)
                 member.setReceivable(member.getReceivable()+vo.getAfterPrice());
 			else
 				member.setPayable(member.getPayable()+vo.getAfterPrice());
+			//商品数据的修改
             for(CommodityItemVO item:vo.getCommodity()){
             	CommodityPO commodity = commodityService.findCommodity(item.getId(), FindCommodityType.ID).get(0);
             	if(vo.getType() == BillType.SALESBILL){
@@ -92,6 +88,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 
             vo.setState(BillState.SUCCESS);
             updateBill(vo);
+            //通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
@@ -104,10 +101,10 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 
 	@Override
 	public ResultMessage notPassBills(ArrayList<SalesVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
 		for(SalesVO vo:vos){
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
+			//通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
 			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);

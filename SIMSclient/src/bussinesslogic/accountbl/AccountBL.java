@@ -135,7 +135,7 @@ public class AccountBL implements AccountBLService {
 			accountVO = accountTransition.POtoVO(accountPOs.get(i));
 			accountVOs.add(accountVO);
 		}
-		
+
 		return accountVOs;
 	}
 
@@ -163,46 +163,9 @@ public class AccountBL implements AccountBLService {
 				accountVOs.add(accountVO);
 			}
 		}
-		
+
 		return accountVOs;
 	}
 
-	/**
-	 *
-	 * 单据入账，修改银行账户金额并修改客户的应收应付数据
-	 *
-	 * @author 王灿灿
-	 * @param financialDocVO
-	 *            是收款单付款单的父类对象，拥有银行账户名列表、转账金额列表等属性
-	 *
-	 *
-	 */
-//	@Override
-//	public ResultMessage enterItem(FinancialDocVO financialDocVO, BillType billType) {
-//		// waiting for coding
-//
-//		ArrayList<String> accountID = new ArrayList<>();
-//		ArrayList<Double> accountMoney = new ArrayList<>();
-//		String memberID = "";
-//
-//		if (billType.equals(billType.SKD)) {
-//			ReceiptBillVO receiptBillVO = (ReceiptBillVO) financialDocVO;
-//			ArrayList<AccountListVO> accountVOs = receiptBillVO.getAccountListVOs();
-//			for (int i = 0; i < accountVOs.size(); i++) {
-//				accountID.add(accountVOs.get(i).getAccountID());
-//				accountMoney.add(Double.valueOf(accountVOs.get(i).getMoney()));
-//			}
-//			memberID = receiptBillVO.getCustomerID();
-//		}
-//		if (billType.equals(billType.XJFYD)) {
-//			PaymentBillVO paymentBillVO = (PaymentBillVO) financialDocVO;
-//			accountID.add(paymentBillVO.getAccountID());
-//			accountMoney.add(Double.valueOf(paymentBillVO.getTotal()));
-//			memberID = paymentBillVO.getCustomerID();
-//		}
-//
-//		return ResultMessage.FAIL;
-//
-//	}
 
 }

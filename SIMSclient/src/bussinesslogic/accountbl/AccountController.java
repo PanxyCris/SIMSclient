@@ -3,11 +3,9 @@ package bussinesslogic.accountbl;
 import java.util.ArrayList;
 
 import bussinesslogicservice.accountblservice.AccountBLService;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountType;
 import vo.accountvo.AccountVO;
-import vo.billvo.financialbillvo.FinancialDocVO;
 
 
 /**
@@ -21,7 +19,7 @@ import vo.billvo.financialbillvo.FinancialDocVO;
 public class AccountController implements AccountBLService{
 
 	AccountBL accountBL=new AccountBL();
-	
+
 	@Override
 	public ArrayList<AccountVO> find(String message, FindAccountType findType) {
 		return accountBL.find(message, findType);
@@ -34,10 +32,7 @@ public class AccountController implements AccountBLService{
 	public ArrayList<AccountVO> getAccountList() {
 		return accountBL.getAccountList();
 	}
-//	@Override
-//	public ResultMessage enterItem(FinancialDocVO financialDocVO,BillType billType) {
-//		return accountBL.enterItem(financialDocVO,billType);
-//	}
+
 	@Override
 	public ResultMessage add(AccountVO accountVO) {
 		return accountBL.add(accountVO);
@@ -51,6 +46,6 @@ public class AccountController implements AccountBLService{
 		accountBL.delete(accountVO);
 	}
 
-	
+
 
 }

@@ -13,7 +13,7 @@ import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
 
 /**
- *
+ * 会员促销策略
  * @author 潘星宇
  * @date 2017年12月27日
  */
@@ -38,7 +38,6 @@ public class PromotionMemberBL implements PromotionBLService<PromotionMemberVO> 
 
 	@Override
 	public ResultMessage update(PromotionMemberVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updatePromotion(voTopo(vo));
 	}
 

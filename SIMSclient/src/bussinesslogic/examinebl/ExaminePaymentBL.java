@@ -2,6 +2,7 @@ package bussinesslogic.examinebl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import bussinesslogic.accountbillbl.PaymentBillTransition;
 import bussinesslogicservice.examineblservice.ExamineBLService;
 import dataenum.BillState;
@@ -22,11 +23,14 @@ import po.UserPO;
 import po.FinancialBill.PaymentBillPO;
 import po.messagepo.MessageBillPO;
 import rmi.RemoteHelper;
-import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
-public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
-
+/**
+ * 审批付款单的业务逻辑层
+ *
+ * @author 潘星宇 2017-12-25
+ */
+public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO> {
 
 	private PaymentBillDataService service;
 	private MessageDataService messageService;
@@ -46,34 +50,35 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 
 	@Override
 	public ResultMessage updateBill(PaymentBillVO vo) throws RemoteException {
-		// TODO Auto-generated method stub
 		return service.updatePaymentBill(tansition.VOtoPO(vo));
 	}
 
 	@Override
 	public ResultMessage passBills(ArrayList<PaymentBillVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
-		for(PaymentBillVO vo:vos){
+		for (PaymentBillVO vo : vos) {
+			// 对会员应收应付信息的修改
 			MemberPO member = memberService.findMember(vo.getCustomerID(), FindMemberType.ID).get(0);
-            member.setReceivable(member.getReceivable()-vo.getTotal());
-            memberService.updateMember(member);
-            String accountID = "";
-        	for(int i=0;i<vo.getAccountID().length();i++)
-        		if(vo.getAccountID().charAt(i)==' '){
-        			accountID = vo.getAccountID().substring(0,i);
-        			break;
-        		}
-             AccountPO account = accountService.findAccount(accountID, FindAccountType.ID).get(0);
-             account.setMoney(account.getMoney()+vo.getTotal());
-             accountService.updateAccount(account);
+			member.setReceivable(member.getReceivable() - vo.getTotal());
+			memberService.updateMember(member);
+			String accountID = "";
+			for (int i = 0; i < vo.getAccountID().length(); i++)
+				if (vo.getAccountID().charAt(i) == ' ') {
+					accountID = vo.getAccountID().substring(0, i);
+					break;
+				}
+			// 对账户信息的修改
+			AccountPO account = accountService.findAccount(accountID, FindAccountType.ID).get(0);
+			account.setMoney(account.getMoney() + vo.getTotal());
+			accountService.updateAccount(account);
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
+			// 通知用户
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), false,
+					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.SUCCESS)
+			if (result != ResultMessage.SUCCESS)
 				return result;
 		}
 		return ResultMessage.SUCCESS;
@@ -81,15 +86,14 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 
 	@Override
 	public ResultMessage notPassBills(ArrayList<PaymentBillVO> vos) throws RemoteException {
-		// TODO Auto-generated method stub
-		for(PaymentBillVO vo:vos){
+		for (PaymentBillVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), false,
+					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.SUCCESS)
+			if (result != ResultMessage.SUCCESS)
 				return result;
 		}
 		return ResultMessage.SUCCESS;
@@ -99,8 +103,8 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 	public ArrayList<PaymentBillVO> getCommitedBills() throws RemoteException {
 		ArrayList<PaymentBillVO> committed = new ArrayList<>();
 		ArrayList<PaymentBillPO> purchaseList = service.showPaymentBill();
-		for(PaymentBillPO po:purchaseList)
-			if(po.getBillState()==BillState.COMMITED)
+		for (PaymentBillPO po : purchaseList)
+			if (po.getBillState() == BillState.COMMITED)
 				committed.add(tansition.POtoVO(po));
 		return committed;
 	}
@@ -109,12 +113,10 @@ public class ExaminePaymentBL implements ExamineBLService<PaymentBillVO>{
 	public ArrayList<PaymentBillVO> find(String info, FindBillType type) throws RemoteException {
 		ArrayList<PaymentBillVO> committed = new ArrayList<>();
 		ArrayList<PaymentBillPO> purchaseList = service.findPaymentBill(info, FindAccountBillType.getType(type.value));
-		for(PaymentBillPO po:purchaseList)
-			if(po.getBillState()==BillState.COMMITED)
+		for (PaymentBillPO po : purchaseList)
+			if (po.getBillState() == BillState.COMMITED)
 				committed.add(tansition.POtoVO(po));
 		return committed;
 	}
-
-
 
 }

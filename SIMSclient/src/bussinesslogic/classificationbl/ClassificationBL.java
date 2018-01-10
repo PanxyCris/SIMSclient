@@ -90,10 +90,11 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public ResultMessage update(ClassificationVPO vpo) {
 		try {
+			//先更新父节点
 			ClassificationVPO father = getClass(vpo.getFather());
-			for(int i = 0;i<father.getChildrenPointer().size();i++){
+			for (int i = 0; i < father.getChildrenPointer().size(); i++) {
 				String id = classificationDataService.findClassification(father.getChildrenPointer().get(i)).getId();
-				if(id.equals(vpo.getId())){
+				if (id.equals(vpo.getId())) {
 					ArrayList<String> children = father.getChildrenPointer();
 					children.set(i, vpo.getName());
 					father.setChildrenPointer(children);

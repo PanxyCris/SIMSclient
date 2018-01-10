@@ -13,10 +13,10 @@ import vo.commodityvo.CommodityVO;
 public class CommodityController implements CommodityBLService{
 
 	CommodityBL commodityBL=new CommodityBL();
-	
+
 	@Override
-	public String getID() throws Exception {
-		return commodityBL.getID();
+	public String getID(String name) throws Exception {
+		return commodityBL.getID(name);
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class CommodityController implements CommodityBLService{
 	}
 
 	@Override
-	public void delete(CommodityVO vo) throws Exception {
-		commodityBL.delete(vo);
+	public ResultMessage delete(CommodityVO vo) throws Exception {
+		return commodityBL.delete(vo);
 	}
 
 	@Override

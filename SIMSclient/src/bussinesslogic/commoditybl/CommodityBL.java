@@ -1,15 +1,11 @@
 package bussinesslogic.commoditybl;
 
 import java.io.File;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import bussinesslogic.billbl.inventory.InventoryBillController;
-import bussinesslogic.classificationbl.ClassificationBL;
 import bussinesslogic.classificationbl.ClassificationController;
 import bussinesslogic.purchasebl.PurchaseController;
 import bussinesslogic.salesbl.SalesController;
@@ -22,12 +18,14 @@ import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
-import dataenum.findtype.FindInventoryBillType;
 import dataservice.classificationdataservice.ClassificationDataService;
 import dataservice.commoditydataservice.CommodityDataService;
 import javafx.util.converter.LocalDateStringConverter;
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 import po.ClassificationVPO;
-import po.MemberPO;
 import po.commodity.CommodityPO;
 import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
@@ -38,12 +36,6 @@ import vo.commodityvo.CommodityItemVO;
 import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
 import vo.commodityvo.GiftVO;
-import vo.membervo.MemberVO;
-
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
 /**
  *

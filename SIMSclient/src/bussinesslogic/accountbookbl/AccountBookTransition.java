@@ -15,11 +15,11 @@ import vo.commodityvo.CommodityVO;
 import vo.membervo.MemberVO;
 
 public class AccountBookTransition {
-	
+
 	AccountTransition accountTransition=new AccountTransition();
 	MemberTransition memberTransition=new MemberTransition();
 	CommodityTransiton commodityTransiton=new CommodityTransiton();
-	
+
 	public AccountBookPO VOtoPO(AccountBookVO accountBookVO) {
 		AccountBookPO accountBookPO = null;
 		ArrayList<CommodityPO> commodityPOs=new ArrayList<>();
@@ -43,7 +43,6 @@ public class AccountBookTransition {
 				accountPOs.add(accountTransition.VOtoPO(accountVOs.get(i)));
 			}
 		}
-//		String id=accountBookVO.getId();
 		String date=accountBookVO.getDate();
 		String clerkId=accountBookVO.getClerkID();
 		accountBookPO=new AccountBookPO(date, clerkId, commodityPOs, memberPOs, accountPOs);
@@ -51,7 +50,7 @@ public class AccountBookTransition {
 	}
 
 	public AccountBookVO POtoVO(AccountBookPO accountBookPO) {
-		
+
 		AccountBookVO accountBookVO = null;
 		ArrayList<CommodityVO> commodityVOs=new ArrayList<>();
 		ArrayList<CommodityPO> commodityPOs=accountBookPO.getCommodityPOs();
