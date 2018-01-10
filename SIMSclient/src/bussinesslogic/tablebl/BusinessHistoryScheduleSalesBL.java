@@ -28,12 +28,12 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 
 	private SalesBLService salesBLService;
 	private ExamineBLService<SalesVO> examineBLService;
-	
+
 	public BusinessHistoryScheduleSalesBL() {
 		salesBLService=new SalesController();
 		examineBLService=new ExamineSalesBL();
 	}
-	
+
 	@Override
 	public ArrayList<SalesVO> show() {
 		ArrayList<SalesVO> out=new ArrayList<>();
@@ -52,7 +52,9 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		ArrayList<SalesVO> salesVOs=show();
 		for (int i = 0; i < salesVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(salesVOs.get(i).getId());
-			if(localDate.isAfter(start)&&localDate.isBefore(end)){
+			if((localDate.isAfter(start)||localDate.isEqual(start))
+					&&(localDate.isBefore(end)||localDate.isEqual(end))
+					&&salesVOs.get(i).getState() == BillState.SUCCESS){
 				out.add(salesVOs.get(i));
 			}
 		}
@@ -100,20 +102,20 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 
 	@Override
 	public void exportReport(ArrayList<SalesVO> table) {
-		WritableWorkbook wwb = null;  
+		WritableWorkbook wwb = null;
 	 	String fileName="C:/Users/user/Desktop/SaleSchedule.xlsx";
-        try {  
-            // 创建一个可写入的工作簿（WorkBook）对象,  
-            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
-            wwb = Workbook.createWorkbook(new File(fileName));  
-              
-            // 创建一个可写入的工作表   
-            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+        try {
+            // 创建一个可写入的工作簿（WorkBook）对象,
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法
+            wwb = Workbook.createWorkbook(new File(fileName));
+
+            // 创建一个可写入的工作表
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置
             WritableSheet bSheet = wwb.createSheet("SaleTable", 0);
-            
+
             int bSheetL=table.size();
-           
-            Label ini = new Label(0,0,"Date");  
+
+            Label ini = new Label(0,0,"Date");
             bSheet.addCell(ini);
             ini=new Label(1, 0, "Id");//initialize
             bSheet.addCell(ini);
@@ -121,32 +123,32 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
             bSheet.addCell(ini);
             ini=new Label(3, 0, "Operator");
             bSheet.addCell(ini);
-            
-            for(int i=1;i<bSheetL+1;i++){  
+
+            for(int i=1;i<bSheetL+1;i++){
                 for(int j=0;j<4;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));  
-                        bSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));
+                        bSheet.addCell(labelC);
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,table.get(i-1).getId());  
-                        bSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getId());
+                        bSheet.addCell(labelC);
                 	}
                 	else if(j==2){
-                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());  
-                        bSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());
+                        bSheet.addCell(labelC);
                 	}
                 	else{
-                		Label labelC = new Label(j,i,table.get(i-1).getOperator());  
-                        bSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getOperator());
+                        bSheet.addCell(labelC);
                 	}
-                }  
-            }                       
-            wwb.write();// 从内从中写入文件中  
-            wwb.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
+                }
+            }
+            wwb.write();// 从内从中写入文件中
+            wwb.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("生成Excel文件"+fileName+"成功");
 	}
 
@@ -165,7 +167,7 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
@@ -177,7 +179,7 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 			salesVO.setState(BillState.COMMITED);
 			salesBLService.save(salesVO);
 			sList.add(salesVO);
-		}		
+		}
 		return sList;
 	}
 
@@ -189,7 +191,7 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		l=localDate.fromString(date);
 		return l;
 	}
-	
+
 	public SalesVO redRush(SalesVO salesVO){
 		String id=salesBLService.getBackSaleID();
 		String retailer=salesVO.getRetailer();
@@ -199,24 +201,24 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		BillState billState=salesVO.getState();
 		BillType billType=salesVO.getType();
 		Warehouse warehouse=salesVO.getWarehouse();
-		
+
 		Double beforePrice=-salesVO.getBeforePrice();
 		Double allowance=-salesVO.getAllowance();
 		Double voucher=-salesVO.getVoucher();
 		Double afterPrice=-salesVO.getAfterPrice();
-		
+
 		ArrayList<CommodityItemVO> commodity=salesVO.getCommodity();
 		for (int i = 0; i < commodity.size(); i++) {
 			Integer number=commodity.get(i).getNumber();
 			commodity.get(i).setNumber(-number);
 		}
-		
+
 		ArrayList<GiftVO> giftVOs=salesVO.getGifts();
 		for (int i = 0; i < giftVOs.size(); i++) {
 			Integer number=giftVOs.get(i).getNumber();
 			giftVOs.get(i).setNumber(number);;
 		}
-		
+
 		return new SalesVO(id, retailer, saleMan, operator, warehouse, commodity, giftVOs, beforePrice, allowance, voucher, afterPrice, note, billState, billType);
 	}
 
@@ -235,5 +237,5 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 		}
 		return ResultMessage.FAIL;
 	}
-	
+
 }

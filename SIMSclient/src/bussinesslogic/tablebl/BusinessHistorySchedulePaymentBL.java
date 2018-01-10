@@ -27,12 +27,12 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	private ExamineBLService<PaymentBillVO> examineBLService;
 	private PaymentBillBLService paymentBillBLService;
-	
+
 	public BusinessHistorySchedulePaymentBL() {
 		examineBLService=new ExaminePaymentBL();
 		paymentBillBLService=new PaymentBillController();
 	}
-	
+
 	@Override
 	public ArrayList<PaymentBillVO> show() {
 		ArrayList<PaymentBillVO> out=new ArrayList<>();
@@ -47,12 +47,13 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public ArrayList<PaymentBillVO> siftTime(LocalDate start, LocalDate end) {
-		
+
 		ArrayList<PaymentBillVO> out=new ArrayList<>();
 		ArrayList<PaymentBillVO> paymentBillVOs=paymentBillBLService.show();
 		for (int i = 0; i < paymentBillVOs.size(); i++) {
 			LocalDate localDate=StringtoDate(paymentBillVOs.get(i).getId());
-			if(localDate.isBefore(end)&&localDate.isAfter(start)&&(paymentBillVOs.get(i).getState()==BillState.SUCCESS)){
+			if((localDate.isBefore(end)||localDate.isEqual(start))&&(localDate.isAfter(start)||localDate.isEqual(end))
+					&&(paymentBillVOs.get(i).getState()==BillState.SUCCESS)){
 				out.add(paymentBillVOs.get(i));
 			}
 		}
@@ -87,20 +88,20 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 
 	@Override
 	public void exportReport(ArrayList<PaymentBillVO> table) {
-		WritableWorkbook wwb = null;  
+		WritableWorkbook wwb = null;
 	 	String fileName="C:/Users/user/Desktop/PaymentSchedule.xlsx";
-        try {  
-            // 创建一个可写入的工作簿（WorkBook）对象,  
-            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法  
-            wwb = Workbook.createWorkbook(new File(fileName));  
-              
-            // 创建一个可写入的工作表   
-            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置  
+        try {
+            // 创建一个可写入的工作簿（WorkBook）对象,
+            //这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法
+            wwb = Workbook.createWorkbook(new File(fileName));
+
+            // 创建一个可写入的工作表
+            // Workbook的createSheet方法有两个参数，第一个是工作表的名称，第二个是工作表在工作簿中的位置
             WritableSheet pSheet = wwb.createSheet("PaymentTable", 0);
-            
+
             int bSheetL=table.size();
-           
-            Label ini = new Label(0,0,"Date");  
+
+            Label ini = new Label(0,0,"Date");
             pSheet.addCell(ini);
             ini=new Label(1, 0, "Id");//initialize
             pSheet.addCell(ini);
@@ -110,40 +111,40 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
             pSheet.addCell(ini);
             ini=new Label(4, 0, "Total");
             pSheet.addCell(ini);
-            
-            for(int i=1;i<bSheetL+1;i++){  
+
+            for(int i=1;i<bSheetL+1;i++){
                 for(int j=0;j<5;j++){
                 	if(j==0){
-                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getDate()));
+                        pSheet.addCell(labelC);
                 	}
                 	else if(j==1){
-                		Label labelC = new Label(j,i,table.get(i-1).getId());  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getId());
+                        pSheet.addCell(labelC);
                 	}
                 	else if(j==2){
-                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getTypeString());
+                        pSheet.addCell(labelC);
                 	}
                 	else if(j==3){
-                		Label labelC = new Label(j,i,table.get(i-1).getUserID());  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,table.get(i-1).getUserID());
+                        pSheet.addCell(labelC);
                 	}
                 	else{
-                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getTotal()));  
-                        pSheet.addCell(labelC); 
+                		Label labelC = new Label(j,i,String.valueOf(table.get(i-1).getTotal()));
+                        pSheet.addCell(labelC);
                 	}
-                }  
-            }                       
-            wwb.write();// 从内从中写入文件中  
-            wwb.close();  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }  
+                }
+            }
+            wwb.write();// 从内从中写入文件中
+            wwb.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("生成Excel文件"+fileName+"成功");
 	}
 
-	@Override//红冲生成一样的单据的话是否意味着单据的id也一样？不是的话该怎么存？
+	@Override
 	public ArrayList<PaymentBillVO> writeOff(ArrayList<PaymentBillVO> table) {//不能是总经理
 		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
@@ -181,7 +182,7 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		l=localDate.fromString(date);
 		return l;
 	}
-	
+
 	public PaymentBillVO redRush(PaymentBillVO paymentBillVO){//红冲数据转化方法
 		String customerID=paymentBillVO.getCustomerID();
 		String userID=paymentBillVO.getUserID();
@@ -217,5 +218,5 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		}
 		return ResultMessage.FAIL;
 	}
-	
+
 }

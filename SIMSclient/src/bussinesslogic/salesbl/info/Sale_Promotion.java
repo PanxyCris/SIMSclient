@@ -32,7 +32,7 @@ import vo.promotionvo.PromotionTotalVO;
 import vo.promotionvo.PromotionVO;
 
 /**
- * 销售过程中的
+ * 销售过程中的促销策略选择
  * @author Lijie
  * @date 2018年1月2日
  */
@@ -169,7 +169,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 				if(giftList.isEmpty())
 					giftList.addAll(m.getGifts());
 				else{
-				for(GiftVO gift:m.getGifts()){
+				for(GiftVO gift:m.getGifts()){ //增加赠品
 					for(int i=0;i<giftList.size();i++){
 						if(giftList.get(i).getName().equals(gift.getName())){
 							int num = giftList.get(i).getNumber()+gift.getNumber();
@@ -193,7 +193,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 				if(giftList.isEmpty())
 					giftList.addAll(t.getGifts());
 				else{
-				for(GiftVO gift:t.getGifts()){
+				for(GiftVO gift:t.getGifts()){ //增加赠品
 					for(int i=0;i<giftList.size();i++){
 						if(giftList.get(i).getName().equals(gift.getName())){
 							int num = giftList.get(i).getNumber()+gift.getNumber();

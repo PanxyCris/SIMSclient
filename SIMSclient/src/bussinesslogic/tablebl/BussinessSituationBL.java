@@ -138,7 +138,8 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 				ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 				for (int j = 0; j < giftVOs.size(); j++) {
 					try {//这里会多访问一次数据库，可以优化
-						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8), FindCommodityType.NAME);
+						String name = giftVOs.get(j).getName();
+						ArrayList<CommodityVO> commodityVOs=commodityBLService.find(getTrueName(name), FindCommodityType.NAME);
 						sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(j).getNumber();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -188,7 +189,8 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 					ArrayList<GiftVO> giftVOs=inventoryBillVOs.get(i).getGifts();
 					for (int j = 0; j < giftVOs.size(); j++) {
 						try {//这里会多访问一次数据库，可以优化
-							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(giftVOs.get(j).getName().substring(0,giftVOs.get(j).getName().length()-8), FindCommodityType.NAME);
+							String name = giftVOs.get(j).getName();
+							ArrayList<CommodityVO> commodityVOs=commodityBLService.find(getTrueName(name), FindCommodityType.NAME);
 							sum+=commodityVOs.get(0).getPurPrice()*giftVOs.get(j).getNumber();
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -227,5 +229,19 @@ public class BussinessSituationBL implements BussinessSituationBLService {
 		l=localDate.fromString(date);
 		return l;
 	}
-
+    /**
+     * 商品名的过滤
+     * @param name 显示在单据上的商品名
+     * @return 真实的商品名
+     */
+	public String getTrueName(String name){
+		String newName = "";
+		for(int m=0;m<name.length();m++){
+			if(name.charAt(m)=='('){
+				newName = name.substring(0, m);
+			    break;
+			    }
+		}
+		return newName;
+	}
 }

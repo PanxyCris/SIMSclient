@@ -6,17 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 
-import bussinesslogic.commoditybl.CommodityBL;
 import bussinesslogic.promotionbl.PromotionMemberBL;
 import bussinesslogic.promotionbl.PromotionSpecialBL;
 import bussinesslogic.promotionbl.PromotionSumBL;
-import bussinesslogic.purchasebl.PurchaseTransition;
 import bussinesslogicservice.salesblservice.SalesBLService;
-import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
-import dataenum.Warehouse;
 import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindSalesType;
 import dataenum.findtype.FindUserType;
@@ -27,7 +23,6 @@ import dataservice.promotiondataservice.PromotionSpecialDataService;
 import dataservice.promotiondataservice.PromotionSumDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
-import po.PurchasePO;
 import po.UserPO;
 import po.messagepo.MessageExaminePO;
 import po.promotionpo.PromotionMemberPO;
@@ -35,17 +30,16 @@ import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;
 import po.sales.SalesPO;
 import rmi.RemoteHelper;
-import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;
 
-/*
+/**
  * 负责实现销售界面所需要的服务
  */
-public class SalesController implements SalesBLService{
+public class SalesController implements SalesBLService {
 
 	private SalesDataService service;
 	private PromotionMemberDataService PMService;
@@ -60,7 +54,6 @@ public class SalesController implements SalesBLService{
 	private MessageDataService messageDataService;
 
 	private CommodityDataService commodityDataService;
-
 
 	public SalesController() {
 		service = RemoteHelper.getInstance().getSalesDataService();
@@ -89,43 +82,38 @@ public class SalesController implements SalesBLService{
 		ArrayList<Long> IDList = new ArrayList<>();
 		String id = null;
 		String day = getDate();
-		if(list == null)
+		if (list == null)
 			return "XSD-" + getDate() + "-00001";
 		if (list.size() == 0) {
 			return "XSD-" + getDate() + "-00001";
-		}
-		else{
-		for (SalesPO po : list) {
-			id = po.getId();
-			String temp[] = id.split("-");
+		} else {
+			for (SalesPO po : list) {
+				id = po.getId();
+				String temp[] = id.split("-");
 
-			if (temp[0].equals("XSD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				if (temp[0].equals("XSD")) {
+					IDList.add(Long.parseLong(temp[1] + temp[2]));
+				}
 			}
-		}
 
-		Collections.sort(IDList);
+			Collections.sort(IDList);
 
-//		Collections.reverse(IDList);
-
-		String num = String.valueOf(IDList.get(IDList.size()-1));
-		if (day.equals(String.valueOf(num.substring(0, 8)))) {
-			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
-			StringBuilder sb = new StringBuilder(index);
-			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
-				sb.insert(0, "0");
+			String num = String.valueOf(IDList.get(IDList.size() - 1));
+			if (day.equals(String.valueOf(num.substring(0, 8)))) {
+				String index = num.substring(8, num.length());
+				index = String.valueOf(Integer.parseInt(index) + 1);
+				StringBuilder sb = new StringBuilder(index);
+				int len = index.length();
+				for (int i = 0; i < 5 - len; i++) {
+					sb.insert(0, "0");
+				}
+				id = sb.toString();
+			} else {
+				id = "00001";
 			}
-			id = sb.toString();
+			StringBuilder s = new StringBuilder("XSD-");
+			return s.append(day).append("-").append(id).toString();
 		}
-		else {
-			id = "00001";
-		}
-		StringBuilder s = new StringBuilder("XSD-");
-		return s.append(day).append("-").append(id).toString();
-		}
-//		return "000001";
 	}
 
 	@Override
@@ -143,27 +131,25 @@ public class SalesController implements SalesBLService{
 			String temp[] = id.split("-");
 
 			if (temp[0].equals("XSTHD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				IDList.add(Long.parseLong(temp[1] + temp[2]));
 			}
 		}
 		Collections.sort(IDList);
 		String day = getDate();
-//		Collections.reverse(IDList);
 		if (IDList.isEmpty()) {
 			return "XSTHD-" + date + "-00001";
 		}
-		String num = String.valueOf(IDList.get(IDList.size()-1));
+		String num = String.valueOf(IDList.get(IDList.size() - 1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
+			index = String.valueOf(Integer.parseInt(index) + 1);
 			StringBuilder sb = new StringBuilder(index);
 			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
+			for (int i = 0; i < 5 - len; i++) {
 				sb.insert(0, "0");
 			}
 			id = sb.toString();
-		}
-		else {
+		} else {
 			id = "00001";
 		}
 		StringBuilder s = new StringBuilder("XSTHD-");
@@ -188,20 +174,24 @@ public class SalesController implements SalesBLService{
 	@Override
 	public ResultMessage submit(SalesVO Info) {
 		try {
-			if(Info.getType() == BillType.SALESBILL){
-				for(CommodityItemVO commodity:Info.getCommodity()){
-					if(commodityDataService.findCommodity(commodity.getName().substring(0,commodity.getName().length()-8),
-							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
+			if (Info.getType() == BillType.SALESBILL) {
+				for (CommodityItemVO commodity : Info.getCommodity()) {
+					if (commodityDataService
+							.findCommodity(commodity.getName().substring(0, commodity.getName().length() - 8),
+									FindCommodityType.NAME)
+							.get(0).getNumber() < commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
 				}
 			}
 			SalesPO po = SalesTransition.VOtoPO(Info);
 			ResultMessage resultMessage = service.insertSale(po);
-			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){
-				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
-				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),false,po.getId(),manager);
-				messageDataService.save(message);
+			if (resultMessage == ResultMessage.SUCCESS || resultMessage == ResultMessage.EXISTED) {
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
+						FindUserType.USERROLE);
+				for (UserPO manager : generalManagers) {
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(), false,
+							po.getId(), manager);
+					messageDataService.save(message);
 				}
 			}
 			return resultMessage;
@@ -217,8 +207,8 @@ public class SalesController implements SalesBLService{
 			SalesPO po = SalesTransition.VOtoPO(Info);
 			if (service.insertSale(po) == ResultMessage.EXISTED) {
 				return service.updateSale(po);
-			}
-			else return service.insertSale(SalesTransition.VOtoPO(Info));
+			} else
+				return service.insertSale(SalesTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

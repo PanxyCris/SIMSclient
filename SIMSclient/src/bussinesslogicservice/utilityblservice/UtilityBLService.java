@@ -1,9 +1,8 @@
 package bussinesslogicservice.utilityblservice;
 
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.ArrayList;
 
-import dataenum.BillType;
 import po.commodity.CommodityPO;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
@@ -12,7 +11,6 @@ public interface UtilityBLService {
 
 	public boolean isPrintLegal(ArrayList<String> list);
 
-	public String generateID(BillType billType);
     /**
      * 通过用户信息得到该用户的最新信息
      * @param user

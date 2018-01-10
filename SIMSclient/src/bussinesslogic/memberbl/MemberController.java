@@ -13,11 +13,11 @@ import rmi.RemoteHelper;
 import vo.membervo.MemberVO;
 
 /**
-*
-* @author Lijie
-* @date 2017年12月13日
-*/
-public class MemberController implements MemberBLService{
+ *
+ * @author Lijie
+ * @date 2017年12月13日
+ */
+public class MemberController implements MemberBLService {
 
 	private MemberDataService service;
 	private MemberTransition transition;
@@ -31,17 +31,20 @@ public class MemberController implements MemberBLService{
 	public String getId() throws RemoteException {
 		ArrayList<MemberPO> list = service.showMember();
 		ArrayList<Integer> IDList = new ArrayList<>();
-		for (MemberPO po : list) {
-			IDList.add(Integer.parseInt(po.getId()));
-		}
-		Collections.sort(IDList);
-		String id = String.valueOf(IDList.get(IDList.size()-1)+1);
-		StringBuilder sb = new StringBuilder(id);
-		int len = id.length();
-		for (int i=0; i < 6-len; i++) {
-			sb.insert(0, "0");
-		}
-		return sb.toString();
+		if (list != null&&list.size()!=0) {
+			for (MemberPO po : list) {
+				IDList.add(Integer.parseInt(po.getId()));
+			}
+			Collections.sort(IDList);
+			String id = String.valueOf(IDList.get(IDList.size() - 1) + 1);
+			StringBuilder sb = new StringBuilder(id);
+			int len = id.length();
+			for (int i = 0; i < 6 - len; i++) {
+				sb.insert(0, "0");
+			}
+			return sb.toString();
+		} else
+			return "000001";
 	}
 
 	@Override
@@ -69,17 +72,17 @@ public class MemberController implements MemberBLService{
 	}
 
 	@Override
-	public ResultMessage insert(MemberVO vo) throws RemoteException{
+	public ResultMessage insert(MemberVO vo) throws RemoteException {
 		return service.insertMember(transition.VOtoPO(vo));
 	}
 
 	@Override
-	public ResultMessage update(MemberVO vo) throws RemoteException{
+	public ResultMessage update(MemberVO vo) throws RemoteException {
 		return service.updateMember(transition.VOtoPO(vo));
 	}
 
 	@Override
-	public ResultMessage delete(String id) throws RemoteException{
+	public ResultMessage delete(String id) throws RemoteException {
 		return service.deleteMember(id);
 	}
 
