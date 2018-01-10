@@ -841,25 +841,6 @@ JavaFX
 |memberblservice.show|得到当前系统内会员信息的List|
 <br/>
 
-　**statementOfOperationbl模块的接口规范**
-
-|提供的服务|供接口||
-| --- | --- | --- |
-|StatementOfOperation.viewReport|语法|public void viewReport(StatementOfOperationVO statementOfOperationVO)|
-||前置条件|传入的筛选条件符合输入|
-||后置条件|返回筛选出的单据|
-|StatementOfOperation.exportReport|语法|public void exportReport()|
-||前置条件|单据存在|
-||后置条件|单据导出为excel|
-
-<br/>
-
-|需要的服务|需接口|
-| --- | --- |
-|服务名|服务|
-|StatementOfOperationDataService.insert(StatementOfOperationPO statementOfOperationPO)|插入单一持久化对象|
-|StatementOfOperationDataService.delete(StatementOfOperationPO statementOfOperationPO)|删除单一持久化对象|
-
 
 
 ##**5.4数据层的分解**
