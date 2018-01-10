@@ -30,28 +30,28 @@ public class AccountBookData {
 	public ResultMessage insert(AccountBookPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
-			Statement ps0 = conn.createStatement();
-			ResultSet rs = ps0.executeQuery("select count(*) from accountbook where id = " + po.getID());
-			int count = 0;
-			if (rs.next()) {
-				count = rs.getInt(1);
-				if (count == 0) {
+//			Statement ps0 = conn.createStatement();
+//			ResultSet rs = ps0.executeQuery("select count(*) from accountbook where id = " + po.getID());
+//			int count = 0;
+//			if (rs.next()) {
+//				count = rs.getInt(1);
+//				if (count == 0) {
 					String sql = "" + "insert into accountbook(id, object) values (?,?)";
 					
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getID());
+					ps.setString(1, po.getDate());
 			        ps.setObject(2, po);
 			        ps.executeUpdate();
 			        conn.commit();
 			        ps.close();
 			        conn.close();
 			        return ResultMessage.SUCCESS;
-				}
-				else {
-					System.out.println("该期初建账已存在");
-				}
-			}
+//				}
+//				else {
+//					System.out.println("该期初建账已存在");
+//				}
+//			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public class AccountBookData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, po);
-			ps.setString(2, po.getID());
+			ps.setString(2, po.getDate());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();
@@ -111,7 +111,7 @@ public class AccountBookData {
                     ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
                     AccountBookPO po = (AccountBookPO)in.readObject();                   //读出对象  
                       
-//                    switch (type) {
+//                  switch (type) {
 //					case :
 //						
 //						break;
@@ -120,7 +120,7 @@ public class AccountBookData {
 //						break;
 //					}
                     list.add(po);
-                }  
+//                }  
 			}
 			rs.close();
 			ps.close();

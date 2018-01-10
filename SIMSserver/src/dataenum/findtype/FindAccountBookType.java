@@ -6,4 +6,5 @@ package dataenum.findtype;
 */
 public enum FindAccountBookType {
 
+	
 }
