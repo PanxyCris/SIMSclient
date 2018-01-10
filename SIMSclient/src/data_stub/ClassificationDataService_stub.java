@@ -16,37 +16,45 @@ public class ClassificationDataService_stub implements ClassificationDataService
 
 	@Override
 	public ResultMessage insertClassification(ClassificationVPO po) throws RemoteException {
-		return null;
+		System.out.println("Insert Succeed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage updateClassification(ClassificationVPO po) throws RemoteException {
-		return null;
+		System.out.println("Update Succeed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage deleteClassification(String id) throws RemoteException {
-		return null;
+		System.out.println("Delete Succeed!");
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ClassificationVPO getRoot() throws RemoteException {
-		return null;
+		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
+		return root;
 	}
 
 	@Override
 	public ClassificationVPO findClassification(String name) throws RemoteException {
-		return null;
+		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
+		return root;
 	}
 
 	@Override
 	public String getId() throws RemoteException {
-		return null;
+		return "00001";
 	}
 
 	@Override
 	public ArrayList<ClassificationVPO> show() throws RemoteException {
-		return null;
+		ArrayList<ClassificationVPO> list = new ArrayList<>();
+		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
+		list.add(root);
+		return list;
 	}
 
 }
