@@ -119,7 +119,7 @@ public class PaymentMakeBillController extends MakeReceiptController {
 		PaymentBillVO vo = new PaymentBillVO(idLabel.getText(),operatorLabel.getText(),memberChoice.getValue(),
 		            accountChoice.getValue(),entryList,Double.parseDouble(sumLabel.getText()),BillType.XJFYD,BillState.COMMITED,noteArea.getText());
 		ResultMessage message = service.commit(vo);
-	       if(message == ResultMessage.SUCCESS){
+	       if(message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED){
 	           printInfo(ResultMessage.COMMITED);
 	           try {
 				fresh();
