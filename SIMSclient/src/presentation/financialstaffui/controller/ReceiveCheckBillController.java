@@ -67,7 +67,7 @@ public class ReceiveCheckBillController extends FinancialStaffController{
 	@FXML
 	TableColumn<AccountListVO,String> tableAccount;
 	@FXML
-	TableColumn<AccountListVO,String> tableMoney;
+	TableColumn<AccountListVO,Double> tableMoney;
 	@FXML
 	TableColumn<AccountListVO,String> tableDescription;
 
@@ -268,7 +268,7 @@ public class ReceiveCheckBillController extends FinancialStaffController{
 		tableAccount.setCellValueFactory(
                 new PropertyValueFactory<AccountListVO,String>("accountID"));
         tableMoney.setCellValueFactory(
-                new PropertyValueFactory<AccountListVO,String>("money"));
+                new PropertyValueFactory<AccountListVO,Double>("money"));
         tableDescription.setCellValueFactory(
                 new PropertyValueFactory<AccountListVO,String>("note"));
 	}

@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import presentation.common.EditingCell;
 import presentation.common.EditingCellInteger;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
@@ -217,6 +218,8 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	public void edit() {
 		Callback<TableColumn<GiftVO, Integer>, TableCell<GiftVO, Integer>> cellFactoryInteger = (
 				TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
+		Callback<TableColumn<InventoryBillVO, String>, TableCell<InventoryBillVO, String>> cellFactory = (
+				TableColumn<InventoryBillVO, String> p) -> new EditingCell<InventoryBillVO>();
 
 		tableNumber.setCellFactory(cellFactoryInteger);
 		tableNumber.setOnEditCommit((CellEditEvent<GiftVO, Integer> t) -> {
@@ -226,13 +229,19 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 			ArrayList<GiftVO> tmpGifts = new ArrayList<>();
 			tmpGifts.addAll(giftList);
 			inv.setGifts(tmpGifts);
-			try {
-				service.updateBill(inv);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			service.updateBill(inv);
 
 		});
+		tableNote.setCellFactory(cellFactory);
+		tableNote.setOnEditCommit((CellEditEvent<InventoryBillVO, String> t) -> {
+			((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
+			list.set(t.getTablePosition().getRow(),
+					((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())));
+		     InventoryBillVO updating = ((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			service.updateBill(updating);
+
+		});
+
 
 	}
 

@@ -2,12 +2,14 @@ package presentation.financialstaffui.controller;
 
 import java.rmi.RemoteException;
 
+
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.BussinessHistorySchedulePurchaseBL;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +22,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import presentation.common.EditingCell;
+import presentation.common.EditingCellDouble;
+import presentation.common.EditingCellInteger;
 import presentation.financialstaffui.controller.BussinessProcessTableController;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
@@ -87,9 +94,20 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		for (int i = 0; i < list.size(); i++)
 			if (list.get(i).getRed().isSelected())
 				result.add(list.get(i));
-		list.addAll(service.writeOff(result));
+		ArrayList<PurchaseVO> inventoryList = service.writeOff(result);
+		if (inventoryList != null) {
+			list.addAll(inventoryList);
+			table.setItems(list);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "红冲失败");
+			alert.showAndWait();
+		}
 	}
-
+    /**
+     * 红冲并复制
+     */
 	@FXML
 	public void redCopy() {
 		ArrayList<PurchaseVO> result = new ArrayList<>();
@@ -97,13 +115,25 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 			if (list.get(i).getRed().isSelected())
 				result.add(list.get(i));
 		ArrayList<PurchaseVO> copy = service.writeOffAndCopy(result);
-		list.clear();
-		list.addAll(copy);
-		table.setItems(list);
-		table.setEditable(true);
-		commodityList.clear();
-		commodity.setItems(commodityList);
-		commodity.setEditable(true);
+		if (copy != null) {
+			list.clear();
+			list.addAll(copy);
+			table.setItems(list);
+			table.setEditable(true);
+			commodityList.clear();
+			commodity.setItems(commodityList);
+			commodity.setEditable(true);
+			try {
+				edit();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲，请编辑单据信息");
+			alert.showAndWait();
+		} else {
+			Alert alert = new Alert(Alert.AlertType.WARNING, "红冲失败");
+			alert.showAndWait();
+		}
 	}
 	/**
 	 * 导出表格
@@ -224,5 +254,150 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		commodityPrice.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("price"));
 		commodityMoney.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("total"));
 		commodityNote.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("remark"));
+	}
+
+	/**
+	 * 可对单据备注以及商品数量及金额进行修改
+	 * @throws RemoteException
+	 */
+
+	public void edit() throws RemoteException {
+        //单据表格层面的edit
+		Callback<TableColumn<PurchaseVO, String>, TableCell<PurchaseVO, String>> cellFactory = (
+				TableColumn<PurchaseVO, String> p) -> new EditingCell<PurchaseVO>();
+
+		tableNote.setCellFactory(cellFactory);
+		tableNote.setOnEditCommit((CellEditEvent<PurchaseVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((PurchaseVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
+			PurchaseVO newVO = ((PurchaseVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			try {
+				if (!update(newVO)) {
+					((PurchaseVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+        //商品表格层面的edit
+		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
+				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryDouble = (
+				TableColumn<CommodityItemVO, Double> p) -> new EditingCellDouble<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, String>, TableCell<CommodityItemVO, String>> cellFactoryNote = (
+				TableColumn<CommodityItemVO, String> p) -> new EditingCell<CommodityItemVO>();
+
+		commodityPrice.setCellFactory(cellFactoryDouble);
+		commodityPrice.setOnEditCommit((CellEditEvent<CommodityItemVO, Double> t) -> {
+			Double tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setPrice(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getNumber());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			PurchaseVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodities(entryVO);
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue()) //表格总价的连锁反应
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPrice(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getNumber());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setSum(newVO.getSum());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNumber.setCellFactory(cellFactoryInteger);
+		commodityNumber.setOnEditCommit((CellEditEvent<CommodityItemVO, Integer> t) -> {
+			int tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setNumber(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getPrice());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			PurchaseVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodities(entryVO);
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue())  //表格总价的连锁反应
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getPrice());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumber(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getPrice());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setSum(newVO.getSum());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNote.setCellFactory(cellFactoryNote);
+		commodityNote.setOnEditCommit((CellEditEvent<CommodityItemVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			PurchaseVO newVO = bill;
+			ArrayList<CommodityItemVO> accountListVO = new ArrayList<>();
+			accountListVO.addAll(commodityList);
+			newVO.setCommodities(accountListVO);
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+	}
+
+	public boolean update(PurchaseVO vo) throws RemoteException {
+		ResultMessage message = service.updateBill(vo);
+		Boolean result = message == ResultMessage.SUCCESS ? true : false;
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					switch (message) {
+					case SUCCESS:
+						break;
+					default:
+						Alert error = new Alert(Alert.AlertType.ERROR, message.value);
+						error.showAndWait();
+						;
+						break;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		return result;
 	}
 }

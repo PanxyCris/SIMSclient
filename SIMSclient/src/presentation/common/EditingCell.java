@@ -4,7 +4,12 @@ package presentation.common;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-
+/**
+ * ¿É±à¼­µÄTextField for String
+ * @author ÅËÐÇÓî
+ * 2017-11-30
+ * @param <T>
+ */
 public class EditingCell<T> extends TableCell<T, String> {
 
     private TextField textField;

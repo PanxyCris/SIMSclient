@@ -1,6 +1,7 @@
 package presentation.generalmanagerui.controller;
 
 import java.rmi.RemoteException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -10,7 +11,6 @@ import bussinesslogic.promotionbl.PromotionSumBL;
 import bussinesslogicservice.commodityblservice.CommodityBLService;
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.PromotionType;
-import dataenum.Remind;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import javafx.application.Platform;
@@ -38,53 +38,51 @@ import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionTotalVO;
 import vo.uservo.UserVO;
 
-
-public class PromotionSumController extends PromotionMakingController{
+public class PromotionSumController extends PromotionMakingController {
 
 	PromotionBLService<PromotionTotalVO> service = new PromotionSumBL();
-	public static final Remind remind = Remind.PROMOTION;
+	CommodityBLService commodityservice = new CommodityController();
 	PromotionType type = PromotionType.SUM_PROMOTION;
-    ObservableList<PromotionTotalVO> list = FXCollections.observableArrayList();
-    ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
-    ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
-    UserVO user;
-    PromotionTotalVO currentPromotion;
+	ObservableList<PromotionTotalVO> list = FXCollections.observableArrayList();
+	ObservableList<GiftVO> giftList = FXCollections.observableArrayList();
+	ObservableList<String> giftChoiceList = FXCollections.observableArrayList();
+	UserVO user;
+	PromotionTotalVO currentPromotion;
 
-    @FXML
-    ChoiceBox<String> findChoice;
-    @FXML
-    TextField findingField;
+	@FXML
+	ChoiceBox<String> findChoice;
+	@FXML
+	TextField findingField;
 
 	@FXML
 	TableView<PromotionTotalVO> table;
 	@FXML
-	TableColumn<PromotionTotalVO,String> tableID;
+	TableColumn<PromotionTotalVO, String> tableID;
 	@FXML
-	TableColumn<PromotionTotalVO,Double> tableSum;
+	TableColumn<PromotionTotalVO, Double> tableSum;
 	@FXML
-	TableColumn<PromotionTotalVO,Double> tableVoucher;
+	TableColumn<PromotionTotalVO, Double> tableVoucher;
 	@FXML
-	TableColumn<PromotionTotalVO,LocalDate> tableStart;
+	TableColumn<PromotionTotalVO, LocalDate> tableStart;
 	@FXML
-	TableColumn<PromotionTotalVO,LocalDate> tableEnd;
+	TableColumn<PromotionTotalVO, LocalDate> tableEnd;
 	@FXML
-	TableColumn<PromotionTotalVO,String> tableCheck;
+	TableColumn<PromotionTotalVO, String> tableCheck;
 	@FXML
-	TableColumn<PromotionTotalVO,String> tableDelete;
-
+	TableColumn<PromotionTotalVO, String> tableDelete;
 
 	@FXML
 	TableView<GiftVO> giftTable;
 	@FXML
-	TableColumn<GiftVO,String> tableName;
+	TableColumn<GiftVO, String> tableName;
 	@FXML
-	TableColumn<GiftVO,Integer> tableNumber;
+	TableColumn<GiftVO, Integer> tableNumber;
 	@FXML
-	TableColumn<GiftVO,String> tableDeleteGift;
+	TableColumn<GiftVO, String> tableDeleteGift;
 
 	@FXML
 	Label idLabel;
-    @FXML
+	@FXML
 	TextField sumField;
 	@FXML
 	TextField voucherField;
@@ -99,91 +97,94 @@ public class PromotionSumController extends PromotionMakingController{
 	TextField numberField;
 
 	@FXML
-	public void find() throws RemoteException{
-		if(findingField.getText()==null||findChoice.getValue()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好查询信息");
+	public void find() throws RemoteException {
+		if (findingField.getText() == null || findChoice.getValue() == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好查询信息");
 			warning.showAndWait();
-		}else{
-		ArrayList<PromotionTotalVO> list = service.find(findingField.getText(),FindPromotionType.getType(findChoice.getValue()));
-	       if(list==null){
-	    	   Alert error = new Alert(Alert.AlertType.WARNING,ResultMessage.NOTFOUND.value);
-               error.showAndWait();
-	       }
-	       else{
-	    	   table.getItems().clear();
-	    	   table.getItems().addAll(list);
-	    	   initFind();
-	       }
+		} else {
+			ArrayList<PromotionTotalVO> promotionList = service.find(findingField.getText(),
+					FindPromotionType.getType(findChoice.getValue()));
+			if (promotionList == null) {
+				Alert error = new Alert(Alert.AlertType.WARNING, ResultMessage.NOTFOUND.value);
+				error.showAndWait();
+			} else {
+				list.clear();
+				list.addAll(promotionList);
+				table.setItems(list);
+				initFind();
+			}
 		}
 	}
 
-
-
 	@FXML
-	public void insert() throws RemoteException{
-		if(startPicker.getValue()==null||endPicker.getValue()==null||sumField.getText()==null||
-				voucherField.getText()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+	public void insert() throws RemoteException {
+		if (startPicker.getValue() == null || endPicker.getValue() == null || sumField.getText() == null
+				|| voucherField.getText() == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有的信息");
 			warning.showAndWait();
-		}
-		else{
-		ArrayList<GiftVO> gifts = null;
-		 PromotionTotalVO vo = new PromotionTotalVO(idLabel.getText(),startPicker.getValue(),endPicker.getValue(),
-				 Double.parseDouble(sumField.getText()),Double.parseDouble(voucherField.getText()),gifts);
-	        ResultMessage message = service.insert(vo);
-	        Platform.runLater(new Runnable() {
-	    	    public void run() {
-	    	        try {
-	    	        switch(message){
-	    	        case EXISTED: Alert existed = new Alert(Alert.AlertType.WARNING,"该策略已存在");
-	                              existed.showAndWait();break;
-	    	        case SUCCESS:list.add(vo);table.setItems(list);
-	    	                    initInsert();break;
-	    	        default: Alert error = new Alert(Alert.AlertType.ERROR,message.value);
-	                error.showAndWait();break;
-	    	        }
+		} else {
+			ArrayList<GiftVO> gifts = null;
+			PromotionTotalVO vo = new PromotionTotalVO(idLabel.getText(), startPicker.getValue(), endPicker.getValue(),
+					Double.parseDouble(sumField.getText()), Double.parseDouble(voucherField.getText()), gifts);
+			ResultMessage message = service.insert(vo);
+			Platform.runLater(new Runnable() {
+				public void run() {
+					try {
+						switch (message) {
+						case EXISTED:
+							Alert existed = new Alert(Alert.AlertType.WARNING, "该策略已存在");
+							existed.showAndWait();
+							break;
+						case SUCCESS:
+							list.add(vo);
+							table.setItems(list);
+							initInsert();
+							break;
+						default:
+							Alert error = new Alert(Alert.AlertType.ERROR, message.value);
+							error.showAndWait();
+							break;
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-	    	    }
-	    	});
+				}
+			});
 		}
 	}
 
 	@FXML
-	public void insertGift() throws RemoteException{
-		if(giftChoice.getValue()==null||numberField.getText()==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请填写好所有的信息");
+	public void insertGift() throws RemoteException {
+		if (giftChoice.getValue() == null || numberField.getText() == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有的信息");
 			warning.showAndWait();
-		}
-		else if(currentPromotion==null){
-			Alert warning = new Alert(Alert.AlertType.WARNING,"请点击查看赠品列表选择需要赠品的策略");
+		} else if (currentPromotion == null) {
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请点击查看赠品列表选择需要赠品的策略");
 			warning.showAndWait();
-		}
-		else{
-		 GiftVO vo = new GiftVO(giftChoice.getValue(),Integer.parseInt(numberField.getText()));
-	     giftList.add(vo);
-	     giftTable.setItems(giftList);
-	     updateGiftList();
+		} else {
+			GiftVO vo = new GiftVO(giftChoice.getValue(), Integer.parseInt(numberField.getText()));
+			giftList.add(vo);
+			giftTable.setItems(giftList);
+			updateGiftList();
 		}
 	}
 
-
-	public void initFind(){
+	public void initFind() {
 		findingField.setText(null);
 		findChoice.setValue(null);
 	}
 
-	public void initInsert() throws RemoteException{
+	public void initInsert() throws RemoteException {
 		idLabel.setText(service.getID());
 		voucherField.setText(null);
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
 
-
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		choiceInit();
+		promotionChoice.setValue(type.value);
 		list.clear();
 		list.addAll(service.getPromotionList());
 		table.setItems(list);
@@ -191,224 +192,196 @@ public class PromotionSumController extends PromotionMakingController{
 		initFind();
 		edit();
 		manageInit();
-		findChoice.setItems(FXCollections.observableArrayList(FindPromotionType.ID.value,FindPromotionType.TIMEINTERVAL.value));
+		checkInit();
+		deleteInit();
+		deleteGiftInit();
+		giftChoiceList.addAll(commodityservice.getIDandName());
+		giftChoice.setItems(giftChoiceList);
+		findChoice.setItems(
+				FXCollections.observableArrayList(FindPromotionType.ID.value, FindPromotionType.TIMEINTERVAL.value));
 	}
+	/**
+	 * 代金券、折让的修改
+	 */
 
-	public void edit(){
-		Callback<TableColumn<PromotionTotalVO, Double>,
-	        TableCell<PromotionTotalVO, Double>> cellFactoryDouble
-	            = (TableColumn<PromotionTotalVO, Double> p) -> new EditingCellDouble<PromotionTotalVO>();
+	public void edit() {
+		Callback<TableColumn<PromotionTotalVO, Double>, TableCell<PromotionTotalVO, Double>> cellFactoryDouble = (
+				TableColumn<PromotionTotalVO, Double> p) -> new EditingCellDouble<PromotionTotalVO>();
 
-	    Callback<TableColumn<GiftVO, Integer>,
-		    TableCell<GiftVO, Integer>> cellFactoryInteger
-		        = (TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
+		Callback<TableColumn<GiftVO, Integer>, TableCell<GiftVO, Integer>> cellFactoryInteger = (
+				TableColumn<GiftVO, Integer> p) -> new EditingCellInteger<GiftVO>();
 
-        Callback<TableColumn<PromotionTotalVO, LocalDate>,
-	        TableCell<PromotionTotalVO, LocalDate>> dateFactory
-	            = (TableColumn<PromotionTotalVO, LocalDate> p) -> new EditingCellDate<PromotionTotalVO>();
+		Callback<TableColumn<PromotionTotalVO, LocalDate>, TableCell<PromotionTotalVO, LocalDate>> dateFactory = (
+				TableColumn<PromotionTotalVO, LocalDate> p) -> new EditingCellDate<PromotionTotalVO>();
 
-	    tableVoucher.setCellFactory(cellFactoryDouble);
-	    tableVoucher.setOnEditCommit(
-	            (CellEditEvent<PromotionTotalVO, Double> t) -> {
-	                ((PromotionTotalVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setVoucher(t.getNewValue());
-	                try {
-						service.update((PromotionTotalVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-								);
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
+		tableVoucher.setCellFactory(cellFactoryDouble);
+		tableVoucher.setOnEditCommit((CellEditEvent<PromotionTotalVO, Double> t) -> {
+			((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setVoucher(t.getNewValue());
+			try {
+				service.update((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 
-	        });
+		});
 
-	    tableStart.setCellFactory(dateFactory);
-	    tableStart.setOnEditCommit(
-	            (CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
-	                ((PromotionTotalVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setBeginDate(t.getNewValue());
-	                try {
-						service.update((PromotionTotalVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-								);
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
+		tableStart.setCellFactory(dateFactory);
+		tableStart.setOnEditCommit((CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
+			((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setBeginDate(t.getNewValue());
+			try {
+				service.update((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 
-	        });
+		});
 
-	    tableEnd.setCellFactory(dateFactory);
-	    tableEnd.setOnEditCommit(
-	            (CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
-	                ((PromotionTotalVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setEndDate(t.getNewValue());
-	                try {
-						service.update((PromotionTotalVO) t.getTableView().getItems().get(
-						        t.getTablePosition().getRow())
-								);
-					} catch (RemoteException e) {
-						e.printStackTrace();
-					}
+		tableEnd.setCellFactory(dateFactory);
+		tableEnd.setOnEditCommit((CellEditEvent<PromotionTotalVO, LocalDate> t) -> {
+			((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setEndDate(t.getNewValue());
+			try {
+				service.update((PromotionTotalVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 
-	        });
+		});
 
+		tableNumber.setCellFactory(cellFactoryInteger);
+		tableNumber.setOnEditCommit((CellEditEvent<GiftVO, Integer> t) -> {
+			((GiftVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumber(t.getNewValue());
+			try {
+				updateGiftList();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 
-
-	    tableNumber.setCellFactory(cellFactoryInteger);
-	    tableNumber.setOnEditCommit(
-	            (CellEditEvent<GiftVO, Integer> t) -> {
-	                ((GiftVO) t.getTableView().getItems().get(
-	                        t.getTablePosition().getRow())
-	                        ).setNumber(t.getNewValue());
-	            try {
-					updateGiftList();
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				}
-
-	        });
+		});
 
 	}
 
+	public void manageInit() throws Exception {
+		tableID.setCellValueFactory(new PropertyValueFactory<PromotionTotalVO, String>("id"));
+		tableSum.setCellValueFactory(new PropertyValueFactory<PromotionTotalVO, Double>("total"));
+		tableStart.setCellValueFactory(new PropertyValueFactory<PromotionTotalVO, LocalDate>("beginDate"));
+		tableEnd.setCellValueFactory(new PropertyValueFactory<PromotionTotalVO, LocalDate>("endDate"));
+		tableVoucher.setCellValueFactory(new PropertyValueFactory<PromotionTotalVO, Double>("voucher"));
 
-	public void manageInit() throws Exception{
-		tableID.setCellValueFactory(
-                new PropertyValueFactory<PromotionTotalVO,String>("id"));
-		tableSum.setCellValueFactory(
-	                new PropertyValueFactory<PromotionTotalVO,Double>("total"));
-	    tableStart.setCellValueFactory(
-                new PropertyValueFactory<PromotionTotalVO,LocalDate>("beginDate"));
-        tableEnd.setCellValueFactory(
-                new PropertyValueFactory<PromotionTotalVO,LocalDate>("endDate"));
-        tableVoucher.setCellValueFactory(
-                new PropertyValueFactory<PromotionTotalVO,Double>("voucher"));
-
-        tableName.setCellValueFactory(
-                new PropertyValueFactory<GiftVO,String>("name"));
-	    tableNumber.setCellValueFactory(
-                new PropertyValueFactory<GiftVO,Integer>("number"));
-	    checkInit();
-        deleteInit();
-        deleteGiftInit();
-        CommodityBLService commodityservice = new CommodityController();
-        giftChoiceList.addAll(commodityservice.getIDandName());
-        giftChoice.setItems(giftChoiceList);
+		tableName.setCellValueFactory(new PropertyValueFactory<GiftVO, String>("name"));
+		tableNumber.setCellValueFactory(new PropertyValueFactory<GiftVO, Integer>("number"));
 
 	}
 
-	public void checkInit(){
+	public void checkInit() {
 
 		tableCheck.setCellFactory((col) -> {
-            TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
+			TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
 
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					this.setText(null);
+					this.setGraphic(null);
 
-                    if (!empty) {
-                        Button delBtn = new Button("查看赠品列表");
-                        this.setGraphic(delBtn);
-                        delBtn.setOnMouseClicked((me) -> {
-                        	PromotionTotalVO clickedItem = this.getTableView().getItems().get(this.getIndex());
-                        	currentPromotion = clickedItem;
-                            giftList.clear();
-                            if(clickedItem.getGifts()!=null)
-                            giftList.addAll(clickedItem.getGifts());
-                            giftTable.setItems(giftList);
+					if (!empty) {
+						Button delBtn = new Button("查看赠品列表");
+						this.setGraphic(delBtn);
+						delBtn.setOnMouseClicked((me) -> {
+							PromotionTotalVO clickedItem = this.getTableView().getItems().get(this.getIndex());
+							currentPromotion = clickedItem;
+							giftList.clear();
+							if (clickedItem.getGifts() != null)
+								giftList.addAll(clickedItem.getGifts());
+							giftTable.setItems(giftList);
 
-                        });
-                    }
-                }
+						});
+					}
+				}
 
-            };
-            return cell;
-        });
+			};
+			return cell;
+		});
 
 	}
 
-	public void deleteInit(){
+	public void deleteInit() {
 		tableDelete.setCellFactory((col) -> {
-            TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
+			TableCell<PromotionTotalVO, String> cell = new TableCell<PromotionTotalVO, String>() {
 
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					this.setText(null);
+					this.setGraphic(null);
 
-                    if (!empty) {
-                        Button delBtn = new Button("删除");
-                        this.setGraphic(delBtn);
-                        delBtn.setOnMouseClicked((me) -> {
-                        	PromotionTotalVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                        	 try {
-	                            	Alert alert = new Alert(AlertType.CONFIRMATION);
-	                            	alert.setContentText("确认删除？");
-	                            	Optional<ButtonType> result = alert.showAndWait();
-	                            	if (result.get() == ButtonType.OK){
-	                            		service.delete(clickedUser);
-	                            		  list.remove(clickedUser);
-	      	                              table.setItems(list);
-	                            	}
-								} catch (RemoteException e) {
-									e.printStackTrace();
+					if (!empty) {
+						Button delBtn = new Button("删除");
+						this.setGraphic(delBtn);
+						delBtn.setOnMouseClicked((me) -> {
+							PromotionTotalVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+							try {
+								Alert alert = new Alert(AlertType.CONFIRMATION);
+								alert.setContentText("确认删除？");
+								Optional<ButtonType> result = alert.showAndWait();
+								if (result.get() == ButtonType.OK) {
+									service.delete(clickedUser);
+									list.remove(clickedUser);
+									table.setItems(list);
 								}
-                        });
-                    }
-                }
+							} catch (RemoteException e) {
+								e.printStackTrace();
+							}
+						});
+					}
+				}
 
-            };
-            return cell;
-        });
-
-
+			};
+			return cell;
+		});
 
 	}
 
-    public void deleteGiftInit(){
-
+	public void deleteGiftInit() {
 
 		tableDeleteGift.setCellFactory((col) -> {
-            TableCell<GiftVO, String> cell = new TableCell<GiftVO, String>() {
+			TableCell<GiftVO, String> cell = new TableCell<GiftVO, String>() {
 
-                @Override
-                public void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    this.setText(null);
-                    this.setGraphic(null);
+				@Override
+				public void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					this.setText(null);
+					this.setGraphic(null);
 
-                    if (!empty) {
-                        Button delBtn = new Button("删除");
-                        this.setGraphic(delBtn);
-                        delBtn.setOnMouseClicked((me) -> {
-                        	GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
-                            giftList.remove(clickedUser);
-                            giftTable.setItems(giftList);
-                            try {
+					if (!empty) {
+						Button delBtn = new Button("删除");
+						this.setGraphic(delBtn);
+						delBtn.setOnMouseClicked((me) -> {
+							GiftVO clickedUser = this.getTableView().getItems().get(this.getIndex());
+							giftList.remove(clickedUser);
+							giftTable.setItems(giftList);
+							try {
 								updateGiftList();
 							} catch (RemoteException e) {
 								e.printStackTrace();
 							}
-                        });
-                    }
-                }
+						});
+					}
+				}
 
-            };
-            return cell;
-        });
+			};
+			return cell;
+		});
 	}
 
-    public void updateGiftList() throws RemoteException{
-    	 PromotionTotalVO promotion = currentPromotion;
-         ArrayList<GiftVO> gifts = new ArrayList<>();
-    	 gifts.addAll(giftList);
-    	 promotion.setGifts(gifts);
-    	 service.update(promotion);
-    }
+	public void updateGiftList() throws RemoteException {
+		PromotionTotalVO promotion = currentPromotion;
+		ArrayList<GiftVO> gifts = new ArrayList<>();
+		gifts.addAll(giftList);
+		promotion.setGifts(gifts);
+		service.update(promotion);
+	}
 
 }

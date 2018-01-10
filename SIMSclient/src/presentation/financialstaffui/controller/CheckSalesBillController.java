@@ -7,6 +7,7 @@ import bussinesslogic.tablebl.BusinessHistoryScheduleSalesBL;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +20,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import presentation.common.EditingCell;
+import presentation.common.EditingCellDouble;
+import presentation.common.EditingCellInteger;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.uservo.UserVO;
@@ -29,6 +35,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 	BusinessHistoryScheduleBLService<SalesVO> service = new BusinessHistoryScheduleSalesBL();
 	ObservableList<SalesVO> list = FXCollections.observableArrayList();
 	ObservableList<CommodityItemVO> commodityList = FXCollections.observableArrayList();
+	SalesVO bill;
 
 	@FXML
 	ChoiceBox<String> findChoice;
@@ -120,6 +127,11 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 			list.addAll(copy);
 			table.setItems(list);
 			table.setEditable(true);
+			try {
+				edit();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲，请编辑单据信息");
 			alert.showAndWait();
 		} else {
@@ -231,6 +243,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 							commodityList.clear();
 							commodityList.addAll(clickedItem.getCommodity());
 							commodity.setItems(commodityList);
+							bill = clickedItem;
 						});
 					}
 				}
@@ -249,6 +262,196 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 		commodityPrice.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("price"));
 		commodityMoney.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, Double>("total"));
 		commodityNote.setCellValueFactory(new PropertyValueFactory<CommodityItemVO, String>("remark"));
+	}
+
+	/**
+	 * 可对单据备注、代金券以及折让数额进行修改，已经商品价格数量进行修改
+	 *
+	 * @throws RemoteException
+	 */
+
+	public void edit() throws RemoteException {
+       //单据表格层面的edit
+		Callback<TableColumn<SalesVO, String>, TableCell<SalesVO, String>> cellFactory = (
+				TableColumn<SalesVO, String> p) -> new EditingCell<SalesVO>();
+
+		Callback<TableColumn<SalesVO, Double>, TableCell<SalesVO, Double>> cellFactoryDouble = (
+				TableColumn<SalesVO, Double> p) -> new EditingCellDouble<SalesVO>();
+
+		tableVoucher.setCellFactory(cellFactoryDouble);
+		tableVoucher.setOnEditCommit((CellEditEvent<SalesVO, Double> t) -> {
+			double tmp = t.getOldValue();
+			((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setVoucher(t.getNewValue());
+			SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setVoucher(tmp);
+				} else {
+					((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setAfterPrice(newVO.getAfterPrice());
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		tableAllowance.setCellFactory(cellFactoryDouble);
+		tableAllowance.setOnEditCommit((CellEditEvent<SalesVO, Double> t) -> {
+			double tmp = t.getOldValue();
+			((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAllowance(t.getNewValue());
+			SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setAllowance(tmp);
+				} else {
+					((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setAfterPrice(newVO.getAfterPrice());
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		tableNote.setCellFactory(cellFactory);
+		tableNote.setOnEditCommit((CellEditEvent<SalesVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
+			SalesVO newVO = ((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			try {
+				if (!update(newVO)) {
+					((SalesVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+        //商品表格层面的edit
+		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
+				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryCommodityDouble = (
+				TableColumn<CommodityItemVO, Double> p) -> new EditingCellDouble<CommodityItemVO>();
+		Callback<TableColumn<CommodityItemVO, String>, TableCell<CommodityItemVO, String>> cellFactoryNote = (
+				TableColumn<CommodityItemVO, String> p) -> new EditingCell<CommodityItemVO>();
+
+		commodityPrice.setCellFactory(cellFactoryCommodityDouble);
+		commodityPrice.setOnEditCommit((CellEditEvent<CommodityItemVO, Double> t) -> {
+			Double tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setPrice(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getNumber());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodity(entryVO);
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
+			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPrice(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getNumber());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setBeforePrice(newVO.getBeforePrice());
+							table.getItems().get(i).setAfterPrice(newVO.getAfterPrice());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNumber.setCellFactory(cellFactoryInteger);
+		commodityNumber.setOnEditCommit((CellEditEvent<CommodityItemVO, Integer> t) -> {
+			int tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setNumber(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			accountVO.setTotal(accountVO.getPrice() - (tmp - t.getNewValue()) * accountVO.getPrice());
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
+			entryVO.addAll(commodityList);
+			newVO.setCommodity(entryVO);
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
+			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumber(tmp);
+				} else {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+							.setTotal(t.getNewValue()
+									* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+											.getPrice());
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setBeforePrice(newVO.getBeforePrice());
+							table.getItems().get(i).setAfterPrice(newVO.getAfterPrice());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		commodityNote.setCellFactory(cellFactoryNote);
+		commodityNote.setOnEditCommit((CellEditEvent<CommodityItemVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setRemark(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
+			commodityList.set(t.getTablePosition().getRow(), accountVO);
+			SalesVO newVO = bill;
+			ArrayList<CommodityItemVO> accountListVO = new ArrayList<>();
+			accountListVO.addAll(commodityList);
+			newVO.setCommodity(accountListVO);
+			try {
+				if (!update(newVO)) {
+					((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+	}
+
+	public boolean update(SalesVO vo) throws RemoteException {
+		ResultMessage message = service.updateBill(vo);
+		Boolean result = message == ResultMessage.SUCCESS ? true : false;
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					switch (message) {
+					case SUCCESS:
+						break;
+					default:
+						Alert error = new Alert(Alert.AlertType.ERROR, message.value);
+						error.showAndWait();
+						break;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		return result;
 	}
 
 }

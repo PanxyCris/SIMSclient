@@ -3,7 +3,12 @@ package presentation.common;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableCell;
-
+/**
+ * 可编辑的TreeTable中的 TextField
+ * @author 潘星宇
+ * 2017-12-25
+ * @param <T>
+ */
 public class EditingCellTree<T> extends TreeTableCell<T, String>{
 
 	 private TextField textField;

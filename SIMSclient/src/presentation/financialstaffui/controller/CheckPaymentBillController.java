@@ -7,6 +7,7 @@ import bussinesslogic.tablebl.BusinessHistorySchedulePaymentBL;
 import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +20,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import presentation.common.EditingCell;
+import presentation.common.EditingCellDouble;
 import vo.billvo.financialbillvo.EntryVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 import vo.uservo.UserVO;
@@ -123,6 +128,11 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 			list.addAll(copy);
 			table.setItems(list);
 			table.setEditable(true);
+			try {
+				edit();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲，请编辑单据信息");
 			alert.showAndWait();
 		} else {
@@ -201,7 +211,7 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 							entryList.clear();
 							entryList.addAll(clickedItem.getEntryListVO());
 							itemList.setItems(entryList);
-
+                            bill = clickedItem;
 						});
 					}
 				}
@@ -218,4 +228,123 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 		tableNote.setCellValueFactory(new PropertyValueFactory<EntryVO, String>("note"));
 	}
 
+	/**
+	 * 账户总额和单据备注可编辑
+	 *
+	 * @throws RemoteException
+	 */
+
+	public void edit() throws RemoteException {
+
+		Callback<TableColumn<PaymentBillVO, String>, TableCell<PaymentBillVO, String>> cellFactory = (
+				TableColumn<PaymentBillVO, String> p) -> new EditingCell<PaymentBillVO>();
+
+		tableRemark.setCellFactory(cellFactory);
+		tableRemark.setOnEditCommit((CellEditEvent<PaymentBillVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((PaymentBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
+			PaymentBillVO newVO = ((PaymentBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			try {
+				if (!update(newVO)) {
+					((PaymentBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		Callback<TableColumn<EntryVO, String>, TableCell<EntryVO, String>> cellFactoryItem = (
+				TableColumn<EntryVO, String> p) -> new EditingCell<EntryVO>();
+		Callback<TableColumn<EntryVO, Double>, TableCell<EntryVO, Double>> cellFactoryDouble = (
+				TableColumn<EntryVO, Double> p) -> new EditingCellDouble<EntryVO>();
+
+		tableItem.setCellFactory(cellFactoryItem);
+		tableItem.setOnEditCommit((CellEditEvent<EntryVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setEntryName(t.getNewValue());
+			EntryVO accountVO = ((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			entryList.set(t.getTablePosition().getRow(), accountVO);
+			PaymentBillVO newVO = bill;
+			ArrayList<EntryVO> entryVO = new ArrayList<>();
+			entryVO.addAll(entryList);
+			newVO.setEntryListVO(entryVO);
+			try {
+				if (!update(newVO)) {
+					((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setEntryName(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		tableMoney.setCellFactory(cellFactoryDouble);
+		tableMoney.setOnEditCommit((CellEditEvent<EntryVO, Double> t) -> {
+			Double tmp = t.getOldValue();
+			((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setTransferAmount(t.getNewValue());
+			EntryVO accountVO = ((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			entryList.set(t.getTablePosition().getRow(), accountVO);
+			PaymentBillVO newVO = bill;
+			ArrayList<EntryVO> entryVO = new ArrayList<>();
+			entryVO.addAll(entryList);
+			newVO.setEntryListVO(entryVO);
+			newVO.setTotal(newVO.getTotal() - tmp + t.getNewValue());
+			try {
+				if (!update(newVO)) {
+					((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTransferAmount(tmp);
+				} else {
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getId().equals(newVO.getId())) {
+							table.getItems().get(i).setTotal(newVO.getTotal());
+							break;
+						}
+					}
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+
+		tableNote.setCellFactory(cellFactoryItem);
+		tableNote.setOnEditCommit((CellEditEvent<EntryVO, String> t) -> {
+			String tmp = t.getOldValue();
+			((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
+			EntryVO accountVO = ((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			entryList.set(t.getTablePosition().getRow(), accountVO);
+			PaymentBillVO newVO = bill;
+			ArrayList<EntryVO> accountListVO = new ArrayList<>();
+			accountListVO.addAll(entryList);
+			newVO.setEntryListVO(accountListVO);
+			try {
+				if (!update(newVO)) {
+					((EntryVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(tmp);
+				}
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
+	public boolean update(PaymentBillVO vo) throws RemoteException {
+		ResultMessage message = service.updateBill(vo);
+		Boolean result = message == ResultMessage.SUCCESS ? true : false;
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					switch (message) {
+					case SUCCESS:
+						break;
+					default:
+						Alert error = new Alert(Alert.AlertType.ERROR, message.value);
+						error.showAndWait();
+						;
+						break;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		return result;
+	}
 }

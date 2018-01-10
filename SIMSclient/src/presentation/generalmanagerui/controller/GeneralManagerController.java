@@ -41,7 +41,7 @@ public class GeneralManagerController {
 	static String previous;
 	static String current;
 	static Stack<String> stack;
-    protected BillType billType;
+	protected BillType billType;
 	protected UserVO user;
 
 	@FXML
@@ -49,137 +49,173 @@ public class GeneralManagerController {
 	@FXML
 	protected ImageView image;
 
-
 	@FXML
-	public void returnLast() throws Exception{
-        startUI(previous,user,billType);
-        if(!stack.isEmpty()){
-        stack.pop();
-        current = previous;
-        }
-        if(stack.size()>1)
-            previous = stack.lastElement();
+	public void returnLast() throws Exception {
+		startUI(previous, user, billType);
+		if (!stack.isEmpty()) {
+			stack.pop();
+			current = previous;
+		}
+		if (stack.size() > 1)
+			previous = stack.lastElement();
 	}
 
 	@FXML
-	public void mainPage() throws Exception{
-		changeStage(mainID,user,billType);
+	public void mainPage() throws Exception {
+		changeStage(mainID, user, billType);
 
-    }
-
-	@FXML
-	public void fresh() throws Exception{
-		startUI(current,user,billType);
 	}
 
 	@FXML
-	public void message() throws Exception{
-       changeStage("UserMessageUI",user,billType);
+	public void fresh() throws Exception {
+		startUI(current, user, billType);
 	}
 
 	@FXML
-	public void logout(){
+	public void message() throws Exception {
+		changeStage("UserMessageUI", user, billType);
+	}
+
+	@FXML
+	public void logout() {
 		Platform.runLater(new Runnable() {
-            public void run() {
-                try {
-                   new MainUI().start(new Stage());
-               } catch (Exception e) {
-                       e.printStackTrace();
-                    }
-            }
-       });
+			public void run() {
+				try {
+					new MainUI().start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		Stage stage = (Stage) pane.getScene().getWindow();
-	    stage.close();
+		stage.close();
 	}
 
 	@FXML
-	public void checkBill() throws Exception{
-		changeStage("ExamineBillUI",user,billType);
+	public void checkBill() throws Exception {
+		changeStage("ExamineBillUI", user, billType);
 	}
 
 	@FXML
-	public void checkTable() throws Exception{
-		changeStage("FinanceTableUI",user,billType);
-	}
-
-
-	@FXML
-	public void makePromotion() throws Exception{
-		changeStage("PromotionMakingUI",user,billType);
+	public void checkTable() throws Exception {
+		changeStage("FinanceTableUI", user, billType);
 	}
 
 	@FXML
-	public void checkDiary() throws Exception{
-	//	changeStage("PromotionMakingUI");
+	public void makePromotion() throws Exception {
+		changeStage("PromotionMakingUI", user, billType);
 	}
-
-
-
 
 	public void initData(UserVO user) throws Exception {
-        stack = new Stack<>();
-        previous = current = mainID;
-        stack.push(mainID);
-        this.user = user;
-       UtilityBLService utilityService = new UtilityBL();
-       if(utilityService.hasMessage(user)){
-        	Circle circle = new Circle();
-        	circle.setCenterX(0);
-        	circle.setCenterY(0);
-        	circle.setLayoutX(377);
-        	circle.setLayoutY(16);
-        	circle.setRadius(7);
-        	circle.setFill(Paint.valueOf("#ff1f1f"));
-        	pane.getChildren().add(circle);
-        }
-     //   image = user.getImage();
+		stack = new Stack<>();
+		previous = current = mainID;
+		stack.push(mainID);
+		this.user = user;
+		UtilityBLService utilityService = new UtilityBL();
+		if (utilityService.hasMessage(user)) {
+			Circle circle = new Circle();
+			circle.setCenterX(0);
+			circle.setCenterY(0);
+			circle.setLayoutX(377);
+			circle.setLayoutY(16);
+			circle.setRadius(7);
+			circle.setFill(Paint.valueOf("#ff1f1f"));
+			pane.getChildren().add(circle);
+		}
+		// image = user.getImage();
+	}
+	/**
+	 * 切换fxml
+	 * @param currentID 当前fxml
+	 * @param user 当前登录用户
+	 * @param type 单据类型
+	 * @throws Exception
+	 */
+
+	public void changeStage(String currentID, UserVO user, BillType type) throws Exception {
+		startUI(currentID, user, type);
+		previous = current;
+		current = currentID;
+		stack.push(current);
 	}
 
+	public void startUI(String currentID, UserVO user, BillType bill) {
+		Stage stage = (Stage) pane.getScene().getWindow();
+		stage.close();
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					switch (currentID) {
+					case mainID:
+						new GeneralManagerUI().start(user);
+						break;
+					case "PromotionMakingUI":
+						new PromotionMakingUI().start(user);
+						break;
+					case "PromotionMemberUI":
+						new PromotionMemberUI().start(user);
+						break;
+					case "PromotionSpecialUI":
+						new PromotionSpecialUI().start(user);
+						break;
+					case "PromotionSumUI":
+						new PromotionSumUI().start(user);
+						break;
+					case "ExamineBillUI":
+						new ExamineBillUI().start(user);
+						break;
+					case "ExamineInventoryBillUI":
+						new ExamineInventoryBillUI().start(user);
+						break;
+					case "ExaminePaymentBillUI":
+						new ExaminePaymentBillUI().start(user);
+						break;
+					case "ExaminePurchaseBillUI":
+						new ExaminePurchaseBillUI().start(user);
+						break;
+					case "ExamineReceiveBillUI":
+						new ExamineReceiveBillUI().start(user);
+						break;
+					case "ExamineSalesBillUI":
+						new ExamineSalesBillUI().start(user);
+						break;
+					case "UserMessageUI":
+						new UserMessageUI().start(user);
+						break;
+					case "BussinessProcessTableUI":
+						new BussinessProcessTableUI().start(user);
+						break;
+					case "BussinessSituationTableUI":
+						new BussinessSituationTableUI().start(user);
+						break;
+					case "SaleDetailTableUI":
+						new SaleDetailTableUI().start(user);
+						break;
+					case "CheckInventoryBillUI":
+						new CheckInventoryBillUI().start(user);
+						break;
+					case "CheckPaymentBillUI":
+						new CheckPaymentBillUI().start(user);
+						break;
+					case "CheckPurchaseBillUI":
+						new CheckPurchaseBillUI().start(user);
+						break;
+					case "CheckReceiveBillUI":
+						new CheckReceiveBillUI().start(user);
+						break;
+					case "CheckSalesBillUI":
+						new CheckSalesBillUI().start(user);
+						break;
+					case "FinanceTableUI":
+						new FinanceTableUI().start(user);
+						break;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 
-	public void changeStage(String currentID,UserVO user,BillType type) throws Exception{
-
-   	    startUI(currentID,user,type);
-	    previous = current;
-	    current = currentID;
-	    stack.push(current);
 	}
-
-	public void startUI(String currentID,UserVO user,BillType bill){
-	    Stage stage = (Stage) pane.getScene().getWindow();
-	    stage.close();
-			Platform.runLater(new Runnable() {
-            public void run() {
-                try {
-                   switch(currentID){
-   		            case mainID:new GeneralManagerUI().start(user);break;
-   		            case "PromotionMakingUI":new PromotionMakingUI().start(user);break;
-   		            case "PromotionMemberUI":new PromotionMemberUI().start(user);break;
-   		            case "PromotionSpecialUI":new PromotionSpecialUI().start(user);break;
-   		            case "PromotionSumUI":new PromotionSumUI().start(user);break;
-   		            case "ExamineBillUI":new ExamineBillUI().start(user);break;
-   		            case "ExamineInventoryBillUI":new ExamineInventoryBillUI().start(user);break;
-   		            case "ExaminePaymentBillUI":new ExaminePaymentBillUI().start(user);break;
-   		            case "ExaminePurchaseBillUI":new ExaminePurchaseBillUI().start(user);break;
-   		            case "ExamineReceiveBillUI":new ExamineReceiveBillUI().start(user);break;
-   		            case "ExamineSalesBillUI":new ExamineSalesBillUI().start(user);break;
-   		            case "UserMessageUI":new UserMessageUI().start(user);break;
-   		            case "BussinessProcessTableUI":new BussinessProcessTableUI().start(user);break;
-		            case "BussinessSituationTableUI":new BussinessSituationTableUI().start(user);break;
-		            case "SaleDetailTableUI":new SaleDetailTableUI().start(user);break;
-		            case "CheckInventoryBillUI":new CheckInventoryBillUI().start(user);break;
-		            case "CheckPaymentBillUI":new CheckPaymentBillUI().start(user);break;
-		            case "CheckPurchaseBillUI":new CheckPurchaseBillUI().start(user);break;
-		            case "CheckReceiveBillUI":new CheckReceiveBillUI().start(user);break;
-		            case "CheckSalesBillUI":new CheckSalesBillUI().start(user);break;
-		            case "FinanceTableUI":new FinanceTableUI().start(user);break;
-   		           }
-               } catch (Exception e) {
-                       e.printStackTrace();
-                    }
-            }
-       });
-
-	}
-
 
 }

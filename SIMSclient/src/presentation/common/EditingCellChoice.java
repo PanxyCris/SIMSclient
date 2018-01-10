@@ -5,7 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
-
+/**
+ * 可编辑的TableCell 中的 ChoiceBox
+ * @author 潘星宇
+ * 2017-12-11
+ * @param <T>
+ */
 public class EditingCellChoice<T> extends TableCell<T, String> {
 
     private ChoiceBox<String> choice;

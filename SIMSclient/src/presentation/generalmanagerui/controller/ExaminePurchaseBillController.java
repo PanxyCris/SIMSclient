@@ -204,7 +204,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 	 */
 
 	public void edit() throws RemoteException {
-
+        //单据表格层面的edit
 		Callback<TableColumn<PurchaseVO, String>, TableCell<PurchaseVO, String>> cellFactory = (
 				TableColumn<PurchaseVO, String> p) -> new EditingCell<PurchaseVO>();
 
@@ -221,7 +221,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 				e.printStackTrace();
 			}
 		});
-
+        //商品表格层面的edit
 		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
 				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
 		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryDouble = (
@@ -242,7 +242,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodities(entryVO);
-			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue())
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue()) //表格总价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			try {
 				if (!update(newVO)) {
@@ -277,7 +277,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodities(entryVO);
-			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue())
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue())  //表格总价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getPrice());
 			try {
 				if (!update(newVO)) {

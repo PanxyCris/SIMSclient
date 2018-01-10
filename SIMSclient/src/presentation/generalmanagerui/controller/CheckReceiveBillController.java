@@ -59,7 +59,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 	@FXML
 	TableColumn<AccountListVO, String> tableAccount;
 	@FXML
-	TableColumn<AccountListVO, String> tableMoney;
+	TableColumn<AccountListVO, Double> tableMoney;
 	@FXML
 	TableColumn<AccountListVO, String> tableDescription;
 
@@ -167,7 +167,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 
 	public void listInit() {
 		tableAccount.setCellValueFactory(new PropertyValueFactory<AccountListVO, String>("accountID"));
-		tableMoney.setCellValueFactory(new PropertyValueFactory<AccountListVO, String>("money"));
+		tableMoney.setCellValueFactory(new PropertyValueFactory<AccountListVO, Double>("money"));
 		tableDescription.setCellValueFactory(new PropertyValueFactory<AccountListVO, String>("note"));
 	}
 
