@@ -22,6 +22,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
+import vo.commodityvo.GiftVO;
 
 public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBLService<SalesVO> {
 
@@ -209,7 +210,14 @@ public class BusinessHistoryScheduleSalesBL implements BusinessHistoryScheduleBL
 			Integer number=commodity.get(i).getNumber();
 			commodity.get(i).setNumber(-number);
 		}
-		return new SalesVO(id, retailer, saleMan, operator, warehouse, commodity, beforePrice, allowance, voucher, afterPrice, note, billState, billType);
+		
+		ArrayList<GiftVO> giftVOs=salesVO.getGifts();
+		for (int i = 0; i < giftVOs.size(); i++) {
+			Integer number=giftVOs.get(i).getNumber();
+			giftVOs.get(i).setNumber(number);;
+		}
+		
+		return new SalesVO(id, retailer, saleMan, operator, warehouse, commodity, giftVOs, beforePrice, allowance, voucher, afterPrice, note, billState, billType);
 	}
 
 	@Override
