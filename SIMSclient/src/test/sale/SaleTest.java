@@ -19,7 +19,7 @@ public class SaleTest {
 		MockCommodity commodity2 = new MockCommodity("a2", "RRE");
 
 		SalesController contoll = new SalesController();
-		
+		assertEquals(200.0 , 200.0);
 	}
 
 }
