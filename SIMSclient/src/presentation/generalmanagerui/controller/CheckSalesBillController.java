@@ -140,6 +140,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		findChoice.setItems(
 				FXCollections.observableArrayList(FindSaleScheduleType.NAME.value, FindSaleScheduleType.OPERATOR.value,
 						FindSaleScheduleType.MEMBER.value, FindSaleScheduleType.WAREHOUSE.value));

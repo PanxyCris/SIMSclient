@@ -91,7 +91,7 @@ public class ClassManageController extends InventoryManagerController {
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
 		root = new TreeItem<>(service.getRoot());
-
+		judgeMessage();
 		addAllChildren(root);
 		tree.setRoot(root);
 		classList.clear();

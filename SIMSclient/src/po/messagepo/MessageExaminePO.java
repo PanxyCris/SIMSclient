@@ -1,5 +1,7 @@
 package po.messagepo;
 
+import java.time.LocalDateTime;
+
 import po.UserPO;
 
 public class MessageExaminePO extends MessagePO{
@@ -11,8 +13,8 @@ public class MessageExaminePO extends MessagePO{
 	private String id; //单据编号
 	private UserPO user; //用户
 
-	public MessageExaminePO(String messageID,boolean hasRead,String id,UserPO user) {
-		super(messageID,user.getID(), getFormatInfo(id,user),hasRead);
+	public MessageExaminePO(String messageID,LocalDateTime time,boolean hasRead,String id,UserPO user) {
+		super(messageID,user.getID(), getFormatInfo(id,user),time,hasRead);
 		this.setId(id);
 		this.setUser(user);
 

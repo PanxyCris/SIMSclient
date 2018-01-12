@@ -118,6 +118,7 @@ public class SaleDetailTableController extends ViewTableController{
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);

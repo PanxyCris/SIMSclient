@@ -133,6 +133,7 @@ public class InitAccountController extends FinancialStaffController {
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		ObservableList<Integer> list = FXCollections.observableArrayList();
 		for (int i = LocalDate.now().getYear(); i >= 2000; i--)
 			list.add(i);

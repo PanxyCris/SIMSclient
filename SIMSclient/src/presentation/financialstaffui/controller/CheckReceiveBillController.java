@@ -101,6 +101,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 			list.addAll(copy);
 			table.setItems(list);
 			table.setEditable(true);
+			accountList.setEditable(true);
 			Alert alert = new Alert(Alert.AlertType.INFORMATION, "已红冲，请编辑单据信息");
 			alert.showAndWait();
 		} else {
@@ -164,6 +165,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();

@@ -3,6 +3,7 @@ package presentation.inventorymanagerui.controller;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import bussinesslogic.utilitybl.UtilityBL;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
@@ -44,8 +45,10 @@ public class UserMessageController extends InventoryManagerController {
 				}
 			}
 		}
-		if (messages != null)
+		if (messages != null){
+			Collections.reverse(messages);
 			list.addAll(messages);
+		}
 		messageTable.setItems(list);
 		time.setCellValueFactory(new PropertyValueFactory<MessageVO, LocalDateTime>("time"));
 		messageList.setCellValueFactory(new PropertyValueFactory<MessageVO, String>("info"));

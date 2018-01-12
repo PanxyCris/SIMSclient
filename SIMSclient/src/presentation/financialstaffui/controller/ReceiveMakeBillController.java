@@ -134,6 +134,7 @@ public class ReceiveMakeBillController extends MakeReceiptController {
 	public void initData(UserVO user,ReceiptBillVO bill) throws Exception {
 		   this.user = user;
 		   this.rec = bill;
+		   judgeMessage();
 			if(bill == null){
 				idLabel.setText(service.getId());
 			    sumLabel.setText("0");

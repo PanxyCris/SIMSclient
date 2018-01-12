@@ -130,6 +130,7 @@ public class ExamineReceiveBillController extends ExamineBillController {
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		choiceInit();
 		receiptChoice.setValue(BillType.SKD.value);
 		list.addAll(service.getCommitedBills());

@@ -55,6 +55,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 	TableView<GiftVO> giftTable;
 	@FXML
 	TableColumn<GiftVO, String> tableName;
+	@FXML
 	TableColumn<GiftVO, Integer> tableNumber;
 
 	/**
@@ -115,6 +116,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		manageInit();
 		checkInit();
 		initFind();

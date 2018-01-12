@@ -186,6 +186,7 @@ public class PromotionSumController extends PromotionMakingController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		choiceInit();
 		promotionChoice.setValue(type.value);
 		list.clear();

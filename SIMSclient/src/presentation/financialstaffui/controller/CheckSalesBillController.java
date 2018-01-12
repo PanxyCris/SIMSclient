@@ -127,6 +127,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 			list.addAll(copy);
 			table.setItems(list);
 			table.setEditable(true);
+			commodity.setEditable(true);
 			try {
 				edit();
 			} catch (RemoteException e) {
@@ -198,6 +199,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		findChoice.setItems(
 				FXCollections.observableArrayList(FindSaleScheduleType.NAME.value, FindSaleScheduleType.OPERATOR.value,
 						FindSaleScheduleType.MEMBER.value, FindSaleScheduleType.WAREHOUSE.value));

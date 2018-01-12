@@ -121,6 +121,7 @@ public class AccountManageController extends FinancialStaffController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		list.clear();
 		list.addAll(service.getAccountList());
 		table.setItems(list);

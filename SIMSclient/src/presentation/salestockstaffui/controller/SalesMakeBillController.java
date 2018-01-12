@@ -228,7 +228,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 		this.user = user;
 		this.sale = sale;
 		typeLabel.setText(type.value);
-
+		judgeMessage();
 		if (sale == null) {
 			if (type == BillType.SALESBILL)
 				idLabel.setText(service.getSaleID());

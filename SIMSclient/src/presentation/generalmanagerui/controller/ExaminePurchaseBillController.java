@@ -144,6 +144,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		choiceInit();
 		initFind();
 		receiptChoice.setValue(BillType.PURCHASEBILL.value);

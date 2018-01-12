@@ -136,6 +136,7 @@ public class MakeReceiptController extends InventoryManagerController {
 	public void initData(UserVO user, BillType type, InventoryBillVO inv) throws Exception {
 		this.user = user;
 		this.inv = inv;
+		judgeMessage();
 		operatorLabel.setText(readUser().getName());
 		if (type != null)
 			receiptChoice.setValue(type.value);

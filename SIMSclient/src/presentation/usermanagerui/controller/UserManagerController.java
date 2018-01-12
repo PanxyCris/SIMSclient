@@ -11,14 +11,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import presentation.mainui.LoginController;
 import presentation.mainui.MainUI;
 import presentation.usermanagerui.UserManagerUI;
 import presentation.usermanagerui.UserManagingUI;
 import presentation.usermanagerui.UserMessageUI;
 import vo.uservo.UserVO;
 
-public class UserManagerController{
+public class UserManagerController extends LoginController{
 
+    UtilityBLService utilityService = new UtilityBL();
 	public static final String mainID = "UserManagerUI";
 	static String previous;
 	static String current;
@@ -87,16 +89,8 @@ public class UserManagerController{
         previous = current = mainID;
         stack.push(mainID);
         this.user = user;
-    //    UtilityBLService utilityService = new UtilityBL();
-      /*  if(utilityService.hasMessage(user)){
-        	Circle circle = new Circle();
-        	circle.setCenterX(0);
-        	circle.setCenterY(0);
-        	circle.setLayoutX(377);
-        	circle.setLayoutY(16);
-        	circle.setRadius(7);
-        	circle.setFill(Paint.valueOf("#ff1f1f"));
-        }*/
+        writeUser(user);
+        judgeMessage();
      //   image = user.getImage();
 	}
 
@@ -128,6 +122,18 @@ public class UserManagerController{
 
 	}
 
+	public void judgeMessage(){
+        if(utilityService.hasMessage(user)){
+        	Circle circle = new Circle();
+        	circle.setCenterX(0);
+        	circle.setCenterY(0);
+        	circle.setLayoutX(377);
+        	circle.setLayoutY(16);
+        	circle.setRadius(7);
+        	circle.setFill(Paint.valueOf("#ff1f1f"));
+        	pane.getChildren().add(circle);
+        }
+	}
 
 
 }

@@ -152,6 +152,7 @@ public class PromotionCheckController extends SaleStockStaffController{
 		this.user = user;
 		this.type = type;
 		this.sale = sale;
+		judgeMessage();
 		manageMemberInit();
 		manageSpecialInit();
 		manageSumInit();

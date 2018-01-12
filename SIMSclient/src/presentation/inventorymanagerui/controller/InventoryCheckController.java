@@ -63,6 +63,7 @@ public class InventoryCheckController extends InventoryManagerController {
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		manageInit();
 	}
 

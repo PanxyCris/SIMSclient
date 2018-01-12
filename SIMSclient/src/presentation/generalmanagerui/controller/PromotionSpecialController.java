@@ -180,6 +180,7 @@ public class PromotionSpecialController extends PromotionMakingController {
 	}
 
 	public void initData(UserVO user) throws Exception {
+		judgeMessage();
 		this.user = user;
 		choiceInit();
 		promotionChoice.setValue(type.value);

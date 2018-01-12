@@ -111,6 +111,7 @@ public class SaleDetailTableController extends FinanceTableController {
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);

@@ -2,6 +2,7 @@ package bussinesslogic.billbl.inventory;
 
 import java.rmi.RemoteException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import bussinesslogicservice.billblservice.inventory.InventoryBillBLService;
@@ -77,7 +78,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 		if(clickedItem.getType() == BillType.INVENTORYLOSSBILL||clickedItem.getType() == BillType.INVENTORYGIFTBILL){
 			for(GiftVO commodity:clickedItem.getGifts()){
 				try {
-					if(commodityDataService.findCommodity(commodity.getName().substring(0,commodity.getName().length()-8),
+					if(commodityDataService.findCommodity(getTrueName(commodity.getName()),
 							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
 				} catch (RemoteException e) {
@@ -94,7 +95,7 @@ public class InventoryBillBL implements InventoryBillBLService{
 		    {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
 				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),false,inventoryBillPO.getId(),manager);
+				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(), false,inventoryBillPO.getId(),manager);
 				messageDataService.save(message);
 				}
 			}
@@ -188,4 +189,19 @@ public class InventoryBillBL implements InventoryBillBLService{
 		return l;
 	}
 
+	/**
+     * 商品名的过滤
+     * @param name 显示在单据上的商品名
+     * @return 真实的商品名
+     */
+	public String getTrueName(String name){
+		String newName = "";
+		for(int m=0;m<name.length();m++){
+			if(name.charAt(m)=='('){
+				newName = name.substring(0, m);
+			    break;
+			    }
+		}
+		return newName;
+	}
 }

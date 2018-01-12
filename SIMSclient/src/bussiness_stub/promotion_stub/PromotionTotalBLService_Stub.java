@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogicservice.promotionblservice.PromotionBLService;
-import dataenum.MemberLevel;
-import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import vo.commodityvo.GiftVO;
@@ -72,6 +70,6 @@ public class PromotionTotalBLService_Stub implements PromotionBLService<Promotio
 		return list;
 	}
 
-	
+
 
 }

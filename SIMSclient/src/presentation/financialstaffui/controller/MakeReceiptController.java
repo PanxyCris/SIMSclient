@@ -30,6 +30,7 @@ public class MakeReceiptController extends FinancialStaffController{
 
 	public void initData(UserVO user) throws Exception {
            this.user = user;
+           judgeMessage();
            choiceInit();
 	}
 

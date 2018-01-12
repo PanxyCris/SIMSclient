@@ -99,6 +99,7 @@ public class CheckReceiptController extends InventoryManagerController{
 	public void initData(UserVO user,BillType type){
 		this.user = user;
 		this.type = type;
+		judgeMessage();
 		choiceInit();
 		manageInit();
 		initFind();
@@ -216,7 +217,7 @@ public class CheckReceiptController extends InventoryManagerController{
                         delBtn.setOnMouseClicked((me) -> {
                         	InventoryBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());
                             try {
-								changeStage("ReceiveMakeBillUI",user,type,clickedItem);
+								changeStage("MakeReceiptUI",user,type,clickedItem);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

@@ -102,6 +102,7 @@ public class BussinessSituationTableController extends ViewTableController {
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		payList.addAll(service.showPay());
 		receiveList.addAll(service.showReceive());
 		pay.setItems(payList);

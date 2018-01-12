@@ -1,5 +1,7 @@
 package vo.messagevo;
 
+import java.time.LocalDateTime;
+
 import vo.uservo.UserVO;
 
 public class MessageExamineVO extends MessageVO{
@@ -11,8 +13,8 @@ public class MessageExamineVO extends MessageVO{
 	private String id; //单据编号
 	private UserVO user; //用户
 
-	public MessageExamineVO(String messageID,boolean hasRead,String id,UserVO user) {
-		super(messageID,user.getID(), getFormatInfo(id,user),hasRead);
+	public MessageExamineVO(String messageID,LocalDateTime time,boolean hasRead,String id,UserVO user) {
+		super(messageID,user.getID(), getFormatInfo(id,user),time,hasRead);
 		this.setId(id);
 		this.setUser(user);
 

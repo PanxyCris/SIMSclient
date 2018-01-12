@@ -1,5 +1,7 @@
 package vo.messagevo;
 
+import java.time.LocalDateTime;
+
 public class MessageWarmingVO extends MessageVO{
 
 	/**
@@ -16,8 +18,8 @@ public class MessageWarmingVO extends MessageVO{
 	private Integer currentNumber;
 
 
-	public MessageWarmingVO(String messageID,String userID,boolean hasRead,String name,int currentNumber,int warmingNumber){
-		super(messageID,userID,getFormatInfo(name,currentNumber,warmingNumber),hasRead);
+	public MessageWarmingVO(String messageID,String userID,LocalDateTime time,boolean hasRead,String name,int currentNumber,int warmingNumber){
+		super(messageID,userID,getFormatInfo(name,currentNumber,warmingNumber),time,hasRead);
 		this.name = name;
 		this.warmingNumber = warmingNumber;
 		this.currentNumber = currentNumber;

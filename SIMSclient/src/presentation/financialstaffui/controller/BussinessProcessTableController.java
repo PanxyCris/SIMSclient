@@ -8,10 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
+
 /**
  * 经营历程表选择要查看的单据表格界面
- * @author 潘星宇
- * 2017-12-24
+ *
+ * @author 潘星宇 2017-12-24
  */
 
 public class BussinessProcessTableController extends ViewTableController {
@@ -34,13 +35,13 @@ public class BussinessProcessTableController extends ViewTableController {
 				changeStage("CheckInventoryBillUI", user, null, null);
 				break;
 			case SALESBILL:
-				changeStage("CheckSakesBillUI", user, null, null);
+				changeStage("CheckSalesBillUI", user, null, null);
 				break;
 			case SKD:
-				changeStage("CheckPaymentBillUI", user, null, null);
+				changeStage("CheckReceiveBillUI", user, null, null);
 				break;
 			case XJFYD:
-				changeStage("CheckReceiveBillUI", user, null, null);
+				changeStage("CheckPaymentBillUI", user, null, null);
 				break;
 			default:
 				break;
@@ -50,6 +51,7 @@ public class BussinessProcessTableController extends ViewTableController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		tableChoiceInit();
 		choiceInit();
 	}

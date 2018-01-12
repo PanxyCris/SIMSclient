@@ -1,6 +1,7 @@
 package bussinesslogic.examinebl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import bussinesslogic.accountbillbl.ReceiptBillTransition;
@@ -77,7 +78,7 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO> {
 			updateBill(vo);
 			//通知用户
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), // 生成一个信息
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  // 生成一个信息
 					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
@@ -93,7 +94,7 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO> {
 			updateBill(vo);
 			//通知用户
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), false,
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  false,
 					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)

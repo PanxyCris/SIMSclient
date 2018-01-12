@@ -101,6 +101,7 @@ public class BussinessSituationTableController extends FinanceTableController {
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		payList.addAll(service.showPay());
 		receiveList.addAll(service.showReceive());
 		pay.setItems(payList);

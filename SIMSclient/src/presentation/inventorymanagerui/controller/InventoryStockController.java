@@ -53,6 +53,7 @@ public class InventoryStockController extends InventoryManagerController{
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		list.clear();
 		list.addAll(service.stock());
 		table.setItems(list);

@@ -36,6 +36,7 @@ public class ViewTableController extends FinancialStaffController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		tableChoiceInit();
 	}
 

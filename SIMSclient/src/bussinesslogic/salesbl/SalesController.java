@@ -2,6 +2,7 @@ package bussinesslogic.salesbl;
 
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -189,7 +190,7 @@ public class SalesController implements SalesBLService {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
 						FindUserType.USERROLE);
 				for (UserPO manager : generalManagers) {
-					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(), false,
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(),  false,
 							po.getId(), manager);
 					messageDataService.save(message);
 				}

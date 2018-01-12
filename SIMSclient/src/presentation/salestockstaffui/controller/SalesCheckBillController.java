@@ -123,6 +123,7 @@ public class SalesCheckBillController extends SaleStockStaffController{
 	public void initData(UserVO user,BillType type) {
 		this.user = user;
 		this.type = type;
+		judgeMessage();
 		findChoice.setItems(FXCollections.observableArrayList(FindSalesType.ID.value,FindSalesType.MEMBER.value,
 				FindSalesType.OPERATOR.value,FindSalesType.MEMBER.value,FindSalesType.SALEMAN.value,
 				FindSalesType.TOTAL.value));

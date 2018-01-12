@@ -69,7 +69,7 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		ArrayList<PaymentBillVO> paymentBillVOs=paymentBillBLService.show();
 		if(type==FindSaleScheduleType.OPERATOR){
 			for (int i = 0; i < paymentBillVOs.size(); i++) {
-				String userID=paymentBillVOs.get(i).getId();
+				String userID=paymentBillVOs.get(i).getUserID();
 				if(userID.equals(info)){
 					out.add(paymentBillVOs.get(i));
 				}
@@ -167,7 +167,6 @@ public class BusinessHistorySchedulePaymentBL implements BusinessHistorySchedule
 		ArrayList<PaymentBillVO> pArrayList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			PaymentBillVO paymentBillVO=redRush(table.get(i));
-			paymentBillVO.setState(BillState.COMMITED);
 			paymentBillBLService.save(paymentBillVO);
 			pArrayList.add(paymentBillVO);
 		}

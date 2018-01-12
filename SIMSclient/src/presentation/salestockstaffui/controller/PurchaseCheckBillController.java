@@ -122,6 +122,7 @@ public class PurchaseCheckBillController extends SaleStockStaffController {
 	public void initData(UserVO user,BillType type) {
 		this.user = user;
 		this.type = type;
+		judgeMessage();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();

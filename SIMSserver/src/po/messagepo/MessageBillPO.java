@@ -1,5 +1,7 @@
 package po.messagepo;
 
+import java.time.LocalDateTime;
+
 import dataenum.BillType;
 import dataenum.ResultMessage;
 
@@ -13,8 +15,8 @@ public class MessageBillPO extends MessagePO{
 	     private ResultMessage result;  //只有成功或者失败
 	     private String info; //格式 单据类：时间+"： 您的" + 单据编号 + 单据类型  + "审批" + 成功/失败
 
-	     public MessageBillPO(String messageID,String userID,boolean hasRead,String name,String id,BillType type,ResultMessage result){
-	    	 super(messageID,userID,getFormatInfo(name,id,type,result),hasRead);
+	     public MessageBillPO(String messageID,String userID,LocalDateTime time,boolean hasRead,String name,String id,BillType type,ResultMessage result){
+	    	 super(messageID,userID,getFormatInfo(name,id,type,result),time,hasRead);
 	    	 this.name = name;
 	    	 this.id = id;
 	    	 this.type = type;

@@ -415,6 +415,7 @@ public class MemberManageController extends SaleStockStaffController{
 		public void initData(UserVO user) throws Exception {
 			operatorField.setText(readUser().getName());
 			list.clear();
+			judgeMessage();
 			try {
 				list.addAll(service.show());
 				initInsert();

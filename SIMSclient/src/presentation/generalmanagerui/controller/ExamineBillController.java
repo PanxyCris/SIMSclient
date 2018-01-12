@@ -47,6 +47,7 @@ public class ExamineBillController extends GeneralManagerController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		choiceInit();
 	}
 

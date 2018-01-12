@@ -119,6 +119,7 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		list.addAll(service.show());
 		table.setItems(list);
 		initTime();
@@ -149,7 +150,7 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 					this.setGraphic(null);
 
 					if (!empty) {
-						Button delBtn = new Button("查看商品列表");
+						Button delBtn = new Button("查看条目清单");
 						this.setGraphic(delBtn);
 						delBtn.setOnMouseClicked((me) -> {
 							PaymentBillVO clickedItem = this.getTableView().getItems().get(this.getIndex());

@@ -173,7 +173,7 @@ public class PurchaseMakeBillController extends MakeReceiptController{
 		   this.user = user;
 		   this.purchase = purchase;
 		   typeLabel.setText(type.value);
-
+		   judgeMessage();
 			if(purchase == null){
 				if(type == BillType.PURCHASEBILL)
 				    idLabel.setText(service.getPurchaseID());

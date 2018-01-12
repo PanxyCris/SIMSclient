@@ -34,13 +34,13 @@ public class BussinessProcessTableController extends FinanceTableController {
 				changeStage("CheckInventoryBillUI", user, null);
 				break;
 			case SALESBILL:
-				changeStage("CheckSakesBillUI", user, null);
+				changeStage("CheckSalesBillUI", user, null);
 				break;
 			case SKD:
-				changeStage("CheckPaymentBillUI", user, null);
+				changeStage("CheckReceiveBillUI", user, null);
 				break;
 			case XJFYD:
-				changeStage("CheckReceiveBillUI", user, null);
+				changeStage("CheckPaymentBillUI", user, null);
 				break;
 			default:
 				break;
@@ -50,6 +50,7 @@ public class BussinessProcessTableController extends FinanceTableController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		tableChoiceInit();
 		choiceInit();
 	}

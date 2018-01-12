@@ -1,13 +1,13 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
+
 import bussinesslogicservice.purchaseblservice.PurchaseBLService;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
-import po.PurchasePO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 
@@ -84,7 +84,7 @@ public class PurchaseBLService_Stub implements PurchaseBLService{
 				"ncibwcfhbwvhu",45.00,BillType.PURCHASEBILL,BillState.DRAFT);
 		list.add(purchase1);
 		list.add(puchase2);
-		
+
 		ArrayList<PurchaseVO> result = new ArrayList<>();
 		for (PurchaseVO vo : list) {
 			switch (type) {

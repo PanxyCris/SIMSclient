@@ -211,6 +211,7 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 							if (giftList.get(i).getName().equals(gift.getName())) {
 								int num = giftList.get(i).getNumber() + gift.getNumber();
 								giftList.set(i, new GiftVO(gift.getName(), num));
+								break;
 							} else if (i + 1 == giftList.size())
 								giftList.addAll(t.getGifts());
 						}

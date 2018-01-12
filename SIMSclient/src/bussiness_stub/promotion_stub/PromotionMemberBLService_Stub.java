@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.MemberLevel;
-import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import vo.commodityvo.GiftVO;
@@ -15,7 +14,7 @@ import vo.promotionvo.PromotionMemberVO;
 
 public class PromotionMemberBLService_Stub implements PromotionBLService<PromotionMemberVO> {
 
-	
+
 	@Override
 	public ResultMessage insert(PromotionMemberVO vo) throws RemoteException {
 		return ResultMessage.SUCCESS;

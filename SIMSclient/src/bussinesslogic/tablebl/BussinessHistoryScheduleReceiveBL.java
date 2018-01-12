@@ -70,7 +70,7 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 		ArrayList<ReceiptBillVO> receiptBillVOs=receiptBillBLService.show();
 		if(type==FindSaleScheduleType.OPERATOR){
 			for (int i = 0; i < receiptBillVOs.size(); i++) {
-				String userID=receiptBillVOs.get(i).getId();
+				String userID=receiptBillVOs.get(i).getUserID();
 				if(userID.equals(info)){
 					out.add(receiptBillVOs.get(i));
 				}
@@ -168,7 +168,6 @@ public class BussinessHistoryScheduleReceiveBL implements BusinessHistorySchedul
 		ArrayList<ReceiptBillVO> rList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			ReceiptBillVO receiptBillVO=redRush(table.get(i));
-			receiptBillVO.setState(BillState.COMMITED);
 			receiptBillBLService.save(receiptBillVO);//存入红冲创建的新单据
 			rList.add(receiptBillVO);
 		}

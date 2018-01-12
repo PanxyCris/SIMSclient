@@ -40,6 +40,7 @@ public class MakeReceiptController extends SaleStockStaffController {
 
 	public void initData(UserVO user) throws Exception {
 		this.user = user;
+		judgeMessage();
 		try {
 			choiceInit();
 		} catch (Exception e) {

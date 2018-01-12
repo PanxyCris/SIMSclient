@@ -104,6 +104,7 @@ public class ReceiveCheckBillController extends FinancialStaffController{
 
 	public void initData(UserVO user) {
 		this.user = user;
+		judgeMessage();
 		list.addAll(service.show());
 		table.setItems(list);
 		manageInit();

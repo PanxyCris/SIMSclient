@@ -1,6 +1,7 @@
 package bussinesslogic.utilitybl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import bussinesslogic.userbl.UserController;
@@ -74,13 +75,13 @@ public class UtilityBL implements UtilityBLService{
 	}
 
 	public MessagePO voTopo(MessageVO vo){
-		MessagePO po = new MessagePO(vo.getMessageID(),vo.getUserID(),vo.getInfo(),vo.getHasRead());
+		MessagePO po = new MessagePO(vo.getMessageID(),vo.getUserID(),vo.getInfo(),vo.getTime(),vo.getHasRead());
 		po.setHasRead(vo.getHasRead());
 		return po;
 	}
 
 	public MessageVO poTovo(MessagePO po){
-		MessageVO vo = new MessageVO(po.getMessageID(),po.getUserID(),po.getInfo(),po.getHasRead());
+		MessageVO vo = new MessageVO(po.getMessageID(),po.getUserID(),po.getInfo(),po.getTime(),po.getHasRead());
 		vo.setHasRead(po.getHasRead());
 		return vo;
 	}
@@ -88,7 +89,7 @@ public class UtilityBL implements UtilityBLService{
 	@Override
 	public void warningMessage(CommodityPO po) throws RemoteException{
         if(po.getNumber()<=po.getWarmingValue()){
-      	  MessageWarmingPO message = new MessageWarmingPO(messageService.getMessageID(),null,false,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
+      	  MessageWarmingPO message = new MessageWarmingPO(messageService.getMessageID(),null,LocalDateTime.now(),false,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
       	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
       	  for(UserPO user:inventorymanagers){
       		  message.setMessageID(user.getID());

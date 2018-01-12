@@ -133,6 +133,7 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		list.addAll(service.show());
 		table.setItems(list);
 		initFind();

@@ -1,6 +1,7 @@
 package bussinesslogic.examinebl;
 
 import java.rmi.RemoteException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import bussinesslogic.billbl.inventory.InventoryBillBL;
@@ -90,7 +91,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
             updateBill(vo);
             //通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),LocalDateTime.now(), false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.SUCCESS)
@@ -106,7 +107,7 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 			updateBill(vo);
 			//通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),false,user.getName()+"("+user.getID()+")",
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),LocalDateTime.now(), false,user.getName()+"("+user.getID()+")",
 					vo.getId(),vo.getType(),ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if(result!=ResultMessage.FAIL)

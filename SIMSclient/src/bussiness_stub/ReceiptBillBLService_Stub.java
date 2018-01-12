@@ -1,11 +1,10 @@
 package bussiness_stub;
 
 import java.util.ArrayList;
+
 import bussinesslogicservice.accountbillblservice.ReceiptBillBLService;
 import dataenum.BillState;
 import dataenum.BillType;
-import dataenum.MemberCategory;
-import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import vo.billvo.financialbillvo.AccountListVO;

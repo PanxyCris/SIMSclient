@@ -34,9 +34,9 @@ public class CommodityBLService_Stub implements CommodityBLService{
 	@Override
 	public ArrayList<CommodityVO> find(String info, FindCommodityType properties) throws Exception {
 		ArrayList<CommodityVO> list = new ArrayList<>();
-		CommodityVO v1 = new CommodityVO("00001", "¿×Ã÷µÆ", "L", "µÆ", 
+		CommodityVO v1 = new CommodityVO("00001", "¿×Ã÷µÆ", "L", "µÆ",
 				300, 400.0, 500.0, 100);
-		CommodityVO v2 = new CommodityVO("00002", "¿×Ã÷µÆ", "S", "µÆ", 
+		CommodityVO v2 = new CommodityVO("00002", "¿×Ã÷µÆ", "S", "µÆ",
 				400, 300.0, 400.0, 100);
 		list.add(v1);
 		list.add(v2);
@@ -60,9 +60,9 @@ public class CommodityBLService_Stub implements CommodityBLService{
 	@Override
 	public ArrayList<CommodityVO> show() throws Exception {
 		ArrayList<CommodityVO> list = new ArrayList<>();
-		CommodityVO v1 = new CommodityVO("00001", "¿×Ã÷µÆ", "L", "µÆ", 
+		CommodityVO v1 = new CommodityVO("00001", "¿×Ã÷µÆ", "L", "µÆ",
 				300, 400.0, 500.0, 100);
-		CommodityVO v2 = new CommodityVO("00002", "¿×Ã÷µÆ", "S", "µÆ", 
+		CommodityVO v2 = new CommodityVO("00002", "¿×Ã÷µÆ", "S", "µÆ",
 				400, 300.0, 400.0, 100);
 		list.add(v1);
 		list.add(v2);
@@ -89,7 +89,6 @@ public class CommodityBLService_Stub implements CommodityBLService{
 		return null;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public ArrayList<CommodityCheckVO> check(LocalDate start, LocalDate end) {
 		ArrayList<CommodityCheckVO> list = new ArrayList<>();
@@ -108,5 +107,5 @@ public class CommodityBLService_Stub implements CommodityBLService{
 		return "00001";
 	}
 
-	
+
 }

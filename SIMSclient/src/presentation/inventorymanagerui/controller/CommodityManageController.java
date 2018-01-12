@@ -171,6 +171,7 @@ public class CommodityManageController extends InventoryManagerController {
 			classList.addAll(service.getAllChildrenClass());
 			classChoice.setItems(classList);
 		}
+		judgeMessage();
 		list.clear();
 		list.addAll(service.show());
 		table.setItems(list);

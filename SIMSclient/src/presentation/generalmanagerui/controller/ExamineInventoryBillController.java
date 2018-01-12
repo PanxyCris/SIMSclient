@@ -126,6 +126,7 @@ public class ExamineInventoryBillController extends ExamineBillController {
 
 	public void initData(UserVO user) throws RemoteException {
 		this.user = user;
+		judgeMessage();
 		choiceInit();
 		receiptChoice.setValue(BillType.INVENTORYBILL.value);
 		edit();

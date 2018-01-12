@@ -29,6 +29,7 @@ import vo.uservo.UserVO;
 
 public class SaleStockStaffController extends LoginController {
 
+	UtilityBLService utilityService = new UtilityBL();
 	public static final String mainID = "SaleStockStaffUI";
 	static String previous;
 	static String current;
@@ -101,17 +102,7 @@ public class SaleStockStaffController extends LoginController {
 		stack.push(mainID);
 		writeUser(user);
 		this.user = user;
-		UtilityBLService utilityService = new UtilityBL();
-		if (utilityService.hasMessage(user)) {
-			Circle circle = new Circle();
-			circle.setCenterX(0);
-			circle.setCenterY(0);
-			circle.setLayoutX(377);
-			circle.setLayoutY(16);
-			circle.setRadius(7);
-			circle.setFill(Paint.valueOf("#ff1f1f"));
-			pane.getChildren().add(circle);
-		}
+		judgeMessage();
 		// image = user.getImage();
 	}
 	/**
@@ -174,6 +165,19 @@ public class SaleStockStaffController extends LoginController {
 			}
 		});
 
+	}
+
+	public void judgeMessage(){
+		if (utilityService.hasMessage(user)) {
+			Circle circle = new Circle();
+			circle.setCenterX(0);
+			circle.setCenterY(0);
+			circle.setLayoutX(377);
+			circle.setLayoutY(16);
+			circle.setRadius(7);
+			circle.setFill(Paint.valueOf("#ff1f1f"));
+			pane.getChildren().add(circle);
+		}
 	}
 
 }

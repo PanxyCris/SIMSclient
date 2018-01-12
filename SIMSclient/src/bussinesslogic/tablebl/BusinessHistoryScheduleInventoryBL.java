@@ -142,7 +142,6 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 		ArrayList<InventoryBillVO> iList=new ArrayList<>();
 		for (int i = 0; i < table.size(); i++) {
 			InventoryBillVO inventoryBillVO=redRush(table.get(i));
-			inventoryBillVO.setState(BillState.COMMITED);
 			inventoryBillBLService.save(inventoryBillVO);
 			iList.add(inventoryBillVO);
 		}
@@ -174,17 +173,9 @@ public class BusinessHistoryScheduleInventoryBL implements BusinessHistorySchedu
 
 	@Override
 	public ResultMessage updateBill(InventoryBillVO table) {
-			ArrayList<InventoryBillVO> iList=new ArrayList<>();
 			InventoryBillVO inventoryBillVO=table;
-			inventoryBillVO.setState(BillState.COMMITED);
 			inventoryBillBLService.save(inventoryBillVO);
-		try {
-			examineBLService.passBills(iList);
-			return ResultMessage.SUCCESS;
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return ResultMessage.FAIL;
+		return ResultMessage.SUCCESS;
 	}
 
 }

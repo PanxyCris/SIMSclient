@@ -36,8 +36,8 @@ public class MessageDataServiceImpl implements MessageDataService{
 	public static void main(String[] args) {
 		String info = "进货单： 您的JHD-20171228-00001进货单审批成功";
 		MessageDataServiceImpl data = new MessageDataServiceImpl();
-		MessageWarmingPO message = new MessageWarmingPO("1","000003",true,"N JIAACD",400,500);
-	System.out.println(data.getMessage(new UserPO("000005",null,null,null,null)).get(0).getInfo());
+	//	MessageWarmingPO message = new MessageWarmingPO("1","000003",true,"N JIAACD",400,500);
+	System.out.println(data.getMessage(new UserPO("000003",null,null,null,null)).get(0).getInfo());
 
 	}
 
@@ -47,14 +47,14 @@ public class MessageDataServiceImpl implements MessageDataService{
 		    PreparedStatement ps0 = conn.prepareStatement("select count(*) from message where id = ?");
 		    ps0.setString(1, message.getMessageID());
 			ResultSet rs = ps0.executeQuery();
-			
+
 			int count = 0;
 			if (rs.next()) {
 				count = rs.getInt(1);
 				if (count == 0) {
 					return insert(message);
 				}
-				
+
 				else {
 					return update(message);
 				}
@@ -64,7 +64,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 		}
 		return ResultMessage.FAIL;
 	}
-	
+
 	public ResultMessage insert(MessagePO message) {
 		String sql = "" + "insert into message(id, object) values (?,?)";
 		try {
@@ -79,7 +79,7 @@ public class MessageDataServiceImpl implements MessageDataService{
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ResultMessage update(MessagePO message) {
 		String sql = "" + "update message set object = ? where id = ?";
 		try {
