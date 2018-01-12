@@ -1364,139 +1364,101 @@ Promotionbl各个类的职责如图
 该图展示了当总经理想要制定销售策略的时候，制定销售策略业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/制定销售策略顺序图.png">
 =======
-4.1.10 billbl模块<br>
-（1）模块概述<br>
-billbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
-billbl模块的职责及接口参见软件系统结构描述文档表<br>
-（2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.billblservice.billBLService接口。业务逻辑层和数据层之间添加dataservice.billdataservice.BillDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了BillController，这样BillController会将对商品的业务逻辑处理委托给Bill对象。BillPO是作为单据记录的持久化对象添加到设计模型中去的。BillList封装了关于Bill的数据集合的数据结构的秘密和计算总数的职责。InventoryBill、PurchaseAndSalesBill和Financial继承了Bill总类。Commodityinfo、Salesinfo和Accountinfo是根据依赖倒置原则，为了消除循环依赖而产生的接口。<br>
+　　　　4.1.10 InventoryBillbl模块
+
+　　　　(1)模块概述
+
+　　InventoryBill模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。
+
+　　InventoryBill模块的职责及接口参见软件系统结构描述文档表
+
+　　　　(2)整体结构
+
+　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.inventoryBillservice.InventoryBillBLService接口。业务逻辑层和数据层之间添加dataservice.inventoryBilldataservice.InventoryBillDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了InventoryBillController，这样InventoryBillController会将对库存类单据的业务逻辑处理委托给billController对象。InventoryBillPO是作为单据记录的持久化对象添加到设计模型中去的。<br>
 <img src="../img/软件详细设计图/bill模块各个类的设计.png"><br>
 <center>**bill模块各个类的设计**</center>
-<table><tbody>
-<tr>
-<th>模  块</th>
-<th>职  责</th>
-</tr>
-<tr>
-<th>BillController</th>
-<th>负责实现单据界面所需要的服务</th>
-<tr>
-<th>Bill</th>
-<th>单据的领域模型对象，拥有一个单据所持有的编号、时间等信息，可以帮助完成单据界面所需要的服务</th>
-</tr>
-<tr>
-<th>BillList</th>
-<th>单据清单的领域模型对象，拥有一系列单据所持有的编号、时间、状态等信息，可以帮助完成单据界面所需要的服务</th>
-</tr>
-<tr>
-<th>InventoryBill</th>
-<th>库存单据类的领域模型对象，拥有库存单据所持有的商品、进出数量等信息</th>
-</tr>
-<tr>
-<th>PurchaseAndSalesBill</th>
-<th>销售和进退货类的领域模型对象，拥有销售进出货所持有的商品、进出数量等信息</th>
-</tr>
-<tr>
-<th>FinancialBill</th>
-<th>收付款类的领域模型对象，拥有收付款项等信息</th>
-</tr>
-</table>
 
-（3）模块内部类的接口规范
-<center>**BillController的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "3">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th rowspan="3">BillController.check(BillList list)</th>
-<th>语法</th>
-<th>public ResultMessage check(BillList list)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已创建一个BillList领域对象，已有单据进入待审批状态，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Bill领域对象的check方法</th>
-</tr>
-<tr>
-<th rowspan="3">BillController.sendMessage()</th>
-<th>语法</th>
-<th>public ResultMessage sendMessage</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>总经理已执行了单据审批操作，返回单据审批结果信息</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用Bill领域对象的sendMessage方法</th>
-</tr>
-</table>
+|模块|职责|
+| --- | --- |
+|InventoryBillController|负责实现库存类单据界面所需要的服务|
+|InventoryBill|库存类单据的模型对象，拥有库存类单据所持有的编号，时间等信息，可以帮助库存管理人员库存类单据界面所需要的服务|
 
-<center>**Bill的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan = "3">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th rowspan="3">Bill.check(BillList list)</th>
-<th>语法</th>
-<th>public ResultMessage check(BillList list)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已进行一次单据的集合</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>返回单据清单对象</th>
-</tr>
-<tr>
-<th rowspan="3">Bill.sendMessage()</th>
-<th>语法</th>
-<th>public ResultMessage sendMessage()</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>单据已经进入待审批状态</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>返回单据审批结果</th>
-</tr>
-</table>
-<table><tbody>
-<tr>
-<th colspan = "2">需要的服务（需接口）</th>
-</tr>
-<tr>
-<th>服务名</th>
-<th>服务</th>
-</tr>
-<tr>
-<th>BillDataService.find(String id)</th>
-<th>根据ID进行查找单一持久化对象</th>
-</tr>
-<tr>
-<th>BillDataService.finds(String field,int value)</th>
-<th>根据字段名和值查找多个持久化对象</th>
-</tr>
-<tr>
-<th>BillDataService.insert(BillPO po)</th>
-<th>插入单一持久化对象</th>
-</tr>
-<tr>
-<th>BillDataService.update(BillPO po)</th>
-<th>更新单一持久化对象</th>
-</tr>
-<tr>
-<th>DataFactory.getBillDatabase</th>
-<th>得到Bill数据库的服务的引用</th>
-</tr>
-</table>
+　　　　(3)模块内部类的接口规范
+
+<center>**InventoryBillController的接口规范**</center>
+
+　**InventoryBillController模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|InventoryBillController.getID|语法|`public String getId(BillType type)`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的getId()方法|
+|InventoryBillController.save|语法|`public ResultMessage save(InventoryBillVO vo)`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的save()方法|
+|InventoryBillController.delete|语法|`public void delete(InventoryBillVO clickedItem)`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的delete()方法|
+|InventoryBillController.submit|语法|`public ResultMessage submit(InventoryBillVO clickedItem)`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的submit()方法|
+|InventoryBillController.show|语法|`public ArrayList<InventoryBillVO> show()`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的show()方法|
+|InventoryBillController.find|语法|`public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type)`|
+||前置条件|已经创建一个inventoryBillBL领域对象|
+||后置条件|调用inventoryBillBL的find()方法|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|InventoryBillBL.save|新增或更新单据信息|
+|InventoryBillBL.delete|删除单据|
+|InventoryBillBL.getID|返回待新增的单据id|
+|InventoryBillBL.find(String text,FindInventoryBillType type)|根据text查找单据|
+|InventoryBillBL.submit|提交单据|
+|InventoryBillBL.show|返回系统中所有库存类单据|
+<br/>
+
+　**InventoryBillbl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|InventoryBill.getID|语法|`public String getId(BillType type)`|
+||前置条件|启动一个新增库存类单据的回合|
+||后置条件|返回待新增单据的ID|
+|InventoryBill.save|语法|`public ResultMessage save(InventoryBillVO vo)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否存在该单据，若不存在则新增，存在则更新，返回保存验证的结果|
+|InventoryBill.delete|语法|`public void delete(InventoryBillVO clickedItem)`|
+||前置条件|单据符合规则|
+||后置条件|查找是否有该单据，若存在则删除|
+|InventoryBill.submit|语法|`public ResultMessage submit(InventoryBillVO clickedItem)`|
+||前置条件|单据信息符合规则|
+||后置条件|查找是否有该单据，若存在则修改单据状态为已提交，返回提交验证的结果|
+|InventoryBill.show|语法|`public ArrayList<InventoryBillVO> show()`|
+||前置条件|启动一个查看过往单据的回合|
+||后置条件|返回系统中所有的库存类单据的list|
+|InventoryBill.find|语法|`public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type)`|
+||前置条件|text符合规则|
+||后置条件|返回符合text的库存类单据的列表|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|InventoryBillDataService.insert|插入单一持久化对象|
+|InventoryBillDataService.update|更新打印持久化对象|
+|InventoryBillDataService.delete|删除单一持久化对象|
+|InventoryBillDataService.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|InventoryBillDataService.show|返回数据库中所有持久化对象|
+<br/>
 
 （4）业务逻辑层的动态模型
 该图表明了SIMS系统中，当用户点击输入新增添的单据之后，单据业务逻辑处理相关对象之间的协作<br>
@@ -1504,89 +1466,120 @@ billbl模块的职责及接口参见软件系统结构描述文档表<br>
 该图表明了SIMS系统中，当用户点击输入查询单据之后，单据业务逻辑处理相关对象之间的协作<br>
 <img src="../img/软件详细设计图/查询单据的顺序图.png"><br>
 
-4.1.11 checktablebl 模块<br>
-（1）模块概述<br>
-checktablebl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。<br>
-checktablebl模块的职责及接口参见软件系统结构描述文档表<br>
-（2）整体结构<br>
-根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. checktableBLService接口。业务逻辑层和数据层之间添加dataservice. checktableDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了checktableController，这样checktableController会将对客户的逻辑业务处理委托给checktable对象。checktablePO是作为客户的持久化对象被添加到设计模型中去的。
-checktablebl模块的设计如图
+　　　　4.1.11 tablebl 模块
 
-checktablebl各个类的职责如图
+　　　　(1)模块概述
+
+　　tablebl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。
+
+　　tablebl模块的职责及接口参见软件系统结构描述文档表。
+　　　　(2)整体结构
+
+　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice. SaleScheduleBLService、businesslogicservice.BusinessSituationBLservice和经营历程表的接口。
+
+tablebl各个类的职责如图
 | **模块** | **职责** |
-| checktableController | 负责实现制定销售策略界面所需要的服务 |
-| checktable | 制定销售策略的领域模型对象 |
-（3）模块内部类的接口规范<br>
-<center>**checktable的接口规范**</center>
-<table><tbody>
-<tr>
-<th colspan="3">提供的服务（供接口）</th>
-</tr>
-<tr>
-<th rowspan="3">checktable.FinancialDocPO viewReport</th>
-<th>语法</th>
-<th>FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>关键字符合输入条件</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>查询到目标报表</th>
-</tr>
-<tr>
-<th rowspan="3">checktable.exportReport</th>
-<th>语法</th>
-<th>public void exportReport()</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>符合输入条件</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>导出报表</th>
-</tr>
-<tr>
-<th rowspan="3">checktable.writeOff</th>
-<th>语法</th>
-<th>public void writeOff()</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>属性符合输入条件</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>红冲</th>
-</tr>
-<tr>
-<th rowspan="3">checktable.writeOffAndCopy</th>
-<th>语法</th>
-<th>public void writeOffAndCopy(BillPO billPO)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>符合输入条件</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>红冲并复制</th>
-</tr>
-</table>
-<table><tbody>
+|businesshistorybl|负责实现查看经营历程表界面所需要的服务|
+|businesssituationbl|负责实现查看经营情况表界面所需要的服务|
+|saleschedulebl|负责实现查看销售明细表界面所需要的服务|
 
-<table><tbody>
-<tr>
-<th colspan = "2">需要的服务（需接口）</th>
-</tr>
+　　　　(3)模块内部类的接口规范
 
-</tr>
-</table>
+　**businesshistorybl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|businesshistory.show|语法|` public ArrayList<B> show()`|
+||前置条件|启动一个查看经营历程表的回合|
+||后置条件|返回通过审批的对应单据|
+|businesshistory.siftTime|语法|`public ArrayList<B> siftTime(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的单据|
+|businesshistory.sift|语法|`public ArrayList<B> sift(String  info,FindSaleScheduleType type)`|
+||前置条件|info符合输入规则|
+||后置条件|返回符合info的单据列表|
+|businesshistory.exportReport|语法|`public void exportReport(ArrayList<B> table)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+|businesshistory.writeOff|语法|`public ArrayList<B> writeOff(ArrayList<B> table)`|
+||前置条件|启动一个红冲回合|
+||后置条件|进行红冲操作并将单据入账并返回红冲后的单据|
+|businesshistory.writeOffAndCopy|语法|`public ArrayList<B> writeOffAndCopy(ArrayList<B> table)`|
+||前置条件|启动一个红冲并复制回合|
+||后置条件|将单据入账，返回操作后的单据|
+|businesshistory.updateBill|语法|`public ResultMessage updateBill(B table)`|
+||前置条件|启动一个红冲并复制回合|
+||后置条件|进行红冲并复制操作并将单据入账|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|purchaseservice.show|获得系统中的进货单和进货退货单|
+|salesservice.show|获得系统中的销售单和销售退货单|
+|paymentbillservice.show|获得系统中的付款单|
+|receiptbillservice.show|获得系统中的收款单|
+|inventorybillservice.show|获得系统中的库存类单据|
+|examineblservice.passbill|审批单据|
+<br/>
+　**businesssituationbl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|businesssituation.showPay|语法|`public ArrayList<PaymentTableVO> showPay()`|
+||前置条件|启动一个查看经营情况表的回合|
+||后置条件|返回支出类|
+|businesssituation.showReceive|语法|`public ArrayList<ReceiveTableVO> showReceive()`|
+||前置条件|启动一个查看经营情况表的回合|
+||后置条件|返回收入类|
+|businesssituation.siftPay|语法|`public ArrayList<PaymentTableVO> siftPay(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的付款单List|
+|businesssituation.siftReceive|语法|`public ArrayList<ReceiveTableVO> siftReceive(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的收款单List|
+|businesssituation.exportReport|语法|`public void exportReport(ArrayList<PaymentTableVO> pay,ArrayList<ReceiveTableVO> receive)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+
+
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|paymentbillservice.show|获得系统中的付款单|
+|receiptbillservice.show|获得系统中的收款单|
+<br/>
+　**saleschedulebl模块的接口规范**
+
+|提供的服务|供接口||
+| --- | --- | --- |
+|saleschedule.show|语法|` public ArrayList<SaleScheduleVO> show()`|
+||前置条件|启动一个查看销售明细表的回合|
+||后置条件|返回通过审批的对应单据的销售信息|
+|saleschedule.siftTime|语法|`public ArrayList<SaleScheduleVO> siftTime(LocalDate start,LocalDate end)`|
+||前置条件|输入合理的筛选条件范围|
+||后置条件|返回筛选出的单据的销售信息|
+|saleschedule.sift|语法|`public ArrayList<SaleScheduleVO> sift(String info,FindSaleScheduleType type)`|
+||前置条件|info符合输入规则|
+||后置条件|返回符合info的单据列表的对应销售信息|
+|saleschedule.exportReport|语法|`public void exportReport(ArrayList<SaleScheduleVO> sale)`|
+||前置条件|启动生成表格的回合|
+||后置条件|导出excel表格|
+<br/>
+
+|需要的服务|需接口|
+| --- | --- |
+|服务名|服务|
+|salesservice.show|获得系统中的销售单和销售退货单|
+<br/>
+
 
 （4）业务逻辑层的动态模型<br>
-该图展示了当财务人员想要查看表格的时候，查看表格业务逻辑处理的相关对象之间的协作<br>
+该图展示了当财务人员或总经理想要查看表格的时候，查看表格业务逻辑处理的相关对象之间的协作<br>
 
 4.2.1 mainui模块<br>
 （1）模块概述<br>
