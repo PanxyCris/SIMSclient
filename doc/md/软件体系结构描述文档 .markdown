@@ -441,11 +441,11 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Commodity.insert(CommodityVO vo)|插入单一持久化对象|
-|Commodity.delelte(String id)|删除单一持久化对象|
-|Commodity.update(CommodityVO vo)|更新单一持久化对象|
-|Commodity.find(String keywords,FindCommodityType type)|根据keywords查找多个持久化对象|
-|Commodity.show()|返回数据库中所有持久化对象|
+|CommodityDataService.insert(CommodityPO po)|插入单一持久化对象|
+|CommodityDataService.delelte(String id)|删除单一持久化对象|
+|CommodityDataService.update(CommodityPO po)|更新单一持久化对象|
+|CommodityDataService.find(String keywords,FindCommodityType type)|根据keywords查找多个持久化对象|
+|CommodityDataService.show()|返回数据库中所有持久化对象|
 <br/>
 
 　**classificationbl模块的接口规范**
@@ -479,13 +479,13 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Classification.insert()|插入单一持久化对象|
-|Classification.update|更新打印持久化对象|
-|Classification.delete|删除单一持久化对象|
-|Classification.getRoot|返回数据库中根节点持久化对象|
-|Classification.find(String name)|根据name查找单一持久化对象|
-|Classification.show|返回数据库中所有持久化对象|
-|Classification.getId|返回待新增分类的Id|
+|ClassificationDataService.insert()|插入单一持久化对象|
+|ClassificationDataService.update|更新打印持久化对象|
+|ClassificationDataService.delete|删除单一持久化对象|
+|ClassificationDataService.getRoot|返回数据库中根节点持久化对象|
+|ClassificationDataService.find(String name)|根据name查找单一持久化对象|
+|ClassificationDataService.show|返回数据库中所有持久化对象|
+|ClassificationDataService.getId|返回待新增分类的Id|
 <br/>
 
 　**InventoryBillbl模块的接口规范**
@@ -517,11 +517,11 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|InventoryBill.insert|插入单一持久化对象|
-|InventoryBill.update|更新打印持久化对象|
-|InventoryBill.delete|删除单一持久化对象|
-|InventoryBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|InventoryBill.show|返回数据库中所有持久化对象|
+|InventoryBillDataService.insert|插入单一持久化对象|
+|InventoryBillDataService.update|更新打印持久化对象|
+|InventoryBillDataService.delete|删除单一持久化对象|
+|InventoryBillDataService.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|InventoryBillDataService.show|返回数据库中所有持久化对象|
 <br/>
 
 　**memberbl模块的接口规范**
@@ -718,11 +718,11 @@ JavaFX
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|PaymentBill.insert|插入单一持久化对象|
-|PaymentBill.update|更新打印持久化对象|
-|PaymentBill.delete|删除单一持久化对象|
-|PaymentBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|PaymentBill.show|返回数据库中所有持久化对象|
+|PaymentBillDataService.insert|插入单一持久化对象|
+|PaymentBillDataService.update|更新打印持久化对象|
+|PaymentBillDataService.delete|删除单一持久化对象|
+|PaymentBillDataService.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
+|PaymentBillDataService.show|返回数据库中所有持久化对象|
 <br/>
 
 　**businesshistorybl模块的接口规范**
