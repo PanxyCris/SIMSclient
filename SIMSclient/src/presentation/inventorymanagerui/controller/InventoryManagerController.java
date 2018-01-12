@@ -177,7 +177,7 @@ public class InventoryManagerController extends LoginController {
      * 判断是否有信息
      */
 	public void judgeMessage(){
-		if (utilityService.hasMessage(user)) {
+		if (utilityService.hasMessage(readUser())) {
 			Circle circle = new Circle();
 			circle.setCenterX(0);
 			circle.setCenterY(0);

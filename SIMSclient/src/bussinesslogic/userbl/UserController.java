@@ -69,7 +69,7 @@ public class UserController implements UserBLService{
 	public UserPO voTopo(UserVO vo){
 		UserPO po = new UserPO(vo.getID(),vo.getName(),vo.getPassword(),vo.getRole(),vo.getImage());
 		return po;
-
+		
 	}
 
 	public UserVO poTovo(UserPO po){

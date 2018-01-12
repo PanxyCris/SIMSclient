@@ -123,7 +123,7 @@ public class UserManagerController extends LoginController{
 	}
 
 	public void judgeMessage(){
-        if(utilityService.hasMessage(user)){
+        if(utilityService.hasMessage(readUser())){
         	Circle circle = new Circle();
         	circle.setCenterX(0);
         	circle.setCenterY(0);

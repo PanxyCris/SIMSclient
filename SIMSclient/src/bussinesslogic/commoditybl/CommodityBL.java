@@ -318,7 +318,7 @@ public class CommodityBL implements CommodityBLService {
 	@Override
 	public void exportReport(ArrayList<CommodityStockVO> commodityStockVOs) {
 		WritableWorkbook wwb = null;
-		String fileName = "C:/Users/asus/Desktop/CommodityStock.xlsx";
+		String fileName = "C:/Users/user/Desktop/CommodityStock.xlsx";
 		try {
 			// 创建一个可写入的工作簿（WorkBook）对象,
 			// 这里用父类方法createWorkbook创建子类WritableWorkbook让我想起了工厂方法
