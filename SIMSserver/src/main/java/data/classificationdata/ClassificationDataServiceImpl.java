@@ -42,7 +42,7 @@ public class ClassificationDataServiceImpl implements ClassificationDataService 
 
 	@Override
 	public ClassificationVPO findClassification(String keyword) throws RemoteException {
-		return classfication.find(keyword).get(0);
+		return classfication.findClassification(keyword);
 	}
 
 	@Override

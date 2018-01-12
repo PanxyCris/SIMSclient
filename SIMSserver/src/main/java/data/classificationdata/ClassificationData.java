@@ -29,8 +29,8 @@ public class ClassificationData {
 	public static void main(String[] args){
 
 		ClassificationData d = new ClassificationData();
-		ArrayList<ClassificationVPO> children = new ArrayList<>();
-		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
+//		ArrayList<ClassificationVPO> children = new ArrayList<>();
+//		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
 //	    ClassificationVPO c11 = new ClassificationVPO("0005","白白炽灯",true,null,null);
 //		ClassificationVPO c12 = new ClassificationVPO("0006","黑白炽灯",true,null,null);
 //		children1.add(c11);
@@ -42,18 +42,19 @@ public class ClassificationData {
 ////	    children.add(c1);
 ////		children.add(c2);
 ////		children.add(c3);
-		 ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+//		 ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
 
 //  	d.insert(c2);
 //		d.insert(c1);
 //		d.insert(root);
-		 ClassificationVPO last = d.show().get(5);
-		 last.setChildrenPointer(null);
+//		 ClassificationVPO last = d.show().get(5);
+//		 last.setChildrenPointer(null);
 	//	 d.update(last);
     //    d.delete(d.show().get(d.show().size()-1).getName());
-		System.out.println(d.show().size());
-		for(ClassificationVPO vpo:d.show())
-		System.out.println(vpo.getName());
+//		System.out.println(d.show().size());
+//		for(ClassificationVPO vpo:d.show())
+		System.out.println(d.show().get(2).getId());
+		System.out.println(d.findClassification("黄灯").getId());
 	}
 
 	private Connection conn;
@@ -200,26 +201,10 @@ public class ClassificationData {
 	}
 
 	public ClassificationVPO findClassification(String name) {
-		String sql = "select object from classification where name = ?";
+		ArrayList<ClassificationVPO> list = show();
 		ClassificationVPO po = null;
-		PreparedStatement ps;
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, name);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
-
-                while(-1!=(bis.read(buff, 0, buff.length)));
-                ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                po = (ClassificationVPO)in.readObject();                   //读出对象
-
-			}
-		} catch (SQLException | IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+		for (ClassificationVPO p : list) {
+			if (name.equals(p.getName())) return p;
 		}
 
 		return po;
