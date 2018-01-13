@@ -383,11 +383,9 @@ paymentbill的设计图类似
 
 　　　　(4)业务逻辑层的动态模型
 
-　　　　以下三个图分别表明了企业进销存系统中，对账簿进行增删查的逻辑处理的相关对象之间的协作
+　　　　以下三个图分别表明了企业进销存系统中，对账簿进行增查的逻辑处理的相关对象之间的协作
 
 <img src="../img/软件详细设计图/setupaccount_newBuild顺序图.png">
-
-<img src="../img/软件详细设计图/setupaccount_delete顺序图.png">
 
 <img src="../img/软件详细设计图/setupaccount_find顺序图.png">
 　　　　4.1.4 commoditybl 模块
