@@ -43,8 +43,6 @@ import dataservice.promotiondataservice.PromotionSumDataService;
 import dataservice.purchasedataservice.PurchaseDataService;
 import dataservice.salesdataservice.SalesDataService;
 import dataservice.userdataservice.UserDataService;
-import po.PurchasePO;
-import po.UserPO;
 import po.accountbookpo.AccountBookPO;
 import po.accountpo.AccountPO;
 import po.classificationvpo.ClassificationVPO;
@@ -57,7 +55,9 @@ import po.messagepo.MessagePO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;
+import po.purchasepo.PurchasePO;
 import po.salespo.SalesPO;
+import po.userpo.UserPO;
 
 /**
  *

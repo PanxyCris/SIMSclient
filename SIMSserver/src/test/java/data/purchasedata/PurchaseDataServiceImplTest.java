@@ -2,8 +2,9 @@ package data.purchasedata;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.PurchasePO;
+
 import po.commoditypo.CommodityItemPO;
+import po.purchasepo.PurchasePO;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
 import dataenum.BillType;

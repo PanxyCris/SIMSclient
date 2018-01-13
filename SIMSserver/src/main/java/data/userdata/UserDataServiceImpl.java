@@ -18,7 +18,7 @@ import data.userdata.UserData;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
-import po.UserPO;
+import po.userpo.UserPO;
 
 public class UserDataServiceImpl implements UserDataService {
 

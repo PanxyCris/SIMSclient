@@ -23,8 +23,8 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
-import po.PurchasePO;
 import po.commoditypo.CommodityItemPO;
+import po.purchasepo.PurchasePO;
 
 public class PurchaseData {
 

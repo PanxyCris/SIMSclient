@@ -1,12 +1,13 @@
 package po.accountbookpo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import po.accountpo.AccountPO;
 import po.commoditypo.CommodityPO;
 import po.memberpo.MemberPO;
 
-public class AccountBookPO {
+public class AccountBookPO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String date;
 	private String clerkID;// ²Ù×÷Ô±ID

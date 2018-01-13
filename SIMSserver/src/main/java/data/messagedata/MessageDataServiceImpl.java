@@ -17,8 +17,8 @@ import java.util.Collections;
 import data.DBManager;
 import dataenum.ResultMessage;
 import dataservice.messagedataservice.MessageDataService;
-import po.UserPO;
 import po.messagepo.MessagePO;
+import po.userpo.UserPO;
 
 public class MessageDataServiceImpl implements MessageDataService {
 

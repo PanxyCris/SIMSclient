@@ -17,7 +17,7 @@ import data.DBManager;
 import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
-import po.UserPO;
+import po.userpo.UserPO;
 
 /**
  * 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
-import po.PurchasePO;
+import po.purchasepo.PurchasePO;
 
 /**
  * ภเหตร๗
