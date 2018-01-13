@@ -3,14 +3,14 @@ package vo.promotionvo;
 import java.time.LocalDate;
 
 import dataenum.PromotionType;
-import vo.ViewObject;
+
 
 /**
 *
 * @author Lijie
 * @date 2017Äê12ÔÂ11ÈÕ
 */
-public class PromotionVO extends ViewObject{
+public class PromotionVO{
 
 	private String id;
 	private LocalDate beginDate;

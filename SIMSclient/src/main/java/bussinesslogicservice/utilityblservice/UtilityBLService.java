@@ -3,7 +3,7 @@ package bussinesslogicservice.utilityblservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 

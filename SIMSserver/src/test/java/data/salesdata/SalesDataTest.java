@@ -3,12 +3,13 @@ package data.salesdata;
 import java.util.ArrayList;
 import dataenum.ResultMessage;
 import org.junit.*;
-import po.sales.SalesPO;
+
+import po.commoditypo.CommodityItemPO;
+import po.commoditypo.GiftPO;
+import po.salespo.SalesPO;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
 import dataenum.BillType;
-import po.commodity.CommodityItemPO;
-import po.commodity.GiftPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

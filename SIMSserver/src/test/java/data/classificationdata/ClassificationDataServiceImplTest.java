@@ -2,8 +2,10 @@ package data.classificationdata;
 
 import java.util.ArrayList;
 import dataenum.ResultMessage;
+import po.classificationvpo.ClassificationVPO;
+
 import org.junit.*;
-import po.ClassificationVPO;
+
 import static org.junit.Assert.*;
 
 /**

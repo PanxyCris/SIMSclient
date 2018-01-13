@@ -4,7 +4,8 @@ import org.junit.*;
 import vo.membervo.MemberVO;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
-import po.MemberPO;
+import po.memberpo.MemberPO;
+
 import static org.junit.Assert.*;
 
 /**

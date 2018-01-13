@@ -2,7 +2,7 @@ package bussinesslogic.salesbl.info;
 
 import java.time.LocalDate;
 import vo.commodityvo.GiftVO;
-import po.commodity.GiftPO;
+
 import java.util.ArrayList;
 import vo.promotionvo.PromotionPricePacksVO;
 import java.util.Date;
@@ -10,6 +10,8 @@ import vo.billvo.salesbillvo.SalesPriceVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionVO;
 import org.junit.*;
+
+import po.commoditypo.GiftPO;
 import vo.promotionvo.PromotionTotalVO;
 import vo.promotionvo.PromotionMemberVO;
 import static org.junit.Assert.*;

@@ -8,7 +8,7 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
 import dataservice.billdataservice.BillDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.inventorybillpo.InventoryBillPO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import dataenum.BillState;
 import dataenum.BillType;
-import po.BillPO;
-import po.commodity.GiftPO;
+import po.billpo.BillPO;
+import po.commoditypo.GiftPO;
 
 public class InventoryBillPO extends BillPO implements Serializable{
 

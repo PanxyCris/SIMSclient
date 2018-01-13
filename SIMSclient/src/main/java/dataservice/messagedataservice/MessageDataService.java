@@ -5,8 +5,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
-import po.UserPO;
 import po.messagepo.MessagePO;
+import po.userpo.UserPO;
 
 public interface MessageDataService extends Remote {
 

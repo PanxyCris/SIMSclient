@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
-import po.ClassificationVPO;
+import po.classificationvpo.ClassificationVPO;
 
 /**     
 *  

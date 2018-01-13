@@ -18,7 +18,7 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import dataenum.findtype.FindPromotionType;
 import po.UserPO;
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 
 public class CommodityData {
 

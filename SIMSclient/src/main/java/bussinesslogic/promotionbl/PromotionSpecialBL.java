@@ -7,7 +7,7 @@ import bussinesslogicservice.promotionblservice.PromotionBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPricePacksPO;
 import rmi.RemoteHelper;
 import vo.commodityvo.GiftVO;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
-import po.ClassificationVPO;
+import po.classificationvpo.ClassificationVPO;
 
 public class ClassificationController implements ClassificationBLService{
 

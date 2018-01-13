@@ -2,9 +2,10 @@ package bussinesslogic.promotionbl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPricePacksPO;
 import vo.commodityvo.GiftVO;
-import po.commodity.GiftPO;
 import dataenum.ResultMessage;
 import org.junit.*;
 import vo.promotionvo.PromotionPricePacksVO;

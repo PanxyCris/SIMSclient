@@ -1,7 +1,8 @@
 package bussinesslogic.commoditybl;
 
 import org.junit.*;
-import po.commodity.CommodityPO;
+
+import po.commoditypo.CommodityPO;
 import vo.commodityvo.CommodityVO;
 import static org.junit.Assert.*;
 

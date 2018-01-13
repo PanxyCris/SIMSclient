@@ -9,8 +9,9 @@ import dataenum.UserRole;
 import javafx.scene.image.ImageView;
 import org.junit.*;
 import bussinesslogicservice.utilityblservice.UtilityBLService;
+import po.commoditypo.CommodityPO;
 import po.messagepo.MessagePO;
-import po.commodity.CommodityPO;
+
 import static org.junit.Assert.*;
 
 /**

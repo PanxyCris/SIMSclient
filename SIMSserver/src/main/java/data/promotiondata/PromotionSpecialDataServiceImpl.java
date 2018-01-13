@@ -10,7 +10,7 @@ import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPO;
 import po.promotionpo.PromotionPricePacksPO;
 

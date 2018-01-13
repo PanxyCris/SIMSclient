@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import org.junit.*;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import dataenum.BillType;
+import po.commoditypo.GiftPO;
 import po.inventorybillpo.InventoryBillPO;
 import vo.commodityvo.GiftVO;
-import po.commodity.GiftPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

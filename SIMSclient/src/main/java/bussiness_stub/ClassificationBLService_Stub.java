@@ -3,7 +3,7 @@ package bussiness_stub;
 import java.util.ArrayList;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
-import po.ClassificationVPO;
+import po.classificationvpo.ClassificationVPO;
 
 public class ClassificationBLService_Stub implements ClassificationBLService{
 

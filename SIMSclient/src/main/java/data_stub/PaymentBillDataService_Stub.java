@@ -8,8 +8,8 @@ import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
-import po.FinancialBill.EntryPO;
-import po.FinancialBill.PaymentBillPO;
+import po.financialbillpo.EntryPO;
+import po.financialbillpo.PaymentBillPO;
 
 /**     
 *  

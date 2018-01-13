@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
 import dataservice.memberdataservice.MemberDataService;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 
 
 public class MemberDataServiceImpl implements MemberDataService {

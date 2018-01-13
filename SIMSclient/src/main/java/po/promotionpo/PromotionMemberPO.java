@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.MemberLevel;
 import dataenum.PromotionType;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 
 public class PromotionMemberPO extends PromotionPO {
 	/** 

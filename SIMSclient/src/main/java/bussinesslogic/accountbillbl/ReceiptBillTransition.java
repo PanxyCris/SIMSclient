@@ -2,8 +2,8 @@ package bussinesslogic.accountbillbl;
 
 import java.util.ArrayList;
 
-import po.FinancialBill.AccountListPO;
-import po.FinancialBill.ReceiptBillPO;
+import po.financialbillpo.AccountListPO;
+import po.financialbillpo.ReceiptBillPO;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 

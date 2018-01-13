@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
-import po.sales.SalesPO;
+import po.salespo.SalesPO;
 
 public interface SalesDataService extends Remote {
 	

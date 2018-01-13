@@ -2,8 +2,10 @@ package bussinesslogic.classificationbl;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.ClassificationVPO;
+
 import dataenum.ResultMessage;
+import po.classificationvpo.ClassificationVPO;
+
 import static org.junit.Assert.*;
 
 /**

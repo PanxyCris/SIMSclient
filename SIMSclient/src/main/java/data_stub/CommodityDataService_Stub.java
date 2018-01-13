@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 
 public class CommodityDataService_Stub implements CommodityDataService{
 

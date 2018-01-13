@@ -1,12 +1,13 @@
 package bussinesslogic.accountbillbl;
 
 import java.util.ArrayList;
-import po.FinancialBill.AccountListPO;
+
 import org.junit.*;
 import vo.billvo.financialbillvo.AccountListVO;
-import po.FinancialBill.ReceiptBillPO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 import dataenum.BillType;
+import po.financialbillpo.AccountListPO;
+import po.financialbillpo.ReceiptBillPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

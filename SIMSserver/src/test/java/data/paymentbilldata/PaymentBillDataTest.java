@@ -2,10 +2,11 @@ package data.paymentbilldata;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.FinancialBill.EntryPO;
+
 import dataenum.BillType;
-import po.FinancialBill.PaymentBillPO;
 import dataenum.findtype.FindAccountBillType;
+import po.financialbillpo.EntryPO;
+import po.financialbillpo.PaymentBillPO;
 import dataenum.BillState;
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;

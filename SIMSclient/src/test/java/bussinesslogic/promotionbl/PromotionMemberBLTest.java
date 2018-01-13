@@ -3,10 +3,11 @@ package bussinesslogic.promotionbl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.ResultMessage;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import vo.commodityvo.GiftVO;
 import dataenum.MemberLevel;
-import po.commodity.GiftPO;
+
 import org.junit.*;
 import dataenum.findtype.FindPromotionType;
 import vo.promotionvo.PromotionMemberVO;

@@ -2,7 +2,7 @@ package dataservice.checktabledataservice;
 
 import java.rmi.Remote;
 
-import po.table.SaleSchedulePO;
+import po.tablepo.SaleSchedulePO;
 
 public interface SaleScheduleDataService extends Remote{
 	public static final String NAME = "SaleScheduleData";

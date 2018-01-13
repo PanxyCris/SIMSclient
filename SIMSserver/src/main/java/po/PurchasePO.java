@@ -13,7 +13,7 @@ import java.util.Date;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
-import po.commodity.CommodityItemPO;
+import po.commoditypo.CommodityItemPO;
 
 public class PurchasePO implements Serializable{
 

@@ -1,7 +1,8 @@
 package dataservice.checktabledataservice;
 
 import java.rmi.Remote;
-import po.table.StatementOfOperationPO;
+
+import po.tablepo.StatementOfOperationPO;
 
 public interface StatementOfOperationDataService extends Remote{
 	public static final String NAME = "statementOfOperationData";

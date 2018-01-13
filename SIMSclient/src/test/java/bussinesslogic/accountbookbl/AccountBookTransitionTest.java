@@ -6,11 +6,13 @@ import vo.membervo.MemberVO;
 import bussinesslogic.memberbl.MemberTransition;
 import bussinesslogic.accountbl.AccountTransition;
 import vo.commodityvo.CommodityVO;
-import po.AccountBookPO;
-import po.AccountPO;
-import po.MemberPO;
+import po.accountbookpo.AccountBookPO;
+import po.accountpo.AccountPO;
+import po.commoditypo.CommodityPO;
+
 import org.junit.*;
-import po.commodity.CommodityPO;
+
+import po.memberpo.MemberPO;
 import vo.accountbookvo.AccountBookVO;
 import bussinesslogic.commoditybl.CommodityTransiton;
 import static org.junit.Assert.*;

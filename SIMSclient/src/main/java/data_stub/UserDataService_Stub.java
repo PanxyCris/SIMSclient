@@ -7,7 +7,7 @@ import dataenum.ResultMessage;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
-import po.UserPO;
+import po.userpo.UserPO;
 
 public class UserDataService_Stub implements UserDataService{
 

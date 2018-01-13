@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 import java.util.*;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSalesType;
-import po.sales.SalesPO;
+import po.salespo.SalesPO;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 import vo.promotionvo.PromotionMemberVO;

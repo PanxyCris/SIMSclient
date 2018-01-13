@@ -5,8 +5,8 @@ import dataenum.ResultMessage;
 import org.junit.*;
 import dataenum.findtype.FindInventoryBillType;
 import dataenum.BillType;
+import po.commoditypo.GiftPO;
 import po.inventorybillpo.InventoryBillPO;
-import po.commodity.GiftPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

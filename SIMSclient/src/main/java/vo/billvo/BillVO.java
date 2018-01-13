@@ -4,9 +4,8 @@ import dataenum.BillState;
 
 import dataenum.BillType;
 import javafx.scene.control.CheckBox;
-import vo.ViewObject;
 
-public class BillVO extends ViewObject{
+public class BillVO{
 
 	protected String id;
 	protected String note;

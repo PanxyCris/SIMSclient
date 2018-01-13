@@ -7,7 +7,7 @@ package bussinesslogic.common;
 
 import java.util.ArrayList;
 
-import po.commodity.CommodityItemPO;
+import po.commoditypo.CommodityItemPO;
 import vo.commodityvo.CommodityItemVO;
 
 public class CommodityItemTran {

@@ -23,7 +23,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellEditEvent;
 import javafx.scene.control.TreeTableView;
 import javafx.util.Callback;
-import po.ClassificationVPO;
+import po.classificationvpo.ClassificationVPO;
 import presentation.common.EditingCellTree;
 import vo.uservo.UserVO;
 

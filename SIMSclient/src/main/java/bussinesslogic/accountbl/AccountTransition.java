@@ -1,6 +1,6 @@
 package bussinesslogic.accountbl;
 
-import po.AccountPO;
+import po.accountpo.AccountPO;
 import vo.accountvo.AccountVO;
 
 public class AccountTransition {

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import org.junit.*;
 import po.PurchasePO;
+import po.commoditypo.CommodityItemPO;
 import dataenum.findtype.FindSalesType;
 import dataenum.Warehouse;
 import dataenum.BillType;
-import po.commodity.CommodityItemPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

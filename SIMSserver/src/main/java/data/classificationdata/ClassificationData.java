@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 import data.DBManager;
 import dataenum.ResultMessage;
-import po.ClassificationVPO;
 import po.UserPO;
+import po.classificationvpo.ClassificationVPO;
 
 /**
 *

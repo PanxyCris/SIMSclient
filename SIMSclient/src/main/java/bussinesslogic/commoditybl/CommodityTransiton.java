@@ -6,7 +6,7 @@ package bussinesslogic.commoditybl;
 */
 
 
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 import vo.commodityvo.CommodityVO;
 
 public class CommodityTransiton {

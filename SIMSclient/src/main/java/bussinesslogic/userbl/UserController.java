@@ -8,7 +8,7 @@ import bussinesslogicservice.userblservice.UserBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
-import po.UserPO;
+import po.userpo.UserPO;
 import rmi.RemoteHelper;
 import vo.uservo.UserVO;
 

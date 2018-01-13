@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindCommodityType;
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 
 public interface CommodityDataService extends Remote {
 

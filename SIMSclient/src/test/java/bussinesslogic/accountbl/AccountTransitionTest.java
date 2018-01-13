@@ -1,8 +1,10 @@
 package bussinesslogic.accountbl;
 
 import org.junit.*;
+
+import po.accountpo.AccountPO;
 import vo.accountvo.AccountVO;
-import po.AccountPO;
+
 import static org.junit.Assert.*;
 
 /**

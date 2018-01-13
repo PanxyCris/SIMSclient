@@ -2,11 +2,12 @@ package bussinesslogic.purchasebl;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.PurchasePO;
+
 import dataenum.Warehouse;
 import dataenum.BillType;
 import vo.commodityvo.CommodityItemVO;
-import po.commodity.CommodityItemPO;
+import po.commoditypo.CommodityItemPO;
+import po.purchasepo.PurchasePO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import dataenum.BillState;
 import static org.junit.Assert.*;

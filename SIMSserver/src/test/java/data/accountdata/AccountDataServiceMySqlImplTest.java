@@ -2,8 +2,9 @@ package data.accountdata;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.AccountPO;
+
 import dataenum.findtype.FindAccountType;
+import po.accountpo.AccountPO;
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;
 

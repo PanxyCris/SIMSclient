@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindUserType;
-import po.UserPO;
+import po.userpo.UserPO;
 
 public interface UserDataService extends Remote {
 	

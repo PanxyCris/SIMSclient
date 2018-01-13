@@ -8,7 +8,7 @@ import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
 import dataservice.memberdataservice.MemberDataService;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 import vo.membervo.MemberVO;
 
 /**  

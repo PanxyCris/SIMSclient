@@ -9,9 +9,9 @@ import dataenum.ResultMessage;
 import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
 import dataservice.salesdataservice.SalesDataService;
-import po.commodity.CommodityItemPO;
-import po.commodity.GiftPO;
-import po.sales.SalesPO;
+import po.commoditypo.CommodityItemPO;
+import po.commoditypo.GiftPO;
+import po.salespo.SalesPO;
 
 /**
  * ภเหตร๗

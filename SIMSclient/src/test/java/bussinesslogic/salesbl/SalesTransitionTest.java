@@ -2,15 +2,17 @@ package bussinesslogic.salesbl;
 
 import java.util.ArrayList;
 import vo.billvo.salesbillvo.SalesVO;
-import po.sales.SalesPO;
+import po.commoditypo.CommodityItemPO;
+import po.commoditypo.GiftPO;
+import po.salespo.SalesPO;
 import dataenum.BillType;
 import vo.commodityvo.GiftVO;
 import dataenum.BillState;
-import po.commodity.GiftPO;
+
 import org.junit.*;
 import dataenum.Warehouse;
 import vo.commodityvo.CommodityItemVO;
-import po.commodity.CommodityItemPO;
+
 import static org.junit.Assert.*;
 
 /**

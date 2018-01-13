@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dataenum.BillState;
 import dataenum.BillType;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.inventorybillpo.InventoryBillPO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;

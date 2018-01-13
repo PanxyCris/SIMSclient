@@ -126,7 +126,7 @@ public class BussinessHistorySchedulePurchaseBL implements BusinessHistorySchedu
 			for (int i = 1; i < bSheetL + 1; i++) {
 				for (int j = 0; j < 4; j++) {
 					if (j == 0) {
-						Label labelC = new Label(j, i, String.valueOf(table.get(i - 1).getDate()));
+						Label labelC = new Label(j, i, String.valueOf(StringtoDate(table.get(i-1).getId())));
 						bSheet.addCell(labelC);
 					} else if (j == 1) {
 						Label labelC = new Label(j, i, table.get(i - 1).getId());

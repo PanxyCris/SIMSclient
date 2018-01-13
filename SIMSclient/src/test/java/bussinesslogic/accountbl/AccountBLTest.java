@@ -5,9 +5,10 @@ import dataenum.ResultMessage;
 import org.junit.*;
 import data_stub.AccountDataService_stub;
 import vo.accountvo.AccountVO;
-import po.AccountPO;
 import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
+import po.accountpo.AccountPO;
+
 import static org.junit.Assert.*;
 
 /**

@@ -2,8 +2,9 @@ package data.salesdata;
 
 import java.util.ArrayList;
 import org.junit.*;
-import po.sales.SalesPO;
+
 import dataenum.findtype.FindSalesType;
+import po.salespo.SalesPO;
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;
 

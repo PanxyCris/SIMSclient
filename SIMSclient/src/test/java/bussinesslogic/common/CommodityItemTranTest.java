@@ -2,8 +2,10 @@ package bussinesslogic.common;
 
 import java.util.ArrayList;
 import org.junit.*;
+
+import po.commoditypo.CommodityItemPO;
 import vo.commodityvo.CommodityItemVO;
-import po.commodity.CommodityItemPO;
+
 import static org.junit.Assert.*;
 
 /**

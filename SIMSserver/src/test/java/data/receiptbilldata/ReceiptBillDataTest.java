@@ -1,11 +1,13 @@
 package data.receiptbilldata;
 
 import java.util.ArrayList;
-import po.FinancialBill.AccountListPO;
+
 import org.junit.*;
-import po.FinancialBill.ReceiptBillPO;
+
 import dataenum.BillType;
 import dataenum.findtype.FindAccountBillType;
+import po.financialbillpo.AccountListPO;
+import po.financialbillpo.ReceiptBillPO;
 import dataenum.BillState;
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;

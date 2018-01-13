@@ -8,7 +8,7 @@ package bussinesslogic.memberbl;
 import java.util.ArrayList;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 import vo.membervo.MemberVO;
 
 public class MemberTransition {

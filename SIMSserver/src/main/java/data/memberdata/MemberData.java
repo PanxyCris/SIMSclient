@@ -18,7 +18,7 @@ import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 
 /**
  * 

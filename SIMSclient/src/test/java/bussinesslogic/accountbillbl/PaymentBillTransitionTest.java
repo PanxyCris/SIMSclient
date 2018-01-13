@@ -3,10 +3,10 @@ package bussinesslogic.accountbillbl;
 import java.util.ArrayList;
 import org.junit.*;
 import vo.billvo.financialbillvo.PaymentBillVO;
-import po.FinancialBill.EntryPO;
 import dataenum.BillType;
+import po.financialbillpo.EntryPO;
+import po.financialbillpo.PaymentBillPO;
 import vo.billvo.financialbillvo.EntryVO;
-import po.FinancialBill.PaymentBillPO;
 import dataenum.BillState;
 import static org.junit.Assert.*;
 

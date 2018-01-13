@@ -7,7 +7,7 @@ package dataservice.accountdataservice;
 
 import java.util.ArrayList;
 
-import po.MemberPO;
+import po.memberpo.MemberPO;
 
 public interface Member_AccountInfo {
 

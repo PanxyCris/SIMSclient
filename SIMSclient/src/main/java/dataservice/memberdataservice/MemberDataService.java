@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 
 public interface MemberDataService extends Remote {
 

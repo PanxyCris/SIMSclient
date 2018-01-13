@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
-import po.FinancialBill.PaymentBillPO;
+import po.financialbillpo.PaymentBillPO;
 
 /**     
 *  

@@ -9,7 +9,7 @@ import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionMemberDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPO;
 import po.promotionpo.PromotionTotalPO;

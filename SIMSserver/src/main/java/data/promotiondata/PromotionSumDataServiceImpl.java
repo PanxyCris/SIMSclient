@@ -8,7 +8,7 @@ import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionSumDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPO;
 import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;

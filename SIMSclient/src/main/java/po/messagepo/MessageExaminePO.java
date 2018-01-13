@@ -2,7 +2,7 @@ package po.messagepo;
 
 import java.time.LocalDateTime;
 
-import po.UserPO;
+import po.userpo.UserPO;
 
 public class MessageExaminePO extends MessagePO{
 

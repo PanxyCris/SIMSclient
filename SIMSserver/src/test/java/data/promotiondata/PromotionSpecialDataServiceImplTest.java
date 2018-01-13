@@ -3,8 +3,9 @@ package data.promotiondata;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.ResultMessage;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPricePacksPO;
-import po.commodity.GiftPO;
+
 import org.junit.*;
 import dataenum.findtype.FindPromotionType;
 import static org.junit.Assert.*;

@@ -2,8 +2,10 @@ package data.commoditydata;
 
 import java.util.ArrayList;
 import dataenum.findtype.FindCommodityType;
+import po.commoditypo.CommodityPO;
+
 import org.junit.*;
-import po.commodity.CommodityPO;
+
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;
 

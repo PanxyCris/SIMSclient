@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import bussinesslogicservice.utilityblservice.UtilityBLService;
 import dataenum.BillType;
-import po.commodity.CommodityPO;
+import po.commoditypo.CommodityPO;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 

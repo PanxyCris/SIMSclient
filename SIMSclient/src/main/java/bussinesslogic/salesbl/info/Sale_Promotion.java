@@ -18,7 +18,7 @@ import dataenum.findtype.FindMemberType;
 import dataservice.promotiondataservice.PromotionMemberDataService;
 import dataservice.promotiondataservice.PromotionSpecialDataService;
 import dataservice.promotiondataservice.PromotionSumDataService;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;

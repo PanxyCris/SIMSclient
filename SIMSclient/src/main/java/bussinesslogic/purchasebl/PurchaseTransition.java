@@ -6,8 +6,8 @@ import bussinesslogic.common.CommodityItemTran;
 import dataenum.BillState;
 import dataenum.BillType;
 import dataenum.Warehouse;
-import po.PurchasePO;
-import po.commodity.CommodityItemPO;
+import po.commoditypo.CommodityItemPO;
+import po.purchasepo.PurchasePO;
 import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 

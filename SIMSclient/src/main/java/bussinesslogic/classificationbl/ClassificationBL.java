@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
-import po.ClassificationVPO;
+import po.classificationvpo.ClassificationVPO;
 import rmi.RemoteHelper;
 
 public class ClassificationBL implements ClassificationBLService {

@@ -8,7 +8,7 @@ package po.promotionpo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import dataenum.PromotionType;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 
 public class PromotionPricePacksPO extends PromotionPO {
 	private static final long serialVersionUID = 5383295935262148394L;

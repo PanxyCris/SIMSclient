@@ -8,7 +8,7 @@ import bussinesslogicservice.memberblservice.MemberBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindMemberType;
 import dataservice.memberdataservice.MemberDataService;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 import rmi.RemoteHelper;
 import vo.membervo.MemberVO;
 

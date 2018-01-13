@@ -17,7 +17,7 @@ import data.DBManager;
 import dataenum.MemberLevel;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
-import po.commodity.GiftPO;
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPO;
 

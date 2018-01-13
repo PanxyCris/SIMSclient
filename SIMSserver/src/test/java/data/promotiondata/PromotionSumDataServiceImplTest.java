@@ -2,8 +2,9 @@ package data.promotiondata;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionTotalPO;
-import po.commodity.GiftPO;
 import dataenum.ResultMessage;
 import org.junit.*;
 import dataenum.findtype.FindPromotionType;

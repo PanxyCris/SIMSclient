@@ -3,8 +3,8 @@ package dataservice.checktabledataservice;
 import java.rmi.Remote;
 
 import po.PersistObject;
-import po.FinancialBill.FinancialDocPO;
-import po.table.BusinessHistorySchedulePO;
+import po.financialbillpo.FinancialDocPO;
+import po.tablepo.BusinessHistorySchedulePO;
 
 /**
  * 查看经营历程表

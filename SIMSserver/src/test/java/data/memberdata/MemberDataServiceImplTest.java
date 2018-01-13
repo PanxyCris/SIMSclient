@@ -5,7 +5,7 @@ import org.junit.*;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import dataenum.findtype.FindMemberType;
-import po.MemberPO;
+import po.memberpo.MemberPO;
 import dataenum.ResultMessage;
 import static org.junit.Assert.*;
 
