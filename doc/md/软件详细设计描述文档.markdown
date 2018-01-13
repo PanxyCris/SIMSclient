@@ -49,6 +49,7 @@
 | 李杰 | 2018-1-08 | 修改Purchase模块、sale模块、member模块 | v1.3 |
 | 孙嘉杰 | 2018-1-10 | 修改Promotionbl模块 | v1.4 |
 | 王灿灿 | 2018-1-13| 修改财务类和库存类模块，修改对应设计图和顺序图| v1.5|
+| 李杰 | 2018-1-13 | 修改进货和销售以及促销与客户管理模块 | v1.6 |
 
 >>>>>>> refs/remotes/origin/master
 
@@ -397,7 +398,7 @@ paymentbill的设计图类似
 　　commoditybl模块的职责及接口参见软件系统结构描述文档表
 
 　　　　 (2)整体结构
- 
+
 　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.commodityblservice.CommodityBLService接口和bussinesslogicservice.commodityblservice.ClassificationBLService接口。业务逻辑层和数据层之间添加dataservice.commoditydataservice.CommodityDataService接口和dataservice.commoditydataservice.ClassificationDataService接口。为了隔离业务逻辑职责和逻辑控制职责，我们增加了CommodityController和ClassificationController这样CommodityController会将对商品和商品分类管理的业务逻辑处理分别委托给Commodity对象和classification对象。CommodityPO和ClassificationPO是作为商品及其分类记录的持久化对象添加到设计模型中去的。<br>
 <img src="../img/软件详细设计图/commodity模块各个类的设计.png"><br>
 <center>**commodity模块各个类的设计**</center>
@@ -624,7 +625,7 @@ paymentbill的设计图类似
 
 　　userbl模块承担的需求参见需求规格说明文档功能需求及相关非功能需求。
 
-　　userbl模块的职责及接口参见软件系统结构描述文档表。 
+　　userbl模块的职责及接口参见软件系统结构描述文档表。
 
 　　　　(2)整体结构<br>
 　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加bussinesslogicservice.userblservice.UserBLService接口。业务逻辑层和数据层之间添加dataservice.userdataservice.UserDataService接口。UserPO是作为商品记录的持久化对象添加到设计模型中去的。<br>
@@ -638,7 +639,7 @@ paymentbill的设计图类似
 
 
  　　　　(3)模块内部类的接口规范
- 
+
 　**UserController模块的接口规范**
 
 |提供的服务|供接口||
@@ -935,8 +936,8 @@ Salebl模块的设计如图所示<br>
 
 （4）业务逻辑层的动态模型<br>
 
-该图展示了进货销售人员想在销售单／销售退货单中添加一个商品的时候，销售业务逻辑处理的相关对象之间的协作<br>
-<img src="../img/软件详细设计图/addCommodity.png">
+该图展示了进货销售人员想在销售单／销售退货单中添加一个促销策略的时候，销售业务逻辑处理的相关对象之间的协作<br>
+<img src="../img/软件详细设计图/addPromotion.png">
 
 
 该图展示了进货销售人员对一个销售单／销售退货单进行提交审批时，销售业务逻辑处理的相关对象之间的协作<br>
@@ -1255,10 +1256,6 @@ purchasebl模块的职责及接口参见软件系统结构描述文档表<br>
 </table>
 
 （4）业务逻辑层的动态模型<br>
-
-该图所示展示了当一名进货销售人员想要将商品添加进进货单时，进货业务逻辑处理的相关对象之间的协作<br>
-<img src="../img/软件详细设计图/Purchase.addCommodity.png">
-
 
 该图展示了进货人员需要进行单据的提交时，进货业务逻辑处理的相关对象之间的协作<br>
 <img src="../img/软件详细设计图/submitPurchase.png">
@@ -1894,29 +1891,29 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 </tr>
 </table>
 
-　　　　4.2.5　accountui模块
+4.2.5　accountui模块
 
-　　　　(1)模块概述
+(1)模块概述
 
-　　　　accountui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
-　　　　Accountui模块的职责及接口参见软件体系结构描述文档表。
+accountui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+Accountui模块的职责及接口参见软件体系结构描述文档表。
 
-　　　　(2)整体结构
+(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountblservice.AccountBLService接口。
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountblservice.AccountBLService接口。
 
-　　　　accountui模块的设计如图所示。
+accountui模块的设计如图所示。
 
-　　accountui模块各个类的职责如下所示
-<br/>
+<center>**accountui模块各个类的职责如下所示**</center>
+
 
 |模块|职责|
 | --- | --- |
 |AccountUI|账户管理界面的模型对象|
 
-　　　　(3)模块内部类的接口规范
+(3)模块内部类的接口规范
 
-　　　AccountUI的接口规范
+AccountUI的接口规范
 
 |提供的服务|供接口|
 | --- | --- |
@@ -1927,7 +1924,7 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 |`AccountUI.modify(AccountVO accountVO)`|修改账户|
 <br/>
 
-　　　　4.2.6　mfdocui模块
+4.2.6　mfdocui模块
 
 　　　　(1)模块概述
 
@@ -1993,6 +1990,113 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 |`AccountBookUI.find()`|查找所有的账簿|
 <br/>
 
+4.2.8　saleui模块
+
+(1)模块概述
+
+saleui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+Saleui模块的职责及接口参见软件体系结构描述文档表。
+
+(2)整体结构
+
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.saleblservice.SaleBLService接口。
+
+saleui模块的设计如图所示。
+
+<center>**saleui模块各个类的职责如下所示**</center>
+
+
+|模块|职责|
+| --- | --- |
+|SalesCheckBillController|销售初始化界面的模型对象|
+|SalesMakeBillController|销售单制作界面的模型对象|
+|SalesStockStaffController|销售check界面的模型对象|
+
+(3)模块内部类的接口规范
+
+SalesUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`SalesMakeBillController.save(SaleVO vo)`|保存草稿单据|
+|`SalesMakeBillController.submit(SaleVO vo)`|提交草稿单据|
+
+<br/>
+
+4.2.9　purchaseui模块
+
+(1)模块概述
+
+purchaseui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+Purchaseui模块的职责及接口参见软件体系结构描述文档表。
+
+(2)整体结构
+
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.purchaseblservice.PurchaseBLService接口。
+
+purchaseui模块的设计如图所示。
+
+<center>**purchasaeui模块各个类的职责如下所示**</center>
+
+
+|模块|职责|
+| --- | --- |
+|PurchaseCheckBillController|进货初始化界面的模型对象|
+|PurchaseMakeBillController|进货单制作界面的模型对象|
+|PurchaseStockStaffController|进货单check界面的模型对象|
+
+(3)模块内部类的接口规范
+
+PurchaseUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`PurchaseMakeBillController.save(PurchaseVO vo)`|保存草稿单据|
+|`PurchaseMakeBillController.submit(PurchaseVO vo)`|提交草稿单据|
+
+<br/>
+
+4.2.10　Memberui模块
+
+(1)模块概述
+
+memberui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+Memebrui模块的职责及接口参见软件体系结构描述文档表。
+
+(2)整体结构
+
+根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.memberblservice.MemberBLService接口。
+
+memberui模块的设计如图所示。
+
+<center>**memberui模块各个类的职责如下所示**</center>
+
+
+|模块|职责|
+| --- | --- |
+|MemberManageController|客户界面的模型对象|
+
+(3)模块内部类的接口规范
+
+MemberUI的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`MemberManageController.insert(MemberVO vo)`|保存客户数据|
+|`MemberManageController.delete(String ID)`|删除客户|
+|`MemberManageController.find()`|查找客户|
+|`MemberManageController.exit()`|退出界面|
+|`MemberManageController.initData()`|初始化数据|
+|`MemberManageController.find()`|查找客户|
+|`MemberManageController.deleteInit()`|删除客户后刷新|
+
+
+
+
+<br/>
 
 　4.3.1 commoditydata模块<br>
 
@@ -2202,6 +2306,170 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 ||前置条件|查看特定年份账户，date输入符合规则|
 ||后置条件|返回date对应的账簿|
 <br/>
+
+4.3.7　Saledata模块
+
+　　　　(1)模块概述
+
+　　　　saledata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Saledata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.saledataservice.SaleDataService接口。AccountPO是作为销售记录的持久化对象被添加到设计模型中去的。
+
+　　saledata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|SaleData|销售(退货)的模型对象，拥有销售单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SaleData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`SaleDataService.find(String keywords, FindSaleType type)`|根据keywords查找单一持久化对象|
+|`SaleDataService.insert(SalePO po)`|新建单一持久化对象|
+|`SaleDataService.delete(String id)`|删除单一持久化对象|
+|`SaleDataService.update(SalePO po)`|更新单一持久化对象|
+|`SaleDataService.show()`|返回数据库中所有持久化对象|
+<br/>
+
+4.3.8　Purchasedata模块
+
+　　　　(1)模块概述
+
+　　　　purchasedata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Purchasedata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.purchasedataservice.PurchaseDataService接口。PurchasePO是作为进货记录的持久化对象被添加到设计模型中去的。
+
+　　Purchasedata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|PurchaseData|进货(退货)的模型对象，拥有进货单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　SaleData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`PurchaseDataService.find(String keywords, FindSaleType type)`|根据keywords查找单一持久化对象|
+|`PurchaseDataService.insert(PurchasePO po)`|新建单一持久化对象|
+|`PurchaseDataService.delete(String id)`|删除单一持久化对象|
+|`PurchaseDataService.update(PurchasePO po)`|更新单一持久化对象|
+|`PurchaseDataService.show()`|返回数据库中所有持久化对象|
+<br/>
+
+4.3.9　Memberdata模块
+
+　　　　(1)模块概述
+
+　　　　Memberdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Memberdata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.memberdataservice.MemberDataService接口。MemberPO是作为客户记录的持久化对象被添加到设计模型中去的。
+
+　　Memberdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|MemberData|客户的模型对象，拥有客户单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　MemberData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`MemberDataService.find(String keywords, FindMemberType type)`|根据keywords查找单一持久化对象|
+|`MemberDataService.insert(MemberPO po)`|新建单一持久化对象|
+|`MemberDataService.delete(String id)`|删除单一持久化对象|
+|`MemberDataService.update(MemberPO po)`|更新单一持久化对象|
+|`MemberDataService.show()`|返回数据库中所有持久化对象|
+<br/>
+
+4.3.10　Promotiondata模块
+
+　　　　(1)模块概述
+
+　　　　Promotiondata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Promotiondata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.promotiondataservice.PromotionDataService接口。PromotionPO是作为促销记录的持久化对象被添加到设计模型中去的。
+
+　　Promotiondata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|PromotionData|促销的模型对象，拥有促销策略单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　MemberData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`PromotionDataService.find(String keywords, FindPromotionType type)`|根据keywords查找单一持久化对象|
+|`PromotionDataService.insert(PromotionPO po)`|新建单一持久化对象|
+|`PromotionDataService.delete(String id)`|删除单一持久化对象|
+|`PromotionDataService.update(PromotionPO po)`|更新单一持久化对象|
+|`PromotionDataService.show()`|返回数据库中所有持久化对象|
+<br/>
+
+4.3.11　Classificationdata模块
+
+　　　　(1)模块概述
+
+　　　　Classificationdata模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　　Classificationdata模块的职责及接口参见软件体系结构描述文档表。
+
+　　　　(2)整体结构
+
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如业务逻辑层和数据层之间，我们添加dataservice.classificationdataservice.ClassificationDataService接口。ClassificationPO是作为分类记录的持久化对象被添加到设计模型中去的。
+
+　　Classificationdata模块各个类的职责如下所示
+<br/>
+
+|模块|职责|
+| --- | --- |
+|ClassificationData|促销的模型对象，拥有促销策略单据的各类数据以及方法|
+
+　　　　(3)模块内部类的接口规范
+
+　　　MemberData的接口规范
+
+|提供的服务|供接口|
+| --- | --- |
+|服务名|服务|
+|`ClassificationDataService.find(String name)`|根据name查找单一持久化对象|
+|`ClassificationDataService.insert(ClassificationPO po)`|新建单一持久化对象|
+|`ClassificationDataService.delete(String id)`|删除单一持久化对象|
+|`ClassificationDataService.update(ClassificationPO po)`|更新单一持久化对象|
+|`ClassificationDataService.show()`|返回数据库中所有持久化对象|
+|`ClassificationDataService.FindClassificationById()`|根据id查找单一持久化对象|
+|`ClassificationDataService.getRoot()`|返回分类的根节点|
+
+<br/>
+
 
 
 ##5.依赖视角
