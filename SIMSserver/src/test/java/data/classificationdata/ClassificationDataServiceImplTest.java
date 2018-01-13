@@ -89,7 +89,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -111,7 +111,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -133,7 +133,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -155,7 +155,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -177,7 +177,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -199,7 +199,7 @@ public class ClassificationDataServiceImplTest {
 		throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
-		String result = fixture.getId();
+		String result = fixture.getID();
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
