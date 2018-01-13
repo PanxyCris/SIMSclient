@@ -18,12 +18,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import data.DBManager;
-import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
-import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
-import po.commoditypo.CommodityItemPO;
 import po.purchasepo.PurchasePO;
 
 public class PurchaseData {
@@ -34,18 +30,6 @@ public class PurchaseData {
 		conn = DBManager.getConnection();
 	}
 
-	public static void main(String[] args) {
-		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
-		ArrayList<CommodityItemPO> list = new ArrayList<>();
-		list.add(i);
-		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1, "11", list, "2",
-				100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
-		PurchaseData p = new PurchaseData();
-		// p.insert(po);
-		System.out.println(p.show().get(0).getOperator());
-		// p.delete(po.getId());
-
-	}
 
 	public ResultMessage insert(PurchasePO po) {
 
