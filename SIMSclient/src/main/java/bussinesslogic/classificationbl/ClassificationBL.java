@@ -91,15 +91,22 @@ public class ClassificationBL implements ClassificationBLService {
 	public ResultMessage update(ClassificationVPO vpo) {
 		try {
 			// 先更新父节点
+
 			ClassificationVPO father = getClass(vpo.getFather());
-			for (int i = 0; i < father.getChildrenPointer().size(); i++) {
-				String id = classificationDataService.findClassification(father.getChildrenPointer().get(i)).getId();
-				if (id.equals(vpo.getId())) {
-					ArrayList<String> children = father.getChildrenPointer();
-					children.set(i, vpo.getName());
-					father.setChildrenPointer(children);
-					classificationDataService.updateClassification(father);
-					break;
+			if (father!=null&&father.getChildrenPointer() != null) {
+				for (int i = 0; i < father.getChildrenPointer().size(); i++) {
+					String tmp = father.getChildrenPointer().get(i);
+					if(tmp==null)
+						continue;
+					String id = classificationDataService.findClassification(tmp)
+							.getId();
+					if (id.equals(vpo.getId())) {
+						ArrayList<String> children = father.getChildrenPointer();
+						children.set(i, vpo.getName());
+						father.setChildrenPointer(children);
+						classificationDataService.updateClassification(father);
+						break;
+					}
 				}
 			}
 			return classificationDataService.updateClassification(vpo);

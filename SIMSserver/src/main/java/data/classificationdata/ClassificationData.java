@@ -53,9 +53,9 @@ public class ClassificationData {
 	//	 d.update(last);
     //    d.delete(d.show().get(d.show().size()-1).getName());
 //            d.insert(root);
-		System.out.println(d.getID());
-//  	for(ClassificationVPO vpo:d.show())
-//		System.out.println(vpo.getName());
+//		System.out.println(d.getID());
+  	for(ClassificationVPO vpo:d.show())
+		System.out.println(vpo.getName());
 	}
 
 	private Connection conn;
@@ -205,7 +205,7 @@ public class ClassificationData {
 		ArrayList<ClassificationVPO> list = show();
 		ClassificationVPO po = null;
 		for (ClassificationVPO p : list) {
-			if (name.equals(p.getName())) return p;
+			if (p.getName().equals(name)) return p;
 		}
 
 		return po;
@@ -214,7 +214,7 @@ public class ClassificationData {
 
 	public String getID(){
 			if (!show().isEmpty()) {
-				for (int i = 1; i < show().size(); i++) {
+				for (int i = 1; i <= show().size(); i++) {
 					ClassificationVPO last = show().get(show().size() - i);
 					if (last.getB()) {
 						String oldId = last.getId();
@@ -225,7 +225,7 @@ public class ClassificationData {
 							newId = "0" + newId;
 						return newId;
 					}
-					else if(i!=show().size()-1)
+					else if(i!=show().size())
 						continue;
 					else
 						return "0001";
