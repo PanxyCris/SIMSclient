@@ -1,16 +1,15 @@
 package vo.billvo.financialbillvo;
 
-
 public class AccountListVO {
 
-	protected String accountID;//银行账户ID
-	protected Double money;//转账金额
-	protected String note;//备注
+	protected String accountID;// 银行账户ID
+	protected Double money;// 转账金额
+	protected String note;// 备注
 
-	public AccountListVO(String accountID,Double money,String note){
-		this.accountID=accountID;
-		this.money=money;
-		this.note=note;
+	public AccountListVO(String accountID, Double money, String note) {
+		this.accountID = accountID;
+		this.money = money;
+		this.note = note;
 	}
 
 	public String getAccountID() {
@@ -36,7 +35,5 @@ public class AccountListVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
-
 
 }

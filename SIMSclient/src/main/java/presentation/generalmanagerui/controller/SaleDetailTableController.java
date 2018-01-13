@@ -56,7 +56,7 @@ public class SaleDetailTableController extends FinanceTableController {
 		ArrayList<SaleScheduleVO> resultList = new ArrayList<>();
 		resultList.addAll(list);
 		service.exportReport(resultList);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 

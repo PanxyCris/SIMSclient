@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
-import java.rmi.server.RMIClientSocketFactory;
-import java.rmi.server.RMIServerSocketFactory;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,16 +25,16 @@ import po.accountpo.AccountPO;
  * @date 2017年12月3日
  */
 public class AccountData {
-	 public static void main(String[] args) throws RemoteException {
-	 AccountData a = new AccountData();
-	 AccountPO po = new AccountPO("000007", "王灿灿", 4000);
-	// a.insert(po);
-	 ArrayList<AccountPO> list = a.show();
-	 for (AccountPO p : list) {
-	 System.out.println(p.getId() + " " + p.getName() + " " + p.getMoney());
-	 }
-	
-	 }
+	public static void main(String[] args) throws RemoteException {
+		AccountData a = new AccountData();
+		AccountPO po = new AccountPO("000007", "王灿灿", 4000);
+		// a.insert(po);
+		ArrayList<AccountPO> list = a.show();
+		for (AccountPO p : list) {
+			System.out.println(p.getId() + " " + p.getName() + " " + p.getMoney());
+		}
+
+	}
 
 	public ResultMessage insert(AccountPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
@@ -57,8 +55,7 @@ public class AccountData {
 					ps.close();
 					conn.close();
 					return ResultMessage.SUCCESS;
-				}
-				else {
+				} else {
 					System.out.println("该账户已存在");
 				}
 			}

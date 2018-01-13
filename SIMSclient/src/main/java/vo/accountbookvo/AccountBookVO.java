@@ -8,18 +8,18 @@ import vo.membervo.MemberVO;
 
 public class AccountBookVO {
 	private String date;
-	private String clerkID;//操作员ID
-	private ArrayList<CommodityVO> commodityVOs;//商品列表
-	private ArrayList<MemberVO> memberVOs;//客户列表
-	private ArrayList<AccountVO> accountVOs;//账户列表
+	private String clerkID;// 操作员ID
+	private ArrayList<CommodityVO> commodityVOs;// 商品列表
+	private ArrayList<MemberVO> memberVOs;// 客户列表
+	private ArrayList<AccountVO> accountVOs;// 账户列表
 
-	public AccountBookVO(String date, String clerkID,ArrayList<CommodityVO> commodityVOs,ArrayList<MemberVO> memberVOs
-			,ArrayList<AccountVO> accountVOs) {
-		this.date=date;
-		this.clerkID=clerkID;
-		this.commodityVOs=commodityVOs;
-		this.memberVOs=memberVOs;
-		this.accountVOs=accountVOs;
+	public AccountBookVO(String date, String clerkID, ArrayList<CommodityVO> commodityVOs,
+			ArrayList<MemberVO> memberVOs, ArrayList<AccountVO> accountVOs) {
+		this.date = date;
+		this.clerkID = clerkID;
+		this.commodityVOs = commodityVOs;
+		this.memberVOs = memberVOs;
+		this.accountVOs = accountVOs;
 	}
 
 	public String getDate() {

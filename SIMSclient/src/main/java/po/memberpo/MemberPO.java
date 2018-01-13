@@ -22,7 +22,6 @@ public class MemberPO implements Serializable {
 	private double payable; // 应付
 	private String saleMan; // 默认业务员
 
-	
 	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String adress,
 			String post, String email, double receivableLimit, String saleMan) {
 		this.id = id;
@@ -40,7 +39,7 @@ public class MemberPO implements Serializable {
 	public String getId() {
 		return id;
 	}
-	
+
 	public MemberCategory getCategory() {
 		return category;
 	}
@@ -103,10 +102,11 @@ public class MemberPO implements Serializable {
 
 	/**
 	 * 
-	 * @Title: setRereceivableLimit 
+	 * @Title: setRereceivableLimit
 	 * @Description: 应收额度仅最高权限可修改 ,仅有总经理可以修改
-	 *  @param rereceivableLimit, role
-	 *   @return 是否修改成功 
+	 * @param rereceivableLimit,
+	 *            role
+	 * @return 是否修改成功
 	 */
 	public boolean setReceivableLimit(double rereceivableLimit, UserRole role) {
 		if (role.equals(UserRole.GENERAL_MANAGER)) {

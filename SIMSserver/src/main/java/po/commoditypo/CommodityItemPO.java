@@ -2,14 +2,13 @@ package po.commoditypo;
 
 import java.io.Serializable;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月2日    
-*/
-public class CommodityItemPO implements Serializable{
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月2日
+ */
+public class CommodityItemPO implements Serializable {
 
-	
 	private static final long serialVersionUID = 8871761745550204005L;
 	private String id;
 	private String name;
@@ -56,7 +55,5 @@ public class CommodityItemPO implements Serializable{
 	public String getRemark() {
 		return remark;
 	}
-	
-	
 
 }

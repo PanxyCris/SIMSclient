@@ -7,15 +7,15 @@ import javafx.stage.Stage;
 import presentation.generalmanagerui.controller.CheckReceiveBillController;
 import vo.uservo.UserVO;
 
-public class CheckReceiveBillUI{
+public class CheckReceiveBillUI {
 
-	public void start(UserVO user) throws Exception{
+	public void start(UserVO user) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CheckReceiveBillUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        CheckReceiveBillController controller = loader.<CheckReceiveBillController>getController();
-        controller.initData(user);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		CheckReceiveBillController controller = loader.<CheckReceiveBillController>getController();
+		controller.initData(user);
+		primaryStage.show();
 	}
 
 }

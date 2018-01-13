@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
@@ -22,19 +21,20 @@ import po.financialbillpo.EntryPO;
 import po.financialbillpo.PaymentBillPO;
 
 /**
-*
-* @author Lijie
-* @date 2017年12月14日
-*/
+ *
+ * @author Lijie
+ * @date 2017年12月14日
+ */
 public class PaymentBillData {
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		ArrayList<EntryPO> entryList = new ArrayList<>();
-		EntryPO entry1 = new EntryPO("QWERT",20.00,"NCFIDJCN");
-		EntryPO entry2 = new EntryPO("RAT",789.00,"NCJDJC");
+		EntryPO entry1 = new EntryPO("QWERT", 20.00, "NCFIDJCN");
+		EntryPO entry2 = new EntryPO("RAT", 789.00, "NCJDJC");
 		entryList.add(entry1);
 		entryList.add(entry2);
-		PaymentBillPO bill1 = new PaymentBillPO("XJFKD-20180105-00001","Panxy","00001","00001",entryList,809.00,BillType.XJFYD,BillState.DRAFT,"dsa");
+		PaymentBillPO bill1 = new PaymentBillPO("XJFKD-20180105-00001", "Panxy", "00001", "00001", entryList, 809.00,
+				BillType.XJFYD, BillState.DRAFT, "dsa");
 		PaymentBillData d = new PaymentBillData();
 		d.insert(bill1);
 		System.out.println(d.show().get(0).getDocID());
@@ -55,14 +55,13 @@ public class PaymentBillData {
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getDocID());
-			        ps.setObject(2, po);
-			        ps.executeUpdate();
-			        conn.commit();
-			        ps.close();
-			        conn.close();
-			        return ResultMessage.SUCCESS;
-				}
-				else {
+					ps.setObject(2, po);
+					ps.executeUpdate();
+					conn.commit();
+					ps.close();
+					conn.close();
+					return ResultMessage.SUCCESS;
+				} else {
 					update(po);
 					System.out.println("付款单已存在");
 					return ResultMessage.EXISTED;
@@ -76,7 +75,7 @@ public class PaymentBillData {
 		return ResultMessage.FAIL;
 	}
 
-	public ResultMessage delete(String id)  {
+	public ResultMessage delete(String id) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from paymentbill where id = ?";
 		try {
@@ -107,7 +106,8 @@ public class PaymentBillData {
 				BufferedInputStream input = new BufferedInputStream(is);
 
 				byte[] buff = new byte[(int) inblob.length()];// 放到一个buff 字节数组
-				while (-1 != (input.read(buff, 0, buff.length)));
+				while (-1 != (input.read(buff, 0, buff.length)))
+					;
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				PaymentBillPO po = (PaymentBillPO) in.readObject();
@@ -133,7 +133,7 @@ public class PaymentBillData {
 
 			}
 
-		}catch (SQLException | IOException | ClassNotFoundException e) {
+		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return list;
@@ -163,18 +163,18 @@ public class PaymentBillData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
 
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                    PaymentBillPO po = (PaymentBillPO)in.readObject();                   //读出对象
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					PaymentBillPO po = (PaymentBillPO) in.readObject(); // 读出对象
 
-                    list.add(po);
-                }
+					list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();

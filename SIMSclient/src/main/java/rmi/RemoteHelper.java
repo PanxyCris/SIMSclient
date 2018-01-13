@@ -30,77 +30,75 @@ public class RemoteHelper {
 
 	private static RemoteHelper remoteHelper = new RemoteHelper();
 
-	public static RemoteHelper getInstance(){
+	public static RemoteHelper getInstance() {
 		return remoteHelper;
 
 	}
 
-	private RemoteHelper(){
+	private RemoteHelper() {
 	}
 
-	public void setRemote(Remote remote){
-		this.remote=remote;
+	public void setRemote(Remote remote) {
+		this.remote = remote;
 	}
 
-	public AccountDataService getAccountDataService(){
-		return (AccountDataService)remote;
+	public AccountDataService getAccountDataService() {
+		return (AccountDataService) remote;
 	}
 
-	public BillDataService getBilldataService(){
-		return (BillDataService)remote;
+	public BillDataService getBilldataService() {
+		return (BillDataService) remote;
 	}
 
-
-
-	public ClassificationDataService getClassificationDataService(){
-		return (ClassificationDataService)remote;
+	public ClassificationDataService getClassificationDataService() {
+		return (ClassificationDataService) remote;
 	}
 
-	public CommodityDataService getCommodityDataService(){
-		return (CommodityDataService)remote;
+	public CommodityDataService getCommodityDataService() {
+		return (CommodityDataService) remote;
 	}
 
-	public MemberDataService getMemeberDataService(){
-		return (MemberDataService)remote;
+	public MemberDataService getMemeberDataService() {
+		return (MemberDataService) remote;
 	}
 
-	public ReceiptBillDataService getReceiptDataService(){
-		return (ReceiptBillDataService)remote;
+	public ReceiptBillDataService getReceiptDataService() {
+		return (ReceiptBillDataService) remote;
 	}
 
-	public PaymentBillDataService getPaymentDataService(){
-		return (PaymentBillDataService)remote;
+	public PaymentBillDataService getPaymentDataService() {
+		return (PaymentBillDataService) remote;
 	}
 
-	public PromotionMemberDataService getMemberPromotionDataService(){
-		return (PromotionMemberDataService)remote;
+	public PromotionMemberDataService getMemberPromotionDataService() {
+		return (PromotionMemberDataService) remote;
 	}
 
-	public PromotionSpecialDataService getSpecialPromotionDataService(){
-		return (PromotionSpecialDataService)remote;
+	public PromotionSpecialDataService getSpecialPromotionDataService() {
+		return (PromotionSpecialDataService) remote;
 	}
 
-	public PromotionSumDataService getSumPromotionDataService(){
-		return (PromotionSumDataService)remote;
+	public PromotionSumDataService getSumPromotionDataService() {
+		return (PromotionSumDataService) remote;
 	}
 
-	public SalesDataService getSalesDataService(){
-		return (SalesDataService)remote;
+	public SalesDataService getSalesDataService() {
+		return (SalesDataService) remote;
 	}
 
-	public AccountBookDataService getSetUpAccountDataService(){
-		return (AccountBookDataService)remote;
+	public AccountBookDataService getSetUpAccountDataService() {
+		return (AccountBookDataService) remote;
 	}
 
-	public UserDataService getUserDataService(){
-		return (UserDataService)remote;
+	public UserDataService getUserDataService() {
+		return (UserDataService) remote;
 	}
 
 	public PurchaseDataService getPurchaseDataService() {
-		return (PurchaseDataService)remote;
+		return (PurchaseDataService) remote;
 	}
 
-	public MessageDataService getMessageDataService(){
-		return (MessageDataService)remote;
+	public MessageDataService getMessageDataService() {
+		return (MessageDataService) remote;
 	}
 }

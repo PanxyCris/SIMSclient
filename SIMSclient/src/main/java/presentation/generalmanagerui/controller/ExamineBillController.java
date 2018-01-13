@@ -7,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
+
 /**
  * 审批单据的选择单据界面
- * @author 潘星宇
- * 2017-12-17
+ * 
+ * @author 潘星宇 2017-12-17
  */
 public class ExamineBillController extends GeneralManagerController {
 

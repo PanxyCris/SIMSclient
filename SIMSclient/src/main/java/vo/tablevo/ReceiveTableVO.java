@@ -12,7 +12,7 @@ public class ReceiveTableVO {
 	private Double allowance;
 	private Double sum;
 
-	public ReceiveTableVO(LocalDate d,MoneyType t,Double a,Double s){
+	public ReceiveTableVO(LocalDate d, MoneyType t, Double a, Double s) {
 		date = d;
 		type = t;
 		typeString = t.value;

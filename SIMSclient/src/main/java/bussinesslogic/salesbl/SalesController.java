@@ -177,9 +177,7 @@ public class SalesController implements SalesBLService {
 		try {
 			if (Info.getType() == BillType.SALESBILL) {
 				for (CommodityItemVO commodity : Info.getCommodity()) {
-					if (commodityDataService
-							.findCommodity(getTrueName(commodity.getName()),
-									FindCommodityType.NAME)
+					if (commodityDataService.findCommodity(getTrueName(commodity.getName()), FindCommodityType.NAME)
 							.get(0).getNumber() < commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
 				}
@@ -190,8 +188,8 @@ public class SalesController implements SalesBLService {
 				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
 						FindUserType.USERROLE);
 				for (UserPO manager : generalManagers) {
-					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(),  false,
-							po.getId(), manager);
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),
+							LocalDateTime.now(), false, po.getId(), manager);
 					messageDataService.save(message);
 				}
 			}
@@ -306,17 +304,19 @@ public class SalesController implements SalesBLService {
 	}
 
 	/**
-     * 商品名的过滤
-     * @param name 显示在单据上的商品名
-     * @return 真实的商品名
-     */
-	public String getTrueName(String name){
+	 * 商品名的过滤
+	 * 
+	 * @param name
+	 *            显示在单据上的商品名
+	 * @return 真实的商品名
+	 */
+	public String getTrueName(String name) {
 		String newName = "";
-		for(int m=0;m<name.length();m++){
-			if(name.charAt(m)=='('){
+		for (int m = 0; m < name.length(); m++) {
+			if (name.charAt(m) == '(') {
 				newName = name.substring(0, m);
-			    break;
-			    }
+				break;
+			}
 		}
 		return newName;
 	}

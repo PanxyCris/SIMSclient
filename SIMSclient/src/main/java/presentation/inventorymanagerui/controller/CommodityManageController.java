@@ -92,7 +92,7 @@ public class CommodityManageController extends InventoryManagerController {
 		if (nameField.getText() == null || modelField.getText() == null || classChoice.getValue() == null
 				|| numberField.getText() == null || purPriceField.getText() == null
 				|| retailedPriceField.getText() == null || warmingValueField.getText() == null) {
-			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有信息");//空值判断
+			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有信息");// 空值判断
 			warning.showAndWait();
 		} else {
 			CommodityVO vo = new CommodityVO(idLabel.getText(), nameField.getText(), modelField.getText(),
@@ -150,8 +150,10 @@ public class CommodityManageController extends InventoryManagerController {
 		findingField.setText(null);
 		findChoice.setValue(null);
 	}
+
 	/**
 	 * 增加初始化
+	 * 
 	 * @throws Exception
 	 */
 
@@ -181,8 +183,10 @@ public class CommodityManageController extends InventoryManagerController {
 		manageInit();
 		choiceInit();
 	}
+
 	/**
 	 * 根据分类的选择来给定新ID
+	 * 
 	 * @throws Exception
 	 */
 
@@ -197,6 +201,7 @@ public class CommodityManageController extends InventoryManagerController {
 					}
 				});
 	}
+
 	/**
 	 * 可编辑初始化
 	 */
@@ -356,7 +361,7 @@ public class CommodityManageController extends InventoryManagerController {
 									if (message == ResultMessage.SUCCESS) {
 										list.remove(clickedUser);
 										table.setItems(list);
-									} else    //若在非审批成功的单据里有该商品，则不可删除
+									} else // 若在非审批成功的单据里有该商品，则不可删除
 										printWrong(message);
 								}
 							} catch (Exception e) {

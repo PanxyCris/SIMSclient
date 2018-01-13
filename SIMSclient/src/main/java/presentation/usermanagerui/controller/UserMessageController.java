@@ -29,7 +29,7 @@ public class UserMessageController extends UserManagerController {
 	public void initData(UserVO user) {
 		this.user = user;
 		ArrayList<MessageVO> messages = service.getMessage(user);
-		if (messages != null){
+		if (messages != null) {
 			Collections.reverse(messages);
 			list.addAll(messages);
 		}

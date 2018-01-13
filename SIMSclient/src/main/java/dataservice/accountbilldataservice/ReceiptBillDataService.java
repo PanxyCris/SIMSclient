@@ -7,12 +7,12 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import po.financialbillpo.ReceiptBillPO;
 
-/**  
-* 类说明   
-*  
-* @author ****  
-* @date 2017年11月12日    
-*/
+/**
+ * 类说明
+ * 
+ * @author ****
+ * @date 2017年11月12日
+ */
 public interface ReceiptBillDataService extends Remote {
 
 	public ResultMessage insertReceiptBill(ReceiptBillPO po) throws RemoteException;

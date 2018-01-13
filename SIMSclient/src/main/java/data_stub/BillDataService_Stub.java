@@ -13,11 +13,11 @@ import po.inventorybillpo.InventoryBillPO;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2018年1月10日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2018年1月10日
+ */
 public class BillDataService_Stub implements BillDataService {
 
 	@Override
@@ -41,27 +41,29 @@ public class BillDataService_Stub implements BillDataService {
 	@Override
 	public ArrayList<InventoryBillPO> findInventoryBill(String keyword, FindInventoryBillType type)
 			throws RemoteException {
-		GiftPO gift1 = new GiftPO("照明灯",12);
-		GiftPO gift2 = new GiftPO("探照灯",23);
+		GiftPO gift1 = new GiftPO("照明灯", 12);
+		GiftPO gift2 = new GiftPO("探照灯", 23);
 		ArrayList<GiftPO> giftList = new ArrayList<>();
 		giftList.add(gift1);
 		giftList.add(gift2);
-	    InventoryBillPO po1 = new InventoryBillPO("00001",giftList,"李杰",BillType.INVENTORYGIFTBILL,BillState.FAIL,"cid");
-	    ArrayList<InventoryBillPO> list = new ArrayList<>();
-	    list.add(po1);
+		InventoryBillPO po1 = new InventoryBillPO("00001", giftList, "李杰", BillType.INVENTORYGIFTBILL, BillState.FAIL,
+				"cid");
+		ArrayList<InventoryBillPO> list = new ArrayList<>();
+		list.add(po1);
 		return list;
 	}
 
 	@Override
 	public ArrayList<InventoryBillPO> showInventoryBill() throws RemoteException {
-		GiftPO gift1 = new GiftPO("照明灯",12);
-		GiftPO gift2 = new GiftPO("探照灯",23);
+		GiftPO gift1 = new GiftPO("照明灯", 12);
+		GiftPO gift2 = new GiftPO("探照灯", 23);
 		ArrayList<GiftPO> giftList = new ArrayList<>();
 		giftList.add(gift1);
 		giftList.add(gift2);
-	    InventoryBillPO po1 = new InventoryBillPO("00001",giftList,"李杰",BillType.INVENTORYGIFTBILL,BillState.FAIL,"cid");
-	    ArrayList<InventoryBillPO> list = new ArrayList<>();
-	    list.add(po1);
+		InventoryBillPO po1 = new InventoryBillPO("00001", giftList, "李杰", BillType.INVENTORYGIFTBILL, BillState.FAIL,
+				"cid");
+		ArrayList<InventoryBillPO> list = new ArrayList<>();
+		list.add(po1);
 		return list;
 	}
 

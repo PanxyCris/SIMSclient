@@ -15,7 +15,7 @@ import dataenum.BillType;
 import dataenum.Warehouse;
 import po.commoditypo.CommodityItemPO;
 
-public class PurchasePO implements Serializable{
+public class PurchasePO implements Serializable {
 
 	private static final long serialVersionUID = 3444450733489092554L;
 	private String id;
@@ -29,7 +29,7 @@ public class PurchasePO implements Serializable{
 	private BillType type;
 	private BillState state;
 	private String date;
-	
+
 	public PurchasePO(String id, String memberID, String member, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemPO> commodities, String remark, double sum, BillType type, BillState state) {
 		this.id = id;
@@ -45,46 +45,53 @@ public class PurchasePO implements Serializable{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		this.date = sdf.format(new Date());
 	}
-	
+
 	public String getDate() {
 		return this.date;
 	}
-	
+
 	public String getId() {
 		return id;
-	}	
-	
+	}
+
 	public String getMemberID() {
 		return memberID;
 	}
+
 	public String getMember() {
 		return member;
 	}
+
 	public Warehouse getWarehouse() {
 		return warehouse;
 	}
+
 	public String getOperator() {
 		return operator;
 	}
+
 	public ArrayList<CommodityItemPO> getCommodities() {
 		return commodities;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
+
 	public double getSum() {
 		return sum;
 	}
+
 	public BillType getType() {
 		return type;
 	}
+
 	public BillState getState() {
 		return state;
 	}
-	
+
 	public void setState(BillState state) {
 		this.state = state;
 	}
-	
-	
+
 }

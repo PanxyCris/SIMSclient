@@ -19,24 +19,24 @@ import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
 import po.UserPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月7日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月7日
+ */
 public class UserData {
 	public static void main(String[] args) {
 		UserData user = new UserData();
 		UserPO po = new UserPO("1", "王灿灿", "admin", UserRole.USER_MANAGER, null);
-//		user.delete(null);
+		// user.delete(null);
 		user.insert(po);
 		ArrayList<UserPO> list = user.show();
-//		System.out.println("555");
-		for(UserPO u: list) {
+		// System.out.println("555");
+		for (UserPO u : list) {
 			System.out.println(u.toString());
-		}	
+		}
 	}
-	
+
 	public ResultMessage insert(UserPO po) {
 		Connection conn = DBManager.getConnection();// 首先拿到数据库的连接
 		try {
@@ -47,30 +47,29 @@ public class UserData {
 				count = rs.getInt(1);
 				if (count == 0) {
 					String sql = "" + "insert into userrole(id, object) values (?,?)";
-					
+
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getID());
-			        ps.setObject(2, po);
-			        ps.executeUpdate();
-			        conn.commit();
-			        ps.close();
-			        conn.close();
-			        return ResultMessage.SUCCESS;
-				}
-				else {
+					ps.setObject(2, po);
+					ps.executeUpdate();
+					conn.commit();
+					ps.close();
+					conn.close();
+					return ResultMessage.SUCCESS;
+				} else {
 					System.out.println("客户ID已存在");
 				}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return ResultMessage.FAIL;
 	}
-	
-	public ResultMessage delete(String id)  {
+
+	public ResultMessage delete(String id) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "delete from userrole where id = ?";
 		try {
@@ -85,7 +84,7 @@ public class UserData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	@SuppressWarnings("unlikely-arg-type")
 	public ArrayList<UserPO> find(String keyword, FindUserType type) {
 		ArrayList<UserPO> list = new ArrayList<>();
@@ -103,35 +102,34 @@ public class UserData {
 				BufferedInputStream input = new BufferedInputStream(is);
 
 				byte[] buff = new byte[(int) inblob.length()];// 放到一个buff 字节数组
-				while (-1 != (input.read(buff, 0, buff.length)));
+				while (-1 != (input.read(buff, 0, buff.length)))
+					;
 
 				ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
 				po = (UserPO) in.readObject();
-				
-				if(type == FindUserType.ID) {
-					if(keyword.equals(po.getID())) {
+
+				if (type == FindUserType.ID) {
+					if (keyword.equals(po.getID())) {
+						list.add(po);
+					}
+				} else if (type == FindUserType.NAME) {
+					if (keyword.equals(po.getName())) {
+						list.add(po);
+					}
+				} else if (type == FindUserType.USERROLE) {
+					if (keyword.equals(po.getRole().value)) {
 						list.add(po);
 					}
 				}
-				else if (type == FindUserType.NAME) {
-					if(keyword.equals(po.getName())) {
-						list.add(po);
-					}
-				}
-				else if (type == FindUserType.USERROLE) {
-					if(keyword.equals(po.getRole().value)) {
-						list.add(po);
-					}
-				}
-				
+
 			}
-					
-		}catch (SQLException | IOException | ClassNotFoundException e) {
+
+		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
 	}
-	
+
 	public ResultMessage update(UserPO po) {
 		Connection conn = DBManager.getConnection();
 		String sql = "" + "update userrole set object = ? where id = ?";
@@ -148,7 +146,7 @@ public class UserData {
 			return ResultMessage.FAIL;
 		}
 	}
-	
+
 	public ArrayList<UserPO> show() {
 		ArrayList<UserPO> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
@@ -156,27 +154,27 @@ public class UserData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
-                byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    UserPO po = (UserPO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
+
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					UserPO po = (UserPO) in.readObject(); // 读出对象
+
+					list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 		return list;
-		
+
 	}
 
 }

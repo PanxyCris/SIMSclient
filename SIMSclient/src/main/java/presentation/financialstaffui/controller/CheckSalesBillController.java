@@ -149,7 +149,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 		ArrayList<SalesVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 
@@ -275,7 +275,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 	 */
 
 	public void edit() throws RemoteException {
-       //单据表格层面的edit
+		// 单据表格层面的edit
 		Callback<TableColumn<SalesVO, String>, TableCell<SalesVO, String>> cellFactory = (
 				TableColumn<SalesVO, String> p) -> new EditingCell<SalesVO>();
 
@@ -331,7 +331,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 				e.printStackTrace();
 			}
 		});
-        //商品表格层面的edit
+		// 商品表格层面的edit
 		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
 				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
 		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryCommodityDouble = (
@@ -352,7 +352,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodity(entryVO);
-			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) // 修改之后的总价与折后价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
 			try {
@@ -389,7 +389,7 @@ public class CheckSalesBillController extends BussinessProcessTableController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodity(entryVO);
-			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) // 修改之后的总价与折后价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
 			try {

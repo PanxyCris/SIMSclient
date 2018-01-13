@@ -199,13 +199,15 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 		});
 
 	}
+
 	/**
 	 * 可对单据备注以及商品数量及金额进行修改
+	 * 
 	 * @throws RemoteException
 	 */
 
 	public void edit() throws RemoteException {
-        //单据表格层面的edit
+		// 单据表格层面的edit
 		Callback<TableColumn<PurchaseVO, String>, TableCell<PurchaseVO, String>> cellFactory = (
 				TableColumn<PurchaseVO, String> p) -> new EditingCell<PurchaseVO>();
 
@@ -222,7 +224,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 				e.printStackTrace();
 			}
 		});
-        //商品表格层面的edit
+		// 商品表格层面的edit
 		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
 				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
 		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryDouble = (
@@ -243,7 +245,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodities(entryVO);
-			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue()) //表格总价的连锁反应
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue()) // 表格总价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			try {
 				if (!update(newVO)) {
@@ -278,7 +280,7 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodities(entryVO);
-			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue())  //表格总价的连锁反应
+			newVO.setSum(newVO.getSum() - (tmp - t.getNewValue()) // 表格总价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getPrice());
 			try {
 				if (!update(newVO)) {
@@ -303,8 +305,10 @@ public class ExaminePurchaseBillController extends ExamineBillController {
 		commodityNote.setCellFactory(cellFactoryNote);
 		commodityNote.setOnEditCommit((CellEditEvent<CommodityItemVO, String> t) -> {
 			String tmp = t.getOldValue();
-			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRemark(t.getNewValue());
-			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
+					.setRemark(t.getNewValue());
+			CommodityItemVO accountVO = ((CommodityItemVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
 			commodityList.set(t.getTablePosition().getRow(), accountVO);
 			PurchaseVO newVO = bill;
 			ArrayList<CommodityItemVO> accountListVO = new ArrayList<>();

@@ -117,12 +117,18 @@ public class InventoryManagerController extends LoginController {
 		judgeMessage();
 		// image = user.getImage();
 	}
+
 	/**
 	 * 用于切换fxml
-	 * @param currentID 新的fxml
-	 * @param user 当前登录用户
-	 * @param type 单据类型
-	 * @param inv 库存单据
+	 * 
+	 * @param currentID
+	 *            新的fxml
+	 * @param user
+	 *            当前登录用户
+	 * @param type
+	 *            单据类型
+	 * @param inv
+	 *            库存单据
 	 * @throws Exception
 	 */
 
@@ -173,10 +179,11 @@ public class InventoryManagerController extends LoginController {
 		});
 
 	}
-    /**
-     * 判断是否有信息
-     */
-	public void judgeMessage(){
+
+	/**
+	 * 判断是否有信息
+	 */
+	public void judgeMessage() {
 		if (utilityService.hasMessage(readUser())) {
 			Circle circle = new Circle();
 			circle.setCenterX(0);

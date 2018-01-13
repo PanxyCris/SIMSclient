@@ -4,9 +4,8 @@ import dataenum.Warehouse;
 import po.PersistObject;
 
 /**
- * 销售明细表 继承PersistObjct 将原本的属性用private修饰，增加serialVersionUID,去掉date, 因为date在父类PersistObject自动生成 
- * 将clerkID转String
- * 修改者：lijie
+ * 销售明细表 继承PersistObjct 将原本的属性用private修饰，增加serialVersionUID,去掉date,
+ * 因为date在父类PersistObject自动生成 将clerkID转String 修改者：lijie
  */
 public class SaleSchedulePO extends PersistObject {
 	private static final long serialVersionUID = 1L;
@@ -16,7 +15,6 @@ public class SaleSchedulePO extends PersistObject {
 	private String clerkID;// 业务员
 	private Warehouse warehouse;// 仓库
 
-	
 	public SaleSchedulePO(String id, String tradeName, String customer, String clerkID, Warehouse warehouse) {
 		super(id);
 		this.tradeName = tradeName;

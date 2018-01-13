@@ -11,7 +11,7 @@ public class PaymentTableVO {
 	private String typeString;
 	private Double sum;
 
-	public PaymentTableVO(LocalDate d,MoneyType t,Double s){
+	public PaymentTableVO(LocalDate d, MoneyType t, Double s) {
 		date = d;
 		type = t;
 		typeString = t.value;
@@ -33,6 +33,5 @@ public class PaymentTableVO {
 	public String getTypeString() {
 		return typeString;
 	}
-
 
 }

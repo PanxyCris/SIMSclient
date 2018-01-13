@@ -12,7 +12,8 @@ import po.accountpo.AccountPO;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>AccountBLTest</code> contains tests for the class <code>{@link AccountBL}</code>.
+ * The class <code>AccountBLTest</code> contains tests for the class
+ * <code>{@link AccountBL}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:20
  * @author asus
@@ -27,24 +28,30 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAccountBL_1()
-		throws Exception {
+	public void testAccountBL_1() throws Exception {
 
 		AccountBL result = new AccountBL();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.InstanceCreationExpression.execute(InstanceCreationExpression.java:425)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.InstanceCreationExpression.execute(InstanceCreationExpression.java:425)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -56,8 +63,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_1()
-		throws Exception {
+	public void testAdd_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -68,18 +74,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -91,8 +104,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_2()
-		throws Exception {
+	public void testAdd_2() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -103,18 +115,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -126,8 +145,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_3()
-		throws Exception {
+	public void testAdd_3() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -138,18 +156,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -161,8 +186,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_4()
-		throws Exception {
+	public void testAdd_4() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -173,18 +197,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -196,8 +227,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_5()
-		throws Exception {
+	public void testAdd_5() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -208,18 +238,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -231,8 +268,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAdd_6()
-		throws Exception {
+	public void testAdd_6() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -243,18 +279,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.add(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -266,8 +309,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testDelete_1()
-		throws Exception {
+	public void testDelete_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -278,18 +320,25 @@ public class AccountBLTest {
 		fixture.delete(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 	}
 
 	/**
@@ -300,8 +349,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testDelete_2()
-		throws Exception {
+	public void testDelete_2() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -312,18 +360,25 @@ public class AccountBLTest {
 		fixture.delete(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 	}
 
 	/**
@@ -334,8 +389,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testFind_1()
-		throws Exception {
+	public void testFind_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -347,18 +401,25 @@ public class AccountBLTest {
 		ArrayList<AccountVO> result = fixture.find(message, findType);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -370,8 +431,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testFind_2()
-		throws Exception {
+	public void testFind_2() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -383,18 +443,25 @@ public class AccountBLTest {
 		ArrayList<AccountVO> result = fixture.find(message, findType);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -406,8 +473,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testGetAccountList_1()
-		throws Exception {
+	public void testGetAccountList_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -417,18 +483,25 @@ public class AccountBLTest {
 		ArrayList<AccountVO> result = fixture.getAccountList();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -440,8 +513,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testGetAccountList_2()
-		throws Exception {
+	public void testGetAccountList_2() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -451,18 +523,25 @@ public class AccountBLTest {
 		ArrayList<AccountVO> result = fixture.getAccountList();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -474,8 +553,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testGetAccountList_3()
-		throws Exception {
+	public void testGetAccountList_3() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -485,18 +563,25 @@ public class AccountBLTest {
 		ArrayList<AccountVO> result = fixture.getAccountList();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -508,8 +593,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testJudgeLegal_1()
-		throws Exception {
+	public void testJudgeLegal_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -520,18 +604,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.judgeLegal(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -543,8 +634,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testJudgeLegal_2()
-		throws Exception {
+	public void testJudgeLegal_2() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -555,18 +645,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.judgeLegal(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -578,8 +675,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testJudgeLegal_3()
-		throws Exception {
+	public void testJudgeLegal_3() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -590,18 +686,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.judgeLegal(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -613,8 +716,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testJudgeLegal_4()
-		throws Exception {
+	public void testJudgeLegal_4() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -625,18 +727,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.judgeLegal(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -648,8 +757,7 @@ public class AccountBLTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testModify_1()
-		throws Exception {
+	public void testModify_1() throws Exception {
 		AccountBL fixture = new AccountBL();
 		fixture.accountVO = new AccountVO("", "", new Double(1.0));
 		fixture.accountPO = new AccountPO("", "", 1.0);
@@ -660,18 +768,25 @@ public class AccountBLTest {
 		ResultMessage result = fixture.modify(accountVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException: bussinesslogic.accountbl.AccountBL
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -679,13 +794,12 @@ public class AccountBLTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -693,20 +807,20 @@ public class AccountBLTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */

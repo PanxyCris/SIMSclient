@@ -5,29 +5,22 @@ import dataenum.Warehouse;
 import po.PersistObject;
 
 /**
- * 经营历程表
- * 继承PersistObjct
- * 将原本的属性用private修饰，增加serialVersionUID,去掉date, 因为date在父类PersistObject自动生成
- * 修改者：lijie
+ * 经营历程表 继承PersistObjct 将原本的属性用private修饰，增加serialVersionUID,去掉date,
+ * 因为date在父类PersistObject自动生成 修改者：lijie
  */
-public class BusinessHistorySchedulePO extends PersistObject{
+public class BusinessHistorySchedulePO extends PersistObject {
 	private static final long serialVersionUID = 1L;
-	//筛选条件
+	// 筛选条件
 	private BillType type;
-	private String customer;//客户
-	private String clerkID;//业务员
-	private Warehouse warehouse;//仓库
-	
-	/** 
-	* @Description: TODO(这里用一句话描述这个方法的作用) 
-	* @param @param id
-	* @param @param type
-	* @param @param customer
-	* @param @param clerkID
-	* @param @param warehouse    设定文件 
-	* @return   返回类型 
-	* @throws 
-	*/
+	private String customer;// 客户
+	private String clerkID;// 业务员
+	private Warehouse warehouse;// 仓库
+
+	/**
+	 * @Description: TODO(这里用一句话描述这个方法的作用) @param @param id @param @param
+	 * type @param @param customer @param @param clerkID @param @param warehouse
+	 * 设定文件 @return 返回类型 @throws
+	 */
 	public BusinessHistorySchedulePO(String id, BillType type, String customer, String clerkID, Warehouse warehouse) {
 		super(id);
 		this.type = type;
@@ -71,8 +64,5 @@ public class BusinessHistorySchedulePO extends PersistObject{
 	public void setWarehouse(Warehouse warehouse) {
 		this.warehouse = warehouse;
 	}
-	
-	
-	
-		
+
 }

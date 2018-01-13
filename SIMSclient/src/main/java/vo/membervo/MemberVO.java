@@ -57,11 +57,9 @@ public class MemberVO {
 		return ID;
 	}
 
-
 	public MemberCategory getCategory() {
 		return category;
 	}
-
 
 	public MemberLevel getLevel() {
 		return level;
@@ -76,7 +74,6 @@ public class MemberVO {
 		return name;
 	}
 
-
 	public String getCellNumber() {
 		return cellNumber;
 	}
@@ -88,7 +85,6 @@ public class MemberVO {
 	public String getPost() {
 		return post;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -110,31 +106,31 @@ public class MemberVO {
 		return saleMan;
 	}
 
-	public String getCategoryStr(){
+	public String getCategoryStr() {
 		return category.value;
 	}
 
-	public String getLevelString(){
+	public String getLevelString() {
 		return levelString;
 	}
 
-	public void setCellNumber(String cellNumber){
+	public void setCellNumber(String cellNumber) {
 		this.cellNumber = cellNumber;
 	}
 
-	public void setAddress(String address){
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public void setPost(String post){
+	public void setPost(String post) {
 		this.post = post;
 	}
 
-	public void setEmail(String email){
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public void setSaleMan(String saleMan){
+	public void setSaleMan(String saleMan) {
 		this.saleMan = saleMan;
 	}
 

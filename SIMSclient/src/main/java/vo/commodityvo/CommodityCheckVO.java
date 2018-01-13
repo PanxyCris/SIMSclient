@@ -12,7 +12,7 @@ public class CommodityCheckVO {
 	private Integer number;
 	private Double money;
 
-	public CommodityCheckVO(LocalDate date,BillType type,String name,Integer number,Double money){
+	public CommodityCheckVO(LocalDate date, BillType type, String name, Integer number, Double money) {
 		this.date = date;
 		this.type = type;
 		this.typeString = type.value;

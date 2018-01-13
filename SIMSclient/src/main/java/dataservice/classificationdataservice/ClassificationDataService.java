@@ -25,5 +25,4 @@ public interface ClassificationDataService extends Remote {
 
 	public ArrayList<ClassificationVPO> show() throws RemoteException;
 
-
 }

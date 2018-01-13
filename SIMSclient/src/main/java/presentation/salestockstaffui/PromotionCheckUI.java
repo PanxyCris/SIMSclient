@@ -11,14 +11,13 @@ import vo.uservo.UserVO;
 
 public class PromotionCheckUI {
 
-	public void start(UserVO user,BillType type,SalesVO sale) throws Exception{
+	public void start(UserVO user, BillType type, SalesVO sale) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PromotionCheckUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        PromotionCheckController controller = loader.<PromotionCheckController>getController();
-        controller.initData(user,type,sale);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		PromotionCheckController controller = loader.<PromotionCheckController>getController();
+		controller.initData(user, type, sale);
+		primaryStage.show();
 	}
-
 
 }

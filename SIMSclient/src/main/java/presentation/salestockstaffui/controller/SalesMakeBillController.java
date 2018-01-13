@@ -165,7 +165,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 					Double.parseDouble(voucherLabel.getText()), Double.parseDouble(afterLabel.getText()),
 					noteArea.getText(), BillState.DRAFT, BillType.getType(typeLabel.getText()));
 			ResultMessage message = service.save(vo);
-			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
+			if (message == ResultMessage.SUCCESS || message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.SAVED);
 				fresh();
 			} else
@@ -191,7 +191,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 					Double.parseDouble(voucherLabel.getText()), Double.parseDouble(afterLabel.getText()),
 					noteArea.getText(), BillState.COMMITED, BillType.getType(typeLabel.getText()));
 			ResultMessage message = service.submit(vo);
-			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
+			if (message == ResultMessage.SUCCESS || message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.COMMITED);
 				fresh();
 			} else
@@ -288,7 +288,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 			if (!update(newVO))
 				(t.getTableView().getItems().get(t.getTablePosition().getRow())).setNumber(tmp);
 			else {
-				Integer newTmp = newVO.getNumber(); //商品数量变更，总价的修改
+				Integer newTmp = newVO.getNumber(); // 商品数量变更，总价的修改
 				double result = Double.parseDouble(beforeLabel.getText()) - (tmp - newTmp * newVO.getPrice());
 				((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTotal(result);
 				beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText()) - tmpTotal + result));
@@ -307,7 +307,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 			if (!update(newVO))
 				(t.getTableView().getItems().get(t.getTablePosition().getRow())).setPrice(tmp);
 			else {
-				Integer newTmp = newVO.getNumber(); //价格修改的总价的修改
+				Integer newTmp = newVO.getNumber(); // 价格修改的总价的修改
 				double result = Double.parseDouble(beforeLabel.getText()) - (tmp - newTmp) * newVO.getNumber();
 				((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setTotal(result);
 				beforeLabel.setText(String.valueOf(Double.parseDouble(beforeLabel.getText()) - tmpTotal + result));
@@ -386,7 +386,6 @@ public class SalesMakeBillController extends MakeReceiptController {
 
 		ObservableList<String> commodityList = FXCollections.observableArrayList();
 
-
 		commodityList.addAll(commodityService.getIDandName());
 
 		nameChoice.setItems(commodityList);
@@ -419,6 +418,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 		}
 
 	}
+
 	/**
 	 * 对商品数量和价格的合法性监听
 	 */
@@ -546,6 +546,7 @@ public class SalesMakeBillController extends MakeReceiptController {
 			return cell;
 		});
 	}
+
 	/**
 	 * 所有的价格变更都会对折后价格有影响，此方法用于更新折后价格
 	 */

@@ -10,7 +10,6 @@ import dataenum.findtype.FindPromotionType;
 import dataservice.promotiondataservice.PromotionSumDataService;
 import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionPO;
-import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;
 
 public class PromotionSumDataServiceImpl implements PromotionSumDataService {
@@ -26,7 +25,7 @@ public class PromotionSumDataServiceImpl implements PromotionSumDataService {
 		LocalDate endDate = LocalDate.of(2017, 12, 31);
 		GiftPO g = new GiftPO("100010", 100);
 		ArrayList<GiftPO> gifts = new ArrayList<>();
-		gifts .add(g);
+		gifts.add(g);
 		PromotionTotalPO po = new PromotionTotalPO("100001", beginDate, endDate, 100.0, 200.0, gifts);
 		PromotionSumDataServiceImpl p = new PromotionSumDataServiceImpl();
 		p.insertPromotion(po);
@@ -62,10 +61,10 @@ public class PromotionSumDataServiceImpl implements PromotionSumDataService {
 		ArrayList<PromotionTotalPO> result = new ArrayList<>();
 		ArrayList<PromotionPO> list = promotion.show();
 		for (PromotionPO po : list) {
-			if (po.getType() == PromotionType.SUM_PROMOTION) result.add((PromotionTotalPO) po);
+			if (po.getType() == PromotionType.SUM_PROMOTION)
+				result.add((PromotionTotalPO) po);
 		}
 		return result;
 	}
-
 
 }

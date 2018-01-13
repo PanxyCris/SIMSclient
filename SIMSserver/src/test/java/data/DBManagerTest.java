@@ -5,7 +5,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>DBManagerTest</code> contains tests for the class <code>{@link DBManager}</code>.
+ * The class <code>DBManagerTest</code> contains tests for the class
+ * <code>{@link DBManager}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:26
  * @author asus
@@ -18,8 +19,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testDBManager_1()
-		throws Exception {
+	public void testDBManager_1() throws Exception {
 		DBManager result = new DBManager();
 		assertNotNull(result);
 		// add additional test code here
@@ -33,8 +33,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetConnection_1()
-		throws Exception {
+	public void testGetConnection_1() throws Exception {
 
 		Connection result = DBManager.getConnection();
 
@@ -50,8 +49,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetConnection_2()
-		throws Exception {
+	public void testGetConnection_2() throws Exception {
 
 		Connection result = DBManager.getConnection();
 
@@ -67,8 +65,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetConnection_3()
-		throws Exception {
+	public void testGetConnection_3() throws Exception {
 
 		Connection result = DBManager.getConnection();
 
@@ -84,8 +81,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetConnection_4()
-		throws Exception {
+	public void testGetConnection_4() throws Exception {
 
 		Connection result = DBManager.getConnection();
 
@@ -101,8 +97,7 @@ public class DBManagerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetConnection_5()
-		throws Exception {
+	public void testGetConnection_5() throws Exception {
 
 		Connection result = DBManager.getConnection();
 
@@ -114,13 +109,12 @@ public class DBManagerTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -128,20 +122,20 @@ public class DBManagerTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */

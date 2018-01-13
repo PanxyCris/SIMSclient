@@ -69,7 +69,7 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 		ArrayList<PaymentBillVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 
@@ -107,12 +107,12 @@ public class CheckPaymentBillController extends BussinessProcessTableController 
 		}
 	}
 
-	public void initTime(){
+	public void initTime() {
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
 
-	public void initFind(){
+	public void initFind() {
 		findChoice.setValue(null);
 		findingField.setText(null);
 	}

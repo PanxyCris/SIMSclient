@@ -22,21 +22,21 @@ import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPO;
 
 /**
-*
-* @author Lijie
-* @date 2017年12月6日
-*/
+ *
+ * @author Lijie
+ * @date 2017年12月6日
+ */
 public class PromotionData<P extends PromotionPO> {
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		PromotionData<PromotionMemberPO> data = new PromotionData<>();
-		GiftPO gift1 = new GiftPO("赠品1",2);
-		GiftPO gift2 = new GiftPO("赠品2",3);
+		GiftPO gift1 = new GiftPO("赠品1", 2);
+		GiftPO gift2 = new GiftPO("赠品2", 3);
 		ArrayList<GiftPO> gifts = new ArrayList<>();
 		gifts.add(gift1);
 		gifts.add(gift2);
-		PromotionMemberPO pro = new PromotionMemberPO("000001",LocalDate.of(2017, 12, 1),LocalDate.now(),
-				MemberLevel.LEVEL1,20.0,20.0,gifts);
+		PromotionMemberPO pro = new PromotionMemberPO("000001", LocalDate.of(2017, 12, 1), LocalDate.now(),
+				MemberLevel.LEVEL1, 20.0, 20.0, gifts);
 		data.insert(pro);
 		System.out.println(data.show().get(0).getId());
 	}
@@ -55,14 +55,13 @@ public class PromotionData<P extends PromotionPO> {
 					conn.setAutoCommit(false);
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setString(1, po.getId());
-			        ps.setObject(2, po);
-			        ps.executeUpdate();
-			        conn.commit();
-			        ps.close();
-			        conn.close();
-			        return ResultMessage.SUCCESS;
-				}
-				else {
+					ps.setObject(2, po);
+					ps.executeUpdate();
+					conn.commit();
+					ps.close();
+					conn.close();
+					return ResultMessage.SUCCESS;
+				} else {
 					System.out.println("促销策略ID已存在");
 					return ResultMessage.EXISTED;
 				}
@@ -108,7 +107,6 @@ public class PromotionData<P extends PromotionPO> {
 		}
 	}
 
-
 	public ArrayList<P> find(String keyword, FindPromotionType type) {
 		ArrayList<P> list = new ArrayList<>();
 		Connection conn = DBManager.getConnection();
@@ -116,29 +114,32 @@ public class PromotionData<P extends PromotionPO> {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
 
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                    P po = (P) in.readObject();
-                    switch (type) {
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					P po = (P) in.readObject();
+					switch (type) {
 					case TYPE:
-						if (keyword.equals(po.getType().value)) list.add(po);
+						if (keyword.equals(po.getType().value))
+							list.add(po);
 						break;
 					case ID:
-						if (keyword.equals(po.getId())) list.add(po);
+						if (keyword.equals(po.getId()))
+							list.add(po);
 						break;
 					case TIMEINTERVAL:
-						if (keyword.equals(po.getBeginDate())) list.add(po);
+						if (keyword.equals(po.getBeginDate()))
+							list.add(po);
 						break;
 					default:
 						break;
 					}
-               }
+				}
 			}
 			rs.close();
 			ps.close();
@@ -157,17 +158,17 @@ public class PromotionData<P extends PromotionPO> {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
 
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                    P po = (P) in.readObject();
-                    list.add(po);
-                }
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					P po = (P) in.readObject();
+					list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();

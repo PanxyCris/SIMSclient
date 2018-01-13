@@ -10,17 +10,22 @@ import po.accountbookpo.AccountBookPO;
 
 /**
  * 
-* @ClassName: SetUpAccountDataService 
-* @Description: 期初建账 ,只有增加，查看和显示
-* @author lijie 
-* @date 2017年12月3日 上午11:10:47 
-*
+ * @ClassName: SetUpAccountDataService
+ * @Description: 期初建账 ,只有增加，查看和显示
+ * @author lijie
+ * @date 2017年12月3日 上午11:10:47
+ *
  */
 public interface AccountBookDataService extends Remote {
 	public static final String NAME = "AccountBookData";
-    public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException;
-    public ResultMessage deleteAccountBook(String ID) throws RemoteException;
-    public ResultMessage updateAccountBook(AccountBookPO po) throws RemoteException;
-    public ArrayList<AccountBookPO> find(String keyword, FindAccountBookType type) throws RemoteException;
+
+	public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException;
+
+	public ResultMessage deleteAccountBook(String ID) throws RemoteException;
+
+	public ResultMessage updateAccountBook(AccountBookPO po) throws RemoteException;
+
+	public ArrayList<AccountBookPO> find(String keyword, FindAccountBookType type) throws RemoteException;
+
 	public ArrayList<AccountBookPO> showAccountBook() throws RemoteException;
 }

@@ -12,8 +12,7 @@ import po.commoditypo.GiftPO;
 import po.promotionpo.PromotionMemberPO;
 import po.promotionpo.PromotionPO;
 
-
-public class PromotionDataService_Stub implements PromotionMemberDataService{
+public class PromotionDataService_Stub implements PromotionMemberDataService {
 
 	@Override
 	public ResultMessage insertPromotion(PromotionMemberPO po) throws RemoteException {
@@ -42,7 +41,8 @@ public class PromotionDataService_Stub implements PromotionMemberDataService{
 		ArrayList<GiftPO> gifts = new ArrayList<>();
 		GiftPO g = new GiftPO("100010", 100);
 		gifts.add(g);
-		PromotionMemberPO po = new PromotionMemberPO("10001", beginDate, endDate, MemberLevel.LEVEL3, 120.0, 60.00, gifts );
+		PromotionMemberPO po = new PromotionMemberPO("10001", beginDate, endDate, MemberLevel.LEVEL3, 120.0, 60.00,
+				gifts);
 		list.add(po);
 		return list;
 	}
@@ -55,9 +55,10 @@ public class PromotionDataService_Stub implements PromotionMemberDataService{
 		ArrayList<GiftPO> gifts = new ArrayList<>();
 		GiftPO g = new GiftPO("100010", 100);
 		gifts.add(g);
-		PromotionMemberPO po = new PromotionMemberPO("10001", beginDate, endDate, MemberLevel.LEVEL3, 120.0, 60.00, gifts );
+		PromotionMemberPO po = new PromotionMemberPO("10001", beginDate, endDate, MemberLevel.LEVEL3, 120.0, 60.00,
+				gifts);
 		list.add(po);
 		return list;
 	}
-	
+
 }

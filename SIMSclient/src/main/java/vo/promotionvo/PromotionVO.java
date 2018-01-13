@@ -4,13 +4,12 @@ import java.time.LocalDate;
 
 import dataenum.PromotionType;
 
-
 /**
-*
-* @author Lijie
-* @date 2017年12月11日
-*/
-public class PromotionVO{
+ *
+ * @author Lijie
+ * @date 2017年12月11日
+ */
+public class PromotionVO {
 
 	private String id;
 	private LocalDate beginDate;
@@ -18,7 +17,7 @@ public class PromotionVO{
 	private PromotionType type;
 	private String typeString;
 
-	public PromotionVO(String id,LocalDate beginDate,LocalDate endDate,PromotionType type){
+	public PromotionVO(String id, LocalDate beginDate, LocalDate endDate, PromotionType type) {
 		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -26,23 +25,23 @@ public class PromotionVO{
 		this.typeString = type.value;
 	}
 
-	public String getId(){
+	public String getId() {
 		return id;
 	}
 
-	public void setBeginDate(LocalDate beginDate){
+	public void setBeginDate(LocalDate beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public LocalDate getBeginDate(){
+	public LocalDate getBeginDate() {
 		return beginDate;
 	}
 
-	public void setEndDate(LocalDate endDate){
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public LocalDate getEndDate(){
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
@@ -57,7 +56,5 @@ public class PromotionVO{
 	public String getTypeString() {
 		return typeString;
 	}
-
-
 
 }

@@ -1,7 +1,6 @@
 package data.accountdata;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
@@ -15,10 +14,10 @@ import po.accountpo.AccountPO;
  * @version 2017-12-2
  * 
  */
-public class AccountDataServiceMySqlImpl  implements AccountDataService{
+public class AccountDataServiceMySqlImpl implements AccountDataService {
 
 	private AccountData account;
-	
+
 	public AccountDataServiceMySqlImpl() {
 		account = new AccountData();
 	}
@@ -32,7 +31,6 @@ public class AccountDataServiceMySqlImpl  implements AccountDataService{
 	public ArrayList<AccountPO> showAccount() throws RemoteException {
 		return account.show();
 	}
-
 
 	@Override
 	public ResultMessage insertAccount(AccountPO po) throws RemoteException {
@@ -48,6 +46,5 @@ public class AccountDataServiceMySqlImpl  implements AccountDataService{
 	public ResultMessage updateAccount(AccountPO po) throws RemoteException {
 		return account.update(po);
 	}
-	
-	
+
 }

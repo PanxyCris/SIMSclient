@@ -15,7 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
@@ -30,6 +29,7 @@ import po.commoditypo.CommodityItemPO;
 public class PurchaseData {
 
 	private Connection conn;
+
 	public PurchaseData() {
 		conn = DBManager.getConnection();
 	}
@@ -38,12 +38,12 @@ public class PurchaseData {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
-		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "潘星宇", Warehouse.WAREHOUSE1,
-				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
+		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "潘星宇", Warehouse.WAREHOUSE1, "11", list, "2",
+				100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
 		PurchaseData p = new PurchaseData();
-//		p.insert(po);
+		// p.insert(po);
 		System.out.println(p.show().get(0).getOperator());
-		//p.delete(po.getId());
+		// p.delete(po.getId());
 
 	}
 
@@ -66,8 +66,7 @@ public class PurchaseData {
 					conn.commit();
 					ps.close();
 					return ResultMessage.SUCCESS;
-				}
-				else {
+				} else {
 					update(po);
 					System.out.println("该进货单已存在");
 					return ResultMessage.EXISTED;

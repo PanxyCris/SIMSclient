@@ -12,11 +12,11 @@ import dataservice.purchasedataservice.PurchaseDataService;
 import po.commoditypo.CommodityItemPO;
 import po.purchasepo.PurchasePO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2018ƒÍ1‘¬10»’    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2018ƒÍ1‘¬10»’
+ */
 public class PurchaseDataService_Stub implements PurchaseDataService {
 
 	@Override
@@ -42,10 +42,10 @@ public class PurchaseDataService_Stub implements PurchaseDataService {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
-		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1,
-				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
-        ArrayList<PurchasePO> result = new ArrayList<>();
-        result.add(po);
+		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1, "11", list, "2",
+				100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
+		ArrayList<PurchasePO> result = new ArrayList<>();
+		result.add(po);
 		return result;
 	}
 
@@ -54,10 +54,10 @@ public class PurchaseDataService_Stub implements PurchaseDataService {
 		CommodityItemPO i = new CommodityItemPO("00001", "5201314", "44", 50, 20, "55");
 		ArrayList<CommodityItemPO> list = new ArrayList<>();
 		list.add(i);
-		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1,
-				"11", list, "2", 100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
-        ArrayList<PurchasePO> result = new ArrayList<>();
-        result.add(po);
+		PurchasePO po = new PurchasePO("JHTHD-20171231-00001", "000001", "≈À–«”Ó", Warehouse.WAREHOUSE1, "11", list, "2",
+				100, BillType.PURCHASEBACKBILL, BillState.COMMITED);
+		ArrayList<PurchasePO> result = new ArrayList<>();
+		result.add(po);
 		return result;
 	}
 

@@ -18,30 +18,27 @@ public class RemindUI {
 	AnchorPane pane;
 
 	@FXML
-	public void confirm(){
-	   exit();
+	public void confirm() {
+		exit();
 	}
 
 	@FXML
-	public void exitKey(KeyEvent event){
-		if(event.getCode()==KeyCode.ENTER)
+	public void exitKey(KeyEvent event) {
+		if (event.getCode() == KeyCode.ENTER)
 			exit();
 	}
 
-	public void exit(){
+	public void exit() {
 		Stage stage = (Stage) button.getScene().getWindow();
-	    stage.close();
+		stage.close();
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		    Parent root = FXMLLoader.load(getClass().getResource("fxml/Remind.fxml"));
-	        Scene scene = new Scene(root);
-	        primaryStage.setScene(scene);
-	        primaryStage.setTitle("提示界面");
-	        primaryStage.show();
+		Parent root = FXMLLoader.load(getClass().getResource("fxml/Remind.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("提示界面");
+		primaryStage.show();
 	}
-
-
-
 
 }

@@ -1,22 +1,23 @@
 package vo.commodityvo;
 
 public class CommodityStockVO {
-	private String id;   //商品编号
+	private String id; // 商品编号
 	private String name;
-	private String model; //商品型号
-	private Integer number; //商品数量
-	private Double avgRetailedPrice; //均进价
-	private Double avgPurPrice;//均售价
-	private Integer line;//行号
-	
-	public CommodityStockVO(String id,String name,String model,Integer number,Double avgRetailedPrice,Double avgPurPrice,Integer line){
-		this.id=id;
-		this.name=name;
-		this.model=model;
-		this.number=number;
-		this.avgRetailedPrice=avgRetailedPrice;
-		this.avgPurPrice=avgPurPrice;
-		this.line=line;
+	private String model; // 商品型号
+	private Integer number; // 商品数量
+	private Double avgRetailedPrice; // 均进价
+	private Double avgPurPrice;// 均售价
+	private Integer line;// 行号
+
+	public CommodityStockVO(String id, String name, String model, Integer number, Double avgRetailedPrice,
+			Double avgPurPrice, Integer line) {
+		this.id = id;
+		this.name = name;
+		this.model = model;
+		this.number = number;
+		this.avgRetailedPrice = avgRetailedPrice;
+		this.avgPurPrice = avgPurPrice;
+		this.line = line;
 	}
 
 	public String getId() {
@@ -74,7 +75,5 @@ public class CommodityStockVO {
 	public void setAvgPurPrice(Double avgPurPrice) {
 		this.avgPurPrice = avgPurPrice;
 	}
-	
-	
-	
+
 }

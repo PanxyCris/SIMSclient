@@ -5,7 +5,6 @@ package bussinesslogic.commoditybl;
 * @date 2017Äê12ÔÂ18ÈÕ    
 */
 
-
 import po.commoditypo.CommodityPO;
 import vo.commodityvo.CommodityVO;
 
@@ -26,7 +25,7 @@ public class CommodityTransiton {
 				recentPurPrice, recentRetailedPrice, warmingValue);
 		return po;
 	}
-	
+
 	public CommodityVO POtoVO(CommodityPO po) {
 		String id = po.getID();
 		String name = po.getName();
@@ -38,9 +37,9 @@ public class CommodityTransiton {
 		String classification = po.getClassification();
 		double recentRetailedPrice = po.getRecentRetailedPrice();
 		double recentPurPrice = po.getRecentPurPrice();
-		
+
 		CommodityVO vo = new CommodityVO(id, name, model, classification, number, purPrice, retailedPrice,
-				 warmingValue);
+				warmingValue);
 		vo.setRecentPurPrice(recentPurPrice);
 		vo.setRecentRetailedPrice(recentRetailedPrice);
 		return vo;

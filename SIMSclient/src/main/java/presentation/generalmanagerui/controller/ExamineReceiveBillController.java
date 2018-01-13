@@ -78,7 +78,7 @@ public class ExamineReceiveBillController extends ExamineBillController {
 			if (receiptList == null) {
 				Alert error = new Alert(Alert.AlertType.WARNING, ResultMessage.NOTFOUND.value);
 				error.showAndWait();
-			}else {
+			} else {
 				list.clear();
 				list.addAll(receiptList);
 				table.setItems(list);
@@ -181,8 +181,10 @@ public class ExamineReceiveBillController extends ExamineBillController {
 		});
 
 	}
+
 	/**
 	 * 可编辑账户数额和备注
+	 * 
 	 * @throws RemoteException
 	 */
 
@@ -213,8 +215,7 @@ public class ExamineReceiveBillController extends ExamineBillController {
 		tableMoney.setCellFactory(cellFactoryAccountListVODouble);
 		tableMoney.setOnEditCommit((CellEditEvent<AccountListVO, Double> t) -> {
 			double tmp = t.getOldValue();
-			((AccountListVO) t.getTableView().getItems().get(t.getTablePosition().getRow()))
-					.setMoney(t.getNewValue());
+			((AccountListVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setMoney(t.getNewValue());
 			AccountListVO accountVO = ((AccountListVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
 			accountVOList.set(t.getTablePosition().getRow(), accountVO);
 			ReceiptBillVO newVO = bill;

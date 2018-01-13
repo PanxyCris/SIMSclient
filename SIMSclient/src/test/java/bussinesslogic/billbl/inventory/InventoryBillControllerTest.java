@@ -11,7 +11,8 @@ import dataenum.BillState;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>InventoryBillControllerTest</code> contains tests for the class <code>{@link InventoryBillController}</code>.
+ * The class <code>InventoryBillControllerTest</code> contains tests for the
+ * class <code>{@link InventoryBillController}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:21
  * @author asus
@@ -24,8 +25,7 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testInventoryBillController_1()
-		throws Exception {
+	public void testInventoryBillController_1() throws Exception {
 		InventoryBillController result = new InventoryBillController();
 		assertNotNull(result);
 		// add additional test code here
@@ -39,39 +39,47 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testDelete_1()
-		throws Exception {
+	public void testDelete_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
-		InventoryBillVO clickedItem = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL, BillState.COMMITED, "");
+		InventoryBillVO clickedItem = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL,
+				BillState.COMMITED, "");
 
 		fixture.delete(clickedItem);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 	}
 
 	/**
-	 * Run the ArrayList<InventoryBillVO> find(String,FindInventoryBillType) method test.
+	 * Run the ArrayList<InventoryBillVO> find(String,FindInventoryBillType)
+	 * method test.
 	 *
 	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testFind_1()
-		throws Exception {
+	public void testFind_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
 		String text = "";
@@ -80,18 +88,26 @@ public class InventoryBillControllerTest {
 		ArrayList<InventoryBillVO> result = fixture.find(text, type);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -103,8 +119,7 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testGetId_1()
-		throws Exception {
+	public void testGetId_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
 		BillType type = BillType.INVENTORYBILL;
@@ -112,18 +127,26 @@ public class InventoryBillControllerTest {
 		String result = fixture.getId(type);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -135,27 +158,35 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testSave_1()
-		throws Exception {
+	public void testSave_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
-		InventoryBillVO vo = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL, BillState.COMMITED, "");
+		InventoryBillVO vo = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL, BillState.COMMITED,
+				"");
 
 		ResultMessage result = fixture.save(vo);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -167,26 +198,33 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testShow_1()
-		throws Exception {
+	public void testShow_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
 
 		ArrayList<InventoryBillVO> result = fixture.show();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -198,27 +236,35 @@ public class InventoryBillControllerTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Test
-	public void testSubmit_1()
-		throws Exception {
+	public void testSubmit_1() throws Exception {
 		InventoryBillController fixture = new InventoryBillController();
 		fixture.inventoryBillBL = new InventoryBillBL();
-		InventoryBillVO clickedItem = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL, BillState.COMMITED, "");
+		InventoryBillVO clickedItem = new InventoryBillVO("", new ArrayList(), "", BillType.INVENTORYBILL,
+				BillState.COMMITED, "");
 
 		ResultMessage result = fixture.submit(clickedItem);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.billbl.inventory.InventoryBillController
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.billbl.inventory.InventoryBillController
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -226,13 +272,12 @@ public class InventoryBillControllerTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -240,20 +285,20 @@ public class InventoryBillControllerTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:21
 	 */

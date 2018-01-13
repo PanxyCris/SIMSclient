@@ -25,8 +25,8 @@ public class MemberTransition {
 		String receivable = String.valueOf(po.getReceivable());
 		String payable = String.valueOf(po.getPayable());
 		String saleMan = po.getSaleMan();
-		MemberVO vo = new MemberVO(id, category, level, name, cellNumber, address, post,
-				email, receivableLimit, receivable, payable, saleMan);
+		MemberVO vo = new MemberVO(id, category, level, name, cellNumber, address, post, email, receivableLimit,
+				receivable, payable, saleMan);
 		return vo;
 	}
 
@@ -41,8 +41,7 @@ public class MemberTransition {
 		String email = vo.getEmail();
 		Double receivableLimit = Double.parseDouble(vo.getReceivableLimit());
 		String saleMan = vo.getSaleMan();
-		MemberPO po = new MemberPO(id, category, level, name, phone, adress, post,
-				                   email, receivableLimit, saleMan);
+		MemberPO po = new MemberPO(id, category, level, name, phone, adress, post, email, receivableLimit, saleMan);
 		po.setPayable(Double.parseDouble(vo.getPayable()));
 		po.setReceivable(Double.parseDouble(vo.getReceivable()));
 		return po;

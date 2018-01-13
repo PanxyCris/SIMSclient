@@ -75,7 +75,7 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO> {
 				member.setReceivable(member.getReceivable() + vo.getSum());
 			else
 				member.setPayable(member.getPayable() + vo.getSum());
-			//商品信息的修改
+			// 商品信息的修改
 			for (CommodityItemVO item : vo.getCommodities()) {
 				String commodityName = "";
 				for (int i = 0; i < item.getName().length(); i++)
@@ -95,10 +95,10 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO> {
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-            //通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  false,
-					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
 				return result;
@@ -112,10 +112,10 @@ public class ExaminePurchaseBL implements ExamineBLService<PurchaseVO> {
 		for (PurchaseVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  false,
-					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
 				return result;

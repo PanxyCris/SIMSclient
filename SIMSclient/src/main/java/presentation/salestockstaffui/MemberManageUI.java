@@ -9,12 +9,12 @@ import vo.uservo.UserVO;
 
 public class MemberManageUI extends SaleStockStaffUI {
 
-	public void start(UserVO user) throws Exception{
+	public void start(UserVO user) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/MemberManageUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        MemberManageController controller = loader.<MemberManageController>getController();
-        controller.initData(user);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		MemberManageController controller = loader.<MemberManageController>getController();
+		controller.initData(user);
+		primaryStage.show();
 	}
 }

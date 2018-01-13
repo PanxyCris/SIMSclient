@@ -4,20 +4,20 @@ import java.time.LocalDate;
 
 public class SaleScheduleVO {
 
-	private LocalDate date;//时间
-	private String name;//商品名
-	private String model;//型号
-	private Integer number;//数量
-	private Double price;//单价
+	private LocalDate date;// 时间
+	private String name;// 商品名
+	private String model;// 型号
+	private Integer number;// 数量
+	private Double price;// 单价
 	private Double sum;
 
-	public SaleScheduleVO(LocalDate d,String name,String m,Integer n,double p){
+	public SaleScheduleVO(LocalDate d, String name, String m, Integer n, double p) {
 		this.date = d;
 		this.name = name;
 		model = m;
 		this.number = n;
 		price = p;
-		sum = n*p;
+		sum = n * p;
 	}
 
 	public LocalDate getDate() {
@@ -67,6 +67,5 @@ public class SaleScheduleVO {
 	public void setSum(Double sum) {
 		this.sum = sum;
 	}
-
 
 }

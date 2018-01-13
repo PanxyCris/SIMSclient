@@ -18,24 +18,24 @@ import rmi.RemoteHelper;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
 
-public class UtilityBL implements UtilityBLService{
+public class UtilityBL implements UtilityBLService {
 
 	private static UtilityBL utilityBL = new UtilityBL();
 	private MessageDataService messageService;
 	private UserDataService userService;
 	UserController bl = new UserController();
 
-	public UtilityBL(){
-     	messageService = RemoteHelper.getInstance().getMessageDataService();
-     	userService = RemoteHelper.getInstance().getUserDataService();
+	public UtilityBL() {
+		messageService = RemoteHelper.getInstance().getMessageDataService();
+		userService = RemoteHelper.getInstance().getUserDataService();
 	}
 
-	public static UtilityBL getInstance(){
+	public static UtilityBL getInstance() {
 		return utilityBL;
 	}
 
-	public UtilityBLService getUtilityBLService(){
-		return (UtilityBLService)utilityBL;
+	public UtilityBLService getUtilityBLService() {
+		return (UtilityBLService) utilityBL;
 	}
 
 	@Override
@@ -45,15 +45,15 @@ public class UtilityBL implements UtilityBLService{
 
 	@Override
 	public ArrayList<MessageVO> getMessage(UserVO user) {
-        UserPO po = bl.voTopo(user);
+		UserPO po = bl.voTopo(user);
 		ArrayList<MessageVO> messages = new ArrayList<>();
 		try {
 			ArrayList<MessagePO> messagesData = messageService.getMessage(po);
-			if(messagesData==null)
+			if (messagesData == null)
 				return null;
 			else
-			for(MessagePO message:messagesData)
-				messages.add(poTovo(message));
+				for (MessagePO message : messagesData)
+					messages.add(poTovo(message));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -64,38 +64,40 @@ public class UtilityBL implements UtilityBLService{
 	public boolean hasMessage(UserVO user) {
 		try {
 			ArrayList<MessagePO> messages = messageService.getMessage(bl.voTopo(user));
-			if(messages!=null)
-			for(MessagePO message:messages)
-				if(message.getHasRead() == false)
-					return true;
+			if (messages != null)
+				for (MessagePO message : messages)
+					if (message.getHasRead() == false)
+						return true;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
 
-	public MessagePO voTopo(MessageVO vo){
-		MessagePO po = new MessagePO(vo.getMessageID(),vo.getUserID(),vo.getInfo(),vo.getTime(),vo.getHasRead());
+	public MessagePO voTopo(MessageVO vo) {
+		MessagePO po = new MessagePO(vo.getMessageID(), vo.getUserID(), vo.getInfo(), vo.getTime(), vo.getHasRead());
 		po.setHasRead(vo.getHasRead());
 		return po;
 	}
 
-	public MessageVO poTovo(MessagePO po){
-		MessageVO vo = new MessageVO(po.getMessageID(),po.getUserID(),po.getInfo(),po.getTime(),po.getHasRead());
+	public MessageVO poTovo(MessagePO po) {
+		MessageVO vo = new MessageVO(po.getMessageID(), po.getUserID(), po.getInfo(), po.getTime(), po.getHasRead());
 		vo.setHasRead(po.getHasRead());
 		return vo;
 	}
 
 	@Override
-	public void warningMessage(CommodityPO po) throws RemoteException{
-        if(po.getNumber()<=po.getWarmingValue()){
-      	  MessageWarmingPO message = new MessageWarmingPO(messageService.getMessageID(),null,LocalDateTime.now(),false,po.getName()+"("+po.getID()+")",po.getNumber(),po.getWarmingValue());
-      	  ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value, FindUserType.USERROLE);
-      	  for(UserPO user:inventorymanagers){
-      		  message.setMessageID(user.getID());
-      		  messageService.save(message);
-      		  }
-        }
+	public void warningMessage(CommodityPO po) throws RemoteException {
+		if (po.getNumber() <= po.getWarmingValue()) {
+			MessageWarmingPO message = new MessageWarmingPO(messageService.getMessageID(), null, LocalDateTime.now(),
+					false, po.getName() + "(" + po.getID() + ")", po.getNumber(), po.getWarmingValue());
+			ArrayList<UserPO> inventorymanagers = userService.findUser(UserRole.INVENTORY_MANAGER.value,
+					FindUserType.USERROLE);
+			for (UserPO user : inventorymanagers) {
+				message.setMessageID(user.getID());
+				messageService.save(message);
+			}
+		}
 	}
 
 	@Override

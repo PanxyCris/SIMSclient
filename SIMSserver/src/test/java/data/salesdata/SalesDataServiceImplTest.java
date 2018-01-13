@@ -9,7 +9,8 @@ import dataenum.ResultMessage;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>SalesDataServiceImplTest</code> contains tests for the class <code>{@link SalesDataServiceImpl}</code>.
+ * The class <code>SalesDataServiceImplTest</code> contains tests for the class
+ * <code>{@link SalesDataServiceImpl}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:27
  * @author asus
@@ -24,8 +25,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testSalesDataServiceImpl_1()
-		throws Exception {
+	public void testSalesDataServiceImpl_1() throws Exception {
 
 		SalesDataServiceImpl result = new SalesDataServiceImpl();
 
@@ -44,18 +44,19 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testDeleteSale_1()
-		throws Exception {
+	public void testDeleteSale_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 		String ID = "";
 
 		ResultMessage result = fixture.deleteSale(ID);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.salesdata.SalesData.delete(SalesData.java:95)
-		//       at data.salesdata.SalesDataServiceImpl.deleteSale(SalesDataServiceImpl.java:34)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.salesdata.SalesData.delete(SalesData.java:95)
+		// at
+		// data.salesdata.SalesDataServiceImpl.deleteSale(SalesDataServiceImpl.java:34)
 		assertNotNull(result);
 	}
 
@@ -67,8 +68,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testFindSale_1()
-		throws Exception {
+	public void testFindSale_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 		String info = "";
 		FindSalesType type = FindSalesType.ID;
@@ -87,8 +87,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testGetSaleBackID_1()
-		throws Exception {
+	public void testGetSaleBackID_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 
 		String result = fixture.getSaleBackID();
@@ -105,8 +104,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testGetSaleID_1()
-		throws Exception {
+	public void testGetSaleID_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 
 		String result = fixture.getSaleID();
@@ -123,8 +121,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testInsertSale_1()
-		throws Exception {
+	public void testInsertSale_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 		SalesPO po = new SalesPO();
 
@@ -145,8 +142,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testShowSale_1()
-		throws Exception {
+	public void testShowSale_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 
 		ArrayList<SalesPO> result = fixture.showSale();
@@ -163,8 +159,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testShowSale_2()
-		throws Exception {
+	public void testShowSale_2() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 
 		ArrayList<SalesPO> result = fixture.showSale();
@@ -181,8 +176,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testUpdateSale_1()
-		throws Exception {
+	public void testUpdateSale_1() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 		SalesPO po = new SalesPO();
 
@@ -203,8 +197,7 @@ public class SalesDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Test
-	public void testUpdateSale_2()
-		throws Exception {
+	public void testUpdateSale_2() throws Exception {
 		SalesDataServiceImpl fixture = new SalesDataServiceImpl();
 		SalesPO po = new SalesPO();
 
@@ -221,13 +214,12 @@ public class SalesDataServiceImplTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -235,20 +227,20 @@ public class SalesDataServiceImplTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:27
 	 */

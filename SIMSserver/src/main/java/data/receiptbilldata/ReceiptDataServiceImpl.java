@@ -8,19 +8,19 @@ import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.ReceiptBillDataService;
 import po.financialbillpo.ReceiptBillPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月14日
+ */
 public class ReceiptDataServiceImpl implements ReceiptBillDataService {
 
 	private ReceiptBillData receipt;
-	
+
 	public ReceiptDataServiceImpl() {
 		receipt = new ReceiptBillData();
 	}
-	
+
 	@Override
 	public ResultMessage insertReceiptBill(ReceiptBillPO po) throws RemoteException {
 		return receipt.insert(po);
@@ -45,6 +45,5 @@ public class ReceiptDataServiceImpl implements ReceiptBillDataService {
 	public ArrayList<ReceiptBillPO> showReceiptBill() throws RemoteException {
 		return receipt.show();
 	}
-
 
 }

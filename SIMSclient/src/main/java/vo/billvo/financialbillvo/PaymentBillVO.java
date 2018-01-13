@@ -2,35 +2,34 @@ package vo.billvo.financialbillvo;
 
 import java.util.ArrayList;
 
-
 import dataenum.BillState;
 import dataenum.BillType;
 
 /**
  *
  * @author 王灿灿
- *@version 2017-12-2
+ * @version 2017-12-2
  *
  */
 @SuppressWarnings("serial")
 public class PaymentBillVO extends FinancialDocVO {
-	private Double total;//总额
+	private Double total;// 总额
 	private String accountID;
-	private ArrayList<EntryVO> entryListVO;//条目清单
+	private ArrayList<EntryVO> entryListVO;// 条目清单
 
-	public PaymentBillVO (String docID,String userID,String customer,String accountID,ArrayList<EntryVO> entryListVO,
-			Double total,BillType billType,BillState billState,String note){
-		super(docID,userID,customer,billType,billState,note);
+	public PaymentBillVO(String docID, String userID, String customer, String accountID, ArrayList<EntryVO> entryListVO,
+			Double total, BillType billType, BillState billState, String note) {
+		super(docID, userID, customer, billType, billState, note);
 		this.entryListVO = entryListVO;
 		this.accountID = accountID;
-		this.total=total;
+		this.total = total;
 	}
 
-	public String getAccountID(){
+	public String getAccountID() {
 		return accountID;
 	}
 
-	public void setAccountID(String accountID){
+	public void setAccountID(String accountID) {
 		this.accountID = accountID;
 	}
 

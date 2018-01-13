@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import po.PurchasePO;
 import po.salespo.SalesPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月15日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月15日
+ */
 public interface CommonDataService extends Remote {
 
 	public ArrayList<SalesPO> showSales() throws RemoteException;
+
 	public ArrayList<PurchasePO> showPurchase() throws RemoteException;
 }

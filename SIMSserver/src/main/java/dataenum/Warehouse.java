@@ -1,18 +1,18 @@
 package dataenum;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月2日    
-*/
+
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月2日
+ */
 public enum Warehouse {
 
-	WAREHOUSE1("仓库1"),
-	WAREHOUSE2("仓库2");
+	WAREHOUSE1("仓库1"), WAREHOUSE2("仓库2");
 
 	public final String value;
 
 	Warehouse(String value) {
 		this.value = value;
 	}
-	
+
 }

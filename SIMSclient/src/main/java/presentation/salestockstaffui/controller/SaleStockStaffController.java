@@ -105,13 +105,20 @@ public class SaleStockStaffController extends LoginController {
 		judgeMessage();
 		// image = user.getImage();
 	}
+
 	/**
 	 * 切换fxml
-	 * @param currentID 当前fxml
-	 * @param user 当前登录用户
-	 * @param type 切换界面的单据类型
-	 * @param purchase 进出货
-	 * @param sales 销售
+	 * 
+	 * @param currentID
+	 *            当前fxml
+	 * @param user
+	 *            当前登录用户
+	 * @param type
+	 *            切换界面的单据类型
+	 * @param purchase
+	 *            进出货
+	 * @param sales
+	 *            销售
 	 * @throws Exception
 	 */
 
@@ -167,7 +174,7 @@ public class SaleStockStaffController extends LoginController {
 
 	}
 
-	public void judgeMessage(){
+	public void judgeMessage() {
 		if (utilityService.hasMessage(readUser())) {
 			Circle circle = new Circle();
 			circle.setCenterX(0);

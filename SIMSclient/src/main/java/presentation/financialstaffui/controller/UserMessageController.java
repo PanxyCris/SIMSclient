@@ -40,7 +40,7 @@ public class UserMessageController extends FinancialStaffController {
 				}
 			}
 		}
-		if (messages != null){
+		if (messages != null) {
 			Collections.reverse(messages);
 			list.addAll(messages);
 		}

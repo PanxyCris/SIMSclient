@@ -26,11 +26,12 @@ import vo.billvo.purchasebillvo.PurchaseVO;
 import vo.commodityvo.CommodityItemVO;
 
 /**
-* 进出货的业务逻辑层
-* @author Lijie
-* @date 2017年12月1日
-*/
-public class PurchaseController implements PurchaseBLService{
+ * 进出货的业务逻辑层
+ * 
+ * @author Lijie
+ * @date 2017年12月1日
+ */
+public class PurchaseController implements PurchaseBLService {
 
 	private PurchaseDataService service;
 	private String date;
@@ -61,27 +62,26 @@ public class PurchaseController implements PurchaseBLService{
 			String temp[] = id.split("-");
 
 			if (temp[0].equals("JHD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				IDList.add(Long.parseLong(temp[1] + temp[2]));
 			}
 		}
 		Collections.sort(IDList);
 		String day = getDate();
 		String num = null;
-		if(IDList.size()==0)
-			num = getDate()+"00001";
+		if (IDList.size() == 0)
+			num = getDate() + "00001";
 		else
-		    num = String.valueOf(IDList.get(IDList.size()-1));
+			num = String.valueOf(IDList.get(IDList.size() - 1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
+			index = String.valueOf(Integer.parseInt(index) + 1);
 			StringBuilder sb = new StringBuilder(index);
 			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
+			for (int i = 0; i < 5 - len; i++) {
 				sb.insert(0, "0");
 			}
 			id = sb.toString();
-		}
-		else {
+		} else {
 			id = "00001";
 		}
 		StringBuilder s = new StringBuilder("JHD-");
@@ -103,27 +103,26 @@ public class PurchaseController implements PurchaseBLService{
 			String temp[] = id.split("-");
 
 			if (temp[0].equals("JHTHD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				IDList.add(Long.parseLong(temp[1] + temp[2]));
 			}
 		}
 		Collections.sort(IDList);
 		String day = getDate();
 		String num = null;
-		if(IDList.size()==0)
-			num = getDate()+"00001";
+		if (IDList.size() == 0)
+			num = getDate() + "00001";
 		else
-		    num = String.valueOf(IDList.get(IDList.size()-1));
+			num = String.valueOf(IDList.get(IDList.size() - 1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
+			index = String.valueOf(Integer.parseInt(index) + 1);
 			StringBuilder sb = new StringBuilder(index);
 			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
+			for (int i = 0; i < 5 - len; i++) {
 				sb.insert(0, "0");
 			}
 			id = sb.toString();
-		}
-		else {
+		} else {
 			id = "00001";
 		}
 		StringBuilder s = new StringBuilder("JHTHD-");
@@ -142,21 +141,22 @@ public class PurchaseController implements PurchaseBLService{
 	@Override
 	public ResultMessage submit(PurchaseVO Info) {
 		try {
-			if(Info.getType() == BillType.PURCHASEBACKBILL){
-				for(CommodityItemVO commodity:Info.getCommodities()){
-					if(commodityDataService.findCommodity(getTrueName(commodity.getName()),
-							FindCommodityType.NAME).get(0).getNumber()<commodity.getNumber())
+			if (Info.getType() == BillType.PURCHASEBACKBILL) {
+				for (CommodityItemVO commodity : Info.getCommodities()) {
+					if (commodityDataService.findCommodity(getTrueName(commodity.getName()), FindCommodityType.NAME)
+							.get(0).getNumber() < commodity.getNumber())
 						return ResultMessage.LOWNUMBER;
 				}
 			}
 
 			PurchasePO po = PurchaseTransition.VOtoPO(Info);
 			ResultMessage resultMessage = service.insertPurchase(po);
-			if (resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)
-			{
-					ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
-					for(UserPO manager:generalManagers){
-					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(), false,po.getId(),manager);
+			if (resultMessage == ResultMessage.EXISTED || resultMessage == ResultMessage.SUCCESS) {
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
+						FindUserType.USERROLE);
+				for (UserPO manager : generalManagers) {
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),
+							LocalDateTime.now(), false, po.getId(), manager);
 					messageDataService.save(message);
 				}
 			}
@@ -173,8 +173,7 @@ public class PurchaseController implements PurchaseBLService{
 			PurchasePO po = PurchaseTransition.VOtoPO(Info);
 			if (service.insertPurchase(po) == ResultMessage.EXISTED) {
 				return service.updatePurchase(po);
-			}
-			else
+			} else
 				return service.insertPurchase(PurchaseTransition.VOtoPO(Info));
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -204,7 +203,6 @@ public class PurchaseController implements PurchaseBLService{
 		return list;
 	}
 
-
 	public String getDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		this.date = sdf.format(new Date());
@@ -229,17 +227,19 @@ public class PurchaseController implements PurchaseBLService{
 	}
 
 	/**
-     * 商品名的过滤
-     * @param name 显示在单据上的商品名
-     * @return 真实的商品名
-     */
-	public String getTrueName(String name){
+	 * 商品名的过滤
+	 * 
+	 * @param name
+	 *            显示在单据上的商品名
+	 * @return 真实的商品名
+	 */
+	public String getTrueName(String name) {
 		String newName = "";
-		for(int m=0;m<name.length();m++){
-			if(name.charAt(m)=='('){
+		for (int m = 0; m < name.length(); m++) {
+			if (name.charAt(m) == '(') {
 				newName = name.substring(0, m);
-			    break;
-			    }
+				break;
+			}
 		}
 		return newName;
 	}

@@ -7,11 +7,11 @@ import dataenum.ResultMessage;
 import dataservice.classificationdataservice.ClassificationDataService;
 import po.classificationvpo.ClassificationVPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2018年1月10日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2018年1月10日
+ */
 public class ClassificationDataService_stub implements ClassificationDataService {
 
 	@Override
@@ -34,13 +34,13 @@ public class ClassificationDataService_stub implements ClassificationDataService
 
 	@Override
 	public ClassificationVPO getRoot() throws RemoteException {
-		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+		ClassificationVPO root = new ClassificationVPO("0001", "灯", true, null, null, null);
 		return root;
 	}
 
 	@Override
 	public ClassificationVPO findClassification(String name) throws RemoteException {
-		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+		ClassificationVPO root = new ClassificationVPO("0001", "灯", true, null, null, null);
 		return root;
 	}
 
@@ -51,7 +51,7 @@ public class ClassificationDataService_stub implements ClassificationDataService
 	@Override
 	public ArrayList<ClassificationVPO> show() throws RemoteException {
 		ArrayList<ClassificationVPO> list = new ArrayList<>();
-		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+		ClassificationVPO root = new ClassificationVPO("0001", "灯", true, null, null, null);
 		list.add(root);
 		return list;
 	}
@@ -63,7 +63,7 @@ public class ClassificationDataService_stub implements ClassificationDataService
 
 	@Override
 	public ClassificationVPO findClassificationByID(String id) throws RemoteException {
-		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+		ClassificationVPO root = new ClassificationVPO("0001", "灯", true, null, null, null);
 
 		return root;
 	}

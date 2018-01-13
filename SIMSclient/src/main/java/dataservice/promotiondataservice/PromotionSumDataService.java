@@ -10,7 +10,6 @@ import po.promotionpo.PromotionTotalPO;
 
 public interface PromotionSumDataService extends Remote {
 
-
 	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException;
 
 	public ResultMessage deleteSumPromotion(String ID) throws RemoteException;

@@ -12,10 +12,14 @@ import dataenum.PromotionType;
 import po.commoditypo.GiftPO;
 
 public class PromotionMemberPO extends PromotionPO {
-	/** 
-	* <p>Title: </p> 
-	* <p>Description: </p> 
-	*/
+	/**
+	 * <p>
+	 * Title:
+	 * </p>
+	 * <p>
+	 * Description:
+	 * </p>
+	 */
 	private static final long serialVersionUID = 7539070862489685774L;
 	private MemberLevel level;
 	private String levelString;
@@ -23,9 +27,9 @@ public class PromotionMemberPO extends PromotionPO {
 	private Double voucher;
 	private ArrayList<GiftPO> gifts;
 
-	public PromotionMemberPO(String id,LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance, Double voucher,
-			ArrayList<GiftPO> gifts) {
-		super( id,beginDate, endDate,PromotionType.LEVEL_PROMOTION);
+	public PromotionMemberPO(String id, LocalDate beginDate, LocalDate endDate, MemberLevel level, Double allowance,
+			Double voucher, ArrayList<GiftPO> gifts) {
+		super(id, beginDate, endDate, PromotionType.LEVEL_PROMOTION);
 		this.level = level;
 		levelString = level.value;
 		this.allowance = allowance;
@@ -33,38 +37,36 @@ public class PromotionMemberPO extends PromotionPO {
 		this.gifts = gifts;
 	}
 
-	public void setAllowance(Double allowance){
+	public void setAllowance(Double allowance) {
 		this.allowance = allowance;
 	}
 
-	public Double getAllowance(){
+	public Double getAllowance() {
 		return allowance;
 	}
 
-	public MemberLevel getLevel(){
+	public MemberLevel getLevel() {
 		return level;
 	}
 
-	public String getLevelString(){
+	public String getLevelString() {
 		return levelString;
 	}
 
-	public void setVoucher(Double voucher){
+	public void setVoucher(Double voucher) {
 		this.voucher = voucher;
 	}
 
-	public Double getVoucher(){
+	public Double getVoucher() {
 		return voucher;
 	}
 
-	public void setGifts(ArrayList<GiftPO> gifts){
+	public void setGifts(ArrayList<GiftPO> gifts) {
 		this.gifts = gifts;
 	}
 
-	public ArrayList<GiftPO> getGifts(){
+	public ArrayList<GiftPO> getGifts() {
 		return gifts;
 	}
-
-
 
 }

@@ -7,24 +7,24 @@ import po.memberpo.MemberPO;
 import po.accountpo.AccountPO;
 import po.commoditypo.CommodityPO;
 
-public class AccountBookPO implements Serializable{
+public class AccountBookPO implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String date;
-	private String clerkID;//操作员ID
-	private ArrayList<CommodityPO> commodityPOs;//商品列表
-	private ArrayList<MemberPO> memberPOs;//客户列表
-	private ArrayList<AccountPO> accountPOs;//账户列表
+	private String clerkID;// 操作员ID
+	private ArrayList<CommodityPO> commodityPOs;// 商品列表
+	private ArrayList<MemberPO> memberPOs;// 客户列表
+	private ArrayList<AccountPO> accountPOs;// 账户列表
 
-	public AccountBookPO(String date, String clerkID,ArrayList<CommodityPO> commodityPOs,ArrayList<MemberPO> memberPOs
-			,ArrayList<AccountPO> accountPOs) {
-		this.date=date;
-		this.clerkID=clerkID;
-		this.commodityPOs=commodityPOs;
-		this.memberPOs=memberPOs;
-		this.accountPOs=accountPOs;
+	public AccountBookPO(String date, String clerkID, ArrayList<CommodityPO> commodityPOs,
+			ArrayList<MemberPO> memberPOs, ArrayList<AccountPO> accountPOs) {
+		this.date = date;
+		this.clerkID = clerkID;
+		this.commodityPOs = commodityPOs;
+		this.memberPOs = memberPOs;
+		this.accountPOs = accountPOs;
 	}
 
 	public String getDate() {

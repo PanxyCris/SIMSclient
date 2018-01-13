@@ -8,10 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
+
 /**
  * 查看表格的选择界面
- * @author 潘星宇
- * 2017-12-15
+ * 
+ * @author 潘星宇 2017-12-15
  */
 public class FinanceTableController extends GeneralManagerController {
 

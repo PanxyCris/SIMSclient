@@ -83,6 +83,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 			alert.showAndWait();
 		}
 	}
+
 	/**
 	 * 红冲并复制
 	 */
@@ -120,7 +121,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 		ArrayList<InventoryBillVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 
@@ -158,7 +159,7 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 		}
 	}
 
-	public void initTime(){
+	public void initTime() {
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
@@ -241,11 +242,11 @@ public class CheckInventoryBillController extends BussinessProcessTableControlle
 			((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
 			list.set(t.getTablePosition().getRow(),
 					((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())));
-		     InventoryBillVO updating = ((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			InventoryBillVO updating = ((InventoryBillVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
 			service.updateBill(updating);
 
 		});
-
 
 	}
 

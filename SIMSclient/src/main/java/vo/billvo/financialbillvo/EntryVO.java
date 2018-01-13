@@ -6,10 +6,10 @@ public class EntryVO {
 	protected Double transferAmount;// ½ð¶î
 	protected String note;// ±¸×¢
 
-	public EntryVO(String entryName,Double transferAmount,String note) {
-		this.transferAmount=transferAmount;
-		this.entryName=entryName;
-		this.note=note;
+	public EntryVO(String entryName, Double transferAmount, String note) {
+		this.transferAmount = transferAmount;
+		this.entryName = entryName;
+		this.note = note;
 	}
 
 	public String getEntryName() {
@@ -35,6 +35,5 @@ public class EntryVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 
 }

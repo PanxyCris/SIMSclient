@@ -8,14 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class UserManagingUI{
+public class UserManagingUI {
 
-	public void start(UserVO user) throws Exception{
+	public void start(UserVO user) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/UserManagingUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        UserManagingController controller = loader.<UserManagingController>getController();
-        controller.initData(user);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		UserManagingController controller = loader.<UserManagingController>getController();
+		controller.initData(user);
+		primaryStage.show();
 	}
 }

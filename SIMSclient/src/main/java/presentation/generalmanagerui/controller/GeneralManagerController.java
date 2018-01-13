@@ -36,7 +36,7 @@ import presentation.mainui.MainUI;
 import presentation.generalmanagerui.UserMessageUI;
 import vo.uservo.UserVO;
 
-public class GeneralManagerController extends LoginController{
+public class GeneralManagerController extends LoginController {
 
 	UtilityBLService utilityService = new UtilityBL();
 	public static final String mainID = "GeneralManagerUI";
@@ -117,11 +117,16 @@ public class GeneralManagerController extends LoginController{
 		judgeMessage();
 		// image = user.getImage();
 	}
+
 	/**
 	 * 切换fxml
-	 * @param currentID 当前fxml
-	 * @param user 当前登录用户
-	 * @param type 单据类型
+	 * 
+	 * @param currentID
+	 *            当前fxml
+	 * @param user
+	 *            当前登录用户
+	 * @param type
+	 *            单据类型
 	 * @throws Exception
 	 */
 
@@ -210,10 +215,11 @@ public class GeneralManagerController extends LoginController{
 		});
 
 	}
+
 	/**
 	 * 判断是否有新信息
 	 */
-	public void judgeMessage(){
+	public void judgeMessage() {
 		if (utilityService.hasMessage(readUser())) {
 			Circle circle = new Circle();
 			circle.setCenterX(0);

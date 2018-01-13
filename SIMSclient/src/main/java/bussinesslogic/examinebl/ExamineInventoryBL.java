@@ -26,8 +26,10 @@ import po.userpo.UserPO;
 import rmi.RemoteHelper;
 import vo.billvo.inventorybillvo.InventoryBillVO;
 import vo.commodityvo.GiftVO;
+
 /**
  * 审批库存单据的业务逻辑层
+ * 
  * @author 潘星宇
  * @date 2017-12-26
  */
@@ -62,13 +64,13 @@ public class ExamineInventoryBL implements ExamineBLService<InventoryBillVO> {
 
 			for (GiftVO gift : vo.getGifts()) {
 				String name = "";
-				for(int i=0;i<gift.getName().length();i++)
-					if(gift.getName().charAt(i)=='('){
-						name = gift.getName().substring(i+1,gift.getName().length()-1);
+				for (int i = 0; i < gift.getName().length(); i++)
+					if (gift.getName().charAt(i) == '(') {
+						name = gift.getName().substring(i + 1, gift.getName().length() - 1);
 						break;
 					}
-                //对商品数据的修改
-				CommodityPO commodity = commodityService.findCommodity(name,FindCommodityType.ID).get(0);
+				// 对商品数据的修改
+				CommodityPO commodity = commodityService.findCommodity(name, FindCommodityType.ID).get(0);
 
 				switch (vo.getType()) {
 				case INVENTORYGIFTBILL:
@@ -94,10 +96,10 @@ public class ExamineInventoryBL implements ExamineBLService<InventoryBillVO> {
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(), false,
-					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			System.out.println(message.getInfo());
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
@@ -113,10 +115,10 @@ public class ExamineInventoryBL implements ExamineBLService<InventoryBillVO> {
 		for (InventoryBillVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(), false,
-					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
 				return result;

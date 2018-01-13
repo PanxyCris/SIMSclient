@@ -15,11 +15,11 @@ import vo.promotionvo.PromotionTotalVO;
 
 /**
  * 总价促销策略
+ * 
  * @author 潘星宇
  * @date 2017年12月27日
  */
 public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
-
 
 	private PromotionSumDataService service;
 
@@ -45,7 +45,7 @@ public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
 	@Override
 	public ArrayList<PromotionTotalVO> getPromotionList() throws RemoteException {
 		ArrayList<PromotionTotalVO> promotionList = new ArrayList<>();
-		for(PromotionTotalPO po:service.showSumPromotion())
+		for (PromotionTotalPO po : service.showSumPromotion())
 			promotionList.add(poTovo(po));
 		return promotionList;
 	}
@@ -68,34 +68,32 @@ public class PromotionSumBL implements PromotionBLService<PromotionTotalVO> {
 	@Override
 	public ArrayList<PromotionTotalVO> find(String info, FindPromotionType findType) throws RemoteException {
 		ArrayList<PromotionTotalVO> promotionList = new ArrayList<>();
-		for(PromotionTotalPO po:service.findSumPromotion(info, findType))
+		for (PromotionTotalPO po : service.findSumPromotion(info, findType))
 			promotionList.add(poTovo(po));
 		return promotionList;
 	}
 
-	public PromotionTotalPO voTopo(PromotionTotalVO vo){
+	public PromotionTotalPO voTopo(PromotionTotalVO vo) {
 		ArrayList<GiftPO> gifts = new ArrayList<>();
-		if(vo.getGifts()!=null){
-		for(GiftVO gift:vo.getGifts())
-			gifts.add(new GiftPO(gift.getName(),gift.getNumber()));
-		}
-		else
+		if (vo.getGifts() != null) {
+			for (GiftVO gift : vo.getGifts())
+				gifts.add(new GiftPO(gift.getName(), gift.getNumber()));
+		} else
 			gifts = null;
-		PromotionTotalPO po = new PromotionTotalPO(vo.getId(),vo.getBeginDate(),vo.getEndDate(),
-				vo.getTotal(),vo.getVoucher(),gifts);
+		PromotionTotalPO po = new PromotionTotalPO(vo.getId(), vo.getBeginDate(), vo.getEndDate(), vo.getTotal(),
+				vo.getVoucher(), gifts);
 		return po;
 	}
 
-	public PromotionTotalVO poTovo(PromotionTotalPO po){
+	public PromotionTotalVO poTovo(PromotionTotalPO po) {
 		ArrayList<GiftVO> gifts = new ArrayList<>();
-		if(po.getGifts()!=null){
-		for(GiftPO gift:po.getGifts())
-			gifts.add(new GiftVO(gift.getName(),gift.getNumber()));
-		}
-		else
+		if (po.getGifts() != null) {
+			for (GiftPO gift : po.getGifts())
+				gifts.add(new GiftVO(gift.getName(), gift.getNumber()));
+		} else
 			gifts = null;
-		PromotionTotalVO vo = new PromotionTotalVO(po.getId(),po.getBeginDate(),po.getEndDate(),
-				po.getTotal(),po.getVoucher(),gifts);
+		PromotionTotalVO vo = new PromotionTotalVO(po.getId(), po.getBeginDate(), po.getEndDate(), po.getTotal(),
+				po.getVoucher(), gifts);
 		return vo;
 	}
 }

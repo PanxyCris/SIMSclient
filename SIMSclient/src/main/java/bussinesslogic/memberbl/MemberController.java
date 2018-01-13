@@ -31,7 +31,7 @@ public class MemberController implements MemberBLService {
 	public String getId() throws RemoteException {
 		ArrayList<MemberPO> list = service.showMember();
 		ArrayList<Integer> IDList = new ArrayList<>();
-		if (list != null&&list.size()!=0) {
+		if (list != null && list.size() != 0) {
 			for (MemberPO po : list) {
 				IDList.add(Integer.parseInt(po.getId()));
 			}

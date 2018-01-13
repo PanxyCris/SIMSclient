@@ -27,8 +27,7 @@ import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
-
-public class PaymentBillBL implements PaymentBillBLService{
+public class PaymentBillBL implements PaymentBillBLService {
 
 	private PaymentBillPO paymentBillPO;
 	private PaymentBillVO paymentBillVO;
@@ -44,35 +43,33 @@ public class PaymentBillBL implements PaymentBillBLService{
 	private String date;
 
 	public PaymentBillBL() {
-		paymentBillTransition=new PaymentBillTransition();
-		paymentBillDataService=RemoteHelper.getInstance().getPaymentDataService();
-		accountBLService=new AccountController();
-		memberBLService=new MemberController();
+		paymentBillTransition = new PaymentBillTransition();
+		paymentBillDataService = RemoteHelper.getInstance().getPaymentDataService();
+		accountBLService = new AccountController();
+		memberBLService = new MemberController();
 		userDataService = RemoteHelper.getInstance().getUserDataService();
 		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
-
 	@Override
 	public ResultMessage save(PaymentBillVO paymentBillVO) {
-		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
-		ArrayList<PaymentBillPO> paymentBillPOs=null;
+		paymentBillPO = paymentBillTransition.VOtoPO(paymentBillVO);
+		ArrayList<PaymentBillPO> paymentBillPOs = null;
 		try {
-			paymentBillPOs=paymentBillDataService.findPaymentBill(paymentBillVO.getId(), FindAccountBillType.BILLID);
+			paymentBillPOs = paymentBillDataService.findPaymentBill(paymentBillVO.getId(), FindAccountBillType.BILLID);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-		if(paymentBillPOs.isEmpty()){//找不到，新建
+		if (paymentBillPOs.isEmpty()) {// 找不到，新建
 			try {
-				String customerID="";
-				String customer=paymentBillVO.getCustomer();
+				String customerID = "";
+				String customer = paymentBillVO.getCustomer();
 				for (int i = 0; i < customer.length(); i++) {
-					if('('==customer.charAt(i)){
-						for (int j = i+1; j < customer.length(); j++) {
-							if(')'!=customer.charAt(j)){
-								customerID+=customer.charAt(j);
-							}
-							else{
+					if ('(' == customer.charAt(i)) {
+						for (int j = i + 1; j < customer.length(); j++) {
+							if (')' != customer.charAt(j)) {
+								customerID += customer.charAt(j);
+							} else {
 								break;
 							}
 						}
@@ -84,8 +81,7 @@ public class PaymentBillBL implements PaymentBillBLService{
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
-		}
-		else{//找到，修改
+		} else {// 找到，修改
 			try {
 				return paymentBillDataService.updatePaymentBill(paymentBillPO);
 			} catch (RemoteException e) {
@@ -97,7 +93,7 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	@Override
 	public ResultMessage delete(PaymentBillVO paymentBillVO) {
-		String id=paymentBillVO.getId();
+		String id = paymentBillVO.getId();
 		try {
 			return paymentBillDataService.deletePaymentBill(id);
 		} catch (RemoteException e) {
@@ -111,8 +107,8 @@ public class PaymentBillBL implements PaymentBillBLService{
 	 */
 	@Override
 	public ResultMessage judgeLegal(String money) {
-		Double m=Double.valueOf(money);
-		if(0>m){
+		Double m = Double.valueOf(money);
+		if (0 > m) {
 			return ResultMessage.FAIL;
 		}
 		return ResultMessage.SUCCESS;
@@ -121,14 +117,16 @@ public class PaymentBillBL implements PaymentBillBLService{
 	@Override
 	public ResultMessage commit(PaymentBillVO paymentBillVO) {
 		paymentBillVO.setState(BillState.COMMITED);
-		paymentBillPO=paymentBillTransition.VOtoPO(paymentBillVO);
+		paymentBillPO = paymentBillTransition.VOtoPO(paymentBillVO);
 		try {
 			ResultMessage resultMessage = paymentBillDataService.insertPaymentBill(paymentBillPO);
-			if(resultMessage == ResultMessage.SUCCESS||resultMessage == ResultMessage.EXISTED){
-				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
-				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(), false,paymentBillVO.getId(),manager);
-				messageDataService.save(message);
+			if (resultMessage == ResultMessage.SUCCESS || resultMessage == ResultMessage.EXISTED) {
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
+						FindUserType.USERROLE);
+				for (UserPO manager : generalManagers) {
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),
+							LocalDateTime.now(), false, paymentBillVO.getId(), manager);
+					messageDataService.save(message);
 				}
 			}
 			return resultMessage;
@@ -140,11 +138,11 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	@Override
 	public ArrayList<PaymentBillVO> show() {
-		ArrayList<PaymentBillVO> aBillVOs=new ArrayList<>();
+		ArrayList<PaymentBillVO> aBillVOs = new ArrayList<>();
 		try {
-			ArrayList<PaymentBillPO> aBillPOs=paymentBillDataService.showPaymentBill();
+			ArrayList<PaymentBillPO> aBillPOs = paymentBillDataService.showPaymentBill();
 			for (int i = 0; i < aBillPOs.size(); i++) {
-				paymentBillVO=paymentBillTransition.POtoVO(aBillPOs.get(i));
+				paymentBillVO = paymentBillTransition.POtoVO(aBillPOs.get(i));
 				aBillVOs.add(paymentBillVO);
 			}
 		} catch (RemoteException e) {
@@ -155,11 +153,11 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	@Override
 	public ArrayList<PaymentBillVO> find(String info, FindAccountBillType type) {
-		ArrayList<PaymentBillVO> aBillVOs=new ArrayList<>();
+		ArrayList<PaymentBillVO> aBillVOs = new ArrayList<>();
 		try {
-			ArrayList<PaymentBillPO> aBillPOs=paymentBillDataService.findPaymentBill(info, type);
+			ArrayList<PaymentBillPO> aBillPOs = paymentBillDataService.findPaymentBill(info, type);
 			for (int i = 0; i < aBillPOs.size(); i++) {
-				paymentBillVO=paymentBillTransition.POtoVO(aBillPOs.get(i));
+				paymentBillVO = paymentBillTransition.POtoVO(aBillPOs.get(i));
 				aBillVOs.add(paymentBillVO);
 			}
 		} catch (RemoteException e) {
@@ -170,11 +168,11 @@ public class PaymentBillBL implements PaymentBillBLService{
 
 	@Override
 	public ArrayList<String> getAccountList() {
-		ArrayList<String> list=new ArrayList<>();
- 		ArrayList<AccountVO> accountVOs=accountBLService.getAccountList();
-		String a="";
+		ArrayList<String> list = new ArrayList<>();
+		ArrayList<AccountVO> accountVOs = accountBLService.getAccountList();
+		String a = "";
 		for (int i = 0; i < accountVOs.size(); i++) {
-			a=accountVOs.get(i).getId()+" "+accountVOs.get(i).getName();
+			a = accountVOs.get(i).getId() + " " + accountVOs.get(i).getName();
 			list.add(a);
 		}
 		return list;
@@ -184,7 +182,7 @@ public class PaymentBillBL implements PaymentBillBLService{
 	public ArrayList<String> getCustomerList() {
 		ArrayList<String> list = null;
 		try {
-		 list=memberBLService.getIDandName();
+			list = memberBLService.getIDandName();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -206,28 +204,27 @@ public class PaymentBillBL implements PaymentBillBLService{
 			String temp[] = id.split("-");
 
 			if (temp[0].equals("XJFYD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				IDList.add(Long.parseLong(temp[1] + temp[2]));
 			}
 		}
 		Collections.sort(IDList);
 		String day = getDate();
-//		Collections.reverse(IDList);
+		// Collections.reverse(IDList);
 		String num = null;
-		if(IDList.size()==0)
-			num = getDate()+"00000";
+		if (IDList.size() == 0)
+			num = getDate() + "00000";
 		else
-		    num = String.valueOf(IDList.get(IDList.size()-1));
+			num = String.valueOf(IDList.get(IDList.size() - 1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
+			index = String.valueOf(Integer.parseInt(index) + 1);
 			StringBuilder sb = new StringBuilder(index);
 			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
+			for (int i = 0; i < 5 - len; i++) {
 				sb.insert(0, "0");
 			}
 			id = sb.toString();
-		}
-		else {
+		} else {
 			id = "00001";
 		}
 		StringBuilder s = new StringBuilder("XJFYD-");
@@ -239,6 +236,5 @@ public class PaymentBillBL implements PaymentBillBLService{
 		this.date = sdf.format(new Date());
 		return this.date;
 	}
-
 
 }

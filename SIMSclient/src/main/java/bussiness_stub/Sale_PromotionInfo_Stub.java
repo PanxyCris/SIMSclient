@@ -25,13 +25,15 @@ public class Sale_PromotionInfo_Stub implements Sale_PromotionInfo {
 		GiftVO g3 = new GiftVO("°×µÆ", 120);
 		gifts.add(g1);
 		gifts.add(g2);
-		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05), MemberLevel.LEVEL3, 300.0, 125.0, gifts);
+		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05),
+				MemberLevel.LEVEL3, 300.0, 125.0, gifts);
 		list.add(m1);
 		ArrayList<GiftVO> gifts1 = new ArrayList<>();
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionMemberVO m2 = new PromotionMemberVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
-	    list.add(m2);
+		PromotionMemberVO m2 = new PromotionMemberVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12),
+				MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
+		list.add(m2);
 		return list;
 
 	}
@@ -48,8 +50,10 @@ public class Sale_PromotionInfo_Stub implements Sale_PromotionInfo {
 		gifts.add(g2);
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), 500.0, 250.0, gifts1);
-		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12), 1200.0, 350.0, gifts);
+		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12),
+				500.0, 250.0, gifts1);
+		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12),
+				1200.0, 350.0, gifts);
 		list.add(t1);
 		list.add(t2);
 		return list;
@@ -68,9 +72,11 @@ public class Sale_PromotionInfo_Stub implements Sale_PromotionInfo {
 		ArrayList<GiftVO> pricePacks1 = new ArrayList<>();
 		pricePacks1.add(g3);
 		pricePacks1.add(g2);
-				
-		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 15), 200.0, pricePacks);
-		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05), LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
+
+		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30),
+				LocalDate.of(2017, 12, 15), 200.0, pricePacks);
+		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05),
+				LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
 		list.add(p2);
 		list.add(p1);
 		return list;

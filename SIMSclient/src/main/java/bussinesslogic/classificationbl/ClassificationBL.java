@@ -73,15 +73,15 @@ public class ClassificationBL implements ClassificationBLService {
 
 	@Override
 	public void delete(ClassificationVPO vpo) {
-      try {
-		String name = vpo.getName();
-		classificationDataService.deleteClassification(name);
-		// 先更新vpo父节点的子节点指针
-		ClassificationVPO father = getClass(vpo.getFather());
-		ArrayList<String> children = father.getChildrenPointer();
-		children.remove(vpo.getName());
-		father.setChildrenPointer(children);
-		update(father);
+		try {
+			String name = vpo.getName();
+			classificationDataService.deleteClassification(name);
+			// 先更新vpo父节点的子节点指针
+			ClassificationVPO father = getClass(vpo.getFather());
+			ArrayList<String> children = father.getChildrenPointer();
+			children.remove(vpo.getName());
+			father.setChildrenPointer(children);
+			update(father);
 
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -95,7 +95,7 @@ public class ClassificationBL implements ClassificationBLService {
 			ClassificationVPO old = classificationDataService.findClassificationByID(vpo.getId());
 			String oldName = old.getName();
 			ClassificationVPO father = getClass(vpo.getFather());
-			if (father != null && father.getChildrenPointer() != null) {//连锁更新
+			if (father != null && father.getChildrenPointer() != null) {// 连锁更新
 				for (int i = 0; i < father.getChildrenPointer().size(); i++) {
 					String tmp = father.getChildrenPointer().get(i);
 					if (tmp == null)
@@ -109,7 +109,7 @@ public class ClassificationBL implements ClassificationBLService {
 							classificationDataService.updateClassification(father);
 							break;
 						}
-					} else {//直接更新
+					} else {// 直接更新
 						ArrayList<String> children = father.getChildrenPointer();
 						children.set(i, vpo.getName());
 						father.setChildrenPointer(children);

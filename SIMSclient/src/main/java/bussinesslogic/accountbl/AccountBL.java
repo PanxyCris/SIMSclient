@@ -11,7 +11,6 @@ import po.accountpo.AccountPO;
 import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 
-
 /**
  *
  * @author 王灿灿
@@ -25,8 +24,8 @@ public class AccountBL implements AccountBLService {
 	AccountPO accountPO;
 
 	public AccountBL() {
-		accountDataService=RemoteHelper.getInstance().getAccountDataService();
-		accountTransition=new AccountTransition();
+		accountDataService = RemoteHelper.getInstance().getAccountDataService();
+		accountTransition = new AccountTransition();
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class AccountBL implements AccountBLService {
 
 	@Override
 	public void delete(AccountVO accountVO) {
-		String id=accountVO.getId();
+		String id = accountVO.getId();
 		try {
 			accountDataService.deleteAccount(id);
 		} catch (RemoteException e) {
@@ -86,7 +85,8 @@ public class AccountBL implements AccountBLService {
 	 * 判断输入的account是否合法
 	 *
 	 * @author 王灿灿
-	 * @param accountVO 为传入的已修改的account对象
+	 * @param accountVO
+	 *            为传入的已修改的account对象
 	 *
 	 */
 	@Override
@@ -139,7 +139,6 @@ public class AccountBL implements AccountBLService {
 		return accountVOs;
 	}
 
-
 	/**
 	 *
 	 * @author 王灿灿 得到当前服务器上银行账户的数据
@@ -166,6 +165,5 @@ public class AccountBL implements AccountBLService {
 
 		return accountVOs;
 	}
-
 
 }

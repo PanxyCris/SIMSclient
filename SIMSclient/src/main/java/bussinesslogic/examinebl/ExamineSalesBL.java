@@ -33,10 +33,11 @@ import vo.billvo.salesbillvo.SalesVO;
 import vo.commodityvo.CommodityItemVO;
 
 /**
-* 审批销售类单据业务逻辑层
-* @author 潘星宇
-* @date 2017年12月26日
-*/
+ * 审批销售类单据业务逻辑层
+ * 
+ * @author 潘星宇
+ * @date 2017年12月26日
+ */
 public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	private SalesDataService service;
 	private MessageDataService messageService;
@@ -63,38 +64,38 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 
 	@Override
 	public ResultMessage passBills(ArrayList<SalesVO> vos) throws RemoteException {
-		for(SalesVO vo:vos){
-            //会员应收应付信息的修改
+		for (SalesVO vo : vos) {
+			// 会员应收应付信息的修改
 			String memberID = vo.getRetailerID();
 			MemberPO member = memberService.findMember(memberID, FindMemberType.ID).get(0);
-			if(vo.getType() == BillType.SALESBILL)
-                member.setReceivable(member.getReceivable()+vo.getAfterPrice());
+			if (vo.getType() == BillType.SALESBILL)
+				member.setReceivable(member.getReceivable() + vo.getAfterPrice());
 			else
-				member.setPayable(member.getPayable()+vo.getAfterPrice());
-			//商品数据的修改
-            for(CommodityItemVO item:vo.getCommodity()){
-            	CommodityPO commodity = commodityService.findCommodity(item.getId(), FindCommodityType.ID).get(0);
-            	if(vo.getType() == BillType.SALESBILL){
-            	    commodity.setNumner(commodity.getNumber()-item.getNumber());
-            	    utilityService.warningMessage(commodity);
-            	}
-            	else
-            		commodity.setNumner(commodity.getNumber()+item.getNumber());
-            	commodityService.updateCommodity(commodity);
-            }
+				member.setPayable(member.getPayable() + vo.getAfterPrice());
+			// 商品数据的修改
+			for (CommodityItemVO item : vo.getCommodity()) {
+				CommodityPO commodity = commodityService.findCommodity(item.getId(), FindCommodityType.ID).get(0);
+				if (vo.getType() == BillType.SALESBILL) {
+					commodity.setNumner(commodity.getNumber() - item.getNumber());
+					utilityService.warningMessage(commodity);
+				} else
+					commodity.setNumner(commodity.getNumber() + item.getNumber());
+				commodityService.updateCommodity(commodity);
+			}
 
-            InventoryBillVO inventory = new InventoryBillVO(inventoryBL.getId(BillType.INVENTORYGIFTBILL),vo.getGifts(),
-            		vo.getOperator(),BillType.INVENTORYGIFTBILL,BillState.COMMITED,vo.getId()+"的赠品提交");
-            inventoryBL.submit(inventory);
+			InventoryBillVO inventory = new InventoryBillVO(inventoryBL.getId(BillType.INVENTORYGIFTBILL),
+					vo.getGifts(), vo.getOperator(), BillType.INVENTORYGIFTBILL, BillState.COMMITED,
+					vo.getId() + "的赠品提交");
+			inventoryBL.submit(inventory);
 
-            vo.setState(BillState.SUCCESS);
-            updateBill(vo);
-            //通知用户
+			vo.setState(BillState.SUCCESS);
+			updateBill(vo);
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),LocalDateTime.now(), false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.SUCCESS);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.SUCCESS)
+			if (result != ResultMessage.SUCCESS)
 				return result;
 		}
 		return ResultMessage.SUCCESS;
@@ -102,15 +103,15 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 
 	@Override
 	public ResultMessage notPassBills(ArrayList<SalesVO> vos) throws RemoteException {
-		for(SalesVO vo:vos){
+		for (SalesVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getOperator(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(),user.getID(),LocalDateTime.now(), false,user.getName()+"("+user.getID()+")",
-					vo.getId(),vo.getType(),ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
-			if(result!=ResultMessage.FAIL)
+			if (result != ResultMessage.FAIL)
 				return result;
 		}
 		return ResultMessage.SUCCESS;
@@ -120,8 +121,8 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	public ArrayList<SalesVO> getCommitedBills() throws RemoteException {
 		ArrayList<SalesVO> committed = new ArrayList<>();
 		ArrayList<SalesPO> purchaseList = service.showSale();
-		for(SalesPO po:purchaseList)
-			if(po.getState()==BillState.COMMITED)
+		for (SalesPO po : purchaseList)
+			if (po.getState() == BillState.COMMITED)
 				committed.add(SalesTransition.POtoVO(po));
 		return committed;
 	}
@@ -130,8 +131,8 @@ public class ExamineSalesBL implements ExamineBLService<SalesVO> {
 	public ArrayList<SalesVO> find(String info, FindBillType type) throws RemoteException {
 		ArrayList<SalesVO> committed = new ArrayList<>();
 		ArrayList<SalesPO> purchaseList = service.findSale(info, FindSalesType.getType(type.value));
-		for(SalesPO po:purchaseList)
-			if(po.getState()==BillState.COMMITED)
+		for (SalesPO po : purchaseList)
+			if (po.getState() == BillState.COMMITED)
 				committed.add(SalesTransition.POtoVO(po));
 		return committed;
 	}

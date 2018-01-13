@@ -34,7 +34,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 	BusinessHistoryScheduleBLService<ReceiptBillVO> service = new BussinessHistoryScheduleReceiveBL();
 	ObservableList<ReceiptBillVO> list = FXCollections.observableArrayList();
 	ObservableList<AccountListVO> accountVOList = FXCollections.observableArrayList();
-    ReceiptBillVO bill;
+	ReceiptBillVO bill;
 	@FXML
 	ChoiceBox<String> findChoice;
 	@FXML
@@ -115,7 +115,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 		ArrayList<ReceiptBillVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 
@@ -205,7 +205,7 @@ public class CheckReceiveBillController extends BussinessProcessTableController 
 							accountVOList.clear();
 							accountVOList.addAll(clickedItem.getAccountListVOs());
 							accountList.setItems(accountVOList);
-                            bill = clickedItem;
+							bill = clickedItem;
 						});
 					}
 				}

@@ -8,15 +8,15 @@ import dataenum.findtype.FindAccountBillType;
 import dataservice.accountbilldataservice.PaymentBillDataService;
 import po.financialbillpo.PaymentBillPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
-*/
-public class PaymentBillDataServiceImpl implements PaymentBillDataService{
-	
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月14日
+ */
+public class PaymentBillDataServiceImpl implements PaymentBillDataService {
+
 	private PaymentBillData payment;
-	
+
 	public PaymentBillDataServiceImpl() {
 		payment = new PaymentBillData();
 	}

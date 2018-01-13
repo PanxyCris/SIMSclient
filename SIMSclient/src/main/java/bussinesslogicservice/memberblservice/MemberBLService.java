@@ -21,7 +21,7 @@ public interface MemberBLService {
 	public ResultMessage update(MemberVO vo) throws RemoteException;
 
 	public ResultMessage delete(String id) throws RemoteException;
-	
+
 	public ArrayList<String> getIDandName() throws RemoteException;
 
 }

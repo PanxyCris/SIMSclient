@@ -11,7 +11,6 @@ import dataenum.Warehouse;
 import po.commoditypo.CommodityItemPO;
 import po.commoditypo.GiftPO;
 
-
 public class SalesPO implements Serializable {
 
 	private static final long serialVersionUID = 2470445039822316724L;
@@ -27,19 +26,18 @@ public class SalesPO implements Serializable {
 	private double afterPrice; // 折让后金额
 	private String remark; // 备注
 	private ArrayList<CommodityItemPO> commodities; // 商品清单
-	private ArrayList<GiftPO> gifts;//赠品列表
+	private ArrayList<GiftPO> gifts;// 赠品列表
 	private BillState state;
 	private BillType type;
 	private String date;
-
 
 	public SalesPO() {
 
 	}
 
 	public SalesPO(String id, String clientId, String clientName, String saleMan, String operator, Warehouse warehouse,
-			ArrayList<CommodityItemPO> commodities,ArrayList<GiftPO> gifts, double beforePrice, double allowance, double voucher,
-			double afterPrice, String remark, BillType type, BillState state) {
+			ArrayList<CommodityItemPO> commodities, ArrayList<GiftPO> gifts, double beforePrice, double allowance,
+			double voucher, double afterPrice, String remark, BillType type, BillState state) {
 		this.id = id;
 		this.clientId = clientId;
 		this.clientName = clientName;
@@ -66,6 +64,7 @@ public class SalesPO implements Serializable {
 	public String getId() {
 		return id;
 	}
+
 	public void setState(BillState state) {
 		this.state = state;
 	}

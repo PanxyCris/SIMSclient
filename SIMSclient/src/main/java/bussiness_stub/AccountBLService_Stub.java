@@ -12,7 +12,7 @@ public class AccountBLService_Stub implements AccountBLService {
 	@Override
 	public ArrayList<AccountVO> find(String message, FindAccountType findType) {
 		ArrayList<AccountVO> list = new ArrayList<>();
-		AccountVO account1 = new AccountVO("00001","cancan",20000.00);
+		AccountVO account1 = new AccountVO("00001", "cancan", 20000.00);
 		list.add(account1);
 		return list;
 	}
@@ -44,13 +44,11 @@ public class AccountBLService_Stub implements AccountBLService {
 	@Override
 	public ArrayList<AccountVO> getAccountList() {
 		ArrayList<AccountVO> list = new ArrayList<>();
-		AccountVO account1 = new AccountVO("00001","cancan",20000.00);
-		AccountVO account2 = new AccountVO("00002","lijie",50000.00);
+		AccountVO account1 = new AccountVO("00001", "cancan", 20000.00);
+		AccountVO account2 = new AccountVO("00002", "lijie", 50000.00);
 		list.add(account1);
 		list.add(account2);
 		return list;
 	}
-
-
 
 }

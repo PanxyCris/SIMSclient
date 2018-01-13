@@ -2,8 +2,7 @@ package dataenum;
 
 public enum Warehouse {
 
-	WAREHOUSE1("²Ö¿â1"),
-	WAREHOUSE2("²Ö¿â2");
+	WAREHOUSE1("²Ö¿â1"), WAREHOUSE2("²Ö¿â2");
 
 	public final String value;
 
@@ -11,8 +10,8 @@ public enum Warehouse {
 		this.value = value;
 	}
 
-	public static Warehouse getWarehouse(String value){
-		return value == "²Ö¿â1"?WAREHOUSE1:WAREHOUSE2;
+	public static Warehouse getWarehouse(String value) {
+		return value == "²Ö¿â1" ? WAREHOUSE1 : WAREHOUSE2;
 	}
 
 }

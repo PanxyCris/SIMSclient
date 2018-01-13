@@ -6,10 +6,10 @@ import bussinesslogicservice.commodityblservice.ClassificationBLService;
 import dataenum.ResultMessage;
 import po.classificationvpo.ClassificationVPO;
 
-public class ClassificationController implements ClassificationBLService{
+public class ClassificationController implements ClassificationBLService {
 
-	ClassificationBL classificationBL=new ClassificationBL();
-	
+	ClassificationBL classificationBL = new ClassificationBL();
+
 	@Override
 	public String getID() {
 		return classificationBL.getID();
@@ -44,5 +44,5 @@ public class ClassificationController implements ClassificationBLService{
 	public ClassificationVPO getRoot() {
 		return classificationBL.getRoot();
 	}
-	
+
 }

@@ -1,8 +1,6 @@
 package data.salesdata;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dataenum.ResultMessage;
@@ -10,7 +8,7 @@ import dataenum.findtype.FindSalesType;
 import dataservice.salesdataservice.SalesDataService;
 import po.salespo.SalesPO;
 
-public class SalesDataServiceImpl implements SalesDataService{
+public class SalesDataServiceImpl implements SalesDataService {
 
 	private SalesData sale;
 
@@ -38,7 +36,7 @@ public class SalesDataServiceImpl implements SalesDataService{
 	public ResultMessage updateSale(SalesPO po) throws RemoteException {
 		try {
 			return sale.update(po);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ResultMessage.FAIL;
@@ -48,7 +46,7 @@ public class SalesDataServiceImpl implements SalesDataService{
 	public ArrayList<SalesPO> showSale() throws RemoteException {
 		try {
 			return sale.show();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return null;
@@ -70,4 +68,3 @@ public class SalesDataServiceImpl implements SalesDataService{
 	}
 
 }
-

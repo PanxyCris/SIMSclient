@@ -22,7 +22,6 @@ public class MemberPO implements Serializable {
 	private double payable; // 应付
 	private String saleMan; // 默认业务员
 
-	
 	public MemberPO(String id, MemberCategory category, MemberLevel level, String name, String phone, String address,
 			String post, String email, double rereceivableLimit, String saleMan) {
 		this.id = id;
@@ -40,7 +39,7 @@ public class MemberPO implements Serializable {
 	public String getId() {
 		return id;
 	}
-	
+
 	public MemberCategory getCategory() {
 		return category;
 	}
@@ -141,8 +140,8 @@ public class MemberPO implements Serializable {
 
 	@Override
 	public String toString() {
-		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post + "," + email
-				+ "," + receivableLimit + receivable + "," + payable + "," + "," + saleMan;
+		return id + "," + category.value + "," + level.value + "," + name + "," + phone + "," + address + "," + post
+				+ "," + email + "," + receivableLimit + receivable + "," + payable + "," + "," + saleMan;
 	}
 
 }

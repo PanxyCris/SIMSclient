@@ -129,24 +129,21 @@ public class Sale_Promotion implements Sale_PromotionInfo {
 
 				ArrayList<GiftVO> gifts = poTOvo(po.getPricePacks());
 				boolean flag = true;
-	OutLoop:	for (int i=0;i<gifts.size();i++) {
-					for(int j=0;j<commodity.size();j++){
-					     if(gifts.get(i).getName().equals(commodity.get(j).getName())){
-					    	 if(gifts.get(i).getNumber()<=commodity.get(j).getNumber()) //策略中该商品数量低于特价包数量
-					    		 break;
-					    	 else{
-					    		 flag = false;
-					    		 break OutLoop;
-					    		 }
-					     }
-					     else if(j==commodity.size()-1){
-					    	 flag = false;
-					    	 break OutLoop;
-					     }
-
-
-
+				OutLoop: for (int i = 0; i < gifts.size(); i++) {
+					for (int j = 0; j < commodity.size(); j++) {
+						if (gifts.get(i).getName().equals(commodity.get(j).getName())) {
+							if (gifts.get(i).getNumber() <= commodity.get(j).getNumber()) // 策略中该商品数量低于特价包数量
+								break;
+							else {
+								flag = false;
+								break OutLoop;
+							}
+						} else if (j == commodity.size() - 1) {
+							flag = false;
+							break OutLoop;
 						}
+
+					}
 				}
 				if (flag) {
 

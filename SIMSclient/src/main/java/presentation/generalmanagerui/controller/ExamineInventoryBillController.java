@@ -180,7 +180,8 @@ public class ExamineInventoryBillController extends ExamineBillController {
 			((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).setNote(t.getNewValue());
 			list.set(t.getTablePosition().getRow(),
 					((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow())));
-		     InventoryBillVO updating = ((InventoryBillVO) t.getTableView().getItems().get(t.getTablePosition().getRow()));
+			InventoryBillVO updating = ((InventoryBillVO) t.getTableView().getItems()
+					.get(t.getTablePosition().getRow()));
 			try {
 				service.updateBill(updating);
 			} catch (RemoteException e) {
@@ -188,7 +189,6 @@ public class ExamineInventoryBillController extends ExamineBillController {
 			}
 
 		});
-
 
 	}
 

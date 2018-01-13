@@ -8,14 +8,14 @@ import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
 import po.commoditypo.CommodityPO;
 
-public class CommodityDataServiceMySqlImpl implements CommodityDataService{
+public class CommodityDataServiceMySqlImpl implements CommodityDataService {
 
 	private CommodityData commodity;
-	
+
 	public CommodityDataServiceMySqlImpl() {
 		commodity = new CommodityData();
 	}
-	
+
 	@Override
 	public ResultMessage insertCommodity(CommodityPO po) throws RemoteException {
 		return commodity.insert(po);

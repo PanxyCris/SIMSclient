@@ -12,13 +12,13 @@ import vo.uservo.UserVO;
 
 public class PurchaseMakeBillUI extends MakeReceiptUI {
 
-	public void start(UserVO user,BillType type,PurchaseVO purchase) throws Exception{
+	public void start(UserVO user, BillType type, PurchaseVO purchase) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PurchaseMakeBillUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        PurchaseMakeBillController controller = loader.<PurchaseMakeBillController>getController();
-        controller.initData(user,type,purchase);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		PurchaseMakeBillController controller = loader.<PurchaseMakeBillController>getController();
+		controller.initData(user, type, purchase);
+		primaryStage.show();
 	}
 
 }

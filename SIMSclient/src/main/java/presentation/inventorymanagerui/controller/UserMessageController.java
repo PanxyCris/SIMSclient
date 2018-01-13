@@ -15,10 +15,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import vo.messagevo.MessageVO;
 import vo.uservo.UserVO;
+
 /**
  * 库存管理人员的信息类界面
- * @author 潘星宇
- * 2017-12-25
+ * 
+ * @author 潘星宇 2017-12-25
  */
 public class UserMessageController extends InventoryManagerController {
 
@@ -45,7 +46,7 @@ public class UserMessageController extends InventoryManagerController {
 				}
 			}
 		}
-		if (messages != null){
+		if (messages != null) {
 			Collections.reverse(messages);
 			list.addAll(messages);
 		}

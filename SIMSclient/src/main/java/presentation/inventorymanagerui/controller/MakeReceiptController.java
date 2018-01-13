@@ -70,7 +70,7 @@ public class MakeReceiptController extends InventoryManagerController {
 			InventoryBillVO vo = new InventoryBillVO(idLabel.getText(), gifts, operatorLabel.getText(),
 					BillType.getType(receiptChoice.getValue()), BillState.DRAFT, noteArea.getText());
 			ResultMessage message = service.save(vo);
-			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
+			if (message == ResultMessage.SUCCESS || message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.SAVED);
 				try {
 					fresh();
@@ -94,7 +94,7 @@ public class MakeReceiptController extends InventoryManagerController {
 			InventoryBillVO vo = new InventoryBillVO(idLabel.getText(), gifts, operatorLabel.getText(),
 					BillType.getType(receiptChoice.getValue()), BillState.COMMITED, noteArea.getText());
 			ResultMessage message = service.submit(vo);
-			if (message == ResultMessage.SUCCESS||message == ResultMessage.EXISTED) {
+			if (message == ResultMessage.SUCCESS || message == ResultMessage.EXISTED) {
 				printInfo(ResultMessage.COMMITED);
 				try {
 					fresh();
@@ -106,6 +106,7 @@ public class MakeReceiptController extends InventoryManagerController {
 				printWrong(message);
 		}
 	}
+
 	/**
 	 * 在商品列表中插入一个新的商品
 	 */
@@ -145,7 +146,7 @@ public class MakeReceiptController extends InventoryManagerController {
 		noteArea.setText(null);
 		list.clear();
 		table.setItems(list);
-		if (inv != null) { //inv不为空是查看单据界面跳转而来
+		if (inv != null) { // inv不为空是查看单据界面跳转而来
 			idLabel.setText(inv.getId());
 			receiptChoice.setValue(inv.getTypeString());
 			noteArea.setText(inv.getNote());

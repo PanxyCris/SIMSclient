@@ -8,7 +8,7 @@ import dataenum.findtype.FindCommodityType;
 import dataservice.commoditydataservice.CommodityDataService;
 import po.commoditypo.CommodityPO;
 
-public class CommodityDataService_Stub implements CommodityDataService{
+public class CommodityDataService_Stub implements CommodityDataService {
 
 	@Override
 	public ResultMessage insertCommodity(CommodityPO po) throws RemoteException {
@@ -30,22 +30,20 @@ public class CommodityDataService_Stub implements CommodityDataService{
 
 	@Override
 	public ArrayList<CommodityPO> showCommodity() throws RemoteException {
-		CommodityPO po = new CommodityPO("ºÚµÆ-0001", "ºÚÒ¹×·Ð×µÆ", "L", "ºÚµÆ", 200, 25,
-				29, 24, 28, 2000);
+		CommodityPO po = new CommodityPO("ºÚµÆ-0001", "ºÚÒ¹×·Ð×µÆ", "L", "ºÚµÆ", 200, 25, 29, 24, 28, 2000);
 		ArrayList<CommodityPO> list = new ArrayList<>();
 		list.add(po);
 		return list;
-		
+
 	}
 
 	@Override
 	public ArrayList<CommodityPO> findCommodity(String keywords, FindCommodityType type) throws RemoteException {
-		CommodityPO po = new CommodityPO("ºÚµÆ-0001", "ºÚÒ¹×·Ð×µÆ", "L", "ºÚµÆ", 200, 25,
-				29, 24, 28, 2000);
+		CommodityPO po = new CommodityPO("ºÚµÆ-0001", "ºÚÒ¹×·Ð×µÆ", "L", "ºÚµÆ", 200, 25, 29, 24, 28, 2000);
 		ArrayList<CommodityPO> list = new ArrayList<>();
 		list.add(po);
 		return list;
-		
+
 	}
 
 }

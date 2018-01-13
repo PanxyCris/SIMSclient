@@ -11,13 +11,13 @@ import vo.uservo.UserVO;
 
 public class MakeReceiptUI {
 
-	public void start(UserVO user,BillType type,InventoryBillVO inv) throws Exception {
+	public void start(UserVO user, BillType type, InventoryBillVO inv) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/MakeReceiptUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        MakeReceiptController controller = loader.<MakeReceiptController>getController();
-        controller.initData(user,type,inv);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		MakeReceiptController controller = loader.<MakeReceiptController>getController();
+		controller.initData(user, type, inv);
+		primaryStage.show();
 
 	}
 

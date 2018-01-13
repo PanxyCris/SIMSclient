@@ -7,9 +7,9 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import vo.billvo.financialbillvo.PaymentBillVO;
 
-public class PaymentBillController implements PaymentBillBLService{
-	
-	PaymentBillBL paymentBillBL=new PaymentBillBL();
+public class PaymentBillController implements PaymentBillBLService {
+
+	PaymentBillBL paymentBillBL = new PaymentBillBL();
 
 	@Override
 	public ResultMessage save(PaymentBillVO paymentBillVO) {
@@ -56,7 +56,4 @@ public class PaymentBillController implements PaymentBillBLService{
 		return paymentBillBL.getId();
 	}
 
-
-	
-	
 }

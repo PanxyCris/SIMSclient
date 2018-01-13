@@ -11,22 +11,22 @@ import dataenum.findtype.FindMemberType;
 import vo.membervo.MemberVO;
 
 /**
-* 类说明
-*
-* @author ****
-* @date 2017年10月22日
-*/
-public class MemberBLService_Stub implements MemberBLService{
+ * 类说明
+ *
+ * @author ****
+ * @date 2017年10月22日
+ */
+public class MemberBLService_Stub implements MemberBLService {
 
 	public String getId() {
 		return "000001";
 	}
 
 	public ArrayList<MemberVO> show() {
-		MemberVO member1 = new MemberVO("00001",MemberCategory.SUPPLIER,MemberLevel.LEVEL5,"李杰","1591515","南京大学",
-				"210064","lq@qq.com","50","20","50","NJU");
-		MemberVO member2 = new MemberVO("00002",MemberCategory.RETAILER,MemberLevel.LEVEL4,"NJU","15cs515","南京大学",
-				"210064","lq@qq.com","50","20","50","NJU");
+		MemberVO member1 = new MemberVO("00001", MemberCategory.SUPPLIER, MemberLevel.LEVEL5, "李杰", "1591515", "南京大学",
+				"210064", "lq@qq.com", "50", "20", "50", "NJU");
+		MemberVO member2 = new MemberVO("00002", MemberCategory.RETAILER, MemberLevel.LEVEL4, "NJU", "15cs515", "南京大学",
+				"210064", "lq@qq.com", "50", "20", "50", "NJU");
 		System.out.println("Show Succeed!\n");
 		ArrayList<MemberVO> list = new ArrayList<>();
 		list.add(member1);
@@ -39,11 +39,10 @@ public class MemberBLService_Stub implements MemberBLService{
 		return null;
 	}
 
-
 	@Override
 	public ArrayList<MemberVO> find(String keyword, FindMemberType properties) {
-		MemberVO member1 = new MemberVO("161250001",MemberCategory.RETAILER,MemberLevel.LEVEL5,"NJU","1591515","南京大学",
-				"210064","lq@qq.com","50","20","50","NJU");
+		MemberVO member1 = new MemberVO("161250001", MemberCategory.RETAILER, MemberLevel.LEVEL5, "NJU", "1591515",
+				"南京大学", "210064", "lq@qq.com", "50", "20", "50", "NJU");
 		System.out.println("Show Succeed!\n");
 		ArrayList<MemberVO> list = new ArrayList<>();
 		list.add(member1);
@@ -77,6 +76,5 @@ public class MemberBLService_Stub implements MemberBLService{
 		list.add(s2);
 		return list;
 	}
-
 
 }

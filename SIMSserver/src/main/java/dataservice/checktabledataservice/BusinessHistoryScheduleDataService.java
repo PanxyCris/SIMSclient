@@ -11,12 +11,12 @@ import po.tablepo.BusinessHistorySchedulePO;
  */
 public interface BusinessHistoryScheduleDataService extends Remote {
 	public static final String NAME = "BusinessHistoryScheduleData";
-	
+
 	public FinancialDocPO viewReport(BusinessHistorySchedulePO businessHistorySchedulePO);
-	
+
 	public void exportReport();
-	
-	public void writeOff();//ºì³å
-	
-	public void writeOffAndCopy(PersistObject billPO);//ºì³å²¢¸´ÖÆ
+
+	public void writeOff();// ºì³å
+
+	public void writeOffAndCopy(PersistObject billPO);// ºì³å²¢¸´ÖÆ
 }

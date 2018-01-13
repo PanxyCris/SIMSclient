@@ -8,13 +8,14 @@ import dataenum.BillType;
 import vo.billvo.BillVO;
 import vo.commodityvo.GiftVO;
 
-public class InventoryBillVO extends BillVO{
+public class InventoryBillVO extends BillVO {
 
 	private ArrayList<GiftVO> gifts;
 	private String operator;
 
-	public InventoryBillVO(String id,ArrayList<GiftVO> gifts,String operator,BillType billType, BillState billState,String note) {
-		super(id,billType, billState,note);
+	public InventoryBillVO(String id, ArrayList<GiftVO> gifts, String operator, BillType billType, BillState billState,
+			String note) {
+		super(id, billType, billState, note);
 		this.setOperator(operator);
 		this.setGifts(gifts);
 	}
@@ -34,7 +35,5 @@ public class InventoryBillVO extends BillVO{
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-
-
 
 }

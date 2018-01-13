@@ -8,11 +8,11 @@ import dataenum.findtype.FindAccountType;
 import dataservice.accountdataservice.AccountDataService;
 import po.accountpo.AccountPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2018年1月10日    
-*/
+/**
+ * 
+ * @author Lijie
+ * @date 2018年1月10日
+ */
 public class AccountDataService_stub implements AccountDataService {
 
 	@Override
@@ -48,6 +48,5 @@ public class AccountDataService_stub implements AccountDataService {
 		System.out.println("Delete Succeed!");
 		return ResultMessage.SUCCESS;
 	}
-
 
 }

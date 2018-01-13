@@ -9,7 +9,7 @@ import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
 import po.userpo.UserPO;
 
-public class UserDataService_Stub implements UserDataService{
+public class UserDataService_Stub implements UserDataService {
 
 	@Override
 	public boolean login(String id, String password) throws RemoteException {
@@ -50,5 +50,5 @@ public class UserDataService_Stub implements UserDataService{
 		list.add(po);
 		return list;
 	}
-	
+
 }

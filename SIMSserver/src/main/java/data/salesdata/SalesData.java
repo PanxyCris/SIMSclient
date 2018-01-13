@@ -5,23 +5,16 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.rmi.RemoteException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import data.DBManager;
-import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
-import dataenum.Warehouse;
 import dataenum.findtype.FindSalesType;
-import po.PurchasePO;
-import po.commoditypo.CommodityItemPO;
 import po.salespo.SalesPO;
 
 /**
@@ -29,32 +22,37 @@ import po.salespo.SalesPO;
  * @author Lijie
  * @date 2017年12月5日
  */
-public class SalesData{
+public class SalesData {
 
 	private Connection conn;
+
 	public SalesData() {
 		conn = DBManager.getConnection();
 	}
 
 	public static void main(String[] args) {
-//		ArrayList<CommodityItemPO> commodities = new ArrayList<>();
-//
-//		CommodityItemPO e = new CommodityItemPO("000001", "潘星宇", "单身汪", 100, 200, "汪汪");
-//		commodities.add(e);
-//		SalesPO po = new SalesPO("XSD-20180101-00001", "000002", "王灿灿(000002)(销售商)", "王灿灿", "刘钦",
-//				Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "大吉大利，晚上吃鸡", BillType.SALESBILL, BillState.DRAFT);
+		// ArrayList<CommodityItemPO> commodities = new ArrayList<>();
+		//
+		// CommodityItemPO e = new CommodityItemPO("000001", "潘星宇", "单身汪", 100,
+		// 200, "汪汪");
+		// commodities.add(e);
+		// SalesPO po = new SalesPO("XSD-20180101-00001", "000002",
+		// "王灿灿(000002)(销售商)", "王灿灿", "刘钦",
+		// Warehouse.WAREHOUSE1, commodities, 2000, 200, 300, 1500, "大吉大利，晚上吃鸡",
+		// BillType.SALESBILL, BillState.DRAFT);
 		SalesData s = new SalesData();
 
-//		ArrayList<SalesPO> list = s.show();
-//		for (SalesPO p : list) {
+		// ArrayList<SalesPO> list = s.show();
+		// for (SalesPO p : list) {
 
 		SalesPO po = s.show().get(0);
-//		SalesPO newPO = new SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"潘星宇",
-//				po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),
-//				po.getAfterPrice(),po.getRemark(),po.getType(),po.getState());
-//		s.update(newPO);
+		// SalesPO newPO = new
+		// SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"潘星宇",
+		// po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),
+		// po.getAfterPrice(),po.getRemark(),po.getType(),po.getState());
+		// s.update(newPO);
 		System.out.println(s.show().get(0).getOperator());
-//		}
+		// }
 	}
 
 	public ResultMessage insert(SalesPO po) {
@@ -75,8 +73,7 @@ public class SalesData{
 					conn.commit();
 					ps.close();
 					return ResultMessage.SUCCESS;
-				}
-				else {
+				} else {
 					System.out.println("该销售已存在");
 					update(po);
 					return ResultMessage.EXISTED;

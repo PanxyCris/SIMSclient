@@ -6,7 +6,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
-
 /**
  *
  * @author Íõ²Ó²Ó
@@ -17,7 +16,7 @@ public class RemoteHelper {
 	public RemoteHelper() {
 		initServer();
 	}
-	
+
 	public void initServer() {
 		DataRemoteObject dataRemoteObject;
 		try {

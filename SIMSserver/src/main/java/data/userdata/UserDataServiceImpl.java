@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,20 +24,20 @@ import po.UserPO;
 public class UserDataServiceImpl implements UserDataService {
 
 	private UserData user;
-	
+
 	public UserDataServiceImpl() throws RemoteException {
 		super();
 		user = new UserData();
 	}
-	
+
 	public static void main(String[] args) throws RemoteException {
 		UserDataServiceImpl u = new UserDataServiceImpl();
 		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
-//		u.insertUser(p);
-//		ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
-//		for(UserPO po: list) {
-//			System.out.println(po.toString());
-//		}
+		// u.insertUser(p);
+		// ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
+		// for(UserPO po: list) {
+		// System.out.println(po.toString());
+		// }
 		System.out.println(u.login("000002", "admin"));
 	}
 
@@ -62,7 +61,6 @@ public class UserDataServiceImpl implements UserDataService {
 		return user.show();
 	}
 
-
 	@Override
 	public boolean login(String id, String password) throws RemoteException {
 		ArrayList<UserPO> list = new ArrayList<>();
@@ -71,28 +69,28 @@ public class UserDataServiceImpl implements UserDataService {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象 
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象  
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象  
-                byte[] buff = new byte[(int) inBlob.length()];
-                
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中  
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));  
-                    UserPO po = (UserPO)in.readObject();                   //读出对象  
-                      
-                    list.add(po);  
-                }  
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
+
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					UserPO po = (UserPO) in.readObject(); // 读出对象
+
+					list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();
 			conn.close();
 		} catch (SQLException | IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		}  
+		}
 
-		for (UserPO po: list) {
-			if (id.equals(po.getID()) && password.equals(po.getPassword())){
+		for (UserPO po : list) {
+			if (id.equals(po.getID()) && password.equals(po.getPassword())) {
 				return true;
 			}
 		}
@@ -104,8 +102,4 @@ public class UserDataServiceImpl implements UserDataService {
 		return user.find(info, type);
 	}
 
-
-	
-
-	
 }

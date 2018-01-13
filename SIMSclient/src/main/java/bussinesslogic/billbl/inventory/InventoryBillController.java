@@ -14,7 +14,7 @@ import vo.billvo.inventorybillvo.InventoryBillVO;
 
 public class InventoryBillController implements InventoryBillBLService {
 
-	InventoryBillBL inventoryBillBL=new InventoryBillBL();
+	InventoryBillBL inventoryBillBL = new InventoryBillBL();
 
 	@Override
 	public ArrayList<InventoryBillVO> find(String text, FindInventoryBillType type) {
@@ -42,7 +42,7 @@ public class InventoryBillController implements InventoryBillBLService {
 	}
 
 	@Override
-	public String getId(BillType type) {//得到新建单据的Id
+	public String getId(BillType type) {// 得到新建单据的Id
 		return inventoryBillBL.getId(type);
 	}
 

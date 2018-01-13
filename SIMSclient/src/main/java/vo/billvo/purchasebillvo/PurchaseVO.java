@@ -7,19 +7,19 @@ import dataenum.Warehouse;
 import vo.billvo.BillVO;
 import vo.commodityvo.CommodityItemVO;
 
-public class PurchaseVO extends BillVO{
+public class PurchaseVO extends BillVO {
 
-	private String supplier;  //供应商
+	private String supplier; // 供应商
 	private Warehouse warehouse;
 	@SuppressWarnings("unused")
 	private String warehouseString;
 	private String operator;
-	private ArrayList<CommodityItemVO> commodities;  //入库商品列表
+	private ArrayList<CommodityItemVO> commodities; // 入库商品列表
 	private Double sum;
 
 	public PurchaseVO(String id, String supplier, Warehouse warehouse, String operator,
 			ArrayList<CommodityItemVO> commodities, String note, Double sum, BillType type, BillState state) {
-		super(id,type,state,note);
+		super(id, type, state, note);
 		this.supplier = supplier;
 		this.warehouse = warehouse;
 		this.operator = operator;
@@ -28,34 +28,31 @@ public class PurchaseVO extends BillVO{
 		setWarehouseString(warehouse.value);
 	}
 
-	public String getSupplier(){
+	public String getSupplier() {
 		return supplier;
 	}
 
-	public Warehouse getWarehouse(){
+	public Warehouse getWarehouse() {
 		return warehouse;
 	}
 
-	public String getWarehouseString(){
+	public String getWarehouseString() {
 		return warehouse.value;
 	}
 
-	public String getOperator(){
+	public String getOperator() {
 		return operator;
 	}
 
-	public ArrayList<CommodityItemVO> getCommodities(){
+	public ArrayList<CommodityItemVO> getCommodities() {
 		return commodities;
 	}
-
 
 	public void setCommodities(ArrayList<CommodityItemVO> commodities) {
 		this.commodities = commodities;
 	}
 
-
-
-	public Double getSum(){
+	public Double getSum() {
 		return sum;
 	}
 
@@ -67,8 +64,5 @@ public class PurchaseVO extends BillVO{
 	public void setWarehouseString(String warehouseString) {
 		this.warehouseString = warehouseString;
 	}
-
-
-
 
 }

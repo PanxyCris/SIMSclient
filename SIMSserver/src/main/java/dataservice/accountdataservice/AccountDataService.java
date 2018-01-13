@@ -15,15 +15,19 @@ import po.accountpo.AccountPO;
  */
 /**
  * 
-* @ClassName: AccountDataService 
-* @author lijie
-* @date 2017年12月3日 上午10:03:44 
-*
+ * @ClassName: AccountDataService
+ * @author lijie
+ * @date 2017年12月3日 上午10:03:44
+ *
  */
-public interface AccountDataService extends Remote{
+public interface AccountDataService extends Remote {
 	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException;
+
 	public ArrayList<AccountPO> showAccount() throws RemoteException;
+
 	public ResultMessage insertAccount(AccountPO po) throws RemoteException;
+
 	public ResultMessage deleteAccount(String id) throws RemoteException;
+
 	public ResultMessage updateAccount(AccountPO po) throws RemoteException;
 }

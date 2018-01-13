@@ -60,10 +60,8 @@ public class CommodityItemVO {
 		this.remark = remark;
 	}
 
-	public void setTotal(Double total){
+	public void setTotal(Double total) {
 		this.total = total;
 	}
-
-
 
 }

@@ -14,11 +14,11 @@ import po.inventorybillpo.InventoryBillPO;
  * @version 2018-1-1
  */
 
-public class BillDataServiceImpl implements BillDataService{
+public class BillDataServiceImpl implements BillDataService {
 
 	BillData billdata;
 
-	public BillDataServiceImpl(){
+	public BillDataServiceImpl() {
 		billdata = new BillData();
 	}
 

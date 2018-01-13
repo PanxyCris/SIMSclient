@@ -14,7 +14,7 @@ import po.accountbookpo.AccountBookPO;
 import rmi.RemoteHelper;
 import vo.accountbookvo.AccountBookVO;
 
-public class AccountBookBL implements AccountBookBLService{
+public class AccountBookBL implements AccountBookBLService {
 
 	private AccountBookVO accountBookVO;
 	private AccountBookPO accountBookPO;
@@ -27,22 +27,23 @@ public class AccountBookBL implements AccountBookBLService{
 	private AccountBL accountService;
 
 	public AccountBookBL() {
-		accountBookTransition=new AccountBookTransition();
-		accountBookDataService=RemoteHelper.getInstance().getSetUpAccountDataService();
+		accountBookTransition = new AccountBookTransition();
+		accountBookDataService = RemoteHelper.getInstance().getSetUpAccountDataService();
 		memberService = new MemberController();
 		commodityService = new CommodityBL();
 		accountService = new AccountBL();
 	}
+
 	@Override
 	public ResultMessage newBuild(AccountBookVO accountBookVO) {
-		String date=accountBookVO.getDate();
-		ArrayList<AccountBookVO> accountBookVOs=show();
+		String date = accountBookVO.getDate();
+		ArrayList<AccountBookVO> accountBookVOs = show();
 		for (int i = 0; i < accountBookVOs.size(); i++) {
-			if(date.equals(accountBookVOs.get(i).getDate())){
+			if (date.equals(accountBookVOs.get(i).getDate())) {
 				return ResultMessage.FAIL;
 			}
 		}
-		accountBookPO=accountBookTransition.VOtoPO(accountBookVO);
+		accountBookPO = accountBookTransition.VOtoPO(accountBookVO);
 
 		try {
 			return accountBookDataService.insertAccountBook(accountBookPO);
@@ -56,9 +57,9 @@ public class AccountBookBL implements AccountBookBLService{
 	@Override
 	public ArrayList<AccountBookVO> show() {
 
-		ArrayList<AccountBookVO> accountBookVOs=new ArrayList<>();
+		ArrayList<AccountBookVO> accountBookVOs = new ArrayList<>();
 		try {
-			ArrayList<AccountBookPO> accountBookPOs=accountBookDataService.showAccountBook();
+			ArrayList<AccountBookPO> accountBookPOs = accountBookDataService.showAccountBook();
 			for (int i = 0; i < accountBookPOs.size(); i++) {
 				accountBookVOs.add(accountBookTransition.POtoVO(accountBookPOs.get(i)));
 			}
@@ -71,18 +72,18 @@ public class AccountBookBL implements AccountBookBLService{
 
 	@Override
 	public AccountBookVO choseByYear(int date) {
-		String d=Integer.toString(date);
-		ArrayList<AccountBookVO> accountBookVOs=show();
+		String d = Integer.toString(date);
+		ArrayList<AccountBookVO> accountBookVOs = show();
 		for (int i = 0; i < accountBookVOs.size(); i++) {
-			if(d.equals(accountBookVOs.get(i).getDate())){
-				accountBookVO=accountBookVOs.get(i);
+			if (d.equals(accountBookVOs.get(i).getDate())) {
+				accountBookVO = accountBookVOs.get(i);
 				break;
 			}
 		}
-		if(date==LocalDate.now().getYear()&&accountBookVO==null){
+		if (date == LocalDate.now().getYear() && accountBookVO == null) {
 			try {
-				accountBookVO = new AccountBookVO(String.valueOf(date),null,commodityService.show(),
-						memberService.show(),accountService.getAccountList());
+				accountBookVO = new AccountBookVO(String.valueOf(date), null, commodityService.show(),
+						memberService.show(), accountService.getAccountList());
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

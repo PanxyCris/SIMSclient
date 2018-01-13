@@ -7,7 +7,7 @@ import dataenum.BillType;
 import po.billpo.BillPO;
 import po.commoditypo.GiftPO;
 
-public class InventoryBillPO extends BillPO implements Serializable{
+public class InventoryBillPO extends BillPO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String id;
@@ -15,7 +15,8 @@ public class InventoryBillPO extends BillPO implements Serializable{
 	private ArrayList<GiftPO> gifts;
 	private String operator;
 
-	public InventoryBillPO(String id,ArrayList<GiftPO> gifts,String operator,BillType billType, BillState billState,String note) {
+	public InventoryBillPO(String id, ArrayList<GiftPO> gifts, String operator, BillType billType, BillState billState,
+			String note) {
 		super(billType, billState);
 		this.setOperator(operator);
 		this.setId(id);
@@ -54,7 +55,5 @@ public class InventoryBillPO extends BillPO implements Serializable{
 	public void setOperator(String operator) {
 		this.operator = operator;
 	}
-
-
 
 }

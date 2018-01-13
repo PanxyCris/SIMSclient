@@ -219,7 +219,7 @@ public class ExamineSalesBillController extends ExamineBillController {
 	 */
 
 	public void edit() throws RemoteException {
-       //单据表格层面的edit
+		// 单据表格层面的edit
 		Callback<TableColumn<SalesVO, String>, TableCell<SalesVO, String>> cellFactory = (
 				TableColumn<SalesVO, String> p) -> new EditingCell<SalesVO>();
 
@@ -275,7 +275,7 @@ public class ExamineSalesBillController extends ExamineBillController {
 				e.printStackTrace();
 			}
 		});
-        //商品表格层面的edit
+		// 商品表格层面的edit
 		Callback<TableColumn<CommodityItemVO, Integer>, TableCell<CommodityItemVO, Integer>> cellFactoryInteger = (
 				TableColumn<CommodityItemVO, Integer> p) -> new EditingCellInteger<CommodityItemVO>();
 		Callback<TableColumn<CommodityItemVO, Double>, TableCell<CommodityItemVO, Double>> cellFactoryCommodityDouble = (
@@ -296,7 +296,7 @@ public class ExamineSalesBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodity(entryVO);
-			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) // 修改之后的总价与折后价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
 			try {
@@ -333,7 +333,7 @@ public class ExamineSalesBillController extends ExamineBillController {
 			ArrayList<CommodityItemVO> entryVO = new ArrayList<>();
 			entryVO.addAll(commodityList);
 			newVO.setCommodity(entryVO);
-			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) //修改之后的总价与折后价的连锁反应
+			newVO.setBeforePrice(newVO.getBeforePrice() - (tmp - t.getNewValue()) // 修改之后的总价与折后价的连锁反应
 					* ((CommodityItemVO) t.getTableView().getItems().get(t.getTablePosition().getRow())).getNumber());
 			newVO.setAfterPrice(newVO.getBeforePrice() - newVO.getAllowance() - newVO.getVoucher());
 			try {

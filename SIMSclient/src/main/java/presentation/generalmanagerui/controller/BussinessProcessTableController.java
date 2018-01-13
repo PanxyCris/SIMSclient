@@ -8,10 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import vo.uservo.UserVO;
+
 /**
  * 经营历程表选择要查看的单据表格界面
- * @author 潘星宇
- * 2017-12-24
+ * 
+ * @author 潘星宇 2017-12-24
  */
 
 public class BussinessProcessTableController extends FinanceTableController {

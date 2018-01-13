@@ -18,45 +18,44 @@ public class LoginController {
 	UserBLService userservice = new UserController();
 
 	public boolean writeUser(UserVO user) {
-	 if(user!=null){
-		try {
-			BufferedWriter fw = new BufferedWriter(new FileWriter("Login.txt"));
+		if (user != null) {
+			try {
+				BufferedWriter fw = new BufferedWriter(new FileWriter("Login.txt"));
 
-			fw.write(user.getID());
-			fw.close();
-			return true;
-		} catch (IOException e) {
-			e.printStackTrace();
+				fw.write(user.getID());
+				fw.close();
+				return true;
+			} catch (IOException e) {
+				e.printStackTrace();
 
-		}
+			}
 		}
 		return true;
 	}
 
 	public UserVO readUser() {
 		// TODO Auto-generated method stub
-	     File path=new File("Login.txt");
-	     try {
-	    	 FileReader fileReader = new FileReader(path);
-				BufferedReader reader = new BufferedReader(fileReader);
-				String line = reader.readLine();
-				reader.close();
-				return userservice.find(line, FindUserType.ID).get(0);
-			} catch (IOException e) {
+		File path = new File("Login.txt");
+		try {
+			FileReader fileReader = new FileReader(path);
+			BufferedReader reader = new BufferedReader(fileReader);
+			String line = reader.readLine();
+			reader.close();
+			return userservice.find(line, FindUserType.ID).get(0);
+		} catch (IOException e) {
 
-				e.printStackTrace();
-			}
+			e.printStackTrace();
+		}
 		return null;
 	}
 
-
-	public void printInfo(ResultMessage message){
-		Alert error = new Alert(Alert.AlertType.INFORMATION,message.value);
+	public void printInfo(ResultMessage message) {
+		Alert error = new Alert(Alert.AlertType.INFORMATION, message.value);
 		error.showAndWait();
 	}
 
-	public void printWrong(ResultMessage message){
-		Alert error = new Alert(Alert.AlertType.WARNING,message.value);
+	public void printWrong(ResultMessage message) {
+		Alert error = new Alert(Alert.AlertType.WARNING, message.value);
 		error.showAndWait();
 	}
 

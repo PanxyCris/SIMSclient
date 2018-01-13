@@ -40,8 +40,10 @@ public class PromotionSpecialBLService_Stub implements PromotionBLService<Promot
 		pricePacks1.add(g3);
 		pricePacks1.add(g2);
 
-		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 15), 200.0, pricePacks);
-		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05), LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
+		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30),
+				LocalDate.of(2017, 12, 15), 200.0, pricePacks);
+		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05),
+				LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
 		list.add(p2);
 		list.add(p1);
 		return list;
@@ -65,13 +67,13 @@ public class PromotionSpecialBLService_Stub implements PromotionBLService<Promot
 		pricePacks1.add(g3);
 		pricePacks1.add(g2);
 
-		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 15), 200.0, pricePacks);
-		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05), LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
+		PromotionPricePacksVO p1 = new PromotionPricePacksVO("00002", LocalDate.of(2017, 11, 30),
+				LocalDate.of(2017, 12, 15), 200.0, pricePacks);
+		PromotionPricePacksVO p2 = new PromotionPricePacksVO("00003", LocalDate.of(2017, 12, 05),
+				LocalDate.of(2017, 12, 25), 500.0, pricePacks1);
 		list.add(p2);
 		list.add(p1);
 		return list;
 	}
-
-
 
 }

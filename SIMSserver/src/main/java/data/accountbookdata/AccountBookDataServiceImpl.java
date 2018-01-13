@@ -3,24 +3,24 @@ package data.accountbookdata;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import data.accountdata.AccountData;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBookType;
 import dataservice.accountbookdataservice.AccountBookDataService;
 import po.accountbookpo.AccountBookPO;
 
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月14日    
-*/
-public class AccountBookDataServiceImpl implements AccountBookDataService{
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月14日
+ */
+public class AccountBookDataServiceImpl implements AccountBookDataService {
 
 	private AccountBookData accountbook;
-	
+
 	public AccountBookDataServiceImpl() {
 		accountbook = new AccountBookData();
 	}
+
 	@Override
 	public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException {
 		return accountbook.insert(po);

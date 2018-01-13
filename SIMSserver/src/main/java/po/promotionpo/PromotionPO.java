@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import dataenum.PromotionType;
 
 /**
-*
-* @author 潘星宇
-* @date 2017年12月27日
-*/
-public class PromotionPO implements Serializable{
+ *
+ * @author 潘星宇
+ * @date 2017年12月27日
+ */
+public class PromotionPO implements Serializable {
 
 	protected static final long serialVersionUID = -7961034019548242635L;
 	protected String id;
@@ -18,7 +18,7 @@ public class PromotionPO implements Serializable{
 	protected PromotionType type;
 	protected String typeString;
 
-	public PromotionPO(String id,LocalDate beginDate,LocalDate endDate,PromotionType type){
+	public PromotionPO(String id, LocalDate beginDate, LocalDate endDate, PromotionType type) {
 		this.id = id;
 		this.beginDate = beginDate;
 		this.endDate = endDate;
@@ -26,23 +26,23 @@ public class PromotionPO implements Serializable{
 		this.typeString = type.value;
 	}
 
-	public String getId(){
+	public String getId() {
 		return id;
 	}
 
-	public void setBeginDate(LocalDate beginDate){
+	public void setBeginDate(LocalDate beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public LocalDate getBeginDate(){
+	public LocalDate getBeginDate() {
 		return beginDate;
 	}
 
-	public void setEndDate(LocalDate endDate){
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	public LocalDate getEndDate(){
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
@@ -57,7 +57,5 @@ public class PromotionPO implements Serializable{
 	public String getTypeString() {
 		return typeString;
 	}
-
-
 
 }

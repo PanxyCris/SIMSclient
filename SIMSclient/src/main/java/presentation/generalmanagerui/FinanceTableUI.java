@@ -9,13 +9,13 @@ import vo.uservo.UserVO;
 
 public class FinanceTableUI {
 
-	public void start(UserVO user) throws Exception{
+	public void start(UserVO user) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/FinanceTableUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        FinanceTableController controller = loader.<FinanceTableController>getController();
-        controller.initData(user);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		FinanceTableController controller = loader.<FinanceTableController>getController();
+		controller.initData(user);
+		primaryStage.show();
 	}
 
 }

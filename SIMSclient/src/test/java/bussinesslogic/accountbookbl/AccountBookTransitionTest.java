@@ -18,7 +18,8 @@ import bussinesslogic.commoditybl.CommodityTransiton;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>AccountBookTransitionTest</code> contains tests for the class <code>{@link AccountBookTransition}</code>.
+ * The class <code>AccountBookTransitionTest</code> contains tests for the class
+ * <code>{@link AccountBookTransition}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:20
  * @author asus
@@ -31,8 +32,7 @@ public class AccountBookTransitionTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testAccountBookTransition_1()
-		throws Exception {
+	public void testAccountBookTransition_1() throws Exception {
 		AccountBookTransition result = new AccountBookTransition();
 		assertNotNull(result);
 		// add additional test code here
@@ -46,8 +46,7 @@ public class AccountBookTransitionTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testPOtoVO_1()
-		throws Exception {
+	public void testPOtoVO_1() throws Exception {
 		AccountBookTransition fixture = new AccountBookTransition();
 		fixture.commodityTransiton = new CommodityTransiton();
 		fixture.memberTransition = new MemberTransition();
@@ -57,18 +56,26 @@ public class AccountBookTransitionTest {
 		AccountBookVO result = fixture.POtoVO(accountBookPO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbookbl.AccountBookTransition
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.accountbookbl.AccountBookTransition
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -80,8 +87,7 @@ public class AccountBookTransitionTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testPOtoVO_2()
-		throws Exception {
+	public void testPOtoVO_2() throws Exception {
 		AccountBookTransition fixture = new AccountBookTransition();
 		fixture.commodityTransiton = new CommodityTransiton();
 		fixture.memberTransition = new MemberTransition();
@@ -91,18 +97,26 @@ public class AccountBookTransitionTest {
 		AccountBookVO result = fixture.POtoVO(accountBookPO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbookbl.AccountBookTransition
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.accountbookbl.AccountBookTransition
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -114,8 +128,7 @@ public class AccountBookTransitionTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testVOtoPO_1()
-		throws Exception {
+	public void testVOtoPO_1() throws Exception {
 		AccountBookTransition fixture = new AccountBookTransition();
 		fixture.commodityTransiton = new CommodityTransiton();
 		fixture.memberTransition = new MemberTransition();
@@ -125,18 +138,26 @@ public class AccountBookTransitionTest {
 		AccountBookPO result = fixture.VOtoPO(accountBookVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbookbl.AccountBookTransition
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.accountbookbl.AccountBookTransition
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -148,8 +169,7 @@ public class AccountBookTransitionTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Test
-	public void testVOtoPO_2()
-		throws Exception {
+	public void testVOtoPO_2() throws Exception {
 		AccountBookTransition fixture = new AccountBookTransition();
 		fixture.commodityTransiton = new CommodityTransiton();
 		fixture.memberTransition = new MemberTransition();
@@ -159,18 +179,26 @@ public class AccountBookTransitionTest {
 		AccountBookPO result = fixture.VOtoPO(accountBookVO);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.ClassNotFoundException: bussinesslogic.accountbookbl.AccountBookTransition
-		//       at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
-		//       at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
-		//       at com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
-		//       at com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
-		//       at com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
-		//       at com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
-		//       at java.lang.Thread.run(Thread.java:745)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.ClassNotFoundException:
+		// bussinesslogic.accountbookbl.AccountBookTransition
+		// at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.UserDefinedClassLoader.loadClass(UserDefinedClassLoader.java:62)
+		// at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionContextImpl.getClass(ExecutionContextImpl.java:99)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.SimpleTypeExpression.execute(SimpleTypeExpression.java:205)
+		// at
+		// com.instantiations.eclipse.analysis.expression.model.MethodInvocationExpression.execute(MethodInvocationExpression.java:544)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.core.ExecutionRequest.execute(ExecutionRequest.java:286)
+		// at
+		// com.instantiations.assist.eclipse.junit.execution.communication.LocalExecutionClient$1.run(LocalExecutionClient.java:158)
+		// at java.lang.Thread.run(Thread.java:745)
 		assertNotNull(result);
 	}
 
@@ -178,13 +206,12 @@ public class AccountBookTransitionTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -192,20 +219,20 @@ public class AccountBookTransitionTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:20
 	 */

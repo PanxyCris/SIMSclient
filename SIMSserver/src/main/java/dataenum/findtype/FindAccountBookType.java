@@ -1,10 +1,10 @@
 package dataenum.findtype;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月10日    
-*/
+
+/**
+ * 
+ * @author Lijie
+ * @date 2017年12月10日
+ */
 public enum FindAccountBookType {
 
-	
 }

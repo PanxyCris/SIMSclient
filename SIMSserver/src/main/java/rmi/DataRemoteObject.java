@@ -59,7 +59,6 @@ import po.promotionpo.PromotionPricePacksPO;
 import po.promotionpo.PromotionTotalPO;
 import po.salespo.SalesPO;
 
-
 /**
  *
  * @author 王灿灿
@@ -74,9 +73,10 @@ import po.salespo.SalesPO;
  * @date 2017年12月3日 下午7:00:46
  *
  */
-public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService, SalesDataService,
-    PromotionMemberDataService,PromotionSpecialDataService,PromotionSumDataService, PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
-    ClassificationDataService, PaymentBillDataService, ReceiptBillDataService,MessageDataService,BillDataService{
+public class DataRemoteObject extends UnicastRemoteObject implements UserDataService, MemberDataService,
+		SalesDataService, PromotionMemberDataService, PromotionSpecialDataService, PromotionSumDataService,
+		PurchaseDataService, AccountBookDataService, AccountDataService, CommodityDataService,
+		ClassificationDataService, PaymentBillDataService, ReceiptBillDataService, MessageDataService, BillDataService {
 
 	private static final long serialVersionUID = 1L;
 
@@ -115,96 +115,80 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		inventoryBill = new BillDataServiceImpl();
 	}
 
-
 	@Override
 	public ResultMessage insertUser(UserPO po) throws RemoteException {
 		return user.insertUser(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteUser(String ID) throws RemoteException {
 		return user.deleteUser(ID);
 	}
 
-
 	@Override
 	public ResultMessage updateUser(UserPO po) throws RemoteException {
 		return user.updateUser(po);
 	}
-
 
 	@Override
 	public boolean login(String id, String password) throws RemoteException {
 		return user.login(id, password);
 	}
 
-
 	@Override
 	public ArrayList<UserPO> findUser(String info, FindUserType type) throws RemoteException {
 		return user.findUser(info, type);
 	}
-
 
 	@Override
 	public ArrayList<MemberPO> findMember(String keyword, FindMemberType type) throws RemoteException {
 		return member.findMember(keyword, type);
 	}
 
-
 	@Override
 	public ResultMessage insertMember(MemberPO po) throws RemoteException {
 		return member.insertMember(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteMember(String ID) throws RemoteException {
 		return member.deleteMember(ID);
 	}
 
-
 	@Override
 	public ResultMessage updateMember(MemberPO po) throws RemoteException {
 		return member.updateMember(po);
 	}
-
 
 	@Override
 	public ArrayList<UserPO> showUser() throws RemoteException {
 		return user.showUser();
 	}
 
-
 	@Override
 	public ArrayList<MemberPO> showMember() throws RemoteException {
 		return member.showMember();
 	}
-
 
 	@Override
 	public ArrayList<SalesPO> findSale(String info, FindSalesType type) throws RemoteException {
 		return sale.findSale(info, type);
 	}
 
-
 	@Override
 	public ResultMessage insertSale(SalesPO po) throws RemoteException {
 		return sale.insertSale(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteSale(String ID) throws RemoteException {
 		return sale.deleteSale(ID);
 	}
 
-
 	@Override
 	public ResultMessage updateSale(SalesPO po) throws RemoteException {
 		return sale.updateSale(po);
 	}
-
 
 	@Override
 	public ArrayList<SalesPO> showSale() throws RemoteException {
@@ -221,144 +205,120 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return sale.getSaleBackID();
 	}
 
-
 	@Override
 	public ResultMessage insertPurchase(PurchasePO po) throws RemoteException {
 		return purchase.insertPurchase(po);
 	}
-
 
 	@Override
 	public ResultMessage deletePurchase(String ID) throws RemoteException {
 		return purchase.deletePurchase(ID);
 	}
 
-
 	@Override
 	public ResultMessage updatePurchase(PurchasePO po) throws RemoteException {
 		return purchase.updatePurchase(po);
 	}
-
 
 	@Override
 	public ArrayList<PurchasePO> findPurchase(String keyword, FindSalesType type) throws RemoteException {
 		return purchase.findPurchase(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<PurchasePO> showPurchase() throws RemoteException {
 		return purchase.showPurchase();
 	}
-
 
 	@Override
 	public ResultMessage insertAccountBook(AccountBookPO po) throws RemoteException {
 		return accountbook.insertAccountBook(po);
 	}
 
-
 	@Override
 	public ResultMessage deleteAccountBook(String ID) throws RemoteException {
 		return accountbook.deleteAccountBook(ID);
 	}
-
 
 	@Override
 	public ResultMessage updateAccountBook(AccountBookPO po) throws RemoteException {
 		return accountbook.updateAccountBook(po);
 	}
 
-
 	@Override
 	public ArrayList<AccountBookPO> find(String keyword, FindAccountBookType type) throws RemoteException {
 		return accountbook.find(keyword, type);
 	}
-
 
 	@Override
 	public ArrayList<AccountBookPO> showAccountBook() throws RemoteException {
 		return accountbook.showAccountBook();
 	}
 
-
 	@Override
 	public ArrayList<AccountPO> findAccount(String keywords, FindAccountType type) throws RemoteException {
 		return account.findAccount(keywords, type);
 	}
-
 
 	@Override
 	public ArrayList<AccountPO> showAccount() throws RemoteException {
 		return account.showAccount();
 	}
 
-
 	@Override
 	public ResultMessage insertAccount(AccountPO po) throws RemoteException {
 		return account.insertAccount(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteAccount(String id) throws RemoteException {
 		return account.deleteAccount(id);
 	}
 
-
 	@Override
 	public ResultMessage updateAccount(AccountPO po) throws RemoteException {
 		return account.updateAccount(po);
 	}
-
 
 	@Override
 	public ResultMessage insertCommodity(CommodityPO po) throws RemoteException {
 		return commodity.insertCommodity(po);
 	}
 
-
 	@Override
 	public ResultMessage updateCommodity(CommodityPO po) throws RemoteException {
 		return commodity.updateCommodity(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteCommodity(String id) throws RemoteException {
 		return commodity.deleteCommodity(id);
 	}
 
-
 	@Override
 	public ArrayList<CommodityPO> showCommodity() throws RemoteException {
 		return commodity.showCommodity();
 	}
-
 
 	@Override
 	public ArrayList<CommodityPO> findCommodity(String keywords, FindCommodityType type) throws RemoteException {
 		return commodity.findCommodity(keywords, type);
 	}
 
-
 	@Override
 	public ResultMessage insertClassification(ClassificationVPO po) throws RemoteException {
 		return classification.insertClassification(po);
 	}
-
 
 	@Override
 	public ResultMessage updateClassification(ClassificationVPO po) throws RemoteException {
 		return classification.updateClassification(po);
 	}
 
-
 	@Override
 	public ResultMessage deleteClassification(String id) throws RemoteException {
 		return classification.deleteClassification(id);
 	}
-
 
 	@Override
 	public ArrayList<ClassificationVPO> show() throws RemoteException {
@@ -366,20 +326,15 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return classification.show();
 	}
 
-
-
-
 	@Override
 	public ClassificationVPO getRoot() throws RemoteException {
 		return classification.getRoot();
 	}
 
-
 	@Override
 	public ClassificationVPO findClassification(String keyword) throws RemoteException {
 		return classification.findClassification(keyword);
 	}
-
 
 	@Override
 	public String getID() throws RemoteException {
@@ -387,66 +342,55 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return classification.getID();
 	}
 
-
 	@Override
 	public ResultMessage insertPaymentBill(PaymentBillPO po) throws RemoteException {
 		return paymentbill.insertPaymentBill(po);
 	}
-
 
 	@Override
 	public ResultMessage deletePaymentBill(String id) throws RemoteException {
 		return paymentbill.deletePaymentBill(id);
 	}
 
-
 	@Override
 	public ResultMessage updatePaymentBill(PaymentBillPO po) throws RemoteException {
 		return paymentbill.updatePaymentBill(po);
 	}
-
 
 	@Override
 	public ArrayList<PaymentBillPO> findPaymentBill(String keyword, FindAccountBillType type) throws RemoteException {
 		return paymentbill.findPaymentBill(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<PaymentBillPO> showPaymentBill() throws RemoteException {
 		return paymentbill.showPaymentBill();
 	}
-
 
 	@Override
 	public ResultMessage insertReceiptBill(ReceiptBillPO po) throws RemoteException {
 		return receiprbill.insertReceiptBill(po);
 	}
 
-
 	@Override
 	public ResultMessage deleteReceiptBill(String id) throws RemoteException {
 		return receiprbill.deleteReceiptBill(id);
 	}
-
 
 	@Override
 	public ResultMessage updateReceiptBill(ReceiptBillPO po) throws RemoteException {
 		return receiprbill.updateReceiptBill(po);
 	}
 
-
 	@Override
 	public ArrayList<ReceiptBillPO> findReceiptBill(String keyword, FindAccountBillType type) throws RemoteException {
 		return receiprbill.findReceiptBill(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<ReceiptBillPO> showReceiptBill() throws RemoteException {
 		return receiprbill.showReceiptBill();
 	}
-
 
 	@Override
 	public ResultMessage save(MessagePO message) throws RemoteException {
@@ -454,13 +398,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return messageData.save(message);
 	}
 
-
 	@Override
 	public ArrayList<MessagePO> getMessage(UserPO user) throws RemoteException {
 		// TODO Auto-generated method stub
 		return messageData.getMessage(user);
 	}
-
 
 	@Override
 	public String getMessageID() throws RemoteException {
@@ -468,15 +410,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return messageData.getMessageID();
 	}
 
-
-
-
 	@Override
 	public ResultMessage insertPromotion(PromotionTotalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSum.insertPromotion(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteSumPromotion(String ID) throws RemoteException {
@@ -484,13 +422,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionSum.deleteSumPromotion(ID);
 	}
 
-
 	@Override
 	public ResultMessage updatePromotion(PromotionTotalPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSum.updatePromotion(po);
 	}
-
 
 	@Override
 	public ResultMessage insertPromotion(PromotionPricePacksPO po) throws RemoteException {
@@ -498,13 +434,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionSpecial.insertPromotion(po);
 	}
 
-
 	@Override
 	public ResultMessage deleteSpecialPromotion(String ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSpecial.deleteSpecialPromotion(ID);
 	}
-
 
 	@Override
 	public ResultMessage updatePromotion(PromotionPricePacksPO po) throws RemoteException {
@@ -512,13 +446,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionSpecial.updatePromotion(po);
 	}
 
-
 	@Override
 	public ResultMessage insertPromotion(PromotionMemberPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionMember.insertPromotion(po);
 	}
-
 
 	@Override
 	public ResultMessage deleteMemberPromotion(String ID) throws RemoteException {
@@ -526,13 +458,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionMember.deleteMemberPromotion(ID);
 	}
 
-
 	@Override
 	public ResultMessage updatePromotion(PromotionMemberPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionMember.updatePromotion(po);
 	}
-
 
 	@Override
 	public ArrayList<PromotionTotalPO> findSumPromotion(String keyword, FindPromotionType type) throws RemoteException {
@@ -540,13 +470,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionSum.findSumPromotion(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<PromotionTotalPO> showSumPromotion() throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSum.showSumPromotion();
 	}
-
 
 	@Override
 	public ArrayList<PromotionPricePacksPO> findSpecialPromotion(String keyword, FindPromotionType type)
@@ -555,13 +483,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionSpecial.findSpecialPromotion(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<PromotionPricePacksPO> showSpecialPromotion() throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionSpecial.showSpecialPromotion();
 	}
-
 
 	@Override
 	public ArrayList<PromotionMemberPO> findMemberPromotion(String keyword, FindPromotionType type)
@@ -570,13 +496,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return promotionMember.findMemberPromotion(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<PromotionMemberPO> showMemberPromotion() throws RemoteException {
 		// TODO Auto-generated method stub
 		return promotionMember.showMemberPromotion();
 	}
-
 
 	@Override
 	public ResultMessage insertInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
@@ -584,20 +508,17 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return inventoryBill.insertInventoryBill(inventoryBillPO);
 	}
 
-
 	@Override
 	public ResultMessage deleteInventoryBill(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		return inventoryBill.deleteInventoryBill(id);
 	}
 
-
 	@Override
 	public ResultMessage updateInventoryBill(InventoryBillPO inventoryBillPO) throws RemoteException {
 		// TODO Auto-generated method stub
 		return inventoryBill.updateInventoryBill(inventoryBillPO);
 	}
-
 
 	@Override
 	public ArrayList<InventoryBillPO> findInventoryBill(String keyword, FindInventoryBillType type)
@@ -606,13 +527,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return inventoryBill.findInventoryBill(keyword, type);
 	}
 
-
 	@Override
 	public ArrayList<InventoryBillPO> showInventoryBill() throws RemoteException {
 		// TODO Auto-generated method stub
 		return inventoryBill.showInventoryBill();
 	}
-
 
 	@Override
 	public ClassificationVPO findClassificationByID(String id) throws RemoteException {

@@ -11,7 +11,8 @@ import dataenum.findtype.FindPromotionType;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>PromotionMemberDataServiceImplTest</code> contains tests for the class <code>{@link PromotionMemberDataServiceImpl}</code>.
+ * The class <code>PromotionMemberDataServiceImplTest</code> contains tests for
+ * the class <code>{@link PromotionMemberDataServiceImpl}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:26
  * @author asus
@@ -26,8 +27,7 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testPromotionMemberDataServiceImpl_1()
-		throws Exception {
+	public void testPromotionMemberDataServiceImpl_1() throws Exception {
 
 		PromotionMemberDataServiceImpl result = new PromotionMemberDataServiceImpl();
 
@@ -43,31 +43,32 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testDeleteMemberPromotion_1()
-		throws Exception {
+	public void testDeleteMemberPromotion_1() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
 		String ID = "";
 
 		ResultMessage result = fixture.deleteMemberPromotion(ID);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.delete(PromotionData.java:82)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.deleteMemberPromotion(PromotionMemberDataServiceImpl.java:46)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.delete(PromotionData.java:82)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.deleteMemberPromotion(PromotionMemberDataServiceImpl.java:46)
 		assertNotNull(result);
 	}
 
 	/**
-	 * Run the ArrayList<PromotionMemberPO> findMemberPromotion(String,FindPromotionType) method test.
+	 * Run the ArrayList<PromotionMemberPO>
+	 * findMemberPromotion(String,FindPromotionType) method test.
 	 *
 	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testFindMemberPromotion_1()
-		throws Exception {
+	public void testFindMemberPromotion_1() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
 		String keyword = "";
 		FindPromotionType type = FindPromotionType.ID;
@@ -75,10 +76,12 @@ public class PromotionMemberDataServiceImplTest {
 		ArrayList<PromotionMemberPO> result = fixture.findMemberPromotion(keyword, type);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.find(PromotionData.java:117)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.findMemberPromotion(PromotionMemberDataServiceImpl.java:59)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.find(PromotionData.java:117)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.findMemberPromotion(PromotionMemberDataServiceImpl.java:59)
 		assertNotNull(result);
 	}
 
@@ -90,18 +93,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testInsertPromotion_1()
-		throws Exception {
+	public void testInsertPromotion_1() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
-		PromotionMemberPO po = new PromotionMemberPO("", LocalDate.MAX, LocalDate.MAX, MemberLevel.LEVEL1, new Double(1.0), new Double(1.0), new ArrayList());
+		PromotionMemberPO po = new PromotionMemberPO("", LocalDate.MAX, LocalDate.MAX, MemberLevel.LEVEL1,
+				new Double(1.0), new Double(1.0), new ArrayList());
 
 		ResultMessage result = fixture.insertPromotion(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.insert(PromotionData.java:47)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.insert(PromotionData.java:47)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
 		assertNotNull(result);
 	}
 
@@ -113,18 +118,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testMain_1()
-		throws Exception {
+	public void testMain_1() throws Exception {
 		String[] args = new String[] {};
 
 		PromotionMemberDataServiceImpl.main(args);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.insert(PromotionData.java:47)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.insert(PromotionData.java:47)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
 	}
 
 	/**
@@ -135,18 +142,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testMain_2()
-		throws Exception {
+	public void testMain_2() throws Exception {
 		String[] args = new String[] {};
 
 		PromotionMemberDataServiceImpl.main(args);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.insert(PromotionData.java:47)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.insert(PromotionData.java:47)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
 	}
 
 	/**
@@ -157,18 +166,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testMain_3()
-		throws Exception {
+	public void testMain_3() throws Exception {
 		String[] args = new String[] {};
 
 		PromotionMemberDataServiceImpl.main(args);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.insert(PromotionData.java:47)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.insert(PromotionData.java:47)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.insertPromotion(PromotionMemberDataServiceImpl.java:40)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.main(PromotionMemberDataServiceImpl.java:29)
 	}
 
 	/**
@@ -179,17 +190,18 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testShowMemberPromotion_1()
-		throws Exception {
+	public void testShowMemberPromotion_1() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
 
 		ArrayList<PromotionMemberPO> result = fixture.showMemberPromotion();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.show(PromotionData.java:158)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.show(PromotionData.java:158)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
 		assertNotNull(result);
 	}
 
@@ -201,17 +213,18 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testShowMemberPromotion_2()
-		throws Exception {
+	public void testShowMemberPromotion_2() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
 
 		ArrayList<PromotionMemberPO> result = fixture.showMemberPromotion();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.show(PromotionData.java:158)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.show(PromotionData.java:158)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
 		assertNotNull(result);
 	}
 
@@ -223,17 +236,18 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testShowMemberPromotion_3()
-		throws Exception {
+	public void testShowMemberPromotion_3() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
 
 		ArrayList<PromotionMemberPO> result = fixture.showMemberPromotion();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.show(PromotionData.java:158)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.show(PromotionData.java:158)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.showMemberPromotion(PromotionMemberDataServiceImpl.java:65)
 		assertNotNull(result);
 	}
 
@@ -245,18 +259,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testUpdatePromotion_1()
-		throws Exception {
+	public void testUpdatePromotion_1() throws Exception {
 		PromotionMemberDataServiceImpl fixture = new PromotionMemberDataServiceImpl();
-		PromotionMemberPO po = new PromotionMemberPO("", LocalDate.MAX, LocalDate.MAX, MemberLevel.LEVEL1, new Double(1.0), new Double(1.0), new ArrayList());
+		PromotionMemberPO po = new PromotionMemberPO("", LocalDate.MAX, LocalDate.MAX, MemberLevel.LEVEL1,
+				new Double(1.0), new Double(1.0), new ArrayList());
 
 		ResultMessage result = fixture.updatePromotion(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.promotiondata.PromotionData.update(PromotionData.java:98)
-		//       at data.promotiondata.PromotionMemberDataServiceImpl.updatePromotion(PromotionMemberDataServiceImpl.java:52)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at data.promotiondata.PromotionData.update(PromotionData.java:98)
+		// at
+		// data.promotiondata.PromotionMemberDataServiceImpl.updatePromotion(PromotionMemberDataServiceImpl.java:52)
 		assertNotNull(result);
 	}
 
@@ -264,13 +280,12 @@ public class PromotionMemberDataServiceImplTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -278,20 +293,20 @@ public class PromotionMemberDataServiceImplTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */

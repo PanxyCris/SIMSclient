@@ -12,7 +12,8 @@ import po.memberpo.MemberPO;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>AccountBookDataServiceImplTest</code> contains tests for the class <code>{@link AccountBookDataServiceImpl}</code>.
+ * The class <code>AccountBookDataServiceImplTest</code> contains tests for the
+ * class <code>{@link AccountBookDataServiceImpl}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:26
  * @author asus
@@ -27,8 +28,7 @@ public class AccountBookDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testAccountBookDataServiceImpl_1()
-		throws Exception {
+	public void testAccountBookDataServiceImpl_1() throws Exception {
 
 		AccountBookDataServiceImpl result = new AccountBookDataServiceImpl();
 
@@ -44,31 +44,33 @@ public class AccountBookDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testDeleteAccountBook_1()
-		throws Exception {
+	public void testDeleteAccountBook_1() throws Exception {
 		AccountBookDataServiceImpl fixture = new AccountBookDataServiceImpl();
 		String ID = "";
 
 		ResultMessage result = fixture.deleteAccountBook(ID);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.accountbookdata.AccountBookData.delete(AccountBookData.java:67)
-		//       at data.accountbookdata.AccountBookDataServiceImpl.deleteAccountBook(AccountBookDataServiceImpl.java:31)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.accountbookdata.AccountBookData.delete(AccountBookData.java:67)
+		// at
+		// data.accountbookdata.AccountBookDataServiceImpl.deleteAccountBook(AccountBookDataServiceImpl.java:31)
 		assertNotNull(result);
 	}
 
 	/**
-	 * Run the ArrayList<AccountBookPO> find(String,FindAccountBookType) method test.
+	 * Run the ArrayList<AccountBookPO> find(String,FindAccountBookType) method
+	 * test.
 	 *
 	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testFind_1()
-		throws Exception {
+	public void testFind_1() throws Exception {
 		AccountBookDataServiceImpl fixture = new AccountBookDataServiceImpl();
 		String keyword = "";
 		FindAccountBookType type = null;
@@ -76,10 +78,13 @@ public class AccountBookDataServiceImplTest {
 		ArrayList<AccountBookPO> result = fixture.find(keyword, type);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.accountbookdata.AccountBookData.find(AccountBookData.java:102)
-		//       at data.accountbookdata.AccountBookDataServiceImpl.find(AccountBookDataServiceImpl.java:41)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.accountbookdata.AccountBookData.find(AccountBookData.java:102)
+		// at
+		// data.accountbookdata.AccountBookDataServiceImpl.find(AccountBookDataServiceImpl.java:41)
 		assertNotNull(result);
 	}
 
@@ -91,18 +96,20 @@ public class AccountBookDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testInsertAccountBook_1()
-		throws Exception {
+	public void testInsertAccountBook_1() throws Exception {
 		AccountBookDataServiceImpl fixture = new AccountBookDataServiceImpl();
 		AccountBookPO po = new AccountBookPO("", "", new ArrayList(), new ArrayList(), new ArrayList());
 
 		ResultMessage result = fixture.insertAccountBook(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.accountbookdata.AccountBookData.insert(AccountBookData.java:41)
-		//       at data.accountbookdata.AccountBookDataServiceImpl.insertAccountBook(AccountBookDataServiceImpl.java:26)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.accountbookdata.AccountBookData.insert(AccountBookData.java:41)
+		// at
+		// data.accountbookdata.AccountBookDataServiceImpl.insertAccountBook(AccountBookDataServiceImpl.java:26)
 		assertNotNull(result);
 	}
 
@@ -114,17 +121,19 @@ public class AccountBookDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testShowAccountBook_1()
-		throws Exception {
+	public void testShowAccountBook_1() throws Exception {
 		AccountBookDataServiceImpl fixture = new AccountBookDataServiceImpl();
 
 		ArrayList<AccountBookPO> result = fixture.showAccountBook();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.accountbookdata.AccountBookData.show(AccountBookData.java:141)
-		//       at data.accountbookdata.AccountBookDataServiceImpl.showAccountBook(AccountBookDataServiceImpl.java:46)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.accountbookdata.AccountBookData.show(AccountBookData.java:141)
+		// at
+		// data.accountbookdata.AccountBookDataServiceImpl.showAccountBook(AccountBookDataServiceImpl.java:46)
 		assertNotNull(result);
 	}
 
@@ -136,18 +145,20 @@ public class AccountBookDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testUpdateAccountBook_1()
-		throws Exception {
+	public void testUpdateAccountBook_1() throws Exception {
 		AccountBookDataServiceImpl fixture = new AccountBookDataServiceImpl();
 		AccountBookPO po = new AccountBookPO("", "", new ArrayList(), new ArrayList(), new ArrayList());
 
 		ResultMessage result = fixture.updateAccountBook(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.accountbookdata.AccountBookData.update(AccountBookData.java:83)
-		//       at data.accountbookdata.AccountBookDataServiceImpl.updateAccountBook(AccountBookDataServiceImpl.java:36)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.accountbookdata.AccountBookData.update(AccountBookData.java:83)
+		// at
+		// data.accountbookdata.AccountBookDataServiceImpl.updateAccountBook(AccountBookDataServiceImpl.java:36)
 		assertNotNull(result);
 	}
 
@@ -155,13 +166,12 @@ public class AccountBookDataServiceImplTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -169,20 +179,20 @@ public class AccountBookDataServiceImplTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */

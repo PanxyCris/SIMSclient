@@ -10,13 +10,13 @@ import vo.uservo.UserVO;
 
 public class PromotionMakingUI {
 
-	public void start(UserVO user) throws Exception{
+	public void start(UserVO user) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PromotionMakingUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        PromotionMakingController controller = loader.<PromotionMakingController>getController();
-        controller.initData(user);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		PromotionMakingController controller = loader.<PromotionMakingController>getController();
+		controller.initData(user);
+		primaryStage.show();
 	}
 
 }

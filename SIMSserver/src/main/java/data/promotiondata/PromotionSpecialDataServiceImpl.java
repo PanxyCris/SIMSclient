@@ -4,8 +4,6 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.xml.transform.Result;
-
 import dataenum.PromotionType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindPromotionType;
@@ -33,7 +31,7 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 		p.insertPromotion(po);
 		System.out.println(p.showSpecialPromotion().get(0).getId());
 	}
-	
+
 	@Override
 	public ResultMessage insertPromotion(PromotionPricePacksPO po) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -64,11 +62,10 @@ public class PromotionSpecialDataServiceImpl implements PromotionSpecialDataServ
 		ArrayList<PromotionPricePacksPO> result = new ArrayList<>();
 		ArrayList<PromotionPO> list = promotion.show();
 		for (PromotionPO po : list) {
-			if (po.getType() == PromotionType.PRICEPACKS) result.add((PromotionPricePacksPO) po);
+			if (po.getType() == PromotionType.PRICEPACKS)
+				result.add((PromotionPricePacksPO) po);
 		}
 		return result;
 	}
-
-
 
 }

@@ -1,12 +1,11 @@
 package po.userpo;
 
-
 import java.io.Serializable;
 
 import dataenum.UserRole;
 import javafx.scene.image.ImageView;
 
-public class UserPO implements Serializable{
+public class UserPO implements Serializable {
 
 	private static final long serialVersionUID = -554010814150465068L;
 	private String id;
@@ -14,7 +13,6 @@ public class UserPO implements Serializable{
 	private String password;
 	private UserRole role;
 	private ImageView image; // ÓÃ»§Í·Ïñ
-
 
 	public UserPO(String id, String name, String password, UserRole role, ImageView image) {
 		this.id = id;
@@ -24,11 +22,10 @@ public class UserPO implements Serializable{
 		this.image = image;
 	}
 
-
 	public String getID() {
 		return id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

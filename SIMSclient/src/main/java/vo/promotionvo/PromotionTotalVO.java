@@ -13,19 +13,17 @@ import vo.commodityvo.GiftVO;
 
 public class PromotionTotalVO extends PromotionVO {
 
-
 	private Double total;
 	private Double voucher;
 	private ArrayList<GiftVO> gifts;
 
-	public PromotionTotalVO(String id,LocalDate beginDate,LocalDate endDate, Double total,
-			Double voucher, ArrayList<GiftVO> gifts) {
-		super(id,beginDate,endDate,PromotionType.SUM_PROMOTION);
+	public PromotionTotalVO(String id, LocalDate beginDate, LocalDate endDate, Double total, Double voucher,
+			ArrayList<GiftVO> gifts) {
+		super(id, beginDate, endDate, PromotionType.SUM_PROMOTION);
 		this.setVoucher(voucher);
 		this.setGifts(gifts);
 		this.setTotal(total);
 	}
-
 
 	public Double getTotal() {
 		return total;

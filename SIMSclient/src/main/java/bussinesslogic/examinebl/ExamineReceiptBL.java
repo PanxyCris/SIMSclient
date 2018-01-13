@@ -26,8 +26,10 @@ import po.userpo.UserPO;
 import rmi.RemoteHelper;
 import vo.billvo.financialbillvo.AccountListVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
+
 /**
  * 审批收款单的业务逻辑层
+ * 
  * @author 潘星宇
  * @date 2017-12-26
  */
@@ -57,11 +59,11 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO> {
 	@Override
 	public ResultMessage passBills(ArrayList<ReceiptBillVO> vos) throws RemoteException {
 		for (ReceiptBillVO vo : vos) {
-			//客户应收应付信息的修改
+			// 客户应收应付信息的修改
 			MemberPO member = memberService.findMember(vo.getCustomerID(), FindMemberType.ID).get(0);
 			member.setPayable(member.getPayable() - vo.getTotal());
 			memberService.updateMember(member);
-            //账户信息的修改
+			// 账户信息的修改
 			for (AccountListVO accountVO : vo.getAccountListVOs()) {
 				String accountID = "";
 				for (int i = 0; i < accountVO.getAccountID().length(); i++)
@@ -76,9 +78,9 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO> {
 
 			vo.setState(BillState.SUCCESS);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  // 生成一个信息
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(), // 生成一个信息
 					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.SUCCESS);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
@@ -92,10 +94,10 @@ public class ExamineReceiptBL implements ExamineBLService<ReceiptBillVO> {
 		for (ReceiptBillVO vo : vos) {
 			vo.setState(BillState.FAIL);
 			updateBill(vo);
-			//通知用户
+			// 通知用户
 			UserPO user = userService.findUser(vo.getUserID(), FindUserType.NAME).get(0);
-			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(),LocalDateTime.now(),  false,
-					user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
+			MessageBillPO message = new MessageBillPO(messageService.getMessageID(), user.getID(), LocalDateTime.now(),
+					false, user.getName() + "(" + user.getID() + ")", vo.getId(), vo.getType(), ResultMessage.FAIL);
 			ResultMessage result = messageService.save(message);
 			if (result != ResultMessage.SUCCESS)
 				return result;

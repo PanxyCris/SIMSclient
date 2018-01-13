@@ -22,6 +22,6 @@ public interface ExamineBLService<B extends BillVO> {
 
 	public ArrayList<B> getCommitedBills() throws RemoteException;
 
-	public ArrayList<B> find(String info,FindBillType type) throws RemoteException;//已提交的单据
+	public ArrayList<B> find(String info, FindBillType type) throws RemoteException;// 已提交的单据
 
 }

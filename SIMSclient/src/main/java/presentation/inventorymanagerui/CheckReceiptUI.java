@@ -10,13 +10,13 @@ import vo.uservo.UserVO;
 
 public class CheckReceiptUI {
 
-	public void start(UserVO user,BillType type) throws Exception {
+	public void start(UserVO user, BillType type) throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/CheckReceiptUI.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setScene( new Scene((Pane) loader.load()));
-        CheckReceiptController controller = loader.<CheckReceiptController>getController();
-        controller.initData(user,type);
-        primaryStage.show();
+		Stage primaryStage = new Stage();
+		primaryStage.setScene(new Scene((Pane) loader.load()));
+		CheckReceiptController controller = loader.<CheckReceiptController>getController();
+		controller.initData(user, type);
+		primaryStage.show();
 
 	}
 

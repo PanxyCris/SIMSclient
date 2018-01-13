@@ -10,9 +10,9 @@ import vo.commodityvo.CommodityCheckVO;
 import vo.commodityvo.CommodityStockVO;
 import vo.commodityvo.CommodityVO;
 
-public class CommodityController implements CommodityBLService{
+public class CommodityController implements CommodityBLService {
 
-	CommodityBL commodityBL=new CommodityBL();
+	CommodityBL commodityBL = new CommodityBL();
 
 	@Override
 	public String getID(String name) throws Exception {

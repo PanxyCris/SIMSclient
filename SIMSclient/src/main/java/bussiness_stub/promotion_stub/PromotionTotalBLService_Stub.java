@@ -39,8 +39,10 @@ public class PromotionTotalBLService_Stub implements PromotionBLService<Promotio
 		gifts.add(g2);
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), 500.0, 250.0, gifts1);
-		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12), 1200.0, 350.0, gifts);
+		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12),
+				500.0, 250.0, gifts1);
+		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12),
+				1200.0, 350.0, gifts);
 		list.add(t1);
 		list.add(t2);
 		return list;
@@ -63,13 +65,13 @@ public class PromotionTotalBLService_Stub implements PromotionBLService<Promotio
 		gifts.add(g2);
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), 500.0, 250.0, gifts1);
-		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12), 1200.0, 350.0, gifts);
+		PromotionTotalVO t1 = new PromotionTotalVO("00007", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12),
+				500.0, 250.0, gifts1);
+		PromotionTotalVO t2 = new PromotionTotalVO("00008", LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 12),
+				1200.0, 350.0, gifts);
 		list.add(t1);
 		list.add(t2);
 		return list;
 	}
-
-
 
 }

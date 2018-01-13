@@ -83,7 +83,7 @@ public class CheckPurchaseBillController extends BussinessProcessTableController
 		ArrayList<PurchaseVO> result = new ArrayList<>();
 		result.addAll(list);
 		service.exportReport(result);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 

@@ -11,9 +11,7 @@ import dataenum.findtype.FindPromotionType;
 import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
 
-
 public class PromotionMemberBLService_Stub implements PromotionBLService<PromotionMemberVO> {
-
 
 	@Override
 	public ResultMessage insert(PromotionMemberVO vo) throws RemoteException {
@@ -39,13 +37,15 @@ public class PromotionMemberBLService_Stub implements PromotionBLService<Promoti
 		GiftVO g3 = new GiftVO("¹þµÇ", 120);
 		gifts.add(g1);
 		gifts.add(g2);
-		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05), MemberLevel.LEVEL3, 300.0, 125.0, gifts);
+		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05),
+				MemberLevel.LEVEL3, 300.0, 125.0, gifts);
 		list.add(m1);
 		ArrayList<GiftVO> gifts1 = new ArrayList<>();
 		gifts1.add(g3);
 		gifts1.add(g2);
-		PromotionMemberVO m2 = new PromotionMemberVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12), MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
-	    list.add(m2);
+		PromotionMemberVO m2 = new PromotionMemberVO("00002", LocalDate.of(2017, 11, 30), LocalDate.of(2017, 12, 12),
+				MemberLevel.LEVEL2, 500.0, 250.0, gifts1);
+		list.add(m2);
 		return list;
 	}
 
@@ -63,7 +63,8 @@ public class PromotionMemberBLService_Stub implements PromotionBLService<Promoti
 		GiftVO g3 = new GiftVO("¹þµÇ", 120);
 		gifts.add(g1);
 		gifts.add(g2);
-		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05), MemberLevel.LEVEL3, 300.0, 125.0, gifts);
+		PromotionMemberVO m1 = new PromotionMemberVO("00001", LocalDate.of(2017, 11, 25), LocalDate.of(2017, 12, 05),
+				MemberLevel.LEVEL3, 300.0, 125.0, gifts);
 		list.add(m1);
 		return list;
 	}

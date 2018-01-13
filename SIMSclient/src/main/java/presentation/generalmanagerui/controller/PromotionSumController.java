@@ -204,6 +204,7 @@ public class PromotionSumController extends PromotionMakingController {
 		findChoice.setItems(
 				FXCollections.observableArrayList(FindPromotionType.ID.value, FindPromotionType.TIMEINTERVAL.value));
 	}
+
 	/**
 	 * 代金券、折让的修改
 	 */

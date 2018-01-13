@@ -7,9 +7,9 @@ import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 
-public class ReceiptBillController implements ReceiptBillBLService{
+public class ReceiptBillController implements ReceiptBillBLService {
 
-	ReceiptBillBL receiptBillBL=new ReceiptBillBL();
+	ReceiptBillBL receiptBillBL = new ReceiptBillBL();
 
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
@@ -51,6 +51,4 @@ public class ReceiptBillController implements ReceiptBillBLService{
 		return receiptBillBL.getId();
 	}
 
-	
-	
 }

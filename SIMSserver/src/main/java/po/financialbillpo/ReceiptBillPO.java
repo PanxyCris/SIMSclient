@@ -7,15 +7,16 @@ import dataenum.BillType;
 
 public class ReceiptBillPO extends FinancialDocPO {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<AccountListPO> accountListPOs;//转账列表
+	private ArrayList<AccountListPO> accountListPOs;// 转账列表
 
-	private double total;//总额
+	private double total;// 总额
 
-	public ReceiptBillPO(String docID, String userID,String customer,BillType billType,BillState billState
-			,ArrayList<AccountListPO> accountListPOs,Double total,String note) {
-		super(docID,userID,customer,billType,billState,note);
-		this.total=total;
-		this.accountListPOs=accountListPOs;;
+	public ReceiptBillPO(String docID, String userID, String customer, BillType billType, BillState billState,
+			ArrayList<AccountListPO> accountListPOs, Double total, String note) {
+		super(docID, userID, customer, billType, billState, note);
+		this.total = total;
+		this.accountListPOs = accountListPOs;
+		;
 	}
 
 	public ArrayList<AccountListPO> getAccountListPOs() {

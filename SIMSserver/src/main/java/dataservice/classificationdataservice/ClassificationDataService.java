@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import dataenum.ResultMessage;
 import po.classificationvpo.ClassificationVPO;
 
-
 public interface ClassificationDataService extends Remote {
 
 	public ResultMessage insertClassification(ClassificationVPO po) throws RemoteException;

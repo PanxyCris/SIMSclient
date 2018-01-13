@@ -9,7 +9,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
- * The class <code>ClassificationDataServiceImplTest</code> contains tests for the class <code>{@link ClassificationDataServiceImpl}</code>.
+ * The class <code>ClassificationDataServiceImplTest</code> contains tests for
+ * the class <code>{@link ClassificationDataServiceImpl}</code>.
  *
  * @generatedBy CodePro at 18-1-12 下午9:26
  * @author asus
@@ -24,8 +25,7 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testClassificationDataServiceImpl_1()
-		throws Exception {
+	public void testClassificationDataServiceImpl_1() throws Exception {
 
 		ClassificationDataServiceImpl result = new ClassificationDataServiceImpl();
 
@@ -41,18 +41,20 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testDeleteClassification_1()
-		throws Exception {
+	public void testDeleteClassification_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 		String id = "";
 
 		ResultMessage result = fixture.deleteClassification(id);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.delete(ClassificationData.java:103)
-		//       at data.classificationdata.ClassificationDataServiceImpl.deleteClassification(ClassificationDataServiceImpl.java:35)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.delete(ClassificationData.java:103)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.deleteClassification(ClassificationDataServiceImpl.java:35)
 		assertNotNull(result);
 	}
 
@@ -64,18 +66,20 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testFindClassification_1()
-		throws Exception {
+	public void testFindClassification_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 		String keyword = "";
 
 		ClassificationVPO result = fixture.findClassification(keyword);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.find(ClassificationData.java:133)
-		//       at data.classificationdata.ClassificationDataServiceImpl.findClassification(ClassificationDataServiceImpl.java:45)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.find(ClassificationData.java:133)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.findClassification(ClassificationDataServiceImpl.java:45)
 		assertNotNull(result);
 	}
 
@@ -87,17 +91,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_1()
-		throws Exception {
+	public void testGetId_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -109,17 +115,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_2()
-		throws Exception {
+	public void testGetId_2() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -131,17 +139,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_3()
-		throws Exception {
+	public void testGetId_3() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -153,17 +163,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_4()
-		throws Exception {
+	public void testGetId_4() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -175,17 +187,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_5()
-		throws Exception {
+	public void testGetId_5() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -197,17 +211,19 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetId_6()
-		throws Exception {
+	public void testGetId_6() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		String result = fixture.getID();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getId(ClassificationDataServiceImpl.java:50)
 		assertNotNull(result);
 	}
 
@@ -219,41 +235,47 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testGetRoot_1()
-		throws Exception {
+	public void testGetRoot_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		ClassificationVPO result = fixture.getRoot();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationData.getRoot(ClassificationData.java:193)
-		//       at data.classificationdata.ClassificationDataServiceImpl.getRoot(ClassificationDataServiceImpl.java:40)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationData.getRoot(ClassificationData.java:193)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.getRoot(ClassificationDataServiceImpl.java:40)
 		assertNotNull(result);
 	}
 
 	/**
-	 * Run the ResultMessage insertClassification(ClassificationVPO) method test.
+	 * Run the ResultMessage insertClassification(ClassificationVPO) method
+	 * test.
 	 *
 	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testInsertClassification_1()
-		throws Exception {
+	public void testInsertClassification_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 		ClassificationVPO po = new ClassificationVPO("", "", new Boolean(true), "", new ArrayList(), new ArrayList());
 
 		ResultMessage result = fixture.insertClassification(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.insert(ClassificationData.java:78)
-		//       at data.classificationdata.ClassificationDataServiceImpl.insertClassification(ClassificationDataServiceImpl.java:25)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.insert(ClassificationData.java:78)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.insertClassification(ClassificationDataServiceImpl.java:25)
 		assertNotNull(result);
 	}
 
@@ -265,40 +287,45 @@ public class ClassificationDataServiceImplTest {
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testShow_1()
-		throws Exception {
+	public void testShow_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 
 		ArrayList<ClassificationVPO> result = fixture.show();
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.show(ClassificationData.java:167)
-		//       at data.classificationdata.ClassificationDataServiceImpl.show(ClassificationDataServiceImpl.java:71)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.show(ClassificationData.java:167)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.show(ClassificationDataServiceImpl.java:71)
 		assertNotNull(result);
 	}
 
 	/**
-	 * Run the ResultMessage updateClassification(ClassificationVPO) method test.
+	 * Run the ResultMessage updateClassification(ClassificationVPO) method
+	 * test.
 	 *
 	 * @throws Exception
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Test
-	public void testUpdateClassification_1()
-		throws Exception {
+	public void testUpdateClassification_1() throws Exception {
 		ClassificationDataServiceImpl fixture = new ClassificationDataServiceImpl();
 		ClassificationVPO po = new ClassificationVPO("", "", new Boolean(true), "", new ArrayList(), new ArrayList());
 
 		ResultMessage result = fixture.updateClassification(po);
 
 		// add additional test code here
-		// An unexpected exception was thrown in user code while executing this test:
-		//    java.lang.NullPointerException
-		//       at data.classificationdata.ClassificationData.update(ClassificationData.java:117)
-		//       at data.classificationdata.ClassificationDataServiceImpl.updateClassification(ClassificationDataServiceImpl.java:30)
+		// An unexpected exception was thrown in user code while executing this
+		// test:
+		// java.lang.NullPointerException
+		// at
+		// data.classificationdata.ClassificationData.update(ClassificationData.java:117)
+		// at
+		// data.classificationdata.ClassificationDataServiceImpl.updateClassification(ClassificationDataServiceImpl.java:30)
 		assertNotNull(result);
 	}
 
@@ -306,13 +333,12 @@ public class ClassificationDataServiceImplTest {
 	 * Perform pre-test initialization.
 	 *
 	 * @throws Exception
-	 *         if the initialization fails for some reason
+	 *             if the initialization fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@Before
-	public void setUp()
-		throws Exception {
+	public void setUp() throws Exception {
 		// add additional set up code here
 	}
 
@@ -320,20 +346,20 @@ public class ClassificationDataServiceImplTest {
 	 * Perform post-test clean-up.
 	 *
 	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	 *             if the clean-up fails for some reason
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */
 	@After
-	public void tearDown()
-		throws Exception {
+	public void tearDown() throws Exception {
 		// Add additional tear down code here
 	}
 
 	/**
 	 * Launch the test.
 	 *
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 *
 	 * @generatedBy CodePro at 18-1-12 下午9:26
 	 */

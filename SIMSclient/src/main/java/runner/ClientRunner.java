@@ -11,10 +11,9 @@ import rmi.RemoteHelper;
 public class ClientRunner {
 
 	private RemoteHelper remoteHelper;
-	
 
 	public static final double VERSION = 0.1;
-	
+
 	public ClientRunner() {
 	}
 
@@ -34,7 +33,7 @@ public class ClientRunner {
 
 	public static void main(String[] args) throws Exception {
 		ClientRunner runner = new ClientRunner();
-//		runner.test();
+		// runner.test();
 		runner.linkToServer();
 		try {
 			new MainUI().run(args);

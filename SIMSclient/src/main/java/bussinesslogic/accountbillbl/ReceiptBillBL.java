@@ -27,7 +27,7 @@ import rmi.RemoteHelper;
 import vo.accountvo.AccountVO;
 import vo.billvo.financialbillvo.ReceiptBillVO;
 
-public class ReceiptBillBL implements ReceiptBillBLService{
+public class ReceiptBillBL implements ReceiptBillBLService {
 
 	private ReceiptBillVO receiptBillVO;
 	private ReceiptBillPO receiptBillPO;
@@ -44,49 +44,47 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 	private String date;
 
 	public ReceiptBillBL() {
-		receiptBillTransition=new ReceiptBillTransition();
-		receiptBillDataService=RemoteHelper.getInstance().getReceiptDataService();
-		accountBLService=new AccountController();
-		memberBLService=new MemberController();
+		receiptBillTransition = new ReceiptBillTransition();
+		receiptBillDataService = RemoteHelper.getInstance().getReceiptDataService();
+		accountBLService = new AccountController();
+		memberBLService = new MemberController();
 		userDataService = RemoteHelper.getInstance().getUserDataService();
 		messageDataService = RemoteHelper.getInstance().getMessageDataService();
 	}
 
 	@Override
 	public ResultMessage save(ReceiptBillVO receiptBillVO) {
-		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
-		ArrayList<ReceiptBillPO> receiptBillPOs=null;
+		receiptBillPO = receiptBillTransition.VOtoPO(receiptBillVO);
+		ArrayList<ReceiptBillPO> receiptBillPOs = null;
 		try {
-			receiptBillPOs=receiptBillDataService.findReceiptBill(receiptBillVO.getId(), FindAccountBillType.BILLID);
+			receiptBillPOs = receiptBillDataService.findReceiptBill(receiptBillVO.getId(), FindAccountBillType.BILLID);
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
-		if(receiptBillPOs.isEmpty()){
+		if (receiptBillPOs.isEmpty()) {
 
-				try {
-					String customerID="";
-					String customer=receiptBillVO.getCustomer();
-					for (int i = 0; i < customer.length(); i++) {
-						if('('==customer.charAt(i)){
-							for (int j = i+1; j < customer.length(); j++) {
-								if(')'!=customer.charAt(j)){
-									customerID+=customer.charAt(j);
-								}
-								else{
-									break;
-								}
+			try {
+				String customerID = "";
+				String customer = receiptBillVO.getCustomer();
+				for (int i = 0; i < customer.length(); i++) {
+					if ('(' == customer.charAt(i)) {
+						for (int j = i + 1; j < customer.length(); j++) {
+							if (')' != customer.charAt(j)) {
+								customerID += customer.charAt(j);
+							} else {
+								break;
 							}
-							break;
 						}
+						break;
 					}
-					receiptBillVO.setCustomerID(customerID);
+				}
+				receiptBillVO.setCustomerID(customerID);
 				return receiptBillDataService.insertReceiptBill(receiptBillPO);
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}
 
-		}
-		else{
+		} else {
 			try {
 				return receiptBillDataService.updateReceiptBill(receiptBillPO);
 			} catch (RemoteException e) {
@@ -98,7 +96,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public ResultMessage delete(ReceiptBillVO receiptBillVO) {
-		String id=receiptBillVO.getId();
+		String id = receiptBillVO.getId();
 		try {
 			return receiptBillDataService.deleteReceiptBill(id);
 		} catch (RemoteException e) {
@@ -109,11 +107,11 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public ArrayList<ReceiptBillVO> show() {
-		ArrayList<ReceiptBillVO> aBillVOs=new ArrayList<>();
+		ArrayList<ReceiptBillVO> aBillVOs = new ArrayList<>();
 		try {
-			ArrayList<ReceiptBillPO> aBillPOs=receiptBillDataService.showReceiptBill();
+			ArrayList<ReceiptBillPO> aBillPOs = receiptBillDataService.showReceiptBill();
 			for (int i = 0; i < aBillPOs.size(); i++) {
-				receiptBillVO=receiptBillTransition.POtoVO(aBillPOs.get(i));
+				receiptBillVO = receiptBillTransition.POtoVO(aBillPOs.get(i));
 				aBillVOs.add(receiptBillVO);
 			}
 		} catch (RemoteException e) {
@@ -124,11 +122,11 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public ArrayList<ReceiptBillVO> find(String info, FindAccountBillType type) {
-		ArrayList<ReceiptBillVO> aBillVOs=new ArrayList<>();
+		ArrayList<ReceiptBillVO> aBillVOs = new ArrayList<>();
 		try {
-			ArrayList<ReceiptBillPO> aBillPOs=receiptBillDataService.findReceiptBill(info, type);
+			ArrayList<ReceiptBillPO> aBillPOs = receiptBillDataService.findReceiptBill(info, type);
 			for (int i = 0; i < aBillPOs.size(); i++) {
-				receiptBillVO=receiptBillTransition.POtoVO(aBillPOs.get(i));
+				receiptBillVO = receiptBillTransition.POtoVO(aBillPOs.get(i));
 				aBillVOs.add(receiptBillVO);
 			}
 		} catch (RemoteException e) {
@@ -139,11 +137,11 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 
 	@Override
 	public ArrayList<String> getAccountList() {
-		ArrayList<String> list=new ArrayList<>();
- 		ArrayList<AccountVO> accountVOs=accountBLService.getAccountList();
-		String a="";
+		ArrayList<String> list = new ArrayList<>();
+		ArrayList<AccountVO> accountVOs = accountBLService.getAccountList();
+		String a = "";
 		for (int i = 0; i < accountVOs.size(); i++) {
-			a=accountVOs.get(i).getId()+" "+accountVOs.get(i).getName();
+			a = accountVOs.get(i).getId() + " " + accountVOs.get(i).getName();
 			list.add(a);
 		}
 		return list;
@@ -153,7 +151,7 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 	public ArrayList<String> getCustomerList() {
 		ArrayList<String> list = null;
 		try {
-		 list=memberBLService.getIDandName();
+			list = memberBLService.getIDandName();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -163,15 +161,16 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 	@Override
 	public ResultMessage commit(ReceiptBillVO receiptBillVO) {
 		receiptBillVO.setState(BillState.COMMITED);
-		receiptBillPO=receiptBillTransition.VOtoPO(receiptBillVO);
+		receiptBillPO = receiptBillTransition.VOtoPO(receiptBillVO);
 		try {
 			ResultMessage resultMessage = receiptBillDataService.insertReceiptBill(receiptBillPO);
-			if(resultMessage == ResultMessage.EXISTED||resultMessage == ResultMessage.SUCCESS)
-            {
-				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value, FindUserType.USERROLE);
-				for(UserPO manager:generalManagers){
-				MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),LocalDateTime.now(), false,receiptBillPO.getDocID(),manager);
-				messageDataService.save(message);
+			if (resultMessage == ResultMessage.EXISTED || resultMessage == ResultMessage.SUCCESS) {
+				ArrayList<UserPO> generalManagers = userDataService.findUser(UserRole.GENERAL_MANAGER.value,
+						FindUserType.USERROLE);
+				for (UserPO manager : generalManagers) {
+					MessageExaminePO message = new MessageExaminePO(messageDataService.getMessageID(),
+							LocalDateTime.now(), false, receiptBillPO.getDocID(), manager);
+					messageDataService.save(message);
 				}
 			}
 			return resultMessage;
@@ -196,27 +195,26 @@ public class ReceiptBillBL implements ReceiptBillBLService{
 			String temp[] = id.split("-");
 
 			if (temp[0].equals("SKD")) {
-				IDList.add(Long.parseLong(temp[1]+temp[2]));
+				IDList.add(Long.parseLong(temp[1] + temp[2]));
 			}
 		}
 		Collections.sort(IDList);
 		String day = getDate();
 		String num = null;
-		if(IDList.size()==0)
-			num = getDate()+"00000";
+		if (IDList.size() == 0)
+			num = getDate() + "00000";
 		else
-		    num = String.valueOf(IDList.get(IDList.size()-1));
+			num = String.valueOf(IDList.get(IDList.size() - 1));
 		if (day.equals(String.valueOf(num.substring(0, 8)))) {
 			String index = num.substring(8, num.length());
-			index = String.valueOf(Integer.parseInt(index)+1);
+			index = String.valueOf(Integer.parseInt(index) + 1);
 			StringBuilder sb = new StringBuilder(index);
 			int len = index.length();
-			for (int i=0; i < 5-len; i++) {
+			for (int i = 0; i < 5 - len; i++) {
 				sb.insert(0, "0");
 			}
 			id = sb.toString();
-		}
-		else {
+		} else {
 			id = "00001";
 		}
 		StringBuilder s = new StringBuilder("SKD-");

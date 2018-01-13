@@ -66,7 +66,7 @@ public class BussinessSituationTableController extends FinanceTableController {
 		resultPay.addAll(payList);
 		resultReceive.addAll(receiveList);
 		service.exportReport(resultPay, resultReceive);
-		Alert info = new Alert(Alert.AlertType.INFORMATION,"已导出");
+		Alert info = new Alert(Alert.AlertType.INFORMATION, "已导出");
 		info.showAndWait();
 	}
 
@@ -94,7 +94,7 @@ public class BussinessSituationTableController extends FinanceTableController {
 		}
 	}
 
-	public void initTime(){
+	public void initTime() {
 		startPicker.setValue(null);
 		endPicker.setValue(null);
 	}
@@ -126,10 +126,10 @@ public class BussinessSituationTableController extends FinanceTableController {
 		receiveAllowance.setCellValueFactory(new PropertyValueFactory<ReceiveTableVO, Double>("allowance"));
 		receiveSum.setCellValueFactory(new PropertyValueFactory<ReceiveTableVO, Double>("sum"));
 	}
+
 	/**
 	 * 计算利润
 	 */
-
 
 	public void updateSum() {
 		double reve = 0, allo = 0, pro = 0, exp = 0;
