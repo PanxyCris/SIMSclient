@@ -53,7 +53,7 @@ public class ClassificationData {
 	//	 d.update(last);
     //    d.delete(d.show().get(d.show().size()-1).getName());
 //            d.insert(root);
-		System.out.println(d.show().get(0).getId());
+		System.out.println(d.getID());
 //  	for(ClassificationVPO vpo:d.show())
 //		System.out.println(vpo.getName());
 	}
@@ -213,7 +213,7 @@ public class ClassificationData {
 	}
 
 	public String getID(){
-			if (show() != null) {
+			if (!show().isEmpty()) {
 				for (int i = 1; i < show().size(); i++) {
 					ClassificationVPO last = show().get(show().size() - i);
 					if (last.getB()) {
