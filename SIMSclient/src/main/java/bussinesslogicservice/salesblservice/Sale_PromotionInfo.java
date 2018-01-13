@@ -1,15 +1,10 @@
 package bussinesslogicservice.salesblservice;
 
 import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 
-import bussinesslogicservice.memberblservice.MemberBLService;
-import dataenum.MemberLevel;
-import po.commoditypo.CommodityItemPO;
 import vo.billvo.salesbillvo.SalesPriceVO;
 import vo.commodityvo.CommodityItemVO;
-import vo.commodityvo.GiftVO;
 import vo.promotionvo.PromotionMemberVO;
 import vo.promotionvo.PromotionPricePacksVO;
 import vo.promotionvo.PromotionTotalVO;

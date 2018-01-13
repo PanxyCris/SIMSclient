@@ -8,7 +8,6 @@ package bussinesslogicservice.examineblservice;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindBillType;
 import vo.billvo.BillVO;

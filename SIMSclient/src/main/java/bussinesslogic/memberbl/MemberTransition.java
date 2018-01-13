@@ -1,11 +1,10 @@
 package bussinesslogic.memberbl;
-/**     
-*  
-* @author Lijie 
-* @date 2017年12月16日    
+/**
+*
+* @author Lijie
+* @date 2017年12月16日
 */
 
-import java.util.ArrayList;
 import dataenum.MemberCategory;
 import dataenum.MemberLevel;
 import po.memberpo.MemberPO;
@@ -26,11 +25,11 @@ public class MemberTransition {
 		String receivable = String.valueOf(po.getReceivable());
 		String payable = String.valueOf(po.getPayable());
 		String saleMan = po.getSaleMan();
-		MemberVO vo = new MemberVO(id, category, level, name, cellNumber, address, post, 
-				email, receivableLimit, receivable, payable, saleMan);	
+		MemberVO vo = new MemberVO(id, category, level, name, cellNumber, address, post,
+				email, receivableLimit, receivable, payable, saleMan);
 		return vo;
 	}
-	
+
 	public MemberPO VOtoPO(MemberVO vo) {
 		String id = vo.getID();
 		MemberCategory category = vo.getCategory();

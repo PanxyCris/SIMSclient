@@ -11,6 +11,7 @@ public class PurchaseVO extends BillVO{
 
 	private String supplier;  //供应商
 	private Warehouse warehouse;
+	@SuppressWarnings("unused")
 	private String warehouseString;
 	private String operator;
 	private ArrayList<CommodityItemVO> commodities;  //入库商品列表
@@ -24,7 +25,7 @@ public class PurchaseVO extends BillVO{
 		this.operator = operator;
 		this.commodities = commodities;
 		this.sum = sum;
-		warehouseString = warehouse.value;
+		setWarehouseString(warehouse.value);
 	}
 
 	public String getSupplier(){
@@ -61,6 +62,10 @@ public class PurchaseVO extends BillVO{
 	public void setSum(double sum) {
 		this.sum = sum;
 
+	}
+
+	public void setWarehouseString(String warehouseString) {
+		this.warehouseString = warehouseString;
 	}
 
 

@@ -3,10 +3,7 @@ package dataservice.billdataservice;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 
-import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindInventoryBillType;
 import po.inventorybillpo.InventoryBillPO;

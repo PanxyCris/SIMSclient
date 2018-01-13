@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import presentation.generalmanagerui.controller.PromotionSpecialController;
 import presentation.generalmanagerui.controller.PromotionSumController;
 import vo.uservo.UserVO;
 

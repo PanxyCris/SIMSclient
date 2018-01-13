@@ -1,12 +1,11 @@
 package vo.accountvo;
-import java.io.Serializable;
 
 /**
  *
  * @author 王灿灿
  * @version 2017-12-1
  */
-public class AccountVO implements Serializable{
+public class AccountVO{
 
 	private String id;//银行卡号
 	private String name;//银行账户名称
