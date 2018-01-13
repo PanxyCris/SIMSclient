@@ -44,7 +44,6 @@ public class ClassificationDataService_stub implements ClassificationDataService
 		return root;
 	}
 
-	@Override
 	public String getId() throws RemoteException {
 		return "00001";
 	}
@@ -55,6 +54,11 @@ public class ClassificationDataService_stub implements ClassificationDataService
 		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
 		list.add(root);
 		return list;
+	}
+
+	@Override
+	public String getID() throws RemoteException {
+		return "0001";
 	}
 
 }
