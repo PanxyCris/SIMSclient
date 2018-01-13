@@ -1607,7 +1607,7 @@ mainui模块的职责及接口为登录user的使用概况<br>
 <tr>
 <th rowspan="3">MainUI.sendinfo</th>
 <th>语法</th>
-<th>public ResultMessage login(String info)</th>
+<th><code>public ResultMessage login(String info)</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1618,18 +1618,7 @@ mainui模块的职责及接口为登录user的使用概况<br>
 <th>调用mainui领域对象的login方法</th>
 </tr>
 <tr>
-<th rowspan="3">MainUI.register</th>
-<th>语法</th>
-<th>public ResultMessage register(String info)</th>
-</tr>
-<tr>
-<th>前置条件</th>
-<th>已输入新用户名和密码，并且输入符合输入规则</th>
-</tr>
-<tr>
-<th>后置条件</th>
-<th>调用mainui领域对象的register方法</th>
-</tr>
+
 </table>
 
 <table><tbody>
@@ -1681,7 +1670,7 @@ commodityui模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th rowspan="3">CommodityControllerUI.exit</th>
 <th>语法</th>
-<th>public ResultMessage exit()</th>
+<th><code>public ResultMessage exit()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1694,7 +1683,7 @@ commodityui模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th rowspan="3">CommodityControllerUI.makeInventoryBill</th>
 <th>语法</th>
-<th>public ResultMessage makeInventoryBill()</th>
+<th><code>public ResultMessage makeInventoryBill()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1716,31 +1705,31 @@ commodityui模块的职责及接口参见软件系统结构描述文档表<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>CommodityBLService.find(long id)</th>
+<th><code>CommodityBLService.find(String id)</th>
 <th>根据ID进行查找单一可视化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.finds(String field,int value)</th>
+<th><code>CommodityBLService.finds(String field,int value)</th>
 <th>根据字段名和值查找多个可视化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.insert(CommodityVO vo)</th>
+<th><code>CommodityBLService.insert(CommodityVO vo)</th>
 <th>插入单一可视化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.delete(CommodityVO vo)</th>
+<th><code>CommodityBLService.delete(CommodityVO vo)</th>
 <th>删除单一可视化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.update(CommodityVO vo)</th>
+<th><code>CommodityBLService.update(CommodityVO vo)</th>
 <th>更新单一可视化对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.check()</th>
+<th><code>CommodityBLService.check()</th>
 <th>查看库存中的一段时间的对象</th>
 </tr>
 <tr>
-<th>CommodityBLService.stock()</th>
+<th><code>CommodityBLService.stock()</th>
 <th>查看库存中的给定要求的商品对象</th>
 </tr>
 </table>
@@ -1755,15 +1744,15 @@ commodityui模块的职责及接口参见软件系统结构描述文档表<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>ClassificationBLService.insertClass(ClassificationVO vo)</th>
+<th><code>ClassificationBLService.insertClass(ClassificationVO vo)</th>
 <th>插入单一可视化对象</th>
 </tr>
 <tr>
-<th>ClassificationBLService.deleteClass(ClassificationVO vo)</th>
+<th><code>ClassificationBLService.deleteClass(ClassificationVO vo)</th>
 <th>删除单一可视化对象</th>
 </tr>
 <tr>
-<th>ClassificationBLService.updateClass(ClassificationVO vo)</th>
+<th><code>ClassificationBLService.updateClass(ClassificationVO vo)</th>
 <th>更新单一可视化对象</th>
 </tr>
 </table>
@@ -1796,19 +1785,19 @@ userui模块的职责及接口参见软件系统结构描述文档表<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>UserBLService.find(long id)</th>
+<th><code>UserBLService.find(String id)</th>
 <th>根据ID进行查找单一可视化对象</th>
 </tr>
 <tr>
-<th>UserBLService.insert(UserVO vo)</th>
+<th><code>UserBLService.insert(UserVO vo)</th>
 <th>插入单一可视化对象</th>
 </tr>
 <tr>
-<th>UserBLService.delete(UserVO vo)</th>
+<th><code>UserBLService.delete(UserVO vo)</th>
 <th>删除单一可视化对象</th>
 </tr>
 <tr>
-<th>UserBLService.update(UserVO vo)</th>
+<th><code>UserBLService.update(UserVO vo)</th>
 <th>更新单一可视化对象</th>
 </tr>
 </table>
@@ -1861,7 +1850,7 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th rowspan="3">BillControllerUI.makeBill</th>
 <th>语法</th>
-<th>public ResultMessage makeBill()</th>
+<th><code>public ResultMessage makeBill()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1874,7 +1863,7 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 <tr>
 <th rowspan="3">BillControllerUI.approve</th>
 <th>语法</th>
-<th>public ResultMessage approve()</th>
+<th><code>public ResultMessage approve()</th>
 </tr>
 <tr>
 <th>前置条件</th>
@@ -1894,15 +1883,15 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 <th>服务</th>
 </tr>
 <tr>
-<th>BillBLService.insert(BillVO vo)</th>
+<th><code>BillBLService.insert(BillVO vo)</th>
 <th>插入单一可视化对象</th>
 </tr>
 <tr>
-<th>BillBLService.update(BillVO vo)</th>
+<th><code>BillBLService.update(BillVO vo)</th>
 <th>更新单一可视化对象</th>
 </tr>
 <tr>
-<th>BillBLService.find(long id)</th>
+<th><code>BillBLService.find(long id)</th>
 <th>查询单一可视化对象</th>
 </tr>
 </table>
@@ -1934,10 +1923,10 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|AccountUI.find(string message)|根据查找内容查找账户|
-|AccountUI.newBuild(AccountVO accountVO)|添加账户|
-|AccountUI.delete(AccountVO accountVO)|删除账户|
-|AccountUI.modify(AccountVO accountVO)|修改账户|
+|`AccountUI.find(string message)`|根据查找内容查找账户|
+|`AccountUI.newBuild(AccountVO accountVO)`|添加账户|
+|`AccountUI.delete(AccountVO accountVO)`|删除账户|
+|`AccountUI.modify(AccountVO accountVO)`|修改账户|
 <br/>
 
 　　　　4.2.6　mfdocui模块
@@ -1958,65 +1947,52 @@ billui模块的职责及接口参见软件系统结构描述文档表<br>
 
 |模块|职责|
 | --- | --- |
-|SKDUI|收款单界面的模型对象|
-|XJFYDUI|付款单界面的模型对象|
+|ReceiptBillUI|收款单界面的模型对象|
+|PaymentBilUI|付款单界面的模型对象|
 
 　　　　(3)模块内部类的接口规范
 
-　　　SKDUI的接口规范
+　　　ReceiptBillUI的接口规范(PaymentBillUI类似)
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|SKDUI.find(string message)|根据查找内容查找单据|
-|SKDUI.newBuild(SKDVO skdVO)|添加单据|
-|SKDUI.delete(SKDVO skdVO)|删除单据|
-|SKDUI.modify(SKDVO skdVO)|修改单据|
-|SKDUI.commit(SKDVO skdVO)|提交单据|
+|`ReceiptBillUI.find(String message)`|根据查找内容查找单据|
+|`ReceiptBillUI.newBuild(ReceiptBillVO receiptBillVO)`|添加单据|
+|`ReceiptBillUI.delete(ReceiptBillVO receiptBillVO)`|删除单据|
+|`ReceiptBillUI.modify(ReceiptBillVO receiptBillVO)`|修改单据|
+|`ReceiptBillUI.commit(ReceiptBillVO receiptBillVO)`|提交单据|
 <br/>
 
-　　　XJFYDUI的接口规范
-
-|提供的服务|供接口|
-| --- | --- |
-|服务名|服务|
-|XJFYDUI.find(string message)|根据查找内容查找单据|
-|XJFYDUI.newBuild(XJFYDVO xjfydVO)|添加单据|
-|XJFYDUI.delete(XJFYDVO xjfydVO)|删除单据|
-|XJFYDUI.modify(XJFYDVO xjfydVO)|修改单据|
-|XJFYDUI.commit(XJFYDVO xjfydVO)|提交单据|
-<br/>
-
-　　　　4.2.7　setupaccountui模块
+　　　　4.2.7　accountBookui模块
 
 　　　　(1)模块概述
 
-　　　　setupaccountui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
-　　　　SetUpAccountui模块的职责及接口参见软件体系结构描述文档表。
+　　　　accountBookui模块承担的需求参见需求规格说明文档功能需求几相关非功能需求。
+　　　 AccountBookui模块的职责及接口参见软件体系结构描述文档表。
 
 　　　　(2)整体结构
 
-　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.setupaccountblservice.SetUpAccountBLService接口。
+　　　　根据体系结构的设计，我们将系统分为展示层、业务逻辑层、数据层。每一层之间为了增加灵活性，我们会添加接口。比如展示层和业务逻辑层之间，我们添加businesslogicservice.accountBookblservice.AccountBookBLService接口。
 
-　　　　setupaccountui模块的设计如图所示。
+　　　　accountBookui模块的设计如图所示。
 
-　　setupaccountui模块各个类的职责如下所示
+　　accountBookui模块各个类的职责如下所示
 <br/>
 
 |模块|职责|
 | --- | --- |
-|SetUpAccountUI|账户管理界面的模型对象|
+|AccountBookUI|账户管理界面的模型对象|
 
 　　　　(3)模块内部类的接口规范
 
-　　　SetUpAccountUI的接口规范
+　　　AccountBookUI的接口规范
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|SetUpAccountUI.newBuild(AccountBookVO AccountBookVO)|添加账簿|
-|SetUpAccountUI.delete(AccountBookVO accountBookVO)|删除账簿|
-|SetUpAccountUI.find()|查找所有的账簿|
+|`AccountBookUI.newBuild(AccountBookVO accountBookVO)`|添加账簿|
+|`AccountBookUI.find()`|查找所有的账簿|
 <br/>
 
 
@@ -2043,23 +2019,23 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Commodity.insert(CommodityVO vo)|插入单一持久化对象|
-|Commodity.delelte(String id)|删除单一持久化对象|
-|Commodity.update(CommodityVO vo)|更新单一持久化对象|
-|Commodity.find(String keywords,FindCommodityType type)|根据keywords查找多个持久化对象|
-|Commodity.show()|返回数据库中所有持久化对象|
+|`Commodity.insert(CommodityVO vo)`|插入单一持久化对象|
+|`Commodity.delelte(String id)`|删除单一持久化对象|
+|`Commodity.update(CommodityVO vo)`|更新单一持久化对象|
+|`Commodity.find(String keywords,FindCommodityType type)`|根据keywords查找多个持久化对象|
+|`Commodity.show()`|返回数据库中所有持久化对象|
 <br/>
 
 |需要的服务|需接口|
 | --- | --- |
 |服务名|服务|
-|Classification.insert()|插入单一持久化对象|
-|Classification.update|更新打印持久化对象|
-|Classification.delete|删除单一持久化对象|
-|Classification.getRoot|返回数据库中根节点持久化对象|
-|Classification.find(String name)|根据name查找单一持久化对象|
-|Classification.show|返回数据库中所有持久化对象|
-|Classification.getId|返回待新增分类的Id|
+|`Classification.insert()`|插入单一持久化对象|
+|`Classification.update`|更新打印持久化对象|
+|`Classification.delete`|删除单一持久化对象|
+|`Classification.getRoot`|返回数据库中根节点持久化对象|
+|`Classification.find(String name)`|根据name查找单一持久化对象|
+|`Classification.show`|返回数据库中所有持久化对象|
+|`Classification.getId`|返回待新增分类的Id|
 <br/>
 　　　　4.3.2 userdata模块
 
@@ -2087,12 +2063,12 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|Userdataservice.login(String id,String password)|根据id和password进行登录|
-|Userdataservice.insert(User PO)|插入单一持久化对象|
-|Userdataservice.delete(User PO)|删除单一持久化对象|
-|Userdataservice.update(User PO)|更新单一持久化对象|
-|Userdataservice.find(String info,FindUserType type)|根据Info查找多个持久化对象|
-|Userdataservice.show()|返回数据库中所有持久化对象|
+|`Userdataservice.login(String id,String password)`|根据id和password进行登录|
+|`Userdataservice.insert(User PO)`|插入单一持久化对象|
+|`Userdataservice.delete(User PO)`|删除单一持久化对象|
+|`Userdataservice.update(User PO)`|更新单一持久化对象|
+|`Userdataservice.find(String info,FindUserType type)`|根据Info查找多个持久化对象|
+|`Userdataservice.show()`|返回数据库中所有持久化对象|
 <br/>
 
 　　　　4.3.3 inventorybilldata模块
@@ -2120,11 +2096,11 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|Inventory.insert|插入单一持久化对象|
-|Inventory.update|更新打印持久化对象|
-|Inventory.delete|删除单一持久化对象|
-|Inventory.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|Inventory.show|返回数据库中所有持久化对象|
+|`Inventory.insert(InventoryBillPO po)`|插入单一持久化对象|
+|`Inventory.update(InventoryBillPO po)`|更新打印持久化对象|
+|`Inventory.delete(InventoryBillPO po)`|删除单一持久化对象|
+|`Inventory.find(String keyword,FindInventoryBillType type)`|根据keword查找多个持久化对象|
+|`Inventory.show()`|返回数据库中所有持久化对象|
 <br/>
 
 　　　　4.3.4　accountdata模块
@@ -2152,12 +2128,12 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|AccountDataService.find(String keywords, FindAccountType type)|根据keywords查找单一持久化对象|
-|AccountDataService.insert|新建单一持久化对象|
-|AccountDataService.delete|删除单一持久化对象|
-|AccountDataService.update|更新单一持久化对象|
-|AccountDataService.show|返回数据库中所有持久化对象|
-|AccountDataService.updateMoney(String id, double money)|更新id对应账户的银行账户信息|
+|`AccountDataService.find(String keywords, FindAccountType type)`|根据keywords查找单一持久化对象|
+|`AccountDataService.insert(AccountPO po)`|新建单一持久化对象|
+|`AccountDataService.delete(String id)`|删除单一持久化对象|
+|`AccountDataService.update(AccountPO po)`|更新单一持久化对象|
+|`AccountDataService.show()`|返回数据库中所有持久化对象|
+|`AccountDataService.updateMoney(String id, double money)`|更新id对应账户的银行账户信息|
 <br/>
 
 　　　　4.3.5　mfdocdata模块(财务类单据模块)
@@ -2181,28 +2157,16 @@ commoditydata模块的职责及接口参见软件系统结构描述文档表<br>
 
 　　　　(3)模块内部类的接口规范
 
-　　　ReceiptBillData的接口规范
+　　　ReceiptBillData的接口规范(PaymentBillData的接口规范类似)
 
 |提供的服务|供接口|
 | --- | --- |
 |服务名|服务|
-|ReceiptBill.insert|插入单一持久化对象|
-|ReceiptBill.update|更新打印持久化对象|
-|ReceiptBill.delete|删除单一持久化对象|
-|ReceiptBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|ReceiptBill.show|返回数据库中所有持久化对象|
-<br/>
-
-　　　PaymentBillData的接口规范
-
-|提供的服务|供接口|
-| --- | --- |
-|服务名|服务|
-|PaymentBill.insert|插入单一持久化对象|
-|PaymentBill.update|更新打印持久化对象|
-|PaymentBill.delete|删除单一持久化对象|
-|PaymentBill.find(String keyword,FindInventoryBillType type)|根据keword查找多个持久化对象|
-|PaymentBill.show|返回数据库中所有持久化对象|
+|`ReceiptBill.insert(ReceiptBillPO po)`|插入单一持久化对象|
+|`ReceiptBill.update(ReceiptBillPO po)`|更新打印持久化对象|
+|`ReceiptBill.delete(ReceiptBillPO po)`|删除单一持久化对象|
+|`ReceiptBill.find(String keyword,FindInventoryBillType type)`|根据keword查找多个持久化对象|
+|`ReceiptBill.show()`|返回数据库中所有持久化对象|
 <br/>
 
 　　　　4.3.6　accountbookdata模块
