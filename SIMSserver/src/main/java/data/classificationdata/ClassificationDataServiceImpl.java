@@ -46,29 +46,14 @@ public class ClassificationDataServiceImpl implements ClassificationDataService 
 	}
 
 	@Override
-	public String getId() throws RemoteException {
-		if (classfication.show() != null) {
-			for (int i = 1; i < classfication.show().size(); i++) {
-				ClassificationVPO last = classfication.show().get(classfication.show().size() - i);
-				if (last.getB()) {
-					String oldId = last.getId();
-					int count = Integer.parseInt(oldId);
-					count++;
-					String newId = String.valueOf(count);
-					while (newId.length() < oldId.length())
-						newId = "0" + newId;
-					return newId;
-				}
-			}
-		} else
-			return "0001";
-		return null;
+	public ArrayList<ClassificationVPO> show() throws RemoteException {
+		return classfication.show();
 	}
 
 	@Override
-	public ArrayList<ClassificationVPO> show() throws RemoteException {
+	public String getID() throws RemoteException {
 		// TODO Auto-generated method stub
-		return classfication.show();
+		return classfication.getID();
 	}
 
 }

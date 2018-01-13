@@ -54,7 +54,7 @@ public class ClassManageController extends InventoryManagerController {
 
 	@FXML
 	public void insert() throws Exception {
-		if (nameField.getText() == null || classChoice.getValue() == null) {//空信息判断
+		if (nameField.getText() == null || classChoice.getValue() == null) {// 空信息判断
 			Alert warning = new Alert(Alert.AlertType.WARNING, "请填写好所有信息");
 			warning.showAndWait();
 		} else {
@@ -78,6 +78,7 @@ public class ClassManageController extends InventoryManagerController {
 		}
 
 	}
+
 	/**
 	 * 增加分类后的初始化
 	 */
@@ -106,25 +107,28 @@ public class ClassManageController extends InventoryManagerController {
 	/**
 	 * 加入所有子节点
 	 *
-	 * @param item 子节点
+	 * @param item
+	 *            子节点
 	 */
 	public void addAllChildren(TreeItem<ClassificationVPO> item) {
-		item.setExpanded(true);
-		ArrayList<ClassificationVPO> tmpList = item.getValue().getChildren();
-		if (tmpList != null) {
-			ObservableList<TreeItem<ClassificationVPO>> list = FXCollections.observableArrayList();
-			for (int i = 0; i < tmpList.size(); i++) {
-				TreeItem<ClassificationVPO> tmpItem = new TreeItem<>(tmpList.get(i));
-				list.add(tmpItem);
-			}
-			item.getChildren().addAll(list);
+		if (item.getValue() != null) {
+			item.setExpanded(true);
+			ArrayList<ClassificationVPO> tmpList = item.getValue().getChildren();
+			if (tmpList != null) {
+				ObservableList<TreeItem<ClassificationVPO>> list = FXCollections.observableArrayList();
+				for (int i = 0; i < tmpList.size(); i++) {
+					TreeItem<ClassificationVPO> tmpItem = new TreeItem<>(tmpList.get(i));
+					list.add(tmpItem);
+				}
+				item.getChildren().addAll(list);
 
-			for (int i = 0; i < item.getChildren().size(); i++) {
-				addAllChildren(item.getChildren().get(i));
+				for (int i = 0; i < item.getChildren().size(); i++) {
+					addAllChildren(item.getChildren().get(i));
+				}
 			}
 		}
-
 	}
+
 	/**
 	 * 节点名称可编辑
 	 */
@@ -185,7 +189,7 @@ public class ClassManageController extends InventoryManagerController {
 					if (!empty && (this.getTreeTableView().getTreeItem(this.getIndex())).getValue().getB()
 							&& (this.getTreeTableView().getTreeItem(this.getIndex())).getValue().getFather() != null
 							&& (this.getTreeTableView().getTreeItem(this.getIndex())).getValue()
-									.getChildrenPointer() == null) { //空分类且不为根节点方可提供删除按钮
+									.getChildrenPointer() == null) { // 空分类且不为根节点方可提供删除按钮
 						Button delBtn = new Button("删除");
 						this.setGraphic(delBtn);
 						delBtn.setOnMouseClicked((me) -> {

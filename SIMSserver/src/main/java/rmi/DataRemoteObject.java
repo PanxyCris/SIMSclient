@@ -382,9 +382,9 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 
 
 	@Override
-	public String getId() throws RemoteException {
+	public String getID() throws RemoteException {
 		// TODO Auto-generated method stub
-		return classification.getId();
+		return classification.getID();
 	}
 
 

@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.rmi.RemoteException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +43,7 @@ public class ClassificationData {
 ////	    children.add(c1);
 ////		children.add(c2);
 ////		children.add(c3);
-//		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
+		 ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
 
 //  	d.insert(c2);
 //		d.insert(c1);
@@ -51,10 +52,10 @@ public class ClassificationData {
 //		 last.setChildrenPointer(null);
 	//	 d.update(last);
     //    d.delete(d.show().get(d.show().size()-1).getName());
-//		System.out.println(d.show().size());
-//		for(ClassificationVPO vpo:d.show())
-		System.out.println(d.show().get(2).getId());
-		System.out.println(d.findClassification("»ÆµÆ").getId());
+//            d.insert(root);
+		System.out.println(d.show().get(0).getId());
+//  	for(ClassificationVPO vpo:d.show())
+//		System.out.println(vpo.getName());
 	}
 
 	private Connection conn;
@@ -209,5 +210,29 @@ public class ClassificationData {
 
 		return po;
 
+	}
+
+	public String getID(){
+			if (show() != null) {
+				for (int i = 1; i < show().size(); i++) {
+					ClassificationVPO last = show().get(show().size() - i);
+					if (last.getB()) {
+						String oldId = last.getId();
+						int count = Integer.parseInt(oldId);
+						count++;
+						String newId = String.valueOf(count);
+						while (newId.length() < oldId.length())
+							newId = "0" + newId;
+						return newId;
+					}
+					else if(i!=show().size()-1)
+						continue;
+					else
+						return "0001";
+				}
+			}
+			else
+				return "0001";
+       return null;
 	}
 }

@@ -24,7 +24,7 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public String getID() {
 		try {
-			return classificationDataService.getId();
+			return classificationDataService.getID();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public class ClassificationBL implements ClassificationBLService {
 	@Override
 	public ResultMessage update(ClassificationVPO vpo) {
 		try {
-			//先更新父节点
+			// 先更新父节点
 			ClassificationVPO father = getClass(vpo.getFather());
 			for (int i = 0; i < father.getChildrenPointer().size(); i++) {
 				String id = classificationDataService.findClassification(father.getChildrenPointer().get(i)).getId();
@@ -142,14 +142,16 @@ public class ClassificationBL implements ClassificationBLService {
 	public void addChildren(ClassificationVPO vpo) throws RemoteException {
 		ArrayList<ClassificationVPO> children = new ArrayList<>();
 		ArrayList<ClassificationVPO> vpos = classificationDataService.show();
-		for (ClassificationVPO po : vpos) {
-			if (po.getFather() != null && po.getFather().equals(vpo.getName()))
-				children.add(po);
-		}
-		if (children != null) {
-			vpo.setChildren(children);
-			for (ClassificationVPO child : vpo.getChildren())
-				addChildren(child);
+		if (vpo != null) {
+			for (ClassificationVPO po : vpos) {
+				if (po.getFather() != null && po.getFather().equals(vpo.getName()))
+					children.add(po);
+			}
+			if (children != null) {
+				vpo.setChildren(children);
+				for (ClassificationVPO child : vpo.getChildren())
+					addChildren(child);
+			}
 		}
 	}
 
