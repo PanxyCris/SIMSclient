@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.BussinessSituationBL;
-import bussinesslogicservice.checktableblservice.BussinessSituationBLService;
+import bussinesslogicservice.tableblservice.BussinessSituationBLService;
 import dataenum.ResultMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

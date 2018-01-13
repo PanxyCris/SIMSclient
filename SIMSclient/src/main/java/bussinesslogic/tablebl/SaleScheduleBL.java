@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.salesbl.SalesController;
-import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
 import bussinesslogicservice.salesblservice.SalesBLService;
+import bussinesslogicservice.tableblservice.SaleScheduleBLService;
 import dataenum.BillType;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.util.converter.LocalDateStringConverter;

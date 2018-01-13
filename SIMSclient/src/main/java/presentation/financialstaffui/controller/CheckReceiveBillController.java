@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.BussinessHistoryScheduleReceiveBL;
-import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.tableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.application.Platform;

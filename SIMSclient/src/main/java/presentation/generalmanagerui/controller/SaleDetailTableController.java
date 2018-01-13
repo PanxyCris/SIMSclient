@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import bussinesslogic.tablebl.SaleScheduleBL;
-import bussinesslogicservice.checktableblservice.SaleScheduleBLService;
+import bussinesslogicservice.tableblservice.SaleScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.collections.FXCollections;

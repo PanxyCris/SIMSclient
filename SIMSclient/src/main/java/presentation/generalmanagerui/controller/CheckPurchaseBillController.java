@@ -3,7 +3,7 @@ package presentation.generalmanagerui.controller;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import bussinesslogic.tablebl.BussinessHistorySchedulePurchaseBL;
-import bussinesslogicservice.checktableblservice.BusinessHistoryScheduleBLService;
+import bussinesslogicservice.tableblservice.BusinessHistoryScheduleBLService;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindSaleScheduleType;
 import javafx.collections.FXCollections;
