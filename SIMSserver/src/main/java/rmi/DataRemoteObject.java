@@ -613,4 +613,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements UserDataSer
 		return inventoryBill.showInventoryBill();
 	}
 
+
+	@Override
+	public ClassificationVPO findClassificationByID(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return classification.findClassificationByID(id);
+	}
+
 }

@@ -148,8 +148,9 @@ public class ClassManageController extends InventoryManagerController {
 							.getTreeItem(t.getTreeTablePosition().getRow())).getValue();
 					vpo.setName(t.getNewValue());
 					ResultMessage message = service.update(vpo);
-					if (message == ResultMessage.SUCCESS)
+					if (message == ResultMessage.SUCCESS){
 						initData(user);
+					}
 					else
 						printWrong(message);
 

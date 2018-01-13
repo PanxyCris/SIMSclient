@@ -56,4 +56,10 @@ public class ClassificationDataServiceImpl implements ClassificationDataService 
 		return classfication.getID();
 	}
 
+	@Override
+	public ClassificationVPO findClassificationByID(String id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return classfication.findClassificationByID(id);
+	}
+
 }

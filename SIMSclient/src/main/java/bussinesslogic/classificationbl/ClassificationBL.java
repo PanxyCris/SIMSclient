@@ -73,15 +73,16 @@ public class ClassificationBL implements ClassificationBLService {
 
 	@Override
 	public void delete(ClassificationVPO vpo) {
-		String id = vpo.getName();
+      try {
+		String name = vpo.getName();
+		classificationDataService.deleteClassification(name);
 		// 先更新vpo父节点的子节点指针
 		ClassificationVPO father = getClass(vpo.getFather());
 		ArrayList<String> children = father.getChildrenPointer();
 		children.remove(vpo.getName());
 		father.setChildrenPointer(children);
 		update(father);
-		try {
-			classificationDataService.deleteClassification(id);
+
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
@@ -91,21 +92,30 @@ public class ClassificationBL implements ClassificationBLService {
 	public ResultMessage update(ClassificationVPO vpo) {
 		try {
 			// 先更新父节点
-
+			ClassificationVPO old = classificationDataService.findClassificationByID(vpo.getId());
+			String oldName = old.getName();
 			ClassificationVPO father = getClass(vpo.getFather());
-			if (father!=null&&father.getChildrenPointer() != null) {
+			if (father != null && father.getChildrenPointer() != null) {//连锁更新
 				for (int i = 0; i < father.getChildrenPointer().size(); i++) {
 					String tmp = father.getChildrenPointer().get(i);
-					if(tmp==null)
+					if (tmp == null)
 						continue;
-					String id = classificationDataService.findClassification(tmp)
-							.getId();
-					if (id.equals(vpo.getId())) {
+					if (classificationDataService.findClassification(tmp) != null) {
+						String id = classificationDataService.findClassification(tmp).getId();
+						if (id.equals(vpo.getId())) {
+							ArrayList<String> children = father.getChildrenPointer();
+							children.set(i, vpo.getName());
+							father.setChildrenPointer(children);
+							classificationDataService.updateClassification(father);
+							break;
+						}
+					} else {//直接更新
 						ArrayList<String> children = father.getChildrenPointer();
 						children.set(i, vpo.getName());
 						father.setChildrenPointer(children);
 						classificationDataService.updateClassification(father);
-						break;
+						classificationDataService.deleteClassification(oldName);
+						return classificationDataService.insertClassification(vpo);
 					}
 				}
 			}

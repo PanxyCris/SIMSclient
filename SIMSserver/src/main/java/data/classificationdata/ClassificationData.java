@@ -47,13 +47,16 @@ public class ClassificationData {
 
 //  	d.insert(c2);
 //		d.insert(c1);
-//		d.insert(root);
+	d.update(root);
 //		 ClassificationVPO last = d.show().get(5);
 //		 last.setChildrenPointer(null);
 	//	 d.update(last);
     //    d.delete(d.show().get(d.show().size()-1).getName());
-//            d.insert(root);
-//		System.out.println(d.getID());
+      //      d.delete("°×µÆ");
+//		 ClassificationVPO tmp  = d.findClassification("ºìµÆ");
+//		 tmp.setChildrenPointer(null);
+//		 d.update(tmp);
+////         System.out.println(d.findClassification("ºìµÆ").getChildrenPointer().get(0));
   	for(ClassificationVPO vpo:d.show())
 		System.out.println(vpo.getName());
 	}
@@ -206,6 +209,17 @@ public class ClassificationData {
 		ClassificationVPO po = null;
 		for (ClassificationVPO p : list) {
 			if (p.getName().equals(name)) return p;
+		}
+
+		return po;
+
+	}
+
+	public ClassificationVPO findClassificationByID(String id) {
+		ArrayList<ClassificationVPO> list = show();
+		ClassificationVPO po = null;
+		for (ClassificationVPO p : list) {
+			if (p.getId().equals(id)) return p;
 		}
 
 		return po;
