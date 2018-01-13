@@ -61,4 +61,11 @@ public class ClassificationDataService_stub implements ClassificationDataService
 		return "0001";
 	}
 
+	@Override
+	public ClassificationVPO findClassificationByID(String id) throws RemoteException {
+		ClassificationVPO root = new ClassificationVPO("0001","µÆ",true,null,null, null);
+
+		return root;
+	}
+
 }
