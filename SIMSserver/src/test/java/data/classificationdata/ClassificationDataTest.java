@@ -42,7 +42,7 @@ public class ClassificationDataTest {
 	public void testDelete_1()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ResultMessage result = fixture.delete(name);
 
@@ -64,7 +64,7 @@ public class ClassificationDataTest {
 	public void testDelete_2()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ResultMessage result = fixture.delete(name);
 
@@ -86,7 +86,7 @@ public class ClassificationDataTest {
 	public void testDelete_3()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ResultMessage result = fixture.delete(name);
 
@@ -108,7 +108,7 @@ public class ClassificationDataTest {
 	public void testDelete_4()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ResultMessage result = fixture.delete(name);
 
@@ -130,7 +130,7 @@ public class ClassificationDataTest {
 	public void testDelete_5()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ResultMessage result = fixture.delete(name);
 
@@ -526,7 +526,7 @@ public class ClassificationDataTest {
 	public void testFindClassification_4()
 		throws Exception {
 		ClassificationData fixture = new ClassificationData();
-		String name = "";
+		String name = "µÆ";
 
 		ClassificationVPO result = fixture.findClassification(name);
 
