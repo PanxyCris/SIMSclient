@@ -20,45 +20,45 @@ import po.ClassificationVPO;
 import po.UserPO;
 
 /**
-*
-* @author Lijie
-* @date 2017年12月14日
-*/
+ *
+ * @author Lijie
+ * @date 2017年12月14日
+ */
 public class ClassificationData {
 
-
-	public static void main(String[] args){
+	public static void main(String[] args) {
 
 		ClassificationData d = new ClassificationData();
-//		ArrayList<ClassificationVPO> children = new ArrayList<>();
-//		ArrayList<ClassificationVPO> children1 = new ArrayList<>();
-//	    ClassificationVPO c11 = new ClassificationVPO("0005","白白炽灯",true,null,null);
-//		ClassificationVPO c12 = new ClassificationVPO("0006","黑白炽灯",true,null,null);
-//		children1.add(c11);
-//		children1.add(c12);
-//
-//		ClassificationVPO c1 = new ClassificationVPO("0002","白灯",true,"灯",null);
-//     	ClassificationVPO c2 = new ClassificationVPO("0006","蓝灯",true,"白灯",null);
-//		ClassificationVPO c3 = new ClassificationVPO("0005","绿灯",true,"白灯",null);
-////	    children.add(c1);
-////		children.add(c2);
-////		children.add(c3);
-		 ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null, null);
+		// ArrayList<ClassificationVPO> children = new ArrayList<>();
+		// ArrayList<ClassificationVPO> children1 = new ArrayList<>();
+		// ClassificationVPO c11 = new ClassificationVPO("0005","白白炽灯",true,null,null);
+		// ClassificationVPO c12 = new ClassificationVPO("0006","黑白炽灯",true,null,null);
+		// children1.add(c11);
+		// children1.add(c12);
+		//
+		// ClassificationVPO c1 = new ClassificationVPO("0002","白灯",true,"灯",null);
+		// ClassificationVPO c2 = new ClassificationVPO("0006","蓝灯",true,"白灯",null);
+		// ClassificationVPO c3 = new ClassificationVPO("0005","绿灯",true,"白灯",null);
+		//// children.add(c1);
+		//// children.add(c2);
+		//// children.add(c3);
+		ClassificationVPO root = new ClassificationVPO("0001", "灯", true, null, null, null);
 
-//  	d.insert(c2);
-//		d.insert(c1);
-//		d.insert(root);
-//		 ClassificationVPO last = d.show().get(5);
-//		 last.setChildrenPointer(null);
-	//	 d.update(last);
-    //    d.delete(d.show().get(d.show().size()-1).getName());
-//            d.insert(root);
+		// d.insert(c2);
+		// d.insert(c1);
+		// d.insert(root);
+		// ClassificationVPO last = d.show().get(5);
+		// last.setChildrenPointer(null);
+		// d.update(last);
+		// d.delete(d.show().get(d.show().size()-1).getName());
+		// d.insert(root);
 		System.out.println(d.getID());
-//  	for(ClassificationVPO vpo:d.show())
-//		System.out.println(vpo.getName());
+		// for(ClassificationVPO vpo:d.show())
+		// System.out.println(vpo.getName());
 	}
 
 	private Connection conn;
+
 	public ClassificationData() {
 		conn = DBManager.getConnection();
 	}
@@ -66,32 +66,32 @@ public class ClassificationData {
 	public ResultMessage insert(ClassificationVPO po) {
 
 		try {
-//			String sql0 = "select count(*) from classification where name = ?";
-//			PreparedStatement ps0 = conn.prepareStatement(sql0);
-//			ps0.setString(1, po.getName());
-////			Statement ps0 = conn.createStatement();
-//			ResultSet rs = ps0.executeQuery();
-//			int count = 0;
-//			if (rs.next()) {
-//				count = rs.getInt(1);
-//				if (count == 0) {
-					String sql = "" + "insert into classification(name, object) values (?,?)";
+			// String sql0 = "select count(*) from classification where name = ?";
+			// PreparedStatement ps0 = conn.prepareStatement(sql0);
+			// ps0.setString(1, po.getName());
+			//// Statement ps0 = conn.createStatement();
+			// ResultSet rs = ps0.executeQuery();
+			// int count = 0;
+			// if (rs.next()) {
+			// count = rs.getInt(1);
+			// if (count == 0) {
+			String sql = "" + "insert into classification(name, object) values (?,?)";
 
-					conn.setAutoCommit(false);
-					PreparedStatement ps = conn.prepareStatement(sql);
-					ps.setString(1, po.getName());
-			        ps.setObject(2, po);
-			        ps.executeUpdate();
-			        conn.commit();
-			        ps.close();
-			        return ResultMessage.SUCCESS;
-//				}
-//				else {
-//					System.out.println("分类已存在");
-//					return ResultMessage.EXISTED;
-//				}
-//			}
-//
+			conn.setAutoCommit(false);
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, po.getName());
+			ps.setObject(2, po);
+			ps.executeUpdate();
+			conn.commit();
+			ps.close();
+			return ResultMessage.SUCCESS;
+			// }
+			// else {
+			// System.out.println("分类已存在");
+			// return ResultMessage.EXISTED;
+			// }
+			// }
+			//
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -99,7 +99,7 @@ public class ClassificationData {
 		return ResultMessage.FAIL;
 	}
 
-	public ResultMessage delete(String name)  {
+	public ResultMessage delete(String name) {
 		String sql = "" + "delete from classification where name = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -134,18 +134,19 @@ public class ClassificationData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
 
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                    ClassificationVPO po = (ClassificationVPO)in.readObject();                   //读出对象
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					ClassificationVPO po = (ClassificationVPO) in.readObject(); // 读出对象
 
-                    if (keyword.equals(po.getName())) list.add(po);
-                }
+					if (keyword.equals(po.getName()))
+						list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();
@@ -153,13 +154,13 @@ public class ClassificationData {
 			e.printStackTrace();
 		}
 		return list;
-//
-//		ArrayList<ClassificationVPO> list = show();
-//		ArrayList<ClassificationVPO> result = new ArrayList<>();
-//		for (ClassificationVPO vo :list) {
-//			if (keyword.equals(vo.getName())) result.add(vo);
-//		}
-//		return result;
+		//
+		// ArrayList<ClassificationVPO> list = show();
+		// ArrayList<ClassificationVPO> result = new ArrayList<>();
+		// for (ClassificationVPO vo :list) {
+		// if (keyword.equals(vo.getName())) result.add(vo);
+		// }
+		// return result;
 	}
 
 	public ArrayList<ClassificationVPO> show() {
@@ -168,18 +169,18 @@ public class ClassificationData {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-				Blob inBlob = (Blob) rs.getBlob("object");   //获取blob对象
-				InputStream is = inBlob.getBinaryStream();                //获取二进制流对象
-                BufferedInputStream bis = new BufferedInputStream(is);    //带缓冲区的流对象
-                byte[] buff = new byte[(int) inBlob.length()];
+			while (rs.next()) {
+				Blob inBlob = (Blob) rs.getBlob("object"); // 获取blob对象
+				InputStream is = inBlob.getBinaryStream(); // 获取二进制流对象
+				BufferedInputStream bis = new BufferedInputStream(is); // 带缓冲区的流对象
+				byte[] buff = new byte[(int) inBlob.length()];
 
-                while(-1!=(bis.read(buff, 0, buff.length))){            //一次性全部读到buff中
-                    ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(buff));
-                    ClassificationVPO po = (ClassificationVPO)in.readObject();                   //读出对象
+				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
+					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					ClassificationVPO po = (ClassificationVPO) in.readObject(); // 读出对象
 
-                    list.add(po);
-                }
+					list.add(po);
+				}
 			}
 			rs.close();
 			ps.close();
@@ -193,10 +194,11 @@ public class ClassificationData {
 	public ClassificationVPO getRoot() {
 		ClassificationVPO po = null;
 		ArrayList<ClassificationVPO> list = show();
-		for(ClassificationVPO p : list) {
-			if (p.getName().equals("灯")) return p;
+		for (ClassificationVPO p : list) {
+			if (p.getName().equals("灯"))
+				return p;
 		}
-//		ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null);
+		// ClassificationVPO root = new ClassificationVPO("0001","灯",true,null,null);
 		return po;
 
 	}
@@ -205,34 +207,45 @@ public class ClassificationData {
 		ArrayList<ClassificationVPO> list = show();
 		ClassificationVPO po = null;
 		for (ClassificationVPO p : list) {
-			if (name.equals(p.getName())) return p;
+			if (name.equals(p.getName()))
+				return p;
 		}
 
 		return po;
 
 	}
 
-	public String getID(){
-			if (!show().isEmpty()) {
-				for (int i = 1; i < show().size(); i++) {
-					ClassificationVPO last = show().get(show().size() - i);
-					if (last.getB()) {
-						String oldId = last.getId();
-						int count = Integer.parseInt(oldId);
-						count++;
-						String newId = String.valueOf(count);
-						while (newId.length() < oldId.length())
-							newId = "0" + newId;
-						return newId;
-					}
-					else if(i!=show().size()-1)
-						continue;
-					else
-						return "0001";
-				}
+	public ClassificationVPO findClassificationByID(String id) {
+		ArrayList<ClassificationVPO> list = show();
+		ClassificationVPO po = null;
+		for (ClassificationVPO p : list) {
+			if (id.equals(p.getId()))
+				return p;
+		}
+
+		return po;
+
+	}
+	
+	public String getID() {
+		if (!show().isEmpty()) {
+			for (int i = 1; i < show().size(); i++) {
+				ClassificationVPO last = show().get(show().size() - i);
+				if (last.getB()) {
+					String oldId = last.getId();
+					int count = Integer.parseInt(oldId);
+					count++;
+					String newId = String.valueOf(count);
+					while (newId.length() < oldId.length())
+						newId = "0" + newId;
+					return newId;
+				} else if (i != show().size() - 1)
+					continue;
+				else
+					return "0001";
 			}
-			else
-				return "0001";
-       return null;
+		} else
+			return "0001";
+		return null;
 	}
 }
