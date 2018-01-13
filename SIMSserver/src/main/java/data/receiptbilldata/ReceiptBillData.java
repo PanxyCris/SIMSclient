@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import data.DBManager;
-import dataenum.BillState;
-import dataenum.BillType;
 import dataenum.ResultMessage;
 import dataenum.findtype.FindAccountBillType;
 import po.financialbillpo.AccountListPO;
@@ -40,8 +38,6 @@ public class ReceiptBillData {
 		accountList.add(account1);
 		accountList.add(account2);
 
-		ReceiptBillPO bill = new ReceiptBillPO("SKD-20180105-00001", "Panxy", "00001", BillType.SKD, BillState.DRAFT,
-				accountList, 9000.00, "ncidan");
 		d.delete(d.show().get(0).getDocID());
 		System.out.println(d.show().get(0).getCustomer());
 

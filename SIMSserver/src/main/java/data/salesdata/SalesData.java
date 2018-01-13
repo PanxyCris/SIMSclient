@@ -45,7 +45,6 @@ public class SalesData {
 		// ArrayList<SalesPO> list = s.show();
 		// for (SalesPO p : list) {
 
-		SalesPO po = s.show().get(0);
 		// SalesPO newPO = new
 		// SalesPO(po.getId(),po.getClientId(),po.getClientName(),po.getSaleMan(),"≈À–«”Ó",
 		// po.getWarehouse(),po.getCommodities(),po.getBeforePrice(),po.getAllowance(),po.getVoucher(),

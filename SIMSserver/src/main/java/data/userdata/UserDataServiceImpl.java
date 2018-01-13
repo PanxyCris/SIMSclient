@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import data.DBManager;
 import data.userdata.UserData;
 import dataenum.ResultMessage;
-import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
 import dataservice.userdataservice.UserDataService;
 import po.UserPO;
@@ -32,7 +31,6 @@ public class UserDataServiceImpl implements UserDataService {
 
 	public static void main(String[] args) throws RemoteException {
 		UserDataServiceImpl u = new UserDataServiceImpl();
-		UserPO p = new UserPO("000004", "panxingyu", "123", UserRole.USER_MANAGER, null);
 		// u.insertUser(p);
 		// ArrayList<UserPO> list = u.findUser("000004", FindUserType.ID);
 		// for(UserPO po: list) {

@@ -85,7 +85,6 @@ public class UserData {
 		}
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public ArrayList<UserPO> find(String keyword, FindUserType type) {
 		ArrayList<UserPO> list = new ArrayList<>();
 		UserPO po = null;

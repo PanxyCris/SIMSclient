@@ -122,6 +122,7 @@ public class PromotionData<P extends PromotionPO> {
 
 				while (-1 != (bis.read(buff, 0, buff.length))) { // 一次性全部读到buff中
 					ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(buff));
+					@SuppressWarnings("unchecked")
 					P po = (P) in.readObject();
 					switch (type) {
 					case TYPE:
