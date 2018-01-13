@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.inventorymanagerui.controller.CheckReceiptController;
-import presentation.inventorymanagerui.controller.MakeReceiptController;
 import vo.uservo.UserVO;
 
 public class CheckReceiptUI {

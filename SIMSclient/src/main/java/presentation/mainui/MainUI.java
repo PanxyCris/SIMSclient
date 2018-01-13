@@ -3,18 +3,10 @@ package presentation.mainui;
 
 import java.rmi.RemoteException;
 
-
-import bussiness_stub.UserBLService_Stub;
 import bussinesslogic.userbl.UserController;
 import bussinesslogicservice.userblservice.UserBLService;
 import dataenum.UserRole;
 import dataenum.findtype.FindUserType;
-import presentation.financialstaffui.FinancialStaffUI;
-import presentation.generalmanagerui.GeneralManagerUI;
-import presentation.inventorymanagerui.InventoryManagerUI;
-import presentation.salestockstaffui.SaleStockStaffUI;
-import presentation.usermanagerui.UserManagerUI;
-import vo.uservo.UserVO;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -23,14 +15,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import presentation.financialstaffui.FinancialStaffUI;
+import presentation.generalmanagerui.GeneralManagerUI;
+import presentation.inventorymanagerui.InventoryManagerUI;
+import presentation.salestockstaffui.SaleStockStaffUI;
+import presentation.usermanagerui.UserManagerUI;
+import vo.uservo.UserVO;
 
 public class MainUI extends Application{
 

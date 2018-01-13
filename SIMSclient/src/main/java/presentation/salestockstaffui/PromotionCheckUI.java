@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import presentation.salestockstaffui.controller.PromotionCheckController;
-import presentation.salestockstaffui.controller.PurchaseCheckBillController;
 import vo.billvo.salesbillvo.SalesVO;
 import vo.uservo.UserVO;
 
