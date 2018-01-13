@@ -49,10 +49,5 @@ public class AccountDataService_stub implements AccountDataService {
 		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage updateMoney(String id, double money) throws RemoteException {
-		System.out.println("Insert Succeed!");
-		return ResultMessage.SUCCESS;
-	}
 
 }

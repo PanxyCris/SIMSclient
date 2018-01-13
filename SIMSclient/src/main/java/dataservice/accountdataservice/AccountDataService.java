@@ -26,7 +26,5 @@ public interface AccountDataService extends Remote{
 	public ArrayList<AccountPO> showAccount() throws RemoteException;
 	public ResultMessage insertAccount(AccountPO po) throws RemoteException;
 	public ResultMessage updateAccount(AccountPO po) throws RemoteException;
-	public ResultMessage deleteAccount(String id) throws RemoteException;
-	
-	public ResultMessage updateMoney(String id, double money) throws RemoteException;
+	public ResultMessage deleteAccount(String id) throws RemoteException;	
 }
